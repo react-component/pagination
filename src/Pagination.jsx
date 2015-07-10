@@ -2,6 +2,7 @@
 
 let React = require('react');
 let Pager = require('./Pager');
+let Options = require('./Options');
 
 
 function noop() {}
@@ -11,10 +12,11 @@ class Pagination extends React.Component {
     super(props);
 
     this.state = {
-      current: props.current
+      current: props.current,
+      pageSize: props.pageSize
     };
 
-    ['_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map((method) => this[method] = this[method].bind(this));
+    ['_handleChange', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map((method) => this[method] = this[method].bind(this));
   }
 
 
@@ -29,7 +31,7 @@ class Pagination extends React.Component {
     if (allPages <= 9) {
       for (let i = 1; i <= allPages; i++) {
         let active = this.state.current === i;
-        pagerList.push(<Pager onClick={this._handleClick.bind(this, i)} key={i} page={i} active={active} />);
+        pagerList.push(<Pager onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
       }
     } else {
       jumpPrev = <li key="prev" onClick={this._jumpPrev} className="jump-prev"><a>&middot;&middot;&middot;</a></li>;
@@ -38,28 +40,31 @@ class Pagination extends React.Component {
       let current = this.state.current;
 
       if (current <= 5) {
+        // do not show first •••
         for (let i = 1; i <= 5; i++) {
           let active = current === i;
-          pagerList.push(<Pager onClick={this._handleClick.bind(this, i)} key={i} page={i} active={active} />);
+          pagerList.push(<Pager onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
         }
         pagerList.push(jumpNext);
-        pagerList.push(<Pager onClick={this._handleClick.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
+        pagerList.push(<Pager onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
       } else if (allPages - current < 5) {
-        pagerList.push(<Pager onClick={this._handleClick.bind(this, 1)} key={1} page={1} active={false} />);
+        // do not show last •••
+        pagerList.push(<Pager onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);
         pagerList.push(jumpPrev);
         for (let i = allPages - 4; i <= allPages; i++) {
           let active = current === i;
-          pagerList.push(<Pager onClick={this._handleClick.bind(this, i)} key={i} page={i} active={active} />);
+          pagerList.push(<Pager onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
         }
       } else {
-        pagerList.push(<Pager onClick={this._handleClick.bind(this, 1)} key={1} page={1} active={false} />);
+        // show both •••
+        pagerList.push(<Pager onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);
         pagerList.push(jumpPrev);
         for (let i = current - 2; i <= current + 2; i++) {
           let active = current === i;
-          pagerList.push(<Pager onClick={this._handleClick.bind(this, i)} key={i} page={i} active={active} />);
+          pagerList.push(<Pager onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
         }
         pagerList.push(jumpNext);
-        pagerList.push(<Pager onClick={this._handleClick.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
+        pagerList.push(<Pager onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
       }
 
     }
@@ -69,6 +74,7 @@ class Pagination extends React.Component {
         <li onClick={this._prev} className={(this._hasPrev() ? '' : 'disabled ') + 'prev'}><a>&lt;</a></li>
         {pagerList}
         <li onClick={this._next} className={(this._hasNext() ? '' : 'disabled ') + 'next'}><a>&gt;</a></li>
+        <Options changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null} current={this.state.current} quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null} />
       </ul>
     );
   }
@@ -76,38 +82,49 @@ class Pagination extends React.Component {
   // private methods
 
   _calcPage() {
-    let props = this.props;
-    let total = props.total;
-
-    return Math.floor((total - 1) / props.pageSize);
+    return Math.floor((this.props.total - 1) / this.state.pageSize);
   }
 
-  _handleClick(page) {
-    this.setState({current: page});
-    this.props.onChange(page);
+  _isValid(page) {
+    return typeof page === 'number' && page >= 1 && page <= this._calcPage();
+  }
+
+  _changePageSize(size) {
+    if (typeof size === 'number') {
+      this.setState({
+        pageSize: size
+      });
+    }
+  }
+
+  _handleChange(page) {
+    if (this._isValid(page)) {
+      this.setState({current: page});
+      this.props.onChange(page);
+    }
   }
 
   _prev() {
     if (!this._hasPrev()) {
-      this._handleClick(this.state.current - 1);
+      this._handleChange(this.state.current - 1);
     }
   }
 
   _next() {
     if (this._hasNext()) {
-      this._handleClick(this.state.current + 1);
+      this._handleChange(this.state.current + 1);
     }
   }
 
   _jumpPrev() {
     if (this._canJumpPrev()) {
-      this._handleClick(this.state.current - 5);
+      this._handleChange(this.state.current - 5);
     }
   }
 
   _jumpNext() {
     if (this._canJumpNext()) {
-      this._handleClick(this.state.current + 5);
+      this._handleChange(this.state.current + 5);
     }
   }
 
@@ -133,13 +150,20 @@ Pagination.propTypes = {
   current: React.PropTypes.number,
   total: React.PropTypes.number,
   pageSize: React.PropTypes.number,
-  onChange: React.PropTypes.func
+  onChange: React.PropTypes.func,
+
+  showSizeChanger: React.PropTypes.bool,
+  showQuickJumper: React.PropTypes.bool
 };
 
 Pagination.defaultProps = {
   current: 1,
+  total: 0,
   pageSize: 10,
-  onChange: noop
+  onChange: noop,
+
+  showQuickJumper: false,
+  showSizeChanger: false
 };
 
 module.exports = Pagination;

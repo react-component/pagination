@@ -18,8 +18,8 @@
     "url": "http://github.com/react-component/pagination/issues"
   },
   "licenses": "MIT",
-  "main":"./lib/index",
-  "config":{
+  "main": "./lib/index",
+  "config": {
     "port": 3000
   },
   "scripts": {
@@ -40,9 +40,12 @@
     "rc-server": "3.x",
     "rc-tools": "3.x",
     "react": "0.13.x",
-    "node-dev":"2.x"
+    "node-dev": "2.x"
   },
   "precommit": [
     "precommit"
-  ]
+  ],
+  "dependencies": {
+    "rc-select": "^4.2.1"
+  }
 }

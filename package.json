@@ -1,0 +1,48 @@
+{
+  "name": "rc-pagination",
+  "version": "1.0.0",
+  "description": "pagination ui component for react",
+  "keywords": [
+    "react",
+    "react-component",
+    "react-pagination",
+    "pagination"
+  ],
+  "homepage": "http://github.com/react-component/pagination",
+  "author": "i@xiaoba.me",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:react-component/pagination.git"
+  },
+  "bugs": {
+    "url": "http://github.com/react-component/pagination/issues"
+  },
+  "licenses": "MIT",
+  "main":"./lib/index",
+  "config":{
+    "port": 3000
+  },
+  "scripts": {
+    "build": "rc-tools run build",
+    "precommit": "rc-tools run precommit",
+    "less": "rc-tools run less",
+    "gh-pages": "rc-tools run gh-pages",
+    "start": "node --harmony node_modules/.bin/rc-server",
+    "publish": "rc-tools run tag",
+    "lint": "rc-tools run lint",
+    "saucelabs": "node --harmony node_modules/.bin/rc-tools run saucelabs",
+    "browser-test": "node --harmony node_modules/.bin/rc-tools run browser-test",
+    "browser-test-cover": "node --harmony node_modules/.bin/rc-tools run browser-test-cover"
+  },
+  "devDependencies": {
+    "expect.js": "0.3.x",
+    "precommit-hook": "1.x",
+    "rc-server": "3.x",
+    "rc-tools": "3.x",
+    "react": "0.13.x",
+    "node-dev":"2.x"
+  },
+  "precommit": [
+    "precommit"
+  ]
+}

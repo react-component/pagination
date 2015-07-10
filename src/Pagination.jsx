@@ -8,9 +8,10 @@ class Pagination extends React.Component {
     super(props)
 
     this.state = {
-      currnt: props.current
+      current: props.current
     }
 
+    ;['_prev', '_next'].map((method) => this[method] = this[method].bind(this))
   }
 
 
@@ -30,7 +31,9 @@ class Pagination extends React.Component {
     }
     return (
       <ul className={prefixCls}>
+        <a onClick={this._prev}>&lt;</a>
         {pagerList}
+        <a onClick={this._next}>&gt;</a>
       </ul>
     )
   }
@@ -48,10 +51,32 @@ class Pagination extends React.Component {
     this.setState({current: page})
     this.props.onChange(page)
   }
+
+  _prev() {
+    let state = this.state
+    if (state.current <= 1) {
+      return
+    }
+
+    this.setState({
+      current: state.current - 1
+    })
+  }
+
+  _next() {
+    let state = this.state
+    if (state.current >= this._calcPage()) {
+      return
+    }
+
+    this.setState({
+      current: state.current + 1
+    })
+  }
 }
 
 Pagination.propTypes = {
-  currnt: React.PropTypes.number,
+  current: React.PropTypes.number,
   total: React.PropTypes.number,
   pageSize: React.PropTypes.number,
   onChange: React.PropTypes.func

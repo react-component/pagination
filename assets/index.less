@@ -1,1 +1,66 @@
-@zero: 0;
+@prefixClass: rc-pagination;
+
+
+.@{prefixClass} {
+  overflow: auto;
+  zoom: 1;
+  font-size: 12px;
+  font-family: 'Arial';
+
+  .@{prefixClass}-item {
+    cursor: pointer;
+    border-radius: 6px;
+    min-width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    list-style: none;
+    float: left;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    margin-right: 8px;
+
+    a {
+      text-decoration: none;
+      color: #666;
+    }
+
+
+    &:hover {
+      border-color: #2db7f5;
+      a {
+        color: #2db7f5;
+      }
+    }
+
+    &.active {
+      background-color: #2db7f5;
+      border: none;
+
+      a {
+        color: #fff;
+      }
+    }
+  }
+
+  .prev {
+    margin-right: 8px;
+  }
+  .prev, .next {
+    cursor: pointer;
+    color: #666;
+    font-size: 10px;
+    border-radius: 6px;
+    border: 1px solid #d9d9d9;
+    list-style: none;
+    min-width: 28px;
+    height: 28px;
+    line-height: 28px;
+    float: left;
+    text-align: center;
+
+    a {
+      color: #666;
+    }
+  }
+}

@@ -4,14 +4,14 @@ class Pager extends React.Component {
   render() {
     let props = this.props
     let prefixCls = 'rc-pagination-item'
-    let cls = `${prefixCls}-${props.page}`
+    let cls = `${prefixCls} ${prefixCls}-${props.page}`
 
     if (props.active) {
       cls = `${cls} active`
     }
     return (
       <li className={cls} onClick={props.onClick}>
-        <a href="#">{props.page}</a>
+        <a href="javascript:;">{props.page}</a>
       </li>
     )
   }

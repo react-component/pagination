@@ -31,9 +31,9 @@ class Pagination extends React.Component {
     }
     return (
       <ul className={prefixCls}>
-        <a onClick={this._prev}>&lt;</a>
+        <li onClick={this._prev} className="prev"><a>&lt;</a></li>
         {pagerList}
-        <a onClick={this._next}>&gt;</a>
+        <li onClick={this._next} className="next"><a>&gt;</a></li>
       </ul>
     )
   }
@@ -58,9 +58,7 @@ class Pagination extends React.Component {
       return
     }
 
-    this.setState({
-      current: state.current - 1
-    })
+    this._handleClick(state.current - 1)
   }
 
   _next() {
@@ -69,9 +67,7 @@ class Pagination extends React.Component {
       return
     }
 
-    this.setState({
-      current: state.current + 1
-    })
+    this._handleClick(state.current + 1)
   }
 }
 

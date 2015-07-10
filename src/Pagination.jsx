@@ -11,7 +11,7 @@ class Pagination extends React.Component {
       current: props.current
     }
 
-    ;['_prev', '_next'].map((method) => this[method] = this[method].bind(this))
+    ;['_prev', '_next', '_hasPrev', '_hasNext'].map((method) => this[method] = this[method].bind(this))
   }
 
 
@@ -29,11 +29,12 @@ class Pagination extends React.Component {
     } else {
       pagerList = [<Pager page={1} />]
     }
+
     return (
       <ul className={prefixCls}>
-        <li onClick={this._prev} className="prev"><a>&lt;</a></li>
+        <li onClick={this._prev} className={(this._hasPrev() ? '' : 'disabled ') + 'prev'}><a>&lt;</a></li>
         {pagerList}
-        <li onClick={this._next} className="next"><a>&gt;</a></li>
+        <li onClick={this._next} className={(this._hasNext() ? '' : 'disabled ') + 'next'}><a>&gt;</a></li>
       </ul>
     )
   }
@@ -54,7 +55,7 @@ class Pagination extends React.Component {
 
   _prev() {
     let state = this.state
-    if (state.current <= 1) {
+    if (!this._hasPrev()) {
       return
     }
 
@@ -63,12 +64,21 @@ class Pagination extends React.Component {
 
   _next() {
     let state = this.state
-    if (state.current >= this._calcPage()) {
+    if (!this._hasNext()) {
       return
     }
 
     this._handleClick(state.current + 1)
   }
+
+  _hasPrev() {
+    return this.state.current > 1
+  }
+
+  _hasNext() {
+    return this.state.current < this._calcPage()
+  }
+
 }
 
 Pagination.propTypes = {

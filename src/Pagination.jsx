@@ -16,12 +16,18 @@ class Pagination extends React.Component {
       pageSize: props.pageSize
     };
 
-    ['_handleChange', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map((method) => this[method] = this[method].bind(this));
+    ['render', '_handleChange', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map((method) => this[method] = this[method].bind(this));
   }
 
 
   render() {
     let prefixCls = 'rc-pagination';
+
+    let props = this.props;
+
+    if (props.className) {
+      prefixCls = `${prefixCls} ${props.className}`;
+    }
 
     let allPages = this._calcPage();
     let pagerList = [];

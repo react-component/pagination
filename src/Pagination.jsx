@@ -34,8 +34,8 @@ class Pagination extends React.Component {
         pagerList.push(<Pager onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
       }
     } else {
-      jumpPrev = <li key="prev" onClick={this._jumpPrev} className="jump-prev"><a>&middot;&middot;&middot;</a></li>;
-      jumpNext = <li key="next" onClick={this._jumpNext} className="jump-next"><a>&middot;&middot;&middot;</a></li>;
+      jumpPrev = <li key="prev" onClick={this._jumpPrev} className="jump-prev"><a></a></li>;
+      jumpNext = <li key="next" onClick={this._jumpNext} className="jump-next"><a></a></li>;
 
       let current = this.state.current;
 
@@ -86,7 +86,7 @@ class Pagination extends React.Component {
   }
 
   _isValid(page) {
-    return typeof page === 'number' && page >= 1 && page <= this._calcPage();
+    return typeof page === 'number';// && page >= 1 && page <= this._calcPage();
   }
 
   _changePageSize(size) {
@@ -105,7 +105,7 @@ class Pagination extends React.Component {
   }
 
   _prev() {
-    if (!this._hasPrev()) {
+    if (this._hasPrev()) {
       this._handleChange(this.state.current - 1);
     }
   }

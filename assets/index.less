@@ -2,10 +2,17 @@
 
 
 .@{prefixClass} {
-  overflow: auto;
-  zoom: 1;
   font-size: 12px;
   font-family: 'Arial';
+
+  &:after {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+  }
 
   .@{prefixClass}-item {
     cursor: pointer;
@@ -39,6 +46,40 @@
 
       a {
         color: #fff;
+      }
+    }
+  }
+
+  .jump-prev, .jump-next {
+    &:after {
+      content: "•••";
+      display: block;
+      letter-spacing: 2px;
+      color: #ccc;
+      font-size: 12px;
+      margin-top: 1px;
+    }
+
+    &:hover {
+      &:after {
+        color: #2db7f5;
+      }
+    }
+
+  }
+
+  .jump-prev {
+    &:hover {
+      &:after {
+        content: "‹‹";
+      }
+    }
+  }
+
+  .jump-next {
+    &:hover {
+      &:after {
+        content: "››";
       }
     }
   }

@@ -26,10 +26,6 @@ React Pagination Component
 [download-image]: https://img.shields.io/npm/dm/rc-pagination.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-pagination
 
-## Screenshots
-
-<img src="" width="288"/>
-
 
 ## Development
 
@@ -69,25 +65,7 @@ React.render(<Pagination />, container);
 
 ### props
 
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th style="width: 100px;">name</th>
-        <th style="width: 50px;">type</th>
-        <th style="width: 50px;">default</th>
-        <th>description</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td>className</td>
-          <td>String</td>
-          <td></td>
-          <td>additional css class of root dom node</td>
-        </tr>
-    </tbody>
-</table>
-
+See [](https://github.com/react-component/pagination/blob/master/src/Pagination.jsx#L149)
 
 ## Test Case
 

@@ -19,7 +19,7 @@ class Options extends React.Component {
 
     if (changeSize) {
       changeSelect = (
-       <Select defaultValue="10" onChange={this._changeSize}>
+       <Select showSearch={false} className="size-changer" defaultValue="10" onChange={this._changeSize}>
         <Option value="10">10 条/页</Option>
         <Option value="20">20 条/页</Option>
         <Option value="30">30 条/页</Option>
@@ -30,7 +30,7 @@ class Options extends React.Component {
 
     if (quickGo) {
       goInput = (
-        <div>
+        <div className="quick-jumper">
           跳至
           <input type="text" value={props.current} onChange={this._quickGo} />
           页
@@ -39,7 +39,7 @@ class Options extends React.Component {
     }
 
     return (
-      <div>
+      <div className="options">
         {changeSelect}
         {goInput}
       </div>

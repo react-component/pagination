@@ -1,6 +1,7 @@
 'use strict'
 
 require('rc-pagination/assets/index.css')
+require('rc-select/assets/index.css')
 var Pagination = require('rc-pagination')
 var React = require('react')
 

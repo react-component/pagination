@@ -65,7 +65,7 @@ React.render(<Pagination />, container);
 
 ### props
 
-See [](https://github.com/react-component/pagination/blob/master/src/Pagination.jsx#L149)
+See [Here](https://github.com/react-component/pagination/blob/master/src/Pagination.jsx#L149)
 
 ## Test Case
 

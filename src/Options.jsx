@@ -42,7 +42,7 @@ class Options extends React.Component {
     }
 
     return (
-      <div className={`${prefixCls}-options`}>
+      <div className={`${prefixCls}`}>
         {changeSelect}
         {goInput}
       </div>

@@ -6,7 +6,7 @@ var Pagination = require('rc-pagination')
 var React = require('react')
 
 React.render(
-  <Pagination showQuickJumper={true} showSizeChanger={true} onChange={onChange} total={450} />,
+  <Pagination className="ant-select" showQuickJumper={true} showSizeChanger={true} onChange={onChange} total={450} />,
   document.getElementById('__react-content')
 );
 

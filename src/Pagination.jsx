@@ -80,7 +80,7 @@ class Pagination extends React.Component {
         <li onClick={this._prev} className={(this._hasPrev() ? '' : 'disabled ') + 'prev'}><a>&lt;</a></li>
         {pagerList}
         <li onClick={this._next} className={(this._hasNext() ? '' : 'disabled ') + 'next'}><a>&gt;</a></li>
-        <Options changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null} current={this.state.current} quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null} />
+        <Options sizeChangerClass={props.className} changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null} current={this.state.current} quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null} />
       </ul>
     );
   }

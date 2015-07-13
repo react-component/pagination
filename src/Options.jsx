@@ -18,8 +18,10 @@ class Options extends React.Component {
     let goInput = null;
 
     if (changeSize) {
+
+      let changerClass = props.sizeChangerClass;
       changeSelect = (
-       <Select showSearch={false} className="size-changer" defaultValue="10" onChange={this._changeSize}>
+       <Select showSearch={false} className={changerClass ? 'size-changer ' + changerClass : 'size-changer'} defaultValue="10" onChange={this._changeSize}>
         <Option value="10">10 条/页</Option>
         <Option value="20">20 条/页</Option>
         <Option value="30">30 条/页</Option>

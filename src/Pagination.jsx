@@ -16,7 +16,7 @@ class Pagination extends React.Component {
       pageSize: props.pageSize
     };
 
-    ['render', '_handleChange', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map((method) => this[method] = this[method].bind(this));
+    ['render', '_handleChange', '_simpleChange', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map((method) => this[method] = this[method].bind(this));
   }
 
 
@@ -34,6 +34,20 @@ class Pagination extends React.Component {
     let jumpPrev = null;
     let jumpNext = null;
 
+    if (props.simple) {
+      return (
+        <ul className={prefixCls + ' simple'}>
+          <li onClick={this._prev} className={(this._hasPrev() ? '' : 'disabled ') + 'prev'}><a>&lsaquo;</a></li>
+          <div className="simple-pager">
+            <input type="text" value={this.state.current} onChange={this._simpleChange} />
+            <span className="slash">／</span>
+            {allPages}
+          </div>
+          <li onClick={this._next} className={(this._hasNext() ? '' : 'disabled ') + 'next'}><a>&rsaquo;</a></li>
+        </ul>
+      );
+    }
+
     if (allPages <= 9) {
       for (let i = 1; i <= allPages; i++) {
         let active = this.state.current === i;
@@ -45,6 +59,7 @@ class Pagination extends React.Component {
 
       let current = this.state.current;
 
+      // TODO: need optimization
       if (current <= 5) {
         // do not show first •••
         for (let i = 1; i <= 5; i++) {
@@ -101,6 +116,10 @@ class Pagination extends React.Component {
         pageSize: size
       });
     }
+  }
+
+  _simpleChange(evt) {
+    this._handleChange(Number(evt.target.value));
   }
 
   _handleChange(page) {

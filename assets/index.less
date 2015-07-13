@@ -4,6 +4,7 @@
 .@{prefixClass} {
   font-size: 12px;
   font-family: 'Arial';
+  user-select: none;
 
   &:after {
     content: " ";
@@ -14,7 +15,7 @@
     visibility: hidden;
   }
 
-  .@{prefixClass}-item {
+  &-item {
     cursor: pointer;
     border-radius: 6px;
     min-width: 28px;
@@ -40,17 +41,23 @@
       }
     }
 
-    &.active {
+    &-active {
       background-color: #2db7f5;
       border: none;
 
       a {
         color: #fff;
       }
+
+      &:hover {
+        a {
+          color: #fff;
+        }
+      }
     }
   }
 
-  .jump-prev, .jump-next {
+  &-jump-prev, &-jump-next {
     &:after {
       content: "•••";
       display: block;
@@ -68,7 +75,7 @@
 
   }
 
-  .jump-prev {
+  &-jump-prev {
     &:hover {
       &:after {
         content: "«";
@@ -76,7 +83,7 @@
     }
   }
 
-  .jump-next {
+  &-jump-next {
     &:hover {
       &:after {
         content: "»";
@@ -84,10 +91,10 @@
     }
   }
 
-  .prev, .jump-prev, .jump-next {
+  &-prev, &-jump-prev, &-jump-next {
     margin-right: 8px;
   }
-  .prev, .next, .jump-prev, .jump-next {
+  &-prev, &-next, &-jump-prev, &-jump-next {
     cursor: pointer;
     color: #666;
     font-size: 10px;
@@ -100,30 +107,30 @@
     text-align: center;
   }
 
-  .prev, .next {
+  &-prev, &-next {
     border: 1px solid #d9d9d9;
 
     a {
       color: #666;
     }
+  }
 
-    &.disabled {
-      cursor: not-allowed;
-      a {
-        color: #ccc;
-      }
+  &-disabled {
+    cursor: not-allowed;
+    a {
+      color: #ccc;
     }
   }
 
-  .options {
+  &-options {
     float: left;
     margin-left: 15px;
-    .size-changer {
+    &-size-changer {
       float: left;
       width: 70px;
     }
 
-    .quick-jumper {
+    &-quick-jumper {
       float: left;
       margin-left: 16px;
       height: 28px;
@@ -146,42 +153,41 @@
       }
     }
   }
-}
 
-
-.@{prefixClass}.simple {
-  .prev, .next {
-    border: none;
-    height: 24px;
-    line-height: 24px;
-    margin: 0;
-    font-size: 18px;
-  }
-
-  .simple-pager {
-    float: left;
-    margin-right: 8px;
-
-    .slash {
-      margin: 0 10px;
+  &-simple {
+    .@{prefixClass}-prev, .@{prefixClass}-next {
+      border: none;
+      height: 24px;
+      line-height: 24px;
+      margin: 0;
+      font-size: 18px;
     }
 
-    input {
-      margin: 0 8px;
-      box-sizing: border-box;
-      background-color: #fff;
-      border-radius: 6px;
-      border: 1px solid #d9d9d9;
-      outline: none;
-      padding: 5px 8px;
-      width: 30px;
-      min-height: 20px;
+    .@{prefixClass}-simple-pager {
+      float: left;
+      margin-right: 8px;
 
-
-      &:hover {
-        border-color: #2db7f5;
+      .@{prefixClass}-slash {
+        margin: 0 10px;
       }
-    }
 
+      input {
+        margin: 0 8px;
+        box-sizing: border-box;
+        background-color: #fff;
+        border-radius: 6px;
+        border: 1px solid #d9d9d9;
+        outline: none;
+        padding: 5px 8px;
+        width: 30px;
+        min-height: 20px;
+
+
+        &:hover {
+          border-color: #2db7f5;
+        }
+      }
+
+    }
   }
 }

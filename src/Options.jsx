@@ -11,6 +11,7 @@ class Options extends React.Component {
   }
   render() {
     let props = this.props;
+    var prefixCls = `${props.rootPrefixCls}-options`;
     let changeSize = props.changeSize;
     let quickGo = props.quickGo;
 
@@ -18,10 +19,10 @@ class Options extends React.Component {
     let goInput = null;
 
     if (changeSize) {
-
-      let changerClass = props.sizeChangerClass;
       changeSelect = (
-       <Select prefixCls={changerClass ? 'ant-select' : 'rc-select' }showSearch={false} className="size-changer" defaultValue="10" onChange={this._changeSize}>
+       <Select prefixCls={props.selectPrefixCls} showSearch={false}
+         className={`${prefixCls}-size-changer`}
+         defaultValue="10" onChange={this._changeSize}>
         <Option value="10">10 条/页</Option>
         <Option value="20">20 条/页</Option>
         <Option value="30">30 条/页</Option>
@@ -32,7 +33,7 @@ class Options extends React.Component {
 
     if (quickGo) {
       goInput = (
-        <div className="quick-jumper">
+        <div className={`${prefixCls}-quick-jumper`}>
           跳至
           <input type="text" value={props.current} onChange={this._quickGo} />
           页
@@ -41,7 +42,7 @@ class Options extends React.Component {
     }
 
     return (
-      <div className="options">
+      <div className={`${prefixCls}-options`}>
         {changeSelect}
         {goInput}
       </div>

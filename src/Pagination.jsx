@@ -5,7 +5,8 @@ let Pager = require('./Pager');
 let Options = require('./Options');
 
 
-function noop() {}
+function noop() {
+}
 
 class Pagination extends React.Component {
   constructor(props) {
@@ -19,16 +20,24 @@ class Pagination extends React.Component {
     ['render', '_handleChange', '_simpleChange', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map((method) => this[method] = this[method].bind(this));
   }
 
-
-  render() {
-    let prefixCls = 'rc-pagination';
-
-    let props = this.props;
-
-    if (props.className) {
-      prefixCls = `${prefixCls} ${props.className}`;
+  componentWillReceiveProps(nextProps) {
+    if ('current' in nextProps) {
+      this.setState({
+        current: nextProps.current
+      });
     }
 
+    if ('pageSize' in nextProps) {
+      this.setState({
+        pageSize: nextProps.pageSize
+      });
+    }
+  }
+
+  render() {
+    let props = this.props;
+
+    let prefixCls = props.prefixCls;
     let allPages = this._calcPage();
     let pagerList = [];
     let jumpPrev = null;
@@ -36,14 +45,18 @@ class Pagination extends React.Component {
 
     if (props.simple) {
       return (
-        <ul className={prefixCls + ' simple'}>
-          <li onClick={this._prev} className={(this._hasPrev() ? '' : 'disabled ') + 'prev'}><a>&lsaquo;</a></li>
-          <div className="simple-pager">
+        <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`}>
+          <li onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
+            <a>&lsaquo;</a>
+          </li>
+          <div className={`${prefixCls}-simple-pager`}>
             <input type="text" value={this.state.current} onChange={this._simpleChange} />
-            <span className="slash">／</span>
+            <span className={`${prefixCls}-slash`}>／</span>
             {allPages}
           </div>
-          <li onClick={this._next} className={(this._hasNext() ? '' : 'disabled ') + 'next'}><a>&rsaquo;</a></li>
+          <li onClick={this._next} className={(this._hasNext() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-next`}>
+            <a>&rsaquo;</a>
+          </li>
         </ul>
       );
     }
@@ -51,11 +64,15 @@ class Pagination extends React.Component {
     if (allPages <= 9) {
       for (let i = 1; i <= allPages; i++) {
         let active = this.state.current === i;
-        pagerList.push(<Pager onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
+        pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
       }
     } else {
-      jumpPrev = <li key="prev" onClick={this._jumpPrev} className="jump-prev"><a></a></li>;
-      jumpNext = <li key="next" onClick={this._jumpNext} className="jump-next"><a></a></li>;
+      jumpPrev = <li key="prev" onClick={this._jumpPrev} className={`${prefixCls}-jump-prev`}>
+        <a></a>
+      </li>;
+      jumpNext = <li key="next" onClick={this._jumpNext} className={`${prefixCls}-jump-next`}>
+        <a></a>
+      </li>;
 
       let current = this.state.current;
 
@@ -64,38 +81,45 @@ class Pagination extends React.Component {
         // do not show first •••
         for (let i = 1; i <= 5; i++) {
           let active = current === i;
-          pagerList.push(<Pager onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
+          pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
         }
         pagerList.push(jumpNext);
-        pagerList.push(<Pager onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
+        pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
       } else if (allPages - current < 5) {
         // do not show last •••
-        pagerList.push(<Pager onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);
+        pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);
         pagerList.push(jumpPrev);
         for (let i = allPages - 4; i <= allPages; i++) {
           let active = current === i;
-          pagerList.push(<Pager onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
+          pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
         }
       } else {
         // show both •••
-        pagerList.push(<Pager onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);
+        pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);
         pagerList.push(jumpPrev);
         for (let i = current - 2; i <= current + 2; i++) {
           let active = current === i;
-          pagerList.push(<Pager onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
+          pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
         }
         pagerList.push(jumpNext);
-        pagerList.push(<Pager onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
+        pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
       }
 
     }
 
     return (
-      <ul className={prefixCls}>
-        <li onClick={this._prev} className={(this._hasPrev() ? '' : 'disabled ') + 'prev'}><a>&lsaquo;</a></li>
+      <ul className={`${prefixCls} ${props.className}`}
+        unselectable="unselectable">
+        <li onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
+          <a>&lsaquo;</a>
+        </li>
         {pagerList}
-        <li onClick={this._next} className={(this._hasNext() ? '' : 'disabled ') + 'next'}><a>&rsaquo;</a></li>
-        <Options sizeChangerClass={props.className} changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null} current={this.state.current} quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null} />
+        <li onClick={this._next} className={(this._hasNext() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-next`}>
+          <a>&rsaquo;</a>
+        </li>
+        <Options rootPrefixCls={prefixCls}
+          selectPrefixCls={props.selectPrefixCls}
+          changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null} current={this.state.current} quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null} />
       </ul>
     );
   }
@@ -168,7 +192,6 @@ class Pagination extends React.Component {
   _canJumpNext() {
     return this._calcPage() - this.state.current > 5;
   }
-
 }
 
 Pagination.propTypes = {
@@ -176,7 +199,6 @@ Pagination.propTypes = {
   total: React.PropTypes.number,
   pageSize: React.PropTypes.number,
   onChange: React.PropTypes.func,
-
   showSizeChanger: React.PropTypes.bool,
   showQuickJumper: React.PropTypes.bool
 };
@@ -186,7 +208,9 @@ Pagination.defaultProps = {
   total: 0,
   pageSize: 10,
   onChange: noop,
-
+  className: '',
+  selectPrefixCls: 'rc-select',
+  prefixCls: 'rc-pagination',
   showQuickJumper: false,
   showSizeChanger: false
 };

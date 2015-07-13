@@ -21,7 +21,7 @@ class Options extends React.Component {
 
       let changerClass = props.sizeChangerClass;
       changeSelect = (
-       <Select showSearch={false} className={changerClass ? 'size-changer ant-select': 'size-changer'} defaultValue="10" onChange={this._changeSize}>
+       <Select prefixCls={changerClass ? 'ant-select' : 'rc-select' }showSearch={false} className="size-changer" defaultValue="10" onChange={this._changeSize}>
         <Option value="10">10 条/页</Option>
         <Option value="20">20 条/页</Option>
         <Option value="30">30 条/页</Option>
@@ -58,7 +58,10 @@ class Options extends React.Component {
 
 Options.propTypes = {
   changeSize: React.PropTypes.func,
-  quickGo: React.PropTypes.func
+  quickGo: React.PropTypes.func,
+
+  sizeChangerClass: React.PropTypes.bool,
+  current: React.PropTypes.number
 };
 
 module.exports = Options;

@@ -118,6 +118,7 @@ class Pagination extends React.Component {
           <a>&rsaquo;</a>
         </li>
         <Options rootPrefixCls={prefixCls}
+          selectComponentClass={props.selectComponentClass}
           selectPrefixCls={props.selectPrefixCls}
           changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null}
           current={this.state.current}
@@ -202,6 +203,7 @@ Pagination.propTypes = {
   pageSize: React.PropTypes.number,
   onChange: React.PropTypes.func,
   showSizeChanger: React.PropTypes.bool,
+  selectComponentClass:React.PropTypes.func,
   showQuickJumper: React.PropTypes.bool
 };
 
@@ -213,6 +215,7 @@ Pagination.defaultProps = {
   className: '',
   selectPrefixCls: 'rc-select',
   prefixCls: 'rc-pagination',
+  selectComponentClass:null,
   showQuickJumper: false,
   showSizeChanger: false
 };

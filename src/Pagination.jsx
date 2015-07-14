@@ -133,7 +133,7 @@ class Pagination extends React.Component {
   }
 
   _isValid(page) {
-    return typeof page === 'number' && page >= 1 && page <= this._calcPage();
+    return typeof page === 'number' && page >= 1 && page <= this._calcPage() && page !== this.state.current;
   }
 
   _changePageSize(size) {

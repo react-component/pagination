@@ -5,7 +5,7 @@ require('rc-pagination/assets/index.css');
 var Pagination = require('rc-pagination');
 var React = require('react');
 React.render(
-  <Pagination onChange={onChange} total={50} />, 
+  <Pagination onChange={onChange} total={10} />, 
   document.getElementById('__react-content')
 );
 

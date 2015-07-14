@@ -119,7 +119,9 @@ class Pagination extends React.Component {
         </li>
         <Options rootPrefixCls={prefixCls}
           selectPrefixCls={props.selectPrefixCls}
-          changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null} current={this.state.current} quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null} />
+          changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null}
+          current={this.state.current}
+          quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null} />
       </ul>
     );
   }
@@ -131,7 +133,7 @@ class Pagination extends React.Component {
   }
 
   _isValid(page) {
-    return typeof page === 'number';// && page >= 1 && page <= this._calcPage();
+    return typeof page === 'number' && page >= 1 && page <= this._calcPage();
   }
 
   _changePageSize(size) {

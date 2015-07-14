@@ -4,6 +4,8 @@ let React = require('react');
 let Select = require('rc-select');
 let Option = Select.Option;
 
+let KEYCODE = require('./KeyCode');
+
 
 class Options extends React.Component {
   constructor(props) {
@@ -40,7 +42,7 @@ class Options extends React.Component {
       goInput = (
         <div className={`${prefixCls}-quick-jumper`}>
           跳至
-          <input type="text" defaultValue={props.current} onChange={this._quickGo} onKeyUp={this._quickGo} />
+          <input type="text" defaultValue={props.current} onKeyDown={this._checkValid} onChange={this._quickGo} onKeyUp={this._quickGo} />
           页
         </div>
       );
@@ -57,6 +59,19 @@ class Options extends React.Component {
   _changeSize(value) {
     this.props.changeSize(Number(value));
   }
+
+  _checkValid(evt) {
+    let keyCode = evt.keyCode;
+    let valid = (
+      (keyCode >= KEYCODE.ZERO && keyCode <= KEYCODE.NINE) ||
+      (keyCode >= KEYCODE.NUMPAD_ZERO && keyCode <= KEYCODE.NUMPAD_NINE) ||
+      keyCode === KEYCODE.DELETE || keyCode === KEYCODE.BACKSPACE || keyCode === KEYCODE.ENTER);
+
+    if (!valid) {
+      evt.preventDefault();
+    }
+  }
+
   _quickGo(evt) {
     let ENTER_KEY = 13;
     let val = Number(evt.target.value);

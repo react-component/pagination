@@ -4,6 +4,7 @@ let React = require('react');
 let Select = require('rc-select');
 let Option = Select.Option;
 
+
 class Options extends React.Component {
   constructor(props) {
     super(props);
@@ -39,7 +40,7 @@ class Options extends React.Component {
       goInput = (
         <div className={`${prefixCls}-quick-jumper`}>
           跳至
-          <input type="text" value={props.current} onChange={this._quickGo} />
+          <input type="text" defaultValue={props.current} onChange={this._quickGo} onKeyUp={this._quickGo} />
           页
         </div>
       );
@@ -57,7 +58,14 @@ class Options extends React.Component {
     this.props.changeSize(Number(value));
   }
   _quickGo(evt) {
-    this.props.quickGo(Number(evt.target.value));
+    let ENTER_KEY = 13;
+    let val = Number(evt.target.value);
+
+    this.setState({value: val});
+
+    if (evt.keyCode === ENTER_KEY) {
+      this.props.quickGo(val);
+    }
   }
 }
 

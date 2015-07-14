@@ -127,7 +127,7 @@ class Pagination extends React.Component {
   // private methods
 
   _calcPage() {
-    return Math.floor((this.props.total - 1) / this.state.pageSize);
+    return Math.floor((this.props.total - 1) / this.state.pageSize) + 1;
   }
 
   _isValid(page) {

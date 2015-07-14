@@ -27,9 +27,11 @@ class Options extends React.Component {
 
     if (changeSize) {
       changeSelect = (
-       <Select prefixCls={props.selectPrefixCls} showSearch={false}
-         className={`${prefixCls}-size-changer`}
-         defaultValue="10" onChange={this._changeSize}>
+        <Select
+          prefixCls={props.selectPrefixCls} showSearch={false}
+          className={`${prefixCls}-size-changer`}
+          optionLabelProp="children"
+          defaultValue="10" onChange={this._changeSize}>
         <Option value="10">10 条/页</Option>
         <Option value="20">20 条/页</Option>
         <Option value="30">30 条/页</Option>

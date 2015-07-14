@@ -18,6 +18,10 @@ class Options extends React.Component {
     let changeSelect = null;
     let goInput = null;
 
+    if (!(changeSize || quickGo)) {
+      return null;
+    }
+
     if (changeSize) {
       changeSelect = (
        <Select prefixCls={props.selectPrefixCls} showSearch={false}

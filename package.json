@@ -40,12 +40,10 @@
     "rc-server": "3.x",
     "rc-tools": "3.x",
     "react": "0.13.x",
-    "node-dev": "2.x"
+    "node-dev": "2.x",
+    "rc-select": "^4.2.1"
   },
   "precommit": [
     "precommit"
-  ],
-  "dependencies": {
-    "rc-select": "^4.2.1"
-  }
+  ]
 }

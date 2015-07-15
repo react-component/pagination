@@ -1,11 +1,7 @@
 'use strict';
 
 let React = require('react');
-let Select = require('rc-select');
-let Option = Select.Option;
-
 let KEYCODE = require('./KeyCode');
-
 
 class Options extends React.Component {
   constructor(props) {
@@ -14,10 +10,10 @@ class Options extends React.Component {
   }
   render() {
     let props = this.props;
-    var prefixCls = `${props.rootPrefixCls}-options`;
+    let prefixCls = `${props.rootPrefixCls}-options`;
     let changeSize = props.changeSize;
     let quickGo = props.quickGo;
-
+    let Select = props.selectComponentClass;
     let changeSelect = null;
     let goInput = null;
 
@@ -25,7 +21,8 @@ class Options extends React.Component {
       return null;
     }
 
-    if (changeSize) {
+    if (changeSize && Select) {
+      let Option = Select.Option;
       changeSelect = (
         <Select
           prefixCls={props.selectPrefixCls} showSearch={false}

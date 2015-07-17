@@ -47,7 +47,7 @@ class Pagination extends React.Component {
       return (
         <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`}>
           <li onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
-            <a>&lsaquo;</a>
+            <a></a>
           </li>
           <div className={`${prefixCls}-simple-pager`}>
             <input type="text" value={this.state.current} onChange={this._simpleChange} />
@@ -55,7 +55,7 @@ class Pagination extends React.Component {
             {allPages}
           </div>
           <li onClick={this._next} className={(this._hasNext() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-next`}>
-            <a>&rsaquo;</a>
+            <a></a>
           </li>
         </ul>
       );
@@ -111,11 +111,11 @@ class Pagination extends React.Component {
       <ul className={`${prefixCls} ${props.className}`}
         unselectable="unselectable">
         <li onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
-          <a>&lsaquo;</a>
+          <a></a>
         </li>
         {pagerList}
         <li onClick={this._next} className={(this._hasNext() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-next`}>
-          <a>&rsaquo;</a>
+          <a></a>
         </li>
         <Options rootPrefixCls={prefixCls}
           selectComponentClass={props.selectComponentClass}

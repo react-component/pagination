@@ -43,7 +43,7 @@
 
     &-active {
       background-color: #2db7f5;
-      border: none;
+      border-color: #2db7f5;
 
       a {
         color: #fff;
@@ -107,11 +107,32 @@
     text-align: center;
   }
 
+  &-prev {
+    a {
+      &:after {
+        content: "‹";
+        display: block;
+      }
+    }
+  }
+
+  &-next {
+    a {
+      &:after {
+        content: "›";
+        display: block;
+      }
+    }
+  }
+
   &-prev, &-next {
     border: 1px solid #d9d9d9;
-
+    font-size: 18px;
     a {
       color: #666;
+      &:after {
+        margin-top: -1px;
+      }
     }
   }
 

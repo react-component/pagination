@@ -87,7 +87,7 @@ Options.propTypes = {
   changeSize: React.PropTypes.func,
   quickGo: React.PropTypes.func,
 
-  sizeChangerClass: React.PropTypes.bool,
+  selectComponentClass: React.PropTypes.func,
   current: React.PropTypes.number
 };
 

@@ -75,7 +75,6 @@ class Options extends React.Component {
     let ENTER_KEY = 13;
     let val = Number(evt.target.value);
 
-    this.setState({value: val});
 
     if (evt.keyCode === ENTER_KEY) {
       this.props.quickGo(val);

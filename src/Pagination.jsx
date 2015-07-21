@@ -3,6 +3,7 @@
 let React = require('react');
 let Pager = require('./Pager');
 let Options = require('./Options');
+let KEYCODE = require('./KeyCode');
 
 
 function noop() {
@@ -14,10 +15,11 @@ class Pagination extends React.Component {
 
     this.state = {
       current: props.current,
+      _current: props.current,
       pageSize: props.pageSize
     };
 
-    ['render', '_handleChange', '_simpleChange', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map((method) => this[method] = this[method].bind(this));
+    ['render', '_handleChange', '_handleKeyUp', '_handleKeyDown', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map((method) => this[method] = this[method].bind(this));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,7 +52,7 @@ class Pagination extends React.Component {
             <a></a>
           </li>
           <div className={`${prefixCls}-simple-pager`}>
-            <input type="text" value={this.state.current} onChange={this._simpleChange} />
+            <input type="text" value={this.state._current} onKeyDown={this._handleKeyDown} onKeyUp={this._handleKeyUp} onChange={this._handleKeyUp} />
             <span className={`${prefixCls}-slash`}>／</span>
             {allPages}
           </div>
@@ -137,6 +139,37 @@ class Pagination extends React.Component {
     return typeof page === 'number' && page >= 1 && page <= this._calcPage() && page !== this.state.current;
   }
 
+  _handleKeyDown(evt) {
+    if (evt.keyCode === KEYCODE.ARROW_UP || evt.keyCode === KEYCODE.ARROW_DOWN) {
+      evt.preventDefault();
+    }
+  }
+
+  _handleKeyUp(evt) {
+    let _val = evt.target.value;
+    let val;
+
+    if (_val === '') {
+      val = _val;
+    } else if (isNaN(Number(_val))) {
+      val = this.state._current;
+    } else {
+      val = Number(_val);
+    }
+
+    this.setState({
+      _current: val
+    });
+
+    if (evt.keyCode === KEYCODE.ENTER) {
+      this._handleChange(val);
+    } else if (evt.keyCode === KEYCODE.ARROW_UP) {
+      this._handleChange(val - 1);
+    } else if (evt.keyCode === KEYCODE.ARROW_DOWN) {
+      this._handleChange(val + 1);
+    }
+  }
+
   _changePageSize(size) {
     if (typeof size === 'number') {
       this.setState({
@@ -145,13 +178,12 @@ class Pagination extends React.Component {
     }
   }
 
-  _simpleChange(evt) {
-    this._handleChange(Number(evt.target.value));
-  }
-
   _handleChange(page) {
     if (this._isValid(page)) {
-      this.setState({current: page});
+      this.setState({
+        current: page,
+        _current: page
+      });
       this.props.onChange(page);
     }
   }

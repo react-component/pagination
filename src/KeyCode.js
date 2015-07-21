@@ -9,5 +9,8 @@ module.exports = {
 
   BACKSPACE: 8,
   DELETE: 46,
-  ENTER: 13
+  ENTER: 13,
+
+  ARROW_UP: 38,
+  ARROW_DOWN: 40
 };

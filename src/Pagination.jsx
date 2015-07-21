@@ -19,7 +19,22 @@ class Pagination extends React.Component {
       pageSize: props.pageSize
     };
 
-    ['render', '_handleChange', '_handleKeyUp', '_handleKeyDown', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map((method) => this[method] = this[method].bind(this));
+    [
+      'render',
+      '_handleChange',
+      '_handleKeyUp',
+      '_handleKeyDown',
+      '_changePageSize',
+      '_isValid',
+      '_prev',
+      '_next',
+      '_hasPrev',
+      '_hasNext',
+      '_jumpPrev',
+      '_jumpNext',
+      '_canJumpPrev',
+      '_canJumpNext'
+    ].forEach((method) => this[method] = this[method].bind(this));
   }
 
   componentWillReceiveProps(nextProps) {

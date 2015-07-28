@@ -346,7 +346,7 @@
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// export this package's api
+	// do not modify this file
 	'use strict';
 	
 	module.exports = __webpack_require__(9);
@@ -355,53 +355,29 @@
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// export this package's api
 	'use strict';
 	
-	var _createClass = (function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	  };
-	})();
+	module.exports = __webpack_require__(10);
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 	
-	var _get = function get(_x, _x2, _x3) {
-	  var _again = true;_function: while (_again) {
-	    var object = _x,
-	        property = _x2,
-	        receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
-	      var parent = Object.getPrototypeOf(object);if (parent === null) {
-	        return undefined;
-	      } else {
-	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
-	      }
-	    } else if ('value' in desc) {
-	      return desc.value;
-	    } else {
-	      var getter = desc.get;if (getter === undefined) {
-	        return undefined;
-	      }return getter.call(receiver);
-	    }
-	  }
-	};
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	function _classCallCheck(instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError('Cannot call a class as a function');
-	  }
-	}
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
-	function _inherits(subClass, superClass) {
-	  if (typeof superClass !== 'function' && superClass !== null) {
-	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	var React = __webpack_require__(10);
-	var Pager = __webpack_require__(11);
-	var Options = __webpack_require__(12);
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var React = __webpack_require__(11);
+	var Pager = __webpack_require__(12);
+	var Options = __webpack_require__(13);
+	var KEYCODE = __webpack_require__(14);
 	
 	function noop() {}
 	
@@ -417,10 +393,11 @@
 	
 	    this.state = {
 	      current: props.current,
+	      _current: props.current,
 	      pageSize: props.pageSize
 	    };
 	
-	    ['render', '_handleChange', '_simpleChange', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].map(function (method) {
+	    ['render', '_handleChange', '_handleKeyUp', '_handleKeyDown', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext', '_canJumpPrev', '_canJumpNext'].forEach(function (method) {
 	      return _this[method] = _this[method].bind(_this);
 	    });
 	  }
@@ -452,7 +429,31 @@
 	      var jumpNext = null;
 	
 	      if (props.simple) {
-	        return React.createElement('ul', { className: prefixCls + ' ' + prefixCls + '-simple ' + props.className }, React.createElement('li', { onClick: this._prev, className: (this._hasPrev() ? '' : prefixCls + '-disabled ') + (prefixCls + '-prev') }, React.createElement('a', null)), React.createElement('div', { className: prefixCls + '-simple-pager' }, React.createElement('input', { type: 'text', value: this.state.current, onChange: this._simpleChange }), React.createElement('span', { className: prefixCls + '-slash' }, '／'), allPages), React.createElement('li', { onClick: this._next, className: (this._hasNext() ? '' : prefixCls + '-disabled ') + (prefixCls + '-next') }, React.createElement('a', null)));
+	        return React.createElement(
+	          'ul',
+	          { className: prefixCls + ' ' + prefixCls + '-simple ' + props.className },
+	          React.createElement(
+	            'li',
+	            { onClick: this._prev, className: (this._hasPrev() ? '' : prefixCls + '-disabled ') + (prefixCls + '-prev') },
+	            React.createElement('a', null)
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: prefixCls + '-simple-pager' },
+	            React.createElement('input', { type: "text", value: this.state._current, onKeyDown: this._handleKeyDown, onKeyUp: this._handleKeyUp, onChange: this._handleKeyUp }),
+	            React.createElement(
+	              'span',
+	              { className: prefixCls + '-slash' },
+	              '／'
+	            ),
+	            allPages
+	          ),
+	          React.createElement(
+	            'li',
+	            { onClick: this._next, className: (this._hasNext() ? '' : prefixCls + '-disabled ') + (prefixCls + '-next') },
+	            React.createElement('a', null)
+	          )
+	        );
 	      }
 	
 	      if (allPages <= 9) {
@@ -461,8 +462,16 @@
 	          pagerList.push(React.createElement(Pager, { rootPrefixCls: prefixCls, onClick: this._handleChange.bind(this, i), key: i, page: i, active: active }));
 	        }
 	      } else {
-	        jumpPrev = React.createElement('li', { key: 'prev', onClick: this._jumpPrev, className: prefixCls + '-jump-prev' }, React.createElement('a', null));
-	        jumpNext = React.createElement('li', { key: 'next', onClick: this._jumpNext, className: prefixCls + '-jump-next' }, React.createElement('a', null));
+	        jumpPrev = React.createElement(
+	          'li',
+	          { key: "prev", onClick: this._jumpPrev, className: prefixCls + '-jump-prev' },
+	          React.createElement('a', null)
+	        );
+	        jumpNext = React.createElement(
+	          'li',
+	          { key: "next", onClick: this._jumpNext, className: prefixCls + '-jump-next' },
+	          React.createElement('a', null)
+	        );
 	
 	        var current = this.state.current;
 	
@@ -496,19 +505,34 @@
 	        }
 	      }
 	
-	      return React.createElement('ul', { className: prefixCls + ' ' + props.className,
-	        unselectable: 'unselectable' }, React.createElement('li', { onClick: this._prev, className: (this._hasPrev() ? '' : prefixCls + '-disabled ') + (prefixCls + '-prev') }, React.createElement('a', null)), pagerList, React.createElement('li', { onClick: this._next, className: (this._hasNext() ? '' : prefixCls + '-disabled ') + (prefixCls + '-next') }, React.createElement('a', null)), React.createElement(Options, { rootPrefixCls: prefixCls,
-	        selectComponentClass: props.selectComponentClass,
-	        selectPrefixCls: props.selectPrefixCls,
-	        changeSize: this.props.showSizeChanger ? this._changePageSize.bind(this) : null,
-	        current: this.state.current,
-	        quickGo: this.props.showQuickJumper ? this._handleChange.bind(this) : null }));
+	      return React.createElement(
+	        'ul',
+	        { className: prefixCls + ' ' + props.className,
+	          unselectable: "unselectable" },
+	        React.createElement(
+	          'li',
+	          { onClick: this._prev, className: (this._hasPrev() ? '' : prefixCls + '-disabled ') + (prefixCls + '-prev') },
+	          React.createElement('a', null)
+	        ),
+	        pagerList,
+	        React.createElement(
+	          'li',
+	          { onClick: this._next, className: (this._hasNext() ? '' : prefixCls + '-disabled ') + (prefixCls + '-next') },
+	          React.createElement('a', null)
+	        ),
+	        React.createElement(Options, { rootPrefixCls: prefixCls,
+	          selectComponentClass: props.selectComponentClass,
+	          selectPrefixCls: props.selectPrefixCls,
+	          changeSize: this.props.showSizeChanger ? this._changePageSize.bind(this) : null,
+	          current: this.state.current,
+	          quickGo: this.props.showQuickJumper ? this._handleChange.bind(this) : null })
+	      );
 	    }
-	  }, {
-	    key: '_calcPage',
 	
 	    // private methods
 	
+	  }, {
+	    key: '_calcPage',
 	    value: function _calcPage() {
 	      return Math.floor((this.props.total - 1) / this.state.pageSize) + 1;
 	    }
@@ -516,6 +540,39 @@
 	    key: '_isValid',
 	    value: function _isValid(page) {
 	      return typeof page === 'number' && page >= 1 && page <= this._calcPage() && page !== this.state.current;
+	    }
+	  }, {
+	    key: '_handleKeyDown',
+	    value: function _handleKeyDown(evt) {
+	      if (evt.keyCode === KEYCODE.ARROW_UP || evt.keyCode === KEYCODE.ARROW_DOWN) {
+	        evt.preventDefault();
+	      }
+	    }
+	  }, {
+	    key: '_handleKeyUp',
+	    value: function _handleKeyUp(evt) {
+	      var _val = evt.target.value;
+	      var val = undefined;
+	
+	      if (_val === '') {
+	        val = _val;
+	      } else if (isNaN(Number(_val))) {
+	        val = this.state._current;
+	      } else {
+	        val = Number(_val);
+	      }
+	
+	      this.setState({
+	        _current: val
+	      });
+	
+	      if (evt.keyCode === KEYCODE.ENTER) {
+	        this._handleChange(val);
+	      } else if (evt.keyCode === KEYCODE.ARROW_UP) {
+	        this._handleChange(val - 1);
+	      } else if (evt.keyCode === KEYCODE.ARROW_DOWN) {
+	        this._handleChange(val + 1);
+	      }
 	    }
 	  }, {
 	    key: '_changePageSize',
@@ -527,15 +584,13 @@
 	      }
 	    }
 	  }, {
-	    key: '_simpleChange',
-	    value: function _simpleChange(evt) {
-	      this._handleChange(Number(evt.target.value));
-	    }
-	  }, {
 	    key: '_handleChange',
 	    value: function _handleChange(page) {
 	      if (this._isValid(page)) {
-	        this.setState({ current: page });
+	        this.setState({
+	          current: page,
+	          _current: page
+	        });
 	        this.props.onChange(page);
 	      }
 	    }
@@ -618,60 +673,26 @@
 	module.exports = Pagination;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	module.exports = React;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _createClass = (function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	  };
-	})();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) {
-	  var _again = true;_function: while (_again) {
-	    var object = _x,
-	        property = _x2,
-	        receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
-	      var parent = Object.getPrototypeOf(object);if (parent === null) {
-	        return undefined;
-	      } else {
-	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
-	      }
-	    } else if ('value' in desc) {
-	      return desc.value;
-	    } else {
-	      var getter = desc.get;if (getter === undefined) {
-	        return undefined;
-	      }return getter.call(receiver);
-	    }
-	  }
-	};
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
-	function _classCallCheck(instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError('Cannot call a class as a function');
-	  }
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) {
-	  if (typeof superClass !== 'function' && superClass !== null) {
-	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var React = __webpack_require__(10);
+	var React = __webpack_require__(11);
 	
 	var Pager = (function (_React$Component) {
 	  _inherits(Pager, _React$Component);
@@ -692,7 +713,15 @@
 	      if (props.active) {
 	        cls = cls + ' ' + prefixCls + '-active';
 	      }
-	      return React.createElement('li', { className: cls, onClick: props.onClick }, React.createElement('a', null, props.page));
+	      return React.createElement(
+	        'li',
+	        { className: cls, onClick: props.onClick },
+	        React.createElement(
+	          'a',
+	          null,
+	          props.page
+	        )
+	      );
 	    }
 	  }]);
 	
@@ -707,55 +736,21 @@
 	module.exports = Pager;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _createClass = (function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ('value' in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	  };
-	})();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 	
-	var _get = function get(_x, _x2, _x3) {
-	  var _again = true;_function: while (_again) {
-	    var object = _x,
-	        property = _x2,
-	        receiver = _x3;desc = parent = getter = undefined;_again = false;if (object === null) object = Function.prototype;var desc = Object.getOwnPropertyDescriptor(object, property);if (desc === undefined) {
-	      var parent = Object.getPrototypeOf(object);if (parent === null) {
-	        return undefined;
-	      } else {
-	        _x = parent;_x2 = property;_x3 = receiver;_again = true;continue _function;
-	      }
-	    } else if ('value' in desc) {
-	      return desc.value;
-	    } else {
-	      var getter = desc.get;if (getter === undefined) {
-	        return undefined;
-	      }return getter.call(receiver);
-	    }
-	  }
-	};
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 	
-	function _classCallCheck(instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError('Cannot call a class as a function');
-	  }
-	}
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 	
-	function _inherits(subClass, superClass) {
-	  if (typeof superClass !== 'function' && superClass !== null) {
-	    throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-	  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) subClass.__proto__ = superClass;
-	}
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var React = __webpack_require__(10);
-	var KEYCODE = __webpack_require__(13);
+	var React = __webpack_require__(11);
+	var KEYCODE = __webpack_require__(14);
 	
 	var Options = (function (_React$Component) {
 	  _inherits(Options, _React$Component);
@@ -788,18 +783,52 @@
 	
 	      if (changeSize && Select) {
 	        var _Option = Select.Option;
-	        changeSelect = React.createElement(Select, {
-	          prefixCls: props.selectPrefixCls, showSearch: false,
-	          className: prefixCls + '-size-changer',
-	          optionLabelProp: 'children',
-	          defaultValue: '10', onChange: this._changeSize }, React.createElement(_Option, { value: '10' }, '10 条/页'), React.createElement(_Option, { value: '20' }, '20 条/页'), React.createElement(_Option, { value: '30' }, '30 条/页'), React.createElement(_Option, { value: '40' }, '40 条/页'));
+	        changeSelect = React.createElement(
+	          Select,
+	          {
+	            prefixCls: props.selectPrefixCls, showSearch: false,
+	            className: prefixCls + '-size-changer',
+	            optionLabelProp: "children",
+	            defaultValue: "10", onChange: this._changeSize },
+	          React.createElement(
+	            _Option,
+	            { value: "10" },
+	            '10 条/页'
+	          ),
+	          React.createElement(
+	            _Option,
+	            { value: "20" },
+	            '20 条/页'
+	          ),
+	          React.createElement(
+	            _Option,
+	            { value: "30" },
+	            '30 条/页'
+	          ),
+	          React.createElement(
+	            _Option,
+	            { value: "40" },
+	            '40 条/页'
+	          )
+	        );
 	      }
 	
 	      if (quickGo) {
-	        goInput = React.createElement('div', { className: prefixCls + '-quick-jumper' }, '跳至', React.createElement('input', { type: 'text', defaultValue: props.current, onKeyDown: this._checkValid, onChange: this._quickGo, onKeyUp: this._quickGo }), '页');
+	        goInput = React.createElement(
+	          'div',
+	          { className: prefixCls + '-quick-jumper' },
+	          '跳至',
+	          React.createElement('input', { type: "text", defaultValue: props.current, onKeyDown: this._checkValid, onChange: this._quickGo, onKeyUp: this._quickGo }),
+	          '页'
+	        );
 	      }
 	
-	      return React.createElement('div', { className: '' + prefixCls }, changeSelect, goInput);
+	      return React.createElement(
+	        'div',
+	        { className: '' + prefixCls },
+	        changeSelect,
+	        goInput
+	      );
 	    }
 	  }, {
 	    key: '_changeSize',
@@ -822,8 +851,6 @@
 	      var ENTER_KEY = 13;
 	      var val = Number(evt.target.value);
 	
-	      this.setState({ value: val });
-	
 	      if (evt.keyCode === ENTER_KEY) {
 	        this.props.quickGo(val);
 	      }
@@ -837,14 +864,14 @@
 	  changeSize: React.PropTypes.func,
 	  quickGo: React.PropTypes.func,
 	
-	  sizeChangerClass: React.PropTypes.bool,
+	  selectComponentClass: React.PropTypes.func,
 	  current: React.PropTypes.number
 	};
 	
 	module.exports = Options;
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -858,7 +885,10 @@
 	
 	  BACKSPACE: 8,
 	  DELETE: 46,
-	  ENTER: 13
+	  ENTER: 13,
+	
+	  ARROW_UP: 38,
+	  ARROW_DOWN: 40
 	};
 
 /***/ }

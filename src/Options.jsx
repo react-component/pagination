@@ -39,7 +39,7 @@ class Options extends React.Component {
 
     if (quickGo) {
       goInput = (
-        <div className={`${prefixCls}-quick-jumper`}>
+        <div title="Quick jump to page" className={`${prefixCls}-quick-jumper`}>
           跳至
           <input type="text" defaultValue={props.current} onKeyDown={this._checkValid} onChange={this._quickGo} onKeyUp={this._quickGo} />
           页

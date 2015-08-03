@@ -9,9 +9,11 @@ class Pager extends React.Component {
     if (props.active) {
       cls = `${cls} ${prefixCls}-active`;
     }
+
+    let title = props.page === 1 ? 'First Page' : props.last ? ('Last Page: ' + props.page) : ('Page ' + props.page);
     return (
-      <li className={cls} onClick={props.onClick}>
-        <a title={props.page}>{props.page}</a>
+      <li title={title} className={cls} onClick={props.onClick}>
+        <a>{props.page}</a>
       </li>
     );
   }
@@ -19,7 +21,8 @@ class Pager extends React.Component {
 
 Pager.propTypes = {
   page: React.PropTypes.number,
-  active: React.PropTypes.bool
+  active: React.PropTypes.bool,
+  last: React.PropTypes.bool
 };
 
 module.exports = Pager;

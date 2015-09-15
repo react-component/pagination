@@ -93,20 +93,6 @@ class Options extends React.Component {
       });
     }
   }
-
-  _checkValid(evt) {
-    let keyCode = evt.keyCode;
-    let valid = (
-      (keyCode >= KEYCODE.ZERO && keyCode <= KEYCODE.NINE) ||
-      (keyCode >= KEYCODE.NUMPAD_ZERO && keyCode <= KEYCODE.NUMPAD_NINE) ||
-      keyCode === KEYCODE.DELETE || keyCode === KEYCODE.BACKSPACE || keyCode === KEYCODE.ENTER) ||
-      KEYCODE.validKeyBinding(evt);
-
-    if (!valid) {
-      evt.preventDefault();
-    }
-  }
-
 }
 
 Options.propTypes = {

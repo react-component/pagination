@@ -12,13 +12,5 @@ module.exports = {
   ENTER: 13,
 
   ARROW_UP: 38,
-  ARROW_DOWN: 40,
-
-  validKeyBinding: function(event) {
-    // C-a, C-e, C-k
-    if (event.ctrlKey) {
-      let keyCode = event.keyCode;
-      return [65, 69, 75].indexOf(keyCode) > -1;
-    }
-  }
+  ARROW_DOWN: 40
 };

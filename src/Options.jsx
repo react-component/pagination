@@ -6,10 +6,17 @@ let KEYCODE = require('./KeyCode');
 class Options extends React.Component {
   constructor(props) {
     super(props);
-    ['_quickGo', '_changeSize'].map((method) => this[method] = this[method].bind(this));
+
+    this.state = {
+      current: props.current,
+      _current: props.current
+    };
+
+    ['_handleChange', '_changeSize', '_go'].forEach((method) => this[method] = this[method].bind(this));
   }
   render() {
     let props = this.props;
+    let state = this.state;
     let prefixCls = `${props.rootPrefixCls}-options`;
     let changeSize = props.changeSize;
     let quickGo = props.quickGo;
@@ -41,7 +48,7 @@ class Options extends React.Component {
       goInput = (
         <div title="Quick jump to page" className={`${prefixCls}-quick-jumper`}>
           跳至
-          <input ref="quickGo" type="text" defaultValue={props.current} onKeyDown={this._checkValid} onChange={this._quickGo} onKeyUp={this._quickGo} />
+          <input type="text" value={state._current} onChange={this._handleChange.bind(this)} onKeyUp={this._go.bind(this)}/>
           页
         </div>
       );
@@ -59,6 +66,34 @@ class Options extends React.Component {
     this.props.changeSize(Number(value));
   }
 
+  _handleChange(evt) {
+    let _val = evt.target.value;
+    let val;
+
+    if (_val === '') {
+      val = this.state.current;
+    } else {
+      val = Number(_val);
+      if (isNaN(val)) {
+        val = this.state.current;
+      }
+    }
+
+    this.setState({
+      current: val,
+      _current: _val
+    });
+
+  }
+
+  _go (e) {
+    if (e.keyCode === KEYCODE.ENTER) {
+      this.setState({
+        _current: this.props.quickGo(this.state.current) || this.state.current
+      });
+    }
+  }
+
   _checkValid(evt) {
     let keyCode = evt.keyCode;
     let valid = (
@@ -72,19 +107,6 @@ class Options extends React.Component {
     }
   }
 
-  _quickGo(evt) {
-    let ENTER_KEY = 13;
-    let val = Number(evt.target.value);
-
-    if (isNaN(val)) {
-      this.refs.quickGo.getDOMNode().value = this.props.current;
-      return;
-    }
-
-    if (evt.keyCode === ENTER_KEY) {
-      this.refs.quickGo.getDOMNode().value = this.props.quickGo(val) || this.props.current;
-    }
-  }
 }
 
 Options.propTypes = {

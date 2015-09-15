@@ -68,28 +68,26 @@ class Options extends React.Component {
 
   _handleChange(evt) {
     let _val = evt.target.value;
-    let val;
-
-    if (_val === '') {
-      val = this.state.current;
-    } else {
-      val = Number(_val);
-      if (isNaN(val)) {
-        val = this.state.current;
-      }
-    }
 
     this.setState({
-      current: val,
       _current: _val
     });
-
   }
 
   _go (e) {
+    let _val = e.target.value;
+    if (_val === '') {
+      return;
+    }
+    let val = Number(this.state._current);
+    if (isNaN(val)) {
+      val = this.state.current;
+    }
     if (e.keyCode === KEYCODE.ENTER) {
+      let c = this.props.quickGo(val);
       this.setState({
-        _current: this.props.quickGo(this.state.current) || this.state.current
+        _current: c,
+        current: c
       });
     }
   }

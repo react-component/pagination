@@ -207,6 +207,8 @@ class Pagination extends React.Component {
 
       return page;
     }
+
+    return this.state.current;
   }
 
   _prev() {

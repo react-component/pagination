@@ -64,7 +64,8 @@ class Options extends React.Component {
     let valid = (
       (keyCode >= KEYCODE.ZERO && keyCode <= KEYCODE.NINE) ||
       (keyCode >= KEYCODE.NUMPAD_ZERO && keyCode <= KEYCODE.NUMPAD_NINE) ||
-      keyCode === KEYCODE.DELETE || keyCode === KEYCODE.BACKSPACE || keyCode === KEYCODE.ENTER);
+      keyCode === KEYCODE.DELETE || keyCode === KEYCODE.BACKSPACE || keyCode === KEYCODE.ENTER) ||
+      KEYCODE.validKeyBinding(evt);
 
     if (!valid) {
       evt.preventDefault();

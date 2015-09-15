@@ -6,10 +6,17 @@ let KEYCODE = require('./KeyCode');
 class Options extends React.Component {
   constructor(props) {
     super(props);
-    ['_quickGo', '_changeSize'].map((method) => this[method] = this[method].bind(this));
+
+    this.state = {
+      current: props.current,
+      _current: props.current
+    };
+
+    ['_handleChange', '_changeSize', '_go'].forEach((method) => this[method] = this[method].bind(this));
   }
   render() {
     let props = this.props;
+    let state = this.state;
     let prefixCls = `${props.rootPrefixCls}-options`;
     let changeSize = props.changeSize;
     let quickGo = props.quickGo;
@@ -41,7 +48,7 @@ class Options extends React.Component {
       goInput = (
         <div title="Quick jump to page" className={`${prefixCls}-quick-jumper`}>
           跳至
-          <input type="text" defaultValue={props.current} onKeyDown={this._checkValid} onChange={this._quickGo} onKeyUp={this._quickGo} />
+          <input type="text" value={state._current} onChange={this._handleChange.bind(this)} onKeyUp={this._go.bind(this)}/>
           页
         </div>
       );
@@ -59,25 +66,29 @@ class Options extends React.Component {
     this.props.changeSize(Number(value));
   }
 
-  _checkValid(evt) {
-    let keyCode = evt.keyCode;
-    let valid = (
-      (keyCode >= KEYCODE.ZERO && keyCode <= KEYCODE.NINE) ||
-      (keyCode >= KEYCODE.NUMPAD_ZERO && keyCode <= KEYCODE.NUMPAD_NINE) ||
-      keyCode === KEYCODE.DELETE || keyCode === KEYCODE.BACKSPACE || keyCode === KEYCODE.ENTER);
+  _handleChange(evt) {
+    let _val = evt.target.value;
 
-    if (!valid) {
-      evt.preventDefault();
-    }
+    this.setState({
+      _current: _val
+    });
   }
 
-  _quickGo(evt) {
-    let ENTER_KEY = 13;
-    let val = Number(evt.target.value);
-
-
-    if (evt.keyCode === ENTER_KEY) {
-      this.props.quickGo(val);
+  _go (e) {
+    let _val = e.target.value;
+    if (_val === '') {
+      return;
+    }
+    let val = Number(this.state._current);
+    if (isNaN(val)) {
+      val = this.state.current;
+    }
+    if (e.keyCode === KEYCODE.ENTER) {
+      let c = this.props.quickGo(val);
+      this.setState({
+        _current: c,
+        current: c
+      });
     }
   }
 }

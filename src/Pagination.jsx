@@ -31,9 +31,7 @@ class Pagination extends React.Component {
       '_hasPrev',
       '_hasNext',
       '_jumpPrev',
-      '_jumpNext',
-      '_canJumpPrev',
-      '_canJumpNext'
+      '_jumpNext'
     ].forEach((method) => this[method] = this[method].bind(this));
   }
 
@@ -59,6 +57,8 @@ class Pagination extends React.Component {
     let pagerList = [];
     let jumpPrev = null;
     let jumpNext = null;
+    let firstPager = null;
+    let lastPager = null;
 
     if (props.simple) {
       return (
@@ -90,38 +90,39 @@ class Pagination extends React.Component {
       jumpNext = <li title="Next 5 Page" key="next" onClick={this._jumpNext} className={`${prefixCls}-jump-next`}>
         <a></a>
       </li>;
+      lastPager = <Pager last={true} rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />;
+      firstPager = <Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />;
 
       let current = this.state.current;
 
-      // TODO: need optimization
-      if (current <= 5) {
-        // do not show first •••
-        for (let i = 1; i <= 5; i++) {
-          let active = current === i;
-          pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
-        }
-        pagerList.push(jumpNext);
-        pagerList.push(<Pager last={true} rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
-      } else if (allPages - current < 5) {
-        // do not show last •••
-        pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);
-        pagerList.push(jumpPrev);
-        for (let i = allPages - 4; i <= allPages; i++) {
-          let active = current === i;
-          pagerList.push(<Pager last={i === allPages} rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
-        }
-      } else {
-        // show both •••
-        pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);
-        pagerList.push(jumpPrev);
-        for (let i = current - 2; i <= current + 2; i++) {
-          let active = current === i;
-          pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
-        }
-        pagerList.push(jumpNext);
-        pagerList.push(<Pager last={true} rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
+      let left = Math.max(1, current - 2), right = Math.min(current + 2, allPages);
+
+      if (current - 1 <= 2) {
+        right = 1 + 4;
       }
 
+      if (allPages - current <= 2) {
+        left = allPages - 4;
+      }
+
+      for (let i = left; i <= right; i++) {
+        let active = current === i;
+        pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
+      }
+
+      if (current - 1 >= 4) {
+        pagerList.unshift(jumpPrev);
+      }
+      if (allPages - current >= 4) {
+        pagerList.push(jumpNext);
+      }
+
+      if (left !== 1) {
+        pagerList.unshift(firstPager);
+      }
+      if (right !== allPages) {
+        pagerList.push(lastPager);
+      }
     }
 
     return (
@@ -151,7 +152,7 @@ class Pagination extends React.Component {
   }
 
   _isValid(page) {
-    return typeof page === 'number' && page >= 1 && page <= this._calcPage() && page !== this.state.current;
+    return typeof page === 'number' && page >= 1 && page !== this.state.current;
   }
 
   _handleKeyDown(evt) {
@@ -195,12 +196,19 @@ class Pagination extends React.Component {
 
   _handleChange(page) {
     if (this._isValid(page)) {
+      if (page > this._calcPage()) {
+        page = this._calcPage();
+      }
       this.setState({
         current: page,
         _current: page
       });
       this.props.onChange(page);
+
+      return page;
     }
+
+    return this.state.current;
   }
 
   _prev() {
@@ -216,15 +224,11 @@ class Pagination extends React.Component {
   }
 
   _jumpPrev() {
-    if (this._canJumpPrev()) {
-      this._handleChange(this.state.current - 5);
-    }
+    this._handleChange(Math.max(1, this.state.current - 5));
   }
 
   _jumpNext() {
-    if (this._canJumpNext()) {
-      this._handleChange(this.state.current + 5);
-    }
+    this._handleChange(Math.min(this._calcPage(), this.state.current + 5));
   }
 
   _hasPrev() {
@@ -233,14 +237,6 @@ class Pagination extends React.Component {
 
   _hasNext() {
     return this.state.current < this._calcPage();
-  }
-
-  _canJumpPrev() {
-    return this.state.current > 5;
-  }
-
-  _canJumpNext() {
-    return this._calcPage() - this.state.current > 5;
   }
 }
 

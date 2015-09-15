@@ -151,7 +151,7 @@ class Pagination extends React.Component {
   }
 
   _isValid(page) {
-    return typeof page === 'number' && page >= 1 && page <= this._calcPage() && page !== this.state.current;
+    return typeof page === 'number' && page >= 1 && page !== this.state.current;
   }
 
   _handleKeyDown(evt) {
@@ -195,11 +195,16 @@ class Pagination extends React.Component {
 
   _handleChange(page) {
     if (this._isValid(page)) {
+      if (page > this._calcPage()) {
+        page = this._calcPage();
+      }
       this.setState({
         current: page,
         _current: page
       });
       this.props.onChange(page);
+
+      return page;
     }
   }
 

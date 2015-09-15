@@ -41,7 +41,7 @@ class Options extends React.Component {
       goInput = (
         <div title="Quick jump to page" className={`${prefixCls}-quick-jumper`}>
           跳至
-          <input type="text" defaultValue={props.current} onKeyDown={this._checkValid} onChange={this._quickGo} onKeyUp={this._quickGo} />
+          <input ref="quickGo" type="text" defaultValue={props.current} onKeyDown={this._checkValid} onChange={this._quickGo} onKeyUp={this._quickGo} />
           页
         </div>
       );
@@ -75,9 +75,13 @@ class Options extends React.Component {
     let ENTER_KEY = 13;
     let val = Number(evt.target.value);
 
+    if (isNaN(val)) {
+      this.refs.quickGo.getDOMNode().value = this.props.current;
+      return;
+    }
 
     if (evt.keyCode === ENTER_KEY) {
-      this.props.quickGo(val);
+      this.refs.quickGo.getDOMNode().value = this.props.quickGo(val) || this.props.current;
     }
   }
 }

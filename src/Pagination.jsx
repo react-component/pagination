@@ -191,6 +191,8 @@ class Pagination extends React.Component {
       this.setState({
         pageSize: size
       });
+
+      this.props.onShowSizeChange(this.state.current, size);
     }
   }
 
@@ -246,6 +248,7 @@ Pagination.propTypes = {
   pageSize: React.PropTypes.number,
   onChange: React.PropTypes.func,
   showSizeChanger: React.PropTypes.bool,
+  onShowSizeChange: React.PropTypes.func,
   selectComponentClass:React.PropTypes.func,
   showQuickJumper: React.PropTypes.bool
 };
@@ -260,7 +263,8 @@ Pagination.defaultProps = {
   prefixCls: 'rc-pagination',
   selectComponentClass:null,
   showQuickJumper: false,
-  showSizeChanger: false
+  showSizeChanger: false,
+  onShowSizeChange: noop
 };
 
 module.exports = Pagination;

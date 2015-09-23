@@ -9,9 +9,14 @@ var Select=require('rc-select');
 React.render(
   <Pagination
     selectComponentClass={Select}
-    showQuickJumper={true} showSizeChanger={true} onChange={onChange} total={450} />,
+    showQuickJumper={true} showSizeChanger={true} onChange={onChange} onShowSizeChange={onShowSizeChange} total={450} />,
   document.getElementById('__react-content')
 );
+
+function onShowSizeChange(current, pageSize) {
+  console.log(current)
+  console.log(pageSize)
+}
 
 function onChange(key) {
   console.log(key)

@@ -1,7 +1,7 @@
 // use jsx to render html, do not modify simple.html
 'use strict';
 
-require('rc-pagination/assets/index.css');
+require('rc-pagination/assets/index.less');
 var Pagination = require('rc-pagination');
 var React = require('react');
 React.render(

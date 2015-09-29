@@ -1,9 +1,9 @@
-'use strict';
 
-let React = require('react');
-let Pager = require('./Pager');
-let Options = require('./Options');
-let KEYCODE = require('./KeyCode');
+
+const React = require('react');
+const Pager = require('./Pager');
+const Options = require('./Options');
+const KEYCODE = require('./KeyCode');
 
 
 function noop() {
@@ -16,7 +16,7 @@ class Pagination extends React.Component {
     this.state = {
       current: props.current,
       _current: props.current,
-      pageSize: props.pageSize
+      pageSize: props.pageSize,
     };
 
     [
@@ -31,30 +31,30 @@ class Pagination extends React.Component {
       '_hasPrev',
       '_hasNext',
       '_jumpPrev',
-      '_jumpNext'
+      '_jumpNext',
     ].forEach((method) => this[method] = this[method].bind(this));
   }
 
   componentWillReceiveProps(nextProps) {
     if ('current' in nextProps) {
       this.setState({
-        current: nextProps.current
+        current: nextProps.current,
       });
     }
 
     if ('pageSize' in nextProps) {
       this.setState({
-        pageSize: nextProps.pageSize
+        pageSize: nextProps.pageSize,
       });
     }
   }
 
   render() {
-    let props = this.props;
+    const props = this.props;
 
-    let prefixCls = props.prefixCls;
-    let allPages = this._calcPage();
-    let pagerList = [];
+    const prefixCls = props.prefixCls;
+    const allPages = this._calcPage();
+    const pagerList = [];
     let jumpPrev = null;
     let jumpNext = null;
     let firstPager = null;
@@ -80,22 +80,23 @@ class Pagination extends React.Component {
 
     if (allPages <= 9) {
       for (let i = 1; i <= allPages; i++) {
-        let active = this.state.current === i;
+        const active = this.state.current === i;
         pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
       }
     } else {
-      jumpPrev = <li title="Previous 5 Page" key="prev" onClick={this._jumpPrev} className={`${prefixCls}-jump-prev`}>
+      jumpPrev = (<li title="Previous 5 Page" key="prev" onClick={this._jumpPrev} className={`${prefixCls}-jump-prev`}>
         <a></a>
-      </li>;
-      jumpNext = <li title="Next 5 Page" key="next" onClick={this._jumpNext} className={`${prefixCls}-jump-next`}>
+      </li>);
+      jumpNext = (<li title="Next 5 Page" key="next" onClick={this._jumpNext} className={`${prefixCls}-jump-next`}>
         <a></a>
-      </li>;
+      </li>);
       lastPager = <Pager last={true} rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />;
       firstPager = <Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />;
 
-      let current = this.state.current;
+      const current = this.state.current;
 
-      let left = Math.max(1, current - 2), right = Math.min(current + 2, allPages);
+      let left = Math.max(1, current - 2);
+      let right = Math.min(current + 2, allPages);
 
       if (current - 1 <= 2) {
         right = 1 + 4;
@@ -106,7 +107,7 @@ class Pagination extends React.Component {
       }
 
       for (let i = left; i <= right; i++) {
-        let active = current === i;
+        const active = current === i;
         pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
       }
 
@@ -147,7 +148,8 @@ class Pagination extends React.Component {
 
   // private methods
 
-  _calcPage(pageSize) {
+  _calcPage(p) {
+    let pageSize = p;
     if (typeof pageSize === 'undefined') {
       pageSize = this.state.pageSize;
     }
@@ -165,7 +167,7 @@ class Pagination extends React.Component {
   }
 
   _handleKeyUp(evt) {
-    let _val = evt.target.value;
+    const _val = evt.target.value;
     let val;
 
     if (_val === '') {
@@ -177,7 +179,7 @@ class Pagination extends React.Component {
     }
 
     this.setState({
-      _current: val
+      _current: val,
     });
 
     if (evt.keyCode === KEYCODE.ENTER) {
@@ -194,14 +196,14 @@ class Pagination extends React.Component {
       let current = this.state.current;
 
       this.setState({
-        pageSize: size
+        pageSize: size,
       });
 
       if (this.state.current > this._calcPage(size)) {
         current = this._calcPage(size);
         this.setState({
           current: current,
-          _current: current
+          _current: current,
         });
       }
 
@@ -209,14 +211,15 @@ class Pagination extends React.Component {
     }
   }
 
-  _handleChange(page) {
+  _handleChange(p) {
+    let page = p;
     if (this._isValid(page)) {
       if (page > this._calcPage()) {
         page = this._calcPage();
       }
       this.setState({
         current: page,
-        _current: page
+        _current: page,
       });
       this.props.onChange(page);
 
@@ -262,8 +265,8 @@ Pagination.propTypes = {
   onChange: React.PropTypes.func,
   showSizeChanger: React.PropTypes.bool,
   onShowSizeChange: React.PropTypes.func,
-  selectComponentClass:React.PropTypes.func,
-  showQuickJumper: React.PropTypes.bool
+  selectComponentClass: React.PropTypes.func,
+  showQuickJumper: React.PropTypes.bool,
 };
 
 Pagination.defaultProps = {
@@ -274,10 +277,10 @@ Pagination.defaultProps = {
   className: '',
   selectPrefixCls: 'rc-select',
   prefixCls: 'rc-pagination',
-  selectComponentClass:null,
+  selectComponentClass: null,
   showQuickJumper: false,
   showSizeChanger: false,
-  onShowSizeChange: noop
+  onShowSizeChange: noop,
 };
 
 module.exports = Pagination;

@@ -1,7 +1,7 @@
-'use strict';
 
-let React = require('react');
-let KEYCODE = require('./KeyCode');
+
+const React = require('react');
+const KEYCODE = require('./KeyCode');
 
 class Options extends React.Component {
   constructor(props) {
@@ -9,18 +9,18 @@ class Options extends React.Component {
 
     this.state = {
       current: props.current,
-      _current: props.current
+      _current: props.current,
     };
 
     ['_handleChange', '_changeSize', '_go'].forEach((method) => this[method] = this[method].bind(this));
   }
   render() {
-    let props = this.props;
-    let state = this.state;
-    let prefixCls = `${props.rootPrefixCls}-options`;
-    let changeSize = props.changeSize;
-    let quickGo = props.quickGo;
-    let Select = props.selectComponentClass;
+    const props = this.props;
+    const state = this.state;
+    const prefixCls = `${props.rootPrefixCls}-options`;
+    const changeSize = props.changeSize;
+    const quickGo = props.quickGo;
+    const Select = props.selectComponentClass;
     let changeSelect = null;
     let goInput = null;
 
@@ -29,7 +29,7 @@ class Options extends React.Component {
     }
 
     if (changeSize && Select) {
-      let Option = Select.Option;
+      const Option = Select.Option;
       changeSelect = (
         <Select
           prefixCls={props.selectPrefixCls} showSearch={false}
@@ -67,15 +67,15 @@ class Options extends React.Component {
   }
 
   _handleChange(evt) {
-    let _val = evt.target.value;
+    const _val = evt.target.value;
 
     this.setState({
-      _current: _val
+      _current: _val,
     });
   }
 
-  _go (e) {
-    let _val = e.target.value;
+  _go(e) {
+    const _val = e.target.value;
     if (_val === '') {
       return;
     }
@@ -84,10 +84,10 @@ class Options extends React.Component {
       val = this.state.current;
     }
     if (e.keyCode === KEYCODE.ENTER) {
-      let c = this.props.quickGo(val);
+      const c = this.props.quickGo(val);
       this.setState({
         _current: c,
-        current: c
+        current: c,
       });
     }
   }
@@ -96,9 +96,8 @@ class Options extends React.Component {
 Options.propTypes = {
   changeSize: React.PropTypes.func,
   quickGo: React.PropTypes.func,
-
   selectComponentClass: React.PropTypes.func,
-  current: React.PropTypes.number
+  current: React.PropTypes.number,
 };
 
 module.exports = Options;

@@ -1,4 +1,4 @@
-'use strict';
+
 
 module.exports = {
   ZERO: 48,
@@ -8,9 +8,9 @@ module.exports = {
   NUMPAD_NINE: 105,
 
   BACKSPACE: 8,
-  DELETE: 46,
+  DEconstE: 46,
   ENTER: 13,
 
   ARROW_UP: 38,
-  ARROW_DOWN: 40
+  ARROW_DOWN: 40,
 };

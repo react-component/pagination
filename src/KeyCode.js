@@ -8,7 +8,7 @@ module.exports = {
   NUMPAD_NINE: 105,
 
   BACKSPACE: 8,
-  DEconstE: 46,
+  DELETE: 46,
   ENTER: 13,
 
   ARROW_UP: 38,

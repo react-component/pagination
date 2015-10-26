@@ -20,6 +20,7 @@ class Options extends React.Component {
     const prefixCls = `${props.rootPrefixCls}-options`;
     const changeSize = props.changeSize;
     const quickGo = props.quickGo;
+    const buildOptionText = this.props.buildOptionText || this.buildOptionText;
     const Select = props.selectComponentClass;
     let changeSelect = null;
     let goInput = null;
@@ -30,16 +31,18 @@ class Options extends React.Component {
 
     if (changeSize && Select) {
       const Option = Select.Option;
+      const defaultOption = `${props.pageSizeOptions[0]}`;
+      const options = props.pageSizeOptions.map((opt, i) => (
+        <Option key={i} value={`${opt}`}>{buildOptionText(opt)}</Option>
+      ));
+
       changeSelect = (
         <Select
           prefixCls={props.selectPrefixCls} showSearch={false}
           className={`${prefixCls}-size-changer`}
           optionLabelProp="children"
-          defaultValue="10" onChange={this._changeSize}>
-        <Option value="10">10 条/页</Option>
-        <Option value="20">20 条/页</Option>
-        <Option value="30">30 条/页</Option>
-        <Option value="40">40 条/页</Option>
+          defaultValue={defaultOption} onChange={this._changeSize}>
+          {options}
        </Select>
       );
     }
@@ -60,6 +63,10 @@ class Options extends React.Component {
         {goInput}
       </div>
     );
+  }
+
+  buildOptionText(value) {
+    return `${value} 条/页`;
   }
 
   _changeSize(value) {
@@ -98,6 +105,12 @@ Options.propTypes = {
   quickGo: React.PropTypes.func,
   selectComponentClass: React.PropTypes.func,
   current: React.PropTypes.number,
+  pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.number),
+  buildOptionText: React.PropTypes.func,
+};
+
+Options.defaultProps = {
+  pageSizeOptions: [10, 20, 30, 40],
 };
 
 module.exports = Options;

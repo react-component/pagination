@@ -67,17 +67,18 @@ React.render(<Pagination />, container);
 
 ### Pagination
 
-| Parameter        | Description                        | Type     | Default       |
-|------------------|------------------------------------|----------|---------------|
-| current          | currnt page                        | Number   | 1             |
-| total            | items total count                  | Number   | 0             |
-| pageSize         | items per page                     | Number   | 10            |
-| onChange         | page change callback               | Function | noop          |
-| showSizeChanger  | show pageSize changer              | Bool     | false         |
-| onShowSizeChange | pageSize chagne callback           | Function | noop          |
-| showQuickJump    | show quick goto jumper             | Bool     | false         |
-| className        | when set "mini", show mini version | String   | rc-pagination |
-| simple           | when set, show simple pager        | Object   | null          |
+| Parameter        | Description                        | Type          | Default                  |
+|------------------|------------------------------------|---------------|--------------------------|
+| current          | currnt page                        | Number        | 1                        |
+| total            | items total count                  | Number        | 0                        |
+| pageSize         | items per page                     | Number        | 10                       |
+| onChange         | page change callback               | Function      | noop                     |
+| showSizeChanger  | show pageSize changer              | Bool          | false                    |
+| pageSizeOptions  | specify the sizeChanger selections | Array<String> | ['10', '20', '30', '40'] |
+| onShowSizeChange | pageSize chagne callback           | Function      | noop                     |
+| showQuickJump    | show quick goto jumper             | Bool          | false                    |
+| className        | when set "mini", show mini version | String        | rc-pagination            |
+| simple           | when set, show simple pager        | Object        | null                     |
 
 ## Test Case
 

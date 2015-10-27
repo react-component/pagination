@@ -69,7 +69,7 @@ React.render(<Pagination />, container);
 
 | Parameter        | Description                        | Type          | Default                  |
 |------------------|------------------------------------|---------------|--------------------------|
-| current          | currnt page                        | Number        | 1                        |
+| current          | current page                       | Number        | 1                        |
 | total            | items total count                  | Number        | 0                        |
 | pageSize         | items per page                     | Number        | 10                       |
 | onChange         | page change callback               | Function      | noop                     |

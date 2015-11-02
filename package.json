@@ -40,10 +40,11 @@
   "devDependencies": {
     "expect.js": "0.3.x",
     "precommit-hook": "1.x",
+    "rc-select": "~4.2.1",
     "rc-server": "3.x",
     "rc-tools": "4.x",
     "react": "0.13.x",
-    "rc-select": "^4.2.1"
+    "react-dom": "~0.14.1"
   },
   "precommit": [
     "lint"

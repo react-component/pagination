@@ -3,6 +3,7 @@ const React = require('react');
 class Pager extends React.Component {
   render() {
     const props = this.props;
+    const locale = props.locale;
     const prefixCls = `${props.rootPrefixCls}-item`;
     let cls = `${prefixCls} ${prefixCls}-${props.page}`;
 
@@ -12,11 +13,11 @@ class Pager extends React.Component {
 
     let title;
     if (props.page === 1) {
-      title = 'First Page';
+      title = locale.first_page;
     } else if (props.last) {
-      title = ('Last Page: ' + props.page);
+      title = (locale.last_page + ': ' + props.page);
     } else {
-      title = ('Page ' + props.page);
+      title = (props.page);
     }
     return (
       <li title={title} className={cls} onClick={props.onClick}>
@@ -30,6 +31,7 @@ Pager.propTypes = {
   page: React.PropTypes.number,
   active: React.PropTypes.bool,
   last: React.PropTypes.bool,
+  locale: React.PropTypes.object,
 };
 
 module.exports = Pager;

@@ -12,10 +12,10 @@ class Options extends React.Component {
       _current: props.current,
     };
 
-    ['_handleChange', '_changeSize', '_go'].forEach((method) => this[method] = this[method].bind(this));
+    ['_handleChange', '_changeSize', '_go', '_buildOptionText'].forEach((method) => this[method] = this[method].bind(this));
   }
   _buildOptionText(value) {
-    return `${value} 条/页`;
+    return `${value} ${this.props.locale.items_per_page}`;
   }
 
   _changeSize(value) {
@@ -51,6 +51,7 @@ class Options extends React.Component {
   render() {
     const props = this.props;
     const state = this.state;
+    const locale = props.locale;
     const prefixCls = `${props.rootPrefixCls}-options`;
     const changeSize = props.changeSize;
     const quickGo = props.quickGo;
@@ -84,9 +85,9 @@ class Options extends React.Component {
     if (quickGo) {
       goInput = (
         <div title="Quick jump to page" className={`${prefixCls}-quick-jumper`}>
-          跳至
+          {locale.jump_to}
           <input type="text" value={state._current} onChange={this._handleChange.bind(this)} onKeyUp={this._go.bind(this)}/>
-          页
+          {locale.page}
         </div>
       );
     }
@@ -108,6 +109,7 @@ Options.propTypes = {
   current: React.PropTypes.number,
   pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
   buildOptionText: React.PropTypes.func,
+  locale: React.PropTypes.object,
 };
 
 Options.defaultProps = {

@@ -1,9 +1,8 @@
-
-
 const React = require('react');
 const Pager = require('./Pager');
 const Options = require('./Options');
 const KEYCODE = require('./KeyCode');
+const LOCALE = require('./locale/zh_CN');
 
 
 function noop() {
@@ -162,6 +161,7 @@ class Pagination extends React.Component {
 
   render() {
     const props = this.props;
+    const locale = props.locale;
 
     const prefixCls = props.prefixCls;
     const allPages = this._calcPage();
@@ -174,15 +174,15 @@ class Pagination extends React.Component {
     if (props.simple) {
       return (
         <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`}>
-          <li title="Previous Page" onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
+          <li title={locale.prev_page} onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
             <a></a>
           </li>
-          <div title={`Page ${this.state.current} of ${allPages}`} className={`${prefixCls}-simple-pager`}>
+          <div title={`${this.state.current}/${allPages}`} className={`${prefixCls}-simple-pager`}>
             <input type="text" value={this.state._current} onKeyDown={this._handleKeyDown} onKeyUp={this._handleKeyUp} onChange={this._handleKeyUp} />
             <span className={`${prefixCls}-slash`}>／</span>
             {allPages}
           </div>
-          <li title="Next Page" onClick={this._next} className={(this._hasNext() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-next`}>
+          <li title={locale.next_page} onClick={this._next} className={(this._hasNext() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-next`}>
             <a></a>
           </li>
         </ul>
@@ -192,17 +192,21 @@ class Pagination extends React.Component {
     if (allPages <= 9) {
       for (let i = 1; i <= allPages; i++) {
         const active = this.state.current === i;
-        pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
+        pagerList.push(<Pager locale={locale} rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
       }
     } else {
-      jumpPrev = (<li title="Previous 5 Page" key="prev" onClick={this._jumpPrev} className={`${prefixCls}-jump-prev`}>
+      jumpPrev = (<li title={locale.prev_5} key="prev" onClick={this._jumpPrev} className={`${prefixCls}-jump-prev`}>
         <a></a>
       </li>);
-      jumpNext = (<li title="Next 5 Page" key="next" onClick={this._jumpNext} className={`${prefixCls}-jump-next`}>
+      jumpNext = (<li title={locale.next_5} key="next" onClick={this._jumpNext} className={`${prefixCls}-jump-next`}>
         <a></a>
       </li>);
-      lastPager = <Pager last rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active />;
-      firstPager = <Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />;
+      lastPager = (<Pager
+        locale={props.locale}
+        last rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active />);
+      firstPager = (<Pager
+        locale={props.locale}
+        rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);
 
       const current = this.state.current;
 
@@ -219,7 +223,9 @@ class Pagination extends React.Component {
 
       for (let i = left; i <= right; i++) {
         const active = current === i;
-        pagerList.push(<Pager rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
+        pagerList.push(<Pager
+          locale={props.locale}
+          rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
       }
 
       if (current - 1 >= 4) {
@@ -240,14 +246,16 @@ class Pagination extends React.Component {
     return (
       <ul className={`${prefixCls} ${props.className}`}
         unselectable="unselectable">
-        <li title="Previous Page" onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
+        <li title={locale.prev_page} onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
           <a></a>
         </li>
         {pagerList}
-        <li title="Next Page" onClick={this._next} className={(this._hasNext() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-next`}>
+        <li title={locale.next_page} onClick={this._next} className={(this._hasNext() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-next`}>
           <a></a>
         </li>
-        <Options rootPrefixCls={prefixCls}
+        <Options
+          locale={props.locale}
+          rootPrefixCls={prefixCls}
           selectComponentClass={props.selectComponentClass}
           selectPrefixCls={props.selectPrefixCls}
           changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null}
@@ -270,6 +278,8 @@ Pagination.propTypes = {
   selectComponentClass: React.PropTypes.func,
   showQuickJumper: React.PropTypes.bool,
   pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
+
+  locale: React.PropTypes.object,
 };
 
 Pagination.defaultProps = {
@@ -284,6 +294,7 @@ Pagination.defaultProps = {
   showQuickJumper: false,
   showSizeChanger: false,
   onShowSizeChange: noop,
+  locale: LOCALE,
 };
 
 module.exports = Pagination;

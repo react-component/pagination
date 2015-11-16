@@ -30,7 +30,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		4:0
+/******/ 		5:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"jumper","1":"more","2":"simple","3":"stupid"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"jumper","1":"more","2":"simple","3":"sizer","4":"stupid"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -136,6 +136,7 @@
 	var Pager = __webpack_require__(163);
 	var Options = __webpack_require__(164);
 	var KEYCODE = __webpack_require__(165);
+	var LOCALE = __webpack_require__(166);
 	
 	function noop() {}
 	
@@ -174,122 +175,6 @@
 	          pageSize: nextProps.pageSize
 	        });
 	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var props = this.props;
-	
-	      var prefixCls = props.prefixCls;
-	      var allPages = this._calcPage();
-	      var pagerList = [];
-	      var jumpPrev = null;
-	      var jumpNext = null;
-	      var firstPager = null;
-	      var lastPager = null;
-	
-	      if (props.simple) {
-	        return React.createElement(
-	          'ul',
-	          { className: prefixCls + ' ' + prefixCls + '-simple ' + props.className },
-	          React.createElement(
-	            'li',
-	            { title: 'Previous Page', onClick: this._prev, className: (this._hasPrev() ? '' : prefixCls + '-disabled ') + (prefixCls + '-prev') },
-	            React.createElement('a', null)
-	          ),
-	          React.createElement(
-	            'div',
-	            { title: 'Page ' + this.state.current + ' of ' + allPages, className: prefixCls + '-simple-pager' },
-	            React.createElement('input', { type: 'text', value: this.state._current, onKeyDown: this._handleKeyDown, onKeyUp: this._handleKeyUp, onChange: this._handleKeyUp }),
-	            React.createElement(
-	              'span',
-	              { className: prefixCls + '-slash' },
-	              '／'
-	            ),
-	            allPages
-	          ),
-	          React.createElement(
-	            'li',
-	            { title: 'Next Page', onClick: this._next, className: (this._hasNext() ? '' : prefixCls + '-disabled ') + (prefixCls + '-next') },
-	            React.createElement('a', null)
-	          )
-	        );
-	      }
-	
-	      if (allPages <= 9) {
-	        for (var i = 1; i <= allPages; i++) {
-	          var active = this.state.current === i;
-	          pagerList.push(React.createElement(Pager, { rootPrefixCls: prefixCls, onClick: this._handleChange.bind(this, i), key: i, page: i, active: active }));
-	        }
-	      } else {
-	        jumpPrev = React.createElement(
-	          'li',
-	          { title: 'Previous 5 Page', key: 'prev', onClick: this._jumpPrev, className: prefixCls + '-jump-prev' },
-	          React.createElement('a', null)
-	        );
-	        jumpNext = React.createElement(
-	          'li',
-	          { title: 'Next 5 Page', key: 'next', onClick: this._jumpNext, className: prefixCls + '-jump-next' },
-	          React.createElement('a', null)
-	        );
-	        lastPager = React.createElement(Pager, { last: true, rootPrefixCls: prefixCls, onClick: this._handleChange.bind(this, allPages), key: allPages, page: allPages, active: false });
-	        firstPager = React.createElement(Pager, { rootPrefixCls: prefixCls, onClick: this._handleChange.bind(this, 1), key: 1, page: 1, active: false });
-	
-	        var current = this.state.current;
-	
-	        var left = Math.max(1, current - 2);
-	        var right = Math.min(current + 2, allPages);
-	
-	        if (current - 1 <= 2) {
-	          right = 1 + 4;
-	        }
-	
-	        if (allPages - current <= 2) {
-	          left = allPages - 4;
-	        }
-	
-	        for (var i = left; i <= right; i++) {
-	          var active = current === i;
-	          pagerList.push(React.createElement(Pager, { rootPrefixCls: prefixCls, onClick: this._handleChange.bind(this, i), key: i, page: i, active: active }));
-	        }
-	
-	        if (current - 1 >= 4) {
-	          pagerList.unshift(jumpPrev);
-	        }
-	        if (allPages - current >= 4) {
-	          pagerList.push(jumpNext);
-	        }
-	
-	        if (left !== 1) {
-	          pagerList.unshift(firstPager);
-	        }
-	        if (right !== allPages) {
-	          pagerList.push(lastPager);
-	        }
-	      }
-	
-	      return React.createElement(
-	        'ul',
-	        { className: prefixCls + ' ' + props.className,
-	          unselectable: 'unselectable' },
-	        React.createElement(
-	          'li',
-	          { title: 'Previous Page', onClick: this._prev, className: (this._hasPrev() ? '' : prefixCls + '-disabled ') + (prefixCls + '-prev') },
-	          React.createElement('a', null)
-	        ),
-	        pagerList,
-	        React.createElement(
-	          'li',
-	          { title: 'Next Page', onClick: this._next, className: (this._hasNext() ? '' : prefixCls + '-disabled ') + (prefixCls + '-next') },
-	          React.createElement('a', null)
-	        ),
-	        React.createElement(Options, { rootPrefixCls: prefixCls,
-	          selectComponentClass: props.selectComponentClass,
-	          selectPrefixCls: props.selectPrefixCls,
-	          changeSize: this.props.showSizeChanger ? this._changePageSize.bind(this) : null,
-	          current: this.state.current,
-	          quickGo: this.props.showQuickJumper ? this._handleChange.bind(this) : null })
-	      );
 	    }
 	
 	    // private methods
@@ -415,6 +300,132 @@
 	    value: function _hasNext() {
 	      return this.state.current < this._calcPage();
 	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var props = this.props;
+	      var locale = props.locale;
+	
+	      var prefixCls = props.prefixCls;
+	      var allPages = this._calcPage();
+	      var pagerList = [];
+	      var jumpPrev = null;
+	      var jumpNext = null;
+	      var firstPager = null;
+	      var lastPager = null;
+	
+	      if (props.simple) {
+	        return React.createElement(
+	          'ul',
+	          { className: prefixCls + ' ' + prefixCls + '-simple ' + props.className },
+	          React.createElement(
+	            'li',
+	            { title: locale.prev_page, onClick: this._prev, className: (this._hasPrev() ? '' : prefixCls + '-disabled ') + (prefixCls + '-prev') },
+	            React.createElement('a', null)
+	          ),
+	          React.createElement(
+	            'div',
+	            { title: this.state.current + '/' + allPages, className: prefixCls + '-simple-pager' },
+	            React.createElement('input', { type: 'text', value: this.state._current, onKeyDown: this._handleKeyDown, onKeyUp: this._handleKeyUp, onChange: this._handleKeyUp }),
+	            React.createElement(
+	              'span',
+	              { className: prefixCls + '-slash' },
+	              '／'
+	            ),
+	            allPages
+	          ),
+	          React.createElement(
+	            'li',
+	            { title: locale.next_page, onClick: this._next, className: (this._hasNext() ? '' : prefixCls + '-disabled ') + (prefixCls + '-next') },
+	            React.createElement('a', null)
+	          )
+	        );
+	      }
+	
+	      if (allPages <= 9) {
+	        for (var i = 1; i <= allPages; i++) {
+	          var active = this.state.current === i;
+	          pagerList.push(React.createElement(Pager, { locale: locale, rootPrefixCls: prefixCls, onClick: this._handleChange.bind(this, i), key: i, page: i, active: active }));
+	        }
+	      } else {
+	        jumpPrev = React.createElement(
+	          'li',
+	          { title: locale.prev_5, key: 'prev', onClick: this._jumpPrev, className: prefixCls + '-jump-prev' },
+	          React.createElement('a', null)
+	        );
+	        jumpNext = React.createElement(
+	          'li',
+	          { title: locale.next_5, key: 'next', onClick: this._jumpNext, className: prefixCls + '-jump-next' },
+	          React.createElement('a', null)
+	        );
+	        lastPager = React.createElement(Pager, {
+	          locale: props.locale,
+	          last: true, rootPrefixCls: prefixCls, onClick: this._handleChange.bind(this, allPages), key: allPages, page: allPages, active: true });
+	        firstPager = React.createElement(Pager, {
+	          locale: props.locale,
+	          rootPrefixCls: prefixCls, onClick: this._handleChange.bind(this, 1), key: 1, page: 1, active: false });
+	
+	        var current = this.state.current;
+	
+	        var left = Math.max(1, current - 2);
+	        var right = Math.min(current + 2, allPages);
+	
+	        if (current - 1 <= 2) {
+	          right = 1 + 4;
+	        }
+	
+	        if (allPages - current <= 2) {
+	          left = allPages - 4;
+	        }
+	
+	        for (var i = left; i <= right; i++) {
+	          var active = current === i;
+	          pagerList.push(React.createElement(Pager, {
+	            locale: props.locale,
+	            rootPrefixCls: prefixCls, onClick: this._handleChange.bind(this, i), key: i, page: i, active: active }));
+	        }
+	
+	        if (current - 1 >= 4) {
+	          pagerList.unshift(jumpPrev);
+	        }
+	        if (allPages - current >= 4) {
+	          pagerList.push(jumpNext);
+	        }
+	
+	        if (left !== 1) {
+	          pagerList.unshift(firstPager);
+	        }
+	        if (right !== allPages) {
+	          pagerList.push(lastPager);
+	        }
+	      }
+	
+	      return React.createElement(
+	        'ul',
+	        { className: prefixCls + ' ' + props.className,
+	          unselectable: 'unselectable' },
+	        React.createElement(
+	          'li',
+	          { title: locale.prev_page, onClick: this._prev, className: (this._hasPrev() ? '' : prefixCls + '-disabled ') + (prefixCls + '-prev') },
+	          React.createElement('a', null)
+	        ),
+	        pagerList,
+	        React.createElement(
+	          'li',
+	          { title: locale.next_page, onClick: this._next, className: (this._hasNext() ? '' : prefixCls + '-disabled ') + (prefixCls + '-next') },
+	          React.createElement('a', null)
+	        ),
+	        React.createElement(Options, {
+	          locale: props.locale,
+	          rootPrefixCls: prefixCls,
+	          selectComponentClass: props.selectComponentClass,
+	          selectPrefixCls: props.selectPrefixCls,
+	          changeSize: this.props.showSizeChanger ? this._changePageSize.bind(this) : null,
+	          current: this.state.current,
+	          pageSizeOptions: this.props.pageSizeOptions,
+	          quickGo: this.props.showQuickJumper ? this._handleChange.bind(this) : null })
+	      );
+	    }
 	  }]);
 	
 	  return Pagination;
@@ -428,7 +439,10 @@
 	  showSizeChanger: React.PropTypes.bool,
 	  onShowSizeChange: React.PropTypes.func,
 	  selectComponentClass: React.PropTypes.func,
-	  showQuickJumper: React.PropTypes.bool
+	  showQuickJumper: React.PropTypes.bool,
+	  pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
+	
+	  locale: React.PropTypes.object
 	};
 	
 	Pagination.defaultProps = {
@@ -442,7 +456,8 @@
 	  selectComponentClass: null,
 	  showQuickJumper: false,
 	  showSizeChanger: false,
-	  onShowSizeChange: noop
+	  onShowSizeChange: noop,
+	  locale: LOCALE
 	};
 	
 	module.exports = Pagination;
@@ -20852,6 +20867,7 @@
 	    key: 'render',
 	    value: function render() {
 	      var props = this.props;
+	      var locale = props.locale;
 	      var prefixCls = props.rootPrefixCls + '-item';
 	      var cls = prefixCls + ' ' + prefixCls + '-' + props.page;
 	
@@ -20861,11 +20877,11 @@
 	
 	      var title = undefined;
 	      if (props.page === 1) {
-	        title = 'First Page';
+	        title = locale.first_page;
 	      } else if (props.last) {
-	        title = 'Last Page: ' + props.page;
+	        title = locale.last_page + ': ' + props.page;
 	      } else {
-	        title = 'Page ' + props.page;
+	        title = props.page;
 	      }
 	      return React.createElement(
 	        'li',
@@ -20885,7 +20901,8 @@
 	Pager.propTypes = {
 	  page: React.PropTypes.number,
 	  active: React.PropTypes.bool,
-	  last: React.PropTypes.bool
+	  last: React.PropTypes.bool,
+	  locale: React.PropTypes.object
 	};
 	
 	module.exports = Pager;
@@ -20922,75 +20939,15 @@
 	      _current: props.current
 	    };
 	
-	    ['_handleChange', '_changeSize', '_go'].forEach(function (method) {
+	    ['_handleChange', '_changeSize', '_go', '_buildOptionText'].forEach(function (method) {
 	      return _this[method] = _this[method].bind(_this);
 	    });
 	  }
 	
 	  _createClass(Options, [{
-	    key: 'render',
-	    value: function render() {
-	      var props = this.props;
-	      var state = this.state;
-	      var prefixCls = props.rootPrefixCls + '-options';
-	      var changeSize = props.changeSize;
-	      var quickGo = props.quickGo;
-	      var Select = props.selectComponentClass;
-	      var changeSelect = null;
-	      var goInput = null;
-	
-	      if (!(changeSize || quickGo)) {
-	        return null;
-	      }
-	
-	      if (changeSize && Select) {
-	        var _Option = Select.Option;
-	        changeSelect = React.createElement(
-	          Select,
-	          {
-	            prefixCls: props.selectPrefixCls, showSearch: false,
-	            className: prefixCls + '-size-changer',
-	            optionLabelProp: 'children',
-	            defaultValue: '10', onChange: this._changeSize },
-	          React.createElement(
-	            _Option,
-	            { value: '10' },
-	            '10 条/页'
-	          ),
-	          React.createElement(
-	            _Option,
-	            { value: '20' },
-	            '20 条/页'
-	          ),
-	          React.createElement(
-	            _Option,
-	            { value: '30' },
-	            '30 条/页'
-	          ),
-	          React.createElement(
-	            _Option,
-	            { value: '40' },
-	            '40 条/页'
-	          )
-	        );
-	      }
-	
-	      if (quickGo) {
-	        goInput = React.createElement(
-	          'div',
-	          { title: 'Quick jump to page', className: prefixCls + '-quick-jumper' },
-	          '跳至',
-	          React.createElement('input', { type: 'text', value: state._current, onChange: this._handleChange.bind(this), onKeyUp: this._go.bind(this) }),
-	          '页'
-	        );
-	      }
-	
-	      return React.createElement(
-	        'div',
-	        { className: '' + prefixCls },
-	        changeSelect,
-	        goInput
-	      );
+	    key: '_buildOptionText',
+	    value: function _buildOptionText(value) {
+	      return value + ' ' + this.props.locale.items_per_page;
 	    }
 	  }, {
 	    key: '_changeSize',
@@ -21025,6 +20982,67 @@
 	        });
 	      }
 	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+	
+	      var props = this.props;
+	      var state = this.state;
+	      var locale = props.locale;
+	      var prefixCls = props.rootPrefixCls + '-options';
+	      var changeSize = props.changeSize;
+	      var quickGo = props.quickGo;
+	      var buildOptionText = props.buildOptionText || this._buildOptionText;
+	      var Select = props.selectComponentClass;
+	      var changeSelect = null;
+	      var goInput = null;
+	
+	      if (!(changeSize || quickGo)) {
+	        return null;
+	      }
+	
+	      if (changeSize && Select) {
+	        (function () {
+	          var Option = Select.Option;
+	          var defaultOption = props.pageSizeOptions[0];
+	          var options = props.pageSizeOptions.map(function (opt, i) {
+	            return React.createElement(
+	              Option,
+	              { key: i, value: opt },
+	              buildOptionText(opt)
+	            );
+	          });
+	
+	          changeSelect = React.createElement(
+	            Select,
+	            {
+	              prefixCls: props.selectPrefixCls, showSearch: false,
+	              className: prefixCls + '-size-changer',
+	              optionLabelProp: 'children',
+	              defaultValue: defaultOption, onChange: _this2._changeSize },
+	            options
+	          );
+	        })();
+	      }
+	
+	      if (quickGo) {
+	        goInput = React.createElement(
+	          'div',
+	          { title: 'Quick jump to page', className: prefixCls + '-quick-jumper' },
+	          locale.jump_to,
+	          React.createElement('input', { type: 'text', value: state._current, onChange: this._handleChange.bind(this), onKeyUp: this._go.bind(this) }),
+	          locale.page
+	        );
+	      }
+	
+	      return React.createElement(
+	        'div',
+	        { className: '' + prefixCls },
+	        changeSelect,
+	        goInput
+	      );
+	    }
 	  }]);
 	
 	  return Options;
@@ -21034,7 +21052,14 @@
 	  changeSize: React.PropTypes.func,
 	  quickGo: React.PropTypes.func,
 	  selectComponentClass: React.PropTypes.func,
-	  current: React.PropTypes.number
+	  current: React.PropTypes.number,
+	  pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
+	  buildOptionText: React.PropTypes.func,
+	  locale: React.PropTypes.object
+	};
+	
+	Options.defaultProps = {
+	  pageSizeOptions: ['10', '20', '30', '40']
 	};
 	
 	module.exports = Options;
@@ -21053,12 +21078,39 @@
 	  NUMPAD_NINE: 105,
 	
 	  BACKSPACE: 8,
-	  DEconstE: 46,
+	  DELETE: 46,
 	  ENTER: 13,
 	
 	  ARROW_UP: 38,
 	  ARROW_DOWN: 40
 	};
+
+/***/ },
+/* 166 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = {
+	  // Options.jsx
+	  items_per_page: '条/页',
+	  jump_to: '跳至',
+	  page: '页',
+	
+	  // Pager.jsx
+	  first_page: '第一页',
+	  last_page: '最后一页',
+	
+	  // Pagination.jsx
+	  prev_page: '上一页',
+	  next_page: '下一页',
+	  prev_5: '向前 5 页',
+	  next_5: '向后 5 页'
+	};
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

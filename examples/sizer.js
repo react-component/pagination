@@ -1,36 +1,12 @@
-webpackJsonp([0],[
+webpackJsonp([3],[
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
+	module.exports = __webpack_require__(214);
 
 
 /***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	__webpack_require__(2);
-	__webpack_require__(3);
-	var Pagination = __webpack_require__(4);
-	var React = __webpack_require__(7);
-	var Select = __webpack_require__(167);
-	
-	React.render(React.createElement(Pagination, {
-	  selectComponentClass: Select,
-	  showQuickJumper: true, showSizeChanger: true, onChange: onChange, onShowSizeChange: onShowSizeChange, total: 450 }), document.getElementById('__react-content'));
-	
-	function onShowSizeChange(current, pageSize) {
-	  console.log(current);
-	  console.log(pageSize);
-	}
-	
-	function onChange(key) {
-	  console.log(key);
-	}
-
-/***/ },
+/* 1 */,
 /* 2 */,
 /* 3 */
 /***/ function(module, exports) {
@@ -6146,6 +6122,29 @@ webpackJsonp([0],[
 	exports['default'] = Option;
 	module.exports = exports['default'];
 
+/***/ },
+/* 212 */,
+/* 213 */,
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// use jsx to render html, do not modify simple.html
+	'use strict';
+	
+	__webpack_require__(2);
+	__webpack_require__(3);
+	var Pagination = __webpack_require__(4);
+	var React = __webpack_require__(7);
+	var Select = __webpack_require__(167);
+	
+	React.render(React.createElement(Pagination, {
+	  selectComponentClass: Select,
+	  pageSizeOptions: ['1', '2', '3'], showSizeChanger: true, onChange: onChange, total: 25 }), document.getElementById('__react-content'));
+	
+	function onChange(key) {
+	  console.log(key);
+	}
+
 /***/ }
 ]);
-//# sourceMappingURL=jumper.js.map
+//# sourceMappingURL=sizer.js.map

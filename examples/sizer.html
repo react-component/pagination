@@ -233,7 +233,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <!--[if lt IE 9]>
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
-  <link rel="stylesheet" href="common.css" />
+  <link rel="stylesheet" href="sizer.css" /><link rel="stylesheet" href="common.css" />
 </head>
 
 <body>
@@ -245,23 +245,28 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   </div>
   <div class="example" id="__react-content"></div>
   <script src="common.js?nowrap"></script>
-  <script src="more.js?nowrap"></script>
+  <script src="sizer.js?nowrap"></script>
   <div class="highlight">
-    <pre><code><span class="hljs-pi">'use strict'</span>
+    <pre><code><span class="hljs-regexp">//</span> use jsx to render html, <span class="hljs-keyword">do</span> <span class="hljs-keyword">not</span> modify simple.html
+<span class="hljs-string">'use strict'</span>;
 
-<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-pagination/assets/index.css'</span>)
-<span class="hljs-keyword">var</span> Pagination = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-pagination'</span>)
-<span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>)
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-pagination/assets/index.css'</span>);
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-select/assets/index.css'</span>);
+<span class="hljs-reserved">var</span> Pagination = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-pagination'</span>);
+<span class="hljs-reserved">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
+<span class="hljs-reserved">var</span> Select=<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-select'</span>);
 
 React.render(
-  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"ant-pagination"</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{onChange}</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{450}</span> /&gt;</span>,
-  document.getElementById('__react-content')
+  &lt;Pagination 
+  selectComponentClass={Select}
+  pageSizeOptions={[<span class="hljs-string">'1'</span>,<span class="hljs-string">'2'</span>,<span class="hljs-string">'3'</span>]} showSizeChanger={<span class="hljs-literal">true</span>} onChange={onChange} total={<span class="hljs-number">25</span>} /&gt;, 
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'__react-content'</span>)
 );
 
-function onChange(key) {
-  console.log(key)
+<span class="hljs-reserved">function</span> onChange(key) {
+  <span class="hljs-built_in">console</span>.log(key)
 }
-</span></code></pre>
+</code></pre>
   </div>
 </div>
 <a href="http://github.com/react-component/pagination"><img style="position: absolute; top: 0; right: 0; border: 0;"

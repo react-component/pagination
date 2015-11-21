@@ -203,7 +203,7 @@ class Pagination extends React.Component {
       </li>);
       lastPager = (<Pager
         locale={props.locale}
-        last rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active />);
+        last rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
       firstPager = (<Pager
         locale={props.locale}
         rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);

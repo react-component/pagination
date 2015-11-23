@@ -39,14 +39,16 @@
   },
   "devDependencies": {
     "expect.js": "0.3.x",
-    "precommit-hook": "1.x",
+    "pre-commit": "1.x",
     "rc-select": "~4.2.1",
     "rc-server": "3.x",
     "rc-tools": "4.x",
-    "react": "0.13.x",
+    "rc-util": "~3.0.1",
+    "react": "~0.14.3",
+    "react-addons-test-utils": "~0.14.3",
     "react-dom": "~0.14.1"
   },
-  "precommit": [
+  "pre-commit": [
     "lint"
   ]
 }

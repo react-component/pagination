@@ -41,7 +41,7 @@ describe('Pagination', function() {
     expect(prevButton.className).to.contain('rc-pagination-disabled')
   })
 
-  it('should hightlight current page and not highlight other page', shouldHightlightRight)
+  it('should hightlight current page and not highlight other page', shouldHighlightRight)
 
   it('should calc page right', function() {
     let pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li')
@@ -69,8 +69,8 @@ describe('Pagination', function() {
 
     Simulate.click(page2)
     setTimeout(function() {
-      expect(pagination.state.curent).to.be(2)
-      shouldHightlightRight()
+      expect(pagination.state.current).to.be(2)
+      shouldHighlightRight()
       done()
     }, 10)
   })
@@ -88,7 +88,7 @@ describe('Pagination', function() {
     }, 10)
   })
 
-  function shouldHightlightRight() {
+  function shouldHighlightRight() {
     let pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li')
     let current = pagination.state.current
     pagers.forEach(function(pager, index) {

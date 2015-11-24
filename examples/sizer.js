@@ -6,8 +6,9 @@ require('rc-select/assets/index.css');
 var Pagination = require('rc-pagination');
 var React = require('react');
 var Select=require('rc-select');
+var ReactDOM = require('react-dom');
 
-React.render(
+ReactDOM.render(
   <Pagination 
   selectComponentClass={Select}
   pageSizeOptions={['1','2','3']} showSizeChanger={true} onChange={onChange} total={25} />, 

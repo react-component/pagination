@@ -3,10 +3,11 @@
 require('rc-pagination/assets/index.less')
 require('rc-select/assets/index.css')
 var Pagination = require('rc-pagination')
-var React = require('react')
+var React = require('react');
+var ReactDOM = require('react-dom');
 var Select=require('rc-select');
 
-React.render(
+ReactDOM.render(
   <Pagination
     selectComponentClass={Select}
     showQuickJumper={true} showSizeChanger={true} onChange={onChange} onShowSizeChange={onShowSizeChange} total={450} />,

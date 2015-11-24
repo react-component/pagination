@@ -40,13 +40,13 @@
   "devDependencies": {
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
-    "rc-select": "~4.2.1",
+    "rc-select": "5.x",
     "rc-server": "3.x",
     "rc-tools": "4.x",
-    "rc-util": "~3.0.1",
+    "rc-util": "3.x",
     "react": "~0.14.3",
     "react-addons-test-utils": "~0.14.3",
-    "react-dom": "~0.14.1"
+    "react-dom": "~0.14.3"
   },
   "pre-commit": [
     "lint"

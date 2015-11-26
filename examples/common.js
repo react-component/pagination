@@ -156,7 +156,7 @@
 	    }
 	
 	    var current = props.defaultCurrent;
-	    if (props.current !== -1) {
+	    if ('current' in props) {
 	      current = props.current;
 	    }
 	
@@ -266,7 +266,7 @@
 	          page = this._calcPage();
 	        }
 	
-	        if (this.props.onChange === noop) {
+	        if (!('current' in this.props)) {
 	          this.setState({
 	            current: page,
 	            _current: page
@@ -461,7 +461,6 @@
 	};
 	
 	Pagination.defaultProps = {
-	  current: -1,
 	  defaultCurrent: 1,
 	  total: 0,
 	  pageSize: 10,

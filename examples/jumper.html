@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>jumper.js - example - rc-pagination@1.2.2</title>
+  <title>jumper.js - example - rc-pagination@1.3.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -257,7 +257,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-pagination@1.2.2</h1>
+    <h1>rc-pagination@1.3.0</h1>
 
     <p>pagination ui component for react</p>
   </div>
@@ -269,10 +269,11 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-pagination/assets/index.css'</span>)
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-select/assets/index.css'</span>)
 <span class="hljs-keyword">var</span> Pagination = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-pagination'</span>)
-<span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>)
+<span class="hljs-keyword">var</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
+<span class="hljs-keyword">var</span> ReactDOM = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-dom'</span>);
 <span class="hljs-keyword">var</span> Select=<span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-select'</span>);
 
-React.render(
+ReactDOM.render(
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span>
     <span class="hljs-attribute">selectComponentClass</span>=<span class="hljs-value">{Select}</span>
     <span class="hljs-attribute">showQuickJumper</span>=<span class="hljs-value">{true}</span> <span class="hljs-attribute">showSizeChanger</span>=<span class="hljs-value">{true}</span> <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{onChange}</span> <span class="hljs-attribute">onShowSizeChange</span>=<span class="hljs-value">{onShowSizeChange}</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{450}</span> /&gt;</span>,

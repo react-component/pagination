@@ -1,23 +1,35 @@
-webpackJsonp([4],{
+webpackJsonp([5],{
 
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(374);
+	module.exports = __webpack_require__(202);
 
 
 /***/ },
 
-/***/ 374:
+/***/ 169:
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(8);
+
+
+/***/ },
+
+/***/ 202:
 /***/ function(module, exports, __webpack_require__) {
 
 	// use jsx to render html, do not modify simple.html
 	'use strict';
 	
 	__webpack_require__(2);
-	var Pagination = __webpack_require__(4);
-	var React = __webpack_require__(7);
-	React.render(React.createElement(Pagination, { simple: true, onChange: onChange, total: 50 }), document.getElementById('__react-content'));
+	var Pagination = __webpack_require__(3);
+	var React = __webpack_require__(6);
+	var ReactDOM = __webpack_require__(169);
+	
+	ReactDOM.render(React.createElement(Pagination, { simple: true, onChange: onChange, total: 50 }), document.getElementById('__react-content'));
 	
 	function onChange(key) {
 	  console.log(key);

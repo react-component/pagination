@@ -15,8 +15,13 @@ describe('Uncontrolled Pagination', function() {
   let container = document.createElement('div');
   document.body.appendChild(container)
 
+  let current = 1
+  function onChange(page) {
+    current = page
+  }
+
   beforeEach(function(done) {
-    ReactDOM.render(<Pagination defaultCurrent={1} total={25}></Pagination>, container, function() {
+    ReactDOM.render(<Pagination onChange={onChange} defaultCurrent={1} total={25}></Pagination>, container, function() {
       pagination = this
       done()
     })
@@ -69,6 +74,7 @@ describe('Uncontrolled Pagination', function() {
     Simulate.click(page2)
     setTimeout(function() {
       expect(pagination.state.current).to.be(2)
+      expect(current).to.be(2)
       shouldHighlightRight()
       done()
     }, 10)
@@ -83,6 +89,7 @@ describe('Uncontrolled Pagination', function() {
     Simulate.click(nextButton)
     setTimeout(function() {
       expect(pagination.state.current).to.be(2)
+      expect(current).to.be(2)
       done()
     }, 10)
   })
@@ -134,6 +141,7 @@ describe('Controlled Pagination', function() {
     expect(TestUtils.isDOMComponent(nextButton)).to.be(true)
     Simulate.click(nextButton)
     setTimeout(function() {
+      expect(pagination.state.current).to.be(2)
       expect(current).to.be(3)
       done()
     }, 10)

@@ -151,8 +151,8 @@
 	
 	    var hasOnChange = props.onChange !== noop;
 	    var hasCurrent = props.current !== -1;
-	    if (hasOnChange ^ hasCurrent) {
-	      console.warn('provide `onChange` and `current` together');
+	    if (hasCurrent && !hasOnChange) {
+	      console.warn('Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.');
 	    }
 	
 	    var current = props.defaultCurrent;

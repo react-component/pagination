@@ -11,13 +11,13 @@ const Simulate = TestUtils.Simulate
 
 function noop() {}
 
-describe('Pagination', function() {
+describe('Controlled Pagination', function() {
   let pagination = null
   let container = document.createElement('div');
   document.body.appendChild(container)
 
   beforeEach(function(done) {
-    ReactDOM.render(<Pagination onChange={noop} total={25}></Pagination>, container, function() {
+    ReactDOM.render(<Pagination current={1} onChange={noop} total={25}></Pagination>, container, function() {
       pagination = this
       done()
     })
@@ -100,4 +100,38 @@ describe('Pagination', function() {
       }
     })
   }
+})
+
+describe('Uncontrolled Pagination', function() {
+  let pagination = null
+  let container = document.createElement('div');
+  document.body.appendChild(container)
+
+  beforeEach(function(done) {
+    ReactDOM.render(<Pagination defaultCurrent={2} total={25}></Pagination>, container, function() {
+      pagination = this
+      done()
+    })
+  })
+
+  afterEach(function() {
+    ReactDOM.unmountComponentAtNode(container)
+  })
+
+  it('current should equal defaultCurrent', function() {
+    expect(pagination.state.current).to.be(2)
+  })
+
+  it('should not response mouse click', function(done) {
+    let nextButton = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-next'
+    )
+    expect(TestUtils.isDOMComponent(nextButton)).to.be(true)
+    Simulate.click(nextButton)
+    setTimeout(function() {
+      expect(pagination.state.current).to.be(2)
+      done()
+    }, 10)
+  })
 })

@@ -12,9 +12,20 @@ class Pagination extends React.Component {
   constructor(props) {
     super(props);
 
+    const hasOnChange = props.onChange !== noop;
+    const hasCurrent = props.current !== -1;
+    if (hasOnChange ^ hasCurrent) {
+      console.warn('provide `onChange` and `current` together');
+    }
+
+    let current = props.defaultCurrent;
+    if (props.current !== -1) {
+      current = props.current;
+    }
+
     this.state = {
-      current: props.current,
-      _current: props.current,
+      current: current,
+      _current: current,
       pageSize: props.pageSize,
     };
 
@@ -115,6 +126,9 @@ class Pagination extends React.Component {
 
   _handleChange(p) {
     let page = p;
+    if (this.props.onChange === noop) {
+      return -1;
+    }
     if (this._isValid(page)) {
       if (page > this._calcPage()) {
         page = this._calcPage();
@@ -270,6 +284,7 @@ class Pagination extends React.Component {
 
 Pagination.propTypes = {
   current: React.PropTypes.number,
+  defaultCurrent: React.PropTypes.number,
   total: React.PropTypes.number,
   pageSize: React.PropTypes.number,
   onChange: React.PropTypes.func,
@@ -283,7 +298,8 @@ Pagination.propTypes = {
 };
 
 Pagination.defaultProps = {
-  current: 1,
+  current: -1,
+  defaultCurrent: 1,
   total: 0,
   pageSize: 10,
   onChange: noop,

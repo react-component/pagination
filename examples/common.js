@@ -150,7 +150,7 @@
 	    _get(Object.getPrototypeOf(Pagination.prototype), 'constructor', this).call(this, props);
 	
 	    var hasOnChange = props.onChange !== noop;
-	    var hasCurrent = props.current !== -1;
+	    var hasCurrent = ('current' in props);
 	    if (hasCurrent && !hasOnChange) {
 	      console.warn('Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.');
 	    }

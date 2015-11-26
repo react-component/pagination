@@ -28,11 +28,7 @@ webpackJsonp([2],{
 	var React = __webpack_require__(6);
 	var ReactDOM = __webpack_require__(169);
 	
-	ReactDOM.render(React.createElement(Pagination, { className: 'ant-pagination', onChange: onChange, total: 450 }), document.getElementById('__react-content'));
-	
-	function onChange(key) {
-	  console.log(key);
-	}
+	ReactDOM.render(React.createElement(Pagination, { className: 'ant-pagination', defaultCurrent: 3, total: 450 }), document.getElementById('__react-content'));
 
 /***/ }
 

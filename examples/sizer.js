@@ -3379,7 +3379,7 @@ webpackJsonp([4],{
 	
 	ReactDOM.render(React.createElement(Pagination, {
 	  selectComponentClass: Select,
-	  pageSizeOptions: ['1', '2', '3'], showSizeChanger: true, onChange: onChange, total: 25 }), document.getElementById('__react-content'));
+	  pageSizeOptions: ['1', '2', '3'], showSizeChanger: true, defaultCurrent: 3, total: 25 }), document.getElementById('__react-content'));
 	
 	function onChange(key) {
 	  console.log(key);

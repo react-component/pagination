@@ -15,11 +15,27 @@ webpackJsonp([0],[
 	__webpack_require__(2);
 	var Pagination = __webpack_require__(3);
 	var React = __webpack_require__(6);
-	React.render(React.createElement(Pagination, { onChange: onChange, current: 3, total: 25 }), document.getElementById('__react-content'));
 	
-	function onChange(key) {
-	  console.log(key);
-	}
+	var Container = React.createClass({
+	  displayName: 'Container',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      current: 3
+	    };
+	  },
+	  onChange: function onChange(page) {
+	    console.log(page);
+	    this.setState({
+	      current: page
+	    });
+	  },
+	  render: function render() {
+	    return React.createElement(Pagination, { onChange: this.onChange, current: this.state.current, total: 25 });
+	  }
+	});
+	
+	React.render(React.createElement(Container, null), document.getElementById('__react-content'));
 
 /***/ }
 ]);

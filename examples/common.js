@@ -261,17 +261,18 @@
 	    key: '_handleChange',
 	    value: function _handleChange(p) {
 	      var page = p;
-	      if (this.props.onChange === noop) {
-	        return -1;
-	      }
 	      if (this._isValid(page)) {
 	        if (page > this._calcPage()) {
 	          page = this._calcPage();
 	        }
-	        this.setState({
-	          current: page,
-	          _current: page
-	        });
+	
+	        if (this.props.onChange === noop) {
+	          this.setState({
+	            current: page,
+	            _current: page
+	          });
+	        }
+	
 	        this.props.onChange(page);
 	
 	        return page;

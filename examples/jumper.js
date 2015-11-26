@@ -22,7 +22,7 @@ webpackJsonp([1],{
 	
 	ReactDOM.render(React.createElement(Pagination, {
 	  selectComponentClass: Select,
-	  showQuickJumper: true, showSizeChanger: true, onChange: onChange, onShowSizeChange: onShowSizeChange, total: 450 }), document.getElementById('__react-content'));
+	  showQuickJumper: true, showSizeChanger: true, defaultCurrent: 5, onShowSizeChange: onShowSizeChange, total: 450 }), document.getElementById('__react-content'));
 	
 	function onShowSizeChange(current, pageSize) {
 	  console.log(current);

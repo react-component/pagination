@@ -29,11 +29,7 @@ webpackJsonp([3],{
 	var React = __webpack_require__(6);
 	var ReactDOM = __webpack_require__(169);
 	
-	ReactDOM.render(React.createElement(Pagination, { onChange: onChange, total: 25 }), document.getElementById('__react-content'));
-	
-	function onChange(key) {
-	  console.log(key);
-	}
+	ReactDOM.render(React.createElement(Pagination, { defaultCurrent: 2, total: 25 }), document.getElementById('__react-content'));
 
 /***/ }
 

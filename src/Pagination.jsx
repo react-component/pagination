@@ -57,12 +57,6 @@ class Pagination extends React.Component {
         pageSize: nextProps.pageSize,
       });
     }
-
-    if ('total' in nextProps) {
-      this.setState({
-        current: this.state.current,
-      });
-    }
   }
 
   // private methods

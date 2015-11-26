@@ -4,7 +4,6 @@ const Options = require('./Options');
 const KEYCODE = require('./KeyCode');
 const LOCALE = require('./locale/zh_CN');
 
-
 function noop() {
 }
 
@@ -14,8 +13,8 @@ class Pagination extends React.Component {
 
     const hasOnChange = props.onChange !== noop;
     const hasCurrent = props.current !== -1;
-    if (hasOnChange ^ hasCurrent) {
-      console.warn('provide `onChange` and `current` together');
+    if (hasCurrent && !hasOnChange) {
+      console.warn('Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.');
     }
 
     let current = props.defaultCurrent;

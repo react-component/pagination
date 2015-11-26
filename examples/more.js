@@ -6,10 +6,6 @@ var React = require('react')
 var ReactDOM = require('react-dom');
 
 ReactDOM.render(
-  <Pagination className="ant-pagination" onChange={onChange} total={450} />,
+  <Pagination className="ant-pagination" defaultCurrent={3} total={450} />,
   document.getElementById('__react-content')
 );
-
-function onChange(key) {
-  console.log(key)
-}

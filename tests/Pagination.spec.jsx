@@ -9,15 +9,14 @@ import ReactDOM from 'react-dom'
 
 const Simulate = TestUtils.Simulate
 
-function noop() {}
 
-describe('Controlled Pagination', function() {
+describe('Uncontrolled Pagination', function() {
   let pagination = null
   let container = document.createElement('div');
   document.body.appendChild(container)
 
   beforeEach(function(done) {
-    ReactDOM.render(<Pagination current={1} onChange={noop} total={25}></Pagination>, container, function() {
+    ReactDOM.render(<Pagination defaultCurrent={1} total={25}></Pagination>, container, function() {
       pagination = this
       done()
     })
@@ -102,13 +101,18 @@ describe('Controlled Pagination', function() {
   }
 })
 
-describe('Uncontrolled Pagination', function() {
+describe('Controlled Pagination', function() {
   let pagination = null
   let container = document.createElement('div');
   document.body.appendChild(container)
 
+  let current = 2
+  function onChange(page) {
+    current = page
+  }
+
   beforeEach(function(done) {
-    ReactDOM.render(<Pagination defaultCurrent={2} total={25}></Pagination>, container, function() {
+    ReactDOM.render(<Pagination current={current} onChange={onChange} total={25}></Pagination>, container, function() {
       pagination = this
       done()
     })
@@ -130,7 +134,7 @@ describe('Uncontrolled Pagination', function() {
     expect(TestUtils.isDOMComponent(nextButton)).to.be(true)
     Simulate.click(nextButton)
     setTimeout(function() {
-      expect(pagination.state.current).to.be(2)
+      expect(current).to.be(3)
       done()
     }, 10)
   })

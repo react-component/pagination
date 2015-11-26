@@ -7,10 +7,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 ReactDOM.render(
-  <Pagination simple onChange={onChange} total={50} />, 
+  <Pagination simple defaultCurrent={1} total={50} />, 
   document.getElementById('__react-content')
 );
-
-function onChange(key) {
-  console.log(key)
-}

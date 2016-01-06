@@ -10,7 +10,7 @@ var Select=require('rc-select');
 ReactDOM.render(
   <Pagination
     selectComponentClass={Select}
-    showQuickJumper={true} showSizeChanger={true} defaultCurrent={5} onShowSizeChange={onShowSizeChange} total={450} />,
+    showQuickJumper={true} showSizeChanger={true} pageSize={20} defaultCurrent={5} onShowSizeChange={onShowSizeChange} total={450} />,
   document.getElementById('__react-content')
 );
 

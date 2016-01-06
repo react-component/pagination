@@ -1,9 +1,7 @@
-'use strict'
-
-require('rc-pagination/assets/index.less')
-var Pagination = require('rc-pagination')
-var React = require('react')
-var ReactDOM = require('react-dom');
+require('rc-pagination/assets/index.less');
+const Pagination = require('rc-pagination');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
 ReactDOM.render(
   <Pagination className="ant-pagination" defaultCurrent={3} total={450} />,

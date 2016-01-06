@@ -10,6 +10,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	// use jsx to render html, do not modify simple.html
+	
 	'use strict';
 	
 	__webpack_require__(2);

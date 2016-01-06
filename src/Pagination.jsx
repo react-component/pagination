@@ -274,6 +274,7 @@ class Pagination extends React.Component {
           selectPrefixCls={props.selectPrefixCls}
           changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null}
           current={this.state.current}
+          pageSize={this.props.pageSize}
           pageSizeOptions={this.props.pageSizeOptions}
           quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null} />
       </ul>

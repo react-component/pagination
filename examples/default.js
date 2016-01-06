@@ -1,26 +1,25 @@
 // use jsx to render html, do not modify simple.html
-'use strict';
 
 require('rc-pagination/assets/index.less');
-var Pagination = require('rc-pagination');
-var React = require('react');
+const Pagination = require('rc-pagination');
+const React = require('react');
 
 
-var Container = React.createClass({
-  getInitialState(){
+const Container = React.createClass({
+  getInitialState() {
     return {
-      current: 3
-    }
+      current: 3,
+    };
   },
   onChange(page) {
-    console.log(page)
+    console.log(page);
     this.setState({
-      current: page
-    })
+      current: page,
+    });
   },
   render() {
-    return <Pagination onChange={this.onChange} current={this.state.current} total={25} />
-  }
+    return <Pagination onChange={this.onChange} current={this.state.current} total={25} />;
+  },
 });
 
 React.render(

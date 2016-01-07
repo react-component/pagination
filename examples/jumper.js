@@ -14,6 +14,7 @@ function onShowSizeChange(current, pageSize) {
 ReactDOM.render(
   <Pagination
     selectComponentClass={Select}
+    showTotal
     showQuickJumper showSizeChanger pageSize={20} defaultCurrent={5} onShowSizeChange={onShowSizeChange} total={450} />,
   document.getElementById('__react-content')
 );

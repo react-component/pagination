@@ -13,4 +13,6 @@ export default {
   next_page: '下一页',
   prev_5: '向前 5 页',
   next_5: '向后 5 页',
+  total: '共 ',
+  records: '条记录',
 };

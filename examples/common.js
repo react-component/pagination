@@ -20274,7 +20274,7 @@
 	  selectComponentClass: React.PropTypes.func,
 	  current: React.PropTypes.number,
 	  pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
-	  pageSize: React.PropTypes.string,
+	  pageSize: React.PropTypes.number,
 	  buildOptionText: React.PropTypes.func,
 	  locale: React.PropTypes.object
 	};

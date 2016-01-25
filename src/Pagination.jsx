@@ -257,9 +257,16 @@ class Pagination extends React.Component {
       }
     }
 
+    let totalText = null;
+
+    if (props.showTotal) {
+      totalText = <span className={`${prefixCls}-total-text`}>{props.showTotal(props.total)}</span>;
+    }
+
     return (
       <ul className={`${prefixCls} ${props.className}`}
         unselectable="unselectable">
+        {totalText}
         <li title={locale.prev_page} onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
           <a></a>
         </li>
@@ -294,7 +301,7 @@ Pagination.propTypes = {
   selectComponentClass: React.PropTypes.func,
   showQuickJumper: React.PropTypes.bool,
   pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
-
+  showTotal: React.PropTypes.func,
   locale: React.PropTypes.object,
 };
 

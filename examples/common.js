@@ -414,10 +414,21 @@
 	        }
 	      }
 	
+	      var totalText = null;
+	
+	      if (props.showTotal) {
+	        totalText = React.createElement(
+	          'span',
+	          { className: prefixCls + '-total-text' },
+	          props.showTotal(props.total)
+	        );
+	      }
+	
 	      return React.createElement(
 	        'ul',
 	        { className: prefixCls + ' ' + props.className,
 	          unselectable: 'unselectable' },
+	        totalText,
 	        React.createElement(
 	          'li',
 	          { title: locale.prev_page, onClick: this._prev, className: (this._hasPrev() ? '' : prefixCls + '-disabled ') + (prefixCls + '-prev') },
@@ -457,7 +468,7 @@
 	  selectComponentClass: React.PropTypes.func,
 	  showQuickJumper: React.PropTypes.bool,
 	  pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
-	
+	  showTotal: React.PropTypes.func,
 	  locale: React.PropTypes.object
 	};
 	

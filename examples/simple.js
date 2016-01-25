@@ -8,7 +8,7 @@ webpackJsonp([3],{
 
 /***/ },
 
-/***/ 169:
+/***/ 168:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28,7 +28,7 @@ webpackJsonp([3],{
 	__webpack_require__(2);
 	var Pagination = __webpack_require__(3);
 	var React = __webpack_require__(6);
-	var ReactDOM = __webpack_require__(169);
+	var ReactDOM = __webpack_require__(168);
 	
 	ReactDOM.render(React.createElement(Pagination, { defaultCurrent: 2, total: 25 }), document.getElementById('__react-content'));
 

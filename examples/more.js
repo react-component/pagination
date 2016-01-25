@@ -8,7 +8,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 169:
+/***/ 168:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26,7 +26,7 @@ webpackJsonp([2],{
 	__webpack_require__(2);
 	var Pagination = __webpack_require__(3);
 	var React = __webpack_require__(6);
-	var ReactDOM = __webpack_require__(169);
+	var ReactDOM = __webpack_require__(168);
 	
 	ReactDOM.render(React.createElement(Pagination, { className: 'ant-pagination', defaultCurrent: 3, total: 450 }), document.getElementById('__react-content'));
 

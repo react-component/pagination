@@ -6,6 +6,12 @@
       -ms-user-select: none;
           user-select: none;
 }
+.rc-pagination-total-text {
+  float: left;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 10px;
+}
 .rc-pagination:after {
   content: " ";
   display: block;

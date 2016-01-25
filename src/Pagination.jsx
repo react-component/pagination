@@ -260,7 +260,7 @@ class Pagination extends React.Component {
     let totalText = null;
 
     if (props.showTotal) {
-      totalText = <span className={`${prefixCls}-total-text`}>{`${locale.total}${props.total} ${locale.records}`}</span>;
+      totalText = <span className={`${prefixCls}-total-text`}>{props.showTotal(props.total)}</span>;
     }
 
     return (
@@ -301,7 +301,7 @@ Pagination.propTypes = {
   selectComponentClass: React.PropTypes.func,
   showQuickJumper: React.PropTypes.bool,
   pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
-  showTotal: React.PropTypes.bool,
+  showTotal: React.PropTypes.func,
   locale: React.PropTypes.object,
 };
 
@@ -317,7 +317,6 @@ Pagination.defaultProps = {
   showQuickJumper: false,
   showSizeChanger: false,
   onShowSizeChange: noop,
-  showTotal: false,
   locale: LOCALE,
 };
 

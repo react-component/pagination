@@ -75,7 +75,7 @@ React.render(<Pagination />, container);
 | pageSizeOptions  | specify the sizeChanger selections | Array<String> | ['10', '20', '30', '40'] |
 | onShowSizeChange | pageSize chagne callback           | Function      | noop                     |
 | showQuickJump    | show quick goto jumper             | Bool          | false                    |
-| showTotal        | show total records text            | Bool          | false                    |
+| showTotal        | show total records text            | Function      | undefined                |
 | className        | when set "mini", show mini version | String        | rc-pagination            |
 | simple           | when set, show simple pager        | Object        | null                     |
 

@@ -13,7 +13,4 @@ export default {
   next_page: 'Next Page',
   prev_5: 'Previsous 5 Pages',
   next_5: 'Next 5 Pages',
-
-  total: '',
-  records: 'Records',
 };

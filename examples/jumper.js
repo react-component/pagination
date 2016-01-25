@@ -1,20 +1,23 @@
-require('rc-pagination/assets/index.less');
-require('rc-select/assets/index.css');
-const Pagination = require('rc-pagination');
-const React = require('react');
-const ReactDOM = require('react-dom');
-const Select = require('rc-select');
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Select from 'rc-select';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.less';
+import 'rc-select/assets/index.css';
 
 function onShowSizeChange(current, pageSize) {
   console.log(current);
   console.log(pageSize);
 }
 
+function showTotal(total) {
+  return `一共 ${total} 条数据`;
+}
+
 ReactDOM.render(
   <Pagination
     selectComponentClass={Select}
-    showTotal
+    showTotal={showTotal}
     showQuickJumper showSizeChanger pageSize={20} defaultCurrent={5} onShowSizeChange={onShowSizeChange} total={450} />,
   document.getElementById('__react-content')
 );

@@ -2,6 +2,7 @@
 
 const React = require('react');
 const KEYCODE = require('./KeyCode');
+const Option = require('rc-select/lib/Option');
 
 class Options extends React.Component {
   constructor(props) {
@@ -65,7 +66,6 @@ class Options extends React.Component {
     }
 
     if (changeSize && Select) {
-      const Option = Select.Option;
       const defaultOption = props.pageSize || props.pageSizeOptions[0];
       const options = props.pageSizeOptions.map((opt, i) => (
         <Option key={i} value={opt}>{buildOptionText(opt)}</Option>

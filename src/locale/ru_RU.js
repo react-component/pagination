@@ -9,8 +9,8 @@ export default {
   last_page: 'В конец',
 
   // Pagination.jsx
-  prev_page: 'Предыдущая',
-  next_page: 'Следующая',
+  prev_page: 'Назад',
+  next_page: 'Вперед',
   prev_5: 'Предыдущие 5',
   next_5: 'Следующие 5',
 };

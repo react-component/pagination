@@ -3,7 +3,7 @@ webpackJsonp([5],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(244);
+	module.exports = __webpack_require__(246);
 
 
 /***/ },
@@ -18,7 +18,7 @@ webpackJsonp([5],{
 
 /***/ },
 
-/***/ 244:
+/***/ 246:
 /***/ function(module, exports, __webpack_require__) {
 
 	// use jsx to render html, do not modify simple.html

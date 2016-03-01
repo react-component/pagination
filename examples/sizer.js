@@ -1,15 +1,32 @@
-// use jsx to render html, do not modify simple.html
 
 require('rc-pagination/assets/index.less');
 require('rc-select/assets/index.css');
 const Pagination = require('rc-pagination');
 const React = require('react');
-const Select = require('rc-select');
 const ReactDOM = require('react-dom');
+import Select from 'rc-select';
 
-ReactDOM.render(
-  <Pagination
-  selectComponentClass={Select}
-  pageSizeOptions={['1', '2', '3']} showSizeChanger defaultCurrent={3} total={25} />,
+const Hello = React.createClass({
+  getInitialState: function() {
+    return {pageSize: 20};
+  },
+  onShowSizeChange(current, pageSize) {
+    this.setState({
+      pageSize: pageSize,
+    });
+  },
+  render() {
+    return (<div style={{margin: 10}}>
+      <Pagination
+        selectComponentClass={Select}
+        showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
+      <Pagination
+        selectComponentClass={Select}
+        showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
+    </div>);
+  },
+});
+
+ReactDOM.render(<Hello />,
   document.getElementById('__react-content')
 );

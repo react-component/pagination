@@ -22,10 +22,15 @@ class Pagination extends React.Component {
       current = props.current;
     }
 
+    let pageSize = props.defaultPageSize;
+    if ('pageSize' in props) {
+      pageSize = props.pageSize;
+    }
+
     this.state = {
       current: current,
       _current: current,
-      pageSize: props.pageSize,
+      pageSize: pageSize,
     };
 
     [
@@ -104,23 +109,24 @@ class Pagination extends React.Component {
   }
 
   _changePageSize(size) {
+    let current = this.state.current;
+
     if (typeof size === 'number') {
-      let current = this.state.current;
-
-      this.setState({
-        pageSize: size,
-      });
-
-      if (this.state.current > this._calcPage(size)) {
-        current = this._calcPage(size);
+      if (!('pageSize' in this.props)) {
         this.setState({
-          current: current,
-          _current: current,
+          pageSize: size,
         });
-      }
 
-      this.props.onShowSizeChange(current, size);
+        if (this.state.current > this._calcPage(size)) {
+          current = this._calcPage(size);
+          this.setState({
+            current: current,
+            _current: current,
+          });
+        }
+      }
     }
+    this.props.onShowSizeChange(current, size);
   }
 
   _handleChange(p) {
@@ -281,7 +287,7 @@ class Pagination extends React.Component {
           selectPrefixCls={props.selectPrefixCls}
           changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null}
           current={this.state.current}
-          pageSize={this.props.pageSize}
+          pageSize={this.state.pageSize}
           pageSizeOptions={this.props.pageSizeOptions}
           quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null} />
       </ul>
@@ -295,6 +301,7 @@ Pagination.propTypes = {
   defaultCurrent: React.PropTypes.number,
   total: React.PropTypes.number,
   pageSize: React.PropTypes.number,
+  defaultPageSize: React.PropTypes.number,
   onChange: React.PropTypes.func,
   showSizeChanger: React.PropTypes.bool,
   onShowSizeChange: React.PropTypes.func,
@@ -308,7 +315,7 @@ Pagination.propTypes = {
 Pagination.defaultProps = {
   defaultCurrent: 1,
   total: 0,
-  pageSize: 10,
+  defaultPageSize: 10,
   onChange: noop,
   className: '',
   selectPrefixCls: 'rc-select',

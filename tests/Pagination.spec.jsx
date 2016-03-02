@@ -146,3 +146,40 @@ describe('Controlled Pagination', function() {
     }, 10);
   });
 });
+
+describe('Controlled Pagination', function() {
+  const TwoPagination = require('./helper/two-pagination');
+
+  let entry = null;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  beforeEach(function(done) {
+    ReactDOM.render(<TwoPagination />, container, function() {
+      entry = this;
+      done();
+    });
+  });
+
+  afterEach(function() {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('should has initial pageSize 20', function() {
+    const p1 = TestUtils.scryRenderedComponentsWithType(entry, Pagination)[0];
+    const p2 = TestUtils.scryRenderedComponentsWithType(entry, Pagination)[1];
+    expect(p1.state.pageSize).to.be(20);
+    expect(p2.state.pageSize).to.be(20);
+  });
+  it('should sync pageSize via state', function(done) {
+    const p1 = TestUtils.scryRenderedComponentsWithType(entry, Pagination)[0];
+    const p2 = TestUtils.scryRenderedComponentsWithType(entry, Pagination)[1];
+    const hook = TestUtils.scryRenderedDOMComponentsWithClass(entry, 'hook')[0];
+    Simulate.click(hook);
+    setTimeout(function() {
+      expect(p1.state.pageSize).to.be(50);
+      expect(p2.state.pageSize).to.be(50);
+      done();
+    }, 50);
+  });
+});

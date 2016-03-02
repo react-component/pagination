@@ -18,6 +18,6 @@ ReactDOM.render(
   <Pagination
     selectComponentClass={Select}
     showTotal={showTotal}
-    showQuickJumper showSizeChanger pageSize={20} defaultCurrent={5} onShowSizeChange={onShowSizeChange} total={450} />,
+    showQuickJumper showSizeChanger defaultPageSize={20} defaultCurrent={5} onShowSizeChange={onShowSizeChange} total={450} />,
   document.getElementById('__react-content')
 );

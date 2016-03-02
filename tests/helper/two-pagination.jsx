@@ -1,32 +1,30 @@
-
-require('rc-pagination/assets/index.less');
 require('rc-select/assets/index.css');
 const Pagination = require('rc-pagination');
 const React = require('react');
-const ReactDOM = require('react-dom');
 import Select from 'rc-select';
 
 const Hello = React.createClass({
   getInitialState: function() {
     return {pageSize: 20};
   },
-  onShowSizeChange(current, pageSize) {
+  changeSize() {
     this.setState({
-      pageSize: pageSize,
+      pageSize: 50,
     });
   },
   render() {
     return (<div style={{margin: 10}}>
+      <button className="hook" onClick={this.changeSize}>ChaneSize</button>
       <Pagination
+        className="p1"
         selectComponentClass={Select}
         showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
       <Pagination
+        className="p2"
         selectComponentClass={Select}
         showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
     </div>);
   },
 });
 
-ReactDOM.render(<Hello />,
-  document.getElementById('__react-content')
-);
+export default Hello;

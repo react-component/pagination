@@ -64,6 +64,7 @@ class Options extends React.Component {
 
     if (changeSize && Select) {
       const Option = Select.Option;
+      const pageSize = props.pageSize || props.pageSizeOptions[0];
       const options = props.pageSizeOptions.map((opt, i) => (
         <Option key={i} value={opt}>{buildOptionText(opt)}</Option>
       ));
@@ -73,7 +74,7 @@ class Options extends React.Component {
           prefixCls={props.selectPrefixCls} showSearch={false}
           className={`${prefixCls}-size-changer`}
           optionLabelProp="children"
-          value={buildOptionText(props.pageSize)} onChange={this._changeSize}>
+          value={pageSize + ''} onChange={this._changeSize}>
           {options}
        </Select>
       );

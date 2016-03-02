@@ -1,13 +1,10 @@
 import expect from 'expect.js';
 import Pagination from '../';
-
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
 
-
 const Simulate = TestUtils.Simulate;
-
 
 describe('Uncontrolled Pagination', function() {
   let pagination = null;

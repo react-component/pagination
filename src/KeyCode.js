@@ -1,5 +1,3 @@
-
-
 module.exports = {
   ZERO: 48,
   NINE: 57,

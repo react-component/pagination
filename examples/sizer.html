@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>sizer.js - example - rc-pagination@1.5.0</title>
+  <title>sizer.js - example - rc-pagination@1.5.1</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -251,13 +251,13 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <!--[if lt IE 9]>
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
-  <link rel="stylesheet" href="sizer.css" /><link rel="stylesheet" href="common.css" />
+  <link rel="stylesheet" href="sizer.css" />
 </head>
 
 <body>
 <div class="container">
   <div class="header">
-    <h1>rc-pagination@1.5.0</h1>
+    <h1>rc-pagination@1.5.1</h1>
 
     <p>pagination ui component for react</p>
   </div>
@@ -270,10 +270,10 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <span class="hljs-keyword">const</span> Pagination = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-pagination'</span>);
 <span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
 <span class="hljs-keyword">const</span> ReactDOM = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-dom'</span>);
-<span class="hljs-keyword">import</span> Select <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-select'</span>;
+import Select from <span class="hljs-string">'rc-select'</span>;
 
 <span class="hljs-keyword">const</span> Hello = React.createClass({
-  getInitialState: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  getInitialState: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
     <span class="hljs-keyword">return</span> {pageSize: <span class="hljs-number">20</span>};
   },
   onShowSizeChange(current, pageSize) {
@@ -289,11 +289,11 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
       <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span>
         <span class="hljs-attribute">selectComponentClass</span>=<span class="hljs-value">{Select}</span>
         <span class="hljs-attribute">showSizeChanger</span> <span class="hljs-attribute">pageSize</span>=<span class="hljs-value">{this.state.pageSize}</span> <span class="hljs-attribute">onShowSizeChange</span>=<span class="hljs-value">{this.onShowSizeChange}</span> <span class="hljs-attribute">defaultCurrent</span>=<span class="hljs-value">{3}</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{500}</span> /&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>)</span>;
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>);
   },
 });
 
-ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Hello</span> /&gt;</span>,
+ReactDOM.render(<span class="hljs-tag">&lt;<span class="hljs-title">Hello</span> /&gt;</span>,
   document.getElementById('__react-content')
 );
 </span></code></pre></div>

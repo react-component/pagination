@@ -160,10 +160,15 @@
 	      current = props.current;
 	    }
 	
+	    var pageSize = props.defaultPageSize;
+	    if ('pageSize' in props) {
+	      pageSize = props.pageSize;
+	    }
+	
 	    this.state = {
 	      current: current,
 	      _current: current,
-	      pageSize: props.pageSize
+	      pageSize: pageSize
 	    };
 	
 	    ['render', '_handleChange', '_handleKeyUp', '_handleKeyDown', '_changePageSize', '_isValid', '_prev', '_next', '_hasPrev', '_hasNext', '_jumpPrev', '_jumpNext'].forEach(function (method) {
@@ -239,23 +244,24 @@
 	  }, {
 	    key: '_changePageSize',
 	    value: function _changePageSize(size) {
+	      var current = this.state.current;
+	
 	      if (typeof size === 'number') {
-	        var current = this.state.current;
-	
-	        this.setState({
-	          pageSize: size
-	        });
-	
-	        if (this.state.current > this._calcPage(size)) {
-	          current = this._calcPage(size);
+	        if (!('pageSize' in this.props)) {
 	          this.setState({
-	            current: current,
-	            _current: current
+	            pageSize: size
 	          });
-	        }
 	
-	        this.props.onShowSizeChange(current, size);
+	          if (this.state.current > this._calcPage(size)) {
+	            current = this._calcPage(size);
+	            this.setState({
+	              current: current,
+	              _current: current
+	            });
+	          }
+	        }
 	      }
+	      this.props.onShowSizeChange(current, size);
 	    }
 	  }, {
 	    key: '_handleChange',
@@ -447,7 +453,7 @@
 	          selectPrefixCls: props.selectPrefixCls,
 	          changeSize: this.props.showSizeChanger ? this._changePageSize.bind(this) : null,
 	          current: this.state.current,
-	          pageSize: this.props.pageSize,
+	          pageSize: this.state.pageSize,
 	          pageSizeOptions: this.props.pageSizeOptions,
 	          quickGo: this.props.showQuickJumper ? this._handleChange.bind(this) : null })
 	      );
@@ -462,6 +468,7 @@
 	  defaultCurrent: React.PropTypes.number,
 	  total: React.PropTypes.number,
 	  pageSize: React.PropTypes.number,
+	  defaultPageSize: React.PropTypes.number,
 	  onChange: React.PropTypes.func,
 	  showSizeChanger: React.PropTypes.bool,
 	  onShowSizeChange: React.PropTypes.func,
@@ -475,7 +482,7 @@
 	Pagination.defaultProps = {
 	  defaultCurrent: 1,
 	  total: 0,
-	  pageSize: 10,
+	  defaultPageSize: 10,
 	  onChange: noop,
 	  className: '',
 	  selectPrefixCls: 'rc-select',
@@ -20234,7 +20241,6 @@
 	      if (changeSize && Select) {
 	        (function () {
 	          var Option = Select.Option;
-	          var defaultOption = props.pageSize || props.pageSizeOptions[0];
 	          var options = props.pageSizeOptions.map(function (opt, i) {
 	            return React.createElement(
 	              Option,
@@ -20249,7 +20255,7 @@
 	              prefixCls: props.selectPrefixCls, showSearch: false,
 	              className: prefixCls + '-size-changer',
 	              optionLabelProp: 'children',
-	              defaultValue: '' + defaultOption, onChange: _this2._changeSize },
+	              value: buildOptionText(props.pageSize), onChange: _this2._changeSize },
 	            options
 	          );
 	        })();

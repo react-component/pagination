@@ -1,5 +1,3 @@
-
-
 const React = require('react');
 const KEYCODE = require('./KeyCode');
 

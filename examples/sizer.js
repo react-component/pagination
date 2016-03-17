@@ -8654,6 +8654,7 @@ webpackJsonp([4],[
 	    return { pageSize: 20 };
 	  },
 	  onShowSizeChange: function onShowSizeChange(current, pageSize) {
+	    console.log(current);
 	    this.setState({
 	      pageSize: pageSize
 	    });

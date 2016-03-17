@@ -53,13 +53,21 @@ class Pagination extends React.Component {
     if ('current' in nextProps) {
       this.setState({
         current: nextProps.current,
+        _current: nextProps.current,
       });
     }
 
     if ('pageSize' in nextProps) {
-      this.setState({
-        pageSize: nextProps.pageSize,
-      });
+      const newState = {};
+      let current = this.state.current;
+      const newCurrent = this._calcPage(nextProps.pageSize);
+      current = current > newCurrent ? newCurrent : current;
+      if (!('current' in nextProps)) {
+        newState.current = current;
+        newState._current = current;
+      }
+      newState.pageSize = nextProps.pageSize;
+      this.setState(newState);
     }
   }
 
@@ -110,20 +118,19 @@ class Pagination extends React.Component {
 
   _changePageSize(size) {
     let current = this.state.current;
-
+    const newCurrent = this._calcPage(size);
+    current = current > newCurrent ? newCurrent : current;
     if (typeof size === 'number') {
       if (!('pageSize' in this.props)) {
         this.setState({
           pageSize: size,
         });
-
-        if (this.state.current > this._calcPage(size)) {
-          current = this._calcPage(size);
-          this.setState({
-            current: current,
-            _current: current,
-          });
-        }
+      }
+      if (!('current' in this.props)) {
+        this.setState({
+          current: current,
+          _current: current,
+        });
       }
     }
     this.props.onShowSizeChange(current, size);

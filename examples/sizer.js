@@ -11,6 +11,7 @@ const Hello = React.createClass({
     return {pageSize: 20};
   },
   onShowSizeChange(current, pageSize) {
+    console.log(current);
     this.setState({
       pageSize: pageSize,
     });

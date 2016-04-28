@@ -197,7 +197,7 @@ webpackJsonp([1],[
 	
 	__webpack_require__(2);
 	
-	__webpack_require__(237);
+	__webpack_require__(239);
 	
 	function onShowSizeChange(current, pageSize) {
 	  console.log(current);
@@ -238,7 +238,7 @@ webpackJsonp([1],[
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
-	var _Option = __webpack_require__(236);
+	var _Option = __webpack_require__(238);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
@@ -290,13 +290,13 @@ webpackJsonp([1],[
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _util = __webpack_require__(202);
+	var _util = __webpack_require__(203);
 	
-	var _SelectTrigger = __webpack_require__(217);
+	var _SelectTrigger = __webpack_require__(218);
 	
 	var _SelectTrigger2 = _interopRequireDefault(_SelectTrigger);
 	
-	var _FilterMixin = __webpack_require__(235);
+	var _FilterMixin = __webpack_require__(237);
 	
 	var _FilterMixin2 = _interopRequireDefault(_FilterMixin);
 	
@@ -477,6 +477,9 @@ webpackJsonp([1],[
 	
 	  onInputKeyDown: function onInputKeyDown(event) {
 	    var props = this.props;
+	    if (props.disabled) {
+	      return;
+	    }
 	    var state = this.state;
 	    var keyCode = event.keyCode;
 	    if ((0, _util.isMultipleOrTags)(props) && !event.target.value && keyCode === _rcUtil.KeyCode.BACKSPACE) {
@@ -532,12 +535,12 @@ webpackJsonp([1],[
 	      label = label.concat([selectedLabel]);
 	    } else {
 	      if (value[0] === selectedValue) {
-	        this.setOpenState(false);
+	        this.setOpenState(false, true);
 	        return;
 	      }
 	      value = [selectedValue];
 	      label = [selectedLabel];
-	      this.setOpenState(false);
+	      this.setOpenState(false, true);
 	    }
 	    this.fireChange(value, label);
 	    this.setState({
@@ -699,26 +702,25 @@ webpackJsonp([1],[
 	    return this.refs.trigger.getInnerMenu();
 	  },
 	
-	  setOpenState: function setOpenState(open) {
+	  setOpenState: function setOpenState(open, needFocus) {
 	    var _this4 = this;
 	
 	    this.clearDelayTimer();
 	    var props = this.props;
 	    var refs = this.refs;
-	
-	    if (this.state.open === open) {
-	      return;
-	    }
+	    
 	    this.setState({
 	      open: open
 	    }, function () {
-	      if (open || (0, _util.isMultipleOrTagsOrCombobox)(props)) {
-	        var input = _this4.getInputDOMNode();
-	        if (input && document.activeElement !== input) {
-	          input.focus();
+	      if(open || needFocus){
+	        if (open || (0, _util.isMultipleOrTagsOrCombobox)(props)) {
+	          var input = _this4.getInputDOMNode();
+	          if (input && document.activeElement !== input) {
+	            input.focus();
+	          }
+	        } else if (refs.selection) {
+	          refs.selection.focus();
 	        }
-	      } else if (refs.selection) {
-	        refs.selection.focus();
 	      }
 	    });
 	  },
@@ -811,10 +813,14 @@ webpackJsonp([1],[
 	        }
 	        return _react2['default'].createElement(
 	          'li',
-	          {
+	          _extends({
+	            style: _util.UNSELECTABLE_STYLE
+	          }, _util.UNSELECTABLE_ATTRIBUTE, {
+	            onMouseDown: _util.preventDefaultEvent,
 	            className: prefixCls + '-selection__choice',
 	            key: singleValue,
-	            title: title },
+	            title: title
+	          }),
 	          _react2['default'].createElement(
 	            'span',
 	            { className: prefixCls + '-selection__choice__content' },
@@ -871,7 +877,7 @@ webpackJsonp([1],[
 	    if (open && ((0, _util.isMultipleOrTagsOrCombobox)(props) || !props.showSearch) && !options.length) {
 	      open = false;
 	    }
-	    if (!(0, _util.isCombobox)(props)) {
+	    if (!(0, _util.isMultipleOrTagsOrCombobox)(props)) {
 	      extraSelectionProps = {
 	        onKeyDown: this.onKeyDown,
 	        tabIndex: 0
@@ -917,7 +923,11 @@ webpackJsonp([1],[
 	          allowClear && !multiple ? clear : null,
 	          multiple || !props.showArrow ? null : _react2['default'].createElement(
 	            'span',
-	            { key: 'arrow', className: prefixCls + '-arrow', tabIndex: '-1', style: { outline: 'none' } },
+	            {
+	              key: 'arrow',
+	              className: prefixCls + '-arrow',
+	              style: { outline: 'none' }
+	            },
 	            _react2['default'].createElement('b', null)
 	          ),
 	          multiple ? this.getSearchPlaceholderElement(!!this.state.inputValue || this.state.value.length) : null
@@ -3171,7 +3181,7 @@ webpackJsonp([1],[
 	
 	var _AnimateChild2 = _interopRequireDefault(_AnimateChild);
 	
-	var _util = __webpack_require__(201);
+	var _util = __webpack_require__(202);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -3619,7 +3629,7 @@ webpackJsonp([1],[
 	
 	var _cssAnimation2 = _interopRequireDefault(_cssAnimation);
 	
-	var _util = __webpack_require__(201);
+	var _util = __webpack_require__(202);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -3704,13 +3714,31 @@ webpackJsonp([1],[
 
 	'use strict';
 	
-	var Event = __webpack_require__(199);
-	var Css = __webpack_require__(200);
-	var isCssAnimationSupported = Event.endEvents.length !== 0;
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _Event = __webpack_require__(199);
+	
+	var _Event2 = _interopRequireDefault(_Event);
+	
+	var _componentClasses = __webpack_require__(200);
+	
+	var _componentClasses2 = _interopRequireDefault(_componentClasses);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var isCssAnimationSupported = _Event2["default"].endEvents.length !== 0;
+	
+	
+	var capitalPrefixes = ['Webkit', 'Moz', 'O',
+	// ms is special .... !
+	'ms'];
+	var prefixes = ['-webkit-', '-moz-', '-o-', 'ms-', ''];
 	
 	function getDuration(node, name) {
 	  var style = window.getComputedStyle(node);
-	  var prefixes = ['-webkit-', '-moz-', '-o-', 'ms-', ''];
+	
 	  var ret = '';
 	  for (var i = 0; i < prefixes.length; i++) {
 	    ret = style.getPropertyValue(prefixes[i] + name);
@@ -3743,9 +3771,19 @@ webpackJsonp([1],[
 	  }
 	}
 	
-	var cssAnimation = function cssAnimation(node, transitionName, callback) {
+	var cssAnimation = function cssAnimation(node, transitionName, endCallback) {
 	  var className = transitionName;
 	  var activeClassName = className + '-active';
+	  var end = endCallback;
+	  var start = void 0;
+	  var active = void 0;
+	  var nodeClasses = (0, _componentClasses2["default"])(node);
+	
+	  if (endCallback && Object.prototype.toString.call(endCallback) === '[object Object]') {
+	    end = endCallback.end;
+	    start = endCallback.start;
+	    active = endCallback.active;
+	  }
 	
 	  if (node.rcEndListener) {
 	    node.rcEndListener();
@@ -3763,26 +3801,33 @@ webpackJsonp([1],[
 	
 	    clearBrowserBugTimeout(node);
 	
-	    Css.removeClass(node, className);
-	    Css.removeClass(node, activeClassName);
+	    nodeClasses.remove(className);
+	    nodeClasses.remove(activeClassName);
 	
-	    Event.removeEndEventListener(node, node.rcEndListener);
+	    _Event2["default"].removeEndEventListener(node, node.rcEndListener);
 	    node.rcEndListener = null;
 	
-	    // Usually this optional callback is used for informing an owner of
+	    // Usually this optional end is used for informing an owner of
 	    // a leave animation and telling it to remove the child.
-	    if (callback) {
-	      callback();
+	    if (end) {
+	      end();
 	    }
 	  };
 	
-	  Event.addEndEventListener(node, node.rcEndListener);
+	  _Event2["default"].addEndEventListener(node, node.rcEndListener);
 	
-	  Css.addClass(node, className);
+	  nodeClasses.add(className);
+	
+	  if (start) {
+	    start();
+	  }
 	
 	  node.rcAnimTimeout = setTimeout(function () {
 	    node.rcAnimTimeout = null;
-	    Css.addClass(node, activeClassName);
+	    nodeClasses.add(activeClassName);
+	    if (active) {
+	      active();
+	    }
 	    fixBrowserByTimeout(node);
 	  }, 0);
 	
@@ -3812,7 +3857,7 @@ webpackJsonp([1],[
 	
 	    clearBrowserBugTimeout(node);
 	
-	    Event.removeEndEventListener(node, node.rcEndListener);
+	    _Event2["default"].removeEndEventListener(node, node.rcEndListener);
 	    node.rcEndListener = null;
 	
 	    // Usually this optional callback is used for informing an owner of
@@ -3822,7 +3867,7 @@ webpackJsonp([1],[
 	    }
 	  };
 	
-	  Event.addEndEventListener(node, node.rcEndListener);
+	  _Event2["default"].addEndEventListener(node, node.rcEndListener);
 	
 	  node.rcAnimTimeout = setTimeout(function () {
 	    for (var s in style) {
@@ -3843,18 +3888,15 @@ webpackJsonp([1],[
 	    property = '';
 	  }
 	  property = property || '';
-	  ['Webkit', 'Moz', 'O',
-	  // ms is special .... !
-	  'ms'].forEach(function (prefix) {
+	  capitalPrefixes.forEach(function (prefix) {
 	    node.style[prefix + 'Transition' + property] = v;
 	  });
 	};
 	
-	cssAnimation.addClass = Css.addClass;
-	cssAnimation.removeClass = Css.removeClass;
 	cssAnimation.isCssAnimationSupported = isCssAnimationSupported;
 	
-	module.exports = cssAnimation;
+	exports["default"] = cssAnimation;
+	module.exports = exports['default'];
 
 /***/ },
 /* 199 */
@@ -3862,6 +3904,9 @@ webpackJsonp([1],[
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	var EVENT_NAME_MAP = {
 	  transitionend: {
 	    transition: 'transitionend',
@@ -3907,7 +3952,7 @@ webpackJsonp([1],[
 	  }
 	}
 	
-	if (typeof window !== 'undefined') {
+	if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 	  detectEvents();
 	}
 	
@@ -3930,6 +3975,7 @@ webpackJsonp([1],[
 	    });
 	  },
 	
+	
 	  endEvents: endEvents,
 	
 	  removeEndEventListener: function removeEndEventListener(node, eventListener) {
@@ -3942,41 +3988,220 @@ webpackJsonp([1],[
 	  }
 	};
 	
-	module.exports = TransitionEvents;
+	exports["default"] = TransitionEvents;
+	module.exports = exports['default'];
 
 /***/ },
 /* 200 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	/**
+	 * Module dependencies.
+	 */
 	
-	var SPACE = ' ';
-	var RE_CLASS = /[\n\t\r]/g;
-	
-	function norm(elemClass) {
-	  return (SPACE + elemClass + SPACE).replace(RE_CLASS, SPACE);
+	try {
+	  var index = __webpack_require__(201);
+	} catch (err) {
+	  var index = __webpack_require__(201);
 	}
 	
-	module.exports = {
-	  addClass: function addClass(elem, className) {
-	    elem.className += ' ' + className;
-	  },
+	/**
+	 * Whitespace regexp.
+	 */
 	
-	  removeClass: function removeClass(elem, n) {
-	    var elemClass = elem.className.trim();
-	    var className = norm(elemClass);
-	    var needle = n.trim();
-	    needle = SPACE + needle + SPACE;
-	    // 一个 cls 有可能多次出现：'link link2 link link3 link'
-	    while (className.indexOf(needle) >= 0) {
-	      className = className.replace(needle, SPACE);
-	    }
-	    elem.className = className.trim();
-	  }
+	var re = /\s+/;
+	
+	/**
+	 * toString reference.
+	 */
+	
+	var toString = Object.prototype.toString;
+	
+	/**
+	 * Wrap `el` in a `ClassList`.
+	 *
+	 * @param {Element} el
+	 * @return {ClassList}
+	 * @api public
+	 */
+	
+	module.exports = function(el){
+	  return new ClassList(el);
 	};
+	
+	/**
+	 * Initialize a new ClassList for `el`.
+	 *
+	 * @param {Element} el
+	 * @api private
+	 */
+	
+	function ClassList(el) {
+	  if (!el || !el.nodeType) {
+	    throw new Error('A DOM element reference is required');
+	  }
+	  this.el = el;
+	  this.list = el.classList;
+	}
+	
+	/**
+	 * Add class `name` if not already present.
+	 *
+	 * @param {String} name
+	 * @return {ClassList}
+	 * @api public
+	 */
+	
+	ClassList.prototype.add = function(name){
+	  // classList
+	  if (this.list) {
+	    this.list.add(name);
+	    return this;
+	  }
+	
+	  // fallback
+	  var arr = this.array();
+	  var i = index(arr, name);
+	  if (!~i) arr.push(name);
+	  this.el.className = arr.join(' ');
+	  return this;
+	};
+	
+	/**
+	 * Remove class `name` when present, or
+	 * pass a regular expression to remove
+	 * any which match.
+	 *
+	 * @param {String|RegExp} name
+	 * @return {ClassList}
+	 * @api public
+	 */
+	
+	ClassList.prototype.remove = function(name){
+	  if ('[object RegExp]' == toString.call(name)) {
+	    return this.removeMatching(name);
+	  }
+	
+	  // classList
+	  if (this.list) {
+	    this.list.remove(name);
+	    return this;
+	  }
+	
+	  // fallback
+	  var arr = this.array();
+	  var i = index(arr, name);
+	  if (~i) arr.splice(i, 1);
+	  this.el.className = arr.join(' ');
+	  return this;
+	};
+	
+	/**
+	 * Remove all classes matching `re`.
+	 *
+	 * @param {RegExp} re
+	 * @return {ClassList}
+	 * @api private
+	 */
+	
+	ClassList.prototype.removeMatching = function(re){
+	  var arr = this.array();
+	  for (var i = 0; i < arr.length; i++) {
+	    if (re.test(arr[i])) {
+	      this.remove(arr[i]);
+	    }
+	  }
+	  return this;
+	};
+	
+	/**
+	 * Toggle class `name`, can force state via `force`.
+	 *
+	 * For browsers that support classList, but do not support `force` yet,
+	 * the mistake will be detected and corrected.
+	 *
+	 * @param {String} name
+	 * @param {Boolean} force
+	 * @return {ClassList}
+	 * @api public
+	 */
+	
+	ClassList.prototype.toggle = function(name, force){
+	  // classList
+	  if (this.list) {
+	    if ("undefined" !== typeof force) {
+	      if (force !== this.list.toggle(name, force)) {
+	        this.list.toggle(name); // toggle again to correct
+	      }
+	    } else {
+	      this.list.toggle(name);
+	    }
+	    return this;
+	  }
+	
+	  // fallback
+	  if ("undefined" !== typeof force) {
+	    if (!force) {
+	      this.remove(name);
+	    } else {
+	      this.add(name);
+	    }
+	  } else {
+	    if (this.has(name)) {
+	      this.remove(name);
+	    } else {
+	      this.add(name);
+	    }
+	  }
+	
+	  return this;
+	};
+	
+	/**
+	 * Return an array of classes.
+	 *
+	 * @return {Array}
+	 * @api public
+	 */
+	
+	ClassList.prototype.array = function(){
+	  var className = this.el.getAttribute('class') || '';
+	  var str = className.replace(/^\s+|\s+$/g, '');
+	  var arr = str.split(re);
+	  if ('' === arr[0]) arr.shift();
+	  return arr;
+	};
+	
+	/**
+	 * Check if class `name` is present.
+	 *
+	 * @param {String} name
+	 * @return {ClassList}
+	 * @api public
+	 */
+	
+	ClassList.prototype.has =
+	ClassList.prototype.contains = function(name){
+	  return this.list
+	    ? this.list.contains(name)
+	    : !! ~index(this.array(), name);
+	};
+
 
 /***/ },
 /* 201 */
+/***/ function(module, exports) {
+
+	module.exports = function(arr, obj){
+	  if (arr.indexOf) return arr.indexOf(obj);
+	  for (var i = 0; i < arr.length; ++i) {
+	    if (arr[i] === obj) return i;
+	  }
+	  return -1;
+	};
+
+/***/ },
+/* 202 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4009,7 +4234,7 @@ webpackJsonp([1],[
 	module.exports = exports["default"];
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4024,11 +4249,12 @@ webpackJsonp([1],[
 	exports.isMultipleOrTagsOrCombobox = isMultipleOrTagsOrCombobox;
 	exports.isSingleMode = isSingleMode;
 	exports.toArray = toArray;
+	exports.preventDefaultEvent = preventDefaultEvent;
 	exports.getSelectKeys = getSelectKeys;
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _rcMenu = __webpack_require__(203);
+	var _rcMenu = __webpack_require__(204);
 	
 	var _react = __webpack_require__(6);
 	
@@ -4078,6 +4304,10 @@ webpackJsonp([1],[
 	  return ret;
 	}
 	
+	function preventDefaultEvent(e) {
+	  e.preventDefault();
+	}
+	
 	function getSelectKeys(menuItems, value) {
 	  if (value === null || value === undefined) {
 	    return [];
@@ -4096,9 +4326,20 @@ webpackJsonp([1],[
 	  });
 	  return selectedKeys;
 	}
+	
+	var UNSELECTABLE_STYLE = {
+	  userSelect: 'none',
+	  WebkitUserSelect: 'none'
+	};
+	
+	exports.UNSELECTABLE_STYLE = UNSELECTABLE_STYLE;
+	var UNSELECTABLE_ATTRIBUTE = {
+	  unselectable: 'unselectable'
+	};
+	exports.UNSELECTABLE_ATTRIBUTE = UNSELECTABLE_ATTRIBUTE;
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4109,23 +4350,23 @@ webpackJsonp([1],[
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _Menu = __webpack_require__(204);
+	var _Menu = __webpack_require__(205);
 	
 	var _Menu2 = _interopRequireDefault(_Menu);
 	
-	var _SubMenu = __webpack_require__(211);
+	var _SubMenu = __webpack_require__(212);
 	
 	var _SubMenu2 = _interopRequireDefault(_SubMenu);
 	
-	var _MenuItem = __webpack_require__(214);
+	var _MenuItem = __webpack_require__(215);
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
-	var _MenuItemGroup = __webpack_require__(215);
+	var _MenuItemGroup = __webpack_require__(216);
 	
 	var _MenuItemGroup2 = _interopRequireDefault(_MenuItemGroup);
 	
-	var _Divider = __webpack_require__(216);
+	var _Divider = __webpack_require__(217);
 	
 	var _Divider2 = _interopRequireDefault(_Divider);
 	
@@ -4138,7 +4379,7 @@ webpackJsonp([1],[
 	exports['default'] = _Menu2['default'];
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4153,7 +4394,7 @@ webpackJsonp([1],[
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MenuMixin = __webpack_require__(205);
+	var _MenuMixin = __webpack_require__(206);
 	
 	var _MenuMixin2 = _interopRequireDefault(_MenuMixin);
 	
@@ -4161,29 +4402,29 @@ webpackJsonp([1],[
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _util = __webpack_require__(209);
+	var _util = __webpack_require__(210);
 	
 	var Menu = _react2['default'].createClass({
 	  displayName: 'Menu',
 	
 	  propTypes: {
-	    openSubMenuOnMouseEnter: _react2['default'].PropTypes.bool,
-	    closeSubMenuOnMouseLeave: _react2['default'].PropTypes.bool,
-	    selectedKeys: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.string),
-	    defaultSelectedKeys: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.string),
-	    defaultOpenKeys: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.string),
-	    openKeys: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.string),
-	    mode: _react2['default'].PropTypes.string,
-	    onClick: _react2['default'].PropTypes.func,
-	    onSelect: _react2['default'].PropTypes.func,
-	    onDeselect: _react2['default'].PropTypes.func,
-	    onDestroy: _react2['default'].PropTypes.func,
-	    openTransitionName: _react2['default'].PropTypes.string,
-	    openAnimation: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.object]),
-	    level: _react2['default'].PropTypes.number,
-	    eventKey: _react2['default'].PropTypes.string,
-	    selectable: _react2['default'].PropTypes.bool,
-	    children: _react2['default'].PropTypes.any
+	    openSubMenuOnMouseEnter: _react.PropTypes.bool,
+	    closeSubMenuOnMouseLeave: _react.PropTypes.bool,
+	    selectedKeys: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	    defaultSelectedKeys: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	    defaultOpenKeys: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	    openKeys: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	    mode: _react.PropTypes.string,
+	    onClick: _react.PropTypes.func,
+	    onSelect: _react.PropTypes.func,
+	    onDeselect: _react.PropTypes.func,
+	    onDestroy: _react.PropTypes.func,
+	    openTransitionName: _react.PropTypes.string,
+	    openAnimation: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.object]),
+	    level: _react.PropTypes.number,
+	    eventKey: _react.PropTypes.string,
+	    selectable: _react.PropTypes.bool,
+	    children: _react.PropTypes.any
 	  },
 	
 	  mixins: [_MenuMixin2['default']],
@@ -4398,7 +4639,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4427,7 +4668,7 @@ webpackJsonp([1],[
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _domScrollIntoView = __webpack_require__(206);
+	var _domScrollIntoView = __webpack_require__(207);
 	
 	var _domScrollIntoView2 = _interopRequireDefault(_domScrollIntoView);
 	
@@ -4435,9 +4676,9 @@ webpackJsonp([1],[
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _util = __webpack_require__(209);
+	var _util = __webpack_require__(210);
 	
-	var _DOMWrap = __webpack_require__(210);
+	var _DOMWrap = __webpack_require__(211);
 	
 	var _DOMWrap2 = _interopRequireDefault(_DOMWrap);
 	
@@ -4490,17 +4731,17 @@ webpackJsonp([1],[
 	
 	var MenuMixin = {
 	  propTypes: {
-	    focusable: _react2['default'].PropTypes.bool,
-	    multiple: _react2['default'].PropTypes.bool,
-	    style: _react2['default'].PropTypes.object,
-	    defaultActiveFirst: _react2['default'].PropTypes.bool,
-	    visible: _react2['default'].PropTypes.bool,
-	    activeKey: _react2['default'].PropTypes.string,
-	    selectedKeys: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.string),
-	    defaultSelectedKeys: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.string),
-	    defaultOpenKeys: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.string),
-	    openKeys: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.string),
-	    children: _react2['default'].PropTypes.any
+	    focusable: _react.PropTypes.bool,
+	    multiple: _react.PropTypes.bool,
+	    style: _react.PropTypes.object,
+	    defaultActiveFirst: _react.PropTypes.bool,
+	    visible: _react.PropTypes.bool,
+	    activeKey: _react.PropTypes.string,
+	    selectedKeys: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	    defaultSelectedKeys: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	    defaultOpenKeys: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	    openKeys: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	    children: _react.PropTypes.any
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -4709,6 +4950,9 @@ webpackJsonp([1],[
 	    var children = this.getFlatInstanceArray();
 	    var activeKey = this.state.activeKey;
 	    var len = children.length;
+	    if (!len) {
+	      return null;
+	    }
 	    if (direction < 0) {
 	      children = children.concat().reverse();
 	    }
@@ -4747,20 +4991,20 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 206 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(207);
-
-/***/ },
 /* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var util = __webpack_require__(208);
+	module.exports = __webpack_require__(208);
+
+/***/ },
+/* 208 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var util = __webpack_require__(209);
 	
 	function scrollIntoView(elem, container, config) {
 	  config = config || {};
@@ -4773,6 +5017,10 @@ webpackJsonp([1],[
 	  var onlyScrollIfNeeded = config.onlyScrollIfNeeded;
 	  var alignWithTop = config.alignWithTop;
 	  var alignWithLeft = config.alignWithLeft;
+	  var offsetTop = config.offsetTop || 0;
+	  var offsetLeft = config.offsetLeft || 0;
+	  var offsetBottom = config.offsetBottom || 0;
+	  var offsetRight = config.offsetRight || 0;
 	
 	  allowHorizontalScroll = allowHorizontalScroll === undefined ? true : allowHorizontalScroll;
 	
@@ -4801,12 +5049,12 @@ webpackJsonp([1],[
 	    };
 	    // elem 相对 container 可视视窗的距离
 	    diffTop = {
-	      left: elemOffset.left - winScroll.left,
-	      top: elemOffset.top - winScroll.top
+	      left: elemOffset.left - winScroll.left - offsetLeft,
+	      top: elemOffset.top - winScroll.top - offsetTop
 	    };
 	    diffBottom = {
-	      left: elemOffset.left + ew - (winScroll.left + ww),
-	      top: elemOffset.top + eh - (winScroll.top + wh)
+	      left: elemOffset.left + ew - (winScroll.left + ww) + offsetRight,
+	      top: elemOffset.top + eh - (winScroll.top + wh) + offsetBottom
 	    };
 	    containerScroll = winScroll;
 	  } else {
@@ -4820,12 +5068,12 @@ webpackJsonp([1],[
 	    // elem 相对 container 可视视窗的距离
 	    // 注意边框, offset 是边框到根节点
 	    diffTop = {
-	      left: elemOffset.left - (containerOffset.left + (parseFloat(util.css(container, 'borderLeftWidth')) || 0)),
-	      top: elemOffset.top - (containerOffset.top + (parseFloat(util.css(container, 'borderTopWidth')) || 0))
+	      left: elemOffset.left - (containerOffset.left + (parseFloat(util.css(container, 'borderLeftWidth')) || 0)) - offsetLeft,
+	      top: elemOffset.top - (containerOffset.top + (parseFloat(util.css(container, 'borderTopWidth')) || 0)) - offsetTop
 	    };
 	    diffBottom = {
-	      left: elemOffset.left + ew - (containerOffset.left + cw + (parseFloat(util.css(container, 'borderRightWidth')) || 0)),
-	      top: elemOffset.top + eh - (containerOffset.top + ch + (parseFloat(util.css(container, 'borderBottomWidth')) || 0))
+	      left: elemOffset.left + ew - (containerOffset.left + cw + (parseFloat(util.css(container, 'borderRightWidth')) || 0)) + offsetRight,
+	      top: elemOffset.top + eh - (containerOffset.top + ch + (parseFloat(util.css(container, 'borderBottomWidth')) || 0)) + offsetBottom
 	    };
 	  }
 	
@@ -4885,7 +5133,7 @@ webpackJsonp([1],[
 	module.exports = scrollIntoView;
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5329,7 +5577,7 @@ webpackJsonp([1],[
 	}, domUtils);
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5372,7 +5620,7 @@ webpackJsonp([1],[
 	}
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5395,7 +5643,7 @@ webpackJsonp([1],[
 	  displayName: 'DOMWrap',
 	
 	  propTypes: {
-	    tag: _react2['default'].PropTypes.string
+	    tag: _react.PropTypes.string
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -5419,7 +5667,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5434,7 +5682,7 @@ webpackJsonp([1],[
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
-	var _SubPopupMenu = __webpack_require__(212);
+	var _SubPopupMenu = __webpack_require__(213);
 	
 	var _SubPopupMenu2 = _interopRequireDefault(_SubPopupMenu);
 	
@@ -5452,32 +5700,43 @@ webpackJsonp([1],[
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
+	var _util = __webpack_require__(210);
+	
 	var SubMenu = _react2['default'].createClass({
 	  displayName: 'SubMenu',
 	
 	  propTypes: {
-	    parentMenu: _react2['default'].PropTypes.object,
-	    title: _react2['default'].PropTypes.node,
-	    onClick: _react2['default'].PropTypes.func,
-	    onOpenChange: _react2['default'].PropTypes.func,
-	    rootPrefixCls: _react2['default'].PropTypes.string,
-	    eventKey: _react2['default'].PropTypes.string,
-	    multiple: _react2['default'].PropTypes.bool,
-	    active: _react2['default'].PropTypes.bool,
-	    open: _react2['default'].PropTypes.bool,
-	    onSelect: _react2['default'].PropTypes.func,
-	    closeSubMenuOnMouseLeave: _react2['default'].PropTypes.bool,
-	    openSubMenuOnMouseEnter: _react2['default'].PropTypes.bool,
-	    onDeselect: _react2['default'].PropTypes.func,
-	    onDestroy: _react2['default'].PropTypes.func,
-	    onItemHover: _react2['default'].PropTypes.func
+	    parentMenu: _react.PropTypes.object,
+	    title: _react.PropTypes.node,
+	    onClick: _react.PropTypes.func,
+	    onOpenChange: _react.PropTypes.func,
+	    rootPrefixCls: _react.PropTypes.string,
+	    eventKey: _react.PropTypes.string,
+	    multiple: _react.PropTypes.bool,
+	    active: _react.PropTypes.bool,
+	    open: _react.PropTypes.bool,
+	    onSelect: _react.PropTypes.func,
+	    closeSubMenuOnMouseLeave: _react.PropTypes.bool,
+	    openSubMenuOnMouseEnter: _react.PropTypes.bool,
+	    onDeselect: _react.PropTypes.func,
+	    onDestroy: _react.PropTypes.func,
+	    onItemHover: _react.PropTypes.func,
+	    onMouseEnter: _react.PropTypes.func,
+	    onMouseLeave: _react.PropTypes.func,
+	    onTitleMouseEnter: _react.PropTypes.func,
+	    onTitleMouseLeave: _react.PropTypes.func,
+	    onTitleClick: _react.PropTypes.func
 	  },
 	
-	  mixins: [__webpack_require__(213)],
+	  mixins: [__webpack_require__(214)],
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      onMouseEnter: function onMouseEnter() {},
+	      onMouseEnter: _util.noop,
+	      onMouseLeave: _util.noop,
+	      onTitleMouseEnter: _util.noop,
+	      onTitleMouseLeave: _util.noop,
+	      onTitleClick: _util.noop,
 	      title: ''
 	    };
 	  },
@@ -5542,18 +5801,24 @@ webpackJsonp([1],[
 	    }
 	  },
 	
-	  onSubTreeMouseEnter: function onSubTreeMouseEnter() {
-	    if (this.leaveTimer) {
-	      clearTimeout(this.leaveTimer);
-	      this.leaveTimer = null;
-	    }
-	  },
-	
 	  onOpenChange: function onOpenChange(e) {
 	    this.props.onOpenChange(this.addKeyPath(e));
 	  },
 	
-	  onMouseEnter: function onMouseEnter() {
+	  onMouseEnter: function onMouseEnter(e) {
+	    if (this.leaveTimer) {
+	      clearTimeout(this.leaveTimer);
+	      this.leaveTimer = null;
+	    }
+	    var props = this.props;
+	    var eventKey = props.eventKey;
+	    props.onMouseEnter({
+	      key: eventKey,
+	      domEvent: e
+	    });
+	  },
+	
+	  onTitleMouseEnter: function onTitleMouseEnter(e) {
 	    if (this.leaveTimer) {
 	      clearTimeout(this.leaveTimer);
 	      this.leaveTimer = null;
@@ -5565,7 +5830,7 @@ webpackJsonp([1],[
 	      parentMenu.menuItemMouseLeaveTimer = null;
 	    }
 	    props.onItemHover({
-	      key: this.props.eventKey,
+	      key: props.eventKey,
 	      item: this,
 	      hover: true,
 	      trigger: 'mouseenter'
@@ -5576,27 +5841,58 @@ webpackJsonp([1],[
 	    this.setState({
 	      defaultActiveFirst: false
 	    });
+	    props.onTitleMouseEnter({
+	      key: props.eventKey,
+	      domEvent: e
+	    });
 	  },
 	
-	  onMouseLeave: function onMouseLeave() {
+	  onTitleClick: function onTitleClick(e) {
+	    var props = this.props;
+	
+	    props.onTitleClick({
+	      key: props.eventKey,
+	      domEvent: e
+	    });
+	  },
+	
+	  onTitleMouseLeave: function onTitleMouseLeave(e) {
+	    var props = this.props;
+	
+	    props.onTitleMouseLeave({
+	      key: props.eventKey,
+	      domEvent: e
+	    });
+	  },
+	
+	  onMouseLeave: function onMouseLeave(e) {
 	    var _this = this;
 	
 	    // prevent popup menu and submenu gap
 	    this.leaveTimer = setTimeout(function () {
-	      // leave whole sub tree
-	      // still active
-	      if (_this.isMounted() && _this.props.active) {
-	        _this.props.onItemHover({
-	          key: _this.props.eventKey,
-	          item: _this,
-	          hover: false,
-	          trigger: 'mouseleave'
-	        });
-	      }
-	      if (_this.isMounted() && _this.props.open) {
-	        if (_this.props.closeSubMenuOnMouseLeave) {
-	          _this.triggerOpenChange(false);
+	      var props = _this.props;
+	      var eventKey = props.eventKey;
+	      if (_this.isMounted()) {
+	        // leave whole sub tree
+	        // still active
+	        if (props.active) {
+	          props.onItemHover({
+	            key: eventKey,
+	            item: _this,
+	            hover: false,
+	            trigger: 'mouseleave'
+	          });
 	        }
+	        if (props.open) {
+	          if (props.closeSubMenuOnMouseLeave) {
+	            _this.triggerOpenChange(false);
+	          }
+	        }
+	        // trigger mouseleave
+	        props.onMouseLeave({
+	          key: eventKey,
+	          domEvent: e
+	        });
 	      }
 	    }, 100);
 	  },
@@ -5714,11 +6010,13 @@ webpackJsonp([1],[
 	      };
 	      mouseEvents = {
 	        onMouseLeave: this.onMouseLeave,
-	        onMouseEnter: this.onSubTreeMouseEnter
+	        onMouseEnter: this.onMouseEnter
 	      };
 	      // only works in title, not outer li
 	      titleMouseEvents = {
-	        onMouseEnter: this.onMouseEnter
+	        onMouseEnter: this.onTitleMouseEnter,
+	        onClick: this.onTitleClick,
+	        onMouseLeave: this.onTitleMouseLeave
 	      };
 	    }
 	    var style = {};
@@ -5749,7 +6047,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5766,7 +6064,7 @@ webpackJsonp([1],[
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MenuMixin = __webpack_require__(205);
+	var _MenuMixin = __webpack_require__(206);
 	
 	var _MenuMixin2 = _interopRequireDefault(_MenuMixin);
 	
@@ -5774,7 +6072,7 @@ webpackJsonp([1],[
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _util = __webpack_require__(209);
+	var _util = __webpack_require__(210);
 	
 	var _rcAnimate = __webpack_require__(194);
 	
@@ -5784,17 +6082,17 @@ webpackJsonp([1],[
 	  displayName: 'SubPopupMenu',
 	
 	  propTypes: {
-	    onSelect: _react2['default'].PropTypes.func,
-	    onClick: _react2['default'].PropTypes.func,
-	    onDeselect: _react2['default'].PropTypes.func,
-	    onOpenChange: _react2['default'].PropTypes.func,
-	    onDestroy: _react2['default'].PropTypes.func,
-	    openTransitionName: _react2['default'].PropTypes.string,
-	    openAnimation: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.object]),
-	    openKeys: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.string),
-	    closeSubMenuOnMouseLeave: _react2['default'].PropTypes.bool,
-	    visible: _react2['default'].PropTypes.bool,
-	    children: _react2['default'].PropTypes.any
+	    onSelect: _react.PropTypes.func,
+	    onClick: _react.PropTypes.func,
+	    onDeselect: _react.PropTypes.func,
+	    onOpenChange: _react.PropTypes.func,
+	    onDestroy: _react.PropTypes.func,
+	    openTransitionName: _react.PropTypes.string,
+	    openAnimation: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.object]),
+	    openKeys: _react.PropTypes.arrayOf(_react.PropTypes.string),
+	    closeSubMenuOnMouseLeave: _react.PropTypes.bool,
+	    visible: _react.PropTypes.bool,
+	    children: _react.PropTypes.any
 	  },
 	
 	  mixins: [_MenuMixin2['default']],
@@ -5877,7 +6175,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5962,7 +6260,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5985,28 +6283,33 @@ webpackJsonp([1],[
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
+	var _util = __webpack_require__(210);
+	
 	var MenuItem = _react2['default'].createClass({
 	  displayName: 'MenuItem',
 	
 	  propTypes: {
-	    rootPrefixCls: _react2['default'].PropTypes.string,
-	    eventKey: _react2['default'].PropTypes.string,
-	    active: _react2['default'].PropTypes.bool,
-	    selected: _react2['default'].PropTypes.bool,
-	    disabled: _react2['default'].PropTypes.bool,
-	    title: _react2['default'].PropTypes.string,
-	    onSelect: _react2['default'].PropTypes.func,
-	    onClick: _react2['default'].PropTypes.func,
-	    onDeselect: _react2['default'].PropTypes.func,
-	    parentMenu: _react2['default'].PropTypes.object,
-	    onItemHover: _react2['default'].PropTypes.func,
-	    onDestroy: _react2['default'].PropTypes.func
+	    rootPrefixCls: _react.PropTypes.string,
+	    eventKey: _react.PropTypes.string,
+	    active: _react.PropTypes.bool,
+	    selected: _react.PropTypes.bool,
+	    disabled: _react.PropTypes.bool,
+	    title: _react.PropTypes.string,
+	    onSelect: _react.PropTypes.func,
+	    onClick: _react.PropTypes.func,
+	    onDeselect: _react.PropTypes.func,
+	    parentMenu: _react.PropTypes.object,
+	    onItemHover: _react.PropTypes.func,
+	    onDestroy: _react.PropTypes.func,
+	    onMouseEnter: _react.PropTypes.func,
+	    onMouseLeave: _react.PropTypes.func
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      onSelect: function onSelect() {},
-	      onMouseEnter: function onMouseEnter() {}
+	      onSelect: _util.noop,
+	      onMouseEnter: _util.noop,
+	      onMouseLeave: _util.noop
 	    };
 	  },
 	
@@ -6025,14 +6328,15 @@ webpackJsonp([1],[
 	    }
 	  },
 	
-	  onMouseLeave: function onMouseLeave() {
+	  onMouseLeave: function onMouseLeave(e) {
 	    var _this = this;
 	
-	    var eventKey = this.props.eventKey;
-	    var parentMenu = this.props.parentMenu;
+	    var props = this.props;
+	    var eventKey = props.eventKey;
+	    var parentMenu = props.parentMenu;
 	    parentMenu.menuItemMouseLeaveTimer = setTimeout(function () {
-	      if (_this.isMounted() && _this.props.active) {
-	        _this.props.onItemHover({
+	      if (_this.isMounted() && props.active) {
+	        props.onItemHover({
 	          key: eventKey,
 	          item: _this,
 	          hover: false,
@@ -6040,11 +6344,15 @@ webpackJsonp([1],[
 	        });
 	      }
 	    }, 30);
+	    props.onMouseLeave({
+	      key: eventKey,
+	      domEvent: e
+	    });
 	  },
 	
-	  onMouseEnter: function onMouseEnter() {
+	  onMouseEnter: function onMouseEnter(e) {
 	    var props = this.props;
-	    var parentMenu = this.props.parentMenu;
+	    var parentMenu = props.parentMenu;
 	    if (parentMenu.menuItemMouseLeaveTimer) {
 	      clearTimeout(parentMenu.menuItemMouseLeaveTimer);
 	      parentMenu.menuItemMouseLeaveTimer = null;
@@ -6055,6 +6363,10 @@ webpackJsonp([1],[
 	      item: this,
 	      hover: true,
 	      trigger: 'mouseenter'
+	    });
+	    props.onMouseEnter({
+	      key: eventKey,
+	      domEvent: e
 	    });
 	  },
 	
@@ -6135,7 +6447,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6200,7 +6512,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6239,7 +6551,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6254,7 +6566,7 @@ webpackJsonp([1],[
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
-	var _rcTrigger = __webpack_require__(218);
+	var _rcTrigger = __webpack_require__(219);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -6266,7 +6578,7 @@ webpackJsonp([1],[
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DropdownMenu = __webpack_require__(234);
+	var _DropdownMenu = __webpack_require__(236);
 	
 	var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 	
@@ -6400,26 +6712,26 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 218 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = __webpack_require__(219);
-
-/***/ },
 /* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	module.exports = __webpack_require__(220);
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 	
 	var _react = __webpack_require__(6);
 	
@@ -6431,11 +6743,13 @@ webpackJsonp([1],[
 	
 	var _rcUtil = __webpack_require__(171);
 	
-	var _Popup = __webpack_require__(220);
+	var _Popup = __webpack_require__(221);
 	
 	var _Popup2 = _interopRequireDefault(_Popup);
 	
-	var _utils = __webpack_require__(233);
+	var _utils = __webpack_require__(235);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function noop() {}
 	
@@ -6445,7 +6759,7 @@ webpackJsonp([1],[
 	
 	var ALL_HANDLERS = ['onClick', 'onMouseDown', 'onTouchStart', 'onMouseEnter', 'onMouseLeave', 'onFocus', 'onBlur'];
 	
-	var Trigger = _react2['default'].createClass({
+	var Trigger = _react2["default"].createClass({
 	  displayName: 'Trigger',
 	
 	  propTypes: {
@@ -6457,6 +6771,7 @@ webpackJsonp([1],[
 	    afterPopupVisibleChange: _react.PropTypes.func,
 	    popup: _react.PropTypes.node.isRequired,
 	    popupStyle: _react.PropTypes.object,
+	    prefixCls: _react.PropTypes.string,
 	    popupClassName: _react.PropTypes.string,
 	    popupPlacement: _react.PropTypes.string,
 	    builtinPlacements: _react.PropTypes.object,
@@ -6464,12 +6779,17 @@ webpackJsonp([1],[
 	    popupAnimation: _react.PropTypes.any,
 	    mouseEnterDelay: _react.PropTypes.number,
 	    mouseLeaveDelay: _react.PropTypes.number,
+	    zIndex: _react.PropTypes.number,
 	    focusDelay: _react.PropTypes.number,
 	    blurDelay: _react.PropTypes.number,
 	    getPopupContainer: _react.PropTypes.func,
 	    destroyPopupOnHide: _react.PropTypes.bool,
+	    mask: _react.PropTypes.bool,
+	    onPopupAlign: _react.PropTypes.func,
 	    popupAlign: _react.PropTypes.object,
-	    popupVisible: _react.PropTypes.bool
+	    popupVisible: _react.PropTypes.bool,
+	    maskTransitionName: _react.PropTypes.string,
+	    maskAnimation: _react.PropTypes.string
 	  },
 	
 	  getDefaultProps: function getDefaultProps() {
@@ -6478,6 +6798,7 @@ webpackJsonp([1],[
 	      getPopupClassNameFromAlign: returnEmptyString,
 	      onPopupVisibleChange: noop,
 	      afterPopupVisibleChange: noop,
+	      onPopupAlign: noop,
 	      popupClassName: '',
 	      mouseEnterDelay: 0,
 	      mouseLeaveDelay: 0.1,
@@ -6487,29 +6808,29 @@ webpackJsonp([1],[
 	      destroyPopupOnHide: false,
 	      popupAlign: {},
 	      defaultPopupVisible: false,
+	      mask: false,
 	      action: [],
 	      showAction: [],
 	      hideAction: []
 	    };
 	  },
-	
 	  getInitialState: function getInitialState() {
 	    var props = this.props;
-	    var popupVisible = undefined;
+	    var popupVisible = void 0;
 	    if ('popupVisible' in props) {
 	      popupVisible = !!props.popupVisible;
 	    } else {
 	      popupVisible = !!props.defaultPopupVisible;
 	    }
-	    return { popupVisible: popupVisible };
+	    return {
+	      popupVisible: popupVisible
+	    };
 	  },
-	
 	  componentDidMount: function componentDidMount() {
 	    this.componentDidUpdate({}, {
 	      popupVisible: this.state.popupVisible
 	    });
 	  },
-	
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	    if ('popupVisible' in nextProps) {
 	      this.setState({
@@ -6517,18 +6838,18 @@ webpackJsonp([1],[
 	      });
 	    }
 	  },
-	
 	  componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
 	    var _this = this;
 	
 	    var props = this.props;
 	    var state = this.state;
 	    if (this.popupRendered) {
-	      var _ret = (function () {
+	      var _ret = function () {
 	        var self = _this;
-	        _reactDom2['default'].unstable_renderSubtreeIntoContainer(_this, _this.getPopupElement(), _this.getPopupContainer(), function renderPopup() {
+	        _reactDom2["default"].unstable_renderSubtreeIntoContainer(_this, _this.getPopupElement(), _this.getPopupContainer(), function renderPopup() {
+	          /* eslint react/no-is-mounted:0 */
 	          if (this.isMounted()) {
-	            self.popupDomNode = (0, _reactDom.findDOMNode)(this);
+	            self.popupDomNode = this.getPopupDomNode();
 	          } else {
 	            self.popupDomNode = null;
 	          }
@@ -6536,14 +6857,14 @@ webpackJsonp([1],[
 	            props.afterPopupVisibleChange(state.popupVisible);
 	          }
 	        });
-	        if (props.action.indexOf('click') !== -1) {
+	        if (_this.isClickToHide()) {
 	          if (state.popupVisible) {
 	            if (!_this.clickOutsideHandler) {
 	              _this.clickOutsideHandler = _rcUtil.Dom.addEventListener(document, 'mousedown', _this.onDocumentClick);
 	              _this.touchOutsideHandler = _rcUtil.Dom.addEventListener(document, 'touchstart', _this.onDocumentClick);
 	            }
 	            return {
-	              v: undefined
+	              v: void 0
 	            };
 	          }
 	        }
@@ -6553,22 +6874,16 @@ webpackJsonp([1],[
 	          _this.clickOutsideHandler = null;
 	          _this.touchOutsideHandler = null;
 	        }
-	      })();
+	      }();
 	
-	      if (typeof _ret === 'object') return _ret.v;
+	      if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	    }
 	  },
-	
 	  componentWillUnmount: function componentWillUnmount() {
 	    var popupContainer = this.popupContainer;
 	    if (popupContainer) {
-	      _reactDom2['default'].unmountComponentAtNode(popupContainer);
-	      if (this.props.getPopupContainer) {
-	        var mountNode = this.props.getPopupContainer((0, _reactDom.findDOMNode)(this));
-	        mountNode.removeChild(popupContainer);
-	      } else {
-	        document.body.removeChild(popupContainer);
-	      }
+	      _reactDom2["default"].unmountComponentAtNode(popupContainer);
+	      popupContainer.parentNode.removeChild(popupContainer);
 	      this.popupContainer = null;
 	    }
 	    this.clearDelayTimer();
@@ -6579,36 +6894,36 @@ webpackJsonp([1],[
 	      this.touchOutsideHandler = null;
 	    }
 	  },
-	
 	  onMouseEnter: function onMouseEnter() {
 	    this.delaySetPopupVisible(true, this.props.mouseEnterDelay);
 	  },
-	
 	  onMouseLeave: function onMouseLeave() {
 	    this.delaySetPopupVisible(false, this.props.mouseLeaveDelay);
 	  },
-	
 	  onFocus: function onFocus() {
-	    this.focusTime = Date.now();
-	    this.delaySetPopupVisible(true, this.props.focusDelay);
+	    // incase focusin and focusout
+	    this.clearDelayTimer();
+	    if (this.isFocusToShow()) {
+	      this.focusTime = Date.now();
+	      this.delaySetPopupVisible(true, this.props.focusDelay);
+	    }
 	  },
-	
 	  onMouseDown: function onMouseDown() {
 	    this.preClickTime = Date.now();
 	  },
-	
 	  onTouchStart: function onTouchStart() {
 	    this.preTouchTime = Date.now();
 	  },
-	
 	  onBlur: function onBlur() {
-	    this.delaySetPopupVisible(false, this.props.blurDelay);
+	    this.clearDelayTimer();
+	    if (this.isBlurToHide()) {
+	      this.delaySetPopupVisible(false, this.props.blurDelay);
+	    }
 	  },
-	
 	  onClick: function onClick(event) {
 	    // focus will trigger click
 	    if (this.focusTime) {
-	      var preTime = undefined;
+	      var preTime = void 0;
 	      if (this.preClickTime && this.preTouchTime) {
 	        preTime = Math.min(this.preClickTime, this.preTouchTime);
 	      } else if (this.preClickTime) {
@@ -6629,7 +6944,6 @@ webpackJsonp([1],[
 	      this.setPopupVisible(!this.state.popupVisible);
 	    }
 	  },
-	
 	  onDocumentClick: function onDocumentClick(event) {
 	    var target = event.target;
 	    var root = (0, _reactDom.findDOMNode)(this);
@@ -6638,25 +6952,21 @@ webpackJsonp([1],[
 	      this.setPopupVisible(false);
 	    }
 	  },
-	
 	  getPopupDomNode: function getPopupDomNode() {
 	    // for test
 	    return this.popupDomNode;
 	  },
-	
+	  getRootDomNode: function getRootDomNode() {
+	    return _reactDom2["default"].findDOMNode(this);
+	  },
 	  getPopupContainer: function getPopupContainer() {
 	    if (!this.popupContainer) {
 	      this.popupContainer = document.createElement('div');
-	      if (this.props.getPopupContainer) {
-	        var mountNode = this.props.getPopupContainer((0, _reactDom.findDOMNode)(this));
-	        mountNode.appendChild(this.popupContainer);
-	      } else {
-	        document.body.appendChild(this.popupContainer);
-	      }
+	      var mountNode = this.props.getPopupContainer ? this.props.getPopupContainer((0, _reactDom.findDOMNode)(this)) : document.body;
+	      mountNode.appendChild(this.popupContainer);
 	    }
 	    return this.popupContainer;
 	  },
-	
 	  getPopupClassNameFromAlign: function getPopupClassNameFromAlign(align) {
 	    var className = [];
 	    var props = this.props;
@@ -6672,7 +6982,6 @@ webpackJsonp([1],[
 	    }
 	    return className.join(' ');
 	  },
-	
 	  getPopupAlign: function getPopupAlign() {
 	    var props = this.props;
 	    var popupPlacement = props.popupPlacement;
@@ -6684,7 +6993,6 @@ webpackJsonp([1],[
 	    }
 	    return popupAlign;
 	  },
-	
 	  getPopupElement: function getPopupElement() {
 	    var props = this.props;
 	    var state = this.state;
@@ -6693,24 +7001,30 @@ webpackJsonp([1],[
 	      mouseProps.onMouseEnter = this.onMouseEnter;
 	      mouseProps.onMouseLeave = this.onMouseLeave;
 	    }
-	    return _react2['default'].createElement(
-	      _Popup2['default'],
-	      _extends({ prefixCls: props.prefixCls,
+	    return _react2["default"].createElement(
+	      _Popup2["default"],
+	      _extends({
+	        prefixCls: props.prefixCls,
 	        destroyPopupOnHide: props.destroyPopupOnHide,
 	        visible: state.popupVisible,
 	        className: props.popupClassName,
 	        action: props.action,
 	        align: this.getPopupAlign(),
+	        onAlign: props.onPopupAlign,
 	        animation: props.popupAnimation,
 	        getClassNameFromAlign: this.getPopupClassNameFromAlign
 	      }, mouseProps, {
-	        wrap: this,
+	        getRootDomNode: this.getRootDomNode,
 	        style: props.popupStyle,
-	        transitionName: props.popupTransitionName }),
+	        mask: props.mask,
+	        zIndex: props.zIndex,
+	        transitionName: props.popupTransitionName,
+	        maskAnimation: props.maskAnimation,
+	        maskTransitionName: props.maskTransitionName
+	      }),
 	      props.popup
 	    );
 	  },
-	
 	  setPopupVisible: function setPopupVisible(popupVisible) {
 	    this.clearDelayTimer();
 	    if (this.state.popupVisible !== popupVisible) {
@@ -6722,7 +7036,6 @@ webpackJsonp([1],[
 	      this.props.onPopupVisibleChange(popupVisible);
 	    }
 	  },
-	
 	  delaySetPopupVisible: function delaySetPopupVisible(visible, delayS) {
 	    var _this2 = this;
 	
@@ -6737,14 +7050,12 @@ webpackJsonp([1],[
 	      this.setPopupVisible(visible);
 	    }
 	  },
-	
 	  clearDelayTimer: function clearDelayTimer() {
 	    if (this.delayTimer) {
 	      clearTimeout(this.delayTimer);
 	      this.delayTimer = null;
 	    }
 	  },
-	
 	  isClickToShow: function isClickToShow() {
 	    var _props = this.props;
 	    var action = _props.action;
@@ -6752,7 +7063,6 @@ webpackJsonp([1],[
 	
 	    return action.indexOf('click') !== -1 || showAction.indexOf('click') !== -1;
 	  },
-	
 	  isClickToHide: function isClickToHide() {
 	    var _props2 = this.props;
 	    var action = _props2.action;
@@ -6760,7 +7070,6 @@ webpackJsonp([1],[
 	
 	    return action.indexOf('click') !== -1 || hideAction.indexOf('click') !== -1;
 	  },
-	
 	  isMouseEnterToShow: function isMouseEnterToShow() {
 	    var _props3 = this.props;
 	    var action = _props3.action;
@@ -6768,7 +7077,6 @@ webpackJsonp([1],[
 	
 	    return action.indexOf('hover') !== -1 || showAction.indexOf('mouseEnter') !== -1;
 	  },
-	
 	  isMouseLeaveToHide: function isMouseLeaveToHide() {
 	    var _props4 = this.props;
 	    var action = _props4.action;
@@ -6776,7 +7084,6 @@ webpackJsonp([1],[
 	
 	    return action.indexOf('hover') !== -1 || hideAction.indexOf('mouseLeave') !== -1;
 	  },
-	
 	  isFocusToShow: function isFocusToShow() {
 	    var _props5 = this.props;
 	    var action = _props5.action;
@@ -6784,7 +7091,6 @@ webpackJsonp([1],[
 	
 	    return action.indexOf('focus') !== -1 || showAction.indexOf('focus') !== -1;
 	  },
-	
 	  isBlurToHide: function isBlurToHide() {
 	    var _props6 = this.props;
 	    var action = _props6.action;
@@ -6792,12 +7098,11 @@ webpackJsonp([1],[
 	
 	    return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1;
 	  },
-	
 	  render: function render() {
 	    this.popupRendered = this.popupRendered || this.state.popupVisible;
 	    var props = this.props;
 	    var children = props.children;
-	    var child = _react2['default'].Children.only(children);
+	    var child = _react2["default"].Children.only(children);
 	    var childProps = child.props || {};
 	    var newChildProps = {};
 	
@@ -6812,15 +7117,13 @@ webpackJsonp([1],[
 	    if (this.isMouseLeaveToHide()) {
 	      newChildProps.onMouseLeave = (0, _rcUtil.createChainedFunction)(this.onMouseLeave, childProps.onMouseLeave);
 	    }
-	    if (this.isFocusToShow()) {
+	    if (this.isFocusToShow() || this.isBlurToHide()) {
 	      newChildProps.onFocus = (0, _rcUtil.createChainedFunction)(this.onFocus, childProps.onFocus);
-	    }
-	    if (this.isBlurToHide()) {
 	      newChildProps.onBlur = (0, _rcUtil.createChainedFunction)(this.onBlur, childProps.onBlur);
 	    }
 	
 	    ALL_HANDLERS.forEach(function (handler) {
-	      var newFn = undefined;
+	      var newFn = void 0;
 	      if (props[handler] && newChildProps[handler]) {
 	        newFn = (0, _rcUtil.createChainedFunction)(props[handler], newChildProps[handler]);
 	      } else {
@@ -6831,24 +7134,24 @@ webpackJsonp([1],[
 	      }
 	    });
 	
-	    return _react2['default'].cloneElement(child, newChildProps);
+	    return _react2["default"].cloneElement(child, newChildProps);
 	  }
 	});
 	
-	exports['default'] = Trigger;
+	exports["default"] = Trigger;
 	module.exports = exports['default'];
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(6);
 	
@@ -6858,7 +7161,7 @@ webpackJsonp([1],[
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcAlign = __webpack_require__(221);
+	var _rcAlign = __webpack_require__(222);
 	
 	var _rcAlign2 = _interopRequireDefault(_rcAlign);
 	
@@ -6866,27 +7169,36 @@ webpackJsonp([1],[
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _PopupInner = __webpack_require__(232);
+	var _PopupInner = __webpack_require__(233);
 	
 	var _PopupInner2 = _interopRequireDefault(_PopupInner);
 	
-	var Popup = _react2['default'].createClass({
+	var _LazyRenderBox = __webpack_require__(234);
+	
+	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var Popup = _react2["default"].createClass({
 	  displayName: 'Popup',
 	
 	  propTypes: {
 	    visible: _react.PropTypes.bool,
-	    wrap: _react.PropTypes.object,
 	    style: _react.PropTypes.object,
 	    getClassNameFromAlign: _react.PropTypes.func,
+	    onAlign: _react.PropTypes.func,
+	    getRootDomNode: _react.PropTypes.func,
 	    onMouseEnter: _react.PropTypes.func,
+	    align: _react.PropTypes.any,
+	    destroyPopupOnHide: _react.PropTypes.bool,
 	    className: _react.PropTypes.string,
+	    prefixCls: _react.PropTypes.string,
 	    onMouseLeave: _react.PropTypes.func
 	  },
 	
 	  componentDidMount: function componentDidMount() {
 	    this.rootNode = this.getPopupDomNode();
 	  },
-	
 	  onAlign: function onAlign(popupDomNode, align) {
 	    var props = this.props;
 	    var alignClassName = props.getClassNameFromAlign(props.align);
@@ -6895,16 +7207,23 @@ webpackJsonp([1],[
 	      this.currentAlignClassName = currentAlignClassName;
 	      popupDomNode.className = this.getClassName(currentAlignClassName);
 	    }
+	    props.onAlign(popupDomNode, align);
 	  },
-	
 	  getPopupDomNode: function getPopupDomNode() {
-	    return _reactDom2['default'].findDOMNode(this);
+	    return _reactDom2["default"].findDOMNode(this.refs.popup);
 	  },
-	
 	  getTarget: function getTarget() {
-	    return _reactDom2['default'].findDOMNode(this.props.wrap);
+	    return this.props.getRootDomNode();
 	  },
-	
+	  getMaskTransitionName: function getMaskTransitionName() {
+	    var props = this.props;
+	    var transitionName = props.maskTransitionName;
+	    var animation = props.maskAnimation;
+	    if (!transitionName && animation) {
+	      transitionName = props.prefixCls + '-' + animation;
+	    }
+	    return transitionName;
+	  },
 	  getTransitionName: function getTransitionName() {
 	    var props = this.props;
 	    var transitionName = props.transitionName;
@@ -6913,17 +7232,10 @@ webpackJsonp([1],[
 	    }
 	    return transitionName;
 	  },
-	
 	  getClassName: function getClassName(currentAlignClassName) {
-	    var props = this.props;
-	    var prefixCls = props.prefixCls;
-	
-	    var className = prefixCls + ' ' + props.className + ' ';
-	    className += currentAlignClassName;
-	    return className;
+	    return this.props.prefixCls + ' ' + this.props.className + ' ' + currentAlignClassName;
 	  },
-	
-	  render: function render() {
+	  getPopupElement: function getPopupElement() {
 	    var props = this.props;
 	    var align = props.align;
 	    var style = props.style;
@@ -6936,70 +7248,125 @@ webpackJsonp([1],[
 	    if (!visible) {
 	      this.currentAlignClassName = null;
 	    }
+	    var newStyle = _extends({}, style, this.getZIndexStyle());
+	    var popupInnerProps = {
+	      className: className,
+	      prefixCls: prefixCls,
+	      ref: 'popup',
+	      onMouseEnter: props.onMouseEnter,
+	      onMouseLeave: props.onMouseLeave,
+	      style: newStyle
+	    };
 	    if (destroyPopupOnHide) {
-	      return _react2['default'].createElement(
-	        _rcAnimate2['default'],
-	        { component: '',
+	      return _react2["default"].createElement(
+	        _rcAnimate2["default"],
+	        {
+	          component: '',
 	          exclusive: true,
 	          transitionAppear: true,
-	          transitionName: this.getTransitionName() },
-	        visible ? _react2['default'].createElement(
-	          _rcAlign2['default'],
-	          { target: this.getTarget,
+	          transitionName: this.getTransitionName()
+	        },
+	        visible ? _react2["default"].createElement(
+	          _rcAlign2["default"],
+	          {
+	            target: this.getTarget,
 	            key: 'popup',
 	            monitorWindowResize: true,
 	            align: align,
-	            onAlign: this.onAlign },
-	          _react2['default'].createElement(
-	            _PopupInner2['default'],
-	            { className: className,
-	              visible: true,
-	              onMouseEnter: props.onMouseEnter,
-	              onMouseLeave: props.onMouseLeave,
-	              style: style },
+	            onAlign: this.onAlign
+	          },
+	          _react2["default"].createElement(
+	            _PopupInner2["default"],
+	            _extends({
+	              visible: true
+	            }, popupInnerProps),
 	            props.children
 	          )
 	        ) : null
 	      );
 	    }
-	    return _react2['default'].createElement(
-	      _rcAnimate2['default'],
-	      { component: '',
+	    return _react2["default"].createElement(
+	      _rcAnimate2["default"],
+	      {
+	        component: '',
 	        exclusive: true,
 	        transitionAppear: true,
 	        transitionName: this.getTransitionName(),
-	        showProp: 'xVisible' },
-	      _react2['default'].createElement(
-	        _rcAlign2['default'],
-	        { target: this.getTarget,
+	        showProp: 'xVisible'
+	      },
+	      _react2["default"].createElement(
+	        _rcAlign2["default"],
+	        {
+	          target: this.getTarget,
 	          key: 'popup',
 	          monitorWindowResize: true,
 	          xVisible: visible,
-	          childrenProps: {
-	            visible: 'xVisible'
-	          },
+	          childrenProps: { visible: 'xVisible' },
 	          disabled: !visible,
 	          align: align,
-	          onAlign: this.onAlign },
-	        _react2['default'].createElement(
-	          _PopupInner2['default'],
-	          { className: className,
-	            hiddenClassName: hiddenClassName,
-	            onMouseEnter: props.onMouseEnter,
-	            onMouseLeave: props.onMouseLeave,
-	            style: style },
+	          onAlign: this.onAlign
+	        },
+	        _react2["default"].createElement(
+	          _PopupInner2["default"],
+	          _extends({
+	            hiddenClassName: hiddenClassName
+	          }, popupInnerProps),
 	          props.children
 	        )
 	      )
 	    );
+	  },
+	  getZIndexStyle: function getZIndexStyle() {
+	    var style = {};
+	    var props = this.props;
+	    if (props.zIndex !== undefined) {
+	      style.zIndex = props.zIndex;
+	    }
+	    return style;
+	  },
+	  getMaskElement: function getMaskElement() {
+	    var props = this.props;
+	    var maskElement = void 0;
+	    if (props.mask) {
+	      var maskTransition = this.getMaskTransitionName();
+	      maskElement = _react2["default"].createElement(_LazyRenderBox2["default"], {
+	        style: this.getZIndexStyle(),
+	        key: 'mask',
+	        className: props.prefixCls + '-mask',
+	        hiddenClassName: props.prefixCls + '-mask-hidden',
+	        visible: props.visible
+	      });
+	      if (maskTransition) {
+	        maskElement = _react2["default"].createElement(
+	          _rcAnimate2["default"],
+	          {
+	            key: 'mask',
+	            showProp: 'visible',
+	            transitionAppear: true,
+	            component: '',
+	            transitionName: maskTransition
+	          },
+	          maskElement
+	        );
+	      }
+	    }
+	    return maskElement;
+	  },
+	  render: function render() {
+	    return _react2["default"].createElement(
+	      'div',
+	      null,
+	      this.getMaskElement(),
+	      this.getPopupElement()
+	    );
 	  }
 	});
 	
-	exports['default'] = Popup;
+	exports["default"] = Popup;
 	module.exports = exports['default'];
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// export this package's api
@@ -7011,7 +7378,7 @@ webpackJsonp([1],[
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _Align = __webpack_require__(222);
+	var _Align = __webpack_require__(223);
 	
 	var _Align2 = _interopRequireDefault(_Align);
 	
@@ -7019,7 +7386,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7038,13 +7405,13 @@ webpackJsonp([1],[
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _domAlign = __webpack_require__(223);
+	var _domAlign = __webpack_require__(224);
 	
 	var _domAlign2 = _interopRequireDefault(_domAlign);
 	
 	var _rcUtil = __webpack_require__(171);
 	
-	var _isWindow = __webpack_require__(231);
+	var _isWindow = __webpack_require__(232);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
@@ -7176,7 +7543,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7192,27 +7559,27 @@ webpackJsonp([1],[
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(224);
+	var _utils = __webpack_require__(225);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _getOffsetParent = __webpack_require__(225);
+	var _getOffsetParent = __webpack_require__(226);
 	
 	var _getOffsetParent2 = _interopRequireDefault(_getOffsetParent);
 	
-	var _getVisibleRectForElement = __webpack_require__(226);
+	var _getVisibleRectForElement = __webpack_require__(227);
 	
 	var _getVisibleRectForElement2 = _interopRequireDefault(_getVisibleRectForElement);
 	
-	var _adjustForViewport = __webpack_require__(227);
+	var _adjustForViewport = __webpack_require__(228);
 	
 	var _adjustForViewport2 = _interopRequireDefault(_adjustForViewport);
 	
-	var _getRegion = __webpack_require__(228);
+	var _getRegion = __webpack_require__(229);
 	
 	var _getRegion2 = _interopRequireDefault(_getRegion);
 	
-	var _getElFuturePos = __webpack_require__(229);
+	var _getElFuturePos = __webpack_require__(230);
 	
 	var _getElFuturePos2 = _interopRequireDefault(_getElFuturePos);
 	
@@ -7224,6 +7591,14 @@ webpackJsonp([1],[
 	
 	function isFailY(elFuturePos, elRegion, visibleRect) {
 	  return elFuturePos.top < visibleRect.top || elFuturePos.top + elRegion.height > visibleRect.bottom;
+	}
+	
+	function isCompleteFailX(elFuturePos, elRegion, visibleRect) {
+	  return elFuturePos.left > visibleRect.right || elFuturePos.left + elRegion.width < visibleRect.left;
+	}
+	
+	function isCompleteFailY(elFuturePos, elRegion, visibleRect) {
+	  return elFuturePos.top > visibleRect.bottom || elFuturePos.top + elRegion.height < visibleRect.top;
 	}
 	
 	function flip(points, reg, map) {
@@ -7288,30 +7663,42 @@ webpackJsonp([1],[
 	    if (overflow.adjustX) {
 	      // 如果横向不能放下
 	      if (isFailX(elFuturePos, elRegion, visibleRect)) {
-	        fail = 1;
 	        // 对齐位置反下
-	        points = flip(points, /[lr]/ig, {
+	        var newPoints = flip(points, /[lr]/ig, {
 	          l: 'r',
 	          r: 'l'
 	        });
 	        // 偏移量也反下
-	        offset = flipOffset(offset, 0);
-	        targetOffset = flipOffset(targetOffset, 0);
+	        var newOffset = flipOffset(offset, 0);
+	        var newTargetOffset = flipOffset(targetOffset, 0);
+	        var newElFuturePos = (0, _getElFuturePos2['default'])(elRegion, refNodeRegion, newPoints, newOffset, newTargetOffset);
+	        if (!isCompleteFailX(newElFuturePos, elRegion, visibleRect)) {
+	          fail = 1;
+	          points = newPoints;
+	          offset = newOffset;
+	          targetOffset = newTargetOffset;
+	        }
 	      }
 	    }
 	
 	    if (overflow.adjustY) {
 	      // 如果纵向不能放下
 	      if (isFailY(elFuturePos, elRegion, visibleRect)) {
-	        fail = 1;
 	        // 对齐位置反下
-	        points = flip(points, /[tb]/ig, {
+	        var newPoints = flip(points, /[tb]/ig, {
 	          t: 'b',
 	          b: 't'
 	        });
 	        // 偏移量也反下
-	        offset = flipOffset(offset, 1);
-	        targetOffset = flipOffset(targetOffset, 1);
+	        var newOffset = flipOffset(offset, 1);
+	        var newTargetOffset = flipOffset(targetOffset, 1);
+	        var newElFuturePos = (0, _getElFuturePos2['default'])(elRegion, refNodeRegion, newPoints, newOffset, newTargetOffset);
+	        if (!isCompleteFailY(newElFuturePos, elRegion, visibleRect)) {
+	          fail = 1;
+	          points = newPoints;
+	          offset = newOffset;
+	          targetOffset = newTargetOffset;
+	        }
 	      }
 	    }
 	
@@ -7379,7 +7766,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7877,7 +8264,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7888,7 +8275,7 @@ webpackJsonp([1],[
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(224);
+	var _utils = __webpack_require__(225);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -7935,7 +8322,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7946,11 +8333,11 @@ webpackJsonp([1],[
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(224);
+	var _utils = __webpack_require__(225);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
-	var _getOffsetParent = __webpack_require__(225);
+	var _getOffsetParent = __webpack_require__(226);
 	
 	var _getOffsetParent2 = _interopRequireDefault(_getOffsetParent);
 	
@@ -8016,7 +8403,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8027,7 +8414,7 @@ webpackJsonp([1],[
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(224);
+	var _utils = __webpack_require__(225);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -8076,7 +8463,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8087,7 +8474,7 @@ webpackJsonp([1],[
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _utils = __webpack_require__(224);
+	var _utils = __webpack_require__(225);
 	
 	var _utils2 = _interopRequireDefault(_utils);
 	
@@ -8117,7 +8504,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8128,7 +8515,7 @@ webpackJsonp([1],[
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _getAlignOffset = __webpack_require__(230);
+	var _getAlignOffset = __webpack_require__(231);
 	
 	var _getAlignOffset2 = _interopRequireDefault(_getAlignOffset);
 	
@@ -8158,7 +8545,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports) {
 
 	/**
@@ -8203,7 +8590,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -8222,27 +8609,32 @@ webpackJsonp([1],[
 	module.exports = exports["default"];
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	var _react = __webpack_require__(6);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var PopupInner = _react2['default'].createClass({
+	var _LazyRenderBox = __webpack_require__(234);
+	
+	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var PopupInner = _react2["default"].createClass({
 	  displayName: 'PopupInner',
 	
 	  propTypes: {
 	    hiddenClassName: _react.PropTypes.string,
 	    className: _react.PropTypes.string,
+	    prefixCls: _react.PropTypes.string,
 	    onMouseEnter: _react.PropTypes.func,
 	    onMouseLeave: _react.PropTypes.func,
 	    children: _react.PropTypes.any
@@ -8253,27 +8645,81 @@ webpackJsonp([1],[
 	    if (!props.visible) {
 	      className += ' ' + props.hiddenClassName;
 	    }
-	    return _react2['default'].createElement(
+	    return _react2["default"].createElement(
 	      'div',
-	      { className: className,
+	      {
+	        className: className,
 	        onMouseEnter: props.onMouseEnter,
 	        onMouseLeave: props.onMouseLeave,
-	        style: props.style },
-	      props.children
+	        style: props.style
+	      },
+	      _react2["default"].createElement(
+	        _LazyRenderBox2["default"],
+	        { className: props.prefixCls + '-content', visible: props.visible },
+	        props.children
+	      )
 	    );
 	  }
 	});
 	
-	exports['default'] = PopupInner;
+	exports["default"] = PopupInner;
 	module.exports = exports['default'];
 
 /***/ },
-/* 233 */
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(6);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	var LazyRenderBox = _react2["default"].createClass({
+	  displayName: 'LazyRenderBox',
+	
+	  propTypes: {
+	    children: _react.PropTypes.any,
+	    className: _react.PropTypes.string,
+	    visible: _react.PropTypes.bool,
+	    hiddenClassName: _react.PropTypes.string
+	  },
+	  shouldComponentUpdate: function shouldComponentUpdate(nextProps) {
+	    return nextProps.hiddenClassName || nextProps.visible;
+	  },
+	  render: function render() {
+	    if (this.props.hiddenClassName) {
+	      var className = this.props.className;
+	      if (!this.props.visible) {
+	        className += ' ' + this.props.hiddenClassName;
+	      }
+	      return _react2["default"].createElement('div', _extends({}, this.props, { className: className }));
+	    }
+	    if (_react2["default"].Children.count(this.props.children) > 1) {
+	      return _react2["default"].createElement('div', this.props);
+	    }
+	    return _react2["default"].Children.only(this.props.children);
+	  }
+	});
+	
+	exports["default"] = LazyRenderBox;
+	module.exports = exports['default'];
+
+/***/ },
+/* 235 */
 /***/ function(module, exports) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	
@@ -8303,7 +8749,7 @@ webpackJsonp([1],[
 	}
 
 /***/ },
-/* 234 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8322,13 +8768,13 @@ webpackJsonp([1],[
 	
 	var _reactDom = __webpack_require__(168);
 	
-	var _util = __webpack_require__(202);
+	var _util = __webpack_require__(203);
 	
-	var _rcMenu = __webpack_require__(203);
+	var _rcMenu = __webpack_require__(204);
 	
 	var _rcMenu2 = _interopRequireDefault(_rcMenu);
 	
-	var _domScrollIntoView = __webpack_require__(206);
+	var _domScrollIntoView = __webpack_require__(207);
 	
 	var _domScrollIntoView2 = _interopRequireDefault(_domScrollIntoView);
 	
@@ -8470,7 +8916,11 @@ webpackJsonp([1],[
 	      'div',
 	      null,
 	      this.props.search,
-	      this.renderMenu()
+	      _react2['default'].createElement(
+	        'div',
+	        { onMouseDown: _util.preventDefaultEvent },
+	        this.renderMenu()
+	      )
 	    );
 	  }
 	});
@@ -8479,7 +8929,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 235 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8500,18 +8950,9 @@ webpackJsonp([1],[
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
-	var _util = __webpack_require__(202);
+	var _util = __webpack_require__(203);
 	
-	var _rcMenu = __webpack_require__(203);
-	
-	var MENU_ITEM_STYLE = {
-	  userSelect: 'none',
-	  WebkitUserSelect: 'none'
-	};
-	
-	var MENU_ITEM_ATTRIBUTE = {
-	  unselectable: 'unselectable'
-	};
+	var _rcMenu = __webpack_require__(204);
 	
 	exports['default'] = {
 	  filterOption: function filterOption(input, child) {
@@ -8561,8 +9002,8 @@ webpackJsonp([1],[
 	      var childValue = (0, _util.getValuePropValue)(child);
 	      if (_this.filterOption(inputValue, child)) {
 	        sel.push(_react2['default'].createElement(_rcMenu.Item, _extends({
-	          style: MENU_ITEM_STYLE,
-	          attribute: MENU_ITEM_ATTRIBUTE,
+	          style: _util.UNSELECTABLE_STYLE,
+	          attribute: _util.UNSELECTABLE_ATTRIBUTE,
 	          value: childValue,
 	          key: childValue
 	        }, child.props)));
@@ -8581,8 +9022,8 @@ webpackJsonp([1],[
 	        return _react2['default'].createElement(
 	          _rcMenu.Item,
 	          {
-	            style: MENU_ITEM_STYLE,
-	            attribute: MENU_ITEM_ATTRIBUTE,
+	            style: _util.UNSELECTABLE_STYLE,
+	            attribute: _util.UNSELECTABLE_ATTRIBUTE,
 	            value: singleValue,
 	            key: singleValue
 	          },
@@ -8597,8 +9038,8 @@ webpackJsonp([1],[
 	          sel.unshift(_react2['default'].createElement(
 	            _rcMenu.Item,
 	            {
-	              style: MENU_ITEM_STYLE,
-	              attribute: MENU_ITEM_ATTRIBUTE,
+	              style: _util.UNSELECTABLE_STYLE,
+	              attribute: _util.UNSELECTABLE_ATTRIBUTE,
 	              value: inputValue,
 	              key: inputValue
 	            },
@@ -8611,8 +9052,8 @@ webpackJsonp([1],[
 	      sel = [_react2['default'].createElement(
 	        _rcMenu.Item,
 	        {
-	          style: MENU_ITEM_STYLE,
-	          attribute: MENU_ITEM_ATTRIBUTE,
+	          style: _util.UNSELECTABLE_STYLE,
+	          attribute: _util.UNSELECTABLE_ATTRIBUTE,
 	          disabled: true,
 	          value: 'NOT_FOUND',
 	          key: 'NOT_FOUND'
@@ -8626,7 +9067,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 236 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8663,7 +9104,7 @@ webpackJsonp([1],[
 	module.exports = exports['default'];
 
 /***/ },
-/* 237 */
+/* 239 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

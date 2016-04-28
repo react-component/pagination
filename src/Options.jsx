@@ -97,7 +97,6 @@ class Options extends React.Component {
       </div>
     );
   }
-
 }
 
 Options.propTypes = {

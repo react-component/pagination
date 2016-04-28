@@ -8,26 +8,26 @@ import Select from 'rc-select';
 
 const Hello = React.createClass({
   getInitialState: function() {
-    return {pageSize: 20};
+    return {
+      pageSize: 20,
+    };
   },
   onShowSizeChange(current, pageSize) {
     console.log(current);
-    this.setState({
-      pageSize: pageSize,
-    });
+    this.setState({ pageSize });
   },
   render() {
-    return (<div style={{margin: 10}}>
-      <Pagination
-        selectComponentClass={Select}
-        showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
-      <Pagination
-        selectComponentClass={Select}
-        showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
-    </div>);
+    return (
+      <div style={{margin: 10}}>
+        <Pagination
+          selectComponentClass={Select}
+          showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
+        <Pagination
+          selectComponentClass={Select}
+          showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
+      </div>
+    );
   },
 });
 
-ReactDOM.render(<Hello />,
-  document.getElementById('__react-content')
-);
+ReactDOM.render(<Hello />, document.getElementById('__react-content'));

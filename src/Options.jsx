@@ -83,7 +83,7 @@ class Options extends React.Component {
 
     if (quickGo) {
       goInput = (
-        <div title="Quick jump to page" className={`${prefixCls}-quick-jumper`}>
+        <div className={`${prefixCls}-quick-jumper`}>
           {locale.jump_to}
           <input type="text" value={state._current} onChange={this._handleChange.bind(this)} onKeyUp={this._go.bind(this)}/>
           {locale.page}

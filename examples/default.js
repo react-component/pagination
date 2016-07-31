@@ -1,5 +1,4 @@
-// use jsx to render html, do not modify simple.html
-
+/* eslint func-names: 0, no-console: 0 */
 require('rc-pagination/assets/index.less');
 const Pagination = require('rc-pagination');
 const React = require('react');

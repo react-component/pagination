@@ -1,4 +1,4 @@
-
+/* eslint func-names: 0, no-console: 0 */
 require('rc-pagination/assets/index.less');
 require('rc-select/assets/index.css');
 const Pagination = require('rc-pagination');

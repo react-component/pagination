@@ -1,3 +1,4 @@
+/* eslint func-names: 0, no-console: 0 */
 import expect from 'expect.js';
 import Pagination from '../';
 import React from 'react';

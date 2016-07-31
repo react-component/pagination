@@ -9,8 +9,7 @@ webpackJsonp([0],[
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// use jsx to render html, do not modify simple.html
-	
+	/* eslint func-names: 0, no-console: 0 */
 	'use strict';
 	
 	__webpack_require__(2);

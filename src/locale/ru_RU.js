@@ -4,10 +4,6 @@ export default {
   jump_to: 'Перейти',
   page: '',
 
-  // Pager.jsx
-  first_page: 'В начало',
-  last_page: 'В конец',
-
   // Pagination.jsx
   prev_page: 'Назад',
   next_page: 'Вперед',

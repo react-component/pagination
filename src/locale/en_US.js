@@ -4,10 +4,6 @@ export default {
   jump_to: 'Goto',
   page: '',
 
-  // Pager.jsx
-  first_page: 'First Page',
-  last_page: 'Last Page',
-
   // Pagination.jsx
   prev_page: 'Previous Page',
   next_page: 'Next Page',

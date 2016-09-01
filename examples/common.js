@@ -20128,7 +20128,6 @@
 	    key: 'render',
 	    value: function render() {
 	      var props = this.props;
-	      var locale = props.locale;
 	      var prefixCls = props.rootPrefixCls + '-item';
 	      var cls = prefixCls + ' ' + prefixCls + '-' + props.page;
 	
@@ -20136,17 +20135,9 @@
 	        cls = cls + ' ' + prefixCls + '-active';
 	      }
 	
-	      var title = undefined;
-	      if (props.page === 1) {
-	        title = locale.first_page;
-	      } else if (props.last) {
-	        title = locale.last_page + ': ' + props.page;
-	      } else {
-	        title = props.page;
-	      }
 	      return React.createElement(
 	        'li',
-	        { title: title, className: cls, onClick: props.onClick },
+	        { title: props.page, className: cls, onClick: props.onClick },
 	        React.createElement(
 	          'a',
 	          null,
@@ -20362,10 +20353,6 @@
 	  items_per_page: '条/页',
 	  jump_to: '跳至',
 	  page: '页',
-	
-	  // Pager.jsx
-	  first_page: '第一页',
-	  last_page: '最后一页',
 	
 	  // Pagination.jsx
 	  prev_page: '上一页',

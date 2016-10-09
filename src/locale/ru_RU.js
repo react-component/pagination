@@ -1,6 +1,6 @@
 export default {
   // Options.jsx
-  items_per_page: '/страницу',
+  items_per_page: '/странице',
   jump_to: 'Перейти',
   page: '',
 

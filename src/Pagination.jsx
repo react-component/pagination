@@ -278,6 +278,7 @@ class Pagination extends React.Component {
 
     return (
       <ul className={`${prefixCls} ${props.className}`}
+        style={ props.style }
         unselectable="unselectable">
         {totalText}
         <li title={locale.prev_page} onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
@@ -317,6 +318,7 @@ Pagination.propTypes = {
   pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
   showTotal: React.PropTypes.func,
   locale: React.PropTypes.object,
+  style: React.PropTypes.object,
 };
 
 Pagination.defaultProps = {
@@ -332,6 +334,7 @@ Pagination.defaultProps = {
   showSizeChanger: false,
   onShowSizeChange: noop,
   locale: LOCALE,
+  style: {},
 };
 
 module.exports = Pagination;

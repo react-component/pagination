@@ -277,9 +277,11 @@ class Pagination extends React.Component {
     }
 
     return (
-      <ul className={`${prefixCls} ${props.className}`}
-        style={ props.style }
-        unselectable="unselectable">
+      <ul
+        className={`${prefixCls} ${props.className}`}
+        style={props.style}
+        unselectable="unselectable"
+      >
         {totalText}
         <li title={locale.prev_page} onClick={this._prev} className={(this._hasPrev() ? '' : `${prefixCls}-disabled `) + `${prefixCls}-prev`}>
           <a></a>
@@ -297,7 +299,8 @@ class Pagination extends React.Component {
           current={this.state.current}
           pageSize={this.state.pageSize}
           pageSizeOptions={this.props.pageSizeOptions}
-          quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null} />
+          quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null}
+        />
       </ul>
     );
   }

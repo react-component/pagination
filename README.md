@@ -80,6 +80,7 @@ React.render(<Pagination />, container);
 | className        | when set "mini", show mini version | String        | rc-pagination            |
 | simple           | when set, show simple pager        | Object        | null                     |
 | locale           | to set l10n config                 | Object        | [zh_CN](https://github.com/react-component/pagination/blob/master/src/locale/zh_CN.js) |
+| style            | the style of pagination            | Object        | {}                       |
 
 ## Test Case
 

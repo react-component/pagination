@@ -30,7 +30,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		6:0
+/******/ 		7:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"default","1":"jumper","2":"more","3":"simple","4":"sizer","5":"stupid"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"default","1":"jumper","2":"more","3":"simple","4":"sizer","5":"stupid","6":"styles"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -439,8 +439,11 @@
 	
 	      return React.createElement(
 	        'ul',
-	        { className: prefixCls + ' ' + props.className,
-	          unselectable: 'unselectable' },
+	        {
+	          className: prefixCls + ' ' + props.className,
+	          style: props.style,
+	          unselectable: 'unselectable'
+	        },
 	        totalText,
 	        React.createElement(
 	          'li',
@@ -462,7 +465,8 @@
 	          current: this.state.current,
 	          pageSize: this.state.pageSize,
 	          pageSizeOptions: this.props.pageSizeOptions,
-	          quickGo: this.props.showQuickJumper ? this._handleChange.bind(this) : null })
+	          quickGo: this.props.showQuickJumper ? this._handleChange.bind(this) : null
+	        })
 	      );
 	    }
 	  }]);
@@ -483,7 +487,8 @@
 	  showQuickJumper: React.PropTypes.bool,
 	  pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
 	  showTotal: React.PropTypes.func,
-	  locale: React.PropTypes.object
+	  locale: React.PropTypes.object,
+	  style: React.PropTypes.object
 	};
 	
 	Pagination.defaultProps = {
@@ -498,7 +503,8 @@
 	  showQuickJumper: false,
 	  showSizeChanger: false,
 	  onShowSizeChange: noop,
-	  locale: LOCALE
+	  locale: LOCALE,
+	  style: {}
 	};
 	
 	module.exports = Pagination;

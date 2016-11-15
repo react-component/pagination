@@ -11,14 +11,14 @@ function onShowSizeChange(current, pageSize) {
   console.log(pageSize);
 }
 
-function showTotal(total) {
-  return `一共 ${total} 条数据`;
-}
-
 ReactDOM.render(
   <Pagination
     selectComponentClass={Select}
-    showTotal={showTotal}
-    showQuickJumper showSizeChanger defaultPageSize={20} defaultCurrent={5} onShowSizeChange={onShowSizeChange} total={450} />,
-  document.getElementById('__react-content')
-);
+    showQuickJumper
+    showSizeChanger
+    defaultPageSize={20}
+    defaultCurrent={5}
+    onShowSizeChange={onShowSizeChange}
+    total={450}
+  />
+, document.getElementById('__react-content'));

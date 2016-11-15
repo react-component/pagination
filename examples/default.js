@@ -1,10 +1,10 @@
 /* eslint func-names: 0, no-console: 0 */
-require('rc-pagination/assets/index.less');
-const Pagination = require('rc-pagination');
-const React = require('react');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.less';
 
-
-const Container = React.createClass({
+const App = React.createClass({
   getInitialState() {
     return {
       current: 3,
@@ -21,7 +21,4 @@ const Container = React.createClass({
   },
 });
 
-React.render(
-  <Container />,
-  document.getElementById('__react-content')
-);
+ReactDOM.render(<App />, document.getElementById('__react-content'));

@@ -9,16 +9,27 @@ webpackJsonp([0],[
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* eslint func-names: 0, no-console: 0 */
 	'use strict';
 	
-	__webpack_require__(2);
-	var Pagination = __webpack_require__(3);
-	var React = __webpack_require__(6);
+	var _react = __webpack_require__(2);
 	
-	var Container = React.createClass({
-	  displayName: 'Container',
+	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactDom = __webpack_require__(159);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _rcPagination = __webpack_require__(160);
+	
+	var _rcPagination2 = _interopRequireDefault(_rcPagination);
+	
+	__webpack_require__(167);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/* eslint func-names: 0, no-console: 0 */
+	var App = _react2.default.createClass({
+	  displayName: 'App',
 	  getInitialState: function getInitialState() {
 	    return {
 	      current: 3
@@ -31,11 +42,11 @@ webpackJsonp([0],[
 	    });
 	  },
 	  render: function render() {
-	    return React.createElement(Pagination, { onChange: this.onChange, current: this.state.current, total: 25 });
+	    return _react2.default.createElement(_rcPagination2.default, { onChange: this.onChange, current: this.state.current, total: 25 });
 	  }
 	});
 	
-	React.render(React.createElement(Container, null), document.getElementById('__react-content'));
+	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('__react-content'));
 
 /***/ }
 ]);

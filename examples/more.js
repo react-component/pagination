@@ -3,30 +3,20 @@ webpackJsonp([2],{
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(240);
+	module.exports = __webpack_require__(281);
 
 
 /***/ },
 
-/***/ 168:
+/***/ 281:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(8);
-
-
-/***/ },
-
-/***/ 240:
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	__webpack_require__(2);
-	var Pagination = __webpack_require__(3);
-	var React = __webpack_require__(6);
-	var ReactDOM = __webpack_require__(168);
+	__webpack_require__(167);
+	var Pagination = __webpack_require__(160);
+	var React = __webpack_require__(2);
+	var ReactDOM = __webpack_require__(159);
 	
 	ReactDOM.render(React.createElement(Pagination, { className: 'ant-pagination', defaultCurrent: 3, total: 450 }), document.getElementById('__react-content'));
 

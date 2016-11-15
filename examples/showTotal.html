@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>more.js - example - rc-pagination@1.6.0</title>
+  <title>showTotal.js - example - rc-pagination@1.6.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -269,15 +269,25 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     </div>
     <div class="example" id="__react-content"></div>
 
-    <div class="highlight"><pre><code language="js"><span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-pagination/assets/index.css'</span>);
-<span class="hljs-keyword">const</span> Pagination = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rc-pagination'</span>);
-<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
-<span class="hljs-keyword">const</span> ReactDOM = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-dom'</span>);
+    <div class="highlight"><pre><code language="js"><span class="hljs-comment">/* eslint func-names: 0, no-console: 0 */</span>
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
+<span class="hljs-keyword">import</span> Pagination <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-pagination'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rc-pagination/assets/index.css'</span>;
 
 ReactDOM.render(
-  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">"ant-pagination"</span> <span class="hljs-attribute">defaultCurrent</span>=<span class="hljs-value">{3}</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{450}</span> /&gt;</span>,
-  document.getElementById('__react-content')
-);
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span>
+    <span class="hljs-attribute">showTotal</span>=<span class="hljs-value">{(total)</span> =&gt;</span> `Total ${total} items`}
+    total={455}
+  /&gt;
+  <span class="hljs-tag">&lt;<span class="hljs-title">br</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span>
+    <span class="hljs-attribute">showTotal</span>=<span class="hljs-value">{(total,</span> <span class="hljs-attribute">range</span>) =&gt;</span> `${range[0]} - ${range[1]} of ${total} items`}
+    total={455}
+  /&gt;
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+, document.getElementById('__react-content'));
 </span></code></pre></div>
   </div>
   <a href="http://github.com/react-component/pagination">
@@ -288,7 +298,7 @@ ReactDOM.render(
   </a>
   <script>FastClick.attach(document.body);</script>
   <script src="common.js?nowrap"></script>
-  <script src="more.js?nowrap"></script>
+  <script src="showTotal.js?nowrap"></script>
 </body>
 
 </html>

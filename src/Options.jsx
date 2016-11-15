@@ -10,7 +10,12 @@ class Options extends React.Component {
       _current: props.current,
     };
 
-    ['_handleChange', '_changeSize', '_go', '_buildOptionText'].forEach((method) => this[method] = this[method].bind(this));
+    [
+      '_handleChange',
+      '_changeSize',
+      '_go',
+      '_buildOptionText',
+    ].forEach((method) => this[method] = this[method].bind(this));
   }
   _buildOptionText(value) {
     return `${value} ${this.props.locale.items_per_page}`;
@@ -71,11 +76,14 @@ class Options extends React.Component {
 
       changeSelect = (
         <Select
-          prefixCls={props.selectPrefixCls} showSearch={false}
+          prefixCls={props.selectPrefixCls}
+          showSearch={false}
           className={`${prefixCls}-size-changer`}
           optionLabelProp="children"
           dropdownMatchSelectWidth={false}
-          value={pageSize + ''} onChange={this._changeSize}>
+          value={pageSize.toString()}
+          onChange={this._changeSize}
+        >
           {options}
        </Select>
       );
@@ -85,7 +93,12 @@ class Options extends React.Component {
       goInput = (
         <div className={`${prefixCls}-quick-jumper`}>
           {locale.jump_to}
-          <input type="text" value={state._current} onChange={this._handleChange.bind(this)} onKeyUp={this._go.bind(this)}/>
+          <input
+            type="text"
+            value={state._current}
+            onChange={this._handleChange}
+            onKeyUp={this._go}
+          />
           {locale.page}
         </div>
       );

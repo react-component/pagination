@@ -16,16 +16,28 @@ const Hello = React.createClass({
   },
   render() {
     return (
-      <div style={{margin: 10}}>
-        <button className="hook" onClick={this.changeSize}>ChaneSize</button>
+      <div style={{ margin: 10 }}>
+        <button className="hook" onClick={this.changeSize}>
+          ChaneSize
+        </button>
         <Pagination
           className="p1"
           selectComponentClass={Select}
-          showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
+          showSizeChanger
+          pageSize={this.state.pageSize}
+          onShowSizeChange={this.onShowSizeChange}
+          defaultCurrent={3}
+          total={500}
+        />
         <Pagination
           className="p2"
           selectComponentClass={Select}
-          showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
+          showSizeChanger
+          pageSize={this.state.pageSize}
+          onShowSizeChange={this.onShowSizeChange}
+          defaultCurrent={3}
+          total={500}
+        />
       </div>
     );
   },

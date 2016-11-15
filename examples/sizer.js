@@ -1,13 +1,13 @@
 /* eslint func-names: 0, no-console: 0 */
-require('rc-pagination/assets/index.less');
-require('rc-select/assets/index.css');
-const Pagination = require('rc-pagination');
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 import Select from 'rc-select';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/assets/index.less';
+import 'rc-select/assets/index.css';
 
 const Hello = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {
       pageSize: 20,
     };
@@ -18,13 +18,23 @@ const Hello = React.createClass({
   },
   render() {
     return (
-      <div style={{margin: 10}}>
+      <div style={{ margin: 10 }}>
         <Pagination
           selectComponentClass={Select}
-          showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
+          showSizeChanger
+          pageSize={this.state.pageSize}
+          onShowSizeChange={this.onShowSizeChange}
+          defaultCurrent={3}
+          total={500}
+        />
         <Pagination
           selectComponentClass={Select}
-          showSizeChanger pageSize={this.state.pageSize} onShowSizeChange={this.onShowSizeChange} defaultCurrent={3} total={500} />
+          showSizeChanger
+          pageSize={this.state.pageSize}
+          onShowSizeChange={this.onShowSizeChange}
+          defaultCurrent={3}
+          total={500}
+        />
       </div>
     );
   },

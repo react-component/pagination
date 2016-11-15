@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.less';
-import 'rc-select/assets/index.css';
 
 ReactDOM.render(
 <div>

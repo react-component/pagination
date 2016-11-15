@@ -31,10 +31,19 @@ describe('Uncontrolled Pagination', function() {
   }
 
   beforeEach(function(done) {
-    ReactDOM.render(<Pagination onChange={onChange} defaultCurrent={1} total={25} />, container, function() {
-      pagination = this;
-      done();
-    });
+    ReactDOM.render(
+      <Pagination
+        onChange={onChange}
+        defaultCurrent={1}
+        total={25}
+        showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
+      />,
+      container,
+      function() {
+        pagination = this;
+        done();
+      },
+    );
   });
 
   afterEach(function() {
@@ -103,6 +112,23 @@ describe('Uncontrolled Pagination', function() {
       done();
     }, 10);
   });
+
+  it('should display total items', function() {
+    const totalText = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-total-text'
+    );
+    expect(TestUtils.isDOMComponent(totalText)).to.be(true);
+    expect(totalText.innerHTML).to.be('0 - 10 of 25 items');
+    const nextButton = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-next'
+    );
+    Simulate.click(nextButton);
+    expect(totalText.innerHTML).to.be('10 - 20 of 25 items');
+    Simulate.click(nextButton);
+    expect(totalText.innerHTML).to.be('20 - 25 of 25 items');
+  });
 });
 
 describe('Controlled Pagination', function() {
@@ -169,6 +195,7 @@ describe('Controlled Pagination', function() {
     expect(p1.state.pageSize).to.be(20);
     expect(p2.state.pageSize).to.be(20);
   });
+
   it('should sync pageSize via state', function(done) {
     const p1 = TestUtils.scryRenderedComponentsWithType(entry, Pagination)[0];
     const p2 = TestUtils.scryRenderedComponentsWithType(entry, Pagination)[1];

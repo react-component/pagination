@@ -39,7 +39,7 @@ describe('Uncontrolled Pagination', () => {
         showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
       />,
       container,
-      () => {
+      function () {
         pagination = this;
         done();
       },
@@ -145,7 +145,7 @@ describe('Controlled Pagination', () => {
     ReactDOM.render(
       <Pagination current={current} onChange={onChange} total={25} />,
       container,
-      () => {
+      function () {
         pagination = this;
         done();
       }
@@ -183,7 +183,7 @@ describe('Controlled Pagination', () => {
   document.body.appendChild(container);
 
   beforeEach((done) => {
-    ReactDOM.render(<TwoPagination />, container, () => {
+    ReactDOM.render(<TwoPagination />, container, function () {
       entry = this;
       done();
     });

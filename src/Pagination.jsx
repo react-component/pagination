@@ -198,6 +198,8 @@ class Pagination extends React.Component {
     let firstPager = null;
     let lastPager = null;
 
+    const { current, pageSize } = this.state;
+
     if (props.simple) {
       return (
         <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`}>
@@ -222,20 +224,22 @@ class Pagination extends React.Component {
         pagerList.push(<Pager locale={locale} rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, i)} key={i} page={i} active={active} />);
       }
     } else {
-      jumpPrev = (<li title={locale.prev_5} key="prev" onClick={this._jumpPrev} className={`${prefixCls}-jump-prev`}>
-        <a></a>
-      </li>);
-      jumpNext = (<li title={locale.next_5} key="next" onClick={this._jumpNext} className={`${prefixCls}-jump-next`}>
-        <a></a>
-      </li>);
+      jumpPrev = (
+        <li title={locale.prev_5} key="prev" onClick={this._jumpPrev} className={`${prefixCls}-jump-prev`}>
+          <a />
+        </li>
+      );
+      jumpNext = (
+        <li title={locale.next_5} key="next" onClick={this._jumpNext} className={`${prefixCls}-jump-next`}>
+          <a />
+        </li>
+      );
       lastPager = (<Pager
         locale={props.locale}
         last rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, allPages)} key={allPages} page={allPages} active={false} />);
       firstPager = (<Pager
         locale={props.locale}
         rootPrefixCls={prefixCls} onClick={this._handleChange.bind(this, 1)} key={1} page={1} active={false} />);
-
-      const current = this.state.current;
 
       let left = Math.max(1, current - 2);
       let right = Math.min(current + 2, allPages);
@@ -273,7 +277,17 @@ class Pagination extends React.Component {
     let totalText = null;
 
     if (props.showTotal) {
-      totalText = <span className={`${prefixCls}-total-text`}>{props.showTotal(props.total)}</span>;
+      totalText = (
+        <span className={`${prefixCls}-total-text`}>
+          {props.showTotal(
+            props.total,
+            [
+              (current - 1) * pageSize,
+              current * pageSize > props.total ? props.total : current * pageSize,
+            ]
+          )}
+        </span>
+      );
     }
 
     return (

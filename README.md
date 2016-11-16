@@ -76,8 +76,8 @@ React.render(<Pagination />, container);
 | pageSizeOptions  | specify the sizeChanger selections | Array<String> | ['10', '20', '30', '40'] |
 | onShowSizeChange | pageSize chagne callback           | Function      | noop                     |
 | showQuickJump    | show quick goto jumper             | Bool          | false                    |
-| showTotal        | show total records text            | Function(total, range) | undefined       |
-| className        | when set "mini", show mini version | String        | rc-pagination            |
+| showTotal        | show total records text            | Function(total, range) | -               |
+| className        | className of pagination            | String        | -                         |
 | simple           | when set, show simple pager        | Object        | null                     |
 | locale           | to set l10n config                 | Object        | [zh_CN](https://github.com/react-component/pagination/blob/master/src/locale/zh_CN.js) |
 | style            | the style of pagination            | Object        | {}                       |

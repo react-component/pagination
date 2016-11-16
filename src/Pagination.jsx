@@ -337,7 +337,7 @@ class Pagination extends React.Component {
           {props.showTotal(
             props.total,
             [
-              (current - 1) * pageSize,
+              (current - 1) * pageSize + 1,
               current * pageSize > props.total ? props.total : current * pageSize,
             ]
           )}

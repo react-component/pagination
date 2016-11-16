@@ -119,15 +119,15 @@ describe('Uncontrolled Pagination', () => {
       'rc-pagination-total-text'
     );
     expect(TestUtils.isDOMComponent(totalText)).to.be(true);
-    expect(totalText.innerHTML).to.be('0 - 10 of 25 items');
+    expect(totalText.innerHTML).to.be('1 - 10 of 25 items');
     const nextButton = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
       'rc-pagination-next'
     );
     Simulate.click(nextButton);
-    expect(totalText.innerHTML).to.be('10 - 20 of 25 items');
+    expect(totalText.innerHTML).to.be('11 - 20 of 25 items');
     Simulate.click(nextButton);
-    expect(totalText.innerHTML).to.be('20 - 25 of 25 items');
+    expect(totalText.innerHTML).to.be('21 - 25 of 25 items');
   });
 });
 

@@ -75,7 +75,7 @@ React.render(<Pagination />, container);
 | showSizeChanger  | show pageSize changer              | Bool          | false                    |
 | pageSizeOptions  | specify the sizeChanger selections | Array<String> | ['10', '20', '30', '40'] |
 | onShowSizeChange | pageSize chagne callback           | Function      | noop                     |
-| showQuickJump    | show quick goto jumper             | Bool          | false                    |
+| showQuickJumper  | show quick goto jumper             | Bool          | false                    |
 | showTotal        | show total records text            | Function(total, range) | -               |
 | className        | className of pagination            | String        | -                         |
 | simple           | when set, show simple pager        | Object        | null                     |

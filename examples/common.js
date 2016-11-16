@@ -20198,7 +20198,7 @@
 	      totalText = React.createElement(
 	        'span',
 	        { className: prefixCls + '-total-text' },
-	        props.showTotal(props.total, [(current - 1) * pageSize, current * pageSize > props.total ? props.total : current * pageSize])
+	        props.showTotal(props.total, [(current - 1) * pageSize + 1, current * pageSize > props.total ? props.total : current * pageSize])
 	      );
 	    }
 	

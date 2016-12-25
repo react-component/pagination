@@ -1,6 +1,5 @@
 @prefixClass: rc-pagination;
 
-
 .@{prefixClass} {
   font-size: 12px;
   font-family: 'Arial';
@@ -216,6 +215,15 @@
         }
       }
 
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .@{prefixClass}-item {
+    &-after-jump-prev,
+    &-before-jump-next {
+      display: none;
     }
   }
 }

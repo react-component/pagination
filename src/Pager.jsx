@@ -10,6 +10,10 @@ class Pager extends React.Component {
       cls = `${cls} ${prefixCls}-active`;
     }
 
+    if (props.className) {
+      cls = `${cls} ${props.className}`;
+    }
+
     return (
       <li title={props.page} className={cls} onClick={props.onClick}>
         <a>{props.page}</a>
@@ -23,6 +27,7 @@ Pager.propTypes = {
   active: React.PropTypes.bool,
   last: React.PropTypes.bool,
   locale: React.PropTypes.object,
+  className: React.PropTypes.string,
 };
 
 module.exports = Pager;

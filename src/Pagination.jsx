@@ -315,9 +315,15 @@ class Pagination extends React.Component {
       }
 
       if (current - 1 >= 4) {
+        pagerList[0] = React.cloneElement(pagerList[0], {
+          className: `${prefixCls}-item-after-jump-prev`,
+        });
         pagerList.unshift(jumpPrev);
       }
       if (allPages - current >= 4) {
+        pagerList[pagerList.length - 1] = React.cloneElement(pagerList[pagerList.length - 1], {
+          className: `${prefixCls}-item-before-jump-next`,
+        });
         pagerList.push(jumpNext);
       }
 

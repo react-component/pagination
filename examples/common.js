@@ -20178,9 +20178,15 @@
 	      }
 	
 	      if (current - 1 >= 4) {
+	        pagerList[0] = React.cloneElement(pagerList[0], {
+	          className: prefixCls + '-item-after-jump-prev'
+	        });
 	        pagerList.unshift(jumpPrev);
 	      }
 	      if (allPages - current >= 4) {
+	        pagerList[pagerList.length - 1] = React.cloneElement(pagerList[pagerList.length - 1], {
+	          className: prefixCls + '-item-before-jump-next'
+	        });
 	        pagerList.push(jumpNext);
 	      }
 	
@@ -20315,6 +20321,10 @@
 	      cls = cls + ' ' + prefixCls + '-active';
 	    }
 	
+	    if (props.className) {
+	      cls = cls + ' ' + props.className;
+	    }
+	
 	    return React.createElement(
 	      'li',
 	      { title: props.page, className: cls, onClick: props.onClick },
@@ -20333,7 +20343,8 @@
 	  page: React.PropTypes.number,
 	  active: React.PropTypes.bool,
 	  last: React.PropTypes.bool,
-	  locale: React.PropTypes.object
+	  locale: React.PropTypes.object,
+	  className: React.PropTypes.string
 	};
 	
 	module.exports = Pager;

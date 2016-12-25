@@ -176,5 +176,11 @@
 .rc-pagination-simple .rc-pagination-simple-pager input:hover {
   border-color: #2db7f5;
 }
+@media only screen and (max-width: 1024px) {
+  .rc-pagination-item-after-jump-prev,
+  .rc-pagination-item-before-jump-next {
+    display: none;
+  }
+}
 
 /*# sourceMappingURL=common.css.map*/

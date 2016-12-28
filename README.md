@@ -71,12 +71,12 @@ React.render(<Pagination />, container);
 | total            | items total count                  | Number        | 0                        |
 | defaultPageSize  | default items per page             | Number        | 10                       |
 | pageSize         | items per page                     | Number        | 10                       |
-| onChange         | page change callback               | Function      | noop                     |
+| onChange         | page change callback               | Function([changedTo])      | -                     |
 | showSizeChanger  | show pageSize changer              | Bool          | false                    |
 | pageSizeOptions  | specify the sizeChanger selections | Array<String> | ['10', '20', '30', '40'] |
-| onShowSizeChange | pageSize chagne callback           | Function      | noop                     |
+| onShowSizeChange | pageSize change callback           | Function(current page, size)      | -                     |
 | showQuickJumper  | show quick goto jumper             | Bool          | false                    |
-| showTotal        | show total records text            | Function(total, range) | -               |
+| showTotal        | show total records and range            | Function(total, [from, to]) | -               |
 | className        | className of pagination            | String        | -                         |
 | simple           | when set, show simple pager        | Object        | null                     |
 | locale           | to set l10n config                 | Object        | [zh_CN](https://github.com/react-component/pagination/blob/master/src/locale/zh_CN.js) |
@@ -84,11 +84,11 @@ React.render(<Pagination />, container);
 
 ## Test Case
 
-http://localhost:3000/tests/runner.html?coverage
+    http://localhost:3000/tests/runner.html?coverage
 
 ## Coverage
 
-http://localhost:3000/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:3000/tests/runner.html?coverage
+    http://localhost:3000/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:3000/tests/runner.html?coverage
 
 ## License
 

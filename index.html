@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-pagination@1.6.2 - pagination ui component for react</title>
+  <title>rc-pagination@1.6.3 - pagination ui component for react</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-pagination@1.6.2</h1>
+  <h1>rc-pagination@1.6.3</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -826,8 +826,8 @@ React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-titl
 <tr>
 <td>onChange</td>
 <td>page change callback</td>
-<td>Function</td>
-<td>noop</td>
+<td>Function([changedTo])</td>
+<td>-</td>
 </tr>
 <tr>
 <td>showSizeChanger</td>
@@ -843,9 +843,9 @@ React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-titl
 </tr>
 <tr>
 <td>onShowSizeChange</td>
-<td>pageSize chagne callback</td>
-<td>Function</td>
-<td>noop</td>
+<td>pageSize change callback</td>
+<td>Function(current page, size)</td>
+<td>-</td>
 </tr>
 <tr>
 <td>showQuickJumper</td>
@@ -855,8 +855,8 @@ React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-titl
 </tr>
 <tr>
 <td>showTotal</td>
-<td>show total records text</td>
-<td>Function(total, range)</td>
+<td>show total records and range</td>
+<td>Function(total, [from, to])</td>
 <td>-</td>
 </tr>
 <tr>
@@ -885,9 +885,7 @@ React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-titl
 </tr>
 </tbody>
 </table>
-<h2>Test Case<a id="user-content-test-case" name="test-case" class="anchor" aria-hidden="true" href="#test-case"><span class="octicon octicon-link"></span></a></h2><p><a href="http://localhost:3000/tests/runner.html?coverage" title="null">http://localhost:3000/tests/runner.html?coverage</a></p>
-<h2>Coverage<a id="user-content-coverage" name="coverage" class="anchor" aria-hidden="true" href="#coverage"><span class="octicon octicon-link"></span></a></h2><p><a href="http://localhost:3000/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:3000/tests/runner.html?coverage" title="null">http://localhost:3000/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:3000/tests/runner.html?coverage</a></p>
-<h2>License<a id="user-content-license" name="license" class="anchor" aria-hidden="true" href="#license"><span class="octicon octicon-link"></span></a></h2><p>rc-pagination is released under the MIT license.</p>
+<h2>Test Case<a id="user-content-test-case" name="test-case" class="anchor" aria-hidden="true" href="#test-case"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre><code language="js">http:<span class="hljs-comment">//localhost:3000/tests/runner.html?coverage</span></code></pre></div><h2>Coverage<a id="user-content-coverage" name="coverage" class="anchor" aria-hidden="true" href="#coverage"><span class="octicon octicon-link"></span></a></h2><div class="highlight"><pre><code language="js">http:<span class="hljs-comment">//localhost:3000/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:3000/tests/runner.html?coverage</span></code></pre></div><h2>License<a id="user-content-license" name="license" class="anchor" aria-hidden="true" href="#license"><span class="octicon octicon-link"></span></a></h2><p>rc-pagination is released under the MIT license.</p>
 
   </div>
 </div>

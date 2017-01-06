@@ -210,7 +210,7 @@ class Pagination extends React.Component {
           >
             <a />
           </li>
-          <div title={`${this.state.current}/${allPages}`} className={`${prefixCls}-simple-pager`}>
+          <li title={`${this.state.current}/${allPages}`} className={`${prefixCls}-simple-pager`}>
             <input
               type="text"
               value={this.state._current}
@@ -220,7 +220,7 @@ class Pagination extends React.Component {
             />
             <span className={`${prefixCls}-slash`}>／</span>
             {allPages}
-          </div>
+          </li>
           <li
             title={locale.next_page}
             onClick={this._next}

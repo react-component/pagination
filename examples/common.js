@@ -20075,7 +20075,7 @@
 	          React.createElement('a', null)
 	        ),
 	        React.createElement(
-	          'div',
+	          'li',
 	          { title: this.state.current + '/' + allPages, className: prefixCls + '-simple-pager' },
 	          React.createElement('input', {
 	            type: 'text',

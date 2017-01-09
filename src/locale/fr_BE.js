@@ -8,5 +8,5 @@ export default {
   prev_page: 'Page précédente',
   next_page: 'Page suivante',
   prev_5: '5 Pages précédentes',
-  next_5: '5 Pages suivantes'
+  next_5: '5 Pages suivantes',
 };

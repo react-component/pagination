@@ -171,11 +171,13 @@ class Pagination extends React.Component {
   }
 
   _jumpPrev() {
-    this._handleChange(Math.max(1, this.state.current - 5));
+    this._handleChange(Math.max(1, this.state.current - (this.props.lessPages ? 3 : 5)));
   }
 
   _jumpNext() {
-    this._handleChange(Math.min(this._calcPage(), this.state.current + 5));
+    this._handleChange(
+      Math.min(this._calcPage(), this.state.current + (this.props.lessPages ? 3 : 5))
+    );
   }
 
   _hasPrev() {
@@ -198,6 +200,7 @@ class Pagination extends React.Component {
     let firstPager = null;
     let lastPager = null;
 
+    const pageBufferSize = props.lessPages ? 1 : 2;
     const { current, pageSize } = this.state;
 
     if (props.simple) {
@@ -232,7 +235,7 @@ class Pagination extends React.Component {
       );
     }
 
-    if (allPages <= 9) {
+    if (allPages <= 5 + pageBufferSize * 2) {
       for (let i = 1; i <= allPages; i++) {
         const active = this.state.current === i;
         pagerList.push(
@@ -249,7 +252,7 @@ class Pagination extends React.Component {
     } else {
       jumpPrev = (
         <li
-          title={locale.prev_5}
+          title={props.lessPages ? locale.prev_3 : locale.prev_5}
           key="prev"
           onClick={this._jumpPrev}
           className={`${prefixCls}-jump-prev`}
@@ -259,7 +262,7 @@ class Pagination extends React.Component {
       );
       jumpNext = (
         <li
-          title={locale.next_5}
+          title={props.lessPages ? locale.next_3 : locale.next_5}
           key="next"
           onClick={this._jumpNext}
           className={`${prefixCls}-jump-next`}
@@ -289,15 +292,15 @@ class Pagination extends React.Component {
         />
       );
 
-      let left = Math.max(1, current - 2);
-      let right = Math.min(current + 2, allPages);
+      let left = Math.max(1, current - pageBufferSize);
+      let right = Math.min(current + pageBufferSize, allPages);
 
-      if (current - 1 <= 2) {
-        right = 1 + 4;
+      if (current - 1 <= pageBufferSize) {
+        right = 1 + pageBufferSize * 2;
       }
 
-      if (allPages - current <= 2) {
-        left = allPages - 4;
+      if (allPages - current <= pageBufferSize) {
+        left = allPages - pageBufferSize * 2;
       }
 
       for (let i = left; i <= right; i++) {
@@ -314,13 +317,13 @@ class Pagination extends React.Component {
         );
       }
 
-      if (current - 1 >= 4) {
+      if (current - 1 >= pageBufferSize * 2 && current !== 1 + 2) {
         pagerList[0] = React.cloneElement(pagerList[0], {
           className: `${prefixCls}-item-after-jump-prev`,
         });
         pagerList.unshift(jumpPrev);
       }
-      if (allPages - current >= 4) {
+      if (allPages - current >= pageBufferSize * 2 && current !== allPages - 2) {
         pagerList[pagerList.length - 1] = React.cloneElement(pagerList[pagerList.length - 1], {
           className: `${prefixCls}-item-before-jump-next`,
         });
@@ -398,6 +401,7 @@ Pagination.propTypes = {
   defaultPageSize: React.PropTypes.number,
   onChange: React.PropTypes.func,
   showSizeChanger: React.PropTypes.bool,
+  lessPages: React.PropTypes.bool,
   onShowSizeChange: React.PropTypes.func,
   selectComponentClass: React.PropTypes.func,
   showQuickJumper: React.PropTypes.bool,
@@ -418,6 +422,7 @@ Pagination.defaultProps = {
   selectComponentClass: null,
   showQuickJumper: false,
   showSizeChanger: false,
+  lessPages: false,
   onShowSizeChange: noop,
   locale: LOCALE,
   style: {},

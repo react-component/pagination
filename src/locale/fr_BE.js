@@ -9,4 +9,6 @@ export default {
   next_page: 'Page suivante',
   prev_5: '5 Pages précédentes',
   next_5: '5 Pages suivantes',
+  prev_3: '3 Pages précédentes',
+  next_3: '3 Pages suivantes',
 };

@@ -13,8 +13,10 @@ describe('Uncontrolled Pagination', () => {
   document.body.appendChild(container);
 
   let current = 1;
-  function onChange(page) {
+  let pageSize;
+  function onChange(page, pSize) {
     current = page;
+    pageSize = pSize;
   }
 
   function shouldHighlightRight() {
@@ -94,6 +96,7 @@ describe('Uncontrolled Pagination', () => {
     setTimeout(() => {
       expect(pagination.state.current).to.be(2);
       expect(current).to.be(2);
+      expect(pageSize).to.be(10);
       shouldHighlightRight();
       done();
     }, 10);
@@ -109,6 +112,7 @@ describe('Uncontrolled Pagination', () => {
     setTimeout(() => {
       expect(pagination.state.current).to.be(2);
       expect(current).to.be(2);
+      expect(pageSize).to.be(10);
       done();
     }, 10);
   });
@@ -137,8 +141,10 @@ describe('Controlled Pagination', () => {
   document.body.appendChild(container);
 
   let current = 2;
-  function onChange(page) {
+  let pageSize;
+  function onChange(page, pSize) {
     current = page;
+    pageSize = pSize;
   }
 
   beforeEach((done) => {
@@ -170,6 +176,7 @@ describe('Controlled Pagination', () => {
     setTimeout(() => {
       expect(pagination.state.current).to.be(2);
       expect(current).to.be(3);
+      expect(pageSize).to.be(10);
       done();
     }, 10);
   });

@@ -19,8 +19,13 @@ const App = React.createClass({
   render() {
     return (
       <div>
-        <Pagination onChange={this.onChange} lessPages current={this.state.current} total={80} />
-        <Pagination lessPages defaultCurrent={1} total={60} />
+        <Pagination
+          onChange={this.onChange}
+          current={this.state.current}
+          total={80}
+          showLessItems
+        />
+        <Pagination showLessItems defaultCurrent={1} total={60} />
       </div>
     );
   },

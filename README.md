@@ -1,7 +1,7 @@
 # rc-pagination
 ---
 
-React Pagination Component
+React Pagination Component.
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
@@ -37,16 +37,11 @@ http://localhost:3000/examples/
 
 online example: http://react-component.github.io/pagination/examples/
 
-
 ## Feature
 
 * support ie8,ie8+,chrome,firefox,safari
 
-### Keyboard
-
-
-
-## install
+## Install
 
 [![rc-pagination](https://nodei.co/npm/rc-pagination.png)](https://npmjs.org/package/rc-pagination)
 
@@ -60,10 +55,6 @@ React.render(<Pagination />, container);
 
 ## API
 
-### props
-
-### Pagination
-
 | Parameter        | Description                        | Type          | Default                  |
 |------------------|------------------------------------|---------------|--------------------------|
 | defaultCurrent   | uncontrolled current page          | Number        | 1                        |
@@ -71,24 +62,17 @@ React.render(<Pagination />, container);
 | total            | items total count                  | Number        | 0                        |
 | defaultPageSize  | default items per page             | Number        | 10                       |
 | pageSize         | items per page                     | Number        | 10                       |
-| onChange         | page change callback               | Function([changedTo])      | -                     |
+| onChange         | page change callback               | Function(current, pageSize)      | -     |
 | showSizeChanger  | show pageSize changer              | Bool          | false                    |
 | pageSizeOptions  | specify the sizeChanger selections | Array<String> | ['10', '20', '30', '40'] |
-| onShowSizeChange | pageSize change callback           | Function(current page, size)      | -                     |
+| onShowSizeChange | pageSize change callback           | Function(current page, size)  | -        |
 | showQuickJumper  | show quick goto jumper             | Bool          | false                    |
-| showTotal        | show total records and range            | Function(total, [from, to]) | -               |
-| className        | className of pagination            | String        | -                         |
+| showTotal        | show total records and range            | Function(total, [from, to]) | -     |
+| className        | className of pagination            | String        | -                        |
 | simple           | when set, show simple pager        | Object        | null                     |
 | locale           | to set l10n config                 | Object        | [zh_CN](https://github.com/react-component/pagination/blob/master/src/locale/zh_CN.js) |
 | style            | the style of pagination            | Object        | {}                       |
-
-## Test Case
-
-    http://localhost:3000/tests/runner.html?coverage
-
-## Coverage
-
-    http://localhost:3000/node_modules/rc-server/node_modules/node-jscover/lib/front-end/jscoverage.html?w=http://localhost:3000/tests/runner.html?coverage
+| showLessItems    | show less page items               | Bool          | false                    |
 
 ## License
 

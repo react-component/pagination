@@ -172,12 +172,12 @@ class Pagination extends React.Component {
   }
 
   _jumpPrev() {
-    this._handleChange(Math.max(1, this.state.current - (this.props.lessPages ? 3 : 5)));
+    this._handleChange(Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5)));
   }
 
   _jumpNext() {
     this._handleChange(
-      Math.min(this._calcPage(), this.state.current + (this.props.lessPages ? 3 : 5))
+      Math.min(this._calcPage(), this.state.current + (this.props.showLessItems ? 3 : 5))
     );
   }
 
@@ -201,7 +201,7 @@ class Pagination extends React.Component {
     let firstPager = null;
     let lastPager = null;
 
-    const pageBufferSize = props.lessPages ? 1 : 2;
+    const pageBufferSize = props.showLessItems ? 1 : 2;
     const { current, pageSize } = this.state;
 
     if (props.simple) {
@@ -253,7 +253,7 @@ class Pagination extends React.Component {
     } else {
       jumpPrev = (
         <li
-          title={props.lessPages ? locale.prev_3 : locale.prev_5}
+          title={props.showLessItems ? locale.prev_3 : locale.prev_5}
           key="prev"
           onClick={this._jumpPrev}
           className={`${prefixCls}-jump-prev`}
@@ -263,7 +263,7 @@ class Pagination extends React.Component {
       );
       jumpNext = (
         <li
-          title={props.lessPages ? locale.next_3 : locale.next_5}
+          title={props.showLessItems ? locale.next_3 : locale.next_5}
           key="next"
           onClick={this._jumpNext}
           className={`${prefixCls}-jump-next`}
@@ -402,7 +402,7 @@ Pagination.propTypes = {
   defaultPageSize: React.PropTypes.number,
   onChange: React.PropTypes.func,
   showSizeChanger: React.PropTypes.bool,
-  lessPages: React.PropTypes.bool,
+  showLessItems: React.PropTypes.bool,
   onShowSizeChange: React.PropTypes.func,
   selectComponentClass: React.PropTypes.func,
   showQuickJumper: React.PropTypes.bool,
@@ -423,7 +423,7 @@ Pagination.defaultProps = {
   selectComponentClass: null,
   showQuickJumper: false,
   showSizeChanger: false,
-  lessPages: false,
+  showLessItems: false,
   onShowSizeChange: noop,
   locale: LOCALE,
   style: {},

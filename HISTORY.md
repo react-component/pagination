@@ -1,3 +1,14 @@
+1.7.0
+==================
+
+* support `showLessItems`. #55
+* Add `pageSize` as onChange's second argument.
+
+1.6.0
+==================
+
+* Add `range` as showTotal's second argument.
+
 1.5.6 / 2016-11-15
 ==================
 

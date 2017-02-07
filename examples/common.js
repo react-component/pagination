@@ -51,7 +51,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		8:0
+/******/ 		9:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -97,7 +97,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"default","1":"jumper","2":"more","3":"showTotal","4":"simple","5":"sizer","6":"stupid","7":"styles"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"default","1":"jumper","2":"lessPages","3":"more","4":"showTotal","5":"simple","6":"sizer","7":"stupid","8":"styles"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -20008,7 +20008,8 @@
 	        });
 	      }
 	
-	      this.props.onChange(page);
+	      var pageSize = this.state.pageSize;
+	      this.props.onChange(page, pageSize);
 	
 	      return page;
 	    }
@@ -20029,11 +20030,11 @@
 	  };
 	
 	  Pagination.prototype._jumpPrev = function _jumpPrev() {
-	    this._handleChange(Math.max(1, this.state.current - 5));
+	    this._handleChange(Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5)));
 	  };
 	
 	  Pagination.prototype._jumpNext = function _jumpNext() {
-	    this._handleChange(Math.min(this._calcPage(), this.state.current + 5));
+	    this._handleChange(Math.min(this._calcPage(), this.state.current + (this.props.showLessItems ? 3 : 5)));
 	  };
 	
 	  Pagination.prototype._hasPrev = function _hasPrev() {
@@ -20056,6 +20057,7 @@
 	    var firstPager = null;
 	    var lastPager = null;
 	
+	    var pageBufferSize = props.showLessItems ? 1 : 2;
 	    var _state = this.state,
 	        current = _state.current,
 	        pageSize = _state.pageSize;
@@ -20103,7 +20105,7 @@
 	      );
 	    }
 	
-	    if (allPages <= 9) {
+	    if (allPages <= 5 + pageBufferSize * 2) {
 	      for (var i = 1; i <= allPages; i++) {
 	        var active = this.state.current === i;
 	        pagerList.push(React.createElement(Pager, {
@@ -20119,7 +20121,7 @@
 	      jumpPrev = React.createElement(
 	        'li',
 	        {
-	          title: locale.prev_5,
+	          title: props.showLessItems ? locale.prev_3 : locale.prev_5,
 	          key: 'prev',
 	          onClick: this._jumpPrev,
 	          className: prefixCls + '-jump-prev'
@@ -20129,7 +20131,7 @@
 	      jumpNext = React.createElement(
 	        'li',
 	        {
-	          title: locale.next_5,
+	          title: props.showLessItems ? locale.next_3 : locale.next_5,
 	          key: 'next',
 	          onClick: this._jumpNext,
 	          className: prefixCls + '-jump-next'
@@ -20154,15 +20156,15 @@
 	        active: false
 	      });
 	
-	      var left = Math.max(1, current - 2);
-	      var right = Math.min(current + 2, allPages);
+	      var left = Math.max(1, current - pageBufferSize);
+	      var right = Math.min(current + pageBufferSize, allPages);
 	
-	      if (current - 1 <= 2) {
-	        right = 1 + 4;
+	      if (current - 1 <= pageBufferSize) {
+	        right = 1 + pageBufferSize * 2;
 	      }
 	
-	      if (allPages - current <= 2) {
-	        left = allPages - 4;
+	      if (allPages - current <= pageBufferSize) {
+	        left = allPages - pageBufferSize * 2;
 	      }
 	
 	      for (var _i = left; _i <= right; _i++) {
@@ -20177,13 +20179,13 @@
 	        }));
 	      }
 	
-	      if (current - 1 >= 4) {
+	      if (current - 1 >= pageBufferSize * 2 && current !== 1 + 2) {
 	        pagerList[0] = React.cloneElement(pagerList[0], {
 	          className: prefixCls + '-item-after-jump-prev'
 	        });
 	        pagerList.unshift(jumpPrev);
 	      }
-	      if (allPages - current >= 4) {
+	      if (allPages - current >= pageBufferSize * 2 && current !== allPages - 2) {
 	        pagerList[pagerList.length - 1] = React.cloneElement(pagerList[pagerList.length - 1], {
 	          className: prefixCls + '-item-before-jump-next'
 	        });
@@ -20260,6 +20262,7 @@
 	  defaultPageSize: React.PropTypes.number,
 	  onChange: React.PropTypes.func,
 	  showSizeChanger: React.PropTypes.bool,
+	  showLessItems: React.PropTypes.bool,
 	  onShowSizeChange: React.PropTypes.func,
 	  selectComponentClass: React.PropTypes.func,
 	  showQuickJumper: React.PropTypes.bool,
@@ -20280,6 +20283,7 @@
 	  selectComponentClass: null,
 	  showQuickJumper: false,
 	  showSizeChanger: false,
+	  showLessItems: false,
 	  onShowSizeChange: noop,
 	  locale: LOCALE,
 	  style: {}
@@ -20548,7 +20552,9 @@
 	  prev_page: '上一页',
 	  next_page: '下一页',
 	  prev_5: '向前 5 页',
-	  next_5: '向后 5 页'
+	  next_5: '向后 5 页',
+	  prev_3: '向前 3 页',
+	  next_3: '向后 3 页'
 	};
 	module.exports = exports['default'];
 

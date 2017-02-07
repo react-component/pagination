@@ -206,6 +206,11 @@ webpackJsonp([1],[
 	  console.log(pageSize);
 	}
 	
+	function onChange(current, pageSize) {
+	  console.log('onChange:current=', current);
+	  console.log('onChange:pageSize=', pageSize);
+	}
+	
 	_reactDom2.default.render(_react2.default.createElement(_rcPagination2.default, {
 	  selectComponentClass: _rcSelect2.default,
 	  showQuickJumper: true,
@@ -213,6 +218,7 @@ webpackJsonp([1],[
 	  defaultPageSize: 20,
 	  defaultCurrent: 5,
 	  onShowSizeChange: onShowSizeChange,
+	  onChange: onChange,
 	  total: 450
 	}), document.getElementById('__react-content'));
 

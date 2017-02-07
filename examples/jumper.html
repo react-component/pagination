@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>jumper.js - example - rc-pagination@1.6.9</title>
+  <title>jumper.js - example - rc-pagination@1.7.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-pagination@1.6.9</h1>
+      <h1>rc-pagination@1.7.0</h1>
 
       <p>pagination ui component for react</p>
     </div>
@@ -282,6 +282,11 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <span class="hljs-built_in">console</span>.log(pageSize);
 }
 
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onChange</span>(<span class="hljs-params">current, pageSize</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onChange:current='</span>, current);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onChange:pageSize='</span>, pageSize);
+}
+
 ReactDOM.render(
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span>
     <span class="hljs-attribute">selectComponentClass</span>=<span class="hljs-value">{Select}</span>
@@ -290,6 +295,7 @@ ReactDOM.render(
     <span class="hljs-attribute">defaultPageSize</span>=<span class="hljs-value">{20}</span>
     <span class="hljs-attribute">defaultCurrent</span>=<span class="hljs-value">{5}</span>
     <span class="hljs-attribute">onShowSizeChange</span>=<span class="hljs-value">{onShowSizeChange}</span>
+    <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{onChange}</span>
     <span class="hljs-attribute">total</span>=<span class="hljs-value">{450}</span>
   /&gt;</span>
 , document.getElementById('__react-content'));

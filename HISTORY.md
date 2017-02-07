@@ -9,11 +9,6 @@
 
 * Add `range` as showTotal's second argument.
 
-1.5.6 / 2016-11-15
-==================
-
-* Add `range` as showTotal's second argument.
-
 1.5.5 / 2016-09-01
 ==================
 

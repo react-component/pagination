@@ -150,7 +150,8 @@ class Pagination extends React.Component {
         });
       }
 
-      this.props.onChange(page);
+      const pageSize = this.state.pageSize;
+      this.props.onChange(page, pageSize);
 
       return page;
     }

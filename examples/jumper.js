@@ -11,6 +11,11 @@ function onShowSizeChange(current, pageSize) {
   console.log(pageSize);
 }
 
+function onChange(current, pageSize) {
+  console.log('onChange:current=', current);
+  console.log('onChange:pageSize=', pageSize);
+}
+
 ReactDOM.render(
   <Pagination
     selectComponentClass={Select}
@@ -19,6 +24,7 @@ ReactDOM.render(
     defaultPageSize={20}
     defaultCurrent={5}
     onShowSizeChange={onShowSizeChange}
+    onChange={onChange}
     total={450}
   />
 , document.getElementById('__react-content'));

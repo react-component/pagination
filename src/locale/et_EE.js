@@ -1,6 +1,6 @@
 export default {
   // Options.jsx
-  items_per_page: '/ lehekülg',
+  items_per_page: '/ leheküljel',
   jump_to: 'Hüppa',
   page: '',
 

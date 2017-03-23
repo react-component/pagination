@@ -51,7 +51,7 @@
 /******/ 	// "0" means "already loaded"
 /******/ 	// Array means "loading", array contains callbacks
 /******/ 	var installedChunks = {
-/******/ 		9:0
+/******/ 		10:0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -97,7 +97,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 /******/
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"default","1":"jumper","2":"lessPages","3":"more","4":"showTotal","5":"simple","6":"sizer","7":"stupid","8":"styles"}[chunkId]||chunkId) + ".js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + "." + ({"0":"default","1":"jumper","2":"lessPages","3":"more","4":"showTitle","5":"showTotal","6":"simple","7":"sizer","8":"stupid","9":"styles"}[chunkId]||chunkId) + ".js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};
@@ -20070,7 +20070,7 @@
 	        React.createElement(
 	          'li',
 	          {
-	            title: locale.prev_page,
+	            title: props.showTitle ? locale.prev_page : null,
 	            onClick: this._prev,
 	            className: (this._hasPrev() ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-prev'
 	          },
@@ -20078,7 +20078,10 @@
 	        ),
 	        React.createElement(
 	          'li',
-	          { title: this.state.current + '/' + allPages, className: prefixCls + '-simple-pager' },
+	          {
+	            title: props.showTitle ? this.state.current + '/' + allPages : null,
+	            className: prefixCls + '-simple-pager'
+	          },
 	          React.createElement('input', {
 	            type: 'text',
 	            value: this.state._current,
@@ -20096,7 +20099,7 @@
 	        React.createElement(
 	          'li',
 	          {
-	            title: locale.next_page,
+	            title: props.showTitle ? locale.next_page : null,
 	            onClick: this._next,
 	            className: (this._hasNext() ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-next'
 	          },
@@ -20114,14 +20117,16 @@
 	          onClick: this._handleChange.bind(this, i),
 	          key: i,
 	          page: i,
-	          active: active
+	          active: active,
+	          showTitle: props.showTitle
 	        }));
 	      }
 	    } else {
+	      var showLessItems = props.showLessItems ? locale.prev_3 : locale.prev_5;
 	      jumpPrev = React.createElement(
 	        'li',
 	        {
-	          title: props.showLessItems ? locale.prev_3 : locale.prev_5,
+	          title: props.showTitle ? showLessItems : null,
 	          key: 'prev',
 	          onClick: this._jumpPrev,
 	          className: prefixCls + '-jump-prev'
@@ -20131,7 +20136,7 @@
 	      jumpNext = React.createElement(
 	        'li',
 	        {
-	          title: props.showLessItems ? locale.next_3 : locale.next_5,
+	          title: props.showTitle ? showLessItems : null,
 	          key: 'next',
 	          onClick: this._jumpNext,
 	          className: prefixCls + '-jump-next'
@@ -20145,7 +20150,8 @@
 	        onClick: this._handleChange.bind(this, allPages),
 	        key: allPages,
 	        page: allPages,
-	        active: false
+	        active: false,
+	        showTitle: props.showTitle
 	      });
 	      firstPager = React.createElement(Pager, {
 	        locale: props.locale,
@@ -20153,7 +20159,8 @@
 	        onClick: this._handleChange.bind(this, 1),
 	        key: 1,
 	        page: 1,
-	        active: false
+	        active: false,
+	        showTitle: props.showTitle
 	      });
 	
 	      var left = Math.max(1, current - pageBufferSize);
@@ -20175,7 +20182,8 @@
 	          onClick: this._handleChange.bind(this, _i),
 	          key: _i,
 	          page: _i,
-	          active: _active
+	          active: _active,
+	          showTitle: props.showTitle
 	        }));
 	      }
 	
@@ -20221,7 +20229,7 @@
 	      React.createElement(
 	        'li',
 	        {
-	          title: locale.prev_page,
+	          title: props.showTitle ? locale.prev_page : null,
 	          onClick: this._prev,
 	          className: (this._hasPrev() ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-prev'
 	        },
@@ -20231,7 +20239,7 @@
 	      React.createElement(
 	        'li',
 	        {
-	          title: locale.next_page,
+	          title: props.showTitle ? locale.next_page : null,
 	          onClick: this._next,
 	          className: (this._hasNext() ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-next'
 	        },
@@ -20266,6 +20274,7 @@
 	  onShowSizeChange: React.PropTypes.func,
 	  selectComponentClass: React.PropTypes.func,
 	  showQuickJumper: React.PropTypes.bool,
+	  showTitle: React.PropTypes.bool,
 	  pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
 	  showTotal: React.PropTypes.func,
 	  locale: React.PropTypes.object,
@@ -20284,6 +20293,7 @@
 	  showQuickJumper: false,
 	  showSizeChanger: false,
 	  showLessItems: false,
+	  showTitle: true,
 	  onShowSizeChange: noop,
 	  locale: LOCALE,
 	  style: {}
@@ -20331,7 +20341,7 @@
 	
 	    return React.createElement(
 	      'li',
-	      { title: props.page, className: cls, onClick: props.onClick },
+	      { title: props.showTitle ? props.page : null, className: cls, onClick: props.onClick },
 	      React.createElement(
 	        'a',
 	        null,
@@ -20348,7 +20358,8 @@
 	  active: React.PropTypes.bool,
 	  last: React.PropTypes.bool,
 	  locale: React.PropTypes.object,
-	  className: React.PropTypes.string
+	  className: React.PropTypes.string,
+	  showTitle: React.PropTypes.bool
 	};
 	
 	module.exports = Pager;

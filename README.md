@@ -73,6 +73,7 @@ React.render(<Pagination />, container);
 | locale           | to set l10n config                 | Object        | [zh_CN](https://github.com/react-component/pagination/blob/master/src/locale/zh_CN.js) |
 | style            | the style of pagination            | Object        | {}                       |
 | showLessItems    | show less page items               | Bool          | false                    |
+| showTitle        | show page items title              | Bool          | true                     |
 
 ## License
 

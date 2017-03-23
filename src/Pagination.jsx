@@ -208,13 +208,16 @@ class Pagination extends React.Component {
       return (
         <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`}>
           <li
-            title={locale.prev_page}
+            title={props.showTitle ? locale.prev_page : null}
             onClick={this._prev}
             className={`${this._hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           >
             <a />
           </li>
-          <li title={`${this.state.current}/${allPages}`} className={`${prefixCls}-simple-pager`}>
+          <li
+            title={props.showTitle ? `${this.state.current}/${allPages}` : null}
+            className={`${prefixCls}-simple-pager`}
+          >
             <input
               type="text"
               value={this.state._current}
@@ -226,7 +229,7 @@ class Pagination extends React.Component {
             {allPages}
           </li>
           <li
-            title={locale.next_page}
+            title={props.showTitle ? locale.next_page : null}
             onClick={this._next}
             className={`${this._hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           >
@@ -247,13 +250,15 @@ class Pagination extends React.Component {
             key={i}
             page={i}
             active={active}
+            showTitle={props.showTitle}
           />
         );
       }
     } else {
+      const showLessItems = props.showLessItems ? locale.prev_3 : locale.prev_5;
       jumpPrev = (
         <li
-          title={props.showLessItems ? locale.prev_3 : locale.prev_5}
+          title={props.showTitle ? showLessItems : null}
           key="prev"
           onClick={this._jumpPrev}
           className={`${prefixCls}-jump-prev`}
@@ -263,7 +268,7 @@ class Pagination extends React.Component {
       );
       jumpNext = (
         <li
-          title={props.showLessItems ? locale.next_3 : locale.next_5}
+          title={props.showTitle ? showLessItems : null}
           key="next"
           onClick={this._jumpNext}
           className={`${prefixCls}-jump-next`}
@@ -280,6 +285,7 @@ class Pagination extends React.Component {
           key={allPages}
           page={allPages}
           active={false}
+          showTitle={props.showTitle}
         />
       );
       firstPager = (
@@ -290,6 +296,7 @@ class Pagination extends React.Component {
           key={1}
           page={1}
           active={false}
+          showTitle={props.showTitle}
         />
       );
 
@@ -314,6 +321,7 @@ class Pagination extends React.Component {
             key={i}
             page={i}
             active={active}
+            showTitle={props.showTitle}
           />
         );
       }
@@ -363,7 +371,7 @@ class Pagination extends React.Component {
       >
         {totalText}
         <li
-          title={locale.prev_page}
+          title={props.showTitle ? locale.prev_page : null}
           onClick={this._prev}
           className={`${this._hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
         >
@@ -371,7 +379,7 @@ class Pagination extends React.Component {
         </li>
         {pagerList}
         <li
-          title={locale.next_page}
+          title={props.showTitle ? locale.next_page : null}
           onClick={this._next}
           className={`${this._hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
         >
@@ -406,6 +414,7 @@ Pagination.propTypes = {
   onShowSizeChange: React.PropTypes.func,
   selectComponentClass: React.PropTypes.func,
   showQuickJumper: React.PropTypes.bool,
+  showTitle: React.PropTypes.bool,
   pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
   showTotal: React.PropTypes.func,
   locale: React.PropTypes.object,
@@ -424,6 +433,7 @@ Pagination.defaultProps = {
   showQuickJumper: false,
   showSizeChanger: false,
   showLessItems: false,
+  showTitle: true,
   onShowSizeChange: noop,
   locale: LOCALE,
   style: {},

@@ -20122,11 +20122,12 @@
 	        }));
 	      }
 	    } else {
-	      var showLessItems = props.showLessItems ? locale.prev_3 : locale.prev_5;
+	      var prevItemTitle = props.showLessItems ? locale.prev_3 : locale.prev_5;
+	      var nextItemTitle = props.showLessItems ? locale.next_3 : locale.next_5;
 	      jumpPrev = React.createElement(
 	        'li',
 	        {
-	          title: props.showTitle ? showLessItems : null,
+	          title: props.showTitle ? prevItemTitle : null,
 	          key: 'prev',
 	          onClick: this._jumpPrev,
 	          className: prefixCls + '-jump-prev'
@@ -20136,7 +20137,7 @@
 	      jumpNext = React.createElement(
 	        'li',
 	        {
-	          title: props.showTitle ? showLessItems : null,
+	          title: props.showTitle ? nextItemTitle : null,
 	          key: 'next',
 	          onClick: this._jumpNext,
 	          className: prefixCls + '-jump-next'

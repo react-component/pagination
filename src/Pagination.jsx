@@ -255,10 +255,11 @@ class Pagination extends React.Component {
         );
       }
     } else {
-      const showLessItems = props.showLessItems ? locale.prev_3 : locale.prev_5;
+      const prevItemTitle = props.showLessItems ? locale.prev_3 : locale.prev_5;
+      const nextItemTitle = props.showLessItems ? locale.next_3 : locale.next_5;
       jumpPrev = (
         <li
-          title={props.showTitle ? showLessItems : null}
+          title={props.showTitle ? prevItemTitle : null}
           key="prev"
           onClick={this._jumpPrev}
           className={`${prefixCls}-jump-prev`}
@@ -268,7 +269,7 @@ class Pagination extends React.Component {
       );
       jumpNext = (
         <li
-          title={props.showTitle ? showLessItems : null}
+          title={props.showTitle ? nextItemTitle : null}
           key="next"
           onClick={this._jumpNext}
           className={`${prefixCls}-jump-next`}

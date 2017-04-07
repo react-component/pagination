@@ -83,6 +83,7 @@ class Options extends React.Component {
           dropdownMatchSelectWidth={false}
           value={pageSize.toString()}
           onChange={this._changeSize}
+          getPopupContainer={triggerNode => triggerNode.parentNode}
         >
           {options}
        </Select>

@@ -20474,7 +20474,10 @@
 	            optionLabelProp: 'children',
 	            dropdownMatchSelectWidth: false,
 	            value: pageSize.toString(),
-	            onChange: _this2._changeSize
+	            onChange: _this2._changeSize,
+	            getPopupContainer: function getPopupContainer(triggerNode) {
+	              return triggerNode.parentNode;
+	            }
 	          },
 	          options
 	        );

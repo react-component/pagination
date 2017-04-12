@@ -1,19 +1,17 @@
-require('rc-select/assets/index.css');
-const Pagination = require('rc-pagination');
-const React = require('react');
+import 'rc-select/assets/index.css';
+import Pagination from 'rc-pagination';
+import React from 'react';
 import Select from 'rc-select';
 
-const Hello = React.createClass({
-  getInitialState() {
-    return {
-      pageSize: 20,
-    };
-  },
-  changeSize() {
+class Hello extends React.Component {
+  state = {
+    pageSize: 20,
+  };
+  changeSize = () => {
     this.setState({
       pageSize: 50,
     });
-  },
+  }
   render() {
     return (
       <div style={{ margin: 10 }}>
@@ -40,7 +38,7 @@ const Hello = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 export default Hello;

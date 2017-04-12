@@ -1,7 +1,23 @@
-const React = require('react');
-const KEYCODE = require('./KeyCode');
+import React from 'react';
+import PropTypes from 'prop-types';
+import KEYCODE from './KeyCode';
 
 class Options extends React.Component {
+  static propTypes = {
+    changeSize: PropTypes.func,
+    quickGo: PropTypes.func,
+    selectComponentClass: PropTypes.func,
+    current: PropTypes.number,
+    pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
+    pageSize: PropTypes.number,
+    buildOptionText: PropTypes.func,
+    locale: PropTypes.object,
+  };
+
+  static defaultProps = {
+    pageSizeOptions: ['10', '20', '30', '40'],
+  };
+
   constructor(props) {
     super(props);
 
@@ -17,6 +33,7 @@ class Options extends React.Component {
       '_buildOptionText',
     ].forEach((method) => this[method] = this[method].bind(this));
   }
+
   _buildOptionText(value) {
     return `${value} ${this.props.locale.items_per_page}`;
   }
@@ -114,19 +131,4 @@ class Options extends React.Component {
   }
 }
 
-Options.propTypes = {
-  changeSize: React.PropTypes.func,
-  quickGo: React.PropTypes.func,
-  selectComponentClass: React.PropTypes.func,
-  current: React.PropTypes.number,
-  pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
-  pageSize: React.PropTypes.number,
-  buildOptionText: React.PropTypes.func,
-  locale: React.PropTypes.object,
-};
-
-Options.defaultProps = {
-  pageSizeOptions: ['10', '20', '30', '40'],
-};
-
-module.exports = Options;
+export default Options;

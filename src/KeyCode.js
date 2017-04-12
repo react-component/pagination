@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   ZERO: 48,
   NINE: 57,
 

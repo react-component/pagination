@@ -50,5 +50,8 @@
   },
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "dependencies": {
+    "prop-types": "^15.5.7"
+  }
 }

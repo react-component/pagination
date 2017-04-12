@@ -1,8 +1,9 @@
-const React = require('react');
-const Pager = require('./Pager');
-const Options = require('./Options');
-const KEYCODE = require('./KeyCode');
-const LOCALE = require('./locale/zh_CN');
+import React from 'react';
+import PropTypes from 'prop-types';
+import Pager from './Pager';
+import Options from './Options';
+import KEYCODE from './KeyCode';
+import LOCALE from './locale/zh_CN';
 
 function noop() {
 }
@@ -404,22 +405,22 @@ class Pagination extends React.Component {
 }
 
 Pagination.propTypes = {
-  current: React.PropTypes.number,
-  defaultCurrent: React.PropTypes.number,
-  total: React.PropTypes.number,
-  pageSize: React.PropTypes.number,
-  defaultPageSize: React.PropTypes.number,
-  onChange: React.PropTypes.func,
-  showSizeChanger: React.PropTypes.bool,
-  showLessItems: React.PropTypes.bool,
-  onShowSizeChange: React.PropTypes.func,
-  selectComponentClass: React.PropTypes.func,
-  showQuickJumper: React.PropTypes.bool,
-  showTitle: React.PropTypes.bool,
-  pageSizeOptions: React.PropTypes.arrayOf(React.PropTypes.string),
-  showTotal: React.PropTypes.func,
-  locale: React.PropTypes.object,
-  style: React.PropTypes.object,
+  current: PropTypes.number,
+  defaultCurrent: PropTypes.number,
+  total: PropTypes.number,
+  pageSize: PropTypes.number,
+  defaultPageSize: PropTypes.number,
+  onChange: PropTypes.func,
+  showSizeChanger: PropTypes.bool,
+  showLessItems: PropTypes.bool,
+  onShowSizeChange: PropTypes.func,
+  selectComponentClass: PropTypes.func,
+  showQuickJumper: PropTypes.bool,
+  showTitle: PropTypes.bool,
+  pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
+  showTotal: PropTypes.func,
+  locale: PropTypes.object,
+  style: PropTypes.object,
 };
 
 Pagination.defaultProps = {
@@ -440,4 +441,4 @@ Pagination.defaultProps = {
   style: {},
 };
 
-module.exports = Pagination;
+export default Pagination;

@@ -4,18 +4,16 @@ import ReactDOM from 'react-dom';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.less';
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      current: 3,
-    };
-  },
-  onChange(page) {
+class App extends React.Component {
+  state = {
+    current: 3,
+  };
+  onChange = (page) => {
     console.log(page);
     this.setState({
       current: page,
     });
-  },
+  }
   render() {
     return (
       <div>
@@ -29,7 +27,7 @@ const App = React.createClass({
         <Pagination showLessItems defaultCurrent={1} total={60} showTitle={false} />
       </div>
     );
-  },
-});
+  }
+}
 
 ReactDOM.render(<App />, document.getElementById('__react-content'));

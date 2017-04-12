@@ -6,16 +6,14 @@ import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.less';
 import 'rc-select/assets/index.css';
 
-const Hello = React.createClass({
-  getInitialState() {
-    return {
-      pageSize: 20,
-    };
-  },
-  onShowSizeChange(current, pageSize) {
+class Hello extends React.Component {
+  state = {
+    pageSize: 20,
+  };
+  onShowSizeChange = (current, pageSize) => {
     console.log(current);
     this.setState({ pageSize });
-  },
+  }
   render() {
     return (
       <div style={{ margin: 10 }}>
@@ -37,7 +35,7 @@ const Hello = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 ReactDOM.render(<Hello />, document.getElementById('__react-content'));

@@ -1,34 +1,34 @@
-const React = require('react');
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class Pager extends React.Component {
-  render() {
-    const props = this.props;
-    const prefixCls = `${props.rootPrefixCls}-item`;
-    let cls = `${prefixCls} ${prefixCls}-${props.page}`;
+const Pager = (props) => {
+  const prefixCls = `${props.rootPrefixCls}-item`;
+  let cls = `${prefixCls} ${prefixCls}-${props.page}`;
 
-    if (props.active) {
-      cls = `${cls} ${prefixCls}-active`;
-    }
-
-    if (props.className) {
-      cls = `${cls} ${props.className}`;
-    }
-
-    return (
-      <li title={props.showTitle ? props.page : null} className={cls} onClick={props.onClick}>
-        <a>{props.page}</a>
-      </li>
-    );
+  if (props.active) {
+    cls = `${cls} ${prefixCls}-active`;
   }
-}
 
-Pager.propTypes = {
-  page: React.PropTypes.number,
-  active: React.PropTypes.bool,
-  last: React.PropTypes.bool,
-  locale: React.PropTypes.object,
-  className: React.PropTypes.string,
-  showTitle: React.PropTypes.bool,
+  if (props.className) {
+    cls = `${cls} ${props.className}`;
+  }
+
+  return (
+    <li title={props.showTitle ? props.page : null} className={cls} onClick={props.onClick}>
+      <a>{props.page}</a>
+    </li>
+  );
 };
 
-module.exports = Pager;
+Pager.propTypes = {
+  page: PropTypes.number,
+  active: PropTypes.bool,
+  last: PropTypes.bool,
+  locale: PropTypes.object,
+  className: PropTypes.string,
+  showTitle: PropTypes.bool,
+  rootPrefixCls: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+export default Pager;

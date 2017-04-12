@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>lessPages.js - example - rc-pagination@1.8.4</title>
+  <title>lessPages.js - example - rc-pagination@1.8.5</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-pagination@1.8.4</h1>
+      <h1>rc-pagination@1.8.5</h1>
 
       <p>pagination ui component for react</p>
     </div>
@@ -275,18 +275,16 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <span class="hljs-keyword">import</span> Pagination <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-pagination'</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">'rc-pagination/assets/index.css'</span>;
 
-<span class="hljs-keyword">const</span> App = React.createClass({
-  getInitialState() {
-    <span class="hljs-keyword">return</span> {
-      current: <span class="hljs-number">3</span>,
-    };
-  },
-  onChange(page) {
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+  state = {
+    current: <span class="hljs-number">3</span>,
+  };
+  onChange = (page) =&gt; {
     <span class="hljs-built_in">console</span>.log(page);
     <span class="hljs-keyword">this</span>.setState({
       current: page,
     });
-  },
+  }
   render() {
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
@@ -299,8 +297,8 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
         <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span> <span class="hljs-attribute">showLessItems</span> <span class="hljs-attribute">defaultCurrent</span>=<span class="hljs-value">{1}</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{60}</span> /&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     )</span>;
-  },
-});
+  }
+}
 
 ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">App</span> /&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>

@@ -196,7 +196,7 @@ class Pagination extends React.Component {
 
     const prefixCls = props.prefixCls;
     const allPages = this._calcPage();
-    const pagerList = [];
+    let pagerList = [];
     let jumpPrev = null;
     let jumpNext = null;
     let firstPager = null;

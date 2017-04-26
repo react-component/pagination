@@ -40,6 +40,7 @@
     "coverage": "rc-tools run coverage"
   },
   "devDependencies": {
+    "babel-preset-latest": "^6.24.1",
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
     "rc-select": "5.x",
@@ -53,5 +54,10 @@
   ],
   "dependencies": {
     "prop-types": "^15.5.7"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
   }
 }

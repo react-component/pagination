@@ -40,7 +40,7 @@
     "coverage": "rc-tools run coverage"
   },
   "devDependencies": {
-    "babel-preset-latest": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
     "rc-select": "5.x",
@@ -57,7 +57,7 @@
   },
   "babel": {
     "presets": [
-      "latest"
+      "env"
     ]
   }
 }

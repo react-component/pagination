@@ -74,6 +74,7 @@ React.render(<Pagination />, container);
 | style            | the style of pagination            | Object        | {}                       |
 | showLessItems    | show less page items               | Bool          | false                    |
 | showTitle        | show page items title              | Bool          | true                     |
+| renderUrl        | set url in items                   | Function(current) | null                 |
 
 ## License
 

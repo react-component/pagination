@@ -14,8 +14,18 @@ class App extends React.Component {
       current: page,
     });
   }
+  renderUrl = (page) => {
+    return `${location.pathname}?page=${page}`;
+  }
   render() {
-    return <Pagination onChange={this.onChange} current={this.state.current} total={25} />;
+    return (
+      <Pagination
+        onChange={this.onChange}
+        current={this.state.current}
+        total={25}
+        renderUrl={this.renderUrl}
+      />
+    );
   }
 }
 

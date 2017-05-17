@@ -1,15 +1,15 @@
 webpackJsonp([9],{
 
 /***/ 0:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(314);
+	module.exports = __webpack_require__(361);
 
 
-/***/ },
+/***/ }),
 
-/***/ 314:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 361:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -31,7 +31,7 @@ webpackJsonp([9],{
 	
 	_reactDom2.default.render(_react2.default.createElement(_rcPagination2.default, { defaultCurrent: 2, total: 25, style: { margin: '100px' } }), document.getElementById('__react-content'));
 
-/***/ }
+/***/ })
 
 });
 //# sourceMappingURL=styles.js.map

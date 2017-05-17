@@ -1,15 +1,15 @@
 webpackJsonp([3],{
 
 /***/ 0:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(308);
+	module.exports = __webpack_require__(355);
 
 
-/***/ },
+/***/ }),
 
-/***/ 308:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 355:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -31,7 +31,7 @@ webpackJsonp([3],{
 	
 	_reactDom2.default.render(_react2.default.createElement(_rcPagination2.default, { className: 'ant-pagination', defaultCurrent: 3, total: 450 }), document.getElementById('__react-content'));
 
-/***/ }
+/***/ })
 
 });
 //# sourceMappingURL=more.js.map

@@ -1,15 +1,15 @@
 webpackJsonp([5],{
 
 /***/ 0:
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(310);
+	module.exports = __webpack_require__(357);
 
 
-/***/ },
+/***/ }),
 
-/***/ 310:
-/***/ function(module, exports, __webpack_require__) {
+/***/ 357:
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -48,7 +48,7 @@ webpackJsonp([5],{
 	  })
 	), document.getElementById('__react-content'));
 
-/***/ }
+/***/ })
 
 });
 //# sourceMappingURL=showTotal.js.map

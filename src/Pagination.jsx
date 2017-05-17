@@ -212,6 +212,7 @@ class Pagination extends React.Component {
             title={props.showTitle ? locale.prev_page : null}
             onClick={this._prev}
             className={`${this._hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
+            aria-disabled={!this._hasPrev()}
           >
             <a />
           </li>
@@ -233,6 +234,7 @@ class Pagination extends React.Component {
             title={props.showTitle ? locale.next_page : null}
             onClick={this._next}
             className={`${this._hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
+            aria-disabled={!this._hasNext()}
           >
             <a />
           </li>
@@ -376,6 +378,7 @@ class Pagination extends React.Component {
           title={props.showTitle ? locale.prev_page : null}
           onClick={this._prev}
           className={`${this._hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
+          aria-disabled={!this._hasPrev()}
         >
           <a />
         </li>
@@ -384,6 +387,7 @@ class Pagination extends React.Component {
           title={props.showTitle ? locale.next_page : null}
           onClick={this._next}
           className={`${this._hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
+          aria-disabled={!this._hasNext()}
         >
           <a />
         </li>

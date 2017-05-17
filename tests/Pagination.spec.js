@@ -64,6 +64,7 @@ describe('Uncontrolled Pagination', () => {
     );
     expect(TestUtils.isDOMComponent(prevButton)).to.be(true);
     expect(prevButton.className).to.contain('rc-pagination-disabled');
+    expect(prevButton.getAttribute('aria-disabled')).to.equal('true');
   });
 
   it('should hightlight current page and not highlight other page', shouldHighlightRight);
@@ -83,6 +84,7 @@ describe('Uncontrolled Pagination', () => {
 
     expect(TestUtils.isDOMComponent(nextButton)).to.be(true);
     expect(nextButton.className).to.not.contain('rc-pagination-disabled');
+    expect(nextButton.getAttribute('aria-disabled')).to.equal('false');
   });
 
   it('should response mouse click right', (done) => {

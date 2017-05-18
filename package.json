@@ -1,6 +1,6 @@
 {
   "name": "rc-pagination",
-  "version": "1.8.8",
+  "version": "1.8.9",
   "description": "pagination ui component for react",
   "keywords": [
     "react",
@@ -20,17 +20,20 @@
   "license": "MIT",
   "files": [
     "lib",
+    "es",
     "assets/*.css"
   ],
   "main": "lib/index",
+  "module": "es/index",
   "config": {
     "port": 3000
   },
   "scripts": {
     "build": "rc-tools run build",
+    "compile": "rc-tools run compile --babel-runtime",
     "gh-pages": "rc-tools run gh-pages",
     "start": "rc-tools run server",
-    "pub": "rc-tools run pub",
+    "pub": "rc-tools run pub --babel-runtime",
     "lint": "rc-tools run lint",
     "lint:fix": "rc-tools run lint --fix",
     "karma": "rc-tools run karma",
@@ -43,7 +46,7 @@
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
     "rc-select": "5.x",
-    "rc-tools": "5.x",
+    "rc-tools": "6.x",
     "react": "^15.2.1",
     "react-addons-test-utils": "^15.3.1",
     "react-dom": "^15.2.1"

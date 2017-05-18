@@ -74,7 +74,7 @@
   right: 20px;
 }
 .rc-select-selection--single .rc-select-selection__clear:after {
-  content: '×';
+  content: '\D7';
 }
 .rc-select-disabled {
   color: #ccc;
@@ -258,7 +258,7 @@
   transition: opacity .3s, transform .3s, -webkit-transform .3s;
 }
 .rc-select .rc-select-selection__choice__remove:before {
-  content: '×';
+  content: '\D7';
 }
 .rc-select .rc-select-selection__choice__remove:hover {
   color: #333;

@@ -55,7 +55,7 @@
 }
 .rc-pagination-jump-prev:after,
 .rc-pagination-jump-next:after {
-  content: "•••";
+  content: "\2022\2022\2022";
   display: block;
   letter-spacing: 2px;
   color: #ccc;
@@ -67,10 +67,10 @@
   color: #2db7f5;
 }
 .rc-pagination-jump-prev:hover:after {
-  content: "«";
+  content: "\AB";
 }
 .rc-pagination-jump-next:hover:after {
-  content: "»";
+  content: "\BB";
 }
 .rc-pagination-prev,
 .rc-pagination-jump-prev,
@@ -93,11 +93,11 @@
   text-align: center;
 }
 .rc-pagination-prev a:after {
-  content: "‹";
+  content: "\2039";
   display: block;
 }
 .rc-pagination-next a:after {
-  content: "›";
+  content: "\203A";
   display: block;
 }
 .rc-pagination-prev,

@@ -172,14 +172,20 @@ class Pagination extends React.Component {
     }
   }
 
+  _getPrev() {
+    return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
+  }
+
   _jumpPrev() {
-    this._handleChange(Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5)));
+    this._handleChange(this._getPrev());
+  }
+
+  _getNext() {
+    return Math.min(this._calcPage(), this.state.current + (this.props.showLessItems ? 3 : 5));
   }
 
   _jumpNext() {
-    this._handleChange(
-      Math.min(this._calcPage(), this.state.current + (this.props.showLessItems ? 3 : 5))
-    );
+    this._handleChange(this._getNext());
   }
 
   _hasPrev() {
@@ -188,6 +194,16 @@ class Pagination extends React.Component {
 
   _hasNext() {
     return this.state.current < this._calcPage();
+  }
+
+  _renderUrl(page) {
+    if (page < 1 || page > this._calcPage()) {
+      return undefined;
+    }
+    if (this.props.renderUrl) {
+      return this.props.renderUrl(page);
+    }
+    return undefined;
   }
 
   render() {
@@ -214,7 +230,7 @@ class Pagination extends React.Component {
             className={`${this._hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
             aria-disabled={!this._hasPrev()}
           >
-            <a />
+            <a href={this._renderUrl(this.state.current - 1)}/>
           </li>
           <li
             title={props.showTitle ? `${this.state.current}/${allPages}` : null}
@@ -236,7 +252,7 @@ class Pagination extends React.Component {
             className={`${this._hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this._hasNext()}
           >
-            <a />
+            <a href={this._renderUrl(this.state.current + 1)}/>
           </li>
         </ul>
       );
@@ -252,6 +268,7 @@ class Pagination extends React.Component {
             onClick={this._handleChange.bind(this, i)}
             key={i}
             page={i}
+            href={this._renderUrl(i)}
             active={active}
             showTitle={props.showTitle}
           />
@@ -267,7 +284,7 @@ class Pagination extends React.Component {
           onClick={this._jumpPrev}
           className={`${prefixCls}-jump-prev`}
         >
-          <a />
+          <a href={this._renderUrl(this._getPrev())}/>
         </li>
       );
       jumpNext = (
@@ -277,7 +294,7 @@ class Pagination extends React.Component {
           onClick={this._jumpNext}
           className={`${prefixCls}-jump-next`}
         >
-          <a />
+          <a href={this._renderUrl(this._getNext())}/>
         </li>
       );
       lastPager = (
@@ -288,6 +305,7 @@ class Pagination extends React.Component {
           onClick={this._handleChange.bind(this, allPages)}
           key={allPages}
           page={allPages}
+          href={this._renderUrl(allPages)}
           active={false}
           showTitle={props.showTitle}
         />
@@ -299,6 +317,7 @@ class Pagination extends React.Component {
           onClick={this._handleChange.bind(this, 1)}
           key={1}
           page={1}
+          href={this._renderUrl(1)}
           active={false}
           showTitle={props.showTitle}
         />
@@ -324,6 +343,7 @@ class Pagination extends React.Component {
             onClick={this._handleChange.bind(this, i)}
             key={i}
             page={i}
+            href={this._renderUrl(i)}
             active={active}
             showTitle={props.showTitle}
           />
@@ -381,7 +401,7 @@ class Pagination extends React.Component {
           className={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
         >
-          <a />
+          <a href={this._renderUrl(this.state.current - 1)}/>
         </li>
         {pagerList}
         <li
@@ -390,7 +410,7 @@ class Pagination extends React.Component {
           className={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}
         >
-          <a />
+          <a href={this._renderUrl(this.state.current + 1)}/>
         </li>
         <Options
           locale={props.locale}
@@ -426,6 +446,7 @@ Pagination.propTypes = {
   showTotal: PropTypes.func,
   locale: PropTypes.object,
   style: PropTypes.object,
+  renderUrl: PropTypes.func,
 };
 
 Pagination.defaultProps = {
@@ -444,6 +465,7 @@ Pagination.defaultProps = {
   onShowSizeChange: noop,
   locale: LOCALE,
   style: {},
+  renderUrl: null,
 };
 
 export default Pagination;

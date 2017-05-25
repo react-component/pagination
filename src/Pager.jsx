@@ -14,7 +14,13 @@ const Pager = (props) => {
   }
 
   return (
-    <li title={props.showTitle ? props.page : null} className={cls} onClick={props.onClick}>
+    <li
+      title={props.showTitle ? props.page : null}
+      className={cls}
+      onClick={props.onClick}
+      onKeyPress={props.onKeyPress}
+      tabIndex="0"
+    >
       <a>{props.page}</a>
     </li>
   );
@@ -29,6 +35,7 @@ Pager.propTypes = {
   showTitle: PropTypes.bool,
   rootPrefixCls: PropTypes.string,
   onClick: PropTypes.func,
+  onKeyPress: PropTypes.func,
 };
 
 export default Pager;

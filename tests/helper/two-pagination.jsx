@@ -1,5 +1,5 @@
 import 'rc-select/assets/index.css';
-import Pagination from 'rc-pagination';
+import Pagination from '../../src';
 import React from 'react';
 import Select from 'rc-select';
 

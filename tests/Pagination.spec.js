@@ -1,9 +1,10 @@
 /* eslint func-names: 0, no-console: 0 */
 import expect from 'expect.js';
-import Pagination from '../';
+import Pagination from '../src';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
+import TwoPagination from './helper/two-pagination';
 
 const Simulate = TestUtils.Simulate;
 
@@ -185,8 +186,6 @@ describe('Controlled Pagination', () => {
 });
 
 describe('Controlled Pagination', () => {
-  const TwoPagination = require('./helper/two-pagination');
-
   let entry = null;
   const container = document.createElement('div');
   document.body.appendChild(container);

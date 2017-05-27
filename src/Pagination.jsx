@@ -190,6 +190,12 @@ class Pagination extends React.Component {
     return this.state.current < this._calcPage();
   }
 
+  _runIfEnter(event, callback) {
+    if (event.key === 'Enter' || event.charCode === 13) {
+      callback();
+    }
+  }
+
   render() {
     const props = this.props;
     const locale = props.locale;
@@ -211,6 +217,8 @@ class Pagination extends React.Component {
           <li
             title={props.showTitle ? locale.prev_page : null}
             onClick={this._prev}
+            tabIndex="0"
+            onKeyPress={(evt) => this._runIfEnter(evt, this._prev)}
             className={`${this._hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
             aria-disabled={!this._hasPrev()}
           >
@@ -233,6 +241,8 @@ class Pagination extends React.Component {
           <li
             title={props.showTitle ? locale.next_page : null}
             onClick={this._next}
+            tabIndex="0"
+            onKeyPress={(evt) => this._runIfEnter(evt, this._next)}
             className={`${this._hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this._hasNext()}
           >
@@ -250,6 +260,7 @@ class Pagination extends React.Component {
             locale={locale}
             rootPrefixCls={prefixCls}
             onClick={this._handleChange.bind(this, i)}
+            onKeyPress={(evt) => this._runIfEnter(evt, this._handleChange.bind(this, i))}
             key={i}
             page={i}
             active={active}
@@ -265,6 +276,8 @@ class Pagination extends React.Component {
           title={props.showTitle ? prevItemTitle : null}
           key="prev"
           onClick={this._jumpPrev}
+          tabIndex="0"
+          onKeyPress={(evt) => this._runIfEnter(evt, this._jumpPrev)}
           className={`${prefixCls}-jump-prev`}
         >
           <a />
@@ -274,7 +287,9 @@ class Pagination extends React.Component {
         <li
           title={props.showTitle ? nextItemTitle : null}
           key="next"
+          tabIndex="0"
           onClick={this._jumpNext}
+          onKeyPress={(evt) => this._runIfEnter(evt, this._jumpNext)}
           className={`${prefixCls}-jump-next`}
         >
           <a />
@@ -286,6 +301,7 @@ class Pagination extends React.Component {
           last
           rootPrefixCls={prefixCls}
           onClick={this._handleChange.bind(this, allPages)}
+          onKeyPress={(evt) => this._runIfEnter(evt, this._handleChange.bind(this, allPages))}
           key={allPages}
           page={allPages}
           active={false}
@@ -297,6 +313,7 @@ class Pagination extends React.Component {
           locale={props.locale}
           rootPrefixCls={prefixCls}
           onClick={this._handleChange.bind(this, 1)}
+          onKeyPress={(evt) => this._runIfEnter(evt, this._handleChange.bind(this, 1))}
           key={1}
           page={1}
           active={false}
@@ -322,6 +339,7 @@ class Pagination extends React.Component {
             locale={props.locale}
             rootPrefixCls={prefixCls}
             onClick={this._handleChange.bind(this, i)}
+            onKeyPress={(evt) => this._runIfEnter(evt, this._handleChange.bind(this, i))}
             key={i}
             page={i}
             active={active}
@@ -378,6 +396,8 @@ class Pagination extends React.Component {
         <li
           title={props.showTitle ? locale.prev_page : null}
           onClick={this._prev}
+          tabIndex="0"
+          onKeyPress={(evt) => this._runIfEnter(evt, this._prev)}
           className={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
         >
@@ -387,6 +407,8 @@ class Pagination extends React.Component {
         <li
           title={props.showTitle ? locale.next_page : null}
           onClick={this._next}
+          tabIndex="0"
+          onKeyPress={(evt) => this._runIfEnter(evt, this._next)}
           className={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}
         >

@@ -18,7 +18,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_pagination__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_pagination___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rc_pagination__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_pagination_assets_index_less__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_pagination_assets_index_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rc_pagination_assets_index_less__);
 
@@ -58,7 +57,7 @@ var App = function (_React$Component) {
   __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default()(App, [{
     key: 'render',
     value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_rc_pagination___default.a, { onChange: this.onChange, current: this.state.current, total: 25 });
+      return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_rc_pagination__["a" /* default */], { onChange: this.onChange, current: this.state.current, total: 25 });
     }
   }]);
 

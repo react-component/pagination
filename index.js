@@ -1,2 +1,1 @@
-// do not modify this file
-module.exports = require('./src/');
+export { default } from './src/';

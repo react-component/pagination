@@ -8,7 +8,44 @@ import LOCALE from './locale/zh_CN';
 function noop() {
 }
 
-class Pagination extends React.Component {
+export default class Pagination extends React.Component {
+  static propTypes = {
+    current: PropTypes.number,
+    defaultCurrent: PropTypes.number,
+    total: PropTypes.number,
+    pageSize: PropTypes.number,
+    defaultPageSize: PropTypes.number,
+    onChange: PropTypes.func,
+    showSizeChanger: PropTypes.bool,
+    showLessItems: PropTypes.bool,
+    onShowSizeChange: PropTypes.func,
+    selectComponentClass: PropTypes.func,
+    showQuickJumper: PropTypes.bool,
+    showTitle: PropTypes.bool,
+    pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
+    showTotal: PropTypes.func,
+    locale: PropTypes.object,
+    style: PropTypes.object,
+  };
+
+  static defaultProps = {
+    defaultCurrent: 1,
+    total: 0,
+    defaultPageSize: 10,
+    onChange: noop,
+    className: '',
+    selectPrefixCls: 'rc-select',
+    prefixCls: 'rc-pagination',
+    selectComponentClass: null,
+    showQuickJumper: false,
+    showSizeChanger: false,
+    showLessItems: false,
+    showTitle: true,
+    onShowSizeChange: noop,
+    locale: LOCALE,
+    style: {},
+  };
+
   constructor(props) {
     super(props);
 
@@ -33,21 +70,6 @@ class Pagination extends React.Component {
       _current: current,
       pageSize,
     };
-
-    [
-      'render',
-      '_handleChange',
-      '_handleKeyUp',
-      '_handleKeyDown',
-      '_changePageSize',
-      '_isValid',
-      '_prev',
-      '_next',
-      '_hasPrev',
-      '_hasNext',
-      '_jumpPrev',
-      '_jumpNext',
-    ].forEach((method) => this[method] = this[method].bind(this));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -74,7 +96,7 @@ class Pagination extends React.Component {
 
   // private methods
 
-  _calcPage(p) {
+  _calcPage = (p) => {
     let pageSize = p;
     if (typeof pageSize === 'undefined') {
       pageSize = this.state.pageSize;
@@ -82,17 +104,17 @@ class Pagination extends React.Component {
     return Math.floor((this.props.total - 1) / pageSize) + 1;
   }
 
-  _isValid(page) {
+  _isValid = (page) => {
     return typeof page === 'number' && page >= 1 && page !== this.state.current;
   }
 
-  _handleKeyDown(evt) {
+  _handleKeyDown = (evt) => {
     if (evt.keyCode === KEYCODE.ARROW_UP || evt.keyCode === KEYCODE.ARROW_DOWN) {
       evt.preventDefault();
     }
   }
 
-  _handleKeyUp(evt) {
+  _handleKeyUp = (evt) => {
     const _val = evt.target.value;
     let val;
 
@@ -117,7 +139,7 @@ class Pagination extends React.Component {
     }
   }
 
-  _changePageSize(size) {
+  _changePageSize = (size) => {
     let current = this.state.current;
     const newCurrent = this._calcPage(size);
     current = current > newCurrent ? newCurrent : current;
@@ -137,7 +159,7 @@ class Pagination extends React.Component {
     this.props.onShowSizeChange(current, size);
   }
 
-  _handleChange(p) {
+  _handleChange = (p) => {
     let page = p;
     if (this._isValid(page)) {
       if (page > this._calcPage()) {
@@ -160,39 +182,39 @@ class Pagination extends React.Component {
     return this.state.current;
   }
 
-  _prev() {
+  _prev = () => {
     if (this._hasPrev()) {
       this._handleChange(this.state.current - 1);
     }
   }
 
-  _next() {
+  _next = () => {
     if (this._hasNext()) {
       this._handleChange(this.state.current + 1);
     }
   }
 
-  _jumpPrev() {
+  _jumpPrev = () => {
     this._handleChange(Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5)));
   }
 
-  _jumpNext() {
+  _jumpNext = () => {
     this._handleChange(
       Math.min(this._calcPage(), this.state.current + (this.props.showLessItems ? 3 : 5))
     );
   }
 
-  _hasPrev() {
+  _hasPrev = () => {
     return this.state.current > 1;
   }
 
-  _hasNext() {
+  _hasNext = () => {
     return this.state.current < this._calcPage();
   }
 
-  _runIfEnter(event, callback) {
+  _runIfEnter = (event, callback, ...restParams) => {
     if (event.key === 'Enter' || event.charCode === 13) {
-      callback();
+      callback(...restParams);
     }
   }
 
@@ -259,8 +281,8 @@ class Pagination extends React.Component {
           <Pager
             locale={locale}
             rootPrefixCls={prefixCls}
-            onClick={this._handleChange.bind(this, i)}
-            onKeyPress={(evt) => this._runIfEnter(evt, this._handleChange.bind(this, i))}
+            onClick={() => { this._handleChange(i); }}
+            onKeyPress={ (evt) => { this._runIfEnter(evt, this._handleChange, i);} }
             key={i}
             page={i}
             active={active}
@@ -300,8 +322,8 @@ class Pagination extends React.Component {
           locale={props.locale}
           last
           rootPrefixCls={prefixCls}
-          onClick={this._handleChange.bind(this, allPages)}
-          onKeyPress={(evt) => this._runIfEnter(evt, this._handleChange.bind(this, allPages))}
+          onClick={() => this._handleChange(allPages)}
+          onKeyPress={ (evt) => { this._runIfEnter(evt, this._handleChange, allPages);} }
           key={allPages}
           page={allPages}
           active={false}
@@ -312,8 +334,8 @@ class Pagination extends React.Component {
         <Pager
           locale={props.locale}
           rootPrefixCls={prefixCls}
-          onClick={this._handleChange.bind(this, 1)}
-          onKeyPress={(evt) => this._runIfEnter(evt, this._handleChange.bind(this, 1))}
+          onClick={() => this._handleChange(1)}
+          onKeyPress={(evt) => { this._runIfEnter(evt, this._handleChange, 1); }}
           key={1}
           page={1}
           active={false}
@@ -338,8 +360,8 @@ class Pagination extends React.Component {
           <Pager
             locale={props.locale}
             rootPrefixCls={prefixCls}
-            onClick={this._handleChange.bind(this, i)}
-            onKeyPress={(evt) => this._runIfEnter(evt, this._handleChange.bind(this, i))}
+            onClick={() => this._handleChange(i)}
+            onKeyPress={(evt) => { this._runIfEnter(evt, this._handleChange, i); }}
             key={i}
             page={i}
             active={active}
@@ -419,53 +441,13 @@ class Pagination extends React.Component {
           rootPrefixCls={prefixCls}
           selectComponentClass={props.selectComponentClass}
           selectPrefixCls={props.selectPrefixCls}
-          changeSize={this.props.showSizeChanger ? this._changePageSize.bind(this) : null}
+          changeSize={this.props.showSizeChanger ? this._changePageSize : null}
           current={this.state.current}
           pageSize={this.state.pageSize}
           pageSizeOptions={this.props.pageSizeOptions}
-          quickGo={this.props.showQuickJumper ? this._handleChange.bind(this) : null}
+          quickGo={this.props.showQuickJumper ? this._handleChange : null}
         />
       </ul>
     );
   }
-
 }
-
-Pagination.propTypes = {
-  current: PropTypes.number,
-  defaultCurrent: PropTypes.number,
-  total: PropTypes.number,
-  pageSize: PropTypes.number,
-  defaultPageSize: PropTypes.number,
-  onChange: PropTypes.func,
-  showSizeChanger: PropTypes.bool,
-  showLessItems: PropTypes.bool,
-  onShowSizeChange: PropTypes.func,
-  selectComponentClass: PropTypes.func,
-  showQuickJumper: PropTypes.bool,
-  showTitle: PropTypes.bool,
-  pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
-  showTotal: PropTypes.func,
-  locale: PropTypes.object,
-  style: PropTypes.object,
-};
-
-Pagination.defaultProps = {
-  defaultCurrent: 1,
-  total: 0,
-  defaultPageSize: 10,
-  onChange: noop,
-  className: '',
-  selectPrefixCls: 'rc-select',
-  prefixCls: 'rc-pagination',
-  selectComponentClass: null,
-  showQuickJumper: false,
-  showSizeChanger: false,
-  showLessItems: false,
-  showTitle: true,
-  onShowSizeChange: noop,
-  locale: LOCALE,
-  style: {},
-};
-
-export default Pagination;

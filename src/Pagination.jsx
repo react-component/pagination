@@ -256,6 +256,7 @@ export default class Pagination extends React.Component {
               onKeyDown={this._handleKeyDown}
               onKeyUp={this._handleKeyUp}
               onChange={this._handleKeyUp}
+              size="3"
             />
             <span className={`${prefixCls}-slash`}>／</span>
             {allPages}

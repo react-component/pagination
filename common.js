@@ -11411,7 +11411,8 @@ var Pagination = function (_React$Component) {
               value: this.state._current,
               onKeyDown: this._handleKeyDown,
               onKeyUp: this._handleKeyUp,
-              onChange: this._handleKeyUp
+              onChange: this._handleKeyUp,
+              size: '3'
             }),
             __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
               'span',

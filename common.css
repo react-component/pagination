@@ -170,7 +170,6 @@
   border: 1px solid #d9d9d9;
   outline: none;
   padding: 5px 8px;
-  width: 30px;
   min-height: 20px;
 }
 .rc-pagination-simple .rc-pagination-simple-pager input:hover {

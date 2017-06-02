@@ -43,6 +43,7 @@
     "coverage": "rc-test run coverage"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.4.0",
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
     "rc-select": "5.x",
@@ -58,5 +59,10 @@
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "prop-types": "^15.5.7"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   }
 }

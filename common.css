@@ -158,6 +158,7 @@
 .rc-pagination-simple .rc-pagination-simple-pager {
   float: left;
   margin-right: 8px;
+  list-style: none;
 }
 .rc-pagination-simple .rc-pagination-simple-pager .rc-pagination-slash {
   margin: 0 10px;

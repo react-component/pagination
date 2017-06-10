@@ -109,6 +109,9 @@ export default class Pagination extends React.Component {
   }
 
   _handleKeyDown = (evt) => {
+    if (evt.keyCode < 48 || evt.keyCode > 57) {
+      evt.preventDefault();
+    }
     if (evt.keyCode === KEYCODE.ARROW_UP || evt.keyCode === KEYCODE.ARROW_DOWN) {
       evt.preventDefault();
     }

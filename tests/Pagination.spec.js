@@ -2,7 +2,7 @@
 import expect from 'expect.js';
 import Pagination from '../src';
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import ReactDOM from 'react-dom';
 import TwoPagination from './helper/two-pagination';
 

@@ -11072,20 +11072,13 @@ var Options = function (_React$Component) {
       _current: props.current
     };
 
-    ['_handleChange', 'onKeyDown', '_changeSize', '_go', '_buildOptionText'].forEach(function (method) {
+    ['_handleChange', '_changeSize', '_go', '_buildOptionText'].forEach(function (method) {
       return _this[method] = _this[method].bind(_this);
     });
     return _this;
   }
 
   __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default()(Options, [{
-    key: 'onKeyDown',
-    value: function onKeyDown(e) {
-      if (e.keyCode < 48 || e.keyCode > 57) {
-        e.preventDefault();
-      }
-    }
-  }, {
     key: '_buildOptionText',
     value: function _buildOptionText(value) {
       return value + ' ' + this.props.locale.items_per_page;
@@ -11176,7 +11169,6 @@ var Options = function (_React$Component) {
           __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('input', {
             type: 'text',
             value: state._current,
-            onKeyDown: this.onKeyDown,
             onChange: this._handleChange,
             onKeyUp: this._go
           }),
@@ -11301,6 +11293,10 @@ Pager.propTypes = {
 
 
 function noop() {}
+
+function isInteger(value) {
+  return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
+}
 
 var Pagination = function (_React$Component) {
   __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default()(Pagination, _React$Component);
@@ -11691,13 +11687,10 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this._isValid = function (page) {
-    return typeof page === 'number' && page >= 1 && page !== _this3.state.current;
+    return isInteger(page) && page >= 1 && page !== _this3.state.current;
   };
 
   this._handleKeyDown = function (evt) {
-    if (evt.keyCode < 48 || evt.keyCode > 57) {
-      evt.preventDefault();
-    }
     if (evt.keyCode === __WEBPACK_IMPORTED_MODULE_8__KeyCode__["a" /* default */].ARROW_UP || evt.keyCode === __WEBPACK_IMPORTED_MODULE_8__KeyCode__["a" /* default */].ARROW_DOWN) {
       evt.preventDefault();
     }

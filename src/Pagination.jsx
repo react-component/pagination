@@ -8,6 +8,12 @@ import LOCALE from './locale/zh_CN';
 function noop() {
 }
 
+function isInteger(value) {
+  return typeof value === 'number' &&
+    isFinite(value) &&
+    Math.floor(value) === value;
+}
+
 export default class Pagination extends React.Component {
   static propTypes = {
     current: PropTypes.number,
@@ -105,13 +111,10 @@ export default class Pagination extends React.Component {
   }
 
   _isValid = (page) => {
-    return typeof page === 'number' && page >= 1 && page !== this.state.current;
+    return isInteger(page) && page >= 1 && page !== this.state.current;
   }
 
   _handleKeyDown = (evt) => {
-    if (evt.keyCode < 48 || evt.keyCode > 57) {
-      evt.preventDefault();
-    }
     if (evt.keyCode === KEYCODE.ARROW_UP || evt.keyCode === KEYCODE.ARROW_DOWN) {
       evt.preventDefault();
     }

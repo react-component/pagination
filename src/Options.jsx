@@ -28,17 +28,10 @@ class Options extends React.Component {
 
     [
       '_handleChange',
-      'onKeyDown',
       '_changeSize',
       '_go',
       '_buildOptionText',
     ].forEach((method) => this[method] = this[method].bind(this));
-  }
-
-  onKeyDown(e) {
-    if (e.keyCode < 48 || e.keyCode > 57) {
-      e.preventDefault();
-    }
   }
 
   _buildOptionText(value) {
@@ -119,7 +112,6 @@ class Options extends React.Component {
           <input
             type="text"
             value={state._current}
-            onKeyDown={this.onKeyDown}
             onChange={this._handleChange}
             onKeyUp={this._go}
           />

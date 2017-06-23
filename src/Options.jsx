@@ -23,44 +23,33 @@ class Options extends React.Component {
 
     this.state = {
       current: props.current,
-      _current: props.current,
+      goInputText: props.current,
     };
-
-    [
-      '_handleChange',
-      '_changeSize',
-      '_go',
-      '_buildOptionText',
-    ].forEach((method) => this[method] = this[method].bind(this));
   }
 
-  _buildOptionText(value) {
+  buildOptionText = (value) => {
     return `${value} ${this.props.locale.items_per_page}`;
   }
 
-  _changeSize(value) {
+  changeSize = (value) => {
     this.props.changeSize(Number(value));
   }
 
-  _handleChange(evt) {
+  handleChange = (evt) => {
     this.setState({
-      _current: evt.target.value,
+      goInputText: evt.target.value,
     });
   }
 
-  _go(e) {
-    const _val = e.target.value;
-    if (_val === '') {
+  go = (e) => {
+    if (e.target.value === '') {
       return;
     }
-    let val = Number(this.state._current);
-    if (isNaN(val)) {
-      val = this.state.current;
-    }
+    const val = isNaN(val) ? this.state.current : Number(this.state.goInputText);
     if (e.keyCode === KEYCODE.ENTER) {
       const c = this.props.quickGo(val);
       this.setState({
-        _current: c,
+        goInputText: c,
         current: c,
       });
     }
@@ -73,7 +62,7 @@ class Options extends React.Component {
     const prefixCls = `${props.rootPrefixCls}-options`;
     const changeSize = props.changeSize;
     const quickGo = props.quickGo;
-    const buildOptionText = props.buildOptionText || this._buildOptionText;
+    const buildOptionText = props.buildOptionText || this.buildOptionText;
     const Select = props.selectComponentClass;
     let changeSelect = null;
     let goInput = null;
@@ -97,7 +86,7 @@ class Options extends React.Component {
           optionLabelProp="children"
           dropdownMatchSelectWidth={false}
           value={pageSize.toString()}
-          onChange={this._changeSize}
+          onChange={this.changeSize}
           getPopupContainer={triggerNode => triggerNode.parentNode}
         >
           {options}
@@ -111,9 +100,9 @@ class Options extends React.Component {
           {locale.jump_to}
           <input
             type="text"
-            value={state._current}
-            onChange={this._handleChange}
-            onKeyUp={this._go}
+            value={state.goInputText}
+            onChange={this.handleChange}
+            onKeyUp={this.go}
           />
           {locale.page}
         </div>

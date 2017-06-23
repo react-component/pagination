@@ -23,7 +23,7 @@ class Options extends React.Component {
 
     this.state = {
       current: props.current,
-      goInputText: props.current,
+      goInputText: '',
     };
   }
 
@@ -35,9 +35,9 @@ class Options extends React.Component {
     this.props.changeSize(Number(value));
   }
 
-  handleChange = (evt) => {
+  handleChange = (e) => {
     this.setState({
-      goInputText: evt.target.value,
+      goInputText: e.target.value,
     });
   }
 
@@ -45,12 +45,14 @@ class Options extends React.Component {
     if (e.target.value === '') {
       return;
     }
-    const val = isNaN(val) ? this.state.current : Number(this.state.goInputText);
+    let val = Number(this.state.goInputText);
+    if (isNaN(val)) {
+      val = this.state.current;
+    }
     if (e.keyCode === KEYCODE.ENTER) {
-      const c = this.props.quickGo(val);
       this.setState({
-        goInputText: c,
-        current: c,
+        goInputText: '',
+        current: this.props.quickGo(val),
       });
     }
   }

@@ -402,7 +402,7 @@ export default class Pagination extends React.Component {
 
     if (props.showTotal) {
       totalText = (
-        <span className={`${prefixCls}-total-text`}>
+        <li className={`${prefixCls}-total-text`}>
           {props.showTotal(
             props.total,
             [
@@ -410,7 +410,7 @@ export default class Pagination extends React.Component {
               current * pageSize > props.total ? props.total : current * pageSize,
             ]
           )}
-        </span>
+        </li>
       );
     }
     const prevDisabled = !this._hasPrev();

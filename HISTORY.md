@@ -1,7 +1,13 @@
+1.9.0
+==================
+
+* Add keyboard support
+* Add es folder.
+
 1.8.0
 ==================
 
-* Add locale `zh_Tw`.
+* Add locale `zh_TW`.
 * Add `showTitle`.
 
 1.7.5

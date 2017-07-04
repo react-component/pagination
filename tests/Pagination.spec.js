@@ -21,7 +21,8 @@ describe('Uncontrolled Pagination', () => {
   }
 
   function shouldHighlightRight() {
-    const pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li');
+    const pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li')
+            .filter(pager => pager.className.indexOf('rc-pagination-total-text') === -1);
     const current2 = pagination.state.current;
     pagers.forEach((pager, index) => {
       // page starts from 1
@@ -71,7 +72,8 @@ describe('Uncontrolled Pagination', () => {
   it('should hightlight current page and not highlight other page', shouldHighlightRight);
 
   it('should calc page right', () => {
-    const pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li');
+    const pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li')
+            .filter(pager => pager.className.indexOf('rc-pagination-total-text') === -1);
     const knownPageCount = 3;
     const buttonLength = 2;
     expect(pagers.length).to.be(knownPageCount + buttonLength);

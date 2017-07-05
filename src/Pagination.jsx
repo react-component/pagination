@@ -100,8 +100,6 @@ export default class Pagination extends React.Component {
     }
   }
 
-  // private methods
-
   calculatePage = (p) => {
     let pageSize = p;
     if (typeof pageSize === 'undefined') {

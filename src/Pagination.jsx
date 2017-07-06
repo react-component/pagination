@@ -14,6 +14,10 @@ function isInteger(value) {
     Math.floor(value) === value;
 }
 
+function defaultItemRender(page, type) {
+  return <a>{type === 'page' ? page : ''}</a>;
+}
+
 export default class Pagination extends React.Component {
   static propTypes = {
     current: PropTypes.number,
@@ -32,6 +36,7 @@ export default class Pagination extends React.Component {
     showTotal: PropTypes.func,
     locale: PropTypes.object,
     style: PropTypes.object,
+    itemRender: PropTypes.func,
   };
 
   static defaultProps = {
@@ -50,6 +55,7 @@ export default class Pagination extends React.Component {
     onShowSizeChange: noop,
     locale: LOCALE,
     style: {},
+    itemRender: defaultItemRender,
   };
 
   constructor(props) {
@@ -98,6 +104,14 @@ export default class Pagination extends React.Component {
       newState.pageSize = nextProps.pageSize;
       this.setState(newState);
     }
+  }
+
+  getJumpPrevPage() {
+    return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
+  }
+
+  getJumpNextPage() {
+    return Math.min(this.calculatePage(), this.state.current + (this.props.showLessItems ? 3 : 5));
   }
 
   calculatePage = (p) => {
@@ -198,14 +212,20 @@ export default class Pagination extends React.Component {
     }
   }
 
+  getJumpPrevPage() {
+    return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
+  }
+
+  getJumpNextPage() {
+    return Math.min(this.calculatePage(), this.state.current + (this.props.showLessItems ? 3 : 5));
+  }
+
   jumpPrev = () => {
-    this.handleChange(Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5)));
+    this.handleChange(this.getJumpPrevPage());
   }
 
   jumpNext = () => {
-    this.handleChange(
-      Math.min(this.calculatePage(), this.state.current + (this.props.showLessItems ? 3 : 5))
-    );
+    this.handleChange(this.getJumpNextPage());
   }
 
   hasPrev = () => {
@@ -292,6 +312,7 @@ export default class Pagination extends React.Component {
             page={i}
             active={active}
             showTitle={props.showTitle}
+            itemRender={props.itemRender}
           />
         );
       }
@@ -307,7 +328,7 @@ export default class Pagination extends React.Component {
           onKeyPress={(e) => this.runIfEnter(e, this.jumpPrev)}
           className={`${prefixCls}-jump-prev`}
         >
-          <a />
+          {props.itemRender(this.getJumpPrevPage(), 'jump-prev')}
         </li>
       );
       jumpNext = (
@@ -319,7 +340,7 @@ export default class Pagination extends React.Component {
           onKeyPress={(e) => this.runIfEnter(e, this.jumpNext)}
           className={`${prefixCls}-jump-next`}
         >
-          <a />
+          {props.itemRender(this.getJumpNextPage(), 'jump-next')}
         </li>
       );
       lastPager = (
@@ -333,6 +354,7 @@ export default class Pagination extends React.Component {
           page={allPages}
           active={false}
           showTitle={props.showTitle}
+          itemRender={props.itemRender}
         />
       );
       firstPager = (
@@ -345,6 +367,7 @@ export default class Pagination extends React.Component {
           page={1}
           active={false}
           showTitle={props.showTitle}
+          itemRender={props.itemRender}
         />
       );
 
@@ -371,6 +394,7 @@ export default class Pagination extends React.Component {
             page={i}
             active={active}
             showTitle={props.showTitle}
+            itemRender={props.itemRender}
           />
         );
       }
@@ -413,6 +437,8 @@ export default class Pagination extends React.Component {
     }
     const prevDisabled = !this.hasPrev();
     const nextDisabled = !this.hasNext();
+    const prevPage = this.state.current - 1 > 0 ? this.state.current - 1 : 0;
+    const nextPage = this.state.current + 1 < allPages ? this.state.current + 1 : allPages;
     return (
       <ul
         className={`${prefixCls} ${props.className}`}
@@ -428,7 +454,7 @@ export default class Pagination extends React.Component {
           className={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
         >
-          <a />
+          {props.itemRender(prevPage, 'prev')}
         </li>
         {pagerList}
         <li
@@ -439,7 +465,7 @@ export default class Pagination extends React.Component {
           className={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}
         >
-          <a />
+          {props.itemRender(nextPage, 'next')}
         </li>
         <Options
           locale={props.locale}

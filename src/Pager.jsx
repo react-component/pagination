@@ -21,7 +21,7 @@ const Pager = (props) => {
       onKeyPress={props.onKeyPress}
       tabIndex="0"
     >
-      <a>{props.page}</a>
+      {props.itemRender(props.page, 'page')}
     </li>
   );
 };
@@ -36,6 +36,7 @@ Pager.propTypes = {
   rootPrefixCls: PropTypes.string,
   onClick: PropTypes.func,
   onKeyPress: PropTypes.func,
+  itemRender: PropTypes.func,
 };
 
 export default Pager;

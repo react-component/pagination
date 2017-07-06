@@ -74,7 +74,7 @@ React.render(<Pagination />, container);
 | style            | the style of pagination            | Object        | {}                       |
 | showLessItems    | show less page items               | Bool          | false                    |
 | showTitle        | show page items title              | Bool          | true                     |
-| itemRender       | custom page item renderer          | Function(current, type): React.ReactNode| `(current) => <a>{current}</a>` |
+| itemRender       | custom page item renderer          | Function(current, type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next'): React.ReactNode| `(current) => <a>{current}</a>` |
 
 ## License
 

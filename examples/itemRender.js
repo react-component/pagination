@@ -1,6 +1,6 @@
-webpackJsonp([4],{
+webpackJsonp([9],{
 
-/***/ 212:
+/***/ 206:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12,24 +12,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_dom__);
-// use jsx to render html, do not modify simple.html
 
 
 
 
 
+var itemRender = function itemRender(current, type) {
+  if (type === 'page') {
+    return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+      'a',
+      { href: '#' + current },
+      current
+    );
+  }
+  return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement('a', { href: '#' + current });
+};
 
-__WEBPACK_IMPORTED_MODULE_3_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_rc_pagination__["a" /* default */], { defaultCurrent: 2, total: 25 }), document.getElementById('__react-content'));
+__WEBPACK_IMPORTED_MODULE_3_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_rc_pagination__["a" /* default */], { total: 100, itemRender: itemRender }), document.getElementById('__react-content'));
 
 /***/ }),
 
-/***/ 363:
+/***/ 357:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(212);
+module.exports = __webpack_require__(206);
 
 
 /***/ })
 
-},[363]);
-//# sourceMappingURL=simple.js.map
+},[357]);
+//# sourceMappingURL=itemRender.js.map

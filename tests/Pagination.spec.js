@@ -187,7 +187,7 @@ describe('Controlled Pagination', () => {
   });
 });
 
-describe('Controlled Pagination', () => {
+describe('Two Pagination', () => {
   let entry = null;
   const container = document.createElement('div');
   document.body.appendChild(container);
@@ -220,5 +220,59 @@ describe('Controlled Pagination', () => {
       expect(p2.state.pageSize).to.be(50);
       done();
     }, 50);
+  });
+});
+
+describe('Other props', () => {
+  let pagination;
+  const currentPage = 12;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  const itemRender = (current) => {
+    return <a href={`#${current}`}>{current}</a>;
+  };
+
+  beforeEach((done) => {
+    ReactDOM.render(
+      <Pagination total={1000} current={currentPage} itemRender={itemRender} />,
+      container,
+      function () {
+        pagination = this;
+        done();
+      }
+    );
+  });
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('should support custom itemRender', () => {
+    const prev = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-prev'
+    );
+    const next = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-next'
+    );
+    const jumpPrev = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-jump-prev'
+    );
+    const jumpNext = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-jump-next'
+    );
+    const active = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-item-active'
+    );
+    expect(prev.innerHTML).to.be(`<a href="#${currentPage - 1}">${currentPage - 1}</a>`);
+    expect(next.innerHTML).to.be(`<a href="#${currentPage + 1}">${currentPage + 1}</a>`);
+    expect(jumpPrev.innerHTML).to.be(`<a href="#${currentPage - 5}">${currentPage - 5}</a>`);
+    expect(jumpNext.innerHTML).to.be(`<a href="#${currentPage + 5}">${currentPage + 5}</a>`);
+    expect(active.innerHTML).to.be(`<a href="#${currentPage}">${currentPage}</a>`);
   });
 });

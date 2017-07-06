@@ -65,7 +65,7 @@ React.render(<Pagination />, container);
 | onChange         | page change callback               | Function(current, pageSize)      | -     |
 | showSizeChanger  | show pageSize changer              | Bool          | false                    |
 | pageSizeOptions  | specify the sizeChanger selections | Array<String> | ['10', '20', '30', '40'] |
-| onShowSizeChange | pageSize change callback           | Function(current page, size)  | -        |
+| onShowSizeChange | pageSize change callback           | Function(current, size)  | -        |
 | showQuickJumper  | show quick goto jumper             | Bool          | false                    |
 | showTotal        | show total records and range            | Function(total, [from, to]) | -     |
 | className        | className of pagination            | String        | -                        |
@@ -74,6 +74,7 @@ React.render(<Pagination />, container);
 | style            | the style of pagination            | Object        | {}                       |
 | showLessItems    | show less page items               | Bool          | false                    |
 | showTitle        | show page items title              | Bool          | true                     |
+| itemRender       | custom page item renderer          | Function(current, type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next'): React.ReactNode| `(current) => <a>{current}</a>` |
 
 ## License
 

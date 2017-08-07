@@ -262,13 +262,13 @@ export default class Pagination extends React.Component {
   runIfEnterJumpNext = e => {
     this.runIfEnter(e, this.jumpNext);
   }
-    
+
   handleGoTO = e => {
-      if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
-        this.handleChange(this.state.currentInputValue);
-      }
+    if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
+      this.handleChange(this.state.currentInputValue);
+    }
   }
-    
+
   render() {
     const props = this.props;
     const locale = props.locale;

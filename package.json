@@ -1,6 +1,6 @@
 {
   "name": "rc-pagination",
-  "version": "1.10.1",
+  "version": "1.10.4",
   "description": "pagination ui component for react",
   "keywords": [
     "react",
@@ -19,6 +19,7 @@
   },
   "license": "MIT",
   "files": [
+    "dist",
     "lib",
     "es",
     "assets/*.css"
@@ -26,9 +27,16 @@
   "main": "lib/index",
   "module": "es/index",
   "config": {
-    "port": 3000
+    "port": 3000,
+    "entry": {
+      "rc-pagination": [
+        "./src/index.js",
+        "./assets/index.less"
+      ]
+    }
   },
   "scripts": {
+    "dist": "rc-tools run dist",
     "build": "rc-tools run build",
     "compile": "rc-tools run compile --babel-runtime",
     "gh-pages": "rc-tools run gh-pages",
@@ -55,7 +63,7 @@
     "lint"
   ],
   "dependencies": {
-    "babel-runtime": "^6.23.0",
+    "babel-runtime": "6.x",
     "prop-types": "^15.5.7"
   }
 }

@@ -12357,8 +12357,6 @@ Options.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-var _this = this;
-
 
 
 
@@ -12374,11 +12372,11 @@ var Pager = function Pager(props) {
     cls = cls + ' ' + props.className;
   }
 
-  _this.handleClick = function () {
+  var handleClick = function handleClick() {
     props.onClick(props.page);
   };
 
-  _this.handleKeyPress = function (e) {
+  var handleKeyPress = function handleKeyPress(e) {
     props.onKeyPress(e, props.onClick, props.page);
   };
 
@@ -12387,8 +12385,8 @@ var Pager = function Pager(props) {
     {
       title: props.showTitle ? props.page : null,
       className: cls,
-      onClick: _this.handleClick,
-      onKeyPress: _this.handleKeyPress,
+      onClick: handleClick,
+      onKeyPress: handleKeyPress,
       tabIndex: '0'
     },
     props.itemRender(props.page, 'page')

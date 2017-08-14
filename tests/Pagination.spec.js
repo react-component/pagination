@@ -40,6 +40,7 @@ describe('Uncontrolled Pagination', () => {
         onChange={onChange}
         defaultCurrent={1}
         total={25}
+        showQuickJumper={{ goButton: true }}
         showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
       />,
       container,
@@ -114,6 +115,27 @@ describe('Uncontrolled Pagination', () => {
     );
     expect(TestUtils.isDOMComponent(nextButton)).to.be(true);
     Simulate.click(nextButton);
+    setTimeout(() => {
+      expect(pagination.state.current).to.be(2);
+      expect(current).to.be(2);
+      expect(pageSize).to.be(10);
+      done();
+    }, 10);
+  });
+
+  it('should quick jump to expect page', (done) => {
+    const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-options-quick-jumper'
+    );
+    const input = quickJumper.querySelector('input');
+    const goButton = quickJumper.querySelector('button');
+    expect(TestUtils.isDOMComponent(quickJumper)).to.be(true);
+    expect(TestUtils.isDOMComponent(input)).to.be(true);
+    expect(TestUtils.isDOMComponent(goButton)).to.be(true);
+    input.value = '2';
+    Simulate.change(input);
+    Simulate.click(goButton);
     setTimeout(() => {
       expect(pagination.state.current).to.be(2);
       expect(current).to.be(2);

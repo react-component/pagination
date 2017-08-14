@@ -21,17 +21,19 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <p> customize node </p>
         <Pagination
           selectComponentClass={Select}
-          showQuickJumper={{ goButton: true }}
           showSizeChanger
+          showQuickJumper={{ goButton: <button>确定</button> }}
           defaultPageSize={20}
           defaultCurrent={5}
           onShowSizeChange={this.onShowSizeChange}
           onChange={this.onChange}
           total={450}
         />
-        <Pagination simple goButton defaultCurrent={1} total={50} />
+        <p> default node </p>
+        <Pagination simple showQuickJumper={{ goButton: true }} defaultCurrent={1} total={50} />
       </div>
     );
   }

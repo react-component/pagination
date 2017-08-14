@@ -13,11 +13,11 @@ const Pager = (props) => {
     cls = `${cls} ${props.className}`;
   }
 
-  this.handleClick = () => {
+  const handleClick = () => {
     props.onClick(props.page);
   };
 
-  this.handleKeyPress = e => {
+  const handleKeyPress = e => {
     props.onKeyPress(e, props.onClick, props.page);
   };
 
@@ -25,8 +25,8 @@ const Pager = (props) => {
     <li
       title={props.showTitle ? props.page : null}
       className={cls}
-      onClick={this.handleClick}
-      onKeyPress={this.handleKeyPress}
+      onClick={handleClick}
+      onKeyPress={handleKeyPress}
       tabIndex="0"
     >
       {props.itemRender(props.page, 'page')}

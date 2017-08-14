@@ -30,8 +30,7 @@ export default class Pagination extends React.Component {
     showLessItems: PropTypes.bool,
     onShowSizeChange: PropTypes.func,
     selectComponentClass: PropTypes.func,
-    showQuickJumper: PropTypes.bool,
-    goButton: PropTypes.bool,
+    showQuickJumper: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     showTitle: PropTypes.bool,
     pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
     showTotal: PropTypes.func,
@@ -50,7 +49,6 @@ export default class Pagination extends React.Component {
     prefixCls: 'rc-pagination',
     selectComponentClass: null,
     showQuickJumper: false,
-    goButton: false,
     showSizeChanger: false,
     showLessItems: false,
     showTitle: true,
@@ -282,26 +280,30 @@ export default class Pagination extends React.Component {
     let lastPager = null;
     let gotoButton = null;
 
-    const goButton = props.goButton;
+    const goButton = (props.showQuickJumper && props.showQuickJumper.goButton);
     const pageBufferSize = props.showLessItems ? 1 : 2;
     const { current, pageSize } = this.state;
 
     if (props.simple) {
       if (goButton) {
-        gotoButton = (
-          <li
-            title={props.showTitle ? `${locale.jump_to}${this.state.current}/${allPages}` : null}
-            className={`${prefixCls}-simple-pager`}
-          >
-            <button
-              type="button"
-              onClick={this.handleGoTO}
-              onKeyUp={this.handleGoTO}
+        if (typeof goButton === 'boolean') {
+          gotoButton = (
+            <li
+              title={props.showTitle ? `${locale.jump_to}${this.state.current}/${allPages}` : null}
+              className={`${prefixCls}-simple-pager`}
             >
-            {locale.jump_to_confirm}
-            </button>
-          </li>
-        );
+              <button
+                type="button"
+                onClick={this.handleGoTO}
+                onKeyUp={this.handleGoTO}
+              >
+              {locale.jump_to_confirm}
+              </button>
+            </li>
+          );
+        } else {
+          gotoButton = goButton;
+        }
       }
       return (
         <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`}>

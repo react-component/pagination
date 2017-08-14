@@ -19,14 +19,11 @@ class App extends React.Component {
   }
 
   render() {
-    const quickJumper = {
-      goButton: true,
-    };
     return (
       <div>
         <Pagination
           selectComponentClass={Select}
-          showQuickJumper={quickJumper}
+          showQuickJumper={{ goButton: true }}
           showSizeChanger
           defaultPageSize={20}
           defaultCurrent={5}

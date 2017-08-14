@@ -101,15 +101,19 @@ class Options extends React.Component {
 
     if (quickGo) {
       if (goButton) {
-        gotoButton = (
-          <button
-            type="button"
-            onClick={this.go}
-            onKeyUp={this.go}
-          >
-          {locale.jump_to_confirm}
-          </button>
-        );
+        if (typeof goButton === 'boolean') {
+          gotoButton = (
+            <button
+              type="button"
+              onClick={this.go}
+              onKeyUp={this.go}
+            >
+            {locale.jump_to_confirm}
+            </button>
+          );
+        } else {
+          gotoButton = goButton;
+        }
       }
       goInput = (
         <div className={`${prefixCls}-quick-jumper`}>

@@ -42,14 +42,15 @@ class Options extends React.Component {
   }
 
   go = (e) => {
-    if (e.target.value === '') {
+    let val = this.state.goInputText;
+    if (val === '') {
       return;
     }
-    let val = Number(this.state.goInputText);
+    val = Number(val);
     if (isNaN(val)) {
       val = this.state.current;
     }
-    if (e.keyCode === KEYCODE.ENTER) {
+    if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
       this.setState({
         goInputText: '',
         current: this.props.quickGo(val),
@@ -64,10 +65,12 @@ class Options extends React.Component {
     const prefixCls = `${props.rootPrefixCls}-options`;
     const changeSize = props.changeSize;
     const quickGo = props.quickGo;
+    const goButton = props.goButton;
     const buildOptionText = props.buildOptionText || this.buildOptionText;
     const Select = props.selectComponentClass;
     let changeSelect = null;
     let goInput = null;
+    let gotoButton = null;
 
     if (!(changeSize || quickGo)) {
       return null;
@@ -97,6 +100,21 @@ class Options extends React.Component {
     }
 
     if (quickGo) {
+      if (goButton) {
+        if (typeof goButton === 'boolean') {
+          gotoButton = (
+            <button
+              type="button"
+              onClick={this.go}
+              onKeyUp={this.go}
+            >
+            {locale.jump_to_confirm}
+            </button>
+          );
+        } else {
+          gotoButton = goButton;
+        }
+      }
       goInput = (
         <div className={`${prefixCls}-quick-jumper`}>
           {locale.jump_to}
@@ -107,6 +125,7 @@ class Options extends React.Component {
             onKeyUp={this.go}
           />
           {locale.page}
+          {gotoButton}
         </div>
       );
     }

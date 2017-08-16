@@ -30,7 +30,7 @@ export default class Pagination extends React.Component {
     showLessItems: PropTypes.bool,
     onShowSizeChange: PropTypes.func,
     selectComponentClass: PropTypes.func,
-    showQuickJumper: PropTypes.bool,
+    showQuickJumper: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     showTitle: PropTypes.bool,
     pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
     showTotal: PropTypes.func,
@@ -261,6 +261,12 @@ export default class Pagination extends React.Component {
     this.runIfEnter(e, this.jumpNext);
   }
 
+  handleGoTO = e => {
+    if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
+      this.handleChange(this.state.currentInputValue);
+    }
+  }
+
   render() {
     const props = this.props;
     const locale = props.locale;
@@ -272,11 +278,33 @@ export default class Pagination extends React.Component {
     let jumpNext = null;
     let firstPager = null;
     let lastPager = null;
+    let gotoButton = null;
 
+    const goButton = (props.showQuickJumper && props.showQuickJumper.goButton);
     const pageBufferSize = props.showLessItems ? 1 : 2;
     const { current, pageSize } = this.state;
 
     if (props.simple) {
+      if (goButton) {
+        if (typeof goButton === 'boolean') {
+          gotoButton = (
+            <li
+              title={props.showTitle ? `${locale.jump_to}${this.state.current}/${allPages}` : null}
+              className={`${prefixCls}-simple-pager`}
+            >
+              <button
+                type="button"
+                onClick={this.handleGoTO}
+                onKeyUp={this.handleGoTO}
+              >
+              {locale.jump_to_confirm}
+              </button>
+            </li>
+          );
+        } else {
+          gotoButton = goButton;
+        }
+      }
       return (
         <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`}>
           <li
@@ -314,6 +342,7 @@ export default class Pagination extends React.Component {
           >
             <a />
           </li>
+          {gotoButton}
         </ul>
       );
     }
@@ -496,6 +525,7 @@ export default class Pagination extends React.Component {
           pageSize={this.state.pageSize}
           pageSizeOptions={this.props.pageSizeOptions}
           quickGo={this.props.showQuickJumper ? this.handleChange : null}
+          goButton={goButton}
         />
       </ul>
     );

@@ -2,6 +2,7 @@ export default {
   // Options.jsx
   items_per_page: '/ sivu',
   jump_to: 'Mene',
+  jump_to_confirm: 'Potvrdite',
   page: '',
 
   // Pagination.jsx

@@ -2,6 +2,7 @@ export default {
   // Options.jsx
   items_per_page: '/ σελίδα',
   jump_to: 'Μετάβαση',
+  jump_to_confirm: 'επιβεβαιώνω',
   page: '',
 
   // Pagination.jsx

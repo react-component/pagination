@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>showTitle.js - example - rc-pagination@1.11.0</title>
+  <title>jumperWithGoButton.js - example - rc-pagination@1.11.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -257,7 +257,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
   }
   </script>
-  <link rel="stylesheet" href="../common.css" />
+  <link rel="stylesheet" href="../common.css" /><link rel="stylesheet" href="jumperWithGoButton.css" />
 </head>
 
 <body>
@@ -272,30 +272,39 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     <div class="highlight"><pre><code language="js"><span class="hljs-comment">/* eslint func-names: 0, no-console: 0 */</span>
 <span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
+<span class="hljs-keyword">import</span> Select <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-select'</span>;
 <span class="hljs-keyword">import</span> Pagination <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-pagination'</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">'rc-pagination/assets/index.css'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rc-select/assets/index.css'</span>;
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
-  state = {
-    current: <span class="hljs-number">3</span>,
-  };
-  onChange = (page) =&gt; {
-    <span class="hljs-built_in">console</span>.log(page);
-    <span class="hljs-keyword">this</span>.setState({
-      current: page,
-    });
+
+  onShowSizeChange = (current, pageSize) =&gt; {
+    <span class="hljs-built_in">console</span>.log(current);
+    <span class="hljs-built_in">console</span>.log(pageSize);
   }
+
+  onChange = (current, pageSize) =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onChange:current='</span>, current);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onChange:pageSize='</span>, pageSize);
+  }
+
   render() {
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span> customize node <span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span>
-          <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{this.onChange}</span>
-          <span class="hljs-attribute">current</span>=<span class="hljs-value">{this.state.current}</span>
-          <span class="hljs-attribute">total</span>=<span class="hljs-value">{80}</span>
-          <span class="hljs-attribute">showLessItems</span>
-          <span class="hljs-attribute">showTitle</span>=<span class="hljs-value">{false}</span>
-        /&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span> <span class="hljs-attribute">showLessItems</span> <span class="hljs-attribute">defaultCurrent</span>=<span class="hljs-value">{1}</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{60}</span> <span class="hljs-attribute">showTitle</span>=<span class="hljs-value">{false}</span> /&gt;</span>
+          <span class="hljs-attribute">selectComponentClass</span>=<span class="hljs-value">{Select}</span>
+          <span class="hljs-attribute">showSizeChanger</span>
+          <span class="hljs-attribute">showQuickJumper</span>=<span class="hljs-value">{{</span> <span class="hljs-attribute">goButton:</span> &lt;<span class="hljs-attribute">button</span>&gt;</span>确定<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span> }}
+          defaultPageSize={20}
+          defaultCurrent={5}
+          onShowSizeChange={this.onShowSizeChange}
+          onChange={this.onChange}
+          total={450}
+        /&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span> default node <span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span> <span class="hljs-attribute">simple</span> <span class="hljs-attribute">showQuickJumper</span>=<span class="hljs-value">{{</span> <span class="hljs-attribute">goButton:</span> <span class="hljs-attribute">true</span> }} <span class="hljs-attribute">defaultCurrent</span>=<span class="hljs-value">{1}</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{50}</span> /&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     )</span>;
   }
@@ -312,7 +321,7 @@ ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-t
   </a>
   <script>FastClick.attach(document.body);</script>
   <script src="../common.js?nowrap"></script>
-  <script src="showTitle.js?nowrap"></script>
+  <script src="jumperWithGoButton.js?nowrap"></script>
 </body>
 
 </html>

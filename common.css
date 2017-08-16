@@ -150,6 +150,38 @@
 .rc-pagination-options-quick-jumper input:hover {
   border-color: #2db7f5;
 }
+.rc-pagination-options-quick-jumper button {
+  display: inline-block;
+  margin: 0 8px;
+  font-weight: 500;
+  text-align: center;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 0 15px;
+  font-size: 12px;
+  border-radius: 6px;
+  height: 28px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  position: relative;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  border-color: #d9d9d9;
+}
+.rc-pagination-options-quick-jumper button:hover,
+.rc-pagination-options-quick-jumper button:active,
+.rc-pagination-options-quick-jumper button:focus {
+  color: #2db7f5;
+  background-color: #fff;
+  border-color: #2db7f5;
+}
 .rc-pagination-simple .rc-pagination-prev,
 .rc-pagination-simple .rc-pagination-next {
   border: none;
@@ -177,6 +209,38 @@
   min-height: 20px;
 }
 .rc-pagination-simple .rc-pagination-simple-pager input:hover {
+  border-color: #2db7f5;
+}
+.rc-pagination-simple .rc-pagination-simple-pager button {
+  display: inline-block;
+  margin: 0 8px;
+  font-weight: 500;
+  text-align: center;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 0 8px;
+  font-size: 12px;
+  border-radius: 6px;
+  height: 26px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  position: relative;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  border-color: #d9d9d9;
+}
+.rc-pagination-simple .rc-pagination-simple-pager button:hover,
+.rc-pagination-simple .rc-pagination-simple-pager button:active,
+.rc-pagination-simple .rc-pagination-simple-pager button:focus {
+  color: #2db7f5;
+  background-color: #fff;
   border-color: #2db7f5;
 }
 @media only screen and (max-width: 1024px) {

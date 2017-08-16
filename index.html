@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>rc-pagination@1.10.6 - pagination ui component for react</title>
+  <title>rc-pagination@1.11.0 - pagination ui component for react</title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>rc-pagination@1.10.6</h1>
+  <h1>rc-pagination@1.11.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -749,6 +749,8 @@
       <li><a href="examples/itemRender.html">itemRender</a></li>
       
       <li><a href="examples/jumper.html">jumper</a></li>
+      
+      <li><a href="examples/jumperWithGoButton.html">jumperWithGoButton</a></li>
       
       <li><a href="examples/lessPages.html">lessPages</a></li>
       
@@ -856,8 +858,8 @@ React.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-titl
 <tr>
 <td>showQuickJumper</td>
 <td>show quick goto jumper</td>
-<td>Bool</td>
-<td>false</td>
+<td>Bool / Object</td>
+<td>false / {goButton: true}</td>
 </tr>
 <tr>
 <td>showTotal</td>

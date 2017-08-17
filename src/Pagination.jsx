@@ -361,6 +361,7 @@ export default class Pagination extends React.Component {
             active={active}
             showTitle={props.showTitle}
             itemRender={props.itemRender}
+            allPages={allPages}
           />
         );
       }
@@ -376,7 +377,7 @@ export default class Pagination extends React.Component {
           onKeyPress={this.runIfEnterJumpPrev}
           className={`${prefixCls}-jump-prev`}
         >
-          {props.itemRender(this.getJumpPrevPage(), 'jump-prev')}
+          {props.itemRender(this.getJumpPrevPage(), 'jump-prev', allPages)}
         </li>
       );
       jumpNext = (
@@ -388,7 +389,7 @@ export default class Pagination extends React.Component {
           onKeyPress={this.runIfEnterJumpNext}
           className={`${prefixCls}-jump-next`}
         >
-          {props.itemRender(this.getJumpNextPage(), 'jump-next')}
+          {props.itemRender(this.getJumpNextPage(), 'jump-next', allPages)}
         </li>
       );
       lastPager = (
@@ -403,6 +404,7 @@ export default class Pagination extends React.Component {
           active={false}
           showTitle={props.showTitle}
           itemRender={props.itemRender}
+          allPages={allPages}
         />
       );
       firstPager = (
@@ -416,6 +418,7 @@ export default class Pagination extends React.Component {
           active={false}
           showTitle={props.showTitle}
           itemRender={props.itemRender}
+          allPages={allPages}
         />
       );
 
@@ -443,6 +446,7 @@ export default class Pagination extends React.Component {
             active={active}
             showTitle={props.showTitle}
             itemRender={props.itemRender}
+            allPages={allPages}
           />
         );
       }
@@ -502,7 +506,7 @@ export default class Pagination extends React.Component {
           className={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
         >
-          {props.itemRender(prevPage, 'prev')}
+          {props.itemRender(prevPage, 'prev', allPages)}
         </li>
         {pagerList}
         <li
@@ -513,7 +517,7 @@ export default class Pagination extends React.Component {
           className={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}
         >
-          {props.itemRender(nextPage, 'next')}
+          {props.itemRender(nextPage, 'next', allPages)}
         </li>
         <Options
           locale={props.locale}

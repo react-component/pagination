@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>itemRender.js - example - rc-pagination@1.11.0</title>
+  <title>itemRender.js - example - rc-pagination@1.12.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-pagination@1.11.0</h1>
+      <h1>rc-pagination@1.12.0</h1>
 
       <p>pagination ui component for react</p>
     </div>
@@ -274,17 +274,29 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
 
-<span class="hljs-keyword">const</span> itemRender = (current, type) =&gt; {
+<span class="hljs-keyword">const</span> itemRender = (current, type, element) =&gt; {
   <span class="hljs-keyword">if</span> (type === <span class="hljs-string">'page'</span>) {
     <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">{`#${current}`}</span>&gt;</span>{current}<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>;</span>
   }
-  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">{`#${current}`}</span> /&gt;</span>;</span>
+  <span class="hljs-keyword">return</span> element;
+};
+
+<span class="hljs-keyword">const</span> textItemRender = (current, type, element) =&gt; {
+  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">'prev'</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'Prev'</span>;
+  }
+  <span class="hljs-keyword">if</span> (type === <span class="hljs-string">'next'</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'Next'</span>;
+  }
+  <span class="hljs-keyword">return</span> element;
 };
 
 ReactDOM.render(
-  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{100}</span> <span class="hljs-attribute">itemRender</span>=<span class="hljs-value">{itemRender}</span> /&gt;</span>,
-  document.getElementById('__react-content')
-);
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{100}</span> <span class="hljs-attribute">itemRender</span>=<span class="hljs-value">{itemRender}</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{100}</span> <span class="hljs-attribute">itemRender</span>=<span class="hljs-value">{textItemRender}</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+, document.getElementById('__react-content'));
 </span></code></pre></div>
   </div>
   <a href="http://github.com/react-component/pagination">

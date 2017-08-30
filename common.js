@@ -12377,7 +12377,11 @@ var Pager = function Pager(props) {
       onKeyPress: handleKeyPress,
       tabIndex: '0'
     },
-    props.itemRender(props.page, 'page')
+    props.itemRender(props.page, 'page', __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'a',
+      null,
+      props.page
+    ))
   );
 };
 
@@ -12434,12 +12438,8 @@ function isInteger(value) {
   return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
 }
 
-function defaultItemRender(page, type) {
-  return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-    'a',
-    null,
-    type === 'page' ? page : ''
-  );
+function defaultItemRender(page, type, element) {
+  return element;
 }
 
 var Pagination = function (_React$Component) {
@@ -12644,7 +12644,7 @@ var Pagination = function (_React$Component) {
             onKeyPress: this.runIfEnterJumpPrev,
             className: prefixCls + '-jump-prev'
           },
-          props.itemRender(this.getJumpPrevPage(), 'jump-prev')
+          props.itemRender(this.getJumpPrevPage(), 'jump-prev', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', null))
         );
         jumpNext = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'li',
@@ -12656,7 +12656,7 @@ var Pagination = function (_React$Component) {
             onKeyPress: this.runIfEnterJumpNext,
             className: prefixCls + '-jump-next'
           },
-          props.itemRender(this.getJumpNextPage(), 'jump-next')
+          props.itemRender(this.getJumpNextPage(), 'jump-next', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', null))
         );
         lastPager = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Pager__["a" /* default */], {
           locale: props.locale,
@@ -12760,7 +12760,7 @@ var Pagination = function (_React$Component) {
             className: (!prevDisabled ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-prev',
             'aria-disabled': prevDisabled
           },
-          props.itemRender(prevPage, 'prev')
+          props.itemRender(prevPage, 'prev', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', null))
         ),
         pagerList,
         __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
@@ -12773,7 +12773,7 @@ var Pagination = function (_React$Component) {
             className: (!nextDisabled ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-next',
             'aria-disabled': nextDisabled
           },
-          props.itemRender(nextPage, 'next')
+          props.itemRender(nextPage, 'next', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', null))
         ),
         __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__Options__["a" /* default */], {
           locale: props.locale,

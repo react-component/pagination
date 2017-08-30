@@ -17,7 +17,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var itemRender = function itemRender(current, type) {
+var itemRender = function itemRender(current, type, element) {
   if (type === 'page') {
     return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
       'a',
@@ -25,10 +25,25 @@ var itemRender = function itemRender(current, type) {
       current
     );
   }
-  return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement('a', { href: '#' + current });
+  return element;
 };
 
-__WEBPACK_IMPORTED_MODULE_3_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_rc_pagination__["a" /* default */], { total: 100, itemRender: itemRender }), document.getElementById('__react-content'));
+var textItemRender = function textItemRender(current, type, element) {
+  if (type === 'prev') {
+    return 'Prev';
+  }
+  if (type === 'next') {
+    return 'Next';
+  }
+  return element;
+};
+
+__WEBPACK_IMPORTED_MODULE_3_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+  'div',
+  null,
+  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_rc_pagination__["a" /* default */], { total: 100, itemRender: itemRender }),
+  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_rc_pagination__["a" /* default */], { total: 100, itemRender: textItemRender })
+), document.getElementById('__react-content'));
 
 /***/ }),
 

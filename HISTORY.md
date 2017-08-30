@@ -1,3 +1,8 @@
+1.12.0
+==================
+
+* `itemRender(current, type)` => `itemRender(current, type, element): element`.
+
 1.11.0
 ==================
 

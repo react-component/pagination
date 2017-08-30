@@ -3,14 +3,26 @@ import Pagination from 'rc-pagination';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const itemRender = (current, type) => {
+const itemRender = (current, type, element) => {
   if (type === 'page') {
     return <a href={`#${current}`}>{current}</a>;
   }
-  return <a href={`#${current}`} />;
+  return element;
+};
+
+const textItemRender = (current, type, element) => {
+  if (type === 'prev') {
+    return 'Prev';
+  }
+  if (type === 'next') {
+    return 'Next';
+  }
+  return element;
 };
 
 ReactDOM.render(
-  <Pagination total={100} itemRender={itemRender} />,
-  document.getElementById('__react-content')
-);
+  <div>
+    <Pagination total={100} itemRender={itemRender} />
+    <Pagination total={100} itemRender={textItemRender} />
+  </div>
+, document.getElementById('__react-content'));

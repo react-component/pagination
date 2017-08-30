@@ -14,8 +14,8 @@ function isInteger(value) {
     Math.floor(value) === value;
 }
 
-function defaultItemRender(page, type) {
-  return <a>{type === 'page' ? page : ''}</a>;
+function defaultItemRender(page, type, element) {
+  return element;
 }
 
 export default class Pagination extends React.Component {
@@ -376,7 +376,7 @@ export default class Pagination extends React.Component {
           onKeyPress={this.runIfEnterJumpPrev}
           className={`${prefixCls}-jump-prev`}
         >
-          {props.itemRender(this.getJumpPrevPage(), 'jump-prev')}
+          {props.itemRender(this.getJumpPrevPage(), 'jump-prev', <a />)}
         </li>
       );
       jumpNext = (
@@ -388,7 +388,7 @@ export default class Pagination extends React.Component {
           onKeyPress={this.runIfEnterJumpNext}
           className={`${prefixCls}-jump-next`}
         >
-          {props.itemRender(this.getJumpNextPage(), 'jump-next')}
+          {props.itemRender(this.getJumpNextPage(), 'jump-next', <a />)}
         </li>
       );
       lastPager = (
@@ -502,7 +502,7 @@ export default class Pagination extends React.Component {
           className={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
         >
-          {props.itemRender(prevPage, 'prev')}
+          {props.itemRender(prevPage, 'prev', <a />)}
         </li>
         {pagerList}
         <li
@@ -513,7 +513,7 @@ export default class Pagination extends React.Component {
           className={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}
         >
-          {props.itemRender(nextPage, 'next')}
+          {props.itemRender(nextPage, 'next', <a />)}
         </li>
         <Options
           locale={props.locale}

@@ -23,7 +23,6 @@ React Pagination Component.
 [download-image]: https://img.shields.io/npm/dm/rc-pagination.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-pagination
 
-
 ## Development
 
 ```
@@ -74,7 +73,7 @@ React.render(<Pagination />, container);
 | style            | the style of pagination            | Object        | {}                       |
 | showLessItems    | show less page items               | Bool          | false                    |
 | showTitle        | show page items title              | Bool          | true                     |
-| itemRender       | custom page item renderer          | Function(current, type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next'): React.ReactNode| `(current) => <a>{current}</a>` |
+| itemRender       | custom page item renderer          | Function(current, type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next', element): React.ReactNode| `(current, type, element) => element` |
 
 ## License
 

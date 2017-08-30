@@ -29,7 +29,7 @@ const Pager = (props) => {
       onKeyPress={handleKeyPress}
       tabIndex="0"
     >
-      {props.itemRender(props.page, 'page')}
+      {props.itemRender(props.page, 'page', <a>{props.page}</a>)}
     </li>
   );
 };

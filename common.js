@@ -12644,7 +12644,7 @@ var Pagination = function (_React$Component) {
             onKeyPress: this.runIfEnterJumpPrev,
             className: prefixCls + '-jump-prev'
           },
-          props.itemRender(this.getJumpPrevPage(), 'jump-prev', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', null))
+          props.itemRender(this.getJumpPrevPage(), 'jump-prev', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
         );
         jumpNext = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'li',
@@ -12656,7 +12656,7 @@ var Pagination = function (_React$Component) {
             onKeyPress: this.runIfEnterJumpNext,
             className: prefixCls + '-jump-next'
           },
-          props.itemRender(this.getJumpNextPage(), 'jump-next', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', null))
+          props.itemRender(this.getJumpNextPage(), 'jump-next', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
         );
         lastPager = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Pager__["a" /* default */], {
           locale: props.locale,
@@ -12760,7 +12760,7 @@ var Pagination = function (_React$Component) {
             className: (!prevDisabled ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-prev',
             'aria-disabled': prevDisabled
           },
-          props.itemRender(prevPage, 'prev', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', null))
+          props.itemRender(prevPage, 'prev', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
         ),
         pagerList,
         __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
@@ -12773,7 +12773,7 @@ var Pagination = function (_React$Component) {
             className: (!nextDisabled ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-next',
             'aria-disabled': nextDisabled
           },
-          props.itemRender(nextPage, 'next', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', null))
+          props.itemRender(nextPage, 'next', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
         ),
         __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__Options__["a" /* default */], {
           locale: props.locale,

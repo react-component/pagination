@@ -74,7 +74,8 @@ describe('Uncontrolled Pagination', () => {
 
   it('should calc page right', () => {
     const pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li')
-            .filter(pager => pager.className.indexOf('rc-pagination-total-text') === -1);
+            .filter(pager => pager.className.indexOf('rc-pagination-total-text') === -1)
+            .filter(pager => pager.className.indexOf('rc-pagination-options') === -1);
     const knownPageCount = 3;
     const buttonLength = 2;
     expect(pagers.length).to.be(knownPageCount + buttonLength);

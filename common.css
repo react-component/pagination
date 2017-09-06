@@ -7,6 +7,9 @@
           user-select: none;
   padding: 0;
 }
+.rc-pagination > li {
+  list-style: none;
+}
 .rc-pagination-total-text {
   float: left;
   height: 30px;

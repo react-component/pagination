@@ -12541,6 +12541,9 @@ var Pagination = function (_React$Component) {
           pageSize = _state.pageSize;
 
 
+      var prevPage = current - 1 > 0 ? current - 1 : 0;
+      var nextPage = current + 1 < allPages ? current + 1 : allPages;
+
       if (props.simple) {
         if (goButton) {
           if (typeof goButton === 'boolean') {
@@ -12577,7 +12580,7 @@ var Pagination = function (_React$Component) {
               className: (this.hasPrev() ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-prev',
               'aria-disabled': !this.hasPrev()
             },
-            __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', null)
+            props.itemRender(prevPage, 'prev', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
           ),
           __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
             'li',
@@ -12610,7 +12613,7 @@ var Pagination = function (_React$Component) {
               className: (this.hasNext() ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-next',
               'aria-disabled': !this.hasNext()
             },
-            __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', null)
+            props.itemRender(prevPage, 'prev', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
           ),
           gotoButton
         );
@@ -12740,8 +12743,6 @@ var Pagination = function (_React$Component) {
       }
       var prevDisabled = !this.hasPrev();
       var nextDisabled = !this.hasNext();
-      var prevPage = this.state.current - 1 > 0 ? this.state.current - 1 : 0;
-      var nextPage = this.state.current + 1 < allPages ? this.state.current + 1 : allPages;
       return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
         'ul',
         {

@@ -131,10 +131,10 @@ class Options extends React.Component {
     }
 
     return (
-      <div className={`${prefixCls}`}>
+      <li className={`${prefixCls}`}>
         {changeSelect}
         {goInput}
-      </div>
+      </li>
     );
   }
 }

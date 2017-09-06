@@ -12308,7 +12308,7 @@ var Options = function (_React$Component) {
       }
 
       return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-        'div',
+        'li',
         { className: '' + prefixCls },
         changeSelect,
         goInput

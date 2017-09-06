@@ -284,6 +284,9 @@ export default class Pagination extends React.Component {
     const pageBufferSize = props.showLessItems ? 1 : 2;
     const { current, pageSize } = this.state;
 
+    const prevPage = current - 1 > 0 ? current - 1 : 0;
+    const nextPage = current + 1 < allPages ? current + 1 : allPages;
+
     if (props.simple) {
       if (goButton) {
         if (typeof goButton === 'boolean') {
@@ -315,7 +318,7 @@ export default class Pagination extends React.Component {
             className={`${this.hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
             aria-disabled={!this.hasPrev()}
           >
-            <a />
+            {props.itemRender(prevPage, 'prev', <a className={`${prefixCls}-item-link`} />)}
           </li>
           <li
             title={props.showTitle ? `${this.state.current}/${allPages}` : null}
@@ -340,7 +343,7 @@ export default class Pagination extends React.Component {
             className={`${this.hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this.hasNext()}
           >
-            <a />
+            {props.itemRender(prevPage, 'prev', <a className={`${prefixCls}-item-link`} />)}
           </li>
           {gotoButton}
         </ul>
@@ -489,8 +492,6 @@ export default class Pagination extends React.Component {
     }
     const prevDisabled = !this.hasPrev();
     const nextDisabled = !this.hasNext();
-    const prevPage = this.state.current - 1 > 0 ? this.state.current - 1 : 0;
-    const nextPage = this.state.current + 1 < allPages ? this.state.current + 1 : allPages;
     return (
       <ul
         className={`${prefixCls} ${props.className}`}

@@ -343,7 +343,7 @@ export default class Pagination extends React.Component {
             className={`${this.hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this.hasNext()}
           >
-            {props.itemRender(prevPage, 'prev', <a className={`${prefixCls}-item-link`} />)}
+            {props.itemRender(nextPage, 'next', <a className={`${prefixCls}-item-link`} />)}
           </li>
           {gotoButton}
         </ul>

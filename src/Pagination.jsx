@@ -309,7 +309,7 @@ export default class Pagination extends React.Component {
         }
       }
       return (
-        <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`}>
+        <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`} style={props.style}>
           <li
             title={props.showTitle ? locale.prev_page : null}
             onClick={this.prev}

@@ -12569,7 +12569,7 @@ var Pagination = function (_React$Component) {
         }
         return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'ul',
-          { className: prefixCls + ' ' + prefixCls + '-simple ' + props.className },
+          { className: prefixCls + ' ' + prefixCls + '-simple ' + props.className, style: props.style },
           __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
             'li',
             {

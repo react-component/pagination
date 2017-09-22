@@ -2074,7 +2074,7 @@ var Trigger = __WEBPACK_IMPORTED_MODULE_4_create_react_class___default()({
     this.clearDelayTimer();
   },
   onPopupMouseLeave: function onPopupMouseLeave(e) {
-            if (e.relatedTarget && !e.relatedTarget.setTimeout && this._component && __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5_rc_util_es_Dom_contains__["a" /* default */])(this._component.getPopupDomNode(), e.relatedTarget)) {
+            if (e.relatedTarget && !e.relatedTarget.setTimeout && this._component && this._component.getPopupDomNode && __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5_rc_util_es_Dom_contains__["a" /* default */])(this._component.getPopupDomNode(), e.relatedTarget)) {
       return;
     }
     this.delaySetPopupVisible(false, this.props.mouseLeaveDelay);

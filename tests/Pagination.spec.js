@@ -136,12 +136,14 @@ describe('Uncontrolled Pagination', () => {
     expect(TestUtils.isDOMComponent(goButton)).to.be(true);
     input.value = '2';
     Simulate.change(input);
-    Simulate.click(goButton);
     setTimeout(() => {
-      expect(pagination.state.current).to.be(2);
-      expect(current).to.be(2);
-      expect(pageSize).to.be(10);
-      done();
+      Simulate.click(goButton);
+      setTimeout(() => {
+        expect(pagination.state.current).to.be(2);
+        expect(current).to.be(2);
+        expect(pageSize).to.be(10);
+        done();
+      }, 10);
     }, 10);
   });
 
@@ -157,9 +159,13 @@ describe('Uncontrolled Pagination', () => {
       'rc-pagination-next'
     );
     Simulate.click(nextButton);
-    expect(totalText.innerHTML).to.be('11 - 20 of 25 items');
-    Simulate.click(nextButton);
-    expect(totalText.innerHTML).to.be('21 - 25 of 25 items');
+    setTimeout(() => {
+      expect(totalText.innerHTML).to.be('11 - 20 of 25 items');
+      Simulate.click(nextButton);
+      setTimeout(() => {
+        expect(totalText.innerHTML).to.be('21 - 25 of 25 items');
+      }, 10);
+    }, 10);
   });
 });
 

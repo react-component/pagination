@@ -305,3 +305,55 @@ describe('Other props', () => {
     expect(active.innerHTML).to.be(`<a href="#${currentPage}">${currentPage}</a>`);
   });
 });
+
+describe('hideOnSinglePage props', () => {
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  const itemRender = (current) => {
+    return <a href={`#${current}`}>{current}</a>;
+  };
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('should hide pager if hideOnSinglePage equals true', (done) => {
+    ReactDOM.render(
+      <Pagination total={10} itemRender={itemRender} hideOnSinglePage />,
+      container,
+      function () {
+        expect(() => {
+          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination');
+        }).to.throwException(/Did not find exactly one match/);
+        done();
+      }
+    );
+  });
+
+  it('should show pager if hideOnSinglePage equals false', (done) => {
+    ReactDOM.render(
+      <Pagination total={10} itemRender={itemRender} hideOnSinglePage={false} />,
+      container,
+      function () {
+        expect(() => {
+          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination');
+        }).to.not.throwException();
+        done();
+      }
+    );
+  });
+
+  it('should show pager if hideOnSinglePage equals true but more than 1 page', (done) => {
+    ReactDOM.render(
+      <Pagination total={10} pageSize={5} itemRender={itemRender} hideOnSinglePage={false} />,
+      container,
+      function () {
+        expect(() => {
+          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination');
+        }).to.not.throwException();
+        done();
+      }
+    );
+  });
+});

@@ -112,7 +112,12 @@ class Options extends React.Component {
             </button>
           );
         } else {
-          gotoButton = goButton;
+          gotoButton = (
+            <span
+              onClick={this.go}
+              onKeyUp={this.go}
+            >{goButton}</span>
+          );
         }
       }
       goInput = (

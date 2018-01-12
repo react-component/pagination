@@ -298,21 +298,21 @@ export default class Pagination extends React.Component {
       if (goButton) {
         if (typeof goButton === 'boolean') {
           gotoButton = (
-            <li
-              title={props.showTitle ? `${locale.jump_to}${this.state.current}/${allPages}` : null}
-              className={`${prefixCls}-simple-pager`}
+            <button
+              type="button"
+              onClick={this.handleGoTO}
+              onKeyUp={this.handleGoTO}
             >
-              <button
-                type="button"
-                onClick={this.handleGoTO}
-                onKeyUp={this.handleGoTO}
-              >
-              {locale.jump_to_confirm}
-              </button>
-            </li>
+            {locale.jump_to_confirm}
+            </button>
           );
         } else {
-          gotoButton = goButton;
+          gotoButton = (
+            <span
+              onClick={this.handleGoTO}
+              onKeyUp={this.handleGoTO}
+            >{goButton}</span>
+          );
         }
       }
       return (
@@ -352,7 +352,12 @@ export default class Pagination extends React.Component {
           >
             {props.itemRender(nextPage, 'next', <a className={`${prefixCls}-item-link`} />)}
           </li>
-          {gotoButton}
+          <li
+            title={props.showTitle ? `${locale.jump_to}${this.state.current}/${allPages}` : null}
+            className={`${prefixCls}-simple-pager`}
+          >
+            {gotoButton}
+          </li>
         </ul>
       );
     }

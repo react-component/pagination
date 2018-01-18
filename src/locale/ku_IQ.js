@@ -6,10 +6,10 @@ export default {
   page: '',
 
   // Pagination.jsx
-  prev_page: 'Rûpelê Berê',
-  next_page: 'Rûpelê Din',
-  prev_5: '5 Rûpelên Berê',
-  next_5: '5 Rûpelên Din',
-  prev_3: '3 Rûpelên Berê',
-  next_3: '3 Rûpelên Din',
+  prev_page: 'Rûpelê Pêş',
+  next_page: 'Rûpelê Paş',
+  prev_5: '5 Rûpelên Pêş',
+  next_5: '5 Rûpelên Paş',
+  prev_3: '3 Rûpelên Pêş',
+  next_3: '3 Rûpelên Paş',
 };

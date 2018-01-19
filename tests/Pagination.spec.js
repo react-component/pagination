@@ -357,3 +357,134 @@ describe('hideOnSinglePage props', () => {
     );
   });
 });
+
+describe('custom showQuickJumper button Pagination', () => {
+  let pagination = null;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  let current = 1;
+  let pageSize;
+  function onChange(page, pSize) {
+    current = page;
+    pageSize = pSize;
+  }
+
+  beforeEach((done) => {
+    ReactDOM.render(
+      <Pagination
+        onChange={onChange}
+        defaultCurrent={1}
+        total={25}
+        showQuickJumper={{ goButton: <button>go</button> }}
+        showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
+      />,
+      container,
+      function () {
+        pagination = this;
+        done();
+      },
+    );
+  });
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('should quick jump to expect page', (done) => {
+    const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-options-quick-jumper'
+    );
+    const input = quickJumper.querySelector('input');
+    const goButton = quickJumper.querySelector('button');
+    expect(TestUtils.isDOMComponent(quickJumper)).to.be(true);
+    expect(TestUtils.isDOMComponent(input)).to.be(true);
+    expect(TestUtils.isDOMComponent(goButton)).to.be(true);
+    input.value = '2';
+    Simulate.change(input);
+    setTimeout(() => {
+      Simulate.click(goButton);
+      setTimeout(() => {
+        expect(pagination.state.current).to.be(2);
+        expect(current).to.be(2);
+        expect(pageSize).to.be(10);
+        done();
+      }, 10);
+    }, 10);
+  });
+});
+
+
+describe('simple Pagination', () => {
+  let pagination = null;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  let current = 1;
+  let pageSize;
+  function onChange(page, pSize) {
+    current = page;
+    pageSize = pSize;
+  }
+
+  beforeEach((done) => {
+    ReactDOM.render(
+      <Pagination
+        simple
+        onChange={onChange}
+        defaultCurrent={1}
+        total={25}
+        showQuickJumper={{ goButton: <button>go</button> }}
+        showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
+      />,
+      container,
+      function () {
+        pagination = this;
+        done();
+      },
+    );
+  });
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('default current page is 1', () => {
+    const current3 = pagination.state.current;
+    expect(current3).to.be(1);
+  });
+
+  it('prev-button should be disabled', () => {
+    const prevButton = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-prev'
+    );
+    expect(TestUtils.isDOMComponent(prevButton)).to.be(true);
+    expect(prevButton.className).to.contain('rc-pagination-disabled');
+    expect(prevButton.getAttribute('aria-disabled')).to.equal('true');
+  });
+
+  it('should quick jump to expect page', (done) => {
+    const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-simple'
+    );
+    const input = quickJumper.querySelector('input');
+    const goButton = quickJumper.querySelector('button');
+    expect(TestUtils.isDOMComponent(quickJumper)).to.be(true);
+    expect(TestUtils.isDOMComponent(input)).to.be(true);
+    expect(TestUtils.isDOMComponent(goButton)).to.be(true);
+    input.value = '2';
+    Simulate.change(input);
+    setTimeout(() => {
+      Simulate.click(goButton);
+      setTimeout(() => {
+        expect(pagination.state.current).to.be(2);
+        expect(current).to.be(2);
+        expect(pageSize).to.be(10);
+        done();
+      }, 10);
+    }, 10);
+  });
+});

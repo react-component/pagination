@@ -303,7 +303,7 @@ export default class Pagination extends React.Component {
               onClick={this.handleGoTO}
               onKeyUp={this.handleGoTO}
             >
-            {locale.jump_to_confirm}
+              {locale.jump_to_confirm}
             </button>
           );
         } else {

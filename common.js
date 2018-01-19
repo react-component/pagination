@@ -2167,7 +2167,14 @@ var Options = function (_React$Component) {
               locale.jump_to_confirm
             );
           } else {
-            gotoButton = goButton;
+            gotoButton = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+              'span',
+              {
+                onClick: this.go,
+                onKeyUp: this.go
+              },
+              goButton
+            );
           }
         }
         goInput = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
@@ -2431,23 +2438,23 @@ var Pagination = function (_React$Component) {
         if (goButton) {
           if (typeof goButton === 'boolean') {
             gotoButton = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-              'li',
+              'button',
               {
-                title: props.showTitle ? '' + locale.jump_to + this.state.current + '/' + allPages : null,
-                className: prefixCls + '-simple-pager'
+                type: 'button',
+                onClick: this.handleGoTO,
+                onKeyUp: this.handleGoTO
               },
-              __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-                'button',
-                {
-                  type: 'button',
-                  onClick: this.handleGoTO,
-                  onKeyUp: this.handleGoTO
-                },
-                locale.jump_to_confirm
-              )
+              locale.jump_to_confirm
             );
           } else {
-            gotoButton = goButton;
+            gotoButton = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+              'span',
+              {
+                onClick: this.handleGoTO,
+                onKeyUp: this.handleGoTO
+              },
+              goButton
+            );
           }
         }
         return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
@@ -2498,7 +2505,14 @@ var Pagination = function (_React$Component) {
             },
             props.itemRender(nextPage, 'next', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
           ),
-          gotoButton
+          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+            'li',
+            {
+              title: props.showTitle ? '' + locale.jump_to + this.state.current + '/' + allPages : null,
+              className: prefixCls + '-simple-pager'
+            },
+            gotoButton
+          )
         );
       }
 

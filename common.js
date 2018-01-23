@@ -2456,6 +2456,14 @@ var Pagination = function (_React$Component) {
               goButton
             );
           }
+          gotoButton = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+            'li',
+            {
+              title: props.showTitle ? '' + locale.jump_to + this.state.current + '/' + allPages : null,
+              className: prefixCls + '-simple-pager'
+            },
+            gotoButton
+          );
         }
         return __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
           'ul',
@@ -2505,14 +2513,7 @@ var Pagination = function (_React$Component) {
             },
             props.itemRender(nextPage, 'next', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
           ),
-          __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-            'li',
-            {
-              title: props.showTitle ? '' + locale.jump_to + this.state.current + '/' + allPages : null,
-              className: prefixCls + '-simple-pager'
-            },
-            gotoButton
-          )
+          gotoButton
         );
       }
 

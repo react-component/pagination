@@ -314,6 +314,14 @@ export default class Pagination extends React.Component {
             >{goButton}</span>
           );
         }
+        gotoButton = (
+          <li
+            title={props.showTitle ? `${locale.jump_to}${this.state.current}/${allPages}` : null}
+            className={`${prefixCls}-simple-pager`}
+          >
+            {gotoButton}
+          </li>
+        );
       }
       return (
         <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`} style={props.style}>
@@ -352,12 +360,7 @@ export default class Pagination extends React.Component {
           >
             {props.itemRender(nextPage, 'next', <a className={`${prefixCls}-item-link`} />)}
           </li>
-          <li
-            title={props.showTitle ? `${locale.jump_to}${this.state.current}/${allPages}` : null}
-            className={`${prefixCls}-simple-pager`}
-          >
-            {gotoButton}
-          </li>
+          {gotoButton}
         </ul>
       );
     }

@@ -421,21 +421,12 @@ describe('simple Pagination', () => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
-  let current = 1;
-  let pageSize;
-  function onChange(page, pSize) {
-    current = page;
-    pageSize = pSize;
-  }
-
   beforeEach((done) => {
     ReactDOM.render(
       <Pagination
         simple
-        onChange={onChange}
         defaultCurrent={1}
         total={25}
-        showQuickJumper={{ goButton: <button>go</button> }}
         showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
       />,
       container,
@@ -463,6 +454,50 @@ describe('simple Pagination', () => {
     expect(TestUtils.isDOMComponent(prevButton)).to.be(true);
     expect(prevButton.className).to.contain('rc-pagination-disabled');
     expect(prevButton.getAttribute('aria-disabled')).to.equal('true');
+  });
+
+  it('no quick jump', () => {
+    const simplePagers = TestUtils.scryRenderedDOMComponentsWithClass(
+      pagination,
+      'rc-pagination-simple-pager'
+    );
+    expect(simplePagers.length).to.be(1);
+  });
+});
+
+
+describe('simple Pagination with quick jump', () => {
+  let pagination = null;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  let current = 1;
+  let pageSize;
+  function onChange(page, pSize) {
+    current = page;
+    pageSize = pSize;
+  }
+
+  beforeEach((done) => {
+    ReactDOM.render(
+      <Pagination
+        simple
+        onChange={onChange}
+        defaultCurrent={1}
+        total={25}
+        showQuickJumper={{ goButton: <button>go</button> }}
+        showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
+      />,
+      container,
+      function () {
+        pagination = this;
+        done();
+      },
+    );
+  });
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
   });
 
   it('should quick jump to expect page', (done) => {

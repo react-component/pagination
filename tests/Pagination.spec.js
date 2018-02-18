@@ -421,9 +421,14 @@ describe('simple Pagination', () => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
+  const itemRender = (page) => {
+    return <a href={`#${page}`}>{page}</a>;
+  };
+
   beforeEach((done) => {
     ReactDOM.render(
       <Pagination
+        itemRender={itemRender}
         simple
         defaultCurrent={1}
         total={25}
@@ -439,6 +444,27 @@ describe('simple Pagination', () => {
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('should support custom itemRender', () => {
+    const prev = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-prev'
+    );
+    const next = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-next'
+    );
+    const divider = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-divider'
+    );
+
+    const currentPage = 1;
+
+    expect(prev.innerHTML).to.be(`<a href="#${currentPage - 1}">${currentPage - 1}</a>`);
+    expect(next.innerHTML).to.be(`<a href="#${currentPage + 1}">${currentPage + 1}</a>`);
+    expect(divider.innerHTML).to.be(`<a href="#${currentPage}">${currentPage}</a>`);
   });
 
   it('default current page is 1', () => {

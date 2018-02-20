@@ -358,6 +358,52 @@ describe('hideOnSinglePage props', () => {
   });
 });
 
+describe('showPrevNextJumpers props', () => {
+  const container = document.createElement('div');
+  const currentPage = 12;
+  document.body.appendChild(container);
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('should hide jump-prev, jump-next if showPrevNextJumpers equals false', (done) => {
+    ReactDOM.render(
+      <Pagination total={1000} current={currentPage} showPrevNextJumpers={false} />,
+      container,
+      function () {
+        expect(() => {
+          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination-jump-prev');
+        }).to.throwException(/Did not find exactly one match/);
+        expect(() => {
+          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination-jump-next');
+        }).to.throwException(/Did not find exactly one match/);
+        done();
+      }
+    );
+  });
+
+  it('should show jump-prev, jump-next if showPrevNextJumpers equals true', (done) => {
+    ReactDOM.render(
+      <Pagination total={1000} current={currentPage} showPrevNextJumpers />,
+      container,
+      function () {
+        const jumpPrev = TestUtils.findRenderedDOMComponentWithClass(
+          this,
+          'rc-pagination-jump-prev'
+        );
+        const jumpNext = TestUtils.findRenderedDOMComponentWithClass(
+          this,
+          'rc-pagination-jump-next'
+        );
+        expect(TestUtils.isDOMComponent(jumpPrev)).to.be(true);
+        expect(TestUtils.isDOMComponent(jumpNext)).to.be(true);
+        done();
+      }
+    );
+  });
+});
+
 describe('custom showQuickJumper button Pagination', () => {
   let pagination = null;
   const container = document.createElement('div');

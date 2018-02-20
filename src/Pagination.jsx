@@ -31,6 +31,7 @@ export default class Pagination extends React.Component {
     showLessItems: PropTypes.bool,
     onShowSizeChange: PropTypes.func,
     selectComponentClass: PropTypes.func,
+    showPrevNextJumpers: PropTypes.bool,
     showQuickJumper: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     showTitle: PropTypes.bool,
     pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
@@ -50,6 +51,7 @@ export default class Pagination extends React.Component {
     prefixCls: 'rc-pagination',
     selectComponentClass: null,
     hideOnSinglePage: false,
+    showPrevNextJumpers: true,
     showQuickJumper: false,
     showSizeChanger: false,
     showLessItems: false,
@@ -385,34 +387,36 @@ export default class Pagination extends React.Component {
     } else {
       const prevItemTitle = props.showLessItems ? locale.prev_3 : locale.prev_5;
       const nextItemTitle = props.showLessItems ? locale.next_3 : locale.next_5;
-      jumpPrev = (
-        <li
-          title={props.showTitle ? prevItemTitle : null}
-          key="prev"
-          onClick={this.jumpPrev}
-          tabIndex="0"
-          onKeyPress={this.runIfEnterJumpPrev}
-          className={`${prefixCls}-jump-prev`}
-        >
-          {props.itemRender(
-            this.getJumpPrevPage(), 'jump-prev', <a className={`${prefixCls}-item-link`} />
-          )}
-        </li>
-      );
-      jumpNext = (
-        <li
-          title={props.showTitle ? nextItemTitle : null}
-          key="next"
-          tabIndex="0"
-          onClick={this.jumpNext}
-          onKeyPress={this.runIfEnterJumpNext}
-          className={`${prefixCls}-jump-next`}
-        >
-          {props.itemRender(
-            this.getJumpNextPage(), 'jump-next', <a className={`${prefixCls}-item-link`} />
-          )}
-        </li>
-      );
+      if (props.showPrevNextJumpers) {
+        jumpPrev = (
+          <li
+            title={props.showTitle ? prevItemTitle : null}
+            key="prev"
+            onClick={this.jumpPrev}
+            tabIndex="0"
+            onKeyPress={this.runIfEnterJumpPrev}
+            className={`${prefixCls}-jump-prev`}
+          >
+            {props.itemRender(
+              this.getJumpPrevPage(), 'jump-prev', <a className={`${prefixCls}-item-link`} />
+            )}
+          </li>
+        );
+        jumpNext = (
+          <li
+            title={props.showTitle ? nextItemTitle : null}
+            key="next"
+            tabIndex="0"
+            onClick={this.jumpNext}
+            onKeyPress={this.runIfEnterJumpNext}
+            className={`${prefixCls}-jump-next`}
+          >
+            {props.itemRender(
+              this.getJumpNextPage(), 'jump-next', <a className={`${prefixCls}-item-link`} />
+            )}
+          </li>
+        );
+      }
       lastPager = (
         <Pager
           locale={props.locale}

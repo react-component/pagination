@@ -1,3 +1,9 @@
+1.16.0
+==================
+
+* Add locale `id_ID`
+* Add prop showQuickJumper
+
 1.15.2
 ==================
 

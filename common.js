@@ -2537,30 +2537,32 @@ var Pagination = function (_React$Component) {
       } else {
         var prevItemTitle = props.showLessItems ? locale.prev_3 : locale.prev_5;
         var nextItemTitle = props.showLessItems ? locale.next_3 : locale.next_5;
-        jumpPrev = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-          'li',
-          {
-            title: props.showTitle ? prevItemTitle : null,
-            key: 'prev',
-            onClick: this.jumpPrev,
-            tabIndex: '0',
-            onKeyPress: this.runIfEnterJumpPrev,
-            className: prefixCls + '-jump-prev'
-          },
-          props.itemRender(this.getJumpPrevPage(), 'jump-prev', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
-        );
-        jumpNext = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
-          'li',
-          {
-            title: props.showTitle ? nextItemTitle : null,
-            key: 'next',
-            tabIndex: '0',
-            onClick: this.jumpNext,
-            onKeyPress: this.runIfEnterJumpNext,
-            className: prefixCls + '-jump-next'
-          },
-          props.itemRender(this.getJumpNextPage(), 'jump-next', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
-        );
+        if (props.showPrevNextJumpers) {
+          jumpPrev = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+            'li',
+            {
+              title: props.showTitle ? prevItemTitle : null,
+              key: 'prev',
+              onClick: this.jumpPrev,
+              tabIndex: '0',
+              onKeyPress: this.runIfEnterJumpPrev,
+              className: prefixCls + '-jump-prev'
+            },
+            props.itemRender(this.getJumpPrevPage(), 'jump-prev', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
+          );
+          jumpNext = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
+            'li',
+            {
+              title: props.showTitle ? nextItemTitle : null,
+              key: 'next',
+              tabIndex: '0',
+              onClick: this.jumpNext,
+              onKeyPress: this.runIfEnterJumpNext,
+              className: prefixCls + '-jump-next'
+            },
+            props.itemRender(this.getJumpNextPage(), 'jump-next', __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement('a', { className: prefixCls + '-item-link' }))
+          );
+        }
         lastPager = __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Pager__["a" /* default */], {
           locale: props.locale,
           last: true,
@@ -2707,6 +2709,7 @@ Pagination.propTypes = {
   showLessItems: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
   onShowSizeChange: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
   selectComponentClass: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.func,
+  showPrevNextJumpers: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
   showQuickJumper: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.oneOfType([__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool, __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.object]),
   showTitle: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.bool,
   pageSizeOptions: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.arrayOf(__WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string),
@@ -2725,6 +2728,7 @@ Pagination.defaultProps = {
   prefixCls: 'rc-pagination',
   selectComponentClass: null,
   hideOnSinglePage: false,
+  showPrevNextJumpers: true,
   showQuickJumper: false,
   showSizeChanger: false,
   showLessItems: false,

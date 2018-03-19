@@ -2,6 +2,7 @@ export default {
   // Options.jsx
   items_per_page: '/ strani',
   jump_to: 'Pojdi na',
+  jump_to_confirm: 'potrdi',
   page: '',
 
   // Pagination.jsx

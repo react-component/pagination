@@ -2,7 +2,7 @@
 ==================
 
 * Add locale `id_ID`
-* Add prop showQuickJumper
+* Add prop `showPrevNextJumpers`
 
 1.15.2
 ==================

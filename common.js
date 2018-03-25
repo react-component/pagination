@@ -2386,6 +2386,20 @@ var Pagination = function (_React$Component) {
       }
     }
   }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      // When current page change, fix focused style of prev item
+      // A hacky solution of https://github.com/ant-design/ant-design/issues/8948
+      var prefixCls = this.props.prefixCls;
+
+      if (prevState.current !== this.state.current && this.paginationNode) {
+        var lastCurrentNode = this.paginationNode.querySelector('.' + prefixCls + '-item-' + prevState.current);
+        if (lastCurrentNode && document.activeElement === lastCurrentNode) {
+          lastCurrentNode.blur();
+        }
+      }
+    }
+  }, {
     key: 'getJumpPrevPage',
     value: function getJumpPrevPage() {
       return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
@@ -2650,7 +2664,8 @@ var Pagination = function (_React$Component) {
         {
           className: prefixCls + ' ' + props.className,
           style: props.style,
-          unselectable: 'unselectable'
+          unselectable: 'unselectable',
+          ref: this.savePaginationNode
         },
         totalText,
         __WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(
@@ -2698,6 +2713,7 @@ var Pagination = function (_React$Component) {
 }(__WEBPACK_IMPORTED_MODULE_4_react___default.a.Component);
 
 Pagination.propTypes = {
+  prefixCls: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.string,
   current: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.number,
   defaultCurrent: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.number,
   total: __WEBPACK_IMPORTED_MODULE_5_prop_types___default.a.number,
@@ -2741,6 +2757,10 @@ Pagination.defaultProps = {
 
 var _initialiseProps = function _initialiseProps() {
   var _this2 = this;
+
+  this.savePaginationNode = function (node) {
+    _this2.paginationNode = node;
+  };
 
   this.calculatePage = function (p) {
     var pageSize = p;

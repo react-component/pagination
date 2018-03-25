@@ -20,6 +20,7 @@ function defaultItemRender(page, type, element) {
 
 export default class Pagination extends React.Component {
   static propTypes = {
+    prefixCls: PropTypes.string,
     current: PropTypes.number,
     defaultCurrent: PropTypes.number,
     total: PropTypes.number,
@@ -110,12 +111,30 @@ export default class Pagination extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // When current page change, fix focused style of prev item
+    // A hacky solution of https://github.com/ant-design/ant-design/issues/8948
+    const { prefixCls } = this.props;
+    if (prevState.current !== this.state.current && this.paginationNode) {
+      const lastCurrentNode = this.paginationNode.querySelector(
+        `.${prefixCls}-item-${prevState.current}`
+      );
+      if (lastCurrentNode && document.activeElement === lastCurrentNode) {
+        lastCurrentNode.blur();
+      }
+    }
+  }
+
   getJumpPrevPage() {
     return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
   }
 
   getJumpNextPage() {
     return Math.min(this.calculatePage(), this.state.current + (this.props.showLessItems ? 3 : 5));
+  }
+
+  savePaginationNode = (node) => {
+    this.paginationNode = node;
   }
 
   calculatePage = (p) => {
@@ -517,6 +536,7 @@ export default class Pagination extends React.Component {
         className={`${prefixCls} ${props.className}`}
         style={props.style}
         unselectable="unselectable"
+        ref={this.savePaginationNode}
       >
         {totalText}
         <li

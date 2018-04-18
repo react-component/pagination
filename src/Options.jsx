@@ -22,7 +22,6 @@ class Options extends React.Component {
     super(props);
 
     this.state = {
-      current: props.current,
       goInputText: '',
     };
   }
@@ -46,15 +45,12 @@ class Options extends React.Component {
     if (val === '') {
       return;
     }
-    val = Number(val);
-    if (isNaN(val)) {
-      val = this.state.current;
-    }
+    val = isNaN(val) ? this.props.current : Number(val);
     if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
       this.setState({
         goInputText: '',
-        current: this.props.quickGo(val),
       });
+      this.props.quickGo(val);
     }
   }
 

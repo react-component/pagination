@@ -459,6 +459,29 @@ describe('custom showQuickJumper button Pagination', () => {
       }, 10);
     }, 10);
   });
+
+  // https://github.com/ant-design/ant-design/issues/10080
+  it('should not quick jump to previous page when input invalid char', (done) => {
+    const pager = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination'
+    );
+    const nextButton = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-next'
+    );
+    Simulate.click(nextButton);
+    const input = pager.querySelector('input');
+    input.value = '&';
+    Simulate.change(input);
+    setTimeout(() => {
+      Simulate.keyUp(input, { key: 'Enter', keyCode: 13, which: 13 });
+      setTimeout(() => {
+        expect(pagination.state.current).to.be(2);
+        done();
+      }, 10);
+    }, 10);
+  });
 });
 
 

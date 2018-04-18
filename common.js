@@ -2087,20 +2087,16 @@ var Options = function (_React$Component) {
       if (val === '') {
         return;
       }
-      val = Number(val);
-      if (isNaN(val)) {
-        val = _this.state.current;
-      }
+      val = isNaN(val) ? _this.props.current : Number(val);
       if (e.keyCode === __WEBPACK_IMPORTED_MODULE_6__KeyCode__["a" /* default */].ENTER || e.type === 'click') {
         _this.setState({
-          goInputText: '',
-          current: _this.props.quickGo(val)
+          goInputText: ''
         });
+        _this.props.quickGo(val);
       }
     };
 
     _this.state = {
-      current: props.current,
       goInputText: ''
     };
     return _this;

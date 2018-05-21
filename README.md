@@ -38,7 +38,7 @@ online example: http://react-component.github.io/pagination/examples/
 
 ## Feature
 
-* support ie8,ie8+,chrome,firefox,safari
+* support ie9,ie9+,chrome,firefox,safari
 
 ## Install
 

@@ -184,14 +184,14 @@ export default class Pagination extends React.Component {
   }
 
   changePageSize = (size) => {
-	let current = this.state.current;
+	  let current = this.state.current;
     const newCurrent = this.calculatePage(size);
-	current = current > newCurrent ? newCurrent : current;
-	// fix the issue:
-	// Once 'total' is 0, 'current' in 'onShowSizeChange' is 0, which is not correct.
-	if (newCurrent === 0) {
-	  current = this.state.current;
-	}
+    current = current > newCurrent ? newCurrent : current;
+    // fix the issue:
+    // Once 'total' is 0, 'current' in 'onShowSizeChange' is 0, which is not correct.
+    if (newCurrent === 0) {
+      current = this.state.current;
+    }
 
     if (typeof size === 'number') {
       if (!('pageSize' in this.props)) {
@@ -200,9 +200,9 @@ export default class Pagination extends React.Component {
         });
       }
       if (!('current' in this.props)) {
-		this.setState({
-		  current,
-		  currentInputValue: current,
+        this.setState({
+          current,
+          currentInputValue: current,
 		});
       }
 	}

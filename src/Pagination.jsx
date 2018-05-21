@@ -205,7 +205,7 @@ export default class Pagination extends React.Component {
           currentInputValue: current,
 		    });
       }
-	}
+	  }
     this.props.onShowSizeChange(current, size);
   }
 

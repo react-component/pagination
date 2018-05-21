@@ -184,7 +184,7 @@ export default class Pagination extends React.Component {
   }
 
   changePageSize = (size) => {
-	  let current = this.state.current;
+    let current = this.state.current;
     const newCurrent = this.calculatePage(size);
     current = current > newCurrent ? newCurrent : current;
     // fix the issue:
@@ -203,9 +203,9 @@ export default class Pagination extends React.Component {
         this.setState({
           current,
           currentInputValue: current,
-		    });
+        });
       }
-	  }
+    }
     this.props.onShowSizeChange(current, size);
   }
 

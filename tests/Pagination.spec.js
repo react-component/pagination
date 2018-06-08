@@ -1,6 +1,7 @@
 /* eslint func-names: 0, no-console: 0 */
 import expect from 'expect.js';
 import Pagination from '../src';
+import Select from 'rc-select';
 import React from 'react';
 import TestUtils from 'react-dom/test-utils';
 import ReactDOM from 'react-dom';
@@ -587,6 +588,57 @@ describe('simple Pagination with quick jump', () => {
         expect(pagination.state.current).to.be(2);
         expect(current).to.be(2);
         expect(pageSize).to.be(10);
+        done();
+      }, 10);
+    }, 10);
+  });
+});
+
+// https://github.com/ant-design/ant-design/issues/10524
+describe('current value on onShowSizeChange when total is 0', () => {
+  let pagination = null;
+  let changeCurrent = 0;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  const onShowSizeChange = (current) => {
+    changeCurrent = current;
+  };
+
+  beforeEach((done) => {
+    ReactDOM.render(
+      <Pagination
+        selectComponentClass={Select}
+        showSizeChanger
+        onShowSizeChange={onShowSizeChange}
+        current={1}
+        total={0}
+      />,
+      container,
+      function () {
+        pagination = this;
+        done();
+      },
+    );
+  });
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('current should equal to the current in onShowSizeChange', (done) => {
+    const sizeChanger = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-options-size-changer'
+    );
+    Simulate.click(sizeChanger);
+    setTimeout(() => {
+      const menu = sizeChanger.querySelector('.rc-select-selection');
+      // Simulate to choose item of the drop down menu
+      Simulate.keyDown(menu, { key: 'Down', keyCode: 40, which: 40 });
+      setTimeout(() => {
+        Simulate.keyDown(menu, { key: 'Enter', keyCode: 13, which: 13 });
+        expect(pagination.state.current).to.be(changeCurrent);
         done();
       }, 10);
     }, 10);

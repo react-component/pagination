@@ -724,5 +724,4 @@ describe('data and aria props', () => {
       expect(pagination.paginationNode.getAttribute('role')).to.be('navigation');
     });
   });
-
 });

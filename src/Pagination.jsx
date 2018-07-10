@@ -321,6 +321,13 @@ export default class Pagination extends React.Component {
     const prevPage = current - 1 > 0 ? current - 1 : 0;
     const nextPage = current + 1 < allPages ? current + 1 : allPages;
 
+    const dataOrAriaAttributeProps = Object.keys(props).reduce((prev, key) => {
+      if ((key.substr(0, 5) === 'data-' || key.substr(0, 5) === 'aria-' || key === 'role')) {
+        prev[key] = props[key];
+      }
+      return prev;
+    }, {});
+
     if (props.simple) {
       if (goButton) {
         if (typeof goButton === 'boolean') {
@@ -352,7 +359,12 @@ export default class Pagination extends React.Component {
       }
 
       return (
-        <ul className={`${prefixCls} ${prefixCls}-simple ${props.className}`} style={props.style}>
+        <ul
+          className={`${prefixCls} ${prefixCls}-simple ${props.className}`}
+          style={props.style}
+          ref={this.savePaginationNode}
+          {...dataOrAriaAttributeProps}
+        >
           <li
             title={props.showTitle ? locale.prev_page : null}
             onClick={this.prev}
@@ -543,6 +555,7 @@ export default class Pagination extends React.Component {
         style={props.style}
         unselectable="unselectable"
         ref={this.savePaginationNode}
+        {...dataOrAriaAttributeProps}
       >
         {totalText}
         <li

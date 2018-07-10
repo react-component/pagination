@@ -644,3 +644,84 @@ describe('current value on onShowSizeChange when total is 0', () => {
     }, 10);
   });
 });
+
+describe('data and aria props', () => {
+  let pagination = null;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  describe('with simple prop', () => {
+    beforeEach((done) => {
+      ReactDOM.render(
+        <Pagination
+          simple
+          data-test="test-id"
+          data-id="12345"
+          aria-labelledby="labelledby-id"
+          aria-label="label-id"
+          role="navigation"
+        />,
+        container,
+        function () {
+          pagination = this;
+          done();
+        },
+      );
+    });
+
+    afterEach(() => {
+      ReactDOM.unmountComponentAtNode(container);
+    });
+
+    it('renders data attributes', () => {
+      expect(pagination.paginationNode.getAttribute('data-test')).to.be('test-id');
+      expect(pagination.paginationNode.getAttribute('data-id')).to.be('12345');
+    });
+
+    it('renders aria attributes', () => {
+      expect(pagination.paginationNode.getAttribute('aria-labelledby')).to.be('labelledby-id');
+      expect(pagination.paginationNode.getAttribute('aria-label')).to.be('label-id');
+    });
+
+    it('renders role attribute', () => {
+      expect(pagination.paginationNode.getAttribute('role')).to.be('navigation');
+    });
+  });
+
+  describe('without simple prop', () => {
+    beforeEach((done) => {
+      ReactDOM.render(
+        <Pagination
+          data-test="test-id"
+          data-id="12345"
+          aria-labelledby="labelledby-id"
+          aria-label="label-id"
+          role="navigation"
+        />,
+        container,
+        function () {
+          pagination = this;
+          done();
+        },
+      );
+    });
+
+    afterEach(() => {
+      ReactDOM.unmountComponentAtNode(container);
+    });
+
+    it('renders data attributes', () => {
+      expect(pagination.paginationNode.getAttribute('data-test')).to.be('test-id');
+      expect(pagination.paginationNode.getAttribute('data-id')).to.be('12345');
+    });
+
+    it('renders aria attributes', () => {
+      expect(pagination.paginationNode.getAttribute('aria-labelledby')).to.be('labelledby-id');
+      expect(pagination.paginationNode.getAttribute('aria-label')).to.be('label-id');
+    });
+
+    it('renders role attribute', () => {
+      expect(pagination.paginationNode.getAttribute('role')).to.be('navigation');
+    });
+  });
+});

@@ -303,7 +303,40 @@ describe('Other props', () => {
       pagination,
       'rc-pagination-item-active'
     );
+    expect(prev.innerHTML).to.be(`<a href="#${currentPage - 1}">${currentPage - 1}</a>`);
+    expect(next.innerHTML).to.be(`<a href="#${currentPage + 1}">${currentPage + 1}</a>`);
+    expect(jumpPrev.innerHTML).to.be(`<a href="#${currentPage - 5}">${currentPage - 5}</a>`);
+    expect(jumpNext.innerHTML).to.be(`<a href="#${currentPage + 5}">${currentPage + 5}</a>`);
+    expect(active.innerHTML).to.be(`<a href="#${currentPage}">${currentPage}</a>`);
+  });
+});
 
+describe('Other props', () => {
+  let pagination;
+  const currentPage = 12;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+  beforeEach((done) => {
+    ReactDOM.render(
+      <Pagination
+        total={1000}
+        current={currentPage}
+        linkIcon={'link-test'}
+        jumpLinkIcon={'jump-link-test'}
+      />,
+      container,
+      function () {
+        pagination = this;
+        done();
+      }
+    );
+  });
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('should support custom default icon', () => {
     const nextIcon = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
       'rc-pagination-next'
@@ -312,11 +345,6 @@ describe('Other props', () => {
       pagination,
       'rc-pagination-jump-next'
     );
-    expect(prev.innerHTML).to.be(`<a href="#${currentPage - 1}">${currentPage - 1}</a>`);
-    expect(next.innerHTML).to.be(`<a href="#${currentPage + 1}">${currentPage + 1}</a>`);
-    expect(jumpPrev.innerHTML).to.be(`<a href="#${currentPage - 5}">${currentPage - 5}</a>`);
-    expect(jumpNext.innerHTML).to.be(`<a href="#${currentPage + 5}">${currentPage + 5}</a>`);
-    expect(active.innerHTML).to.be(`<a href="#${currentPage}">${currentPage}</a>`);
     expect(nextIcon.innerHTML).to.be('link-test');
     expect(nextJumpIcon.innerHTML).to.be('jump-link-test');
   });

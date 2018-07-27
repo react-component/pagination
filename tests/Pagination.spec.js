@@ -265,7 +265,11 @@ describe('Other props', () => {
 
   beforeEach((done) => {
     ReactDOM.render(
-      <Pagination total={1000} current={currentPage} itemRender={itemRender} />,
+      <Pagination
+        total={1000}
+        current={currentPage}
+        itemRender={itemRender}
+      />,
       container,
       function () {
         pagination = this;
@@ -299,11 +303,22 @@ describe('Other props', () => {
       pagination,
       'rc-pagination-item-active'
     );
+
+    const nextIcon = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-next'
+    );
+    const nextJumpIcon = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-jump-next'
+    );
     expect(prev.innerHTML).to.be(`<a href="#${currentPage - 1}">${currentPage - 1}</a>`);
     expect(next.innerHTML).to.be(`<a href="#${currentPage + 1}">${currentPage + 1}</a>`);
     expect(jumpPrev.innerHTML).to.be(`<a href="#${currentPage - 5}">${currentPage - 5}</a>`);
     expect(jumpNext.innerHTML).to.be(`<a href="#${currentPage + 5}">${currentPage + 5}</a>`);
     expect(active.innerHTML).to.be(`<a href="#${currentPage}">${currentPage}</a>`);
+    expect(nextIcon.innerHTML).to.be('link-test');
+    expect(nextJumpIcon.innerHTML).to.be('jump-link-test');
   });
 });
 

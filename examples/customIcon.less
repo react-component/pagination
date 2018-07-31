@@ -1,0 +1,31 @@
+.rc-pagination-jump-prev,
+.rc-pagination-jump-next {
+    position: relative;
+    &:after {
+        opacity: 1;
+        transition: all .3s;
+    }
+    &:hover:after {
+        opacity: 0;
+        content: '•••';
+    }
+
+    &:hover {
+        .custom-icon-jump-prev,
+        .custom-icon-jump-next {
+            opacity: 1;
+        }
+    }
+}
+
+.custom-icon-jump-prev,
+.custom-icon-jump-next {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    opacity: 0;
+    transition: all .3s;
+}

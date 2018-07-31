@@ -76,8 +76,8 @@ React.render(<Pagination />, container);
 | showLessItems    | show less page items               | Bool          | false                    |
 | showTitle        | show page items title              | Bool          | true                     |
 | itemRender       | custom page item renderer          | Function(current, type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next', element): React.ReactNode| `(current, type, element) => element` |
-| linkIcon        | specific the default link icon      | ReactNode     | -                  |
-| jumpLinkIcon        | specific the default jump link icon | ReactNode | -                  |
+| customIcon        | specific the default custom icon, including next icon, previous icon, next jump icon and previous jump icon      | Function(props: { type: 'prev' | 'next' | 'jump-prev' | 'jump-next' }): ReactNode     | -                  |
+
 
 ## License
 

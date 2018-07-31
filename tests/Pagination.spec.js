@@ -316,13 +316,23 @@ describe('Other props', () => {
   const currentPage = 12;
   const container = document.createElement('div');
   document.body.appendChild(container);
+  const customIconFn = ({ type }) => {
+    switch (type) {
+      case 'next':
+      case 'prev':
+      case 'jump-next':
+      case 'jump-prev':
+        return type;
+      default:
+        return null;
+    }
+  };
   beforeEach((done) => {
     ReactDOM.render(
       <Pagination
         total={1000}
         current={currentPage}
-        linkIcon={'link-test'}
-        jumpLinkIcon={'jump-link-test'}
+        customIcon={customIconFn}
       />,
       container,
       function () {
@@ -341,12 +351,22 @@ describe('Other props', () => {
       pagination,
       'rc-pagination-next'
     );
-    const nextJumpIcon = TestUtils.findRenderedDOMComponentWithClass(
+    const prevIcon = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-prev'
+    );
+    const jumpNextIcon = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
       'rc-pagination-jump-next'
     );
-    expect(nextIcon.innerHTML).to.be('link-test');
-    expect(nextJumpIcon.innerHTML).to.be('jump-link-test');
+    const jumpPrevIcon = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-jump-prev'
+    );
+    expect(nextIcon.innerHTML).to.be('next');
+    expect(prevIcon.innerHTML).to.be('prev');
+    expect(jumpNextIcon.innerHTML).to.be('jump-next');
+    expect(jumpPrevIcon.innerHTML).to.be('jump-prev');
   });
 });
 

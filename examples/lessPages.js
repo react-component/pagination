@@ -87,9 +87,11 @@ class App extends React.Component {
   }
   render() {
     const customIcon = this.state.useIcon && customIconFn || undefined;
+    const paginationCls = this.state.useIcon && 'custom-pagination' || undefined;
     return (
       <div>
         <Pagination
+          className={paginationCls}
           onChange={this.onChange}
           current={this.state.current}
           total={80}

@@ -78,6 +78,7 @@ React.render(<Pagination />, container);
 | itemRender       | custom page item renderer          | Function(current, type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next', element): React.ReactNode| `(current, type, element) => element` |
 | customIcon        | specific the default custom icon, including next icon, previous icon, next jump icon and previous jump icon      | Function(props: { type: 'prev' | 'next' | 'jump-prev' | 'jump-next' }): ReactNode     | -                  |
 
+
 ## License
 
 rc-pagination is released under the MIT license.

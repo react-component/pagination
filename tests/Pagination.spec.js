@@ -265,7 +265,11 @@ describe('Other props', () => {
 
   beforeEach((done) => {
     ReactDOM.render(
-      <Pagination total={1000} current={currentPage} itemRender={itemRender} />,
+      <Pagination
+        total={1000}
+        current={currentPage}
+        itemRender={itemRender}
+      />,
       container,
       function () {
         pagination = this;
@@ -304,6 +308,65 @@ describe('Other props', () => {
     expect(jumpPrev.innerHTML).to.be(`<a href="#${currentPage - 5}">${currentPage - 5}</a>`);
     expect(jumpNext.innerHTML).to.be(`<a href="#${currentPage + 5}">${currentPage + 5}</a>`);
     expect(active.innerHTML).to.be(`<a href="#${currentPage}">${currentPage}</a>`);
+  });
+});
+
+describe('Other props', () => {
+  let pagination;
+  const currentPage = 12;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+  const customIconFn = ({ type }) => {
+    switch (type) {
+      case 'next':
+      case 'prev':
+      case 'jump-next':
+      case 'jump-prev':
+        return type;
+      default:
+        return null;
+    }
+  };
+  beforeEach((done) => {
+    ReactDOM.render(
+      <Pagination
+        total={1000}
+        current={currentPage}
+        customIcon={customIconFn}
+      />,
+      container,
+      function () {
+        pagination = this;
+        done();
+      }
+    );
+  });
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('should support custom default icon', () => {
+    const nextIcon = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-next'
+    );
+    const prevIcon = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-prev'
+    );
+    const jumpNextIcon = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-jump-next'
+    );
+    const jumpPrevIcon = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-jump-prev'
+    );
+    expect(nextIcon.innerHTML).to.be('next');
+    expect(prevIcon.innerHTML).to.be('prev');
+    expect(jumpNextIcon.innerHTML).to.be('jump-next');
+    expect(jumpPrevIcon.innerHTML).to.be('jump-prev');
   });
 });
 

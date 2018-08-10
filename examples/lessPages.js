@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.less';
-import './customIcon.less';
 
 const arrowPath = 'M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h' +
   '-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v' +
@@ -50,24 +49,10 @@ const getSvgIcon = (path, reverse, type) => {
   );
 };
 
-const nextIcon = getSvgIcon(arrowPath, false, 'next');
-const prevIcon = getSvgIcon(arrowPath, true, 'prev');
-const nextJumpIcon = getSvgIcon(doublePath, false, 'jump-next');
-const prevJumpIcon = getSvgIcon(doublePath, true, 'jump-prev');
-const customIconFn = ({ type }) => {
-  switch (type) {
-    case 'next':
-      return nextIcon;
-    case 'prev':
-      return prevIcon;
-    case 'jump-next':
-      return nextJumpIcon;
-    case 'jump-prev':
-      return prevJumpIcon;
-    default:
-      return null;
-  }
-};
+const nextIcon = () => getSvgIcon(arrowPath, false, 'next');
+const prevIcon = () => getSvgIcon(arrowPath, true, 'prev');
+const jumpNextIcon = () => getSvgIcon(doublePath, false, 'jump-next');
+const jumpPrevIcon = () => getSvgIcon(doublePath, true, 'jump-prev');
 
 class App extends React.Component {
   state = {
@@ -86,8 +71,13 @@ class App extends React.Component {
     });
   }
   render() {
-    const customIcon = this.state.useIcon && customIconFn || undefined;
     const paginationCls = this.state.useIcon && 'custom-pagination' || undefined;
+    const iconsProps = this.state.useIcon && {
+      prevIcon,
+      nextIcon,
+      jumpPrevIcon,
+      jumpNextIcon,
+    } || {};
     return (
       <div>
         <Pagination
@@ -97,13 +87,13 @@ class App extends React.Component {
           total={80}
           showLessItems
           style={{ marginBottom: '2rem' }}
-          customIcon={customIcon}
+          {...iconsProps}
         />
         <Pagination
           showLessItems
           defaultCurrent={1}
           total={60}
-          customIcon={customIcon}
+          {...iconsProps}
         />
         <div>
           <button onClick={this.toggleCustomIcon}>

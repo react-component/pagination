@@ -23,7 +23,7 @@ describe('Uncontrolled Pagination', () => {
 
   function shouldHighlightRight() {
     const pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li')
-            .filter(pager => pager.className.indexOf('rc-pagination-total-text') === -1);
+      .filter(pager => pager.className.indexOf('rc-pagination-total-text') === -1);
     const current2 = pagination.state.current;
     pagers.forEach((pager, index) => {
       // page starts from 1
@@ -75,8 +75,8 @@ describe('Uncontrolled Pagination', () => {
 
   it('should calc page right', () => {
     const pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li')
-            .filter(pager => pager.className.indexOf('rc-pagination-total-text') === -1)
-            .filter(pager => pager.className.indexOf('rc-pagination-options') === -1);
+      .filter(pager => pager.className.indexOf('rc-pagination-total-text') === -1)
+      .filter(pager => pager.className.indexOf('rc-pagination-options') === -1);
     const knownPageCount = 3;
     const buttonLength = 2;
     expect(pagers.length).to.be(knownPageCount + buttonLength);
@@ -316,23 +316,22 @@ describe('Other props', () => {
   const currentPage = 12;
   const container = document.createElement('div');
   document.body.appendChild(container);
-  const customIconFn = ({ type }) => {
-    switch (type) {
-      case 'next':
-      case 'prev':
-      case 'jump-next':
-      case 'jump-prev':
-        return type;
-      default:
-        return null;
-    }
+  const nextIcon = () => <span>nextIcon</span>;
+  const prevIcon = () => <span>prevIcon</span>;
+  const jumpNextIcon = () => <span>jumpNextIcon</span>;
+  const jumpPrevIcon = () => <span>jumpPrevIcon</span>;
+  const iconsProps = {
+    prevIcon,
+    nextIcon,
+    jumpPrevIcon,
+    jumpNextIcon,
   };
   beforeEach((done) => {
     ReactDOM.render(
       <Pagination
         total={1000}
         current={currentPage}
-        customIcon={customIconFn}
+        {...iconsProps}
       />,
       container,
       function () {
@@ -347,26 +346,26 @@ describe('Other props', () => {
   });
 
   it('should support custom default icon', () => {
-    const nextIcon = TestUtils.findRenderedDOMComponentWithClass(
+    const nextIconElement = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
       'rc-pagination-next'
     );
-    const prevIcon = TestUtils.findRenderedDOMComponentWithClass(
+    const prevIconElement = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
       'rc-pagination-prev'
     );
-    const jumpNextIcon = TestUtils.findRenderedDOMComponentWithClass(
+    const jumpNextIconElement = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
       'rc-pagination-jump-next'
     );
-    const jumpPrevIcon = TestUtils.findRenderedDOMComponentWithClass(
+    const jumpPrevIconElement = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
       'rc-pagination-jump-prev'
     );
-    expect(nextIcon.innerHTML).to.be('next');
-    expect(prevIcon.innerHTML).to.be('prev');
-    expect(jumpNextIcon.innerHTML).to.be('jump-next');
-    expect(jumpPrevIcon.innerHTML).to.be('jump-prev');
+    expect(nextIconElement.innerText).to.be('nextIcon');
+    expect(prevIconElement.innerText).to.be('prevIcon');
+    expect(jumpNextIconElement.innerText).to.be('jumpNextIcon');
+    expect(jumpPrevIconElement.innerText).to.be('jumpPrevIcon');
   });
 });
 

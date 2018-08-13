@@ -49,8 +49,8 @@ const getSvgIcon = (path, reverse, type) => {
   );
 };
 
-const nextIcon = () => getSvgIcon(arrowPath, false, 'next');
-const prevIcon = () => getSvgIcon(arrowPath, true, 'prev');
+const nextIcon = getSvgIcon(arrowPath, false, 'next');
+const prevIcon = getSvgIcon(arrowPath, true, 'prev');
 const jumpNextIcon = () => getSvgIcon(doublePath, false, 'jump-next');
 const jumpPrevIcon = () => getSvgIcon(doublePath, true, 'jump-prev');
 

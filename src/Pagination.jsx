@@ -140,7 +140,7 @@ export default class Pagination extends React.Component {
   /**
    * computed icon node that need to be rendered.
    * @param {React.ReactNode | React.ComponentType<PaginationProps>} icon received icon.
-   * @param {'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next'} type
+   * @param {'prev' | 'next' | 'jump-prev' | 'jump-next'} type
    * @returns {React.ReactNode}
    */
   getItemIcon = (icon, type) => {

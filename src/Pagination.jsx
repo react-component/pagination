@@ -40,6 +40,10 @@ export default class Pagination extends React.Component {
     locale: PropTypes.object,
     style: PropTypes.object,
     itemRender: PropTypes.func,
+    prevIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    nextIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    jumpPrevIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    jumpNextIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   };
 
   static defaultProps = {
@@ -131,6 +135,21 @@ export default class Pagination extends React.Component {
 
   getJumpNextPage() {
     return Math.min(this.calculatePage(), this.state.current + (this.props.showLessItems ? 3 : 5));
+  }
+
+  /**
+   * computed icon node that need to be rendered.
+   * @param {React.ReactNode | React.ComponentType<PaginationProps>} icon received icon.
+   * @returns {React.ReactNode}
+   */
+  getItemIcon = (icon) => {
+    const { prefixCls } = this.props;
+    let iconNode = icon
+      || <a className={`${prefixCls}-item-link`} />;
+    if (typeof icon === 'function') {
+      iconNode = React.createElement(icon, { ...this.props });
+    }
+    return iconNode;
   }
 
   savePaginationNode = (node) => {
@@ -373,7 +392,7 @@ export default class Pagination extends React.Component {
             className={`${this.hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
             aria-disabled={!this.hasPrev()}
           >
-            {props.itemRender(prevPage, 'prev', <a className={`${prefixCls}-item-link`} />)}
+            {props.itemRender(prevPage, 'prev', this.getItemIcon(props.prevIcon))}
           </li>
           <li
             title={props.showTitle ? `${this.state.current}/${allPages}` : null}
@@ -398,7 +417,7 @@ export default class Pagination extends React.Component {
             className={`${this.hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this.hasNext()}
           >
-            {props.itemRender(nextPage, 'next', <a className={`${prefixCls}-item-link`} />)}
+            {props.itemRender(nextPage, 'next', this.getItemIcon(props.nextIcon))}
           </li>
           {gotoButton}
         </ul>
@@ -426,6 +445,10 @@ export default class Pagination extends React.Component {
       const prevItemTitle = props.showLessItems ? locale.prev_3 : locale.prev_5;
       const nextItemTitle = props.showLessItems ? locale.next_3 : locale.next_5;
       if (props.showPrevNextJumpers) {
+        let jumpPrevClassString = `${prefixCls}-jump-prev`;
+        if (props.jumpPrevIcon) {
+          jumpPrevClassString += ` ${prefixCls}-jump-prev-custom-icon`;
+        }
         jumpPrev = (
           <li
             title={props.showTitle ? prevItemTitle : null}
@@ -433,13 +456,19 @@ export default class Pagination extends React.Component {
             onClick={this.jumpPrev}
             tabIndex="0"
             onKeyPress={this.runIfEnterJumpPrev}
-            className={`${prefixCls}-jump-prev`}
+            className={jumpPrevClassString}
           >
             {props.itemRender(
-              this.getJumpPrevPage(), 'jump-prev', <a className={`${prefixCls}-item-link`} />
+              this.getJumpPrevPage(),
+              'jump-prev',
+              this.getItemIcon(props.jumpPrevIcon)
             )}
           </li>
         );
+        let jumpNextClassString = `${prefixCls}-jump-next`;
+        if (props.jumpNextIcon) {
+          jumpNextClassString += ` ${prefixCls}-jump-next-custom-icon`;
+        }
         jumpNext = (
           <li
             title={props.showTitle ? nextItemTitle : null}
@@ -447,10 +476,12 @@ export default class Pagination extends React.Component {
             tabIndex="0"
             onClick={this.jumpNext}
             onKeyPress={this.runIfEnterJumpNext}
-            className={`${prefixCls}-jump-next`}
+            className={jumpNextClassString}
           >
             {props.itemRender(
-              this.getJumpNextPage(), 'jump-next', <a className={`${prefixCls}-item-link`} />
+              this.getJumpNextPage(),
+              'jump-next',
+              this.getItemIcon(props.jumpNextIcon)
             )}
           </li>
         );
@@ -566,7 +597,11 @@ export default class Pagination extends React.Component {
           className={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
         >
-          {props.itemRender(prevPage, 'prev', <a className={`${prefixCls}-item-link`} />)}
+          {props.itemRender(
+            prevPage,
+            'prev',
+            this.getItemIcon(props.prevIcon)
+          )}
         </li>
         {pagerList}
         <li
@@ -577,7 +612,11 @@ export default class Pagination extends React.Component {
           className={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}
         >
-          {props.itemRender(nextPage, 'next', <a className={`${prefixCls}-item-link`} />)}
+          {props.itemRender(
+            nextPage,
+            'next',
+            this.getItemIcon(props.nextIcon)
+          )}
         </li>
         <Options
           locale={props.locale}

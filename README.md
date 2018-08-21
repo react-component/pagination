@@ -76,6 +76,11 @@ React.render(<Pagination />, container);
 | showLessItems    | show less page items               | Bool          | false                    |
 | showTitle        | show page items title              | Bool          | true                     |
 | itemRender       | custom page item renderer          | Function(current, type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next', element): React.ReactNode| `(current, type, element) => element` |
+| prevIcon        | specifict the default previous icon     | ReactNode \| (props: PaginationProps) => ReactNode          |          |
+| nextIcon        | specifict the default previous icon     | ReactNode \| (props: PaginationProps) => ReactNode          |          |
+| jumpPrevIcon    | specifict the default previous icon     | ReactNode \| (props: PaginationProps) => ReactNode          |          |
+| jumpNextIcon    | specifict the default previous icon     | ReactNode \| (props: PaginationProps) => ReactNode          |          |
+
 
 ## License
 

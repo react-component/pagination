@@ -78,6 +78,46 @@
 .rc-pagination-jump-next:hover:after {
   content: "\BB";
 }
+.rc-pagination-jump-prev-custom-icon,
+.rc-pagination-jump-next-custom-icon {
+  position: relative;
+}
+.rc-pagination-jump-prev-custom-icon:after,
+.rc-pagination-jump-next-custom-icon:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  transition: all .2s;
+  content: "\2022\2022\2022";
+  opacity: 1;
+  display: block;
+  letter-spacing: 2px;
+  color: #ccc;
+  font-size: 12px;
+  margin-top: 1px;
+}
+.rc-pagination-jump-prev-custom-icon .custom-icon-jump-prev,
+.rc-pagination-jump-next-custom-icon .custom-icon-jump-prev,
+.rc-pagination-jump-prev-custom-icon .custom-icon-jump-next,
+.rc-pagination-jump-next-custom-icon .custom-icon-jump-next {
+  opacity: 0;
+  transition: all .2s;
+}
+.rc-pagination-jump-prev-custom-icon:hover:after,
+.rc-pagination-jump-next-custom-icon:hover:after {
+  opacity: 0;
+  color: #ccc;
+}
+.rc-pagination-jump-prev-custom-icon:hover .custom-icon-jump-prev,
+.rc-pagination-jump-next-custom-icon:hover .custom-icon-jump-prev,
+.rc-pagination-jump-prev-custom-icon:hover .custom-icon-jump-next,
+.rc-pagination-jump-next-custom-icon:hover .custom-icon-jump-next {
+  opacity: 1;
+  color: #2db7f5;
+}
 .rc-pagination-prev,
 .rc-pagination-jump-prev,
 .rc-pagination-jump-next {

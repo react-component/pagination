@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>lessPages.js - example - rc-pagination@1.16.5</title>
+  <title>lessPages.js - example - rc-pagination@1.17.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-pagination@1.16.5</h1>
+      <h1>rc-pagination@1.17.0</h1>
 
       <p>pagination ui component for react</p>
     </div>
@@ -275,9 +275,59 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <span class="hljs-keyword">import</span> Pagination <span class="hljs-keyword">from</span> <span class="hljs-string">'rc-pagination'</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">'rc-pagination/assets/index.css'</span>;
 
+<span class="hljs-keyword">const</span> arrowPath = <span class="hljs-string">'M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h'</span> +
+  <span class="hljs-string">'-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v'</span> +
+  <span class="hljs-string">'60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91'</span> +
+  <span class="hljs-string">'.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z'</span>;
+
+<span class="hljs-keyword">const</span> doublePath = [
+  <span class="hljs-string">'M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6'</span> +
+  <span class="hljs-string">'.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1c-4.1 5.2-0'</span> +
+  <span class="hljs-string">'.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.'</span> +
+  <span class="hljs-string">'1c9.1-11.7 9.1-27.9 0-39.5z'</span>,
+  <span class="hljs-string">'M837.2 492.3L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6'</span> +
+  <span class="hljs-string">'.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1c-4.1 5.2-0'</span> +
+  <span class="hljs-string">'.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.'</span> +
+  <span class="hljs-string">'1c9.1-11.7 9.1-27.9 0-39.5z'</span>,
+];
+
+<span class="hljs-keyword">const</span> getSvgIcon = (path, reverse, type) =&gt; {
+  <span class="hljs-keyword">const</span> paths = <span class="hljs-built_in">Array</span>.isArray(path) ? path : [path];
+  <span class="hljs-keyword">const</span> renderPaths = paths.map((p, i) =&gt; {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">path</span> <span class="hljs-attribute">key</span>=<span class="hljs-value">{i}</span> <span class="hljs-attribute">d</span>=<span class="hljs-value">{p}</span> /&gt;</span>
+    )</span>;
+  });
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">i</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">{`custom-icon-${type}`}</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
+      <span class="hljs-attribute">fontSize:</span> '<span class="hljs-attribute">16px</span>',
+    }}
+    &gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">svg</span>
+        <span class="hljs-attribute">viewBox</span>=<span class="hljs-value">"0 0 1024 1024"</span>
+        <span class="hljs-attribute">width</span>=<span class="hljs-value">"1em"</span>
+        <span class="hljs-attribute">height</span>=<span class="hljs-value">"1em"</span>
+        <span class="hljs-attribute">fill</span>=<span class="hljs-value">"currentColor"</span>
+        <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span>
+          <span class="hljs-attribute">verticalAlign:</span> '<span class="hljs-attribute">-.125em</span>',
+          <span class="hljs-attribute">transform:</span> `<span class="hljs-attribute">rotate</span>(${<span class="hljs-attribute">reverse</span> &amp;&amp; <span class="hljs-attribute">180</span> || <span class="hljs-attribute">0</span>}<span class="hljs-attribute">deg</span>)`,
+        }}
+      &gt;</span>
+        {renderPaths}
+      <span class="hljs-tag">&lt;/<span class="hljs-title">svg</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">i</span>&gt;</span>
+  )</span>;
+};
+
+<span class="hljs-keyword">const</span> nextIcon = getSvgIcon(arrowPath, <span class="hljs-literal">false</span>, <span class="hljs-string">'next'</span>);
+<span class="hljs-keyword">const</span> prevIcon = getSvgIcon(arrowPath, <span class="hljs-literal">true</span>, <span class="hljs-string">'prev'</span>);
+<span class="hljs-keyword">const</span> jumpNextIcon = () =&gt; getSvgIcon(doublePath, <span class="hljs-literal">false</span>, <span class="hljs-string">'jump-next'</span>);
+<span class="hljs-keyword">const</span> jumpPrevIcon = () =&gt; getSvgIcon(doublePath, <span class="hljs-literal">true</span>, <span class="hljs-string">'jump-prev'</span>);
+
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
   state = {
     current: <span class="hljs-number">3</span>,
+    useIcon: <span class="hljs-literal">true</span>,
   };
   onChange = (page) =&gt; {
     <span class="hljs-built_in">console</span>.log(page);
@@ -285,7 +335,18 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
       current: page,
     });
   }
+  toggleCustomIcon = () =&gt; {
+    <span class="hljs-keyword">this</span>.setState({
+      useIcon: !<span class="hljs-keyword">this</span>.state.useIcon,
+    });
+  }
   render() {
+    <span class="hljs-keyword">const</span> iconsProps = <span class="hljs-keyword">this</span>.state.useIcon &amp;&amp; {
+      prevIcon,
+      nextIcon,
+      jumpPrevIcon,
+      jumpNextIcon,
+    } || {};
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span>
@@ -293,8 +354,23 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
           <span class="hljs-attribute">current</span>=<span class="hljs-value">{this.state.current}</span>
           <span class="hljs-attribute">total</span>=<span class="hljs-value">{80}</span>
           <span class="hljs-attribute">showLessItems</span>
+          <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span> <span class="hljs-attribute">marginBottom:</span> '<span class="hljs-attribute">2rem</span>' }}
+          {<span class="hljs-attribute">...iconsProps</span>}
         /&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span> <span class="hljs-attribute">showLessItems</span> <span class="hljs-attribute">defaultCurrent</span>=<span class="hljs-value">{1}</span> <span class="hljs-attribute">total</span>=<span class="hljs-value">{60}</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span>
+          <span class="hljs-attribute">showLessItems</span>
+          <span class="hljs-attribute">defaultCurrent</span>=<span class="hljs-value">{1}</span>
+          <span class="hljs-attribute">total</span>=<span class="hljs-value">{60}</span>
+          {<span class="hljs-attribute">...iconsProps</span>}
+        /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.toggleCustomIcon}</span>&gt;</span>
+            Toggle Custom Icon
+          <span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span> <span class="hljs-attribute">marginLeft:</span> '<span class="hljs-attribute">1rem</span>' }}&gt;</span>
+            Is using icon: {this.state.useIcon &amp;&amp; 'true' || 'false'}
+          <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     )</span>;
   }

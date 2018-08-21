@@ -1,3 +1,8 @@
+1.17.0
+==================
+
+* Add `prevIcon`, `nextIcon`, `jumpPrevIcon`, `jumpNextIcon`.
+
 1.16.1
 ==================
 

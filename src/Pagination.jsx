@@ -445,6 +445,10 @@ export default class Pagination extends React.Component {
       const prevItemTitle = props.showLessItems ? locale.prev_3 : locale.prev_5;
       const nextItemTitle = props.showLessItems ? locale.next_3 : locale.next_5;
       if (props.showPrevNextJumpers) {
+        let jumpPrevClassString = `${prefixCls}-jump-prev`;
+        if (props.jumpPrevIcon) {
+          jumpPrevClassString += ` ${prefixCls}-jump-prev-custom-icon`;
+        }
         jumpPrev = (
           <li
             title={props.showTitle ? prevItemTitle : null}
@@ -452,7 +456,7 @@ export default class Pagination extends React.Component {
             onClick={this.jumpPrev}
             tabIndex="0"
             onKeyPress={this.runIfEnterJumpPrev}
-            className={`${prefixCls}-jump-prev`}
+            className={jumpPrevClassString}
           >
             {props.itemRender(
               this.getJumpPrevPage(),
@@ -461,6 +465,10 @@ export default class Pagination extends React.Component {
             )}
           </li>
         );
+        let jumpNextClassString = `${prefixCls}-jump-next`;
+        if (props.jumpNextIcon) {
+          jumpNextClassString += ` ${prefixCls}-jump-next-custom-icon`;
+        }
         jumpNext = (
           <li
             title={props.showTitle ? nextItemTitle : null}
@@ -468,7 +476,7 @@ export default class Pagination extends React.Component {
             tabIndex="0"
             onClick={this.jumpNext}
             onKeyPress={this.runIfEnterJumpNext}
-            className={`${prefixCls}-jump-next`}
+            className={jumpNextClassString}
           >
             {props.itemRender(
               this.getJumpNextPage(),

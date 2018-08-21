@@ -30,7 +30,6 @@ const getSvgIcon = (path, reverse, type) => {
   return (
     <i className={`custom-icon-${type}`} style={{
       fontSize: '16px',
-      color: '#666',
     }}
     >
       <svg
@@ -71,7 +70,6 @@ class App extends React.Component {
     });
   }
   render() {
-    const paginationCls = this.state.useIcon && 'custom-pagination' || undefined;
     const iconsProps = this.state.useIcon && {
       prevIcon,
       nextIcon,
@@ -81,7 +79,6 @@ class App extends React.Component {
     return (
       <div>
         <Pagination
-          className={paginationCls}
           onChange={this.onChange}
           current={this.state.current}
           total={80}

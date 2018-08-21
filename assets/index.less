@@ -102,6 +102,48 @@
       }
     }
   }
+  
+  &-jump-prev-custom-icon,
+  &-jump-next-custom-icon {
+    position: relative;
+
+    &:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      transition: all .2s;
+
+      content: "•••";
+      opacity: 1;
+      display: block;
+      letter-spacing: 2px;
+      color: #ccc;
+      font-size: 12px;
+      margin-top: 1px;
+    }
+
+    .custom-icon-jump-prev,
+    .custom-icon-jump-next {
+      opacity: 0;
+      transition: all .2s;
+    }
+
+    &:hover {
+      &:after {
+        opacity: 0;
+        color: #ccc;
+      }
+
+      .custom-icon-jump-prev,
+      .custom-icon-jump-next {
+        opacity: 1;
+        color: #2db7f5;
+      }
+    }
+  }
 
   &-prev, &-jump-prev, &-jump-next {
     margin-right: 8px;

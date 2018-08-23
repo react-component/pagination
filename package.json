@@ -26,6 +26,7 @@
   ],
   "main": "lib/index",
   "module": "es/index",
+  "types": "rc-pagination.d.ts",
   "config": {
     "port": 3000,
     "entry": {

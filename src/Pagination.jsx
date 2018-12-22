@@ -18,6 +18,14 @@ function defaultItemRender(page, type, element) {
   return element;
 }
 
+function calculatePage(p, state, props) {
+  let pageSize = p;
+  if (typeof pageSize === 'undefined') {
+    pageSize = state.pageSize;
+  }
+  return Math.floor((props.total - 1) / pageSize) + 1;
+}
+
 export default class Pagination extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
@@ -93,28 +101,6 @@ export default class Pagination extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if ('current' in nextProps) {
-      this.setState({
-        current: nextProps.current,
-        currentInputValue: nextProps.current,
-      });
-    }
-
-    if ('pageSize' in nextProps) {
-      const newState = {};
-      let current = this.state.current;
-      const newCurrent = this.calculatePage(nextProps.pageSize);
-      current = current > newCurrent ? newCurrent : current;
-      if (!('current' in nextProps)) {
-        newState.current = current;
-        newState.currentInputValue = current;
-      }
-      newState.pageSize = nextProps.pageSize;
-      this.setState(newState);
-    }
-  }
-
   componentDidUpdate(prevProps, prevState) {
     // When current page change, fix focused style of prev item
     // A hacky solution of https://github.com/ant-design/ant-design/issues/8948
@@ -129,12 +115,40 @@ export default class Pagination extends React.Component {
     }
   }
 
+  static getDerivedStateFromProps(props, state) {
+    let newState = {};
+
+    if ('current' in props) {
+      newState = {
+        current: props.current,
+        currentInputValue: props.current,
+      };
+    }
+
+    if ('pageSize' in props) {
+      let current = state.current;
+      const newCurrent = calculatePage(props.pageSize, state, props);
+      current = current > newCurrent ? newCurrent : current;
+
+      if (!('current' in props)) {
+        newState.current = current;
+        newState.currentInputValue = current;
+      }
+      newState.pageSize = props.pageSize;
+    }
+
+    return newState;
+  }
+
   getJumpPrevPage = () => {
     return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
   }
 
   getJumpNextPage = () => {
-    return Math.min(this.calculatePage(), this.state.current + (this.props.showLessItems ? 3 : 5));
+    return Math.min(
+      calculatePage(undefined, this.state, this.props),
+      this.state.current + (this.props.showLessItems ? 3 : 5)
+    );
   }
 
   /**
@@ -154,14 +168,6 @@ export default class Pagination extends React.Component {
 
   savePaginationNode = (node) => {
     this.paginationNode = node;
-  }
-
-  calculatePage = (p) => {
-    let pageSize = p;
-    if (typeof pageSize === 'undefined') {
-      pageSize = this.state.pageSize;
-    }
-    return Math.floor((this.props.total - 1) / pageSize) + 1;
   }
 
   isValid = (page) => {
@@ -204,7 +210,7 @@ export default class Pagination extends React.Component {
 
   changePageSize = (size) => {
     let current = this.state.current;
-    const newCurrent = this.calculatePage(size);
+    const newCurrent = calculatePage(size, this.state, this.props);
     current = current > newCurrent ? newCurrent : current;
     // fix the issue:
     // Once 'total' is 0, 'current' in 'onShowSizeChange' is 0, which is not correct.
@@ -231,8 +237,9 @@ export default class Pagination extends React.Component {
   handleChange = (p) => {
     let page = p;
     if (this.isValid(page)) {
-      if (page > this.calculatePage()) {
-        page = this.calculatePage();
+      const currentPage = calculatePage(undefined, this.state, this.props);
+      if (page > currentPage) {
+        page = currentPage;
       }
 
       if (!('current' in this.props)) {
@@ -276,7 +283,7 @@ export default class Pagination extends React.Component {
   }
 
   hasNext = () => {
-    return this.state.current < this.calculatePage();
+    return this.state.current < calculatePage(undefined, this.state, this.props);
   }
 
   runIfEnter = (event, callback, ...restParams) => {
@@ -317,7 +324,7 @@ export default class Pagination extends React.Component {
     const locale = props.locale;
 
     const prefixCls = props.prefixCls;
-    const allPages = this.calculatePage();
+    const allPages = calculatePage(undefined, this.state, this.props);
     const pagerList = [];
     let jumpPrev = null;
     let jumpNext = null;

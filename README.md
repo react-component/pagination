@@ -8,7 +8,6 @@ React Pagination Component.
 [![Test coverage][coveralls-image]][coveralls-url]
 [![Dependencies](https://img.shields.io/david/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination)
 [![DevDependencies](https://img.shields.io/david/dev/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination?type=dev)
-[![node version][node-image]][node-url]
 [![npm download][download-image]][download-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-pagination.svg?style=flat-square
@@ -17,8 +16,6 @@ React Pagination Component.
 [travis-url]: https://travis-ci.org/react-component/pagination
 [coveralls-image]: https://img.shields.io/coveralls/react-component/pagination.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/react-component/pagination?branch=master
-[node-image]: https://img.shields.io/badge/node.js-%3E=_0.10-green.svg?style=flat-square
-[node-url]: http://nodejs.org/download/
 [download-image]: https://img.shields.io/npm/dm/rc-pagination.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-pagination
 

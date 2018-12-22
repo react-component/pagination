@@ -705,6 +705,15 @@ describe('current value on onShowSizeChange when total is 0', () => {
       }, 10);
     }, 10);
   });
+
+  it('when total is 0, pager should show and disabled', () => {
+    const itemButton = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-item'
+    );
+    expect(TestUtils.isDOMComponent(itemButton)).to.be(true);
+    expect(itemButton.className).to.contain('rc-pagination-item-disabled');
+  });
 });
 
 describe('data and aria props', () => {

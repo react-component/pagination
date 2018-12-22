@@ -425,19 +425,32 @@ export default class Pagination extends React.Component {
     }
 
     if (allPages <= 5 + pageBufferSize * 2) {
+      const pagerProps = {
+        locale,
+        rootPrefixCls: prefixCls,
+        onClick: this.handleChange,
+        onKeyPress: this.runIfEnter,
+        showTitle: props.showTitle,
+        itemRender: props.itemRender,
+      };
+      if (!allPages) {
+        pagerList.push(
+          <Pager
+            {...pagerProps}
+            key="noPager"
+            page={allPages}
+            className={`${prefixCls}-disabled`}
+          />
+        );
+      }
       for (let i = 1; i <= allPages; i++) {
         const active = this.state.current === i;
         pagerList.push(
           <Pager
-            locale={locale}
-            rootPrefixCls={prefixCls}
-            onClick={this.handleChange}
-            onKeyPress={this.runIfEnter}
+            {...pagerProps}
             key={i}
             page={i}
             active={active}
-            showTitle={props.showTitle}
-            itemRender={props.itemRender}
           />
         );
       }
@@ -578,8 +591,8 @@ export default class Pagination extends React.Component {
         </li>
       );
     }
-    const prevDisabled = !this.hasPrev();
-    const nextDisabled = !this.hasNext();
+    const prevDisabled = !this.hasPrev() || !allPages;
+    const nextDisabled = !this.hasNext() || !allPages;
     return (
       <ul
         className={`${prefixCls} ${props.className}`}

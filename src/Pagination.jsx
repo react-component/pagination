@@ -4,6 +4,7 @@ import Pager from './Pager';
 import Options from './Options';
 import KEYCODE from './KeyCode';
 import LOCALE from './locale/zh_CN';
+import { polyfill } from 'react-lifecycles-compat';
 
 function noop() {
 }
@@ -26,7 +27,7 @@ function calculatePage(p, state, props) {
   return Math.floor((props.total - 1) / pageSize) + 1;
 }
 
-export default class Pagination extends React.Component {
+class Pagination extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     current: PropTypes.number,
@@ -646,3 +647,7 @@ export default class Pagination extends React.Component {
     );
   }
 }
+
+polyfill(Pagination);
+
+export default Pagination;

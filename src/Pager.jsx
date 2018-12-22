@@ -13,6 +13,10 @@ const Pager = (props) => {
     cls = `${cls} ${props.className}`;
   }
 
+  if (!props.page) {
+    cls = `${cls} ${prefixCls}-disabled`;
+  }
+
   const handleClick = () => {
     props.onClick(props.page);
   };

@@ -129,11 +129,11 @@ export default class Pagination extends React.Component {
     }
   }
 
-  getJumpPrevPage() {
+  getJumpPrevPage = () => {
     return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
   }
 
-  getJumpNextPage() {
+  getJumpNextPage = () => {
     return Math.min(this.calculatePage(), this.state.current + (this.props.showLessItems ? 3 : 5));
   }
 
@@ -261,14 +261,6 @@ export default class Pagination extends React.Component {
     if (this.hasNext()) {
       this.handleChange(this.state.current + 1);
     }
-  }
-
-  getJumpPrevPage() {
-    return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
-  }
-
-  getJumpNextPage() {
-    return Math.min(this.calculatePage(), this.state.current + (this.props.showLessItems ? 3 : 5));
   }
 
   jumpPrev = () => {

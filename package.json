@@ -54,7 +54,7 @@
     "core-js": "^2.5.1",
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
-    "rc-select": "6.x",
+    "rc-select": "8.x",
     "rc-test": "^6.0.1",
     "rc-tools": "6.x",
     "react": "^16.5.2",

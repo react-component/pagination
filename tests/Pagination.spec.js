@@ -249,7 +249,7 @@ describe('Two Pagination', () => {
       expect(p1.state.pageSize).to.be(50);
       expect(p2.state.pageSize).to.be(50);
       done();
-    }, 50);
+    }, 100);
   });
 });
 

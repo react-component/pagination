@@ -2317,19 +2317,20 @@ var Pagination = function (_React$Component) {
     }
   }], [{
     key: 'getDerivedStateFromProps',
-    value: function getDerivedStateFromProps(props, state) {
+    value: function getDerivedStateFromProps(props, prevState) {
       var newState = {};
 
       if ('current' in props) {
-        newState = {
-          current: props.current,
-          currentInputValue: props.current
-        };
+        newState.current = props.current;
+
+        if (props.current !== prevState.current) {
+          newState.currentInputValue = newState.current;
+        }
       }
 
-      if ('pageSize' in props) {
-        var current = state.current;
-        var newCurrent = calculatePage(props.pageSize, state, props);
+      if ('pageSize' in props && props.pageSize !== prevState.pageSize) {
+        var current = prevState.current;
+        var newCurrent = calculatePage(props.pageSize, prevState, props);
         current = current > newCurrent ? newCurrent : current;
 
         if (!('current' in props)) {

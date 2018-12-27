@@ -197,6 +197,23 @@ describe('Controlled Pagination', () => {
     ReactDOM.unmountComponentAtNode(container);
   });
 
+  it('not replace currentInputValue if current not change', (done) => {
+    pagination.state.current = 1;
+    pagination.state.currentInputValue = 1;
+    pagination.forceUpdate();
+    expect(pagination.state.current).to.be(1);
+    expect(pagination.state.currentInputValue).to.be(1);
+
+    setTimeout(() => {
+      pagination.state.currentInputValue = 1;
+      pagination.forceUpdate();
+      expect(pagination.state.current).to.be(2);
+      expect(pagination.state.currentInputValue).to.be(1);
+
+      done();
+    }, 10);
+  });
+
   it('current should equal defaultCurrent', () => {
     expect(pagination.state.current).to.be(2);
   });

@@ -116,19 +116,20 @@ class Pagination extends React.Component {
     }
   }
 
-  static getDerivedStateFromProps(props, state) {
-    let newState = {};
+  static getDerivedStateFromProps(props, prevState) {
+    const newState = {};
 
     if ('current' in props) {
-      newState = {
-        current: props.current,
-        currentInputValue: props.current,
-      };
+      newState.current = props.current;
+
+      if (props.current !== prevState.current) {
+        newState.currentInputValue = newState.current;
+      }
     }
 
-    if ('pageSize' in props) {
-      let current = state.current;
-      const newCurrent = calculatePage(props.pageSize, state, props);
+    if ('pageSize' in props && props.pageSize !== prevState.pageSize) {
+      let current = prevState.current;
+      const newCurrent = calculatePage(props.pageSize, prevState, props);
       current = current > newCurrent ? newCurrent : current;
 
       if (!('current' in props)) {

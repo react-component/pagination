@@ -692,6 +692,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
         onShowSizeChange={onShowSizeChange}
         current={1}
         total={0}
+        showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
       />,
       container,
       function () {
@@ -730,6 +731,15 @@ describe('current value on onShowSizeChange when total is 0', () => {
     );
     expect(TestUtils.isDOMComponent(itemButton)).to.be(true);
     expect(itemButton.className).to.contain('rc-pagination-item-disabled');
+  });
+
+  it('when total is 0, `from` and `to` should be 0', () => {
+    const totalText = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-total-text'
+    );
+    expect(TestUtils.isDOMComponent(totalText)).to.be(true);
+    expect(totalText.innerHTML).to.be('0 - 0 of 0 items');
   });
 });
 

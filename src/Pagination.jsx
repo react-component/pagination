@@ -53,6 +53,7 @@ class Pagination extends React.Component {
     nextIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     jumpPrevIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     jumpNextIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    hideBoundary: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -74,6 +75,7 @@ class Pagination extends React.Component {
     locale: LOCALE,
     style: {},
     itemRender: defaultItemRender,
+    hideBoundary: false,
   };
 
   constructor(props) {
@@ -569,10 +571,10 @@ class Pagination extends React.Component {
         pagerList.push(jumpNext);
       }
 
-      if (left !== 1) {
+      if (left !== 1 && !props.hideBoundary) {
         pagerList.unshift(firstPager);
       }
-      if (right !== allPages) {
+      if (right !== allPages && !props.hideBoundary) {
         pagerList.push(lastPager);
       }
     }

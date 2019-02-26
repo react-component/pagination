@@ -77,6 +77,7 @@ React.render(<Pagination />, container);
 | jumpPrevIcon    | specifict the default previous icon     | ReactNode \| (props: PaginationProps) => ReactNode          |          |
 | jumpNextIcon    | specifict the default previous icon     | ReactNode \| (props: PaginationProps) => ReactNode          |          |
 | hideBoundary    | hide boundary jumper               | Bool          | false                     |
+| pagerCount      | show number of pagers              | Number        | 5                         |
 
 ## License
 

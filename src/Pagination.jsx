@@ -338,9 +338,10 @@ class Pagination extends React.Component {
     let lastPager = null;
     let gotoButton = null;
 
+    const pageBoundaryCount = hideBoundary ? 0 : 1;
     const { pagerCount, hideBoundary } = props;
     const goButton = (props.showQuickJumper && props.showQuickJumper.goButton);
-    const halfPagerCount = Math.max(1, Math.floor(pagerCount / 2))
+    const halfPagerCount = Math.max(1, Math.floor(pagerCount / 2));
     const pageBufferSize = props.showLessItems ? 1 : halfPagerCount;
     const { current, pageSize } = this.state;
 
@@ -536,8 +537,7 @@ class Pagination extends React.Component {
 
       let left = Math.max(1, current - pageBufferSize);
       let right = Math.min(current + pageBufferSize, allPages);
-      const pageBoundaryCount = hideBoundary ? 0 : 1;
-      
+
       if (current - 1 <= pageBufferSize) {
         right = 1 + pageBufferSize * 2 + pageBoundaryCount;
       }
@@ -563,7 +563,10 @@ class Pagination extends React.Component {
         );
       }
 
-      if (current - pageBoundaryCount > pageBufferSize && current !== pageBoundaryCount + pageBufferSize + 1) {
+      if (
+        current - pageBoundaryCount > pageBufferSize &&
+        current !== pageBoundaryCount + pageBufferSize + 1
+      ) {
         pagerList[0] = React.cloneElement(pagerList[0], {
           className: `${prefixCls}-item-after-jump-prev`,
         });

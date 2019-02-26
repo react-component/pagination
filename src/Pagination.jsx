@@ -338,8 +338,8 @@ class Pagination extends React.Component {
     let lastPager = null;
     let gotoButton = null;
 
-    const pageBoundaryCount = hideBoundary ? 0 : 1;
     const { pagerCount, hideBoundary } = props;
+    const pageBoundaryCount = hideBoundary ? 0 : 1;
     const goButton = (props.showQuickJumper && props.showQuickJumper.goButton);
     const halfPagerCount = Math.max(1, Math.floor(pagerCount / 2));
     const pageBufferSize = props.showLessItems ? 1 : halfPagerCount;

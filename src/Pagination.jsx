@@ -145,13 +145,13 @@ class Pagination extends React.Component {
   }
 
   getJumpPrevPage = () => {
-    return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : this.props.pagerCount));
+    return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
   }
 
   getJumpNextPage = () => {
     return Math.min(
       calculatePage(undefined, this.state, this.props),
-      this.state.current + (this.props.showLessItems ? 3 : this.props.pagerCount)
+      this.state.current + (this.props.showLessItems ? 3 : 5)
     );
   }
 
@@ -509,12 +509,12 @@ class Pagination extends React.Component {
         1,
         'jump-first',
         this.getItemIcon(props.jumpNextIcon)
-      )
+      );
       const lastPagerRender = props.itemRender(
         allPages,
         'jump-last',
         this.getItemIcon(props.jumpNextIcon)
-      )
+      );
 
       lastPager = (
         firstPagerRender === null ? null :

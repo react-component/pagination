@@ -7,11 +7,11 @@ const total = 500;
 
 const itemRender = (current, type, element) => {
   const hideItems = ['jump-last', 'jump-first'];
-  
+
   if (hideItems.includes(type)) {
     return null;
   }
- 
+
   return element;
 };
 

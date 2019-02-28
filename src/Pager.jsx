@@ -25,7 +25,7 @@ const Pager = (props) => {
     props.onKeyPress(e, props.onClick, props.page);
   };
 
-  const itemRender = props.itemRender(props.page, 'page', <a>{props.page}</a>)
+  const itemRender = props.itemRender(props.page, 'page', <a>{props.page}</a>);
 
   return (
     itemRender === null ? null :

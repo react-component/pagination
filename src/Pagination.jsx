@@ -339,7 +339,7 @@ class Pagination extends React.Component {
     const { pagerCount } = props;
     const boundaryRemainder = pagerCount % 2 === 0 ? 1 : 0;
     const goButton = (props.showQuickJumper && props.showQuickJumper.goButton);
-    const halfPagerCount = Math.max(1, Math.floor(pagerCount / 2));
+    const halfPagerCount = Math.max(1, Math.floor((pagerCount - 1) / 2));
     const pageBufferSize = props.showLessItems ? 1 : halfPagerCount;
     const { current, pageSize } = this.state;
 
@@ -430,7 +430,7 @@ class Pagination extends React.Component {
       );
     }
 
-    if (allPages <= pagerCount + pageBufferSize * 2) {
+    if (allPages <= pageBufferSize * 2 + boundaryRemainder + 1) {
       const pagerProps = {
         locale,
         rootPrefixCls: prefixCls,
@@ -546,15 +546,15 @@ class Pagination extends React.Component {
         />
       );
 
-      let left = Math.max(1, current - pageBufferSize);
-      let right = Math.min(current + pageBufferSize - boundaryRemainder, allPages);
+      let left = Math.max(1, current - pageBufferSize - boundaryRemainder);
+      let right = Math.min(current + pageBufferSize, allPages);
 
       if (current - 1 <= pageBufferSize) {
-        right = 1 + pageBufferSize * 2 - boundaryRemainder;
+        right = 1 + pageBufferSize * 2 + boundaryRemainder;
       }
 
-      if (allPages - current <= pageBufferSize) {
-        left = allPages - pageBufferSize * 2;
+      if (allPages - current < pageBufferSize) {
+        left = allPages - pageBufferSize * 2 - boundaryRemainder;
       }
 
       for (let i = left; i <= right; i++) {
@@ -574,10 +574,7 @@ class Pagination extends React.Component {
         );
       }
 
-      if (
-        current - boundaryRemainder > pageBufferSize &&
-        current !== boundaryRemainder + pageBufferSize + 1
-      ) {
+      if (current - boundaryRemainder - 2 > pageBufferSize) {
         pagerList[0] = React.cloneElement(pagerList[0], {
           className: `${prefixCls}-item-after-jump-prev`,
         });

@@ -152,13 +152,13 @@ class Pagination extends React.Component {
 
   getJumpPrevPage = () => {
     const { showLessItems } = this.props;
-    const hasPagerCount = this.hasPagerCount()
+    const hasPagerCount = this.hasPagerCount();
     return Math.max(1, this.state.current - (showLessItems && !hasPagerCount ? 3 : 5));
   }
 
   getJumpNextPage = () => {
     const { showLessItems } = this.props;
-    const hasPagerCount = this.hasPagerCount()
+    const hasPagerCount = this.hasPagerCount();
     return Math.min(
       calculatePage(undefined, this.state, this.props),
       this.state.current + (showLessItems && !hasPagerCount ? 3 : 5)
@@ -352,9 +352,11 @@ class Pagination extends React.Component {
     // `pagerCount` priority is greater than `showLessItems`.
     const hasPagerCount = this.hasPagerCount();
     const boundary = pagerCount === 0 ? 0 : 1;
-    const boundaryRemainder = hasPagerCount ? (pagerCount % 2 !== 0 ? 0 : boundary) : 0;
+    const pagerCountBoundary = pagerCount % 2 !== 0 ? 0 : boundary;
+    const boundaryRemainder = hasPagerCount ? pagerCountBoundary : 0;
     const halfPagerCount = Math.max(0, Math.floor((pagerCount - 1) / 2));
-    const pageBufferSize = hasPagerCount ? halfPagerCount : (showLessItems ? 1 : halfPagerCount);
+    const halfHasLessItemsCount = showLessItems ? 1 : halfPagerCount;
+    const pageBufferSize = hasPagerCount ? halfPagerCount : halfHasLessItemsCount;
 
     const goButton = (props.showQuickJumper && props.showQuickJumper.goButton);
     const { current, pageSize } = this.state;

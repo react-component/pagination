@@ -32,9 +32,9 @@ const Pager = (props) => {
   if (props.first) {
     pageType = 'jump-first';
   }
-  
+
   const itemNode = props.itemRender(props.page, pageType, <a>{props.page}</a>);
-  
+
   return (
     itemNode === null ? null :
     <li

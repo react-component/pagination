@@ -36,7 +36,7 @@ ReactDOM.render(
     />
 
     <p> pagerCount less than 3 </p>
-    <Pagination total={100} pagerCount={0} />
+    <Pagination total={100} pagerCount={1} />
 
     <p> Has `showLessItems` and `pagerCount` </p>
     <Pagination total={500} pagerCount={8} showLessItems />

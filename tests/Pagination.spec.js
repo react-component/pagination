@@ -1,13 +1,13 @@
 /* eslint func-names: 0, no-console: 0 */
-import expect from 'expect.js';
-import Pagination from '../src';
-import Select from 'rc-select';
-import React from 'react';
-import TestUtils from 'react-dom/test-utils';
-import ReactDOM from 'react-dom';
-import TwoPagination from './helper/two-pagination';
+import expect from 'expect.js'
+import Pagination from '../src'
+import Select from 'rc-select'
+import React from 'react'
+import TestUtils from 'react-dom/test-utils'
+import ReactDOM from 'react-dom'
+import TwoPagination from './helper/two-pagination'
 
-const Simulate = TestUtils.Simulate;
+const Simulate = TestUtils.Simulate
 
 describe('Uncontrolled Pagination', () => {
   let pagination = null;
@@ -810,6 +810,145 @@ describe('data and aria props', () => {
 
     it('renders role attribute', () => {
       expect(pagination.paginationNode.getAttribute('role')).to.be('navigation');
+    });
+  });
+});
+
+describe('pagerCount props', () => {
+  describe('with pagerCount, when hide first, last', () => {
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    const itemRender = (current, type, element) => {
+      if (type === 'jump-first' || type === 'jump-last') {
+        return null;
+      }
+      return element;
+    }
+
+    it('pageCount is 2, total is 10, show 1 pager', (done) => {
+      ReactDOM.render(
+        <Pagination total={10} itemRender={itemRender} pagerCount={2} />,
+        container,
+        function() {
+          const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
+            this,
+            'rc-pagination-item'
+          );
+          expect(pagers.length).to.be(1);
+          done();
+        }
+      )
+    });
+
+    it('pageCount is 2, total is 11, show 2 pager', (done) => {
+      ReactDOM.render(
+        <Pagination total={11} itemRender={itemRender} pagerCount={2} />,
+        container,
+        function() {
+          const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
+            this,
+            'rc-pagination-item'
+          );
+          expect(pagers.length).to.be(2);
+          done();
+        }
+      );
+    });
+
+    it('should show 10 pagers if pageCount equals 10', (done) => {
+      ReactDOM.render(
+        <Pagination total={101} itemRender={itemRender} pagerCount={10} />,
+        container,
+        function() {
+          const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
+            this,
+            'rc-pagination-item'
+          );
+          expect(pagers.length).to.be(10);
+
+          const eighthPager = TestUtils.findRenderedDOMComponentWithClass(
+            this,
+            'rc-pagination-item-8'
+          );
+          expect(TestUtils.isDOMComponent(eighthPager)).to.be(true);
+          Simulate.click(eighthPager);
+          setTimeout(() => {
+            const afterPagers = TestUtils.scryRenderedDOMComponentsWithClass(
+              this,
+              'rc-pagination-item'
+            );
+            expect(afterPagers.length).to.be(10);
+            done();
+          }, 10);
+        }
+      );
+    });
+  })
+
+  describe('pagerCount is even', () => {
+    it('pageCount is even', (done) => {
+      const container = document.createElement('div');
+      document.body.appendChild(container);
+      ReactDOM.render(
+        <Pagination total={500} pagerCount={8} />,
+        container,
+        function() {
+          const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
+            this,
+            'rc-pagination-item'
+          );
+          expect(pagers.length).to.be(9);
+
+          const sixthPager = TestUtils.findRenderedDOMComponentWithClass(
+            this,
+            'rc-pagination-item-6'
+          );
+          expect(TestUtils.isDOMComponent(sixthPager)).to.be(true);
+          Simulate.click(sixthPager);
+          setTimeout(() => {
+            const afterPagers = TestUtils.scryRenderedDOMComponentsWithClass(
+              this,
+              'rc-pagination-item'
+            );
+            expect(afterPagers.length).to.be(10);
+            done();
+          }, 10);
+        }
+      );
+    });
+
+    it('defaultCurrent is last page', (done) => {
+      const container = document.createElement('div')
+      document.body.appendChild(container)
+      ReactDOM.render(
+        <Pagination total={500} pagerCount={7} defaultCurrent={50} />,
+        container,
+        function() {
+          setTimeout(() => {
+            const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
+              this,
+              'rc-pagination-item'
+            );
+            expect(pagers.length).to.be(8);
+  
+            const pager46 = TestUtils.findRenderedDOMComponentWithClass(
+              this,
+              'rc-pagination-item-46'
+            );
+            expect(TestUtils.isDOMComponent(pager46)).to.be(true);
+            Simulate.click(pager46);
+            setTimeout(() => {
+              const afterPagers = TestUtils.scryRenderedDOMComponentsWithClass(
+                this,
+                'rc-pagination-item'
+              );
+              expect(afterPagers.length).to.be(9);
+              done();
+            }, 10);
+          }, 10);
+        }
+      );
     });
   });
 });

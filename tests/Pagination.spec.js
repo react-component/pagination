@@ -1,13 +1,13 @@
 /* eslint func-names: 0, no-console: 0 */
-import expect from 'expect.js'
-import Pagination from '../src'
-import Select from 'rc-select'
-import React from 'react'
-import TestUtils from 'react-dom/test-utils'
-import ReactDOM from 'react-dom'
-import TwoPagination from './helper/two-pagination'
+import expect from 'expect.js';
+import Pagination from '../src';
+import Select from 'rc-select';
+import React from 'react';
+import TestUtils from 'react-dom/test-utils';
+import ReactDOM from 'react-dom';
+import TwoPagination from './helper/two-pagination';
 
-const Simulate = TestUtils.Simulate
+const Simulate = TestUtils.Simulate;
 
 describe('Uncontrolled Pagination', () => {
   let pagination = null;

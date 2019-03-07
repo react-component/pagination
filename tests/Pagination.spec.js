@@ -824,13 +824,13 @@ describe('pagerCount props', () => {
         return null;
       }
       return element;
-    }
+    };
 
     it('pageCount is 2, total is 10, show 1 pager', (done) => {
       ReactDOM.render(
         <Pagination total={10} itemRender={itemRender} pagerCount={2} />,
         container,
-        function() {
+        function () {
           const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
             this,
             'rc-pagination-item'
@@ -838,14 +838,14 @@ describe('pagerCount props', () => {
           expect(pagers.length).to.be(1);
           done();
         }
-      )
+      );
     });
 
     it('pageCount is 2, total is 11, show 2 pager', (done) => {
       ReactDOM.render(
         <Pagination total={11} itemRender={itemRender} pagerCount={2} />,
         container,
-        function() {
+        function () {
           const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
             this,
             'rc-pagination-item'
@@ -860,7 +860,7 @@ describe('pagerCount props', () => {
       ReactDOM.render(
         <Pagination total={101} itemRender={itemRender} pagerCount={10} />,
         container,
-        function() {
+        function () {
           const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
             this,
             'rc-pagination-item'
@@ -884,7 +884,7 @@ describe('pagerCount props', () => {
         }
       );
     });
-  })
+  });
 
   describe('pagerCount is even', () => {
     it('pageCount is even', (done) => {
@@ -893,7 +893,7 @@ describe('pagerCount props', () => {
       ReactDOM.render(
         <Pagination total={500} pagerCount={8} />,
         container,
-        function() {
+        function () {
           const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
             this,
             'rc-pagination-item'
@@ -919,19 +919,19 @@ describe('pagerCount props', () => {
     });
 
     it('defaultCurrent is last page', (done) => {
-      const container = document.createElement('div')
-      document.body.appendChild(container)
+      const container = document.createElement('div');
+      document.body.appendChild(container);
       ReactDOM.render(
         <Pagination total={500} pagerCount={7} defaultCurrent={50} />,
         container,
-        function() {
+        function () {
           setTimeout(() => {
             const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
               this,
               'rc-pagination-item'
             );
             expect(pagers.length).to.be(8);
-  
+
             const pager46 = TestUtils.findRenderedDOMComponentWithClass(
               this,
               'rc-pagination-item-46'

@@ -52,7 +52,7 @@
     "coverage": "rc-test run coverage"
   },
   "devDependencies": {
-    "core-js": "^2.5.1",
+    "core-js": "^3.0.0",
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
     "rc-select": "9.x",

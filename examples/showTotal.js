@@ -15,5 +15,10 @@ ReactDOM.render(
     showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
     total={455}
   />
+  <br />
+  <Pagination
+    showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
+    total={0}
+  />
 </div>
 , document.getElementById('__react-content'));

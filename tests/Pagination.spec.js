@@ -148,6 +148,20 @@ describe('Uncontrolled Pagination', () => {
     }, 10);
   });
 
+  // https://github.com/ant-design/ant-design/issues/15539
+  it('should hide quick jumper when only one page', (done) => {
+    ReactDOM.render(
+      <Pagination pageSize={10} total={10} showQuickJumper />,
+      container,
+      function () {
+        expect(() => {
+          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination-options-quick-jumper');
+        }).to.throwException(/Did not find exactly one match/);
+        done();
+      },
+    );
+  });
+
   it('should display total items', (done) => {
     const totalText = TestUtils.findRenderedDOMComponentWithClass(
       pagination,

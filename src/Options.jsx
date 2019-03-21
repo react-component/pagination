@@ -67,7 +67,7 @@ class Options extends React.Component {
     let goInput = null;
     let gotoButton = null;
 
-    if (!(changeSize || quickGo)) {
+    if (!changeSize && !quickGo) {
       return null;
     }
 

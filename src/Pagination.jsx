@@ -176,6 +176,14 @@ class Pagination extends React.Component {
     return isInteger(page) && page >= 1 && page !== this.state.current;
   }
 
+  shouldDisplayQuickJumper = () => {
+    const { showQuickJumper, pageSize, total } = this.props;
+    if (total <= pageSize) {
+      return false;
+    }
+    return showQuickJumper;
+  }
+
   handleKeyDown = (e) => {
     if (e.keyCode === KEYCODE.ARROW_UP || e.keyCode === KEYCODE.ARROW_DOWN) {
       e.preventDefault();
@@ -641,7 +649,7 @@ class Pagination extends React.Component {
           current={this.state.current}
           pageSize={this.state.pageSize}
           pageSizeOptions={this.props.pageSizeOptions}
-          quickGo={this.props.showQuickJumper ? this.handleChange : null}
+          quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
           goButton={goButton}
         />
       </ul>

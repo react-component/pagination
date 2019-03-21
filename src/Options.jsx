@@ -12,6 +12,9 @@ class Options extends React.Component {
     pageSize: PropTypes.number,
     buildOptionText: PropTypes.func,
     locale: PropTypes.object,
+    rootPrefixCls: PropTypes.string,
+    selectPrefixCls: PropTypes.string,
+    goButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
   };
 
   static defaultProps = {

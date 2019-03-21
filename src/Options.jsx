@@ -55,15 +55,14 @@ class Options extends React.Component {
   }
 
   render() {
-    const props = this.props;
-    const state = this.state;
-    const locale = props.locale;
-    const prefixCls = `${props.rootPrefixCls}-options`;
-    const changeSize = props.changeSize;
-    const quickGo = props.quickGo;
-    const goButton = props.goButton;
-    const buildOptionText = props.buildOptionText || this.buildOptionText;
-    const Select = props.selectComponentClass;
+    const {
+      pageSize, pageSizeOptions, locale, rootPrefixCls, changeSize,
+      quickGo, goButton, selectComponentClass, buildOptionText,
+      selectPrefixCls,
+    } = this.props;
+    const { goInputText } = this.state;
+    const prefixCls = `${rootPrefixCls}-options`;
+    const Select = selectComponentClass;
     let changeSelect = null;
     let goInput = null;
     let gotoButton = null;
@@ -73,20 +72,20 @@ class Options extends React.Component {
     }
 
     if (changeSize && Select) {
-      const Option = Select.Option;
-      const pageSize = props.pageSize || props.pageSizeOptions[0];
-      const options = props.pageSizeOptions.map((opt, i) => (
-        <Option key={i} value={opt}>{buildOptionText(opt)}</Option>
+      const options = pageSizeOptions.map((opt, i) => (
+        <Select.Option key={i} value={opt}>
+          {(buildOptionText || this.buildOptionText)(opt)}
+        </Select.Option>
       ));
 
       changeSelect = (
         <Select
-          prefixCls={props.selectPrefixCls}
+          prefixCls={selectPrefixCls}
           showSearch={false}
           className={`${prefixCls}-size-changer`}
           optionLabelProp="children"
           dropdownMatchSelectWidth={false}
-          value={pageSize.toString()}
+          value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={this.changeSize}
           getPopupContainer={triggerNode => triggerNode.parentNode}
         >
@@ -97,31 +96,29 @@ class Options extends React.Component {
 
     if (quickGo) {
       if (goButton) {
-        if (typeof goButton === 'boolean') {
-          gotoButton = (
-            <button
-              type="button"
-              onClick={this.go}
-              onKeyUp={this.go}
-            >
+        gotoButton = typeof goButton === 'boolean' ? (
+          <button
+            type="button"
+            onClick={this.go}
+            onKeyUp={this.go}
+          >
             {locale.jump_to_confirm}
-            </button>
-          );
-        } else {
-          gotoButton = (
-            <span
-              onClick={this.go}
-              onKeyUp={this.go}
-            >{goButton}</span>
-          );
-        }
+          </button>
+        ) : (
+          <span
+            onClick={this.go}
+            onKeyUp={this.go}
+          >
+            {goButton}
+          </span>
+        );
       }
       goInput = (
         <div className={`${prefixCls}-quick-jumper`}>
           {locale.jump_to}
           <input
             type="text"
-            value={state.goInputText}
+            value={goInputText}
             onChange={this.handleChange}
             onKeyUp={this.go}
           />

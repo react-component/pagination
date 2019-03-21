@@ -148,7 +148,7 @@ describe('Uncontrolled Pagination', () => {
     }, 10);
   });
 
-  it('should display total items', () => {
+  it('should display total items', (done) => {
     const totalText = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
       'rc-pagination-total-text'
@@ -165,6 +165,7 @@ describe('Uncontrolled Pagination', () => {
       Simulate.click(nextButton);
       setTimeout(() => {
         expect(totalText.innerHTML).to.be('21 - 25 of 25 items');
+        done();
       }, 10);
     }, 10);
   });

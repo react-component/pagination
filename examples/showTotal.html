@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>showTotal.js - example - rc-pagination@1.17.9</title>
+  <title>showTotal.js - example - rc-pagination@1.17.10</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>rc-pagination@1.17.9</h1>
+      <h1>rc-pagination@1.17.10</h1>
 
       <p>pagination ui component for react</p>
     </div>
@@ -285,6 +285,11 @@ ReactDOM.render(
   <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span>
     <span class="hljs-attribute">showTotal</span>=<span class="hljs-value">{(total,</span> <span class="hljs-attribute">range</span>) =&gt;</span> `${range[0]} - ${range[1]} of ${total} items`}
     total={455}
+  /&gt;
+  <span class="hljs-tag">&lt;<span class="hljs-title">br</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">Pagination</span>
+    <span class="hljs-attribute">showTotal</span>=<span class="hljs-value">{(total,</span> <span class="hljs-attribute">range</span>) =&gt;</span> `${range[0]} - ${range[1]} of ${total} items`}
+    total={0}
   /&gt;
 <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 , document.getElementById('__react-content'));

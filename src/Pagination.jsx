@@ -415,7 +415,11 @@ class Pagination extends React.Component {
               onChange={this.handleKeyUp}
               size="3"
             />
-            <span className={`${prefixCls}-slash`}>／</span>
+            <span className={`${prefixCls}-divider`} >
+              {this.props.itemRender(current, 'divider',
+                <span className={`${prefixCls}-slash`}>／</span>
+              )}
+            </span>
             {allPages}
           </li>
           <li

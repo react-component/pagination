@@ -11,5 +11,5 @@ export default {
   prev_5: 'Prijašnjih 5 stranica',
   next_5: 'Sljedećih 5 stranica',
   prev_3: 'Prijašnje 3 stranice',
-  next_3: 'Sljedeće 3 stranice'
+  next_3: 'Sljedeće 3 stranice',
 };

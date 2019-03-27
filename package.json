@@ -22,7 +22,8 @@
     "dist",
     "lib",
     "es",
-    "assets/*.css"
+    "assets/*.css",
+    "rc-pagination.d.ts"
   ],
   "main": "lib/index",
   "module": "es/index",

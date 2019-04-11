@@ -1,4 +1,4 @@
-declare module 'rc-pagination' {
+declare module "rc-pagination" {
   export interface PaginationData {
     className: string;
     selectPrefixCls: string;
@@ -23,7 +23,7 @@ declare module 'rc-pagination' {
     style: React.CSSProperties;
 
     selectComponentClass: React.ComponentType;
-    pervIcon: React.ComponentType | React.ReactNode;
+    prevIcon: React.ComponentType | React.ReactNode;
     nextIcon: React.ComponentType | React.ReactNode;
     jumpPrevIcon: React.ComponentType | React.ReactNode;
     jumpNextIcon: React.ComponentType | React.ReactNode;
@@ -32,9 +32,13 @@ declare module 'rc-pagination' {
   export interface PaginationProps extends Partial<PaginationData> {
     onChange?: (page: number, pageSize: number) => void;
     onShowSizeChange?: (current: number, size: number) => void;
-    itemRender?: (page: number, type: string, element: React.ReactNode) => React.ReactNode;
+    itemRender?: (
+      page: number,
+      type: string,
+      element: React.ReactNode
+    ) => React.ReactNode;
     showTotal?: (total: number, range: [number, number]) => React.ReactNode;
   }
 
-  export default class Pagination extends React.Component<PaginationProps> { }
+  export default class Pagination extends React.Component<PaginationProps> {}
 }

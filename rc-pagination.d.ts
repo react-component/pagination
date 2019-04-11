@@ -23,7 +23,7 @@ declare module 'rc-pagination' {
     style: React.CSSProperties;
 
     selectComponentClass: React.ComponentType;
-    pervIcon: React.ComponentType | React.ReactNode;
+    prevIcon: React.ComponentType | React.ReactNode;
     nextIcon: React.ComponentType | React.ReactNode;
     jumpPrevIcon: React.ComponentType | React.ReactNode;
     jumpNextIcon: React.ComponentType | React.ReactNode;

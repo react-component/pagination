@@ -25,7 +25,18 @@ const Pager = (props) => {
     props.onKeyPress(e, props.onClick, props.page);
   };
 
+  let pageType = 'page';
+  if (props.last) {
+    pageType = 'jump-last';
+  }
+  if (props.first) {
+    pageType = 'jump-first';
+  }
+
+  const itemNode = props.itemRender(props.page, pageType, <a>{props.page}</a>);
+
   return (
+    itemNode === null ? null :
     <li
       title={props.showTitle ? props.page : null}
       className={cls}
@@ -33,7 +44,7 @@ const Pager = (props) => {
       onKeyPress={handleKeyPress}
       tabIndex="0"
     >
-      {props.itemRender(props.page, 'page', <a>{props.page}</a>)}
+      {itemNode}
     </li>
   );
 };

@@ -53,6 +53,7 @@ class Pagination extends React.Component {
     nextIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     jumpPrevIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     jumpNextIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    pagerCount: PropTypes.number,
   };
 
   static defaultProps = {
@@ -74,6 +75,7 @@ class Pagination extends React.Component {
     locale: LOCALE,
     style: {},
     itemRender: defaultItemRender,
+    pagerCount: 5,
   };
 
   constructor(props) {
@@ -81,8 +83,14 @@ class Pagination extends React.Component {
 
     const hasOnChange = props.onChange !== noop;
     const hasCurrent = ('current' in props);
+    const hasShowLessItems = ('showLessItems' in props);
     if (hasCurrent && !hasOnChange) {
       console.warn('Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.'); // eslint-disable-line
+    }
+    if (hasShowLessItems && props.showLessItems) {
+      console.warn(
+        'Warning: `showLessItems` is deprecated since 1.18.0. Please use pagerCount instead.'
+      ) // eslint-disable-line
     }
 
     let current = props.defaultCurrent;
@@ -143,13 +151,17 @@ class Pagination extends React.Component {
   }
 
   getJumpPrevPage = () => {
-    return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
+    const { showLessItems } = this.props;
+    const hasPagerCount = this.hasPagerCount();
+    return Math.max(1, this.state.current - (showLessItems && !hasPagerCount ? 3 : 5));
   }
 
   getJumpNextPage = () => {
+    const { showLessItems } = this.props;
+    const hasPagerCount = this.hasPagerCount();
     return Math.min(
       calculatePage(undefined, this.state, this.props),
-      this.state.current + (this.props.showLessItems ? 3 : 5)
+      this.state.current + (showLessItems && !hasPagerCount ? 3 : 5)
     );
   }
 
@@ -324,6 +336,8 @@ class Pagination extends React.Component {
     }
   }
 
+  hasPagerCount = () => !(this.props.pagerCount === 5)
+
   render() {
     // When hideOnSinglePage is true and there is only 1 page, hide the pager
     if (this.props.hideOnSinglePage === true && this.props.total <= this.state.pageSize) {
@@ -342,8 +356,17 @@ class Pagination extends React.Component {
     let lastPager = null;
     let gotoButton = null;
 
+    const { pagerCount, showLessItems } = props;
+    // `pagerCount` priority is greater than `showLessItems`.
+    const hasPagerCount = this.hasPagerCount();
+    const boundary = pagerCount === 0 ? 0 : 1;
+    const pagerCountBoundary = pagerCount % 2 !== 0 ? 0 : boundary;
+    const boundaryRemainder = hasPagerCount ? pagerCountBoundary : 0;
+    const halfPagerCount = Math.max(0, Math.floor((pagerCount - 1) / 2));
+    const halfHasLessItemsCount = showLessItems ? 1 : halfPagerCount;
+    const pageBufferSize = hasPagerCount ? halfPagerCount : halfHasLessItemsCount;
+
     const goButton = (props.showQuickJumper && props.showQuickJumper.goButton);
-    const pageBufferSize = props.showLessItems ? 1 : 2;
     const { current, pageSize } = this.state;
 
     const prevPage = current - 1 > 0 ? current - 1 : 0;
@@ -433,7 +456,7 @@ class Pagination extends React.Component {
       );
     }
 
-    if (allPages <= 5 + pageBufferSize * 2) {
+    if (allPages <= pageBufferSize * 2 + boundaryRemainder + 1) {
       const pagerProps = {
         locale,
         rootPrefixCls: prefixCls,
@@ -464,8 +487,8 @@ class Pagination extends React.Component {
         );
       }
     } else {
-      const prevItemTitle = props.showLessItems ? locale.prev_3 : locale.prev_5;
-      const nextItemTitle = props.showLessItems ? locale.next_3 : locale.next_5;
+      const prevItemTitle = showLessItems && !hasPagerCount ? locale.prev_3 : locale.prev_5;
+      const nextItemTitle = showLessItems && !hasPagerCount ? locale.next_3 : locale.next_5;
       if (props.showPrevNextJumpers) {
         let jumpPrevClassString = `${prefixCls}-jump-prev`;
         if (props.jumpPrevIcon) {
@@ -508,6 +531,7 @@ class Pagination extends React.Component {
           </li>
         );
       }
+
       lastPager = (
         <Pager
           locale={props.locale}
@@ -525,6 +549,7 @@ class Pagination extends React.Component {
       firstPager = (
         <Pager
           locale={props.locale}
+          first
           rootPrefixCls={prefixCls}
           onClick={this.handleChange}
           onKeyPress={this.runIfEnter}
@@ -536,15 +561,15 @@ class Pagination extends React.Component {
         />
       );
 
-      let left = Math.max(1, current - pageBufferSize);
+      let left = Math.max(1, current - pageBufferSize - boundaryRemainder);
       let right = Math.min(current + pageBufferSize, allPages);
 
       if (current - 1 <= pageBufferSize) {
-        right = 1 + pageBufferSize * 2;
+        right = 1 + pageBufferSize * 2 + boundaryRemainder;
       }
 
-      if (allPages - current <= pageBufferSize) {
-        left = allPages - pageBufferSize * 2;
+      if (allPages - current < pageBufferSize) {
+        left = allPages - pageBufferSize * 2 - boundaryRemainder;
       }
 
       for (let i = left; i <= right; i++) {
@@ -564,13 +589,13 @@ class Pagination extends React.Component {
         );
       }
 
-      if (current - 1 >= pageBufferSize * 2 && current !== 1 + 2) {
+      if (current - boundaryRemainder - 2 > pageBufferSize) {
         pagerList[0] = React.cloneElement(pagerList[0], {
           className: `${prefixCls}-item-after-jump-prev`,
         });
         pagerList.unshift(jumpPrev);
       }
-      if (allPages - current >= pageBufferSize * 2 && current !== allPages - 2) {
+      if (allPages - current > pageBufferSize && current !== allPages - pageBufferSize - 1) {
         pagerList[pagerList.length - 1] = React.cloneElement(pagerList[pagerList.length - 1], {
           className: `${prefixCls}-item-before-jump-next`,
         });

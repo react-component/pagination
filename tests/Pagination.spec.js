@@ -838,3 +838,68 @@ describe('data and aria props', () => {
     });
   });
 });
+
+describe('disabled', () => {
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('full pagination', (done) => {
+    ReactDOM.render(
+      <Pagination
+        selectComponentClass={Select}
+        showQuickJumper={{ goButton: true }}
+        showSizeChanger
+        defaultPageSize={20}
+        defaultCurrent={5}
+        total={450}
+        disabled
+      />,
+      container,
+      function () {
+        const pagination = this;
+
+        // Root
+        expect(
+          TestUtils.findRenderedDOMComponentWithClass(
+            pagination,
+            'rc-pagination-disabled'
+          )
+        ).to.be.ok();
+
+        expect(
+          TestUtils.findRenderedDOMComponentWithTag(
+            pagination,
+            'input'
+          )
+        ).to.be.ok();
+
+        expect(
+          TestUtils.findRenderedComponentWithType(
+            pagination,
+            Select,
+          ).props.disabled
+        ).to.be.ok();
+
+        expect(
+          TestUtils.findRenderedDOMComponentWithTag(
+            pagination,
+            'input'
+          ).disabled
+        ).to.be.ok();
+
+        expect(
+          TestUtils.findRenderedDOMComponentWithTag(
+            pagination,
+            'button'
+          ).disabled
+        ).to.be.ok();
+
+        done();
+      },
+    );
+  });
+});

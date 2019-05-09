@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Pager from './Pager';
 import Options from './Options';
@@ -29,7 +30,9 @@ function calculatePage(p, state, props) {
 
 class Pagination extends React.Component {
   static propTypes = {
+    disabled: PropTypes.bool,
     prefixCls: PropTypes.string,
+    className: PropTypes.string,
     current: PropTypes.number,
     defaultCurrent: PropTypes.number,
     total: PropTypes.number,
@@ -245,8 +248,10 @@ class Pagination extends React.Component {
   }
 
   handleChange = (p) => {
+    const { disabled } = this.props;
+
     let page = p;
-    if (this.isValid(page)) {
+    if (this.isValid(page) && !disabled) {
       const currentPage = calculatePage(undefined, this.state, this.props);
       if (page > currentPage) {
         page = currentPage;
@@ -325,6 +330,8 @@ class Pagination extends React.Component {
   }
 
   render() {
+    const { prefixCls, className, disabled } = this.props;
+
     // When hideOnSinglePage is true and there is only 1 page, hide the pager
     if (this.props.hideOnSinglePage === true && this.props.total <= this.state.pageSize) {
       return null;
@@ -333,7 +340,6 @@ class Pagination extends React.Component {
     const props = this.props;
     const locale = props.locale;
 
-    const prefixCls = props.prefixCls;
     const allPages = calculatePage(undefined, this.state, this.props);
     const pagerList = [];
     let jumpPrev = null;
@@ -604,7 +610,9 @@ class Pagination extends React.Component {
     const nextDisabled = !this.hasNext() || !allPages;
     return (
       <ul
-        className={`${prefixCls} ${props.className}`}
+        className={classNames(prefixCls, className, {
+          [`${prefixCls}-disabled`]: disabled,
+        })}
         style={props.style}
         unselectable="unselectable"
         ref={this.savePaginationNode}
@@ -641,6 +649,7 @@ class Pagination extends React.Component {
           )}
         </li>
         <Options
+          disabled={disabled}
           locale={props.locale}
           rootPrefixCls={prefixCls}
           selectComponentClass={props.selectComponentClass}

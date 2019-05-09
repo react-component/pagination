@@ -17,14 +17,28 @@ function onChange(current, pageSize) {
 }
 
 ReactDOM.render(
-  <Pagination
-    selectComponentClass={Select}
-    showQuickJumper
-    showSizeChanger
-    defaultPageSize={20}
-    defaultCurrent={5}
-    onShowSizeChange={onShowSizeChange}
-    onChange={onChange}
-    total={450}
-  />
+  <div>
+    <Pagination
+      selectComponentClass={Select}
+      showQuickJumper
+      showSizeChanger
+      defaultPageSize={20}
+      defaultCurrent={5}
+      onShowSizeChange={onShowSizeChange}
+      onChange={onChange}
+      total={450}
+    />
+    <br />
+    <Pagination
+      selectComponentClass={Select}
+      showQuickJumper={{ goButton: true }}
+      showSizeChanger
+      defaultPageSize={20}
+      defaultCurrent={5}
+      onShowSizeChange={onShowSizeChange}
+      onChange={onChange}
+      total={450}
+      disabled
+    />
+  </div>
 , document.getElementById('__react-content'));

@@ -4,7 +4,7 @@ import KEYCODE from './KeyCode';
 
 class Options extends React.Component {
   static propTypes = {
-    disabled: PropTypes.boolean,
+    disabled: PropTypes.bool,
     changeSize: PropTypes.func,
     quickGo: PropTypes.func,
     selectComponentClass: PropTypes.func,

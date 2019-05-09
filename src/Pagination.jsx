@@ -30,7 +30,7 @@ function calculatePage(p, state, props) {
 
 class Pagination extends React.Component {
   static propTypes = {
-    disabled: PropTypes.boolean,
+    disabled: PropTypes.bool,
     prefixCls: PropTypes.string,
     className: PropTypes.string,
     current: PropTypes.number,

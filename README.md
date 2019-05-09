@@ -52,6 +52,7 @@ React.render(<Pagination />, container);
 
 | Parameter        | Description                        | Type          | Default                  |
 |------------------|------------------------------------|---------------|--------------------------|
+| disabled         | disable pagination                 | Bool          | -                        |
 | defaultCurrent   | uncontrolled current page          | Number        | 1                        |
 | current          | current page                       | Number        | undefined                |
 | total            | items total count                  | Number        | 0                        |

@@ -4,6 +4,7 @@ import KEYCODE from './KeyCode';
 
 class Options extends React.Component {
   static propTypes = {
+    disabled: PropTypes.boolean,
     changeSize: PropTypes.func,
     quickGo: PropTypes.func,
     selectComponentClass: PropTypes.func,
@@ -61,7 +62,7 @@ class Options extends React.Component {
     const {
       pageSize, pageSizeOptions, locale, rootPrefixCls, changeSize,
       quickGo, goButton, selectComponentClass, buildOptionText,
-      selectPrefixCls,
+      selectPrefixCls, disabled,
     } = this.props;
     const { goInputText } = this.state;
     const prefixCls = `${rootPrefixCls}-options`;
@@ -83,6 +84,7 @@ class Options extends React.Component {
 
       changeSelect = (
         <Select
+          disabled={disabled}
           prefixCls={selectPrefixCls}
           showSearch={false}
           className={`${prefixCls}-size-changer`}
@@ -104,6 +106,7 @@ class Options extends React.Component {
             type="button"
             onClick={this.go}
             onKeyUp={this.go}
+            disabled={disabled}
           >
             {locale.jump_to_confirm}
           </button>
@@ -120,6 +123,7 @@ class Options extends React.Component {
         <div className={`${prefixCls}-quick-jumper`}>
           {locale.jump_to}
           <input
+            disabled={disabled}
             type="text"
             value={goInputText}
             onChange={this.handleChange}

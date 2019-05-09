@@ -1,5 +1,16 @@
 @prefixClass: rc-pagination;
 
+.disabled-item() {
+  cursor: not-allowed;
+
+  &:hover {
+    border-color: #d9d9d9;
+    a {
+      color: #d9d9d9;
+    }
+  }
+}
+
 .@{prefixClass} {
   font-size: 12px;
   font-family: 'Arial';
@@ -54,13 +65,7 @@
     }
 
     &-disabled {
-      cursor: not-allowed;
-      &:hover {
-        border-color: #d9d9d9;
-        a {
-          color: #d9d9d9;
-        }
-      }
+      .disabled-item();
     }
 
     &-active {
@@ -204,6 +209,17 @@
     cursor: not-allowed;
     a {
       color: #ccc;
+    }
+
+    .@{prefixClass}-item,
+    .@{prefixClass}-prev,
+    .@{prefixClass}-next {
+      .disabled-item();
+    }
+
+    .@{prefixClass}-jump-prev,
+    .@{prefixClass}-jump-next {
+      pointer-events: none;
     }
   }
 

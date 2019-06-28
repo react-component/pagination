@@ -63,6 +63,7 @@ React.render(<Pagination />, container);
 | pageSizeOptions  | specify the sizeChanger selections | Array<String> | ['10', '20', '30', '40'] |
 | onShowSizeChange | pageSize change callback           | Function(current, size)  | -        |
 | hideOnSinglePage | hide on single page                | Bool          | false                    |
+| hideOnNoData     | hide on no data                    | Bool          | false                    |
 | showPrevNextJumpers | show jump-prev, jump-next       | Bool          | true                     |
 | showQuickJumper  | show quick goto jumper             | Bool / Object | false / {goButton: true} |
 | showTotal        | show total records and range            | Function(total, [from, to]) | -     |

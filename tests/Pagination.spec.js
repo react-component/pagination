@@ -453,6 +453,59 @@ describe('hideOnSinglePage props', () => {
   });
 });
 
+describe('hideOnNoData props', () => {
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  const itemRender = (current) => {
+    return <a href={`#${current}`}>{current}</a>;
+  };
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('should hide pager if hideOnNoData equals true and total equals 0', (done) => {
+    ReactDOM.render(
+      <Pagination total={0} itemRender={itemRender} hideOnNoData />,
+      container,
+      function () {
+        expect(() => {
+          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination');
+        }).to.throwException(/Did not find exactly one match/);
+        done();
+      }
+    );
+  });
+
+  it('should show pager if hideOnNoData equals false and total equals 0', (done) => {
+    ReactDOM.render(
+      <Pagination total={0} itemRender={itemRender} hideOnNoData={false} />,
+      container,
+      function () {
+        expect(() => {
+          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination');
+        }).to.not.throwException();
+        done();
+      }
+    );
+  });
+
+  it('should show pager if hideOnNoData equals true but total is greater than 0', (done) => {
+    ReactDOM.render(
+      <Pagination total={10} itemRender={itemRender} hideOnNoData />,
+      container,
+      function () {
+        expect(() => {
+          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination');
+        }).to.not.throwException();
+        done();
+      }
+    );
+  });
+});
+
+
 describe('showPrevNextJumpers props', () => {
   const container = document.createElement('div');
   const currentPage = 12;

@@ -12,6 +12,7 @@ declare module 'rc-pagination' {
     defaultPageSize: number;
 
     hideOnSinglePage: boolean;
+    hideOnNoData: boolean;
     showSizeChanger: boolean;
     showLessItems: boolean;
     showPrevNextJumpers: boolean;

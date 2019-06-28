@@ -40,6 +40,7 @@ class Pagination extends React.Component {
     defaultPageSize: PropTypes.number,
     onChange: PropTypes.func,
     hideOnSinglePage: PropTypes.bool,
+    hideOnNoData: PropTypes.bool,
     showSizeChanger: PropTypes.bool,
     showLessItems: PropTypes.bool,
     onShowSizeChange: PropTypes.func,
@@ -68,6 +69,7 @@ class Pagination extends React.Component {
     prefixCls: 'rc-pagination',
     selectComponentClass: null,
     hideOnSinglePage: false,
+    hideOnNoData: false,
     showPrevNextJumpers: true,
     showQuickJumper: false,
     showSizeChanger: false,
@@ -334,6 +336,11 @@ class Pagination extends React.Component {
 
     // When hideOnSinglePage is true and there is only 1 page, hide the pager
     if (this.props.hideOnSinglePage === true && this.props.total <= this.state.pageSize) {
+      return null;
+    }
+
+    // When hideOnNoData is true and total is 0, hide the pager
+    if (this.props.hideOnNoData === true && this.props.total === 0) {
       return null;
     }
 

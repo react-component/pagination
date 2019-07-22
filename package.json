@@ -54,7 +54,7 @@
     "now-build": "npm run build"
   },
   "devDependencies": {
-    "core-js": "^3.0.0",
+    "core-js": "^3.1.4",
     "expect.js": "0.3.x",
     "pre-commit": "1.x",
     "rc-select": "9.x",

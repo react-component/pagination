@@ -22,12 +22,13 @@ class Options extends React.Component {
     pageSizeOptions: ['10', '20', '30', '40'],
   };
 
-  constructor(props) {
-    super(props);
+  state = {
+    goInputText: '',
+  };
 
-    this.state = {
-      goInputText: '',
-    };
+  getValidValue() {
+    const { goInputText, current } = this.state;
+    return isNaN(goInputText) ? current : Number(goInputText);
   }
 
   buildOptionText = (value) => {
@@ -44,17 +45,24 @@ class Options extends React.Component {
     });
   }
 
-  go = (e) => {
-    let val = this.state.goInputText;
-    if (val === '') {
+  handleBlur = () => {
+    const { goButton, quickGo } = this.props;
+    if (goButton) {
       return;
     }
-    val = isNaN(val) ? this.props.current : Number(val);
+    quickGo(this.getValidValue());
+  }
+
+  go = (e) => {
+    const { goInputText } = this.state;
+    if (goInputText === '') {
+      return;
+    }
     if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
       this.setState({
         goInputText: '',
       });
-      this.props.quickGo(val);
+      this.props.quickGo(this.getValidValue());
     }
   }
 
@@ -128,6 +136,7 @@ class Options extends React.Component {
             value={goInputText}
             onChange={this.handleChange}
             onKeyUp={this.go}
+            onBlur={this.handleBlur}
           />
           {locale.page}
           {gotoButton}

@@ -171,6 +171,20 @@ class Pagination extends React.Component {
     return iconNode;
   }
 
+  getValidValue(e) {
+    const inputValue = e.target.value;
+    const { currentInputValue } = this.state;
+    let value;
+    if (inputValue === '') {
+      value = inputValue;
+    } else if (isNaN(Number(inputValue))) {
+      value = currentInputValue;
+    } else {
+      value = Number(inputValue);
+    }
+    return value;
+  }
+
   savePaginationNode = (node) => {
     this.paginationNode = node;
   }
@@ -194,24 +208,13 @@ class Pagination extends React.Component {
   }
 
   handleKeyUp = (e) => {
-    const inputValue = e.target.value;
-    const currentInputValue = this.state.currentInputValue;
-    let value;
-
-    if (inputValue === '') {
-      value = inputValue;
-    } else if (isNaN(Number(inputValue))) {
-      value = currentInputValue;
-    } else {
-      value = Number(inputValue);
-    }
-
+    const value = this.getValidValue(e);
+    const { currentInputValue } = this.state;
     if (value !== currentInputValue) {
       this.setState({
         currentInputValue: value,
       });
     }
-
     if (e.keyCode === KEYCODE.ENTER) {
       this.handleChange(value);
     } else if (e.keyCode === KEYCODE.ARROW_UP) {

@@ -54,6 +54,7 @@ describe('Uncontrolled Pagination', () => {
 
   afterEach(() => {
     ReactDOM.unmountComponentAtNode(container);
+    current = 1;
   });
 
   it('default current page is 1', () => {
@@ -135,8 +136,7 @@ describe('Uncontrolled Pagination', () => {
     expect(TestUtils.isDOMComponent(quickJumper)).to.be(true);
     expect(TestUtils.isDOMComponent(input)).to.be(true);
     expect(TestUtils.isDOMComponent(goButton)).to.be(true);
-    input.value = '2';
-    Simulate.change(input);
+    Simulate.change(input, { target: { value: '2' } });
     setTimeout(() => {
       Simulate.click(goButton);
       setTimeout(() => {
@@ -146,6 +146,46 @@ describe('Uncontrolled Pagination', () => {
         done();
       }, 10);
     }, 10);
+  });
+
+  // https://github.com/ant-design/ant-design/issues/17763
+  it('should not jump when blur input when there is goButton', (done) => {
+    const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-options-quick-jumper'
+    );
+    const input = quickJumper.querySelector('input');
+    Simulate.change(input, { target: { value: '2' } });
+    setTimeout(() => {
+      Simulate.blur(input);
+      setTimeout(() => {
+        expect(pagination.state.current).to.be(1);
+        expect(current).to.be(1);
+        done();
+      }, 10);
+    }, 10);
+  });
+
+  // https://github.com/ant-design/ant-design/issues/17763
+  it('should not jump when blur input when there is not goButton', (done) => {
+    ReactDOM.render(
+      <Pagination pageSize={10} total={20} showQuickJumper />,
+      container,
+      function () {
+        const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
+          this, 'rc-pagination-options-quick-jumper',
+        );
+        const input = quickJumper.querySelector('input');
+        Simulate.change(input, { target: { value: '2' } });
+        setTimeout(() => {
+          Simulate.blur(input);
+          setTimeout(() => {
+            expect(this.state.current).to.be(2);
+            done();
+          }, 10);
+        }, 10);
+      },
+    );
   });
 
   // https://github.com/ant-design/ant-design/issues/15539

@@ -16,7 +16,6 @@ class Options extends React.Component {
     rootPrefixCls: PropTypes.string,
     selectPrefixCls: PropTypes.string,
     goButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
-    showQuickJumper: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   };
 
   static defaultProps = {
@@ -47,8 +46,7 @@ class Options extends React.Component {
   }
 
   handleBlur = () => {
-    const { showQuickJumper = {}, quickGo } = this.props;
-    const { goButton } = showQuickJumper;
+    const { goButton, quickGo } = this.props;
     if (goButton) {
       return;
     }

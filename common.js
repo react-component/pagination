@@ -1947,46 +1947,61 @@ if (process.env.NODE_ENV === 'production') {
 var Options = function (_React$Component) {
   __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default()(Options, _React$Component);
 
-  function Options(props) {
+  function Options() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default()(this, Options);
 
-    var _this = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    _this.buildOptionText = function (value) {
+    return _ret = (_temp = (_this = __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(this, (_ref = Options.__proto__ || Object.getPrototypeOf(Options)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      goInputText: ''
+    }, _this.buildOptionText = function (value) {
       return value + ' ' + _this.props.locale.items_per_page;
-    };
-
-    _this.changeSize = function (value) {
+    }, _this.changeSize = function (value) {
       _this.props.changeSize(Number(value));
-    };
-
-    _this.handleChange = function (e) {
+    }, _this.handleChange = function (e) {
       _this.setState({
         goInputText: e.target.value
       });
-    };
+    }, _this.handleBlur = function () {
+      var _this$props = _this.props,
+          goButton = _this$props.goButton,
+          quickGo = _this$props.quickGo;
 
-    _this.go = function (e) {
-      var val = _this.state.goInputText;
-      if (val === '') {
+      if (goButton) {
         return;
       }
-      val = isNaN(val) ? _this.props.current : Number(val);
+      quickGo(_this.getValidValue());
+    }, _this.go = function (e) {
+      var goInputText = _this.state.goInputText;
+
+      if (goInputText === '') {
+        return;
+      }
       if (e.keyCode === __WEBPACK_IMPORTED_MODULE_6__KeyCode__["a" /* default */].ENTER || e.type === 'click') {
         _this.setState({
           goInputText: ''
         });
-        _this.props.quickGo(val);
+        _this.props.quickGo(_this.getValidValue());
       }
-    };
-
-    _this.state = {
-      goInputText: ''
-    };
-    return _this;
+    }, _temp), __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(_this, _ret);
   }
 
   __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default()(Options, [{
+    key: 'getValidValue',
+    value: function getValidValue() {
+      var _state = this.state,
+          goInputText = _state.goInputText,
+          current = _state.current;
+
+      return isNaN(goInputText) ? current : Number(goInputText);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -2072,7 +2087,8 @@ var Options = function (_React$Component) {
             type: 'text',
             value: goInputText,
             onChange: this.handleChange,
-            onKeyUp: this.go
+            onKeyUp: this.go,
+            onBlur: this.handleBlur
           }),
           locale.page,
           gotoButton
@@ -2288,6 +2304,22 @@ var Pagination = function (_React$Component) {
           lastCurrentNode.blur();
         }
       }
+    }
+  }, {
+    key: 'getValidValue',
+    value: function getValidValue(e) {
+      var inputValue = e.target.value;
+      var currentInputValue = this.state.currentInputValue;
+
+      var value = void 0;
+      if (inputValue === '') {
+        value = inputValue;
+      } else if (isNaN(Number(inputValue))) {
+        value = currentInputValue;
+      } else {
+        value = Number(inputValue);
+      }
+      return value;
     }
   }, {
     key: 'render',
@@ -2747,24 +2779,14 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.handleKeyUp = function (e) {
-    var inputValue = e.target.value;
+    var value = _this2.getValidValue(e);
     var currentInputValue = _this2.state.currentInputValue;
-    var value = void 0;
-
-    if (inputValue === '') {
-      value = inputValue;
-    } else if (isNaN(Number(inputValue))) {
-      value = currentInputValue;
-    } else {
-      value = Number(inputValue);
-    }
 
     if (value !== currentInputValue) {
       _this2.setState({
         currentInputValue: value
       });
     }
-
     if (e.keyCode === __WEBPACK_IMPORTED_MODULE_11__KeyCode__["a" /* default */].ENTER) {
       _this2.handleChange(value);
     } else if (e.keyCode === __WEBPACK_IMPORTED_MODULE_11__KeyCode__["a" /* default */].ARROW_UP) {

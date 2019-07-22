@@ -1,21 +1,17 @@
 @-webkit-keyframes select-ring {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 @keyframes select-ring {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 .rc-select {
@@ -229,8 +225,7 @@
 }
 .rc-select-enabled .rc-select-selection__choice:hover .rc-select-selection__choice__remove {
   opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
 }
 .rc-select-enabled .rc-select-selection__choice:hover .rc-select-selection__choice__content {
   margin-left: -8px;
@@ -265,8 +260,7 @@
           animation-duration: 0.3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  transform-origin: 0 0;
   opacity: 0;
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
@@ -293,39 +287,33 @@
 }
 @-webkit-keyframes rcSelectChoiceZoomIn {
   0% {
-    -webkit-transform: scale(0.6);
-            transform: scale(0.6);
+    transform: scale(0.6);
     opacity: 0;
   }
   100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     opacity: 1;
   }
 }
 @keyframes rcSelectChoiceZoomIn {
   0% {
-    -webkit-transform: scale(0.6);
-            transform: scale(0.6);
+    transform: scale(0.6);
     opacity: 0;
   }
   100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     opacity: 1;
   }
 }
 @-webkit-keyframes rcSelectChoiceZoomOut {
   to {
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     opacity: 0;
   }
 }
 @keyframes rcSelectChoiceZoomOut {
   to {
-    -webkit-transform: scale(0);
-            transform: scale(0);
+    transform: scale(0);
     opacity: 0;
   }
 }
@@ -336,13 +324,10 @@
   padding: 0 0 0 8px;
   position: absolute;
   opacity: 0;
-  -webkit-transform: scale(0);
-          transform: scale(0);
+  transform: scale(0);
   top: 0;
   right: 2px;
-  transition: opacity 0.3s, -webkit-transform 0.3s;
   transition: opacity 0.3s, transform 0.3s;
-  transition: opacity 0.3s, transform 0.3s, -webkit-transform 0.3s;
 }
 .rc-select .rc-select-selection__choice__remove-icon {
   font-style: normal;
@@ -425,8 +410,7 @@ li.rc-select-dropdown-menu-item-divider {
           animation-duration: 0.3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  transform-origin: 0 0;
   opacity: 0;
   -webkit-animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
           animation-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
@@ -438,8 +422,7 @@ li.rc-select-dropdown-menu-item-divider {
           animation-duration: 0.3s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  transform-origin: 0 0;
   opacity: 1;
   -webkit-animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
           animation-timing-function: cubic-bezier(0.6, 0.04, 0.98, 0.34);
@@ -475,129 +458,97 @@ li.rc-select-dropdown-menu-item-divider {
 @-webkit-keyframes rcSelectDropdownSlideUpIn {
   0% {
     opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
   }
   100% {
     opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
   }
 }
 @keyframes rcSelectDropdownSlideUpIn {
   0% {
     opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
   }
   100% {
     opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
   }
 }
 @-webkit-keyframes rcSelectDropdownSlideUpOut {
   0% {
     opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
   }
   100% {
     opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
   }
 }
 @keyframes rcSelectDropdownSlideUpOut {
   0% {
     opacity: 1;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 0%;
+    transform: scaleY(1);
   }
   100% {
     opacity: 0;
-    -webkit-transform-origin: 0% 0%;
-            transform-origin: 0% 0%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 0%;
+    transform: scaleY(0);
   }
 }
 @-webkit-keyframes rcSelectDropdownSlideDownIn {
   0% {
     opacity: 0;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 100%;
+    transform: scaleY(0);
   }
   100% {
     opacity: 1;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 100%;
+    transform: scaleY(1);
   }
 }
 @keyframes rcSelectDropdownSlideDownIn {
   0% {
     opacity: 0;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 100%;
+    transform: scaleY(0);
   }
   100% {
     opacity: 1;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 100%;
+    transform: scaleY(1);
   }
 }
 @-webkit-keyframes rcSelectDropdownSlideDownOut {
   0% {
     opacity: 1;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 100%;
+    transform: scaleY(1);
   }
   100% {
     opacity: 0;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 100%;
+    transform: scaleY(0);
   }
 }
 @keyframes rcSelectDropdownSlideDownOut {
   0% {
     opacity: 1;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(1);
-            transform: scaleY(1);
+    transform-origin: 0% 100%;
+    transform: scaleY(1);
   }
   100% {
     opacity: 0;
-    -webkit-transform-origin: 0% 100%;
-            transform-origin: 0% 100%;
-    -webkit-transform: scaleY(0);
-            transform: scaleY(0);
+    transform-origin: 0% 100%;
+    transform: scaleY(0);
   }
 }
 .rc-select-open .rc-select-arrow b {

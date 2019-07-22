@@ -136,7 +136,7 @@ describe('Uncontrolled Pagination', () => {
     expect(TestUtils.isDOMComponent(quickJumper)).to.be(true);
     expect(TestUtils.isDOMComponent(input)).to.be(true);
     expect(TestUtils.isDOMComponent(goButton)).to.be(true);
-    Simulate.change(input, { target: { value: '2' }});
+    Simulate.change(input, { target: { value: '2' } });
     setTimeout(() => {
       Simulate.click(goButton);
       setTimeout(() => {
@@ -155,8 +155,7 @@ describe('Uncontrolled Pagination', () => {
       'rc-pagination-options-quick-jumper'
     );
     const input = quickJumper.querySelector('input');
-    const goButton = quickJumper.querySelector('button');
-    Simulate.change(input, { target: { value: '2' }});
+    Simulate.change(input, { target: { value: '2' } });
     setTimeout(() => {
       Simulate.blur(input);
       setTimeout(() => {
@@ -173,9 +172,11 @@ describe('Uncontrolled Pagination', () => {
       <Pagination pageSize={10} total={20} showQuickJumper />,
       container,
       function () {
-        const quickJumper = TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination-options-quick-jumper');
+        const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
+          this, 'rc-pagination-options-quick-jumper',
+        );
         const input = quickJumper.querySelector('input');
-        Simulate.change(input, { target: { value: '2' }});
+        Simulate.change(input, { target: { value: '2' } });
         setTimeout(() => {
           Simulate.blur(input);
           setTimeout(() => {

@@ -2,7 +2,7 @@ export default {
   // Options.jsx
   items_per_page: '/ பக்கம்',
   jump_to: 'அடுத்த',
-  jump_to_confirm: 'உறுதிப்படுத்தவும் ',
+  jump_to_confirm: 'உறுதிப்படுத்தவும்',
   page: '',
 
   // Pagination.jsx

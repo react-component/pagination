@@ -6,8 +6,610 @@ webpackJsonp([2],[
 /* 4 */,
 /* 5 */,
 /* 6 */,
-/* 7 */,
-/* 8 */
+/* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__propertyUtils__ = __webpack_require__(60);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+
+
+var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
+
+var getComputedStyleX = void 0;
+
+// https://stackoverflow.com/a/3485654/3040605
+function forceRelayout(elem) {
+  var originalStyle = elem.style.display;
+  elem.style.display = 'none';
+  elem.offsetHeight; // eslint-disable-line
+  elem.style.display = originalStyle;
+}
+
+function css(el, name, v) {
+  var value = v;
+  if ((typeof name === 'undefined' ? 'undefined' : _typeof(name)) === 'object') {
+    for (var i in name) {
+      if (name.hasOwnProperty(i)) {
+        css(el, i, name[i]);
+      }
+    }
+    return undefined;
+  }
+  if (typeof value !== 'undefined') {
+    if (typeof value === 'number') {
+      value = value + 'px';
+    }
+    el.style[name] = value;
+    return undefined;
+  }
+  return getComputedStyleX(el, name);
+}
+
+function getClientPosition(elem) {
+  var box = void 0;
+  var x = void 0;
+  var y = void 0;
+  var doc = elem.ownerDocument;
+  var body = doc.body;
+  var docElem = doc && doc.documentElement;
+  // 根据 GBS 最新数据，A-Grade Browsers 都已支持 getBoundingClientRect 方法，不用再考虑传统的实现方式
+  box = elem.getBoundingClientRect();
+
+  // 注：jQuery 还考虑减去 docElem.clientLeft/clientTop
+  // 但测试发现，这样反而会导致当 html 和 body 有边距/边框样式时，获取的值不正确
+  // 此外，ie6 会忽略 html 的 margin 值，幸运地是没有谁会去设置 html 的 margin
+
+  x = box.left;
+  y = box.top;
+
+  // In IE, most of the time, 2 extra pixels are added to the top and left
+  // due to the implicit 2-pixel inset border.  In IE6/7 quirks mode and
+  // IE6 standards mode, this border can be overridden by setting the
+  // document element's border to zero -- thus, we cannot rely on the
+  // offset always being 2 pixels.
+
+  // In quirks mode, the offset can be determined by querying the body's
+  // clientLeft/clientTop, but in standards mode, it is found by querying
+  // the document element's clientLeft/clientTop.  Since we already called
+  // getClientBoundingRect we have already forced a reflow, so it is not
+  // too expensive just to query them all.
+
+  // ie 下应该减去窗口的边框吧，毕竟默认 absolute 都是相对窗口定位的
+  // 窗口边框标准是设 documentElement ,quirks 时设置 body
+  // 最好禁止在 body 和 html 上边框 ，但 ie < 9 html 默认有 2px ，减去
+  // 但是非 ie 不可能设置窗口边框，body html 也不是窗口 ,ie 可以通过 html,body 设置
+  // 标准 ie 下 docElem.clientTop 就是 border-top
+  // ie7 html 即窗口边框改变不了。永远为 2
+  // 但标准 firefox/chrome/ie9 下 docElem.clientTop 是窗口边框，即使设了 border-top 也为 0
+
+  x -= docElem.clientLeft || body.clientLeft || 0;
+  y -= docElem.clientTop || body.clientTop || 0;
+
+  return {
+    left: x,
+    top: y
+  };
+}
+
+function getScroll(w, top) {
+  var ret = w['page' + (top ? 'Y' : 'X') + 'Offset'];
+  var method = 'scroll' + (top ? 'Top' : 'Left');
+  if (typeof ret !== 'number') {
+    var d = w.document;
+    // ie6,7,8 standard mode
+    ret = d.documentElement[method];
+    if (typeof ret !== 'number') {
+      // quirks mode
+      ret = d.body[method];
+    }
+  }
+  return ret;
+}
+
+function getScrollLeft(w) {
+  return getScroll(w);
+}
+
+function getScrollTop(w) {
+  return getScroll(w, true);
+}
+
+function getOffset(el) {
+  var pos = getClientPosition(el);
+  var doc = el.ownerDocument;
+  var w = doc.defaultView || doc.parentWindow;
+  pos.left += getScrollLeft(w);
+  pos.top += getScrollTop(w);
+  return pos;
+}
+
+/**
+ * A crude way of determining if an object is a window
+ * @member util
+ */
+function isWindow(obj) {
+  // must use == for ie8
+  /* eslint eqeqeq:0 */
+  return obj !== null && obj !== undefined && obj == obj.window;
+}
+
+function getDocument(node) {
+  if (isWindow(node)) {
+    return node.document;
+  }
+  if (node.nodeType === 9) {
+    return node;
+  }
+  return node.ownerDocument;
+}
+
+function _getComputedStyle(elem, name, cs) {
+  var computedStyle = cs;
+  var val = '';
+  var d = getDocument(elem);
+  computedStyle = computedStyle || d.defaultView.getComputedStyle(elem, null);
+
+  // https://github.com/kissyteam/kissy/issues/61
+  if (computedStyle) {
+    val = computedStyle.getPropertyValue(name) || computedStyle[name];
+  }
+
+  return val;
+}
+
+var _RE_NUM_NO_PX = new RegExp('^(' + RE_NUM + ')(?!px)[a-z%]+$', 'i');
+var RE_POS = /^(top|right|bottom|left)$/;
+var CURRENT_STYLE = 'currentStyle';
+var RUNTIME_STYLE = 'runtimeStyle';
+var LEFT = 'left';
+var PX = 'px';
+
+function _getComputedStyleIE(elem, name) {
+  // currentStyle maybe null
+  // http://msdn.microsoft.com/en-us/library/ms535231.aspx
+  var ret = elem[CURRENT_STYLE] && elem[CURRENT_STYLE][name];
+
+  // 当 width/height 设置为百分比时，通过 pixelLeft 方式转换的 width/height 值
+  // 一开始就处理了! CUSTOM_STYLE.height,CUSTOM_STYLE.width ,cssHook 解决@2011-08-19
+  // 在 ie 下不对，需要直接用 offset 方式
+  // borderWidth 等值也有问题，但考虑到 borderWidth 设为百分比的概率很小，这里就不考虑了
+
+  // From the awesome hack by Dean Edwards
+  // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
+  // If we're not dealing with a regular pixel number
+  // but a number that has a weird ending, we need to convert it to pixels
+  // exclude left right for relativity
+  if (_RE_NUM_NO_PX.test(ret) && !RE_POS.test(name)) {
+    // Remember the original values
+    var style = elem.style;
+    var left = style[LEFT];
+    var rsLeft = elem[RUNTIME_STYLE][LEFT];
+
+    // prevent flashing of content
+    elem[RUNTIME_STYLE][LEFT] = elem[CURRENT_STYLE][LEFT];
+
+    // Put in the new values to get a computed value out
+    style[LEFT] = name === 'fontSize' ? '1em' : ret || 0;
+    ret = style.pixelLeft + PX;
+
+    // Revert the changed values
+    style[LEFT] = left;
+
+    elem[RUNTIME_STYLE][LEFT] = rsLeft;
+  }
+  return ret === '' ? 'auto' : ret;
+}
+
+if (typeof window !== 'undefined') {
+  getComputedStyleX = window.getComputedStyle ? _getComputedStyle : _getComputedStyleIE;
+}
+
+function getOffsetDirection(dir, option) {
+  if (dir === 'left') {
+    return option.useCssRight ? 'right' : dir;
+  }
+  return option.useCssBottom ? 'bottom' : dir;
+}
+
+function oppositeOffsetDirection(dir) {
+  if (dir === 'left') {
+    return 'right';
+  } else if (dir === 'right') {
+    return 'left';
+  } else if (dir === 'top') {
+    return 'bottom';
+  } else if (dir === 'bottom') {
+    return 'top';
+  }
+}
+
+// 设置 elem 相对 elem.ownerDocument 的坐标
+function setLeftTop(elem, offset, option) {
+  // set position first, in-case top/left are set even on static elem
+  if (css(elem, 'position') === 'static') {
+    elem.style.position = 'relative';
+  }
+  var presetH = -999;
+  var presetV = -999;
+  var horizontalProperty = getOffsetDirection('left', option);
+  var verticalProperty = getOffsetDirection('top', option);
+  var oppositeHorizontalProperty = oppositeOffsetDirection(horizontalProperty);
+  var oppositeVerticalProperty = oppositeOffsetDirection(verticalProperty);
+
+  if (horizontalProperty !== 'left') {
+    presetH = 999;
+  }
+
+  if (verticalProperty !== 'top') {
+    presetV = 999;
+  }
+  var originalTransition = '';
+  var originalOffset = getOffset(elem);
+  if ('left' in offset || 'top' in offset) {
+    originalTransition = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__propertyUtils__["a" /* getTransitionProperty */])(elem) || '';
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__propertyUtils__["b" /* setTransitionProperty */])(elem, 'none');
+  }
+  if ('left' in offset) {
+    elem.style[oppositeHorizontalProperty] = '';
+    elem.style[horizontalProperty] = presetH + 'px';
+  }
+  if ('top' in offset) {
+    elem.style[oppositeVerticalProperty] = '';
+    elem.style[verticalProperty] = presetV + 'px';
+  }
+  // force relayout
+  forceRelayout(elem);
+  var old = getOffset(elem);
+  var originalStyle = {};
+  for (var key in offset) {
+    if (offset.hasOwnProperty(key)) {
+      var dir = getOffsetDirection(key, option);
+      var preset = key === 'left' ? presetH : presetV;
+      var off = originalOffset[key] - old[key];
+      if (dir === key) {
+        originalStyle[dir] = preset + off;
+      } else {
+        originalStyle[dir] = preset - off;
+      }
+    }
+  }
+  css(elem, originalStyle);
+  // force relayout
+  forceRelayout(elem);
+  if ('left' in offset || 'top' in offset) {
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__propertyUtils__["b" /* setTransitionProperty */])(elem, originalTransition);
+  }
+  var ret = {};
+  for (var _key in offset) {
+    if (offset.hasOwnProperty(_key)) {
+      var _dir = getOffsetDirection(_key, option);
+      var _off = offset[_key] - originalOffset[_key];
+      if (_key === _dir) {
+        ret[_dir] = originalStyle[_dir] + _off;
+      } else {
+        ret[_dir] = originalStyle[_dir] - _off;
+      }
+    }
+  }
+  css(elem, ret);
+}
+
+function setTransform(elem, offset) {
+  var originalOffset = getOffset(elem);
+  var originalXY = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__propertyUtils__["c" /* getTransformXY */])(elem);
+  var resultXY = { x: originalXY.x, y: originalXY.y };
+  if ('left' in offset) {
+    resultXY.x = originalXY.x + offset.left - originalOffset.left;
+  }
+  if ('top' in offset) {
+    resultXY.y = originalXY.y + offset.top - originalOffset.top;
+  }
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__propertyUtils__["d" /* setTransformXY */])(elem, resultXY);
+}
+
+function setOffset(elem, offset, option) {
+  if (option.ignoreShake) {
+    var oriOffset = getOffset(elem);
+
+    var oLeft = oriOffset.left.toFixed(0);
+    var oTop = oriOffset.top.toFixed(0);
+    var tLeft = offset.left.toFixed(0);
+    var tTop = offset.top.toFixed(0);
+
+    if (oLeft === tLeft && oTop === tTop) {
+      return;
+    }
+  }
+
+  if (option.useCssRight || option.useCssBottom) {
+    setLeftTop(elem, offset, option);
+  } else if (option.useCssTransform && __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__propertyUtils__["e" /* getTransformName */])() in document.body.style) {
+    setTransform(elem, offset, option);
+  } else {
+    setLeftTop(elem, offset, option);
+  }
+}
+
+function each(arr, fn) {
+  for (var i = 0; i < arr.length; i++) {
+    fn(arr[i]);
+  }
+}
+
+function isBorderBoxFn(elem) {
+  return getComputedStyleX(elem, 'boxSizing') === 'border-box';
+}
+
+var BOX_MODELS = ['margin', 'border', 'padding'];
+var CONTENT_INDEX = -1;
+var PADDING_INDEX = 2;
+var BORDER_INDEX = 1;
+var MARGIN_INDEX = 0;
+
+function swap(elem, options, callback) {
+  var old = {};
+  var style = elem.style;
+  var name = void 0;
+
+  // Remember the old values, and insert the new ones
+  for (name in options) {
+    if (options.hasOwnProperty(name)) {
+      old[name] = style[name];
+      style[name] = options[name];
+    }
+  }
+
+  callback.call(elem);
+
+  // Revert the old values
+  for (name in options) {
+    if (options.hasOwnProperty(name)) {
+      style[name] = old[name];
+    }
+  }
+}
+
+function getPBMWidth(elem, props, which) {
+  var value = 0;
+  var prop = void 0;
+  var j = void 0;
+  var i = void 0;
+  for (j = 0; j < props.length; j++) {
+    prop = props[j];
+    if (prop) {
+      for (i = 0; i < which.length; i++) {
+        var cssProp = void 0;
+        if (prop === 'border') {
+          cssProp = '' + prop + which[i] + 'Width';
+        } else {
+          cssProp = prop + which[i];
+        }
+        value += parseFloat(getComputedStyleX(elem, cssProp)) || 0;
+      }
+    }
+  }
+  return value;
+}
+
+var domUtils = {
+  getParent: function getParent(element) {
+    var parent = element;
+    do {
+      if (parent.nodeType === 11 && parent.host) {
+        parent = parent.host;
+      } else {
+        parent = parent.parentNode;
+      }
+    } while (parent && parent.nodeType !== 1 && parent.nodeType !== 9);
+    return parent;
+  }
+};
+
+each(['Width', 'Height'], function (name) {
+  domUtils['doc' + name] = function (refWin) {
+    var d = refWin.document;
+    return Math.max(
+    // firefox chrome documentElement.scrollHeight< body.scrollHeight
+    // ie standard mode : documentElement.scrollHeight> body.scrollHeight
+    d.documentElement['scroll' + name],
+    // quirks : documentElement.scrollHeight 最大等于可视窗口多一点？
+    d.body['scroll' + name], domUtils['viewport' + name](d));
+  };
+
+  domUtils['viewport' + name] = function (win) {
+    // pc browser includes scrollbar in window.innerWidth
+    var prop = 'client' + name;
+    var doc = win.document;
+    var body = doc.body;
+    var documentElement = doc.documentElement;
+    var documentElementProp = documentElement[prop];
+    // 标准模式取 documentElement
+    // backcompat 取 body
+    return doc.compatMode === 'CSS1Compat' && documentElementProp || body && body[prop] || documentElementProp;
+  };
+});
+
+/*
+ 得到元素的大小信息
+ @param elem
+ @param name
+ @param {String} [extra]  'padding' : (css width) + padding
+ 'border' : (css width) + padding + border
+ 'margin' : (css width) + padding + border + margin
+ */
+function getWH(elem, name, ex) {
+  var extra = ex;
+  if (isWindow(elem)) {
+    return name === 'width' ? domUtils.viewportWidth(elem) : domUtils.viewportHeight(elem);
+  } else if (elem.nodeType === 9) {
+    return name === 'width' ? domUtils.docWidth(elem) : domUtils.docHeight(elem);
+  }
+  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
+  var borderBoxValue = name === 'width' ? elem.getBoundingClientRect().width : elem.getBoundingClientRect().height;
+  var computedStyle = getComputedStyleX(elem);
+  var isBorderBox = isBorderBoxFn(elem, computedStyle);
+  var cssBoxValue = 0;
+  if (borderBoxValue === null || borderBoxValue === undefined || borderBoxValue <= 0) {
+    borderBoxValue = undefined;
+    // Fall back to computed then un computed css if necessary
+    cssBoxValue = getComputedStyleX(elem, name);
+    if (cssBoxValue === null || cssBoxValue === undefined || Number(cssBoxValue) < 0) {
+      cssBoxValue = elem.style[name] || 0;
+    }
+    // Normalize '', auto, and prepare for extra
+    cssBoxValue = parseFloat(cssBoxValue) || 0;
+  }
+  if (extra === undefined) {
+    extra = isBorderBox ? BORDER_INDEX : CONTENT_INDEX;
+  }
+  var borderBoxValueOrIsBorderBox = borderBoxValue !== undefined || isBorderBox;
+  var val = borderBoxValue || cssBoxValue;
+  if (extra === CONTENT_INDEX) {
+    if (borderBoxValueOrIsBorderBox) {
+      return val - getPBMWidth(elem, ['border', 'padding'], which, computedStyle);
+    }
+    return cssBoxValue;
+  } else if (borderBoxValueOrIsBorderBox) {
+    if (extra === BORDER_INDEX) {
+      return val;
+    }
+    return val + (extra === PADDING_INDEX ? -getPBMWidth(elem, ['border'], which, computedStyle) : getPBMWidth(elem, ['margin'], which, computedStyle));
+  }
+  return cssBoxValue + getPBMWidth(elem, BOX_MODELS.slice(extra), which, computedStyle);
+}
+
+var cssShow = {
+  position: 'absolute',
+  visibility: 'hidden',
+  display: 'block'
+};
+
+// fix #119 : https://github.com/kissyteam/kissy/issues/119
+function getWHIgnoreDisplay() {
+  for (var _len = arguments.length, args = Array(_len), _key2 = 0; _key2 < _len; _key2++) {
+    args[_key2] = arguments[_key2];
+  }
+
+  var val = void 0;
+  var elem = args[0];
+  // in case elem is window
+  // elem.offsetWidth === undefined
+  if (elem.offsetWidth !== 0) {
+    val = getWH.apply(undefined, args);
+  } else {
+    swap(elem, cssShow, function () {
+      val = getWH.apply(undefined, args);
+    });
+  }
+  return val;
+}
+
+each(['width', 'height'], function (name) {
+  var first = name.charAt(0).toUpperCase() + name.slice(1);
+  domUtils['outer' + first] = function (el, includeMargin) {
+    return el && getWHIgnoreDisplay(el, name, includeMargin ? MARGIN_INDEX : BORDER_INDEX);
+  };
+  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
+
+  domUtils[name] = function (elem, v) {
+    var val = v;
+    if (val !== undefined) {
+      if (elem) {
+        var computedStyle = getComputedStyleX(elem);
+        var isBorderBox = isBorderBoxFn(elem);
+        if (isBorderBox) {
+          val += getPBMWidth(elem, ['padding', 'border'], which, computedStyle);
+        }
+        return css(elem, name, val);
+      }
+      return undefined;
+    }
+    return elem && getWHIgnoreDisplay(elem, name, CONTENT_INDEX);
+  };
+});
+
+function mix(to, from) {
+  for (var i in from) {
+    if (from.hasOwnProperty(i)) {
+      to[i] = from[i];
+    }
+  }
+  return to;
+}
+
+var utils = {
+  getWindow: function getWindow(node) {
+    if (node && node.document && node.setTimeout) {
+      return node;
+    }
+    var doc = node.ownerDocument || node;
+    return doc.defaultView || doc.parentWindow;
+  },
+
+  getDocument: getDocument,
+  offset: function offset(el, value, option) {
+    if (typeof value !== 'undefined') {
+      setOffset(el, value, option || {});
+    } else {
+      return getOffset(el);
+    }
+  },
+
+  isWindow: isWindow,
+  each: each,
+  css: css,
+  clone: function clone(obj) {
+    var i = void 0;
+    var ret = {};
+    for (i in obj) {
+      if (obj.hasOwnProperty(i)) {
+        ret[i] = obj[i];
+      }
+    }
+    var overflow = obj.overflow;
+    if (overflow) {
+      for (i in obj) {
+        if (obj.hasOwnProperty(i)) {
+          ret.overflow[i] = obj.overflow[i];
+        }
+      }
+    }
+    return ret;
+  },
+
+  mix: mix,
+  getWindowScrollLeft: function getWindowScrollLeft(w) {
+    return getScrollLeft(w);
+  },
+  getWindowScrollTop: function getWindowScrollTop(w) {
+    return getScrollTop(w);
+  },
+  merge: function merge() {
+    var ret = {};
+
+    for (var _len2 = arguments.length, args = Array(_len2), _key3 = 0; _key3 < _len2; _key3++) {
+      args[_key3] = arguments[_key3];
+    }
+
+    for (var i = 0; i < args.length; i++) {
+      utils.mix(ret, args[i]);
+    }
+    return ret;
+  },
+
+  viewportWidth: 0,
+  viewportHeight: 0
+};
+
+mix(utils, domUtils);
+
+/* harmony default export */ __webpack_exports__["a"] = (utils);
+
+/***/ }),
+/* 8 */,
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -23,7 +625,7 @@ webpackJsonp([2],[
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
-var isMobile = __webpack_require__(53);
+var isMobile = __webpack_require__(65);
 
 function noop() {}
 
@@ -100,9 +702,9 @@ var isMobileDevice = function isMobileDevice() {
 };
 
 /***/ }),
-/* 9 */,
 /* 10 */,
-/* 11 */
+/* 11 */,
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -123,7 +725,7 @@ exports.default = function (obj, keys) {
 };
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -134,15 +736,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.create = exports.connect = exports.Provider = undefined;
 
-var _Provider2 = __webpack_require__(54);
+var _Provider2 = __webpack_require__(66);
 
 var _Provider3 = _interopRequireDefault(_Provider2);
 
-var _connect2 = __webpack_require__(55);
+var _connect2 = __webpack_require__(67);
 
 var _connect3 = _interopRequireDefault(_connect2);
 
-var _create2 = __webpack_require__(56);
+var _create2 = __webpack_require__(68);
 
 var _create3 = _interopRequireDefault(_create2);
 
@@ -153,7 +755,7 @@ exports.connect = _connect3.default;
 exports.create = _create3.default;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -677,17 +1279,17 @@ KeyCode.isCharacterKey = function isCharacterKey(keyCode) {
 /* harmony default export */ __webpack_exports__["a"] = (KeyCode);
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_possibleConstructorReturn__);
@@ -697,9 +1299,9 @@ KeyCode.isCharacterKey = function isCharacterKey(keyCode) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ChildrenUtils__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__AnimateChild__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__util_animate__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ChildrenUtils__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__AnimateChild__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__util_animate__ = __webpack_require__(29);
 
 
 
@@ -1055,7 +1657,7 @@ var _initialiseProps = function _initialiseProps() {
 /* harmony default export */ __webpack_exports__["a"] = (Animate);
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1282,13 +1884,13 @@ function generateUUID() {
   });
   return uuid;
 }
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(10)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(11)))
 
 /***/ }),
-/* 16 */,
 /* 17 */,
 /* 18 */,
-/* 19 */
+/* 19 */,
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1296,9 +1898,9 @@ function generateUUID() {
  */
 
 try {
-  var index = __webpack_require__(20);
+  var index = __webpack_require__(21);
 } catch (err) {
-  var index = __webpack_require__(20);
+  var index = __webpack_require__(21);
 }
 
 /**
@@ -1485,7 +2087,7 @@ ClassList.prototype.contains = function(name){
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 module.exports = function(arr, obj){
@@ -1497,16 +2099,416 @@ module.exports = function(arr, obj){
 };
 
 /***/ }),
-/* 21 */
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getVisibleRectForElement__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__adjustForViewport__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getRegion__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__getElFuturePos__ = __webpack_require__(57);
+/**
+ * align dom node flexibly
+ * @author yiminghe@gmail.com
+ */
+
+
+
+
+
+
+
+// http://yiminghe.iteye.com/blog/1124720
+
+function isFailX(elFuturePos, elRegion, visibleRect) {
+  return elFuturePos.left < visibleRect.left || elFuturePos.left + elRegion.width > visibleRect.right;
+}
+
+function isFailY(elFuturePos, elRegion, visibleRect) {
+  return elFuturePos.top < visibleRect.top || elFuturePos.top + elRegion.height > visibleRect.bottom;
+}
+
+function isCompleteFailX(elFuturePos, elRegion, visibleRect) {
+  return elFuturePos.left > visibleRect.right || elFuturePos.left + elRegion.width < visibleRect.left;
+}
+
+function isCompleteFailY(elFuturePos, elRegion, visibleRect) {
+  return elFuturePos.top > visibleRect.bottom || elFuturePos.top + elRegion.height < visibleRect.top;
+}
+
+function flip(points, reg, map) {
+  var ret = [];
+  __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].each(points, function (p) {
+    ret.push(p.replace(reg, function (m) {
+      return map[m];
+    }));
+  });
+  return ret;
+}
+
+function flipOffset(offset, index) {
+  offset[index] = -offset[index];
+  return offset;
+}
+
+function convertOffset(str, offsetLen) {
+  var n = void 0;
+  if (/%$/.test(str)) {
+    n = parseInt(str.substring(0, str.length - 1), 10) / 100 * offsetLen;
+  } else {
+    n = parseInt(str, 10);
+  }
+  return n || 0;
+}
+
+function normalizeOffset(offset, el) {
+  offset[0] = convertOffset(offset[0], el.width);
+  offset[1] = convertOffset(offset[1], el.height);
+}
+
+/**
+ * @param el
+ * @param tgtRegion 参照节点所占的区域: { left, top, width, height }
+ * @param align
+ */
+function doAlign(el, tgtRegion, align, isTgtRegionVisible) {
+  var points = align.points;
+  var offset = align.offset || [0, 0];
+  var targetOffset = align.targetOffset || [0, 0];
+  var overflow = align.overflow;
+  var source = align.source || el;
+  offset = [].concat(offset);
+  targetOffset = [].concat(targetOffset);
+  overflow = overflow || {};
+  var newOverflowCfg = {};
+  var fail = 0;
+  // 当前节点可以被放置的显示区域
+  var visibleRect = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__getVisibleRectForElement__["a" /* default */])(source);
+  // 当前节点所占的区域, left/top/width/height
+  var elRegion = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__getRegion__["a" /* default */])(source);
+  // 将 offset 转换成数值，支持百分比
+  normalizeOffset(offset, elRegion);
+  normalizeOffset(targetOffset, tgtRegion);
+  // 当前节点将要被放置的位置
+  var elFuturePos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__getElFuturePos__["a" /* default */])(elRegion, tgtRegion, points, offset, targetOffset);
+  // 当前节点将要所处的区域
+  var newElRegion = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].merge(elRegion, elFuturePos);
+
+  // 如果可视区域不能完全放置当前节点时允许调整
+  if (visibleRect && (overflow.adjustX || overflow.adjustY) && isTgtRegionVisible) {
+    if (overflow.adjustX) {
+      // 如果横向不能放下
+      if (isFailX(elFuturePos, elRegion, visibleRect)) {
+        // 对齐位置反下
+        var newPoints = flip(points, /[lr]/ig, {
+          l: 'r',
+          r: 'l'
+        });
+        // 偏移量也反下
+        var newOffset = flipOffset(offset, 0);
+        var newTargetOffset = flipOffset(targetOffset, 0);
+        var newElFuturePos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__getElFuturePos__["a" /* default */])(elRegion, tgtRegion, newPoints, newOffset, newTargetOffset);
+
+        if (!isCompleteFailX(newElFuturePos, elRegion, visibleRect)) {
+          fail = 1;
+          points = newPoints;
+          offset = newOffset;
+          targetOffset = newTargetOffset;
+        }
+      }
+    }
+
+    if (overflow.adjustY) {
+      // 如果纵向不能放下
+      if (isFailY(elFuturePos, elRegion, visibleRect)) {
+        // 对齐位置反下
+        var _newPoints = flip(points, /[tb]/ig, {
+          t: 'b',
+          b: 't'
+        });
+        // 偏移量也反下
+        var _newOffset = flipOffset(offset, 1);
+        var _newTargetOffset = flipOffset(targetOffset, 1);
+        var _newElFuturePos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__getElFuturePos__["a" /* default */])(elRegion, tgtRegion, _newPoints, _newOffset, _newTargetOffset);
+
+        if (!isCompleteFailY(_newElFuturePos, elRegion, visibleRect)) {
+          fail = 1;
+          points = _newPoints;
+          offset = _newOffset;
+          targetOffset = _newTargetOffset;
+        }
+      }
+    }
+
+    // 如果失败，重新计算当前节点将要被放置的位置
+    if (fail) {
+      elFuturePos = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__getElFuturePos__["a" /* default */])(elRegion, tgtRegion, points, offset, targetOffset);
+      __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].mix(newElRegion, elFuturePos);
+    }
+    var isStillFailX = isFailX(elFuturePos, elRegion, visibleRect);
+    var isStillFailY = isFailY(elFuturePos, elRegion, visibleRect);
+    // 检查反下后的位置是否可以放下了，如果仍然放不下：
+    // 1. 复原修改过的定位参数
+    if (isStillFailX || isStillFailY) {
+      points = align.points;
+      offset = align.offset || [0, 0];
+      targetOffset = align.targetOffset || [0, 0];
+    }
+    // 2. 只有指定了可以调整当前方向才调整
+    newOverflowCfg.adjustX = overflow.adjustX && isStillFailX;
+    newOverflowCfg.adjustY = overflow.adjustY && isStillFailY;
+
+    // 确实要调整，甚至可能会调整高度宽度
+    if (newOverflowCfg.adjustX || newOverflowCfg.adjustY) {
+      newElRegion = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__adjustForViewport__["a" /* default */])(elFuturePos, elRegion, visibleRect, newOverflowCfg);
+    }
+  }
+
+  // need judge to in case set fixed with in css on height auto element
+  if (newElRegion.width !== elRegion.width) {
+    __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].css(source, 'width', __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].width(source) + newElRegion.width - elRegion.width);
+  }
+
+  if (newElRegion.height !== elRegion.height) {
+    __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].css(source, 'height', __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].height(source) + newElRegion.height - elRegion.height);
+  }
+
+  // https://github.com/kissyteam/kissy/issues/190
+  // 相对于屏幕位置没变，而 left/top 变了
+  // 例如 <div 'relative'><el absolute></div>
+  __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].offset(source, {
+    left: newElRegion.left,
+    top: newElRegion.top
+  }, {
+    useCssRight: align.useCssRight,
+    useCssBottom: align.useCssBottom,
+    useCssTransform: align.useCssTransform,
+    ignoreShake: align.ignoreShake
+  });
+
+  return {
+    points: points,
+    offset: offset,
+    targetOffset: targetOffset,
+    overflow: newOverflowCfg
+  };
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (doAlign);
+/**
+ *  2012-04-26 yiminghe@gmail.com
+ *   - 优化智能对齐算法
+ *   - 慎用 resizeXX
+ *
+ *  2011-07-13 yiminghe@gmail.com note:
+ *   - 增加智能对齐，以及大小调整选项
+ **/
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(7);
+
+
+/**
+ * 得到会导致元素显示不全的祖先元素
+ */
+var getParent = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getParent;
+
+
+function getOffsetParent(element) {
+  if (__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].isWindow(element) || element.nodeType === 9) {
+    return null;
+  }
+  // ie 这个也不是完全可行
+  /*
+   <div style="width: 50px;height: 100px;overflow: hidden">
+   <div style="width: 50px;height: 100px;position: relative;" id="d6">
+   元素 6 高 100px 宽 50px<br/>
+   </div>
+   </div>
+   */
+  // element.offsetParent does the right thing in ie7 and below. Return parent with layout!
+  //  In other browsers it only includes elements with position absolute, relative or
+  // fixed, not elements with overflow set to auto or scroll.
+  //        if (UA.ie && ieMode < 8) {
+  //            return element.offsetParent;
+  //        }
+  // 统一的 offsetParent 方法
+  var doc = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getDocument(element);
+  var body = doc.body;
+  var parent = void 0;
+  var positionStyle = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].css(element, 'position');
+  var skipStatic = positionStyle === 'fixed' || positionStyle === 'absolute';
+
+  if (!skipStatic) {
+    return element.nodeName.toLowerCase() === 'html' ? null : getParent(element);
+  }
+
+  for (parent = getParent(element); parent && parent !== body; parent = getParent(parent)) {
+    positionStyle = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].css(parent, 'position');
+    if (positionStyle !== 'static') {
+      return parent;
+    }
+  }
+  return null;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (getOffsetParent);
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(7);
+
+
+function getRegion(node) {
+  var offset = void 0;
+  var w = void 0;
+  var h = void 0;
+  if (!__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].isWindow(node) && node.nodeType !== 9) {
+    offset = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].offset(node);
+    w = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].outerWidth(node);
+    h = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].outerHeight(node);
+  } else {
+    var win = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getWindow(node);
+    offset = {
+      left: __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getWindowScrollLeft(win),
+      top: __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getWindowScrollTop(win)
+    };
+    w = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].viewportWidth(win);
+    h = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].viewportHeight(win);
+  }
+  offset.width = w;
+  offset.height = h;
+  return offset;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (getRegion);
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getOffsetParent__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isAncestorFixed__ = __webpack_require__(59);
+
+
+
+
+/**
+ * 获得元素的显示部分的区域
+ */
+function getVisibleRectForElement(element) {
+  var visibleRect = {
+    left: 0,
+    right: Infinity,
+    top: 0,
+    bottom: Infinity
+  };
+  var el = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__getOffsetParent__["a" /* default */])(element);
+  var doc = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getDocument(element);
+  var win = doc.defaultView || doc.parentWindow;
+  var body = doc.body;
+  var documentElement = doc.documentElement;
+
+  // Determine the size of the visible rect by climbing the dom accounting for
+  // all scrollable containers.
+  while (el) {
+    // clientWidth is zero for inline block elements in ie.
+    if ((navigator.userAgent.indexOf('MSIE') === -1 || el.clientWidth !== 0) &&
+    // body may have overflow set on it, yet we still get the entire
+    // viewport. In some browsers, el.offsetParent may be
+    // document.documentElement, so check for that too.
+    el !== body && el !== documentElement && __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].css(el, 'overflow') !== 'visible') {
+      var pos = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].offset(el);
+      // add border
+      pos.left += el.clientLeft;
+      pos.top += el.clientTop;
+      visibleRect.top = Math.max(visibleRect.top, pos.top);
+      visibleRect.right = Math.min(visibleRect.right,
+      // consider area without scrollBar
+      pos.left + el.clientWidth);
+      visibleRect.bottom = Math.min(visibleRect.bottom, pos.top + el.clientHeight);
+      visibleRect.left = Math.max(visibleRect.left, pos.left);
+    } else if (el === body || el === documentElement) {
+      break;
+    }
+    el = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__getOffsetParent__["a" /* default */])(el);
+  }
+
+  // Set element position to fixed
+  // make sure absolute element itself don't affect it's visible area
+  // https://github.com/ant-design/ant-design/issues/7601
+  var originalPosition = null;
+  if (!__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].isWindow(element) && element.nodeType !== 9) {
+    originalPosition = element.style.position;
+    var position = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].css(element, 'position');
+    if (position === 'absolute') {
+      element.style.position = 'fixed';
+    }
+  }
+
+  var scrollX = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getWindowScrollLeft(win);
+  var scrollY = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getWindowScrollTop(win);
+  var viewportWidth = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].viewportWidth(win);
+  var viewportHeight = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].viewportHeight(win);
+  var documentWidth = documentElement.scrollWidth;
+  var documentHeight = documentElement.scrollHeight;
+
+  // scrollXXX on html is sync with body which means overflow: hidden on body gets wrong scrollXXX.
+  // We should cut this ourself.
+  var bodyStyle = window.getComputedStyle(body);
+  if (bodyStyle.overflowX === 'hidden') {
+    documentWidth = win.innerWidth;
+  }
+  if (bodyStyle.overflowY === 'hidden') {
+    documentHeight = win.innerHeight;
+  }
+
+  // Reset element position after calculate the visible area
+  if (element.style) {
+    element.style.position = originalPosition;
+  }
+
+  if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__isAncestorFixed__["a" /* default */])(element)) {
+    // Clip by viewport's size.
+    visibleRect.left = Math.max(visibleRect.left, scrollX);
+    visibleRect.top = Math.max(visibleRect.top, scrollY);
+    visibleRect.right = Math.min(visibleRect.right, scrollX + viewportWidth);
+    visibleRect.bottom = Math.min(visibleRect.bottom, scrollY + viewportHeight);
+  } else {
+    // Clip by document's size.
+    var maxVisibleWidth = Math.max(documentWidth, scrollX + viewportWidth);
+    visibleRect.right = Math.min(visibleRect.right, maxVisibleWidth);
+
+    var maxVisibleHeight = Math.max(documentHeight, scrollY + viewportHeight);
+    visibleRect.bottom = Math.min(visibleRect.bottom, maxVisibleHeight);
+  }
+
+  return visibleRect.top >= 0 && visibleRect.left >= 0 && visibleRect.bottom > visibleRect.top && visibleRect.right > visibleRect.left ? visibleRect : null;
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (getVisibleRectForElement);
+
+/***/ }),
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-module.exports = __webpack_require__(49);
+module.exports = __webpack_require__(61);
 
 /***/ }),
-/* 22 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1530,10 +2532,10 @@ var storeShape = exports.storeShape = _propTypes2.default.shape({
 });
 
 /***/ }),
-/* 23 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var now = __webpack_require__(58)
+/* WEBPACK VAR INJECTION */(function(global) {var now = __webpack_require__(70)
   , root = typeof window === 'undefined' ? global : window
   , vendors = ['moz', 'webkit']
   , suffix = 'AnimationFrame'
@@ -1609,10 +2611,10 @@ module.exports.polyfill = function(object) {
   object.cancelAnimationFrame = caf
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(36)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(41)))
 
 /***/ }),
-/* 24 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1639,7 +2641,7 @@ var util = {
 /* harmony default export */ __webpack_exports__["a"] = (util);
 
 /***/ }),
-/* 25 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1658,16 +2660,16 @@ var util = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_trigger__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_classnames__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_trigger__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_classnames__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_mini_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_mini_store__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_mini_store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_mini_store__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__SubPopupMenu__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__placements__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_rc_animate__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__util__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__SubPopupMenu__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__placements__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_rc_animate__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__util__ = __webpack_require__(9);
 
 
 
@@ -2266,14 +3268,14 @@ connected.isSubMenu = true;
 /* harmony default export */ __webpack_exports__["a"] = (connected);
 
 /***/ }),
-/* 26 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = getActiveKey;
 /* unused harmony export saveRef */
 /* unused harmony export SubPopupMenu */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
@@ -2287,14 +3289,14 @@ connected.isSubMenu = true;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_mini_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_mini_store__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_mini_store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_mini_store__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_util_es_createChainedFunction__ = __webpack_require__(79);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_classnames__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_KeyCode__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_util_es_createChainedFunction__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_classnames__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__util__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__DOMWrap__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__util__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__DOMWrap__ = __webpack_require__(76);
 
 
 
@@ -2695,15 +3697,15 @@ var connected = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7_mini_store__["
 /* harmony default export */ __webpack_exports__["b"] = (connected);
 
 /***/ }),
-/* 27 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Menu__ = __webpack_require__(66);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SubMenu__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MenuItem__ = __webpack_require__(67);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MenuItemGroup__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Divider__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Menu__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SubMenu__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MenuItem__ = __webpack_require__(79);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MenuItemGroup__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Divider__ = __webpack_require__(77);
 /* unused harmony reexport SubMenu */
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__MenuItem__["a"]; });
 /* unused harmony reexport MenuItem */
@@ -2721,7 +3723,7 @@ var connected = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7_mini_store__["
 /* harmony default export */ __webpack_exports__["c"] = (__WEBPACK_IMPORTED_MODULE_0__Menu__["a" /* default */]);
 
 /***/ }),
-/* 28 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2766,7 +3768,7 @@ Option.propTypes = {
 Option.isSelectOption = true;
 
 /***/ }),
-/* 29 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2866,11 +3868,11 @@ var SelectPropTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (SelectPropTypes);
 
 /***/ }),
-/* 30 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
@@ -2932,7 +3934,7 @@ LazyRenderBox.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (LazyRenderBox);
 
 /***/ }),
-/* 31 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2950,15 +3952,15 @@ LazyRenderBox.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_lifecycles_compat__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_Dom_contains__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_util_es_Dom_addEventListener__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_util_es_ContainerRender__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rc_util_es_Portal__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_classnames__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_lifecycles_compat__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_Dom_contains__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_util_es_Dom_addEventListener__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rc_util_es_ContainerRender__ = __webpack_require__(89);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_rc_util_es_Portal__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_classnames__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__utils__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__Popup__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__utils__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__Popup__ = __webpack_require__(87);
 
 
 
@@ -3691,7 +4693,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_7_react_lifecycles_compat__["pol
 /* harmony default export */ __webpack_exports__["a"] = (Trigger);
 
 /***/ }),
-/* 32 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3730,7 +4732,7 @@ function saveRef(name, component) {
 }
 
 /***/ }),
-/* 33 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3748,12 +4750,12 @@ function toArray(children) {
 }
 
 /***/ }),
-/* 34 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = addEventListenerWrap;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_add_dom_event_listener__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_add_dom_event_listener__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_add_dom_event_listener___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_add_dom_event_listener__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
@@ -3769,7 +4771,7 @@ function addEventListenerWrap(target, eventType, cb, option) {
 }
 
 /***/ }),
-/* 35 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3787,12 +4789,12 @@ function contains(root, n) {
 }
 
 /***/ }),
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3861,7 +4863,7 @@ exports["default"] = EventBaseObject;
 module.exports = exports["default"];
 
 /***/ }),
-/* 42 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3879,11 +4881,11 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _EventBaseObject = __webpack_require__(41);
+var _EventBaseObject = __webpack_require__(46);
 
 var _EventBaseObject2 = _interopRequireDefault(_EventBaseObject);
 
-var _objectAssign = __webpack_require__(37);
+var _objectAssign = __webpack_require__(42);
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -4145,7 +5147,7 @@ exports['default'] = DomEventObject;
 module.exports = exports['default'];
 
 /***/ }),
-/* 43 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4158,7 +5160,7 @@ exports['default'] = addEventListener;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _EventObject = __webpack_require__(42);
+var _EventObject = __webpack_require__(47);
 
 var _EventObject2 = _interopRequireDefault(_EventObject);
 
@@ -4202,9 +5204,9 @@ function addEventListener(target, eventType, callback, option) {
 module.exports = exports['default'];
 
 /***/ }),
-/* 44 */,
-/* 45 */,
-/* 46 */
+/* 49 */,
+/* 50 */,
+/* 51 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4339,15 +5341,15 @@ var TransitionEvents = {
 /* harmony default export */ __webpack_exports__["a"] = (TransitionEvents);
 
 /***/ }),
-/* 47 */
+/* 52 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return isCssAnimationSupported; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_typeof__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Event__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_component_classes__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Event__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_component_classes__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_component_classes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_component_classes__);
 
 
@@ -4526,916 +5528,15 @@ cssAnimation.isCssAnimationSupported = isCssAnimationSupported;
 /* harmony default export */ __webpack_exports__["b"] = (cssAnimation);
 
 /***/ }),
-/* 48 */
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return alignElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return alignPoint; });
-var vendorPrefix;
-var jsCssMap = {
-  Webkit: '-webkit-',
-  Moz: '-moz-',
-  // IE did it wrong again ...
-  ms: '-ms-',
-  O: '-o-'
-};
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(7);
 
-function getVendorPrefix() {
-  if (vendorPrefix !== undefined) {
-    return vendorPrefix;
-  }
-
-  vendorPrefix = '';
-  var style = document.createElement('p').style;
-  var testProp = 'Transform';
-
-  for (var key in jsCssMap) {
-    if (key + testProp in style) {
-      vendorPrefix = key;
-    }
-  }
-
-  return vendorPrefix;
-}
-
-function getTransitionName() {
-  return getVendorPrefix() ? "".concat(getVendorPrefix(), "TransitionProperty") : 'transitionProperty';
-}
-
-function getTransformName() {
-  return getVendorPrefix() ? "".concat(getVendorPrefix(), "Transform") : 'transform';
-}
-function setTransitionProperty(node, value) {
-  var name = getTransitionName();
-
-  if (name) {
-    node.style[name] = value;
-
-    if (name !== 'transitionProperty') {
-      node.style.transitionProperty = value;
-    }
-  }
-}
-
-function setTransform(node, value) {
-  var name = getTransformName();
-
-  if (name) {
-    node.style[name] = value;
-
-    if (name !== 'transform') {
-      node.style.transform = value;
-    }
-  }
-}
-
-function getTransitionProperty(node) {
-  return node.style.transitionProperty || node.style[getTransitionName()];
-}
-function getTransformXY(node) {
-  var style = window.getComputedStyle(node, null);
-  var transform = style.getPropertyValue('transform') || style.getPropertyValue(getTransformName());
-
-  if (transform && transform !== 'none') {
-    var matrix = transform.replace(/[^0-9\-.,]/g, '').split(',');
-    return {
-      x: parseFloat(matrix[12] || matrix[4], 0),
-      y: parseFloat(matrix[13] || matrix[5], 0)
-    };
-  }
-
-  return {
-    x: 0,
-    y: 0
-  };
-}
-var matrix2d = /matrix\((.*)\)/;
-var matrix3d = /matrix3d\((.*)\)/;
-function setTransformXY(node, xy) {
-  var style = window.getComputedStyle(node, null);
-  var transform = style.getPropertyValue('transform') || style.getPropertyValue(getTransformName());
-
-  if (transform && transform !== 'none') {
-    var arr;
-    var match2d = transform.match(matrix2d);
-
-    if (match2d) {
-      match2d = match2d[1];
-      arr = match2d.split(',').map(function (item) {
-        return parseFloat(item, 10);
-      });
-      arr[4] = xy.x;
-      arr[5] = xy.y;
-      setTransform(node, "matrix(".concat(arr.join(','), ")"));
-    } else {
-      var match3d = transform.match(matrix3d)[1];
-      arr = match3d.split(',').map(function (item) {
-        return parseFloat(item, 10);
-      });
-      arr[12] = xy.x;
-      arr[13] = xy.y;
-      setTransform(node, "matrix3d(".concat(arr.join(','), ")"));
-    }
-  } else {
-    setTransform(node, "translateX(".concat(xy.x, "px) translateY(").concat(xy.y, "px) translateZ(0)"));
-  }
-}
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
-var getComputedStyleX; // https://stackoverflow.com/a/3485654/3040605
-
-function forceRelayout(elem) {
-  var originalStyle = elem.style.display;
-  elem.style.display = 'none';
-  elem.offsetHeight; // eslint-disable-line
-
-  elem.style.display = originalStyle;
-}
-
-function css(el, name, v) {
-  var value = v;
-
-  if (_typeof(name) === 'object') {
-    for (var i in name) {
-      if (name.hasOwnProperty(i)) {
-        css(el, i, name[i]);
-      }
-    }
-
-    return undefined;
-  }
-
-  if (typeof value !== 'undefined') {
-    if (typeof value === 'number') {
-      value = "".concat(value, "px");
-    }
-
-    el.style[name] = value;
-    return undefined;
-  }
-
-  return getComputedStyleX(el, name);
-}
-
-function getClientPosition(elem) {
-  var box;
-  var x;
-  var y;
-  var doc = elem.ownerDocument;
-  var body = doc.body;
-  var docElem = doc && doc.documentElement; // 根据 GBS 最新数据，A-Grade Browsers 都已支持 getBoundingClientRect 方法，不用再考虑传统的实现方式
-
-  box = elem.getBoundingClientRect(); // 注：jQuery 还考虑减去 docElem.clientLeft/clientTop
-  // 但测试发现，这样反而会导致当 html 和 body 有边距/边框样式时，获取的值不正确
-  // 此外，ie6 会忽略 html 的 margin 值，幸运地是没有谁会去设置 html 的 margin
-
-  x = box.left;
-  y = box.top; // In IE, most of the time, 2 extra pixels are added to the top and left
-  // due to the implicit 2-pixel inset border.  In IE6/7 quirks mode and
-  // IE6 standards mode, this border can be overridden by setting the
-  // document element's border to zero -- thus, we cannot rely on the
-  // offset always being 2 pixels.
-  // In quirks mode, the offset can be determined by querying the body's
-  // clientLeft/clientTop, but in standards mode, it is found by querying
-  // the document element's clientLeft/clientTop.  Since we already called
-  // getClientBoundingRect we have already forced a reflow, so it is not
-  // too expensive just to query them all.
-  // ie 下应该减去窗口的边框吧，毕竟默认 absolute 都是相对窗口定位的
-  // 窗口边框标准是设 documentElement ,quirks 时设置 body
-  // 最好禁止在 body 和 html 上边框 ，但 ie < 9 html 默认有 2px ，减去
-  // 但是非 ie 不可能设置窗口边框，body html 也不是窗口 ,ie 可以通过 html,body 设置
-  // 标准 ie 下 docElem.clientTop 就是 border-top
-  // ie7 html 即窗口边框改变不了。永远为 2
-  // 但标准 firefox/chrome/ie9 下 docElem.clientTop 是窗口边框，即使设了 border-top 也为 0
-
-  x -= docElem.clientLeft || body.clientLeft || 0;
-  y -= docElem.clientTop || body.clientTop || 0;
-  return {
-    left: x,
-    top: y
-  };
-}
-
-function getScroll(w, top) {
-  var ret = w["page".concat(top ? 'Y' : 'X', "Offset")];
-  var method = "scroll".concat(top ? 'Top' : 'Left');
-
-  if (typeof ret !== 'number') {
-    var d = w.document; // ie6,7,8 standard mode
-
-    ret = d.documentElement[method];
-
-    if (typeof ret !== 'number') {
-      // quirks mode
-      ret = d.body[method];
-    }
-  }
-
-  return ret;
-}
-
-function getScrollLeft(w) {
-  return getScroll(w);
-}
-
-function getScrollTop(w) {
-  return getScroll(w, true);
-}
-
-function getOffset(el) {
-  var pos = getClientPosition(el);
-  var doc = el.ownerDocument;
-  var w = doc.defaultView || doc.parentWindow;
-  pos.left += getScrollLeft(w);
-  pos.top += getScrollTop(w);
-  return pos;
-}
-/**
- * A crude way of determining if an object is a window
- * @member util
- */
-
-
-function isWindow(obj) {
-  // must use == for ie8
-
-  /* eslint eqeqeq:0 */
-  return obj !== null && obj !== undefined && obj == obj.window;
-}
-
-function getDocument(node) {
-  if (isWindow(node)) {
-    return node.document;
-  }
-
-  if (node.nodeType === 9) {
-    return node;
-  }
-
-  return node.ownerDocument;
-}
-
-function _getComputedStyle(elem, name, cs) {
-  var computedStyle = cs;
-  var val = '';
-  var d = getDocument(elem);
-  computedStyle = computedStyle || d.defaultView.getComputedStyle(elem, null); // https://github.com/kissyteam/kissy/issues/61
-
-  if (computedStyle) {
-    val = computedStyle.getPropertyValue(name) || computedStyle[name];
-  }
-
-  return val;
-}
-
-var _RE_NUM_NO_PX = new RegExp("^(".concat(RE_NUM, ")(?!px)[a-z%]+$"), 'i');
-
-var RE_POS = /^(top|right|bottom|left)$/;
-var CURRENT_STYLE = 'currentStyle';
-var RUNTIME_STYLE = 'runtimeStyle';
-var LEFT = 'left';
-var PX = 'px';
-
-function _getComputedStyleIE(elem, name) {
-  // currentStyle maybe null
-  // http://msdn.microsoft.com/en-us/library/ms535231.aspx
-  var ret = elem[CURRENT_STYLE] && elem[CURRENT_STYLE][name]; // 当 width/height 设置为百分比时，通过 pixelLeft 方式转换的 width/height 值
-  // 一开始就处理了! CUSTOM_STYLE.height,CUSTOM_STYLE.width ,cssHook 解决@2011-08-19
-  // 在 ie 下不对，需要直接用 offset 方式
-  // borderWidth 等值也有问题，但考虑到 borderWidth 设为百分比的概率很小，这里就不考虑了
-  // From the awesome hack by Dean Edwards
-  // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
-  // If we're not dealing with a regular pixel number
-  // but a number that has a weird ending, we need to convert it to pixels
-  // exclude left right for relativity
-
-  if (_RE_NUM_NO_PX.test(ret) && !RE_POS.test(name)) {
-    // Remember the original values
-    var style = elem.style;
-    var left = style[LEFT];
-    var rsLeft = elem[RUNTIME_STYLE][LEFT]; // prevent flashing of content
-
-    elem[RUNTIME_STYLE][LEFT] = elem[CURRENT_STYLE][LEFT]; // Put in the new values to get a computed value out
-
-    style[LEFT] = name === 'fontSize' ? '1em' : ret || 0;
-    ret = style.pixelLeft + PX; // Revert the changed values
-
-    style[LEFT] = left;
-    elem[RUNTIME_STYLE][LEFT] = rsLeft;
-  }
-
-  return ret === '' ? 'auto' : ret;
-}
-
-if (typeof window !== 'undefined') {
-  getComputedStyleX = window.getComputedStyle ? _getComputedStyle : _getComputedStyleIE;
-}
-
-function getOffsetDirection(dir, option) {
-  if (dir === 'left') {
-    return option.useCssRight ? 'right' : dir;
-  }
-
-  return option.useCssBottom ? 'bottom' : dir;
-}
-
-function oppositeOffsetDirection(dir) {
-  if (dir === 'left') {
-    return 'right';
-  } else if (dir === 'right') {
-    return 'left';
-  } else if (dir === 'top') {
-    return 'bottom';
-  } else if (dir === 'bottom') {
-    return 'top';
-  }
-} // 设置 elem 相对 elem.ownerDocument 的坐标
-
-
-function setLeftTop(elem, offset, option) {
-  // set position first, in-case top/left are set even on static elem
-  if (css(elem, 'position') === 'static') {
-    elem.style.position = 'relative';
-  }
-
-  var presetH = -999;
-  var presetV = -999;
-  var horizontalProperty = getOffsetDirection('left', option);
-  var verticalProperty = getOffsetDirection('top', option);
-  var oppositeHorizontalProperty = oppositeOffsetDirection(horizontalProperty);
-  var oppositeVerticalProperty = oppositeOffsetDirection(verticalProperty);
-
-  if (horizontalProperty !== 'left') {
-    presetH = 999;
-  }
-
-  if (verticalProperty !== 'top') {
-    presetV = 999;
-  }
-
-  var originalTransition = '';
-  var originalOffset = getOffset(elem);
-
-  if ('left' in offset || 'top' in offset) {
-    originalTransition = getTransitionProperty(elem) || '';
-    setTransitionProperty(elem, 'none');
-  }
-
-  if ('left' in offset) {
-    elem.style[oppositeHorizontalProperty] = '';
-    elem.style[horizontalProperty] = "".concat(presetH, "px");
-  }
-
-  if ('top' in offset) {
-    elem.style[oppositeVerticalProperty] = '';
-    elem.style[verticalProperty] = "".concat(presetV, "px");
-  } // force relayout
-
-
-  forceRelayout(elem);
-  var old = getOffset(elem);
-  var originalStyle = {};
-
-  for (var key in offset) {
-    if (offset.hasOwnProperty(key)) {
-      var dir = getOffsetDirection(key, option);
-      var preset = key === 'left' ? presetH : presetV;
-      var off = originalOffset[key] - old[key];
-
-      if (dir === key) {
-        originalStyle[dir] = preset + off;
-      } else {
-        originalStyle[dir] = preset - off;
-      }
-    }
-  }
-
-  css(elem, originalStyle); // force relayout
-
-  forceRelayout(elem);
-
-  if ('left' in offset || 'top' in offset) {
-    setTransitionProperty(elem, originalTransition);
-  }
-
-  var ret = {};
-
-  for (var _key in offset) {
-    if (offset.hasOwnProperty(_key)) {
-      var _dir = getOffsetDirection(_key, option);
-
-      var _off = offset[_key] - originalOffset[_key];
-
-      if (_key === _dir) {
-        ret[_dir] = originalStyle[_dir] + _off;
-      } else {
-        ret[_dir] = originalStyle[_dir] - _off;
-      }
-    }
-  }
-
-  css(elem, ret);
-}
-
-function setTransform$1(elem, offset) {
-  var originalOffset = getOffset(elem);
-  var originalXY = getTransformXY(elem);
-  var resultXY = {
-    x: originalXY.x,
-    y: originalXY.y
-  };
-
-  if ('left' in offset) {
-    resultXY.x = originalXY.x + offset.left - originalOffset.left;
-  }
-
-  if ('top' in offset) {
-    resultXY.y = originalXY.y + offset.top - originalOffset.top;
-  }
-
-  setTransformXY(elem, resultXY);
-}
-
-function setOffset(elem, offset, option) {
-  if (option.ignoreShake) {
-    var oriOffset = getOffset(elem);
-    var oLeft = oriOffset.left.toFixed(0);
-    var oTop = oriOffset.top.toFixed(0);
-    var tLeft = offset.left.toFixed(0);
-    var tTop = offset.top.toFixed(0);
-
-    if (oLeft === tLeft && oTop === tTop) {
-      return;
-    }
-  }
-
-  if (option.useCssRight || option.useCssBottom) {
-    setLeftTop(elem, offset, option);
-  } else if (option.useCssTransform && getTransformName() in document.body.style) {
-    setTransform$1(elem, offset);
-  } else {
-    setLeftTop(elem, offset, option);
-  }
-}
-
-function each(arr, fn) {
-  for (var i = 0; i < arr.length; i++) {
-    fn(arr[i]);
-  }
-}
-
-function isBorderBoxFn(elem) {
-  return getComputedStyleX(elem, 'boxSizing') === 'border-box';
-}
-
-var BOX_MODELS = ['margin', 'border', 'padding'];
-var CONTENT_INDEX = -1;
-var PADDING_INDEX = 2;
-var BORDER_INDEX = 1;
-var MARGIN_INDEX = 0;
-
-function swap(elem, options, callback) {
-  var old = {};
-  var style = elem.style;
-  var name; // Remember the old values, and insert the new ones
-
-  for (name in options) {
-    if (options.hasOwnProperty(name)) {
-      old[name] = style[name];
-      style[name] = options[name];
-    }
-  }
-
-  callback.call(elem); // Revert the old values
-
-  for (name in options) {
-    if (options.hasOwnProperty(name)) {
-      style[name] = old[name];
-    }
-  }
-}
-
-function getPBMWidth(elem, props, which) {
-  var value = 0;
-  var prop;
-  var j;
-  var i;
-
-  for (j = 0; j < props.length; j++) {
-    prop = props[j];
-
-    if (prop) {
-      for (i = 0; i < which.length; i++) {
-        var cssProp = void 0;
-
-        if (prop === 'border') {
-          cssProp = "".concat(prop).concat(which[i], "Width");
-        } else {
-          cssProp = prop + which[i];
-        }
-
-        value += parseFloat(getComputedStyleX(elem, cssProp)) || 0;
-      }
-    }
-  }
-
-  return value;
-}
-
-var domUtils = {
-  getParent: function getParent(element) {
-    var parent = element;
-
-    do {
-      if (parent.nodeType === 11 && parent.host) {
-        parent = parent.host;
-      } else {
-        parent = parent.parentNode;
-      }
-    } while (parent && parent.nodeType !== 1 && parent.nodeType !== 9);
-
-    return parent;
-  }
-};
-each(['Width', 'Height'], function (name) {
-  domUtils["doc".concat(name)] = function (refWin) {
-    var d = refWin.document;
-    return Math.max( // firefox chrome documentElement.scrollHeight< body.scrollHeight
-    // ie standard mode : documentElement.scrollHeight> body.scrollHeight
-    d.documentElement["scroll".concat(name)], // quirks : documentElement.scrollHeight 最大等于可视窗口多一点？
-    d.body["scroll".concat(name)], domUtils["viewport".concat(name)](d));
-  };
-
-  domUtils["viewport".concat(name)] = function (win) {
-    // pc browser includes scrollbar in window.innerWidth
-    var prop = "client".concat(name);
-    var doc = win.document;
-    var body = doc.body;
-    var documentElement = doc.documentElement;
-    var documentElementProp = documentElement[prop]; // 标准模式取 documentElement
-    // backcompat 取 body
-
-    return doc.compatMode === 'CSS1Compat' && documentElementProp || body && body[prop] || documentElementProp;
-  };
-});
-/*
- 得到元素的大小信息
- @param elem
- @param name
- @param {String} [extra]  'padding' : (css width) + padding
- 'border' : (css width) + padding + border
- 'margin' : (css width) + padding + border + margin
- */
-
-function getWH(elem, name, ex) {
-  var extra = ex;
-
-  if (isWindow(elem)) {
-    return name === 'width' ? domUtils.viewportWidth(elem) : domUtils.viewportHeight(elem);
-  } else if (elem.nodeType === 9) {
-    return name === 'width' ? domUtils.docWidth(elem) : domUtils.docHeight(elem);
-  }
-
-  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
-  var borderBoxValue = name === 'width' ? elem.getBoundingClientRect().width : elem.getBoundingClientRect().height;
-  var computedStyle = getComputedStyleX(elem);
-  var isBorderBox = isBorderBoxFn(elem);
-  var cssBoxValue = 0;
-
-  if (borderBoxValue === null || borderBoxValue === undefined || borderBoxValue <= 0) {
-    borderBoxValue = undefined; // Fall back to computed then un computed css if necessary
-
-    cssBoxValue = getComputedStyleX(elem, name);
-
-    if (cssBoxValue === null || cssBoxValue === undefined || Number(cssBoxValue) < 0) {
-      cssBoxValue = elem.style[name] || 0;
-    } // Normalize '', auto, and prepare for extra
-
-
-    cssBoxValue = parseFloat(cssBoxValue) || 0;
-  }
-
-  if (extra === undefined) {
-    extra = isBorderBox ? BORDER_INDEX : CONTENT_INDEX;
-  }
-
-  var borderBoxValueOrIsBorderBox = borderBoxValue !== undefined || isBorderBox;
-  var val = borderBoxValue || cssBoxValue;
-
-  if (extra === CONTENT_INDEX) {
-    if (borderBoxValueOrIsBorderBox) {
-      return val - getPBMWidth(elem, ['border', 'padding'], which);
-    }
-
-    return cssBoxValue;
-  } else if (borderBoxValueOrIsBorderBox) {
-    if (extra === BORDER_INDEX) {
-      return val;
-    }
-
-    return val + (extra === PADDING_INDEX ? -getPBMWidth(elem, ['border'], which) : getPBMWidth(elem, ['margin'], which));
-  }
-
-  return cssBoxValue + getPBMWidth(elem, BOX_MODELS.slice(extra), which);
-}
-
-var cssShow = {
-  position: 'absolute',
-  visibility: 'hidden',
-  display: 'block'
-}; // fix #119 : https://github.com/kissyteam/kissy/issues/119
-
-function getWHIgnoreDisplay() {
-  for (var _len = arguments.length, args = new Array(_len), _key2 = 0; _key2 < _len; _key2++) {
-    args[_key2] = arguments[_key2];
-  }
-
-  var val;
-  var elem = args[0]; // in case elem is window
-  // elem.offsetWidth === undefined
-
-  if (elem.offsetWidth !== 0) {
-    val = getWH.apply(undefined, args);
-  } else {
-    swap(elem, cssShow, function () {
-      val = getWH.apply(undefined, args);
-    });
-  }
-
-  return val;
-}
-
-each(['width', 'height'], function (name) {
-  var first = name.charAt(0).toUpperCase() + name.slice(1);
-
-  domUtils["outer".concat(first)] = function (el, includeMargin) {
-    return el && getWHIgnoreDisplay(el, name, includeMargin ? MARGIN_INDEX : BORDER_INDEX);
-  };
-
-  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
-
-  domUtils[name] = function (elem, v) {
-    var val = v;
-
-    if (val !== undefined) {
-      if (elem) {
-        var computedStyle = getComputedStyleX(elem);
-        var isBorderBox = isBorderBoxFn(elem);
-
-        if (isBorderBox) {
-          val += getPBMWidth(elem, ['padding', 'border'], which);
-        }
-
-        return css(elem, name, val);
-      }
-
-      return undefined;
-    }
-
-    return elem && getWHIgnoreDisplay(elem, name, CONTENT_INDEX);
-  };
-});
-
-function mix(to, from) {
-  for (var i in from) {
-    if (from.hasOwnProperty(i)) {
-      to[i] = from[i];
-    }
-  }
-
-  return to;
-}
-
-var utils = {
-  getWindow: function getWindow(node) {
-    if (node && node.document && node.setTimeout) {
-      return node;
-    }
-
-    var doc = node.ownerDocument || node;
-    return doc.defaultView || doc.parentWindow;
-  },
-  getDocument: getDocument,
-  offset: function offset(el, value, option) {
-    if (typeof value !== 'undefined') {
-      setOffset(el, value, option || {});
-    } else {
-      return getOffset(el);
-    }
-  },
-  isWindow: isWindow,
-  each: each,
-  css: css,
-  clone: function clone(obj) {
-    var i;
-    var ret = {};
-
-    for (i in obj) {
-      if (obj.hasOwnProperty(i)) {
-        ret[i] = obj[i];
-      }
-    }
-
-    var overflow = obj.overflow;
-
-    if (overflow) {
-      for (i in obj) {
-        if (obj.hasOwnProperty(i)) {
-          ret.overflow[i] = obj.overflow[i];
-        }
-      }
-    }
-
-    return ret;
-  },
-  mix: mix,
-  getWindowScrollLeft: function getWindowScrollLeft(w) {
-    return getScrollLeft(w);
-  },
-  getWindowScrollTop: function getWindowScrollTop(w) {
-    return getScrollTop(w);
-  },
-  merge: function merge() {
-    var ret = {};
-
-    for (var i = 0; i < arguments.length; i++) {
-      utils.mix(ret, i < 0 || arguments.length <= i ? undefined : arguments[i]);
-    }
-
-    return ret;
-  },
-  viewportWidth: 0,
-  viewportHeight: 0
-};
-mix(utils, domUtils);
-
-/**
- * 得到会导致元素显示不全的祖先元素
- */
-
-var getParent = utils.getParent;
-
-function getOffsetParent(element) {
-  if (utils.isWindow(element) || element.nodeType === 9) {
-    return null;
-  } // ie 这个也不是完全可行
-
-  /*
-   <div style="width: 50px;height: 100px;overflow: hidden">
-   <div style="width: 50px;height: 100px;position: relative;" id="d6">
-   元素 6 高 100px 宽 50px<br/>
-   </div>
-   </div>
-   */
-  // element.offsetParent does the right thing in ie7 and below. Return parent with layout!
-  //  In other browsers it only includes elements with position absolute, relative or
-  // fixed, not elements with overflow set to auto or scroll.
-  //        if (UA.ie && ieMode < 8) {
-  //            return element.offsetParent;
-  //        }
-  // 统一的 offsetParent 方法
-
-
-  var doc = utils.getDocument(element);
-  var body = doc.body;
-  var parent;
-  var positionStyle = utils.css(element, 'position');
-  var skipStatic = positionStyle === 'fixed' || positionStyle === 'absolute';
-
-  if (!skipStatic) {
-    return element.nodeName.toLowerCase() === 'html' ? null : getParent(element);
-  }
-
-  for (parent = getParent(element); parent && parent !== body; parent = getParent(parent)) {
-    positionStyle = utils.css(parent, 'position');
-
-    if (positionStyle !== 'static') {
-      return parent;
-    }
-  }
-
-  return null;
-}
-
-var getParent$1 = utils.getParent;
-function isAncestorFixed(element) {
-  if (utils.isWindow(element) || element.nodeType === 9) {
-    return false;
-  }
-
-  var doc = utils.getDocument(element);
-  var body = doc.body;
-  var parent = null;
-
-  for (parent = getParent$1(element); parent && parent !== body; parent = getParent$1(parent)) {
-    var positionStyle = utils.css(parent, 'position');
-
-    if (positionStyle === 'fixed') {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-/**
- * 获得元素的显示部分的区域
- */
-
-function getVisibleRectForElement(element) {
-  var visibleRect = {
-    left: 0,
-    right: Infinity,
-    top: 0,
-    bottom: Infinity
-  };
-  var el = getOffsetParent(element);
-  var doc = utils.getDocument(element);
-  var win = doc.defaultView || doc.parentWindow;
-  var body = doc.body;
-  var documentElement = doc.documentElement; // Determine the size of the visible rect by climbing the dom accounting for
-  // all scrollable containers.
-
-  while (el) {
-    // clientWidth is zero for inline block elements in ie.
-    if ((navigator.userAgent.indexOf('MSIE') === -1 || el.clientWidth !== 0) && // body may have overflow set on it, yet we still get the entire
-    // viewport. In some browsers, el.offsetParent may be
-    // document.documentElement, so check for that too.
-    el !== body && el !== documentElement && utils.css(el, 'overflow') !== 'visible') {
-      var pos = utils.offset(el); // add border
-
-      pos.left += el.clientLeft;
-      pos.top += el.clientTop;
-      visibleRect.top = Math.max(visibleRect.top, pos.top);
-      visibleRect.right = Math.min(visibleRect.right, // consider area without scrollBar
-      pos.left + el.clientWidth);
-      visibleRect.bottom = Math.min(visibleRect.bottom, pos.top + el.clientHeight);
-      visibleRect.left = Math.max(visibleRect.left, pos.left);
-    } else if (el === body || el === documentElement) {
-      break;
-    }
-
-    el = getOffsetParent(el);
-  } // Set element position to fixed
-  // make sure absolute element itself don't affect it's visible area
-  // https://github.com/ant-design/ant-design/issues/7601
-
-
-  var originalPosition = null;
-
-  if (!utils.isWindow(element) && element.nodeType !== 9) {
-    originalPosition = element.style.position;
-    var position = utils.css(element, 'position');
-
-    if (position === 'absolute') {
-      element.style.position = 'fixed';
-    }
-  }
-
-  var scrollX = utils.getWindowScrollLeft(win);
-  var scrollY = utils.getWindowScrollTop(win);
-  var viewportWidth = utils.viewportWidth(win);
-  var viewportHeight = utils.viewportHeight(win);
-  var documentWidth = documentElement.scrollWidth;
-  var documentHeight = documentElement.scrollHeight; // scrollXXX on html is sync with body which means overflow: hidden on body gets wrong scrollXXX.
-  // We should cut this ourself.
-
-  var bodyStyle = window.getComputedStyle(body);
-
-  if (bodyStyle.overflowX === 'hidden') {
-    documentWidth = win.innerWidth;
-  }
-
-  if (bodyStyle.overflowY === 'hidden') {
-    documentHeight = win.innerHeight;
-  } // Reset element position after calculate the visible area
-
-
-  if (element.style) {
-    element.style.position = originalPosition;
-  }
-
-  if (isAncestorFixed(element)) {
-    // Clip by viewport's size.
-    visibleRect.left = Math.max(visibleRect.left, scrollX);
-    visibleRect.top = Math.max(visibleRect.top, scrollY);
-    visibleRect.right = Math.min(visibleRect.right, scrollX + viewportWidth);
-    visibleRect.bottom = Math.min(visibleRect.bottom, scrollY + viewportHeight);
-  } else {
-    // Clip by document's size.
-    var maxVisibleWidth = Math.max(documentWidth, scrollX + viewportWidth);
-    visibleRect.right = Math.min(visibleRect.right, maxVisibleWidth);
-    var maxVisibleHeight = Math.max(documentHeight, scrollY + viewportHeight);
-    visibleRect.bottom = Math.min(visibleRect.bottom, maxVisibleHeight);
-  }
-
-  return visibleRect.top >= 0 && visibleRect.left >= 0 && visibleRect.bottom > visibleRect.top && visibleRect.right > visibleRect.left ? visibleRect : null;
-}
 
 function adjustForViewport(elFuturePos, elRegion, visibleRect, overflow) {
-  var pos = utils.clone(elFuturePos);
+  var pos = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].clone(elFuturePos);
   var size = {
     width: elRegion.width,
     height: elRegion.height
@@ -5443,70 +5544,149 @@ function adjustForViewport(elFuturePos, elRegion, visibleRect, overflow) {
 
   if (overflow.adjustX && pos.left < visibleRect.left) {
     pos.left = visibleRect.left;
-  } // Left edge inside and right edge outside viewport, try to resize it.
+  }
 
-
+  // Left edge inside and right edge outside viewport, try to resize it.
   if (overflow.resizeWidth && pos.left >= visibleRect.left && pos.left + size.width > visibleRect.right) {
     size.width -= pos.left + size.width - visibleRect.right;
-  } // Right edge outside viewport, try to move it.
+  }
 
-
+  // Right edge outside viewport, try to move it.
   if (overflow.adjustX && pos.left + size.width > visibleRect.right) {
     // 保证左边界和可视区域左边界对齐
     pos.left = Math.max(visibleRect.right - size.width, visibleRect.left);
-  } // Top edge outside viewport, try to move it.
+  }
 
-
+  // Top edge outside viewport, try to move it.
   if (overflow.adjustY && pos.top < visibleRect.top) {
     pos.top = visibleRect.top;
-  } // Top edge inside and bottom edge outside viewport, try to resize it.
+  }
 
-
+  // Top edge inside and bottom edge outside viewport, try to resize it.
   if (overflow.resizeHeight && pos.top >= visibleRect.top && pos.top + size.height > visibleRect.bottom) {
     size.height -= pos.top + size.height - visibleRect.bottom;
-  } // Bottom edge outside viewport, try to move it.
+  }
 
-
+  // Bottom edge outside viewport, try to move it.
   if (overflow.adjustY && pos.top + size.height > visibleRect.bottom) {
     // 保证上边界和可视区域上边界对齐
     pos.top = Math.max(visibleRect.bottom - size.height, visibleRect.top);
   }
 
-  return utils.mix(pos, size);
+  return __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].mix(pos, size);
 }
 
-function getRegion(node) {
-  var offset;
-  var w;
-  var h;
+/* harmony default export */ __webpack_exports__["a"] = (adjustForViewport);
 
-  if (!utils.isWindow(node) && node.nodeType !== 9) {
-    offset = utils.offset(node);
-    w = utils.outerWidth(node);
-    h = utils.outerHeight(node);
+/***/ }),
+/* 54 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__align__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getOffsetParent__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__getVisibleRectForElement__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__getRegion__ = __webpack_require__(24);
+
+
+
+
+
+function isOutOfVisibleRect(target) {
+  var visibleRect = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__getVisibleRectForElement__["a" /* default */])(target);
+  var targetRegion = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__getRegion__["a" /* default */])(target);
+
+  return !visibleRect || targetRegion.left + targetRegion.width <= visibleRect.left || targetRegion.top + targetRegion.height <= visibleRect.top || targetRegion.left >= visibleRect.right || targetRegion.top >= visibleRect.bottom;
+}
+
+function alignElement(el, refNode, align) {
+  var target = align.target || refNode;
+  var refNodeRegion = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__getRegion__["a" /* default */])(target);
+
+  var isTargetNotOutOfVisible = !isOutOfVisibleRect(target);
+
+  return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__align__["a" /* default */])(el, refNodeRegion, align, isTargetNotOutOfVisible);
+}
+
+alignElement.__getOffsetParent = __WEBPACK_IMPORTED_MODULE_1__getOffsetParent__["a" /* default */];
+
+alignElement.__getVisibleRectForElement = __WEBPACK_IMPORTED_MODULE_2__getVisibleRectForElement__["a" /* default */];
+
+/* harmony default export */ __webpack_exports__["a"] = (alignElement);
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__align__ = __webpack_require__(22);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+
+/**
+ * `tgtPoint`: { pageX, pageY } or { clientX, clientY }.
+ * If client position provided, will internal convert to page position.
+ */
+
+function alignPoint(el, tgtPoint, align) {
+  var pageX = void 0;
+  var pageY = void 0;
+
+  var doc = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getDocument(el);
+  var win = doc.defaultView || doc.parentWindow;
+
+  var scrollX = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getWindowScrollLeft(win);
+  var scrollY = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getWindowScrollTop(win);
+  var viewportWidth = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].viewportWidth(win);
+  var viewportHeight = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].viewportHeight(win);
+
+  if ('pageX' in tgtPoint) {
+    pageX = tgtPoint.pageX;
   } else {
-    var win = utils.getWindow(node);
-    offset = {
-      left: utils.getWindowScrollLeft(win),
-      top: utils.getWindowScrollTop(win)
-    };
-    w = utils.viewportWidth(win);
-    h = utils.viewportHeight(win);
+    pageX = scrollX + tgtPoint.clientX;
   }
 
-  offset.width = w;
-  offset.height = h;
-  return offset;
+  if ('pageY' in tgtPoint) {
+    pageY = tgtPoint.pageY;
+  } else {
+    pageY = scrollY + tgtPoint.clientY;
+  }
+
+  var tgtRegion = {
+    left: pageX,
+    top: pageY,
+    width: 0,
+    height: 0
+  };
+
+  var pointInView = pageX >= 0 && pageX <= scrollX + viewportWidth && pageY >= 0 && pageY <= scrollY + viewportHeight;
+
+  // Provide default target point
+  var points = [align.points[0], 'cc'];
+
+  return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__align__["a" /* default */])(el, tgtRegion, _extends({}, align, { points: points }), pointInView);
 }
 
+/* harmony default export */ __webpack_exports__["a"] = (alignPoint);
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /**
  * 获取 node 上的 align 对齐点 相对于页面的坐标
  */
+
 function getAlignOffset(region, align) {
   var V = align.charAt(0);
   var H = align.charAt(1);
   var w = region.width;
   var h = region.height;
+
   var x = region.left;
   var y = region.top;
 
@@ -5528,282 +5708,193 @@ function getAlignOffset(region, align) {
   };
 }
 
+/* harmony default export */ __webpack_exports__["a"] = (getAlignOffset);
+
+/***/ }),
+/* 57 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__getAlignOffset__ = __webpack_require__(56);
+
+
 function getElFuturePos(elRegion, refNodeRegion, points, offset, targetOffset) {
-  var p1 = getAlignOffset(refNodeRegion, points[1]);
-  var p2 = getAlignOffset(elRegion, points[0]);
+  var p1 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__getAlignOffset__["a" /* default */])(refNodeRegion, points[1]);
+  var p2 = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__getAlignOffset__["a" /* default */])(elRegion, points[0]);
   var diff = [p2.left - p1.left, p2.top - p1.top];
+
   return {
     left: Math.round(elRegion.left - diff[0] + offset[0] - targetOffset[0]),
     top: Math.round(elRegion.top - diff[1] + offset[1] - targetOffset[1])
   };
 }
 
-/**
- * align dom node flexibly
- * @author yiminghe@gmail.com
- */
-
-function isFailX(elFuturePos, elRegion, visibleRect) {
-  return elFuturePos.left < visibleRect.left || elFuturePos.left + elRegion.width > visibleRect.right;
-}
-
-function isFailY(elFuturePos, elRegion, visibleRect) {
-  return elFuturePos.top < visibleRect.top || elFuturePos.top + elRegion.height > visibleRect.bottom;
-}
-
-function isCompleteFailX(elFuturePos, elRegion, visibleRect) {
-  return elFuturePos.left > visibleRect.right || elFuturePos.left + elRegion.width < visibleRect.left;
-}
-
-function isCompleteFailY(elFuturePos, elRegion, visibleRect) {
-  return elFuturePos.top > visibleRect.bottom || elFuturePos.top + elRegion.height < visibleRect.top;
-}
-
-function flip(points, reg, map) {
-  var ret = [];
-  utils.each(points, function (p) {
-    ret.push(p.replace(reg, function (m) {
-      return map[m];
-    }));
-  });
-  return ret;
-}
-
-function flipOffset(offset, index) {
-  offset[index] = -offset[index];
-  return offset;
-}
-
-function convertOffset(str, offsetLen) {
-  var n;
-
-  if (/%$/.test(str)) {
-    n = parseInt(str.substring(0, str.length - 1), 10) / 100 * offsetLen;
-  } else {
-    n = parseInt(str, 10);
-  }
-
-  return n || 0;
-}
-
-function normalizeOffset(offset, el) {
-  offset[0] = convertOffset(offset[0], el.width);
-  offset[1] = convertOffset(offset[1], el.height);
-}
-/**
- * @param el
- * @param tgtRegion 参照节点所占的区域: { left, top, width, height }
- * @param align
- */
-
-
-function doAlign(el, tgtRegion, align, isTgtRegionVisible) {
-  var points = align.points;
-  var offset = align.offset || [0, 0];
-  var targetOffset = align.targetOffset || [0, 0];
-  var overflow = align.overflow;
-  var source = align.source || el;
-  offset = [].concat(offset);
-  targetOffset = [].concat(targetOffset);
-  overflow = overflow || {};
-  var newOverflowCfg = {};
-  var fail = 0; // 当前节点可以被放置的显示区域
-
-  var visibleRect = getVisibleRectForElement(source); // 当前节点所占的区域, left/top/width/height
-
-  var elRegion = getRegion(source); // 将 offset 转换成数值，支持百分比
-
-  normalizeOffset(offset, elRegion);
-  normalizeOffset(targetOffset, tgtRegion); // 当前节点将要被放置的位置
-
-  var elFuturePos = getElFuturePos(elRegion, tgtRegion, points, offset, targetOffset); // 当前节点将要所处的区域
-
-  var newElRegion = utils.merge(elRegion, elFuturePos); // 如果可视区域不能完全放置当前节点时允许调整
-
-  if (visibleRect && (overflow.adjustX || overflow.adjustY) && isTgtRegionVisible) {
-    if (overflow.adjustX) {
-      // 如果横向不能放下
-      if (isFailX(elFuturePos, elRegion, visibleRect)) {
-        // 对齐位置反下
-        var newPoints = flip(points, /[lr]/gi, {
-          l: 'r',
-          r: 'l'
-        }); // 偏移量也反下
-
-        var newOffset = flipOffset(offset, 0);
-        var newTargetOffset = flipOffset(targetOffset, 0);
-        var newElFuturePos = getElFuturePos(elRegion, tgtRegion, newPoints, newOffset, newTargetOffset);
-
-        if (!isCompleteFailX(newElFuturePos, elRegion, visibleRect)) {
-          fail = 1;
-          points = newPoints;
-          offset = newOffset;
-          targetOffset = newTargetOffset;
-        }
-      }
-    }
-
-    if (overflow.adjustY) {
-      // 如果纵向不能放下
-      if (isFailY(elFuturePos, elRegion, visibleRect)) {
-        // 对齐位置反下
-        var _newPoints = flip(points, /[tb]/gi, {
-          t: 'b',
-          b: 't'
-        }); // 偏移量也反下
-
-
-        var _newOffset = flipOffset(offset, 1);
-
-        var _newTargetOffset = flipOffset(targetOffset, 1);
-
-        var _newElFuturePos = getElFuturePos(elRegion, tgtRegion, _newPoints, _newOffset, _newTargetOffset);
-
-        if (!isCompleteFailY(_newElFuturePos, elRegion, visibleRect)) {
-          fail = 1;
-          points = _newPoints;
-          offset = _newOffset;
-          targetOffset = _newTargetOffset;
-        }
-      }
-    } // 如果失败，重新计算当前节点将要被放置的位置
-
-
-    if (fail) {
-      elFuturePos = getElFuturePos(elRegion, tgtRegion, points, offset, targetOffset);
-      utils.mix(newElRegion, elFuturePos);
-    }
-
-    var isStillFailX = isFailX(elFuturePos, elRegion, visibleRect);
-    var isStillFailY = isFailY(elFuturePos, elRegion, visibleRect); // 检查反下后的位置是否可以放下了，如果仍然放不下：
-    // 1. 复原修改过的定位参数
-
-    if (isStillFailX || isStillFailY) {
-      points = align.points;
-      offset = align.offset || [0, 0];
-      targetOffset = align.targetOffset || [0, 0];
-    } // 2. 只有指定了可以调整当前方向才调整
-
-
-    newOverflowCfg.adjustX = overflow.adjustX && isStillFailX;
-    newOverflowCfg.adjustY = overflow.adjustY && isStillFailY; // 确实要调整，甚至可能会调整高度宽度
-
-    if (newOverflowCfg.adjustX || newOverflowCfg.adjustY) {
-      newElRegion = adjustForViewport(elFuturePos, elRegion, visibleRect, newOverflowCfg);
-    }
-  } // need judge to in case set fixed with in css on height auto element
-
-
-  if (newElRegion.width !== elRegion.width) {
-    utils.css(source, 'width', utils.width(source) + newElRegion.width - elRegion.width);
-  }
-
-  if (newElRegion.height !== elRegion.height) {
-    utils.css(source, 'height', utils.height(source) + newElRegion.height - elRegion.height);
-  } // https://github.com/kissyteam/kissy/issues/190
-  // 相对于屏幕位置没变，而 left/top 变了
-  // 例如 <div 'relative'><el absolute></div>
-
-
-  utils.offset(source, {
-    left: newElRegion.left,
-    top: newElRegion.top
-  }, {
-    useCssRight: align.useCssRight,
-    useCssBottom: align.useCssBottom,
-    useCssTransform: align.useCssTransform,
-    ignoreShake: align.ignoreShake
-  });
-  return {
-    points: points,
-    offset: offset,
-    targetOffset: targetOffset,
-    overflow: newOverflowCfg
-  };
-}
-/**
- *  2012-04-26 yiminghe@gmail.com
- *   - 优化智能对齐算法
- *   - 慎用 resizeXX
- *
- *  2011-07-13 yiminghe@gmail.com note:
- *   - 增加智能对齐，以及大小调整选项
- **/
-
-function isOutOfVisibleRect(target) {
-  var visibleRect = getVisibleRectForElement(target);
-  var targetRegion = getRegion(target);
-  return !visibleRect || targetRegion.left + targetRegion.width <= visibleRect.left || targetRegion.top + targetRegion.height <= visibleRect.top || targetRegion.left >= visibleRect.right || targetRegion.top >= visibleRect.bottom;
-}
-
-function alignElement(el, refNode, align) {
-  var target = align.target || refNode;
-  var refNodeRegion = getRegion(target);
-  var isTargetNotOutOfVisible = !isOutOfVisibleRect(target);
-  return doAlign(el, refNodeRegion, align, isTargetNotOutOfVisible);
-}
-
-alignElement.__getOffsetParent = getOffsetParent;
-alignElement.__getVisibleRectForElement = getVisibleRectForElement;
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-/**
- * `tgtPoint`: { pageX, pageY } or { clientX, clientY }.
- * If client position provided, will internal convert to page position.
- */
-
-function alignPoint(el, tgtPoint, align) {
-  var pageX;
-  var pageY;
-  var doc = utils.getDocument(el);
-  var win = doc.defaultView || doc.parentWindow;
-  var scrollX = utils.getWindowScrollLeft(win);
-  var scrollY = utils.getWindowScrollTop(win);
-  var viewportWidth = utils.viewportWidth(win);
-  var viewportHeight = utils.viewportHeight(win);
-
-  if ('pageX' in tgtPoint) {
-    pageX = tgtPoint.pageX;
-  } else {
-    pageX = scrollX + tgtPoint.clientX;
-  }
-
-  if ('pageY' in tgtPoint) {
-    pageY = tgtPoint.pageY;
-  } else {
-    pageY = scrollY + tgtPoint.clientY;
-  }
-
-  var tgtRegion = {
-    left: pageX,
-    top: pageY,
-    width: 0,
-    height: 0
-  };
-  var pointInView = pageX >= 0 && pageX <= scrollX + viewportWidth && pageY >= 0 && pageY <= scrollY + viewportHeight; // Provide default target point
-
-  var points = [align.points[0], 'cc'];
-  return doAlign(el, tgtRegion, _objectSpread({}, align, {
-    points: points
-  }), pointInView);
-}
-
-/* unused harmony default export */ var _unused_webpack_default_export = (alignElement);
-
-
+/* harmony default export */ __webpack_exports__["a"] = (getElFuturePos);
 
 /***/ }),
-/* 49 */
+/* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__align_alignElement__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__align_alignPoint__ = __webpack_require__(55);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__align_alignElement__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__align_alignPoint__["a"]; });
+
+
+
+
+
+/* unused harmony default export */ var _unused_webpack_default_export = (__WEBPACK_IMPORTED_MODULE_0__align_alignElement__["a" /* default */]);
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = isAncestorFixed;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(7);
+
+
+var getParent = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getParent;
+
+
+function isAncestorFixed(element) {
+  if (__WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].isWindow(element) || element.nodeType === 9) {
+    return false;
+  }
+
+  var doc = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].getDocument(element);
+  var body = doc.body;
+  var parent = null;
+  for (parent = getParent(element); parent && parent !== body; parent = getParent(parent)) {
+    var positionStyle = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* default */].css(parent, 'position');
+    if (positionStyle === 'fixed') {
+      return true;
+    }
+  }
+  return false;
+}
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["e"] = getTransformName;
+/* harmony export (immutable) */ __webpack_exports__["b"] = setTransitionProperty;
+/* harmony export (immutable) */ __webpack_exports__["a"] = getTransitionProperty;
+/* harmony export (immutable) */ __webpack_exports__["c"] = getTransformXY;
+/* harmony export (immutable) */ __webpack_exports__["d"] = setTransformXY;
+var vendorPrefix = void 0;
+
+var jsCssMap = {
+  Webkit: '-webkit-',
+  Moz: '-moz-',
+  // IE did it wrong again ...
+  ms: '-ms-',
+  O: '-o-'
+};
+
+function getVendorPrefix() {
+  if (vendorPrefix !== undefined) {
+    return vendorPrefix;
+  }
+  vendorPrefix = '';
+  var style = document.createElement('p').style;
+  var testProp = 'Transform';
+  for (var key in jsCssMap) {
+    if (key + testProp in style) {
+      vendorPrefix = key;
+    }
+  }
+  return vendorPrefix;
+}
+
+function getTransitionName() {
+  return getVendorPrefix() ? getVendorPrefix() + 'TransitionProperty' : 'transitionProperty';
+}
+
+function getTransformName() {
+  return getVendorPrefix() ? getVendorPrefix() + 'Transform' : 'transform';
+}
+
+function setTransitionProperty(node, value) {
+  var name = getTransitionName();
+  if (name) {
+    node.style[name] = value;
+    if (name !== 'transitionProperty') {
+      node.style.transitionProperty = value;
+    }
+  }
+}
+
+function setTransform(node, value) {
+  var name = getTransformName();
+  if (name) {
+    node.style[name] = value;
+    if (name !== 'transform') {
+      node.style.transform = value;
+    }
+  }
+}
+
+function getTransitionProperty(node) {
+  return node.style.transitionProperty || node.style[getTransitionName()];
+}
+
+function getTransformXY(node) {
+  var style = window.getComputedStyle(node, null);
+  var transform = style.getPropertyValue('transform') || style.getPropertyValue(getTransformName());
+  if (transform && transform !== 'none') {
+    var matrix = transform.replace(/[^0-9\-.,]/g, '').split(',');
+    return { x: parseFloat(matrix[12] || matrix[4], 0), y: parseFloat(matrix[13] || matrix[5], 0) };
+  }
+  return {
+    x: 0,
+    y: 0
+  };
+}
+
+var matrix2d = /matrix\((.*)\)/;
+var matrix3d = /matrix3d\((.*)\)/;
+
+function setTransformXY(node, xy) {
+  var style = window.getComputedStyle(node, null);
+  var transform = style.getPropertyValue('transform') || style.getPropertyValue(getTransformName());
+  if (transform && transform !== 'none') {
+    var arr = void 0;
+    var match2d = transform.match(matrix2d);
+    if (match2d) {
+      match2d = match2d[1];
+      arr = match2d.split(',').map(function (item) {
+        return parseFloat(item, 10);
+      });
+      arr[4] = xy.x;
+      arr[5] = xy.y;
+      setTransform(node, 'matrix(' + arr.join(',') + ')');
+    } else {
+      var match3d = transform.match(matrix3d)[1];
+      arr = match3d.split(',').map(function (item) {
+        return parseFloat(item, 10);
+      });
+      arr[12] = xy.x;
+      arr[13] = xy.y;
+      setTransform(node, 'matrix3d(' + arr.join(',') + ')');
+    }
+  } else {
+    setTransform(node, 'translateX(' + xy.x + 'px) translateY(' + xy.y + 'px) translateZ(0)');
+  }
+}
+
+/***/ }),
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var util = __webpack_require__(50);
+var util = __webpack_require__(62);
 
 function scrollIntoView(elem, container, config) {
   config = config || {};
@@ -5932,7 +6023,7 @@ function scrollIntoView(elem, container, config) {
 module.exports = scrollIntoView;
 
 /***/ }),
-/* 50 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6377,13 +6468,13 @@ module.exports = _extends({
 }, domUtils);
 
 /***/ }),
-/* 51 */
+/* 63 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 52 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6458,7 +6549,7 @@ module.exports = hoistNonReactStatics;
 
 
 /***/ }),
-/* 53 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!function(e){var n=/iPhone/i,t=/iPod/i,r=/iPad/i,a=/\bAndroid(?:.+)Mobile\b/i,p=/Android/i,b=/\bAndroid(?:.+)SD4930UR\b/i,l=/\bAndroid(?:.+)(?:KF[A-Z]{2,4})\b/i,f=/Windows Phone/i,s=/\bWindows(?:.+)ARM\b/i,u=/BlackBerry/i,c=/BB10/i,h=/Opera Mini/i,v=/\b(CriOS|Chrome)(?:.+)Mobile/i,w=/Mobile(?:.+)Firefox\b/i;function m(e,i){return e.test(i)}function i(e){var i=e||("undefined"!=typeof navigator?navigator.userAgent:""),o=i.split("[FBAN");void 0!==o[1]&&(i=o[0]),void 0!==(o=i.split("Twitter"))[1]&&(i=o[0]);var d={apple:{phone:m(n,i)&&!m(f,i),ipod:m(t,i),tablet:!m(n,i)&&m(r,i)&&!m(f,i),device:(m(n,i)||m(t,i)||m(r,i))&&!m(f,i)},amazon:{phone:m(b,i),tablet:!m(b,i)&&m(l,i),device:m(b,i)||m(l,i)},android:{phone:!m(f,i)&&m(b,i)||!m(f,i)&&m(a,i),tablet:!m(f,i)&&!m(b,i)&&!m(a,i)&&(m(l,i)||m(p,i)),device:!m(f,i)&&(m(b,i)||m(l,i)||m(a,i)||m(p,i))||m(/\bokhttp\b/i,i)},windows:{phone:m(f,i),tablet:m(s,i),device:m(f,i)||m(s,i)},other:{blackberry:m(u,i),blackberry10:m(c,i),opera:m(h,i),firefox:m(w,i),chrome:m(v,i),device:m(u,i)||m(c,i)||m(h,i)||m(w,i)||m(v,i)}};return d.any=d.apple.device||d.android.device||d.windows.device||d.other.device,d.phone=d.apple.phone||d.android.phone||d.windows.phone,d.tablet=d.apple.tablet||d.android.tablet||d.windows.tablet,d}"undefined"!=typeof module&&module.exports&&"undefined"==typeof window?module.exports=i:"undefined"!=typeof module&&module.exports&&"undefined"!=typeof window?(module.exports=i(),module.exports.isMobile=i): true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (e.isMobile=i()),
@@ -6467,7 +6558,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):e.isMobile=i()}(this);
 
 /***/ }),
-/* 54 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6483,7 +6574,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _PropTypes = __webpack_require__(22);
+var _PropTypes = __webpack_require__(27);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6528,7 +6619,7 @@ Provider.childContextTypes = {
 exports.default = Provider;
 
 /***/ }),
-/* 55 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6548,17 +6639,17 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _shallowequal = __webpack_require__(81);
+var _shallowequal = __webpack_require__(93);
 
 var _shallowequal2 = _interopRequireDefault(_shallowequal);
 
-var _hoistNonReactStatics = __webpack_require__(52);
+var _hoistNonReactStatics = __webpack_require__(64);
 
 var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
-var _reactLifecyclesCompat = __webpack_require__(18);
+var _reactLifecyclesCompat = __webpack_require__(19);
 
-var _PropTypes = __webpack_require__(22);
+var _PropTypes = __webpack_require__(27);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -6697,7 +6788,7 @@ function connect(mapStateToProps) {
 }
 
 /***/ }),
-/* 56 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6742,7 +6833,7 @@ function create(initialState) {
 }
 
 /***/ }),
-/* 57 */
+/* 69 */
 /***/ (function(module, exports) {
 
 // mutationobserver-shim v0.3.2 (github.com/megawac/MutationObserver.js)
@@ -6757,7 +6848,7 @@ a:!(!b.characterData&&!b.characterDataOldValue)},d=this.i,f=0;f<d.length;f++)d[f
 
 
 /***/ }),
-/* 58 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Generated by CoffeeScript 1.12.2
@@ -6797,16 +6888,16 @@ a:!(!b.characterData&&!b.characterDataOldValue)},d=this.i,f=0;f<d.length;f++)d[f
 
 //# sourceMappingURL=performance-now.js.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
-/* 59 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
@@ -6818,9 +6909,9 @@ a:!(!b.characterData&&!b.characterDataOldValue)},d=this.i,f=0;f<d.length;f++)d[f
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_dom_align__ = __webpack_require__(48);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_Dom_addEventListener__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__util__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_dom_align__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_util_es_Dom_addEventListener__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__util__ = __webpack_require__(73);
 
 
 
@@ -7024,18 +7115,18 @@ Align.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (Align);
 
 /***/ }),
-/* 60 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Align__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Align__ = __webpack_require__(71);
 // export this package's api
 
 
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__Align__["a" /* default */]);
 
 /***/ }),
-/* 61 */
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7044,7 +7135,7 @@ Align.defaultProps = {
 /* harmony export (immutable) */ __webpack_exports__["b"] = isWindow;
 /* harmony export (immutable) */ __webpack_exports__["d"] = isSimilarValue;
 /* harmony export (immutable) */ __webpack_exports__["a"] = restoreFocus;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rc_util_es_Dom_contains__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rc_util_es_Dom_contains__ = __webpack_require__(40);
 
 
 function buffer(fn, ms) {
@@ -7100,13 +7191,13 @@ function restoreFocus(activeElement, container) {
 }
 
 /***/ }),
-/* 62 */
+/* 74 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
@@ -7118,8 +7209,8 @@ function restoreFocus(activeElement, container) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_css_animation__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__util_animate__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_css_animation__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__util_animate__ = __webpack_require__(29);
 
 
 
@@ -7235,7 +7326,7 @@ AnimateChild.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (AnimateChild);
 
 /***/ }),
-/* 63 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7350,13 +7441,13 @@ function mergeChildren(prev, next) {
 }
 
 /***/ }),
-/* 64 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__);
@@ -7370,9 +7461,9 @@ function mergeChildren(prev, next) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_resize_observer_polyfill__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__SubMenu__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__util__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_resize_observer_polyfill__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__SubMenu__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__util__ = __webpack_require__(9);
 
 
 
@@ -7392,7 +7483,7 @@ var FLOAT_PRECISION_ADJUST = 0.5;
 
 // Fix ssr
 if (canUseDOM) {
-  __webpack_require__(57);
+  __webpack_require__(69);
 }
 
 var DOMWrap = function (_React$Component) {
@@ -7712,7 +7803,7 @@ DOMWrap.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (DOMWrap);
 
 /***/ }),
-/* 65 */
+/* 77 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7770,13 +7861,13 @@ Divider.defaultProps = {
 /* unused harmony default export */ var _unused_webpack_default_export = (Divider);
 
 /***/ }),
-/* 66 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__);
@@ -7788,10 +7879,10 @@ Divider.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_mini_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_mini_store__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_mini_store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_mini_store__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__SubPopupMenu__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__util__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__SubPopupMenu__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__util__ = __webpack_require__(9);
 
 
 
@@ -8043,7 +8134,7 @@ var _initialiseProps = function _initialiseProps() {
 /* harmony default export */ __webpack_exports__["a"] = (Menu);
 
 /***/ }),
-/* 67 */
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8062,14 +8153,14 @@ var _initialiseProps = function _initialiseProps() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_KeyCode__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_util_es_KeyCode__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_dom_scroll_into_view__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_dom_scroll_into_view__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_dom_scroll_into_view___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_dom_scroll_into_view__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_mini_store__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_mini_store__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_mini_store___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_mini_store__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__util__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__util__ = __webpack_require__(9);
 
 
 
@@ -8307,13 +8398,13 @@ var connected = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10_mini_store__[
 /* harmony default export */ __webpack_exports__["a"] = (connected);
 
 /***/ }),
-/* 68 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_objectWithoutProperties__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__);
@@ -8325,7 +8416,7 @@ var connected = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_10_mini_store__[
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util__ = __webpack_require__(9);
 
 
 
@@ -8414,7 +8505,7 @@ MenuItemGroup.isMenuItemGroup = true;
 /* harmony default export */ __webpack_exports__["a"] = (MenuItemGroup);
 
 /***/ }),
-/* 69 */
+/* 81 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8450,24 +8541,24 @@ var placements = {
 /* harmony default export */ __webpack_exports__["a"] = (placements);
 
 /***/ }),
-/* 70 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DropdownMenu; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_dom_scroll_into_view__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_dom_scroll_into_view__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_dom_scroll_into_view___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_dom_scroll_into_view__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_raf__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_raf__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_raf___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_raf__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_menu__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rc_util_es_Children_toArray__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_menu__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rc_util_es_Children_toArray__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util__ = __webpack_require__(16);
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8716,7 +8807,7 @@ DropdownMenu.propTypes = {
 };
 
 /***/ }),
-/* 71 */
+/* 83 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8755,29 +8846,29 @@ function (_Component) {
 OptGroup.isSelectOptGroup = true;
 
 /***/ }),
-/* 72 */
+/* 84 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_classnames__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_classnames__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_component_classes__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_component_classes__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_component_classes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_component_classes__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rc_animate__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_menu__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rc_util_es_Children_toArray__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_util_es_KeyCode__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rc_animate__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_menu__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rc_util_es_Children_toArray__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rc_util_es_KeyCode__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react_lifecycles_compat__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_warning__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react_lifecycles_compat__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_warning__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Option__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__PropTypes__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__SelectTrigger__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__util__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Option__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__PropTypes__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__SelectTrigger__ = __webpack_require__(85);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__util__ = __webpack_require__(16);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -9023,14 +9114,13 @@ function (_React$Component) {
       var props = _this.props;
       var selectedValue = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__util__["d" /* getValuePropValue */])(item);
       var lastValue = value[value.length - 1];
-      var skipTrigger = false;
 
       if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__util__["a" /* isMultipleOrTags */])(props)) {
         if (__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__util__["e" /* findIndexInValueBySingleValue */])(value, selectedValue) !== -1) {
-          skipTrigger = true;
-        } else {
-          value = value.concat([selectedValue]);
+          return;
         }
+
+        value = value.concat([selectedValue]);
       } else {
         if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__util__["c" /* isCombobox */])(props) && lastValue !== undefined && lastValue === selectedValue && selectedValue !== _this.state.backfillValue) {
           _this.setOpenState(false, {
@@ -9038,29 +9128,25 @@ function (_React$Component) {
             fireSearch: false
           });
 
-          skipTrigger = true;
-        } else {
-          value = [selectedValue];
-
-          _this.setOpenState(false, {
-            needFocus: true,
-            fireSearch: false
-          });
+          return;
         }
+
+        value = [selectedValue];
+
+        _this.setOpenState(false, {
+          needFocus: true,
+          fireSearch: false
+        });
       }
 
-      if (!skipTrigger) {
-        _this.fireChange(value);
-      }
+      _this.fireChange(value);
 
       _this.fireSelect(selectedValue);
 
-      if (!skipTrigger) {
-        var inputValue = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__util__["c" /* isCombobox */])(props) ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__util__["f" /* getPropValue */])(item, props.optionLabelProp) : '';
+      var inputValue = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__util__["c" /* isCombobox */])(props) ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__util__["f" /* getPropValue */])(item, props.optionLabelProp) : '';
 
-        if (props.autoClearSearchValue) {
-          _this.setInputValue(inputValue, false);
-        }
+      if (props.autoClearSearchValue) {
+        _this.setInputValue(inputValue, false);
       }
     };
 
@@ -10486,24 +10572,24 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8_react_lifecycles_compat__["pol
 /* harmony default export */ __webpack_exports__["a"] = (Select);
 
 /***/ }),
-/* 73 */
+/* 85 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SelectTrigger; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_classnames__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_classnames__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_raf__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_raf__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_raf___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_raf__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_trigger__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rc_trigger__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__DropdownMenu__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__DropdownMenu__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__util__ = __webpack_require__(16);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -10771,14 +10857,14 @@ SelectTrigger.propTypes = {
 SelectTrigger.displayName = 'SelectTrigger';
 
 /***/ }),
-/* 74 */
+/* 86 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OptGroup__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Option__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PropTypes__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Select__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OptGroup__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Option__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__PropTypes__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Select__ = __webpack_require__(84);
 /* unused harmony reexport Option */
 /* unused harmony reexport OptGroup */
 /* unused harmony reexport SelectPropTypes */
@@ -10792,7 +10878,7 @@ __WEBPACK_IMPORTED_MODULE_3__Select__["a" /* default */].OptGroup = __WEBPACK_IM
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_3__Select__["a" /* default */]);
 
 /***/ }),
-/* 75 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10810,11 +10896,11 @@ __WEBPACK_IMPORTED_MODULE_3__Select__["a" /* default */].OptGroup = __WEBPACK_IM
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_align__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_animate__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__PopupInner__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__LazyRenderBox__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_align__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_animate__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__PopupInner__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__LazyRenderBox__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__utils__ = __webpack_require__(37);
 
 
 
@@ -11159,7 +11245,7 @@ var _initialiseProps = function _initialiseProps() {
 /* harmony default export */ __webpack_exports__["a"] = (Popup);
 
 /***/ }),
-/* 76 */
+/* 88 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11173,7 +11259,7 @@ var _initialiseProps = function _initialiseProps() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__LazyRenderBox__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__LazyRenderBox__ = __webpack_require__(35);
 
 
 
@@ -11232,13 +11318,13 @@ PopupInner.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (PopupInner);
 
 /***/ }),
-/* 77 */
+/* 89 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
@@ -11351,13 +11437,13 @@ ContainerRender.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (ContainerRender);
 
 /***/ }),
-/* 78 */
+/* 90 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
@@ -11439,7 +11525,7 @@ Portal.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Portal);
 
 /***/ }),
-/* 79 */
+/* 91 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11468,7 +11554,7 @@ function createChainedFunction() {
 }
 
 /***/ }),
-/* 80 */
+/* 92 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12401,10 +12487,10 @@ var index = (function () {
 
 /* harmony default export */ __webpack_exports__["a"] = (index);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(36)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(41)))
 
 /***/ }),
-/* 81 */
+/* 93 */
 /***/ (function(module, exports) {
 
 //
@@ -12456,7 +12542,7 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
 
 
 /***/ }),
-/* 82 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12523,21 +12609,9 @@ if (__DEV__) {
 
 module.exports = warning;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ }),
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */,
-/* 90 */,
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
 /* 95 */,
 /* 96 */,
 /* 97 */,
@@ -12572,14 +12646,26 @@ module.exports = warning;
 /* 126 */,
 /* 127 */,
 /* 128 */,
-/* 129 */
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */,
+/* 141 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_classCallCheck__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_createClass__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
@@ -12589,11 +12675,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_select__ = __webpack_require__(74);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_pagination__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_pagination_assets_index_less__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rc_select__ = __webpack_require__(86);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rc_pagination__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_pagination_assets_index_less__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_rc_pagination_assets_index_less___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_rc_pagination_assets_index_less__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_select_assets_index_css__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_select_assets_index_css__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rc_select_assets_index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_rc_select_assets_index_css__);
 
 
@@ -12671,18 +12757,6 @@ var App = function (_React$Component) {
 __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_4_react___default.a.createElement(App, null), document.getElementById('__react-content'));
 
 /***/ }),
-/* 130 */,
-/* 131 */,
-/* 132 */,
-/* 133 */,
-/* 134 */,
-/* 135 */,
-/* 136 */,
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
 /* 142 */,
 /* 143 */,
 /* 144 */,
@@ -12741,12 +12815,24 @@ __WEBPACK_IMPORTED_MODULE_5_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 /* 197 */,
 /* 198 */,
 /* 199 */,
-/* 200 */
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(129);
+module.exports = __webpack_require__(141);
 
 
 /***/ })
-],[200]);
+],[212]);
 //# sourceMappingURL=jumperWithGoButton.js.map

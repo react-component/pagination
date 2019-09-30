@@ -190,7 +190,7 @@ class Pagination extends React.Component {
   }
 
   isValid = (page) => {
-    return isInteger(page) && page >= 1 && page !== this.state.current;
+    return isInteger(page) && page !== this.state.current;
   }
 
   shouldDisplayQuickJumper = () => {
@@ -258,6 +258,8 @@ class Pagination extends React.Component {
       const currentPage = calculatePage(undefined, this.state, this.props);
       if (page > currentPage) {
         page = currentPage;
+      } else if (page < 1) {
+        page = 1;
       }
 
       if (!('current' in this.props)) {

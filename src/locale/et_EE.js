@@ -4,6 +4,8 @@ export default {
   jump_to: 'Hüppa',
   jump_to_confirm: 'Kinnitage',
   page: '',
+  aria_page: 'Leht',
+  aria_current_page: 'Käesolev lehekülg',
 
   // Pagination.jsx
   prev_page: 'Eelmine leht',

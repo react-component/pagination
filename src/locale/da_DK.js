@@ -4,6 +4,8 @@ export default {
   jump_to: 'Gå til',
   jump_to_confirm: 'bekræft',
   page: '',
+  aria_page: 'Side',
+  aria_current_page: 'Nuværende side',
 
   // Pagination.jsx
   prev_page: 'Forrige Side',

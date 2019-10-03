@@ -4,6 +4,8 @@ export default {
   jump_to: 'iet uz',
   jump_to_confirm: 'apstiprināt',
   page: '',
+  aria_page: 'Lappuse',
+  aria_current_page: 'Pašreizējā lapa',
 
   // Pagination.jsx
   prev_page: 'Iepriekšējā lapa',

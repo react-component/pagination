@@ -4,6 +4,8 @@ export default {
   jump_to: 'Biçe',
   jump_to_confirm: 'piştrast bike',
   page: '',
+  aria_page: 'Rûpel',
+  aria_current_page: 'Rûpela heyî',
 
   // Pagination.jsx
   prev_page: 'Rûpelê Pêş',

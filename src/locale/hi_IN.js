@@ -4,6 +4,8 @@ export default {
   jump_to: 'इस पर चलें',
   jump_to_confirm: 'पुष्टि करें',
   page: '',
+  aria_page: 'पृष्ठ',
+  aria_current_page: 'वर्तमान पृष्ठ',
 
   // Pagination.jsx
   prev_page: 'पिछला पृष्ठ',

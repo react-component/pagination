@@ -4,6 +4,8 @@ export default {
   jump_to: 'ಜಿಗಿತವನ್ನು',
   jump_to_confirm: 'ಖಚಿತಪಡಿಸಲು ಜಿಗಿತವನ್ನು',
   page: '',
+  aria_page: 'ಪುಟ',
+  aria_current_page: 'ಪ್ರಸ್ತುತ ಪುಟ',
 
   // Pagination.jsx
   prev_page: 'ಹಿಂದಿನ ಪುಟ',

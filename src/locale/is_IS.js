@@ -4,6 +4,8 @@ export default {
   jump_to: 'Síða',
   jump_to_confirm: 'staðfest',
   page: '',
+  aria_page: 'Síðu',
+  aria_current_page: 'Núverandi síða',
 
   // Pagination.jsx
   prev_page: 'Fyrri síða',

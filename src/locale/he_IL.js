@@ -4,6 +4,8 @@ export default {
   jump_to: 'עבור אל',
   jump_to_confirm: 'אישור',
   page: '',
+  aria_page: 'עמוד',
+  aria_current_page: 'העמוד הנוכחי',
 
   // Pagination.jsx
   prev_page: 'העמוד הקודם',

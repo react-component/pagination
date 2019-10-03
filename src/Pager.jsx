@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 const Pager = (props) => {
   const prefixCls = `${props.rootPrefixCls}-item`;
+  const ariaAttributes = {};
   let cls = `${prefixCls} ${prefixCls}-${props.page}`;
 
   if (props.active) {
     cls = `${cls} ${prefixCls}-active`;
+    ariaAttributes['aria-current'] = 'page';
   }
 
   if (props.className) {
@@ -16,6 +18,22 @@ const Pager = (props) => {
   if (!props.page) {
     cls = `${cls} ${prefixCls}-disabled`;
   }
+
+  const renderVisuallyHiddenText = () => (
+    <span className="visuallyHidden">
+      {props.active
+        ? props.locale.aria_current_page
+        : props.locale.aria_page
+      }
+    </span>
+  );
+
+  const renderLink = () => (
+    <a href="#" {...ariaAttributes}>
+      {renderVisuallyHiddenText()}
+      {props.page}
+    </a>
+  );
 
   const handleClick = () => {
     props.onClick(props.page);
@@ -31,9 +49,9 @@ const Pager = (props) => {
       className={cls}
       onClick={handleClick}
       onKeyPress={handleKeyPress}
-      tabIndex="0"
+      tabIndex={props.focusOnListItem ? 0 : null}
     >
-      {props.itemRender(props.page, 'page', <a>{props.page}</a>)}
+      {props.itemRender(props.page, 'page', renderLink())}
     </li>
   );
 };
@@ -45,6 +63,7 @@ Pager.propTypes = {
   locale: PropTypes.object,
   className: PropTypes.string,
   showTitle: PropTypes.bool,
+  focusOnListItem: PropTypes.bool,
   rootPrefixCls: PropTypes.string,
   onClick: PropTypes.func,
   onKeyPress: PropTypes.func,

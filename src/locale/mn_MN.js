@@ -4,6 +4,8 @@ export default {
   jump_to: 'Шилжих',
   jump_to_confirm: 'сонгох',
   page: '',
+  aria_page: 'Хуудас',
+  aria_current_page: 'Одоогийн хуудас',
 
   // Pagination.jsx
   prev_page: 'Өмнөх хуудас',

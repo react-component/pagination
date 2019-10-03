@@ -4,6 +4,8 @@ export default {
   jump_to: 'Pojdi na',
   jump_to_confirm: 'potrdi',
   page: '',
+  aria_page: 'Stran',
+  aria_current_page: 'Trenutna stran',
 
   // Pagination.jsx
   prev_page: 'Prejšnja stran',

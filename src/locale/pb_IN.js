@@ -4,6 +4,8 @@ export default {
   jump_to: 'Goto',
   jump_to_confirm: 'ਪੁਸ਼ਟੀ ਕਰੋ',
   page: 'ਪੰਨਾ',
+  aria_page: 'ਪੇਜ',
+  aria_current_page: 'ਮੌਜੂਦਾ ਪੇਜ',
 
   // Pagination.jsx
   prev_page: 'ਪਿਛਲਾ ਪੰਨਾ',

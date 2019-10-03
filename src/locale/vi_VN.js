@@ -4,6 +4,8 @@ export default {
   jump_to: 'Đến',
   jump_to_confirm: 'xác nhận',
   page: '',
+  aria_page: 'Trang',
+  aria_current_page: 'Trang hiện tại',
 
   // Pagination.jsx
   prev_page: 'Trang Trước',

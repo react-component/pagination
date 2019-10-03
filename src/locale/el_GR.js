@@ -4,6 +4,8 @@ export default {
   jump_to: 'Μετάβαση',
   jump_to_confirm: 'επιβεβαιώνω',
   page: '',
+  aria_page: 'Σελίδα',
+  aria_current_page: 'Τρέχουσα σελίδα',
 
   // Pagination.jsx
   prev_page: 'Προηγούμενη Σελίδα',

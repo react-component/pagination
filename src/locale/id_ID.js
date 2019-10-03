@@ -4,6 +4,8 @@ export default {
   jump_to: 'Menuju',
   jump_to_confirm: 'konfirmasi',
   page: '',
+  aria_page: 'Halaman',
+  aria_current_page: 'Halaman saat ini',
 
   // Pagination.jsx
   prev_page: 'Halaman Sebelumnya',

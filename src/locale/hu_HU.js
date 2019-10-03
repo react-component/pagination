@@ -4,6 +4,8 @@ export default {
   jump_to: 'Ugrás', // 'Goto',
   jump_to_confirm: 'megerősít', // 'confirm',
   page: '',
+  aria_page: 'Oldal',
+  aria_current_page: 'Aktuális oldal',
 
   // Pagination.jsx
   prev_page: 'Előző oldal', // 'Previous Page',

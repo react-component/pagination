@@ -943,3 +943,69 @@ describe('disabled', () => {
     );
   });
 });
+
+describe('Pagination with jumper', () => {
+  let pagination = null;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  let current = 10;
+  function onChange(page) {
+    current = page;
+  }
+
+  beforeEach((done) => {
+    ReactDOM.render(
+      <Pagination
+        onChange={onChange}
+        defaultCurrent={10}
+        total={1000}
+        showQuickJumper
+      />,
+      container,
+      function () {
+        pagination = this;
+        done();
+      },
+    );
+  });
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+    current = 10;
+  });
+
+  it('when input less than 1', (done) => {
+    const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-options-quick-jumper'
+    );
+    const input = quickJumper.querySelector('input');
+    expect(TestUtils.isDOMComponent(input)).to.be(true);
+    input.value = '-1';
+    Simulate.change(input);
+    setTimeout(() => {
+      Simulate.keyUp(input, { key: 'Enter', keyCode: 13, which: 13 });
+      setTimeout(() => {
+        expect(pagination.state.current).to.be(1);
+        expect(current).to.be(1);
+        done();
+      }, 10);
+    }, 10);
+  });
+
+  it('when input onBlur', (done) => {
+    const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-options-quick-jumper'
+    );
+    const input = quickJumper.querySelector('input');
+    expect(TestUtils.isDOMComponent(input)).to.be(true);
+    Simulate.blur(input);
+    setTimeout(() => {
+      expect(pagination.state.current).to.be(10);
+      expect(current).to.be(10);
+      done();
+    }, 10);
+  });
+});

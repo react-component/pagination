@@ -28,7 +28,7 @@ class Options extends React.Component {
 
   getValidValue() {
     const { goInputText, current } = this.state;
-    return isNaN(goInputText) ? current : Number(goInputText);
+    return !goInputText || isNaN(goInputText) ? current : Number(goInputText);
   }
 
   buildOptionText = (value) => {

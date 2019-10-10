@@ -3,6 +3,8 @@ export default {
   items_per_page: '/ side',
   jump_to: 'Gå til side',
   page: '',
+  aria_page: 'Side',
+  aria_current_page: 'Nåværende side',
 
   // Pagination.jsx
   prev_page: 'Forrige side',

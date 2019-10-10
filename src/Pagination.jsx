@@ -47,6 +47,7 @@ class Pagination extends React.Component {
     showPrevNextJumpers: PropTypes.bool,
     showQuickJumper: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     showTitle: PropTypes.bool,
+    focusOnListItem: PropTypes.bool,
     pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
     showTotal: PropTypes.func,
     locale: PropTypes.object,
@@ -73,6 +74,7 @@ class Pagination extends React.Component {
     showSizeChanger: false,
     showLessItems: false,
     showTitle: true,
+    focusOnListItem: true,
     onShowSizeChange: noop,
     locale: LOCALE,
     style: {},
@@ -451,6 +453,7 @@ class Pagination extends React.Component {
         onClick: this.handleChange,
         onKeyPress: this.runIfEnter,
         showTitle: props.showTitle,
+        focusOnListItem: props.focusOnListItem,
         itemRender: props.itemRender,
       };
       if (!allPages) {
@@ -530,6 +533,7 @@ class Pagination extends React.Component {
           page={allPages}
           active={false}
           showTitle={props.showTitle}
+          focusOnListItem={props.focusOnListItem}
           itemRender={props.itemRender}
         />
       );
@@ -543,6 +547,7 @@ class Pagination extends React.Component {
           page={1}
           active={false}
           showTitle={props.showTitle}
+          focusOnListItem={props.focusOnListItem}
           itemRender={props.itemRender}
         />
       );
@@ -570,6 +575,7 @@ class Pagination extends React.Component {
             page={i}
             active={active}
             showTitle={props.showTitle}
+            focusOnListItem={props.focusOnListItem}
             itemRender={props.itemRender}
           />
         );

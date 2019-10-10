@@ -4,6 +4,8 @@ export default {
   jump_to: 'Git',
   jump_to_confirm: 'onayla',
   page: '',
+  aria_page: 'Sayfa',
+  aria_current_page: 'Geçerli sayfa',
 
   // Pagination.jsx
   prev_page: 'Önceki Sayfa',

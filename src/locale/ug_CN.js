@@ -4,6 +4,9 @@ export default {
   jump_to: 'بەتكە سەكرەش',
   jump_to_confirm: 'مۇقىملاشتۇرۇش',
   page: 'بەت',
+  aria_page: 'صفحة',
+  aria_current_page: 'الصفحه الحاليه',
+
   // Pagination.jsx
   prev_page: 'ئالدىنقى',
   next_page: 'كېيىنكى',

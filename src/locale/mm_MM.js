@@ -4,6 +4,8 @@ export default {
   jump_to: 'သွားရန်',
   jump_to_confirm: 'သေချာပြီ',
   page: '',
+  aria_page: 'စာမျက်နှ',
+  aria_current_page: 'လက်ရှိစာမျက်နှ',
 
   // Pagination.jsx
   prev_page: 'ယခင်စာမျက်နှာ',

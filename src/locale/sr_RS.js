@@ -3,6 +3,8 @@ export default {
   items_per_page: '/ strani',
   jump_to: 'Idi na',
   page: '',
+  aria_page: 'Stranica',
+  aria_current_page: 'Trenutna stranica',
 
   // Pagination.jsx
   prev_page: 'Prethodna strana',

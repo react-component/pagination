@@ -4,6 +4,8 @@ export default {
   jump_to: 'Ga naar',
   jump_to_confirm: 'bevestigen',
   page: '',
+  aria_page: 'Bladzijde',
+  aria_current_page: 'Huidige pagina',
 
   // Pagination.jsx
   prev_page: 'Vorige pagina',

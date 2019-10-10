@@ -4,6 +4,8 @@ export default {
   jump_to: 'Gehe zu',
   jump_to_confirm: 'bestätigen',
   page: '',
+  aria_page: 'Seite',
+  aria_current_page: 'Aktuelle Seite',
 
   // Pagination.jsx
   prev_page: 'Vorherige Seite',

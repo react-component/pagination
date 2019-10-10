@@ -4,6 +4,8 @@ export default {
   jump_to: 'அடுத்த',
   jump_to_confirm: 'உறுதிப்படுத்தவும்',
   page: '',
+  aria_page: 'பக்கம்',
+  aria_current_page: 'தற்போதைய பக்கம்',
 
   // Pagination.jsx
   prev_page: 'முந்தைய பக்கம்',

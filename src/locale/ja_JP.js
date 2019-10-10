@@ -4,6 +4,8 @@ export default {
   jump_to: '移動',
   jump_to_confirm: '確認する',
   page: 'ページ',
+  aria_page: 'ページ',
+  aria_current_page: '現在のページ',
 
   // Pagination.jsx
   prev_page: '前のページ',

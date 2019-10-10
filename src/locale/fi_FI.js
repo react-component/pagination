@@ -4,6 +4,8 @@ export default {
   jump_to: 'Mene',
   jump_to_confirm: 'Potvrdite',
   page: '',
+  aria_page: 'Sivu',
+  aria_current_page: 'Tämänhetkinen sivu',
 
   // Pagination.jsx
   prev_page: 'Edellinen sivu',

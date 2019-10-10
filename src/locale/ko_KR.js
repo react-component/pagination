@@ -4,6 +4,8 @@ export default {
   jump_to: '이동하기',
   jump_to_confirm: '확인하다',
   page: '',
+  aria_page: '페이지',
+  aria_current_page: '현재 페이지',
 
   // Pagination.jsx
   prev_page: '이전 페이지',

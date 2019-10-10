@@ -4,6 +4,8 @@ export default {
   jump_to: 'Перейти',
   jump_to_confirm: 'подтвердить',
   page: '',
+  aria_page: 'Страница',
+  aria_current_page: 'Текущая страница',
 
   // Pagination.jsx
   prev_page: 'Назад',

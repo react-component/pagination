@@ -17,6 +17,18 @@
   user-select: none;
   padding: 0;
 
+  .visuallyHidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
   > li {
     list-style: none;
   }
@@ -55,6 +67,9 @@
     a {
       text-decoration: none;
       color: #666;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
 
     &:hover {

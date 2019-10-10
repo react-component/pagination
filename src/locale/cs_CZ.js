@@ -4,6 +4,8 @@ export default {
   jump_to: 'Přejít',
   jump_to_confirm: 'potvrdit',
   page: '',
+  aria_page: 'Stránka',
+  aria_current_page: 'Aktuální stránka',
 
   // Pagination.jsx
   prev_page: 'Předchozí strana',

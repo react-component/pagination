@@ -1,21 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 const Pager = (props) => {
   const prefixCls = `${props.rootPrefixCls}-item`;
-  let cls = `${prefixCls} ${prefixCls}-${props.page}`;
-
-  if (props.active) {
-    cls = `${cls} ${prefixCls}-active`;
-  }
-
-  if (props.className) {
-    cls = `${cls} ${props.className}`;
-  }
-
-  if (!props.page) {
-    cls = `${cls} ${prefixCls}-disabled`;
-  }
+  const cls = classNames(prefixCls, `${prefixCls}-${props.page}`, {
+    [`${prefixCls}-active`]: props.active,
+    [props.className]: !!props.className,
+    [`${prefixCls}-disabled`]: !props.page,
+  });
 
   const handleClick = () => {
     props.onClick(props.page);

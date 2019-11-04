@@ -426,7 +426,7 @@ class Pagination extends React.Component {
               onChange={this.handleKeyUp}
               size="3"
             />
-            <span className={`${prefixCls}-slash`}>／</span>
+            <span className={`${prefixCls}-slash`}>/</span>
             {allPages}
           </li>
           <li

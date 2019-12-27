@@ -45,9 +45,18 @@ class Options extends React.Component {
     });
   }
 
-  handleBlur = () => {
-    const { goButton, quickGo } = this.props;
+  handleBlur = (e) => {
+    const { goButton, quickGo, rootPrefixCls } = this.props;
     if (goButton) {
+      return;
+    }
+    if (
+      e.relatedTarget &&
+      (
+        e.relatedTarget.className.indexOf(`${rootPrefixCls}-prev`) >= 0 ||
+        e.relatedTarget.className.indexOf(`${rootPrefixCls}-next`) >= 0
+      )
+    ) {
       return;
     }
     quickGo(this.getValidValue());

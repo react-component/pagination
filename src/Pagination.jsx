@@ -48,6 +48,7 @@ class Pagination extends React.Component {
     showQuickJumper: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     showTitle: PropTypes.bool,
     pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
+    pageSizeBuildOptionText: PropTypes.func,
     showTotal: PropTypes.func,
     locale: PropTypes.object,
     style: PropTypes.object,
@@ -663,6 +664,7 @@ class Pagination extends React.Component {
           current={this.state.current}
           pageSize={this.state.pageSize}
           pageSizeOptions={this.props.pageSizeOptions}
+          buildOptionText={this.props.pageSizeBuildOptionText}
           quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
           goButton={goButton}
         />

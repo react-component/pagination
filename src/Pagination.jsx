@@ -98,6 +98,8 @@ class Pagination extends React.Component {
       pageSize = props.pageSize;
     }
 
+    current = Math.min(current, calculatePage(pageSize, undefined, props));
+
     this.state = {
       current,
       currentInputValue: current,
@@ -173,12 +175,15 @@ class Pagination extends React.Component {
 
   getValidValue(e) {
     const inputValue = e.target.value;
+    const allPages = calculatePage(undefined, this.state, this.props);
     const { currentInputValue } = this.state;
     let value;
     if (inputValue === '') {
       value = inputValue;
     } else if (isNaN(Number(inputValue))) {
       value = currentInputValue;
+    } else if (inputValue >= allPages) {
+      value = allPages;
     } else {
       value = Number(inputValue);
     }

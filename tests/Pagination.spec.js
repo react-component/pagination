@@ -669,6 +669,51 @@ describe('simple Pagination', () => {
   });
 });
 
+describe('simple Pagination when current is greater pages', () => {
+  let pagination = null;
+  const container = document.createElement('div');
+  document.body.appendChild(container);
+
+  beforeEach((done) => {
+    ReactDOM.render(
+      <Pagination
+        simple
+        defaultCurrent={100}
+        total={25}
+      />,
+      container,
+      function () {
+        pagination = this;
+        done();
+      },
+    );
+  });
+
+  afterEach(() => {
+    ReactDOM.unmountComponentAtNode(container);
+  });
+
+  it('default current page is 3', () => {
+    const current3 = pagination.state.current;
+    expect(current3).to.be(3);
+  });
+
+  it('input number is greater pages', (done) => {
+    const greaterCurrent = TestUtils.findRenderedDOMComponentWithClass(
+      pagination,
+      'rc-pagination-simple'
+    );
+    const input = greaterCurrent.querySelector('input');
+    input.value = '313423434343343452121';
+    Simulate.change(input);
+    setTimeout(() => {
+      expect(input.value).to.be('3');
+      expect(pagination.state.current).to.be(3);
+      done();
+    }, 10);
+  });
+});
+
 
 describe('simple Pagination with quick jump', () => {
   let pagination = null;

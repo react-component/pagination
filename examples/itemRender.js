@@ -1,6 +1,6 @@
 webpackJsonp([11],{
 
-/***/ 134:
+/***/ 133:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -38,22 +38,60 @@ var textItemRender = function textItemRender(current, type, element) {
   return element;
 };
 
+var buttonItemRender = function buttonItemRender(current, type, element) {
+  if (type === 'prev') {
+    return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+      'button',
+      null,
+      'Prev'
+    );
+  }
+  if (type === 'next') {
+    return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+      'button',
+      null,
+      'Next'
+    );
+  }
+  return element;
+};
+
+var divItemRender = function divItemRender(current, type, element) {
+  if (type === 'prev') {
+    return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+      'div',
+      null,
+      'Prev'
+    );
+  }
+  if (type === 'next') {
+    return __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
+      'div',
+      null,
+      'Next'
+    );
+  }
+  return element;
+};
+
 __WEBPACK_IMPORTED_MODULE_3_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(
   'div',
   null,
   __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_rc_pagination__["a" /* default */], { total: 100, itemRender: itemRender }),
-  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_rc_pagination__["a" /* default */], { total: 100, itemRender: textItemRender })
+  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_rc_pagination__["a" /* default */], { total: 100, itemRender: textItemRender }),
+  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_rc_pagination__["a" /* default */], { total: 100, itemRender: buttonItemRender }),
+  __WEBPACK_IMPORTED_MODULE_2_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_rc_pagination__["a" /* default */], { total: 100, itemRender: divItemRender })
 ), document.getElementById('__react-content'));
 
 /***/ }),
 
-/***/ 205:
+/***/ 204:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(134);
+module.exports = __webpack_require__(133);
 
 
 /***/ })
 
-},[205]);
+},[204]);
 //# sourceMappingURL=itemRender.js.map

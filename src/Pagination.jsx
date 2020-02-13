@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { cloneElement, isValidElement } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Pager from './Pager';
@@ -339,6 +339,20 @@ class Pagination extends React.Component {
     }
   }
 
+  renderPrev(prevPage) {
+    const { prevIcon, itemRender } = this.props;
+    const prevButton = itemRender(prevPage, 'prev', this.getItemIcon(prevIcon));
+    const disabled = !this.hasPrev();
+    return isValidElement(prevButton) ? cloneElement(prevButton, { disabled }) : prevButton;
+  }
+
+  renderNext(nextPage) {
+    const { nextIcon, itemRender } = this.props;
+    const nextButton = itemRender(nextPage, 'next', this.getItemIcon(nextIcon));
+    const disabled = !this.hasNext();
+    return isValidElement(nextButton) ? cloneElement(nextButton, { disabled }) : nextButton;
+  }
+
   render() {
     const { prefixCls, className, disabled } = this.props;
 
@@ -417,7 +431,7 @@ class Pagination extends React.Component {
             className={`${this.hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
             aria-disabled={!this.hasPrev()}
           >
-            {props.itemRender(prevPage, 'prev', this.getItemIcon(props.prevIcon))}
+            {this.renderPrev(prevPage)}
           </li>
           <li
             title={props.showTitle ? `${this.state.current}/${allPages}` : null}
@@ -442,7 +456,7 @@ class Pagination extends React.Component {
             className={`${this.hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this.hasNext()}
           >
-            {props.itemRender(nextPage, 'next', this.getItemIcon(props.nextIcon))}
+            {this.renderNext(nextPage)}
           </li>
           {gotoButton}
         </ul>
@@ -637,11 +651,7 @@ class Pagination extends React.Component {
           className={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
         >
-          {props.itemRender(
-            prevPage,
-            'prev',
-            this.getItemIcon(props.prevIcon)
-          )}
+          {this.renderPrev(prevPage)}
         </li>
         {pagerList}
         <li
@@ -652,11 +662,7 @@ class Pagination extends React.Component {
           className={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}
         >
-          {props.itemRender(
-            nextPage,
-            'next',
-            this.getItemIcon(props.nextIcon)
-          )}
+          {this.renderNext(nextPage)}
         </li>
         <Options
           disabled={disabled}

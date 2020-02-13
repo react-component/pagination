@@ -325,10 +325,10 @@ describe('Two Pagination', () => {
   });
 });
 
-describe('Other props', () => {
+describe('itemRender', () => {
   let pagination;
-  const currentPage = 12;
   const container = document.createElement('div');
+  const currentPage = 12;
   document.body.appendChild(container);
 
   const itemRender = (current) => {
@@ -380,6 +380,31 @@ describe('Other props', () => {
     expect(jumpPrev.innerHTML).to.be(`<a href="#${currentPage - 5}">${currentPage - 5}</a>`);
     expect(jumpNext.innerHTML).to.be(`<a href="#${currentPage + 5}">${currentPage + 5}</a>`);
     expect(active.innerHTML).to.be(`<a href="#${currentPage}">${currentPage}</a>`);
+  });
+
+  it('should support pass disabled to prev and next buttons', (done) => {
+    ReactDOM.unmountComponentAtNode(container);
+    ReactDOM.render(
+      <Pagination
+        total={1000}
+        current={1}
+        itemRender={itemRender}
+      />,
+      container,
+      function () {
+        const prev = TestUtils.findRenderedDOMComponentWithClass(
+          this,
+          'rc-pagination-prev'
+        );
+        const next = TestUtils.findRenderedDOMComponentWithClass(
+          this,
+          'rc-pagination-next'
+        );
+        expect(prev.innerHTML).to.be(`<a href="#0" disabled="">0</a>`);
+        expect(next.innerHTML).to.be(`<a href="#2">2</a>`);
+        done();
+      }
+    );
   });
 });
 

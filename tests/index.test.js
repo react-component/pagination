@@ -2,6 +2,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Pagination from '../src';
 
+const sleep = (timeout = 0) =>
+  new Promise(resolve => setTimeout(resolve, timeout));
+
 describe('Uncontrolled Pagination', () => {
   let wrapper;
   const onChange = jest.fn();
@@ -76,5 +79,65 @@ describe('Uncontrolled Pagination', () => {
     expect(wrapper.state().current).toBe(2);
     expect(onChange).toHaveBeenLastCalledWith(2, 10);
     shouldHighlightRight();
+  });
+
+  it('should response next page', () => {
+    const nextButton = wrapper.find('.rc-pagination-next');
+    nextButton.simulate('click');
+    expect(wrapper.state().current).toBe(2);
+    expect(onChange).toHaveBeenLastCalledWith(2, 10);
+    shouldHighlightRight();
+  });
+
+  it('should quick jump to expect page', () => {
+    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
+    const input = quickJumper.find('input');
+    const goButton = quickJumper.find('button');
+    input.simulate('change', { target: { value: '2' } });
+    goButton.simulate('click');
+    expect(wrapper.state().current).toBe(2);
+    expect(onChange).toHaveBeenLastCalledWith(2, 10);
+  });
+
+  // https://github.com/ant-design/ant-design/issues/17763
+  it('should not jump when blur input when there is goButton', () => {
+    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
+    const input = quickJumper.find('input');
+    input.simulate('focus');
+    input.simulate('change', { target: { value: '2' } });
+    input.simulate('blur');
+    expect(wrapper.state().current).toBe(1);
+    expect(onChange).not.toBeCalled();
+  });
+
+  // https://github.com/ant-design/ant-design/issues/17763
+  it('should not jump when blur input when there is not goButton', () => {
+    const component = mount(
+      <Pagination pageSize={10} total={20} showQuickJumper />,
+    );
+    const quickJumper = component.find('.rc-pagination-options-quick-jumper');
+    const input = quickJumper.find('input');
+    input.simulate('change', { target: { value: '2' } });
+    input.simulate('blur');
+    expect(component.state().current).toBe(2);
+  });
+
+  // https://github.com/ant-design/ant-design/issues/15539
+  it('should hide quick jumper when only one page', () => {
+    const component = mount(
+      <Pagination pageSize={10} total={10} showQuickJumper />,
+    );
+    const quickJumper = component.find('.rc-pagination-options-quick-jumper');
+    expect(quickJumper.length).toBe(0);
+  });
+
+  it('should display total items', () => {
+    const totalText = wrapper.find('.rc-pagination-total-text');
+    expect(totalText.text()).toBe('1 - 10 of 25 items');
+    const nextButton = wrapper.find('.rc-pagination-next');
+    nextButton.simulate('click');
+    expect(totalText.text()).toBe('11 - 20 of 25 items');
+    nextButton.simulate('click');
+    expect(totalText.text()).toBe('21 - 25 of 25 items');
   });
 });

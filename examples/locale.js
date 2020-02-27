@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'rc-select';
-import Pagination from 'rc-pagination';
+import Pagination from '..';
 import localeInfo from '../src/locale/en_US';
 import '../assets/index.less';
 import 'rc-select/assets/index.less';

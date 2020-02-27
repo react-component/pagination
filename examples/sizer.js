@@ -1,7 +1,7 @@
 /* eslint func-names: 0, no-console: 0 */
 import React from 'react';
 import Select from 'rc-select';
-import Pagination from 'rc-pagination';
+import Pagination from '..';
 import '../assets/index.less';
 import 'rc-select/assets/index.less';
 
@@ -9,10 +9,12 @@ class App extends React.Component {
   state = {
     pageSize: 20,
   };
+
   onShowSizeChange = (current, pageSize) => {
     console.log(current);
     this.setState({ pageSize });
   };
+
   render() {
     return (
       <div style={{ margin: 10 }}>

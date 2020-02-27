@@ -59,7 +59,7 @@
     "pre-commit": "1.x",
     "rc-select": "9.x",
     "rc-test": "^6.0.1",
-    "rc-tools": "6.x",
+    "rc-tools": "9.x",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   },

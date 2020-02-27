@@ -1,3 +1,8 @@
+2.0.0
+==================
+
+* Remove prop-types and react-lifecycles-compat
+
 1.20.0
 ==================
 

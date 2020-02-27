@@ -7,6 +7,7 @@ React Pagination Component.
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
+[![codecov](https://codecov.io/gh/react-component/pagination/branch/master/graph/badge.svg)](https://codecov.io/gh/react-component/pagination)
 [![Dependencies](https://img.shields.io/david/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination)
 [![DevDependencies](https://img.shields.io/david/dev/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination?type=dev)
 [![npm download][download-image]][download-url]

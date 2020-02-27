@@ -12,12 +12,14 @@
   ],
   "main": "./lib/index",
   "module": "./es/index",
+  "types": "rc-pagination.d.ts",
   "files": [
     "assets/*.css",
     "assets/*.less",
     "es",
     "lib",
-    "dist"
+    "dist",
+    "rc-pagination.d.ts"
   ],
   "homepage": "https://react-component.github.io/pagination",
   "repository": {

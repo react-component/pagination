@@ -325,18 +325,21 @@ class Pagination extends React.Component {
   }
 
   render() {
-    const { prefixCls, className, disabled } = this.props;
+    const {
+      prefixCls,
+      className,
+      disabled,
+      hideOnSinglePage,
+      total,
+      locale,
+    } = this.props;
 
     // When hideOnSinglePage is true and there is only 1 page, hide the pager
-    if (
-      this.props.hideOnSinglePage === true &&
-      this.props.total <= this.state.pageSize
-    ) {
+    if (hideOnSinglePage === true && total <= this.state.pageSize) {
       return null;
     }
 
     const { props } = this;
-    const { locale } = props;
 
     const allPages = calculatePage(undefined, this.state, this.props);
     const pagerList = [];

@@ -1,4 +1,4 @@
-import 'rc-select/assets/index.css';
+import 'rc-select/assets/index.less';
 import Pagination from '../../src';
 import React from 'react';
 import Select from 'rc-select';
@@ -11,7 +11,7 @@ class Hello extends React.Component {
     this.setState({
       pageSize: 50,
     });
-  }
+  };
   render() {
     return (
       <div style={{ margin: 10 }}>

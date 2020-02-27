@@ -1,19 +1,18 @@
 /* eslint func-names: 0, no-console: 0 */
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Select from 'rc-select';
 import Pagination from 'rc-pagination';
-import 'rc-pagination/assets/index.less';
-import 'rc-select/assets/index.css';
+import '../assets/index.less';
+import 'rc-select/assets/index.less';
 
-class Hello extends React.Component {
+class App extends React.Component {
   state = {
     pageSize: 20,
   };
   onShowSizeChange = (current, pageSize) => {
     console.log(current);
     this.setState({ pageSize });
-  }
+  };
   render() {
     return (
       <div style={{ margin: 10 }}>
@@ -38,4 +37,4 @@ class Hello extends React.Component {
   }
 }
 
-ReactDOM.render(<Hello />, document.getElementById('__react-content'));
+export default App;

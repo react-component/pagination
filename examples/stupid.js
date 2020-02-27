@@ -3,9 +3,6 @@
 import Pagination from 'rc-pagination';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'rc-pagination/assets/index.less';
+import '../assets/index.less';
 
-ReactDOM.render(
-  <Pagination simple defaultCurrent={1} total={50} />,
-  document.getElementById('__react-content')
-);
+export default () => <Pagination simple defaultCurrent={1} total={50} />;

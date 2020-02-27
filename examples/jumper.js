@@ -1,10 +1,9 @@
 /* eslint func-names: 0, no-console: 0 */
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Select from 'rc-select';
 import Pagination from 'rc-pagination';
-import 'rc-pagination/assets/index.less';
-import 'rc-select/assets/index.css';
+import '../assets/index.less';
+import 'rc-select/assets/index.less';
 
 function onShowSizeChange(current, pageSize) {
   console.log(current);
@@ -16,8 +15,8 @@ function onChange(current, pageSize) {
   console.log('onChange:pageSize=', pageSize);
 }
 
-ReactDOM.render(
-  <div>
+const App = () => (
+  <>
     <Pagination
       selectComponentClass={Select}
       showQuickJumper
@@ -40,5 +39,7 @@ ReactDOM.render(
       total={450}
       disabled
     />
-  </div>
-, document.getElementById('__react-content'));
+  </>
+);
+
+export default App;

@@ -3,9 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Select from 'rc-select';
 import Pagination from 'rc-pagination';
-import localeInfo from 'rc-pagination/lib/locale/en_US';
-import 'rc-pagination/assets/index.less';
-import 'rc-select/assets/index.css';
+import localeInfo from '../src/locale/en_US';
+import '../assets/index.less';
+import 'rc-select/assets/index.less';
 
 function onShowSizeChange(current, pageSize) {
   console.log(current);
@@ -17,7 +17,7 @@ function onChange(current, pageSize) {
   console.log('onChange:pageSize=', pageSize);
 }
 
-ReactDOM.render(
+const App = () => (
   <Pagination
     selectComponentClass={Select}
     showQuickJumper
@@ -29,4 +29,6 @@ ReactDOM.render(
     total={450}
     locale={localeInfo}
   />
-, document.getElementById('__react-content'));
+);
+
+export default App;

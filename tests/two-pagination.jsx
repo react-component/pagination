@@ -1,21 +1,23 @@
 import 'rc-select/assets/index.less';
-import Pagination from '../../src';
 import React from 'react';
 import Select from 'rc-select';
+import Pagination from '../src';
 
 class Hello extends React.Component {
   state = {
     pageSize: 20,
   };
+
   changeSize = () => {
     this.setState({
       pageSize: 50,
     });
   };
+
   render() {
     return (
-      <div style={{ margin: 10 }}>
-        <button className="hook" onClick={this.changeSize}>
+      <>
+        <button type="button" className="hook" onClick={this.changeSize}>
           ChaneSize
         </button>
         <Pagination
@@ -36,7 +38,7 @@ class Hello extends React.Component {
           defaultCurrent={3}
           total={500}
         />
-      </div>
+      </>
     );
   }
 }

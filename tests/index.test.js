@@ -2,9 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Pagination from '../src';
 
-const sleep = (timeout = 0) =>
-  new Promise(resolve => setTimeout(resolve, timeout));
-
 describe('Uncontrolled Pagination', () => {
   let wrapper;
   const onChange = jest.fn();
@@ -139,5 +136,30 @@ describe('Uncontrolled Pagination', () => {
     expect(totalText.text()).toBe('11 - 20 of 25 items');
     nextButton.simulate('click');
     expect(totalText.text()).toBe('21 - 25 of 25 items');
+  });
+});
+
+describe('Controlled Pagination', () => {
+  let wrapper;
+  const onChange = jest.fn();
+
+  beforeEach(() => {
+    wrapper = mount(<Pagination current={2} onChange={onChange} total={25} />);
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
+    onChange.mockReset();
+  });
+
+  it('current should equal defaultCurrent', () => {
+    expect(wrapper.state().current).toBe(2);
+  });
+
+  it('should not response mouse click', () => {
+    const nextButton = wrapper.find('.rc-pagination-next');
+    nextButton.simulate('click');
+    expect(wrapper.state().current).toBe(2);
+    expect(onChange).toHaveBeenLastCalledWith(3, 10);
   });
 });

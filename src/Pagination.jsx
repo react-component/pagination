@@ -1,11 +1,10 @@
+/* eslint react/prop-types: 0 */
 import React, { cloneElement, isValidElement } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 import Pager from './Pager';
 import Options from './Options';
 import KEYCODE from './KeyCode';
 import LOCALE from './locale/zh_CN';
-import { polyfill } from 'react-lifecycles-compat';
 
 function noop() {
 }
@@ -29,35 +28,6 @@ function calculatePage(p, state, props) {
 }
 
 class Pagination extends React.Component {
-  static propTypes = {
-    disabled: PropTypes.bool,
-    prefixCls: PropTypes.string,
-    className: PropTypes.string,
-    current: PropTypes.number,
-    defaultCurrent: PropTypes.number,
-    total: PropTypes.number,
-    pageSize: PropTypes.number,
-    defaultPageSize: PropTypes.number,
-    onChange: PropTypes.func,
-    hideOnSinglePage: PropTypes.bool,
-    showSizeChanger: PropTypes.bool,
-    showLessItems: PropTypes.bool,
-    onShowSizeChange: PropTypes.func,
-    selectComponentClass: PropTypes.func,
-    showPrevNextJumpers: PropTypes.bool,
-    showQuickJumper: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-    showTitle: PropTypes.bool,
-    pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
-    showTotal: PropTypes.func,
-    locale: PropTypes.object,
-    style: PropTypes.object,
-    itemRender: PropTypes.func,
-    prevIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    nextIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    jumpPrevIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    jumpNextIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  };
-
   static defaultProps = {
     defaultCurrent: 1,
     total: 0,
@@ -681,7 +651,5 @@ class Pagination extends React.Component {
     );
   }
 }
-
-polyfill(Pagination);
 
 export default Pagination;

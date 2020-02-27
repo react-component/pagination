@@ -10,6 +10,7 @@ function noop() {}
 
 function isInteger(value) {
   return (
+    // eslint-disable-next-line no-restricted-globals
     typeof value === 'number' && isFinite(value) && Math.floor(value) === value
   );
 }
@@ -19,10 +20,7 @@ function defaultItemRender(page, type, element) {
 }
 
 function calculatePage(p, state, props) {
-  let pageSize = p;
-  if (typeof pageSize === 'undefined') {
-    pageSize = state.pageSize;
-  }
+  const pageSize = typeof p === 'undefined' ? state.pageSize : p;
   return Math.floor((props.total - 1) / pageSize) + 1;
 }
 
@@ -54,18 +52,21 @@ class Pagination extends React.Component {
     const hasOnChange = props.onChange !== noop;
     const hasCurrent = 'current' in props;
     if (hasCurrent && !hasOnChange) {
+      // eslint-disable-next-line no-console
       console.warn(
         'Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.',
-      ); // eslint-disable-line
+      );
     }
 
     let current = props.defaultCurrent;
     if ('current' in props) {
+      // eslint-disable-next-line prefer-destructuring
       current = props.current;
     }
 
     let pageSize = props.defaultPageSize;
     if ('pageSize' in props) {
+      // eslint-disable-next-line prefer-destructuring
       pageSize = props.pageSize;
     }
 
@@ -134,6 +135,7 @@ class Pagination extends React.Component {
    */
   getItemIcon = icon => {
     const { prefixCls } = this.props;
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
     let iconNode = icon || <a className={`${prefixCls}-item-link`} />;
     if (typeof icon === 'function') {
       iconNode = React.createElement(icon, { ...this.props });
@@ -148,6 +150,7 @@ class Pagination extends React.Component {
     let value;
     if (inputValue === '') {
       value = inputValue;
+      // eslint-disable-next-line no-restricted-globals
     } else if (isNaN(Number(inputValue))) {
       value = currentInputValue;
     } else if (inputValue >= allPages) {
@@ -202,6 +205,7 @@ class Pagination extends React.Component {
     // fix the issue:
     // Once 'total' is 0, 'current' in 'onShowSizeChange' is 0, which is not correct.
     if (newCurrent === 0) {
+      // eslint-disable-next-line prefer-destructuring
       current = this.state.current;
     }
 
@@ -355,6 +359,7 @@ class Pagination extends React.Component {
         key.substr(0, 5) === 'aria-' ||
         key === 'role'
       ) {
+        // eslint-disable-next-line no-param-reassign
         prev[key] = props[key];
       }
       return prev;
@@ -463,7 +468,7 @@ class Pagination extends React.Component {
           />,
         );
       }
-      for (let i = 1; i <= allPages; i++) {
+      for (let i = 1; i <= allPages; i += 1) {
         const active = this.state.current === i;
         pagerList.push(
           <Pager {...pagerProps} key={i} page={i} active={active} />,
@@ -553,7 +558,7 @@ class Pagination extends React.Component {
         left = allPages - pageBufferSize * 2;
       }
 
-      for (let i = left; i <= right; i++) {
+      for (let i = left; i <= right; i += 1) {
         const active = current === i;
         pagerList.push(
           <Pager

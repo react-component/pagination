@@ -110,4 +110,40 @@ describe('simple quick jumper', () => {
       expect(onChange).toHaveBeenLastCalledWith(2, 10);
     });
   });
+
+  it('goButton could be true', () => {
+    wrapper = mount(
+      <Pagination
+        onChange={onChange}
+        defaultCurrent={10}
+        total={1000}
+        showQuickJumper={{ goButton: true }}
+      />,
+    );
+    expect(wrapper.find('button').exists()).toBe(true);
+  });
+
+  it('goButton defaultly hidden', () => {
+    wrapper = mount(
+      <Pagination
+        onChange={onChange}
+        defaultCurrent={10}
+        total={1000}
+        showQuickJumper
+      />,
+    );
+    expect(wrapper.find('button').exists()).toBe(false);
+  });
+
+  it('goButton could be false', () => {
+    wrapper = mount(
+      <Pagination
+        onChange={onChange}
+        defaultCurrent={10}
+        total={1000}
+        showQuickJumper={{ goButton: false }}
+      />,
+    );
+    expect(wrapper.find('button').exists()).toBe(false);
+  });
 });

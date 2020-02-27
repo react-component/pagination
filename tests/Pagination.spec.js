@@ -22,8 +22,12 @@ describe('Uncontrolled Pagination', () => {
   }
 
   function shouldHighlightRight() {
-    const pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li')
-      .filter(pager => pager.className.indexOf('rc-pagination-total-text') === -1);
+    const pagers = TestUtils.scryRenderedDOMComponentsWithTag(
+      pagination,
+      'li',
+    ).filter(
+      pager => pager.className.indexOf('rc-pagination-total-text') === -1,
+    );
     const current2 = pagination.state.current;
     pagers.forEach((pager, index) => {
       // page starts from 1
@@ -35,17 +39,19 @@ describe('Uncontrolled Pagination', () => {
     });
   }
 
-  beforeEach((done) => {
+  beforeEach(done => {
     ReactDOM.render(
       <Pagination
         onChange={onChange}
         defaultCurrent={1}
         total={25}
         showQuickJumper={{ goButton: true }}
-        showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
+        showTotal={(total, range) =>
+          `${range[0]} - ${range[1]} of ${total} items`
+        }
       />,
       container,
-      function () {
+      function() {
         pagination = this;
         done();
       },
@@ -65,18 +71,23 @@ describe('Uncontrolled Pagination', () => {
   it('prev-button should be disabled', () => {
     const prevButton = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-prev'
+      'rc-pagination-prev',
     );
     expect(TestUtils.isDOMComponent(prevButton)).to.be(true);
     expect(prevButton.className).to.contain('rc-pagination-disabled');
     expect(prevButton.getAttribute('aria-disabled')).to.equal('true');
   });
 
-  it('should hightlight current page and not highlight other page', shouldHighlightRight);
+  it(
+    'should hightlight current page and not highlight other page',
+    shouldHighlightRight,
+  );
 
   it('should calc page right', () => {
     const pagers = TestUtils.scryRenderedDOMComponentsWithTag(pagination, 'li')
-      .filter(pager => pager.className.indexOf('rc-pagination-total-text') === -1)
+      .filter(
+        pager => pager.className.indexOf('rc-pagination-total-text') === -1,
+      )
       .filter(pager => pager.className.indexOf('rc-pagination-options') === -1);
     const knownPageCount = 3;
     const buttonLength = 2;
@@ -86,7 +97,7 @@ describe('Uncontrolled Pagination', () => {
   it('next button should not be disabled', () => {
     const nextButton = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-next'
+      'rc-pagination-next',
     );
 
     expect(TestUtils.isDOMComponent(nextButton)).to.be(true);
@@ -94,8 +105,11 @@ describe('Uncontrolled Pagination', () => {
     expect(nextButton.getAttribute('aria-disabled')).to.equal('false');
   });
 
-  it('should response mouse click right', (done) => {
-    const pagers = TestUtils.scryRenderedDOMComponentsWithClass(pagination, 'rc-pagination-item');
+  it('should response mouse click right', done => {
+    const pagers = TestUtils.scryRenderedDOMComponentsWithClass(
+      pagination,
+      'rc-pagination-item',
+    );
     expect(pagers.length).to.be(3);
     const page2 = pagers[1];
     expect(TestUtils.isDOMComponent(page2)).to.be(true);
@@ -111,10 +125,10 @@ describe('Uncontrolled Pagination', () => {
     }, 10);
   });
 
-  it('should response next page', (done) => {
+  it('should response next page', done => {
     const nextButton = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-next'
+      'rc-pagination-next',
     );
     expect(TestUtils.isDOMComponent(nextButton)).to.be(true);
     Simulate.click(nextButton);
@@ -126,10 +140,10 @@ describe('Uncontrolled Pagination', () => {
     }, 10);
   });
 
-  it('should quick jump to expect page', (done) => {
+  it('should quick jump to expect page', done => {
     const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-options-quick-jumper'
+      'rc-pagination-options-quick-jumper',
     );
     const input = quickJumper.querySelector('input');
     const goButton = quickJumper.querySelector('button');
@@ -149,10 +163,10 @@ describe('Uncontrolled Pagination', () => {
   });
 
   // https://github.com/ant-design/ant-design/issues/17763
-  it('should not jump when blur input when there is goButton', (done) => {
+  it('should not jump when blur input when there is goButton', done => {
     const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-options-quick-jumper'
+      'rc-pagination-options-quick-jumper',
     );
     const input = quickJumper.querySelector('input');
     Simulate.change(input, { target: { value: '2' } });
@@ -167,13 +181,14 @@ describe('Uncontrolled Pagination', () => {
   });
 
   // https://github.com/ant-design/ant-design/issues/17763
-  it('should not jump when blur input when there is not goButton', (done) => {
+  it('should not jump when blur input when there is not goButton', done => {
     ReactDOM.render(
       <Pagination pageSize={10} total={20} showQuickJumper />,
       container,
-      function () {
+      function() {
         const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
-          this, 'rc-pagination-options-quick-jumper',
+          this,
+          'rc-pagination-options-quick-jumper',
         );
         const input = quickJumper.querySelector('input');
         Simulate.change(input, { target: { value: '2' } });
@@ -189,29 +204,32 @@ describe('Uncontrolled Pagination', () => {
   });
 
   // https://github.com/ant-design/ant-design/issues/15539
-  it('should hide quick jumper when only one page', (done) => {
+  it('should hide quick jumper when only one page', done => {
     ReactDOM.render(
       <Pagination pageSize={10} total={10} showQuickJumper />,
       container,
-      function () {
+      function() {
         expect(() => {
-          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination-options-quick-jumper');
+          TestUtils.findRenderedDOMComponentWithClass(
+            this,
+            'rc-pagination-options-quick-jumper',
+          );
         }).to.throwException(/Did not find exactly one match/);
         done();
       },
     );
   });
 
-  it('should display total items', (done) => {
+  it('should display total items', done => {
     const totalText = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-total-text'
+      'rc-pagination-total-text',
     );
     expect(TestUtils.isDOMComponent(totalText)).to.be(true);
     expect(totalText.innerHTML).to.be('1 - 10 of 25 items');
     const nextButton = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-next'
+      'rc-pagination-next',
     );
     Simulate.click(nextButton);
     setTimeout(() => {
@@ -237,14 +255,14 @@ describe('Controlled Pagination', () => {
     pageSize = pSize;
   }
 
-  beforeEach((done) => {
+  beforeEach(done => {
     ReactDOM.render(
       <Pagination current={current} onChange={onChange} total={25} />,
       container,
-      function () {
+      function() {
         pagination = this;
         done();
-      }
+      },
     );
   });
 
@@ -252,7 +270,7 @@ describe('Controlled Pagination', () => {
     ReactDOM.unmountComponentAtNode(container);
   });
 
-  it('not replace currentInputValue if current not change', (done) => {
+  it('not replace currentInputValue if current not change', done => {
     pagination.state.current = 1;
     pagination.state.currentInputValue = 1;
     pagination.forceUpdate();
@@ -273,10 +291,10 @@ describe('Controlled Pagination', () => {
     expect(pagination.state.current).to.be(2);
   });
 
-  it('should not response mouse click', (done) => {
+  it('should not response mouse click', done => {
     const nextButton = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-next'
+      'rc-pagination-next',
     );
     expect(TestUtils.isDOMComponent(nextButton)).to.be(true);
     Simulate.click(nextButton);
@@ -294,8 +312,8 @@ describe('Two Pagination', () => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
-  beforeEach((done) => {
-    ReactDOM.render(<TwoPagination />, container, function () {
+  beforeEach(done => {
+    ReactDOM.render(<TwoPagination />, container, function() {
       entry = this;
       done();
     });
@@ -312,7 +330,7 @@ describe('Two Pagination', () => {
     expect(p2.state.pageSize).to.be(20);
   });
 
-  it('should sync pageSize via state', (done) => {
+  it('should sync pageSize via state', done => {
     const p1 = TestUtils.scryRenderedComponentsWithType(entry, Pagination)[0];
     const p2 = TestUtils.scryRenderedComponentsWithType(entry, Pagination)[1];
     const hook = TestUtils.scryRenderedDOMComponentsWithClass(entry, 'hook')[0];
@@ -331,22 +349,18 @@ describe('itemRender', () => {
   const currentPage = 12;
   document.body.appendChild(container);
 
-  const itemRender = (current) => {
+  const itemRender = current => {
     return <a href={`#${current}`}>{current}</a>;
   };
 
-  beforeEach((done) => {
+  beforeEach(done => {
     ReactDOM.render(
-      <Pagination
-        total={1000}
-        current={currentPage}
-        itemRender={itemRender}
-      />,
+      <Pagination total={1000} current={currentPage} itemRender={itemRender} />,
       container,
-      function () {
+      function() {
         pagination = this;
         done();
-      }
+      },
     );
   });
 
@@ -357,53 +371,59 @@ describe('itemRender', () => {
   it('should support custom itemRender', () => {
     const prev = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-prev'
+      'rc-pagination-prev',
     );
     const next = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-next'
+      'rc-pagination-next',
     );
     const jumpPrev = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-jump-prev'
+      'rc-pagination-jump-prev',
     );
     const jumpNext = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-jump-next'
+      'rc-pagination-jump-next',
     );
     const active = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-item-active'
+      'rc-pagination-item-active',
     );
-    expect(prev.innerHTML).to.be(`<a href="#${currentPage - 1}">${currentPage - 1}</a>`);
-    expect(next.innerHTML).to.be(`<a href="#${currentPage + 1}">${currentPage + 1}</a>`);
-    expect(jumpPrev.innerHTML).to.be(`<a href="#${currentPage - 5}">${currentPage - 5}</a>`);
-    expect(jumpNext.innerHTML).to.be(`<a href="#${currentPage + 5}">${currentPage + 5}</a>`);
-    expect(active.innerHTML).to.be(`<a href="#${currentPage}">${currentPage}</a>`);
+    expect(prev.innerHTML).to.be(
+      `<a href="#${currentPage - 1}">${currentPage - 1}</a>`,
+    );
+    expect(next.innerHTML).to.be(
+      `<a href="#${currentPage + 1}">${currentPage + 1}</a>`,
+    );
+    expect(jumpPrev.innerHTML).to.be(
+      `<a href="#${currentPage - 5}">${currentPage - 5}</a>`,
+    );
+    expect(jumpNext.innerHTML).to.be(
+      `<a href="#${currentPage + 5}">${currentPage + 5}</a>`,
+    );
+    expect(active.innerHTML).to.be(
+      `<a href="#${currentPage}">${currentPage}</a>`,
+    );
   });
 
-  it('should support pass disabled to prev and next buttons', (done) => {
+  it('should support pass disabled to prev and next buttons', done => {
     ReactDOM.unmountComponentAtNode(container);
     ReactDOM.render(
-      <Pagination
-        total={1000}
-        current={1}
-        itemRender={itemRender}
-      />,
+      <Pagination total={1000} current={1} itemRender={itemRender} />,
       container,
-      function () {
+      function() {
         const prev = TestUtils.findRenderedDOMComponentWithClass(
           this,
-          'rc-pagination-prev'
+          'rc-pagination-prev',
         );
         const next = TestUtils.findRenderedDOMComponentWithClass(
           this,
-          'rc-pagination-next'
+          'rc-pagination-next',
         );
         expect(prev.innerHTML).to.be(`<a href="#0" disabled="">0</a>`);
         expect(next.innerHTML).to.be(`<a href="#2">2</a>`);
         done();
-      }
+      },
     );
   });
 });
@@ -423,18 +443,14 @@ describe('Other props', () => {
     jumpPrevIcon,
     jumpNextIcon,
   };
-  beforeEach((done) => {
+  beforeEach(done => {
     ReactDOM.render(
-      <Pagination
-        total={1000}
-        current={currentPage}
-        {...iconsProps}
-      />,
+      <Pagination total={1000} current={currentPage} {...iconsProps} />,
       container,
-      function () {
+      function() {
         pagination = this;
         done();
-      }
+      },
     );
   });
 
@@ -445,19 +461,19 @@ describe('Other props', () => {
   it('should support custom default icon', () => {
     const nextIconElement = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-next'
+      'rc-pagination-next',
     );
     const prevIconElement = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-prev'
+      'rc-pagination-prev',
     );
     const jumpNextIconElement = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-jump-next'
+      'rc-pagination-jump-next',
     );
     const jumpPrevIconElement = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-jump-prev'
+      'rc-pagination-jump-prev',
     );
     expect(nextIconElement.innerText).to.be('nextIcon');
     expect(prevIconElement.innerText).to.be('prevIcon');
@@ -470,7 +486,7 @@ describe('hideOnSinglePage props', () => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
-  const itemRender = (current) => {
+  const itemRender = current => {
     return <a href={`#${current}`}>{current}</a>;
   };
 
@@ -478,42 +494,51 @@ describe('hideOnSinglePage props', () => {
     ReactDOM.unmountComponentAtNode(container);
   });
 
-  it('should hide pager if hideOnSinglePage equals true', (done) => {
+  it('should hide pager if hideOnSinglePage equals true', done => {
     ReactDOM.render(
       <Pagination total={10} itemRender={itemRender} hideOnSinglePage />,
       container,
-      function () {
+      function() {
         expect(() => {
           TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination');
         }).to.throwException(/Did not find exactly one match/);
         done();
-      }
+      },
     );
   });
 
-  it('should show pager if hideOnSinglePage equals false', (done) => {
+  it('should show pager if hideOnSinglePage equals false', done => {
     ReactDOM.render(
-      <Pagination total={10} itemRender={itemRender} hideOnSinglePage={false} />,
+      <Pagination
+        total={10}
+        itemRender={itemRender}
+        hideOnSinglePage={false}
+      />,
       container,
-      function () {
+      function() {
         expect(() => {
           TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination');
         }).to.not.throwException();
         done();
-      }
+      },
     );
   });
 
-  it('should show pager if hideOnSinglePage equals true but more than 1 page', (done) => {
+  it('should show pager if hideOnSinglePage equals true but more than 1 page', done => {
     ReactDOM.render(
-      <Pagination total={10} pageSize={5} itemRender={itemRender} hideOnSinglePage={false} />,
+      <Pagination
+        total={10}
+        pageSize={5}
+        itemRender={itemRender}
+        hideOnSinglePage={false}
+      />,
       container,
-      function () {
+      function() {
         expect(() => {
           TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination');
         }).to.not.throwException();
         done();
-      }
+      },
     );
   });
 });
@@ -527,39 +552,49 @@ describe('showPrevNextJumpers props', () => {
     ReactDOM.unmountComponentAtNode(container);
   });
 
-  it('should hide jump-prev, jump-next if showPrevNextJumpers equals false', (done) => {
+  it('should hide jump-prev, jump-next if showPrevNextJumpers equals false', done => {
     ReactDOM.render(
-      <Pagination total={1000} current={currentPage} showPrevNextJumpers={false} />,
+      <Pagination
+        total={1000}
+        current={currentPage}
+        showPrevNextJumpers={false}
+      />,
       container,
-      function () {
+      function() {
         expect(() => {
-          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination-jump-prev');
+          TestUtils.findRenderedDOMComponentWithClass(
+            this,
+            'rc-pagination-jump-prev',
+          );
         }).to.throwException(/Did not find exactly one match/);
         expect(() => {
-          TestUtils.findRenderedDOMComponentWithClass(this, 'rc-pagination-jump-next');
+          TestUtils.findRenderedDOMComponentWithClass(
+            this,
+            'rc-pagination-jump-next',
+          );
         }).to.throwException(/Did not find exactly one match/);
         done();
-      }
+      },
     );
   });
 
-  it('should show jump-prev, jump-next if showPrevNextJumpers equals true', (done) => {
+  it('should show jump-prev, jump-next if showPrevNextJumpers equals true', done => {
     ReactDOM.render(
       <Pagination total={1000} current={currentPage} showPrevNextJumpers />,
       container,
-      function () {
+      function() {
         const jumpPrev = TestUtils.findRenderedDOMComponentWithClass(
           this,
-          'rc-pagination-jump-prev'
+          'rc-pagination-jump-prev',
         );
         const jumpNext = TestUtils.findRenderedDOMComponentWithClass(
           this,
-          'rc-pagination-jump-next'
+          'rc-pagination-jump-next',
         );
         expect(TestUtils.isDOMComponent(jumpPrev)).to.be(true);
         expect(TestUtils.isDOMComponent(jumpNext)).to.be(true);
         done();
-      }
+      },
     );
   });
 });
@@ -576,17 +611,19 @@ describe('custom showQuickJumper button Pagination', () => {
     pageSize = pSize;
   }
 
-  beforeEach((done) => {
+  beforeEach(done => {
     ReactDOM.render(
       <Pagination
         onChange={onChange}
         defaultCurrent={1}
         total={25}
         showQuickJumper={{ goButton: <button>go</button> }}
-        showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
+        showTotal={(total, range) =>
+          `${range[0]} - ${range[1]} of ${total} items`
+        }
       />,
       container,
-      function () {
+      function() {
         pagination = this;
         done();
       },
@@ -597,10 +634,10 @@ describe('custom showQuickJumper button Pagination', () => {
     ReactDOM.unmountComponentAtNode(container);
   });
 
-  it('should quick jump to expect page', (done) => {
+  it('should quick jump to expect page', done => {
     const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-options-quick-jumper'
+      'rc-pagination-options-quick-jumper',
     );
     const input = quickJumper.querySelector('input');
     const goButton = quickJumper.querySelector('button');
@@ -621,14 +658,14 @@ describe('custom showQuickJumper button Pagination', () => {
   });
 
   // https://github.com/ant-design/ant-design/issues/10080
-  it('should not quick jump to previous page when input invalid char', (done) => {
+  it('should not quick jump to previous page when input invalid char', done => {
     const pager = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination'
+      'rc-pagination',
     );
     const nextButton = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-next'
+      'rc-pagination-next',
     );
     Simulate.click(nextButton);
     const input = pager.querySelector('input');
@@ -644,22 +681,23 @@ describe('custom showQuickJumper button Pagination', () => {
   });
 });
 
-
 describe('simple Pagination', () => {
   let pagination = null;
   const container = document.createElement('div');
   document.body.appendChild(container);
 
-  beforeEach((done) => {
+  beforeEach(done => {
     ReactDOM.render(
       <Pagination
         simple
         defaultCurrent={1}
         total={25}
-        showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
+        showTotal={(total, range) =>
+          `${range[0]} - ${range[1]} of ${total} items`
+        }
       />,
       container,
-      function () {
+      function() {
         pagination = this;
         done();
       },
@@ -678,7 +716,7 @@ describe('simple Pagination', () => {
   it('prev-button should be disabled', () => {
     const prevButton = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-prev'
+      'rc-pagination-prev',
     );
     expect(TestUtils.isDOMComponent(prevButton)).to.be(true);
     expect(prevButton.className).to.contain('rc-pagination-disabled');
@@ -688,7 +726,7 @@ describe('simple Pagination', () => {
   it('no quick jump', () => {
     const simplePagers = TestUtils.scryRenderedDOMComponentsWithClass(
       pagination,
-      'rc-pagination-simple-pager'
+      'rc-pagination-simple-pager',
     );
     expect(simplePagers.length).to.be(1);
   });
@@ -699,15 +737,11 @@ describe('simple Pagination when current is greater pages', () => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
-  beforeEach((done) => {
+  beforeEach(done => {
     ReactDOM.render(
-      <Pagination
-        simple
-        defaultCurrent={100}
-        total={25}
-      />,
+      <Pagination simple defaultCurrent={100} total={25} />,
       container,
-      function () {
+      function() {
         pagination = this;
         done();
       },
@@ -723,10 +757,10 @@ describe('simple Pagination when current is greater pages', () => {
     expect(current3).to.be(3);
   });
 
-  it('input number is greater pages', (done) => {
+  it('input number is greater pages', done => {
     const greaterCurrent = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-simple'
+      'rc-pagination-simple',
     );
     const input = greaterCurrent.querySelector('input');
     input.value = '313423434343343452121';
@@ -738,7 +772,6 @@ describe('simple Pagination when current is greater pages', () => {
     }, 10);
   });
 });
-
 
 describe('simple Pagination with quick jump', () => {
   let pagination = null;
@@ -752,7 +785,7 @@ describe('simple Pagination with quick jump', () => {
     pageSize = pSize;
   }
 
-  beforeEach((done) => {
+  beforeEach(done => {
     ReactDOM.render(
       <Pagination
         simple
@@ -760,10 +793,12 @@ describe('simple Pagination with quick jump', () => {
         defaultCurrent={1}
         total={25}
         showQuickJumper={{ goButton: <button>go</button> }}
-        showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
+        showTotal={(total, range) =>
+          `${range[0]} - ${range[1]} of ${total} items`
+        }
       />,
       container,
-      function () {
+      function() {
         pagination = this;
         done();
       },
@@ -774,10 +809,10 @@ describe('simple Pagination with quick jump', () => {
     ReactDOM.unmountComponentAtNode(container);
   });
 
-  it('should quick jump to expect page', (done) => {
+  it('should quick jump to expect page', done => {
     const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-simple'
+      'rc-pagination-simple',
     );
     const input = quickJumper.querySelector('input');
     const goButton = quickJumper.querySelector('button');
@@ -805,11 +840,11 @@ describe('current value on onShowSizeChange when total is 0', () => {
   const container = document.createElement('div');
   document.body.appendChild(container);
 
-  const onShowSizeChange = (current) => {
+  const onShowSizeChange = current => {
     changeCurrent = current;
   };
 
-  beforeEach((done) => {
+  beforeEach(done => {
     ReactDOM.render(
       <Pagination
         selectComponentClass={Select}
@@ -817,10 +852,12 @@ describe('current value on onShowSizeChange when total is 0', () => {
         onShowSizeChange={onShowSizeChange}
         current={1}
         total={0}
-        showTotal={(total, range) => `${range[0]} - ${range[1]} of ${total} items`}
+        showTotal={(total, range) =>
+          `${range[0]} - ${range[1]} of ${total} items`
+        }
       />,
       container,
-      function () {
+      function() {
         pagination = this;
         done();
       },
@@ -831,10 +868,10 @@ describe('current value on onShowSizeChange when total is 0', () => {
     ReactDOM.unmountComponentAtNode(container);
   });
 
-  it('current should equal to the current in onShowSizeChange', (done) => {
+  it('current should equal to the current in onShowSizeChange', done => {
     const sizeChanger = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-options-size-changer'
+      'rc-pagination-options-size-changer',
     );
     Simulate.click(sizeChanger);
     setTimeout(() => {
@@ -852,7 +889,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
   it('when total is 0, pager should show and disabled', () => {
     const itemButton = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-item'
+      'rc-pagination-item',
     );
     expect(TestUtils.isDOMComponent(itemButton)).to.be(true);
     expect(itemButton.className).to.contain('rc-pagination-item-disabled');
@@ -861,7 +898,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
   it('when total is 0, `from` and `to` should be 0', () => {
     const totalText = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-total-text'
+      'rc-pagination-total-text',
     );
     expect(TestUtils.isDOMComponent(totalText)).to.be(true);
     expect(totalText.innerHTML).to.be('0 - 0 of 0 items');
@@ -874,7 +911,7 @@ describe('data and aria props', () => {
   document.body.appendChild(container);
 
   describe('with simple prop', () => {
-    beforeEach((done) => {
+    beforeEach(done => {
       ReactDOM.render(
         <Pagination
           simple
@@ -885,7 +922,7 @@ describe('data and aria props', () => {
           role="navigation"
         />,
         container,
-        function () {
+        function() {
           pagination = this;
           done();
         },
@@ -897,22 +934,30 @@ describe('data and aria props', () => {
     });
 
     it('renders data attributes', () => {
-      expect(pagination.paginationNode.getAttribute('data-test')).to.be('test-id');
+      expect(pagination.paginationNode.getAttribute('data-test')).to.be(
+        'test-id',
+      );
       expect(pagination.paginationNode.getAttribute('data-id')).to.be('12345');
     });
 
     it('renders aria attributes', () => {
-      expect(pagination.paginationNode.getAttribute('aria-labelledby')).to.be('labelledby-id');
-      expect(pagination.paginationNode.getAttribute('aria-label')).to.be('label-id');
+      expect(pagination.paginationNode.getAttribute('aria-labelledby')).to.be(
+        'labelledby-id',
+      );
+      expect(pagination.paginationNode.getAttribute('aria-label')).to.be(
+        'label-id',
+      );
     });
 
     it('renders role attribute', () => {
-      expect(pagination.paginationNode.getAttribute('role')).to.be('navigation');
+      expect(pagination.paginationNode.getAttribute('role')).to.be(
+        'navigation',
+      );
     });
   });
 
   describe('without simple prop', () => {
-    beforeEach((done) => {
+    beforeEach(done => {
       ReactDOM.render(
         <Pagination
           data-test="test-id"
@@ -922,7 +967,7 @@ describe('data and aria props', () => {
           role="navigation"
         />,
         container,
-        function () {
+        function() {
           pagination = this;
           done();
         },
@@ -934,17 +979,25 @@ describe('data and aria props', () => {
     });
 
     it('renders data attributes', () => {
-      expect(pagination.paginationNode.getAttribute('data-test')).to.be('test-id');
+      expect(pagination.paginationNode.getAttribute('data-test')).to.be(
+        'test-id',
+      );
       expect(pagination.paginationNode.getAttribute('data-id')).to.be('12345');
     });
 
     it('renders aria attributes', () => {
-      expect(pagination.paginationNode.getAttribute('aria-labelledby')).to.be('labelledby-id');
-      expect(pagination.paginationNode.getAttribute('aria-label')).to.be('label-id');
+      expect(pagination.paginationNode.getAttribute('aria-labelledby')).to.be(
+        'labelledby-id',
+      );
+      expect(pagination.paginationNode.getAttribute('aria-label')).to.be(
+        'label-id',
+      );
     });
 
     it('renders role attribute', () => {
-      expect(pagination.paginationNode.getAttribute('role')).to.be('navigation');
+      expect(pagination.paginationNode.getAttribute('role')).to.be(
+        'navigation',
+      );
     });
   });
 });
@@ -957,7 +1010,7 @@ describe('disabled', () => {
     ReactDOM.unmountComponentAtNode(container);
   });
 
-  it('full pagination', (done) => {
+  it('full pagination', done => {
     ReactDOM.render(
       <Pagination
         selectComponentClass={Select}
@@ -969,43 +1022,34 @@ describe('disabled', () => {
         disabled
       />,
       container,
-      function () {
+      function() {
         const pagination = this;
 
         // Root
         expect(
           TestUtils.findRenderedDOMComponentWithClass(
             pagination,
-            'rc-pagination-disabled'
-          )
+            'rc-pagination-disabled',
+          ),
         ).to.be.ok();
 
         expect(
-          TestUtils.findRenderedDOMComponentWithTag(
-            pagination,
-            'input'
-          )
+          TestUtils.findRenderedDOMComponentWithTag(pagination, 'input'),
         ).to.be.ok();
 
         expect(
-          TestUtils.findRenderedComponentWithType(
-            pagination,
-            Select,
-          ).props.disabled
+          TestUtils.findRenderedComponentWithType(pagination, Select).props
+            .disabled,
         ).to.be.ok();
 
         expect(
-          TestUtils.findRenderedDOMComponentWithTag(
-            pagination,
-            'input'
-          ).disabled
+          TestUtils.findRenderedDOMComponentWithTag(pagination, 'input')
+            .disabled,
         ).to.be.ok();
 
         expect(
-          TestUtils.findRenderedDOMComponentWithTag(
-            pagination,
-            'button'
-          ).disabled
+          TestUtils.findRenderedDOMComponentWithTag(pagination, 'button')
+            .disabled,
         ).to.be.ok();
 
         done();
@@ -1024,7 +1068,7 @@ describe('Pagination with jumper', () => {
     current = page;
   }
 
-  beforeEach((done) => {
+  beforeEach(done => {
     ReactDOM.render(
       <Pagination
         onChange={onChange}
@@ -1033,7 +1077,7 @@ describe('Pagination with jumper', () => {
         showQuickJumper
       />,
       container,
-      function () {
+      function() {
         pagination = this;
         done();
       },
@@ -1045,10 +1089,10 @@ describe('Pagination with jumper', () => {
     current = 10;
   });
 
-  it('when input less than 1', (done) => {
+  it('when input less than 1', done => {
     const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-options-quick-jumper'
+      'rc-pagination-options-quick-jumper',
     );
     const input = quickJumper.querySelector('input');
     expect(TestUtils.isDOMComponent(input)).to.be(true);
@@ -1064,10 +1108,10 @@ describe('Pagination with jumper', () => {
     }, 10);
   });
 
-  it('when input onBlur', (done) => {
+  it('when input onBlur', done => {
     const quickJumper = TestUtils.findRenderedDOMComponentWithClass(
       pagination,
-      'rc-pagination-options-quick-jumper'
+      'rc-pagination-options-quick-jumper',
     );
     const input = quickJumper.querySelector('input');
     expect(TestUtils.isDOMComponent(input)).to.be(true);

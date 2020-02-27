@@ -1,128 +1,103 @@
-2.0.0
-==================
+# 2.0.0
 
-* Remove prop-types and react-lifecycles-compat
+- Remove prop-types and react-lifecycles-compat
 
-1.20.0
-==================
+  # 1.20.0
 
-* Add locale `ms_MY`
+- Add locale `ms_MY`
 
-1.19.0
-==================
+  # 1.19.0
 
-* Support Latvian localization
+- Support Latvian localization
 
-1.18.0
-==================
+  # 1.18.0
 
-* Support `disabled`
+- Support `disabled`
 
-1.17.0
-==================
+  # 1.17.0
 
-* Add `prevIcon`, `nextIcon`, `jumpPrevIcon`, `jumpNextIcon`.
+- Add `prevIcon`, `nextIcon`, `jumpPrevIcon`, `jumpNextIcon`.
 
-1.16.1
-==================
+  # 1.16.1
 
-* Add locale `sl_SI`. #130
+- Add locale `sl_SI`. #130
 
-1.16.0
-==================
+  # 1.16.0
 
-* Add locale `id_ID`
-* Add prop `showPrevNextJumpers`
+- Add locale `id_ID`
+- Add prop `showPrevNextJumpers`
 
-1.15.2
-==================
+  # 1.15.2
 
-* Add locale `tr_TR`.
+- Add locale `tr_TR`.
 
-1.12.0
-==================
+  # 1.12.0
 
-* `itemRender(current, type)` => `itemRender(current, type, element): element`.
+- `itemRender(current, type)` => `itemRender(current, type, element): element`.
 
-1.11.0
-==================
+  # 1.11.0
 
-* Add `goButton`.
+- Add `goButton`.
 
-1.10.0
-==================
+  # 1.10.0
 
-* Add `itemRender`.
+- Add `itemRender`.
 
-1.9.0
-==================
+  # 1.9.0
 
-* Add keyboard support
-* Add es folder.
+- Add keyboard support
+- Add es folder.
 
-1.8.0
-==================
+  # 1.8.0
 
-* Add locale `zh_TW`.
-* Add `showTitle`.
+- Add locale `zh_TW`.
+- Add `showTitle`.
 
-1.7.5
-==================
+  # 1.7.5
 
-* Add locale `sk_SK(Slovak)`.
+- Add locale `sk_SK(Slovak)`.
 
-1.7.4
-==================
+  # 1.7.4
 
-* Add locale `et_EE(Estonian)`.
+- Add locale `et_EE(Estonian)`.
 
-1.7.3
-==================
+  # 1.7.3
 
-* Add locale `Czech`.
+- Add locale `Czech`.
 
-1.7.2
-==================
+  # 1.7.2
 
-* Add locale `ko_KR(Korean)`.
+- Add locale `ko_KR(Korean)`.
 
-1.7.1
-==================
+  # 1.7.1
 
-* Add locale `ca_ES (Catalan)`.
+- Add locale `ca_ES (Catalan)`.
 
-1.7.0
-==================
+  # 1.7.0
 
-* support `showLessItems`. #55
-* Add `pageSize` as onChange's second argument.
+- support `showLessItems`. #55
+- Add `pageSize` as onChange's second argument.
 
-1.6.0
-==================
+  # 1.6.0
 
-* Add `range` as showTotal's second argument.
+- Add `range` as showTotal's second argument.
 
-1.5.5 / 2016-09-01
-==================
+  # 1.5.5 / 2016-09-01
 
-* Fix #34
+- Fix #34
 
-1.5.4 / 2016-07-31
-==================
+  # 1.5.4 / 2016-07-31
 
-* Add space before per page #33
+- Add space before per page #33
 
-1.5.0 / 2016-03-02
-==================
+  # 1.5.0 / 2016-03-02
 
-* Add `defaultPageSize` and fix `pageSize` to a controlled prop
+- Add `defaultPageSize` and fix `pageSize` to a controlled prop
 
-1.3.0 / 2015-11-25
-==================
+  # 1.3.0 / 2015-11-25
 
-* Add `defaultCurrent` prop
+- Add `defaultCurrent` prop
 
-1.2.0
-==================
+  # 1.2.0
 
-* Allow specifying the page size for **sizeChanger**
+- Allow specifying the page size for **sizeChanger**

@@ -1,31 +1,29 @@
 /* eslint func-names: 0, no-console: 0 */
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Select from 'rc-select';
-import Pagination from 'rc-pagination';
-import 'rc-pagination/assets/index.less';
-import 'rc-select/assets/index.css';
+import Pagination from '..';
+import '../assets/index.less';
+import 'rc-select/assets/index.less';
 
 class App extends React.Component {
-
   onShowSizeChange = (current, pageSize) => {
     console.log(current);
     console.log(pageSize);
-  }
+  };
 
   onChange = (current, pageSize) => {
     console.log('onChange:current=', current);
     console.log('onChange:pageSize=', pageSize);
-  }
+  };
 
   render() {
     return (
-      <div>
+      <>
         <p> customize node </p>
         <Pagination
           selectComponentClass={Select}
           showSizeChanger
-          showQuickJumper={{ goButton: <button>确定</button> }}
+          showQuickJumper={{ goButton: <button type="button">确定</button> }}
           defaultPageSize={20}
           defaultCurrent={5}
           onShowSizeChange={this.onShowSizeChange}
@@ -33,10 +31,15 @@ class App extends React.Component {
           total={450}
         />
         <p> default node </p>
-        <Pagination simple showQuickJumper={{ goButton: true }} defaultCurrent={1} total={50} />
-      </div>
+        <Pagination
+          simple
+          showQuickJumper={{ goButton: true }}
+          defaultCurrent={1}
+          total={50}
+        />
+      </>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('__react-content'));
+export default App;

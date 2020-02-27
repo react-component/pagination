@@ -1,15 +1,25 @@
 {
   "name": "rc-pagination",
-  "version": "2.0.0",
+  "version": "1.21.0",
   "description": "pagination ui component for react",
   "keywords": [
     "react",
     "react-component",
     "react-pagination",
-    "pagination"
+    "pagination",
+    "antd",
+    "pager"
   ],
-  "homepage": "http://github.com/react-component/pagination",
-  "author": "i@xiaoba.me",
+  "main": "./lib/index",
+  "module": "./es/index",
+  "files": [
+    "assets/*.css",
+    "assets/*.less",
+    "es",
+    "lib",
+    "dist"
+  ],
+  "homepage": "https://react-component.github.io/pagination",
   "repository": {
     "type": "git",
     "url": "git@github.com:react-component/pagination.git"
@@ -18,56 +28,56 @@
     "url": "http://github.com/react-component/pagination/issues"
   },
   "license": "MIT",
-  "files": [
-    "dist",
-    "lib",
-    "es",
-    "assets/*.css",
-    "rc-pagination.d.ts"
-  ],
-  "main": "lib/index",
-  "module": "es/index",
-  "types": "rc-pagination.d.ts",
-  "config": {
-    "port": 3000,
-    "entry": {
-      "rc-pagination": [
-        "./src/index.js",
-        "./assets/index.less"
-      ]
-    }
-  },
   "scripts": {
-    "dist": "rc-tools run dist",
-    "build": "rc-tools run build",
-    "compile": "rc-tools run compile --babel-runtime",
-    "gh-pages": "rc-tools run gh-pages",
-    "start": "rc-tools run server",
-    "pub": "rc-tools run pub --babel-runtime",
-    "lint": "rc-tools run lint",
-    "lint:fix": "rc-tools run lint --fix",
-    "karma": "rc-test run karma",
-    "saucelabs": "rc-test run saucelabs",
-    "test": "rc-test run test",
-    "chrome-test": "rc-test run chrome-test",
-    "coverage": "rc-test run coverage",
-    "now-build": "npm run build"
+    "start": "cross-env NODE_ENV=development father doc dev --storybook",
+    "build": "father doc build --storybook",
+    "compile": "father build && lessc assets/index.less assets/index.css",
+    "gh-pages": "npm run build && father doc deploy",
+    "prepublishOnly": "npm run compile && np --yolo --no-publish && npm run gh-pages",
+    "lint": "eslint src/ --ext .ts,.tsx,.jsx,.js,.md",
+    "prettier": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "pretty-quick": "pretty-quick",
+    "test": "father test",
+    "coverage": "father test --coverage"
+  },
+  "dependencies": {
+    "classnames": "^2.2.1"
   },
   "devDependencies": {
-    "core-js": "^3.1.4",
-    "expect.js": "0.3.x",
-    "pre-commit": "1.x",
-    "rc-select": "9.x",
-    "rc-test": "^6.0.1",
-    "rc-tools": "6.x",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "@types/classnames": "^2.2.9",
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.9.0",
+    "@umijs/fabric": "^2.0.3",
+    "coveralls": "^3.0.6",
+    "cross-env": "^7.0.0",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-16": "^1.0.1",
+    "enzyme-to-json": "^3.4.0",
+    "eslint": "^6.6.0",
+    "father": "^2.13.4",
+    "husky": "^4.2.3",
+    "less": "^3.10.3",
+    "np": "^6.2.0",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^2.0.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-test-renderer": "^16.0.0",
+    "rc-select": "^10.0.1"
   },
-  "pre-commit": [
-    "lint"
-  ],
-  "dependencies": {
-    "babel-runtime": "6.x",
-    "classnames": "^2.2.6"
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "cnpm": {
+    "mode": "npm"
+  },
+  "tnpm": {
+    "mode": "npm"
   }
 }

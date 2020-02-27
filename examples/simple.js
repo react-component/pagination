@@ -1,11 +1,7 @@
-// use jsx to render html, do not modify simple.html
-
-import 'rc-pagination/assets/index.less';
-import Pagination from 'rc-pagination';
+import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import Pagination from '..';
 
-ReactDOM.render(
-  <Pagination defaultCurrent={2} total={25} />,
-  document.getElementById('__react-content')
-);
+const App = () => <Pagination defaultCurrent={2} total={25} />;
+
+export default App;

@@ -32,9 +32,13 @@ declare module 'rc-pagination' {
   export interface PaginationProps extends Partial<PaginationData> {
     onChange?: (page: number, pageSize: number) => void;
     onShowSizeChange?: (current: number, size: number) => void;
-    itemRender?: (page: number, type: string, element: React.ReactNode) => React.ReactNode;
+    itemRender?: (
+      page: number,
+      type: string,
+      element: React.ReactNode,
+    ) => React.ReactNode;
     showTotal?: (total: number, range: [number, number]) => React.ReactNode;
   }
 
-  export default class Pagination extends React.Component<PaginationProps> { }
+  export default class Pagination extends React.Component<PaginationProps> {}
 }

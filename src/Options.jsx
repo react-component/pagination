@@ -13,41 +13,38 @@ class Options extends React.Component {
 
   getValidValue() {
     const { goInputText, current } = this.state;
+    // eslint-disable-next-line no-restricted-globals
     return !goInputText || isNaN(goInputText) ? current : Number(goInputText);
   }
 
-  buildOptionText = (value) => {
-    return `${value} ${this.props.locale.items_per_page}`;
-  }
+  buildOptionText = value => `${value} ${this.props.locale.items_per_page}`;
 
-  changeSize = (value) => {
+  changeSize = value => {
     this.props.changeSize(Number(value));
-  }
+  };
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       goInputText: e.target.value,
     });
-  }
+  };
 
-  handleBlur = (e) => {
+  handleBlur = e => {
     const { goButton, quickGo, rootPrefixCls } = this.props;
     if (goButton) {
       return;
     }
     if (
       e.relatedTarget &&
-      (
-        e.relatedTarget.className.indexOf(`${rootPrefixCls}-prev`) >= 0 ||
-        e.relatedTarget.className.indexOf(`${rootPrefixCls}-next`) >= 0
-      )
+      (e.relatedTarget.className.indexOf(`${rootPrefixCls}-prev`) >= 0 ||
+        e.relatedTarget.className.indexOf(`${rootPrefixCls}-next`) >= 0)
     ) {
       return;
     }
     quickGo(this.getValidValue());
-  }
+  };
 
-  go = (e) => {
+  go = e => {
     const { goInputText } = this.state;
     if (goInputText === '') {
       return;
@@ -58,13 +55,21 @@ class Options extends React.Component {
       });
       this.props.quickGo(this.getValidValue());
     }
-  }
+  };
 
   render() {
     const {
-      pageSize, pageSizeOptions, locale, rootPrefixCls, changeSize,
-      quickGo, goButton, selectComponentClass, buildOptionText,
-      selectPrefixCls, disabled,
+      pageSize,
+      pageSizeOptions,
+      locale,
+      rootPrefixCls,
+      changeSize,
+      quickGo,
+      goButton,
+      selectComponentClass,
+      buildOptionText,
+      selectPrefixCls,
+      disabled,
     } = this.props;
     const { goInputText } = this.state;
     const prefixCls = `${rootPrefixCls}-options`;
@@ -97,29 +102,27 @@ class Options extends React.Component {
           getPopupContainer={triggerNode => triggerNode.parentNode}
         >
           {options}
-       </Select>
+        </Select>
       );
     }
 
     if (quickGo) {
       if (goButton) {
-        gotoButton = typeof goButton === 'boolean' ? (
-          <button
-            type="button"
-            onClick={this.go}
-            onKeyUp={this.go}
-            disabled={disabled}
-          >
-            {locale.jump_to_confirm}
-          </button>
-        ) : (
-          <span
-            onClick={this.go}
-            onKeyUp={this.go}
-          >
-            {goButton}
-          </span>
-        );
+        gotoButton =
+          typeof goButton === 'boolean' ? (
+            <button
+              type="button"
+              onClick={this.go}
+              onKeyUp={this.go}
+              disabled={disabled}
+            >
+              {locale.jump_to_confirm}
+            </button>
+          ) : (
+            <span onClick={this.go} onKeyUp={this.go}>
+              {goButton}
+            </span>
+          );
       }
       goInput = (
         <div className={`${prefixCls}-quick-jumper`}>

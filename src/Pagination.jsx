@@ -6,13 +6,13 @@ import Options from './Options';
 import KEYCODE from './KeyCode';
 import LOCALE from './locale/zh_CN';
 
-function noop() {
-}
+function noop() {}
 
 function isInteger(value) {
-  return typeof value === 'number' &&
-    isFinite(value) &&
-    Math.floor(value) === value;
+  return (
+    // eslint-disable-next-line no-restricted-globals
+    typeof value === 'number' && isFinite(value) && Math.floor(value) === value
+  );
 }
 
 function defaultItemRender(page, type, element) {
@@ -20,10 +20,7 @@ function defaultItemRender(page, type, element) {
 }
 
 function calculatePage(p, state, props) {
-  let pageSize = p;
-  if (typeof pageSize === 'undefined') {
-    pageSize = state.pageSize;
-  }
+  const pageSize = typeof p === 'undefined' ? state.pageSize : p;
   return Math.floor((props.total - 1) / pageSize) + 1;
 }
 
@@ -53,18 +50,23 @@ class Pagination extends React.Component {
     super(props);
 
     const hasOnChange = props.onChange !== noop;
-    const hasCurrent = ('current' in props);
+    const hasCurrent = 'current' in props;
     if (hasCurrent && !hasOnChange) {
-      console.warn('Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.'); // eslint-disable-line
+      // eslint-disable-next-line no-console
+      console.warn(
+        'Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.',
+      );
     }
 
     let current = props.defaultCurrent;
     if ('current' in props) {
+      // eslint-disable-next-line prefer-destructuring
       current = props.current;
     }
 
     let pageSize = props.defaultPageSize;
     if ('pageSize' in props) {
+      // eslint-disable-next-line prefer-destructuring
       pageSize = props.pageSize;
     }
 
@@ -83,7 +85,7 @@ class Pagination extends React.Component {
     const { prefixCls } = this.props;
     if (prevState.current !== this.state.current && this.paginationNode) {
       const lastCurrentNode = this.paginationNode.querySelector(
-        `.${prefixCls}-item-${prevState.current}`
+        `.${prefixCls}-item-${prevState.current}`,
       );
       if (lastCurrentNode && document.activeElement === lastCurrentNode) {
         lastCurrentNode.blur();
@@ -103,7 +105,7 @@ class Pagination extends React.Component {
     }
 
     if ('pageSize' in props && props.pageSize !== prevState.pageSize) {
-      let current = prevState.current;
+      let { current } = prevState;
       const newCurrent = calculatePage(props.pageSize, prevState, props);
       current = current > newCurrent ? newCurrent : current;
 
@@ -117,31 +119,29 @@ class Pagination extends React.Component {
     return newState;
   }
 
-  getJumpPrevPage = () => {
-    return Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
-  }
+  getJumpPrevPage = () =>
+    Math.max(1, this.state.current - (this.props.showLessItems ? 3 : 5));
 
-  getJumpNextPage = () => {
-    return Math.min(
+  getJumpNextPage = () =>
+    Math.min(
       calculatePage(undefined, this.state, this.props),
-      this.state.current + (this.props.showLessItems ? 3 : 5)
+      this.state.current + (this.props.showLessItems ? 3 : 5),
     );
-  }
 
   /**
    * computed icon node that need to be rendered.
    * @param {React.ReactNode | React.ComponentType<PaginationProps>} icon received icon.
    * @returns {React.ReactNode}
    */
-  getItemIcon = (icon) => {
+  getItemIcon = icon => {
     const { prefixCls } = this.props;
-    let iconNode = icon
-      || <a className={`${prefixCls}-item-link`} />;
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
+    let iconNode = icon || <a className={`${prefixCls}-item-link`} />;
     if (typeof icon === 'function') {
       iconNode = React.createElement(icon, { ...this.props });
     }
     return iconNode;
-  }
+  };
 
   getValidValue(e) {
     const inputValue = e.target.value;
@@ -150,6 +150,7 @@ class Pagination extends React.Component {
     let value;
     if (inputValue === '') {
       value = inputValue;
+      // eslint-disable-next-line no-restricted-globals
     } else if (isNaN(Number(inputValue))) {
       value = currentInputValue;
     } else if (inputValue >= allPages) {
@@ -160,13 +161,11 @@ class Pagination extends React.Component {
     return value;
   }
 
-  savePaginationNode = (node) => {
+  savePaginationNode = node => {
     this.paginationNode = node;
-  }
+  };
 
-  isValid = (page) => {
-    return isInteger(page) && page !== this.state.current;
-  }
+  isValid = page => isInteger(page) && page !== this.state.current;
 
   shouldDisplayQuickJumper = () => {
     const { showQuickJumper, pageSize, total } = this.props;
@@ -174,15 +173,15 @@ class Pagination extends React.Component {
       return false;
     }
     return showQuickJumper;
-  }
+  };
 
-  handleKeyDown = (e) => {
+  handleKeyDown = e => {
     if (e.keyCode === KEYCODE.ARROW_UP || e.keyCode === KEYCODE.ARROW_DOWN) {
       e.preventDefault();
     }
-  }
+  };
 
-  handleKeyUp = (e) => {
+  handleKeyUp = e => {
     const value = this.getValidValue(e);
     const { currentInputValue } = this.state;
     if (value !== currentInputValue) {
@@ -197,15 +196,16 @@ class Pagination extends React.Component {
     } else if (e.keyCode === KEYCODE.ARROW_DOWN) {
       this.handleChange(value + 1);
     }
-  }
+  };
 
-  changePageSize = (size) => {
-    let current = this.state.current;
+  changePageSize = size => {
+    let { current } = this.state;
     const newCurrent = calculatePage(size, this.state, this.props);
     current = current > newCurrent ? newCurrent : current;
     // fix the issue:
     // Once 'total' is 0, 'current' in 'onShowSizeChange' is 0, which is not correct.
     if (newCurrent === 0) {
+      // eslint-disable-next-line prefer-destructuring
       current = this.state.current;
     }
 
@@ -223,9 +223,9 @@ class Pagination extends React.Component {
       }
     }
     this.props.onShowSizeChange(current, size);
-  }
+  };
 
-  handleChange = (p) => {
+  handleChange = p => {
     const { disabled } = this.props;
 
     let page = p;
@@ -244,95 +244,116 @@ class Pagination extends React.Component {
         });
       }
 
-      const pageSize = this.state.pageSize;
+      const { pageSize } = this.state;
       this.props.onChange(page, pageSize);
 
       return page;
     }
 
     return this.state.current;
-  }
+  };
 
   prev = () => {
     if (this.hasPrev()) {
       this.handleChange(this.state.current - 1);
     }
-  }
+  };
 
   next = () => {
     if (this.hasNext()) {
       this.handleChange(this.state.current + 1);
     }
-  }
+  };
 
   jumpPrev = () => {
     this.handleChange(this.getJumpPrevPage());
-  }
+  };
 
   jumpNext = () => {
     this.handleChange(this.getJumpNextPage());
-  }
+  };
 
-  hasPrev = () => {
-    return this.state.current > 1;
-  }
+  hasPrev = () => this.state.current > 1;
 
-  hasNext = () => {
-    return this.state.current < calculatePage(undefined, this.state, this.props);
-  }
+  hasNext = () =>
+    this.state.current < calculatePage(undefined, this.state, this.props);
 
   runIfEnter = (event, callback, ...restParams) => {
     if (event.key === 'Enter' || event.charCode === 13) {
       callback(...restParams);
     }
-  }
+  };
 
   runIfEnterPrev = e => {
     this.runIfEnter(e, this.prev);
-  }
+  };
 
   runIfEnterNext = e => {
     this.runIfEnter(e, this.next);
-  }
+  };
 
   runIfEnterJumpPrev = e => {
     this.runIfEnter(e, this.jumpPrev);
-  }
+  };
 
   runIfEnterJumpNext = e => {
     this.runIfEnter(e, this.jumpNext);
-  }
+  };
 
   handleGoTO = e => {
     if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
       this.handleChange(this.state.currentInputValue);
     }
-  }
+  };
 
   renderPrev(prevPage) {
     const { prevIcon, itemRender } = this.props;
     const prevButton = itemRender(prevPage, 'prev', this.getItemIcon(prevIcon));
     const disabled = !this.hasPrev();
-    return isValidElement(prevButton) ? cloneElement(prevButton, { disabled }) : prevButton;
+    return isValidElement(prevButton)
+      ? cloneElement(prevButton, { disabled })
+      : prevButton;
   }
 
   renderNext(nextPage) {
     const { nextIcon, itemRender } = this.props;
     const nextButton = itemRender(nextPage, 'next', this.getItemIcon(nextIcon));
     const disabled = !this.hasNext();
-    return isValidElement(nextButton) ? cloneElement(nextButton, { disabled }) : nextButton;
+    return isValidElement(nextButton)
+      ? cloneElement(nextButton, { disabled })
+      : nextButton;
   }
 
   render() {
-    const { prefixCls, className, disabled } = this.props;
+    const {
+      prefixCls,
+      className,
+      style,
+      disabled,
+      hideOnSinglePage,
+      total,
+      locale,
+      showQuickJumper,
+      showLessItems,
+      showTitle,
+      showTotal,
+      showSizeChanger,
+      simple,
+      itemRender,
+      showPrevNextJumpers,
+      jumpPrevIcon,
+      jumpNextIcon,
+      selectComponentClass,
+      selectPrefixCls,
+      pageSizeOptions,
+    } = this.props;
+
+    const { current, pageSize, currentInputValue } = this.state;
 
     // When hideOnSinglePage is true and there is only 1 page, hide the pager
-    if (this.props.hideOnSinglePage === true && this.props.total <= this.state.pageSize) {
+    if (hideOnSinglePage === true && total <= pageSize) {
       return null;
     }
-
-    const props = this.props;
-    const locale = props.locale;
 
     const allPages = calculatePage(undefined, this.state, this.props);
     const pagerList = [];
@@ -342,21 +363,28 @@ class Pagination extends React.Component {
     let lastPager = null;
     let gotoButton = null;
 
-    const goButton = (props.showQuickJumper && props.showQuickJumper.goButton);
-    const pageBufferSize = props.showLessItems ? 1 : 2;
-    const { current, pageSize } = this.state;
+    const goButton = showQuickJumper && showQuickJumper.goButton;
+    const pageBufferSize = showLessItems ? 1 : 2;
 
     const prevPage = current - 1 > 0 ? current - 1 : 0;
     const nextPage = current + 1 < allPages ? current + 1 : allPages;
 
-    const dataOrAriaAttributeProps = Object.keys(props).reduce((prev, key) => {
-      if ((key.substr(0, 5) === 'data-' || key.substr(0, 5) === 'aria-' || key === 'role')) {
-        prev[key] = props[key];
-      }
-      return prev;
-    }, {});
+    const dataOrAriaAttributeProps = Object.keys(this.props).reduce(
+      (prev, key) => {
+        if (
+          key.substr(0, 5) === 'data-' ||
+          key.substr(0, 5) === 'aria-' ||
+          key === 'role'
+        ) {
+          // eslint-disable-next-line no-param-reassign
+          prev[key] = this.props[key];
+        }
+        return prev;
+      },
+      {},
+    );
 
-    if (props.simple) {
+    if (simple) {
       if (goButton) {
         if (typeof goButton === 'boolean') {
           gotoButton = (
@@ -370,15 +398,14 @@ class Pagination extends React.Component {
           );
         } else {
           gotoButton = (
-            <span
-              onClick={this.handleGoTO}
-              onKeyUp={this.handleGoTO}
-            >{goButton}</span>
+            <span onClick={this.handleGoTO} onKeyUp={this.handleGoTO}>
+              {goButton}
+            </span>
           );
         }
         gotoButton = (
           <li
-            title={props.showTitle ? `${locale.jump_to}${this.state.current}/${allPages}` : null}
+            title={showTitle ? `${locale.jump_to}${current}/${allPages}` : null}
             className={`${prefixCls}-simple-pager`}
           >
             {gotoButton}
@@ -388,28 +415,30 @@ class Pagination extends React.Component {
 
       return (
         <ul
-          className={`${prefixCls} ${prefixCls}-simple ${props.className}`}
-          style={props.style}
+          className={classNames(prefixCls, `${prefixCls}-simple`, className)}
+          style={style}
           ref={this.savePaginationNode}
           {...dataOrAriaAttributeProps}
         >
           <li
-            title={props.showTitle ? locale.prev_page : null}
+            title={showTitle ? locale.prev_page : null}
             onClick={this.prev}
             tabIndex={this.hasPrev() ? 0 : null}
             onKeyPress={this.runIfEnterPrev}
-            className={`${this.hasPrev() ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
+            className={classNames(`${prefixCls}-prev`, {
+              [`${prefixCls}-disabled`]: !this.hasPrev(),
+            })}
             aria-disabled={!this.hasPrev()}
           >
             {this.renderPrev(prevPage)}
           </li>
           <li
-            title={props.showTitle ? `${this.state.current}/${allPages}` : null}
+            title={showTitle ? `${current}/${allPages}` : null}
             className={`${prefixCls}-simple-pager`}
           >
             <input
               type="text"
-              value={this.state.currentInputValue}
+              value={currentInputValue}
               onKeyDown={this.handleKeyDown}
               onKeyUp={this.handleKeyUp}
               onChange={this.handleKeyUp}
@@ -419,11 +448,13 @@ class Pagination extends React.Component {
             {allPages}
           </li>
           <li
-            title={props.showTitle ? locale.next_page : null}
+            title={showTitle ? locale.next_page : null}
             onClick={this.next}
             tabIndex={this.hasPrev() ? 0 : null}
             onKeyPress={this.runIfEnterNext}
-            className={`${this.hasNext() ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
+            className={classNames(`${prefixCls}-next`, {
+              [`${prefixCls}-disabled`]: !this.hasNext(),
+            })}
             aria-disabled={!this.hasNext()}
           >
             {this.renderNext(nextPage)}
@@ -439,8 +470,8 @@ class Pagination extends React.Component {
         rootPrefixCls: prefixCls,
         onClick: this.handleChange,
         onKeyPress: this.runIfEnter,
-        showTitle: props.showTitle,
-        itemRender: props.itemRender,
+        showTitle,
+        itemRender,
       };
       if (!allPages) {
         pagerList.push(
@@ -449,68 +480,59 @@ class Pagination extends React.Component {
             key="noPager"
             page={allPages}
             className={`${prefixCls}-disabled`}
-          />
+          />,
         );
       }
-      for (let i = 1; i <= allPages; i++) {
-        const active = this.state.current === i;
+      for (let i = 1; i <= allPages; i += 1) {
+        const active = current === i;
         pagerList.push(
-          <Pager
-            {...pagerProps}
-            key={i}
-            page={i}
-            active={active}
-          />
+          <Pager {...pagerProps} key={i} page={i} active={active} />,
         );
       }
     } else {
-      const prevItemTitle = props.showLessItems ? locale.prev_3 : locale.prev_5;
-      const nextItemTitle = props.showLessItems ? locale.next_3 : locale.next_5;
-      if (props.showPrevNextJumpers) {
-        let jumpPrevClassString = `${prefixCls}-jump-prev`;
-        if (props.jumpPrevIcon) {
-          jumpPrevClassString += ` ${prefixCls}-jump-prev-custom-icon`;
-        }
+      const prevItemTitle = showLessItems ? locale.prev_3 : locale.prev_5;
+      const nextItemTitle = showLessItems ? locale.next_3 : locale.next_5;
+      if (showPrevNextJumpers) {
         jumpPrev = (
           <li
-            title={props.showTitle ? prevItemTitle : null}
+            title={showTitle ? prevItemTitle : null}
             key="prev"
             onClick={this.jumpPrev}
             tabIndex="0"
             onKeyPress={this.runIfEnterJumpPrev}
-            className={jumpPrevClassString}
+            className={classNames(`${prefixCls}-jump-prev`, {
+              [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
+            })}
           >
-            {props.itemRender(
+            {itemRender(
               this.getJumpPrevPage(),
               'jump-prev',
-              this.getItemIcon(props.jumpPrevIcon)
+              this.getItemIcon(jumpPrevIcon),
             )}
           </li>
         );
-        let jumpNextClassString = `${prefixCls}-jump-next`;
-        if (props.jumpNextIcon) {
-          jumpNextClassString += ` ${prefixCls}-jump-next-custom-icon`;
-        }
         jumpNext = (
           <li
-            title={props.showTitle ? nextItemTitle : null}
+            title={showTitle ? nextItemTitle : null}
             key="next"
             tabIndex="0"
             onClick={this.jumpNext}
             onKeyPress={this.runIfEnterJumpNext}
-            className={jumpNextClassString}
+            className={classNames(`${prefixCls}-jump-next`, {
+              [`${prefixCls}-jump-next-custom-icon`]: !!jumpNextIcon,
+            })}
           >
-            {props.itemRender(
+            {itemRender(
               this.getJumpNextPage(),
               'jump-next',
-              this.getItemIcon(props.jumpNextIcon)
+              this.getItemIcon(jumpNextIcon),
             )}
           </li>
         );
       }
       lastPager = (
         <Pager
-          locale={props.locale}
+          locale={locale}
           last
           rootPrefixCls={prefixCls}
           onClick={this.handleChange}
@@ -518,21 +540,21 @@ class Pagination extends React.Component {
           key={allPages}
           page={allPages}
           active={false}
-          showTitle={props.showTitle}
-          itemRender={props.itemRender}
+          showTitle={showTitle}
+          itemRender={itemRender}
         />
       );
       firstPager = (
         <Pager
-          locale={props.locale}
+          locale={locale}
           rootPrefixCls={prefixCls}
           onClick={this.handleChange}
           onKeyPress={this.runIfEnter}
           key={1}
           page={1}
           active={false}
-          showTitle={props.showTitle}
-          itemRender={props.itemRender}
+          showTitle={showTitle}
+          itemRender={itemRender}
         />
       );
 
@@ -547,33 +569,39 @@ class Pagination extends React.Component {
         left = allPages - pageBufferSize * 2;
       }
 
-      for (let i = left; i <= right; i++) {
+      for (let i = left; i <= right; i += 1) {
         const active = current === i;
         pagerList.push(
           <Pager
-            locale={props.locale}
+            locale={locale}
             rootPrefixCls={prefixCls}
             onClick={this.handleChange}
             onKeyPress={this.runIfEnter}
             key={i}
             page={i}
             active={active}
-            showTitle={props.showTitle}
-            itemRender={props.itemRender}
-          />
+            showTitle={showTitle}
+            itemRender={itemRender}
+          />,
         );
       }
 
       if (current - 1 >= pageBufferSize * 2 && current !== 1 + 2) {
-        pagerList[0] = React.cloneElement(pagerList[0], {
+        pagerList[0] = cloneElement(pagerList[0], {
           className: `${prefixCls}-item-after-jump-prev`,
         });
         pagerList.unshift(jumpPrev);
       }
-      if (allPages - current >= pageBufferSize * 2 && current !== allPages - 2) {
-        pagerList[pagerList.length - 1] = React.cloneElement(pagerList[pagerList.length - 1], {
-          className: `${prefixCls}-item-before-jump-next`,
-        });
+      if (
+        allPages - current >= pageBufferSize * 2 &&
+        current !== allPages - 2
+      ) {
+        pagerList[pagerList.length - 1] = cloneElement(
+          pagerList[pagerList.length - 1],
+          {
+            className: `${prefixCls}-item-before-jump-next`,
+          },
+        );
         pagerList.push(jumpNext);
       }
 
@@ -587,16 +615,13 @@ class Pagination extends React.Component {
 
     let totalText = null;
 
-    if (props.showTotal) {
+    if (showTotal) {
       totalText = (
         <li className={`${prefixCls}-total-text`}>
-          {props.showTotal(
-            props.total,
-            [
-              props.total === 0 ? 0 : (current - 1) * pageSize + 1,
-              current * pageSize > props.total ? props.total : current * pageSize,
-            ]
-          )}
+          {showTotal(total, [
+            total === 0 ? 0 : (current - 1) * pageSize + 1,
+            current * pageSize > total ? total : current * pageSize,
+          ])}
         </li>
       );
     }
@@ -607,43 +632,47 @@ class Pagination extends React.Component {
         className={classNames(prefixCls, className, {
           [`${prefixCls}-disabled`]: disabled,
         })}
-        style={props.style}
+        style={style}
         unselectable="unselectable"
         ref={this.savePaginationNode}
         {...dataOrAriaAttributeProps}
       >
         {totalText}
         <li
-          title={props.showTitle ? locale.prev_page : null}
+          title={showTitle ? locale.prev_page : null}
           onClick={this.prev}
           tabIndex={prevDisabled ? null : 0}
           onKeyPress={this.runIfEnterPrev}
-          className={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
+          className={classNames(`${prefixCls}-prev`, {
+            [`${prefixCls}-disabled`]: prevDisabled,
+          })}
           aria-disabled={prevDisabled}
         >
           {this.renderPrev(prevPage)}
         </li>
         {pagerList}
         <li
-          title={props.showTitle ? locale.next_page : null}
+          title={showTitle ? locale.next_page : null}
           onClick={this.next}
           tabIndex={nextDisabled ? null : 0}
           onKeyPress={this.runIfEnterNext}
-          className={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
+          className={classNames(`${prefixCls}-next`, {
+            [`${prefixCls}-disabled`]: nextDisabled,
+          })}
           aria-disabled={nextDisabled}
         >
           {this.renderNext(nextPage)}
         </li>
         <Options
           disabled={disabled}
-          locale={props.locale}
+          locale={locale}
           rootPrefixCls={prefixCls}
-          selectComponentClass={props.selectComponentClass}
-          selectPrefixCls={props.selectPrefixCls}
-          changeSize={this.props.showSizeChanger ? this.changePageSize : null}
-          current={this.state.current}
-          pageSize={this.state.pageSize}
-          pageSizeOptions={this.props.pageSizeOptions}
+          selectComponentClass={selectComponentClass}
+          selectPrefixCls={selectPrefixCls}
+          changeSize={showSizeChanger ? this.changePageSize : null}
+          current={current}
+          pageSize={pageSize}
+          pageSizeOptions={pageSizeOptions}
           quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
           goButton={goButton}
         />

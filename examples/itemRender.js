@@ -1,7 +1,6 @@
-import 'rc-pagination/assets/index.less';
-import Pagination from 'rc-pagination';
+import '../assets/index.less';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import Pagination from '..';
 
 const itemRender = (current, type, element) => {
   if (type === 'page') {
@@ -22,10 +21,10 @@ const textItemRender = (current, type, element) => {
 
 const buttonItemRender = (current, type, element) => {
   if (type === 'prev') {
-    return <button>Prev</button>;
+    return <button type="button">Prev</button>;
   }
   if (type === 'next') {
-    return <button>Next</button>;
+    return <button type="button">Next</button>;
   }
   return element;
 };
@@ -40,11 +39,13 @@ const divItemRender = (current, type, element) => {
   return element;
 };
 
-ReactDOM.render(
-  <div>
+const App = () => (
+  <>
     <Pagination total={100} itemRender={itemRender} />
     <Pagination total={100} itemRender={textItemRender} />
     <Pagination total={100} itemRender={buttonItemRender} />
     <Pagination total={100} itemRender={divItemRender} />
-  </div>
-, document.getElementById('__react-content'));
+  </>
+);
+
+export default App;

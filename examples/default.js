@@ -1,22 +1,28 @@
 /* eslint func-names: 0, no-console: 0 */
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Pagination from 'rc-pagination';
-import 'rc-pagination/assets/index.less';
+import Pagination from '..';
+import '../assets/index.less';
+import 'rc-select/assets/index.less';
 
-class App extends React.Component {
+export default class App extends React.Component {
   state = {
     current: 3,
   };
-  onChange = (page) => {
+
+  onChange = page => {
     console.log(page);
     this.setState({
       current: page,
     });
-  }
+  };
+
   render() {
-    return <Pagination onChange={this.onChange} current={this.state.current} total={25} />;
+    return (
+      <Pagination
+        onChange={this.onChange}
+        current={this.state.current}
+        total={25}
+      />
+    );
   }
 }
-
-ReactDOM.render(<App />, document.getElementById('__react-content'));

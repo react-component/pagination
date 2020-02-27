@@ -163,3 +163,85 @@ describe('Controlled Pagination', () => {
     expect(onChange).toHaveBeenLastCalledWith(3, 10);
   });
 });
+
+describe('Other props', () => {
+  it('should support custom default icon', () => {
+    const nextIcon = () => <span>nextIcon</span>;
+    const prevIcon = () => <span>prevIcon</span>;
+    const jumpNextIcon = () => <span>jumpNextIcon</span>;
+    const jumpPrevIcon = () => <span>jumpPrevIcon</span>;
+    const iconsProps = {
+      prevIcon,
+      nextIcon,
+      jumpPrevIcon,
+      jumpNextIcon,
+    };
+    const wrapper = mount(
+      <Pagination total={1000} current={12} {...iconsProps} />,
+    );
+    const prev = wrapper.find('.rc-pagination-prev');
+    const next = wrapper.find('.rc-pagination-next');
+    const jumpPrev = wrapper.find('.rc-pagination-jump-prev');
+    const jumpNext = wrapper.find('.rc-pagination-jump-next');
+    expect(prev.text()).toBe('prevIcon');
+    expect(next.text()).toBe('nextIcon');
+    expect(jumpPrev.text()).toBe('jumpPrevIcon');
+    expect(jumpNext.text()).toBe('jumpNextIcon');
+  });
+
+  describe('showPrevNextJumpers props', () => {
+    it('should hide jump-prev, jump-next if showPrevNextJumpers equals false', () => {
+      const wrapper = mount(
+        <Pagination total={1000} current={12} showPrevNextJumpers={false} />,
+      );
+      const prev = wrapper.find('.rc-pagination-jump-prev');
+      const next = wrapper.find('.rc-pagination-jump-next');
+      expect(prev.exists()).toBe(false);
+      expect(next.exists()).toBe(false);
+    });
+
+    it('should show jump-prev, jump-next if showPrevNextJumpers equals true', () => {
+      const wrapper = mount(
+        <Pagination total={1000} current={12} showPrevNextJumpers />,
+      );
+      const prev = wrapper.find('.rc-pagination-jump-prev');
+      const next = wrapper.find('.rc-pagination-jump-next');
+      expect(prev.exists()).toBe(true);
+      expect(next.exists()).toBe(true);
+    });
+  });
+
+  describe('hideOnSinglePage props', () => {
+    const itemRender = current => <a href={`#${current}`}>{current}</a>;
+
+    it('should hide pager if hideOnSinglePage equals true', () => {
+      const wrapper = mount(
+        <Pagination total={10} itemRender={itemRender} hideOnSinglePage />,
+      );
+      expect(wrapper.find('.rc-pagination').exists()).toBe(false);
+    });
+
+    it('should show pager if hideOnSinglePage equals false', () => {
+      const wrapper = mount(
+        <Pagination
+          total={10}
+          itemRender={itemRender}
+          hideOnSinglePage={false}
+        />,
+      );
+      expect(wrapper.find('.rc-pagination').exists()).toBe(true);
+    });
+
+    it('should show pager if hideOnSinglePage equals true but more than 1 page', () => {
+      const wrapper = mount(
+        <Pagination
+          total={10}
+          pageSize={5}
+          itemRender={itemRender}
+          hideOnSinglePage={false}
+        />,
+      );
+      expect(wrapper.find('.rc-pagination').exists()).toBe(true);
+    });
+  });
+});

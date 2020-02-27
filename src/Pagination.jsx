@@ -328,6 +328,7 @@ class Pagination extends React.Component {
     const {
       prefixCls,
       className,
+      style,
       disabled,
       hideOnSinglePage,
       total,
@@ -403,8 +404,8 @@ class Pagination extends React.Component {
 
       return (
         <ul
-          className={`${prefixCls} ${prefixCls}-simple ${props.className}`}
-          style={props.style}
+          className={classNames(prefixCls, `${prefixCls}-simple`, className)}
+          style={style}
           ref={this.savePaginationNode}
           {...dataOrAriaAttributeProps}
         >

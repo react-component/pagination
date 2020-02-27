@@ -1,23 +1,8 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
-import PropTypes from 'prop-types';
 import KEYCODE from './KeyCode';
 
 class Options extends React.Component {
-  static propTypes = {
-    disabled: PropTypes.bool,
-    changeSize: PropTypes.func,
-    quickGo: PropTypes.func,
-    selectComponentClass: PropTypes.func,
-    current: PropTypes.number,
-    pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
-    pageSize: PropTypes.number,
-    buildOptionText: PropTypes.func,
-    locale: PropTypes.object,
-    rootPrefixCls: PropTypes.string,
-    selectPrefixCls: PropTypes.string,
-    goButton: PropTypes.oneOfType([PropTypes.bool, PropTypes.node]),
-  };
-
   static defaultProps = {
     pageSizeOptions: ['10', '20', '30', '40'],
   };

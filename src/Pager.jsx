@@ -1,5 +1,5 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const Pager = (props) => {
@@ -29,19 +29,6 @@ const Pager = (props) => {
       {props.itemRender(props.page, 'page', <a>{props.page}</a>)}
     </li>
   );
-};
-
-Pager.propTypes = {
-  page: PropTypes.number,
-  active: PropTypes.bool,
-  last: PropTypes.bool,
-  locale: PropTypes.object,
-  className: PropTypes.string,
-  showTitle: PropTypes.bool,
-  rootPrefixCls: PropTypes.string,
-  onClick: PropTypes.func,
-  onKeyPress: PropTypes.func,
-  itemRender: PropTypes.func,
 };
 
 export default Pager;

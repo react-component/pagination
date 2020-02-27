@@ -1,5 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import Select from 'rc-select';
 import Pagination from '../src';
 
 describe('Uncontrolled Pagination', () => {
@@ -243,5 +244,96 @@ describe('Other props', () => {
       );
       expect(wrapper.find('.rc-pagination').exists()).toBe(true);
     });
+  });
+
+  it('disabled', () => {
+    const wrapper = mount(
+      <Pagination
+        selectComponentClass={Select}
+        showQuickJumper={{ goButton: true }}
+        showSizeChanger
+        defaultPageSize={20}
+        defaultCurrent={5}
+        total={450}
+        disabled
+      />,
+    );
+    expect(wrapper.find('.rc-pagination-disabled').exists()).toBe(true);
+    expect(wrapper.find('input').exists()).toBe(true);
+    expect(wrapper.find(Select).props().disabled).toBe(true);
+    expect(
+      wrapper
+        .find('input')
+        .at(0)
+        .getDOMNode().disabled,
+    ).toBe(true);
+    expect(
+      wrapper
+        .find('button')
+        .at(0)
+        .getDOMNode().disabled,
+    ).toBe(true);
+  });
+});
+
+// https://github.com/ant-design/ant-design/issues/10524
+describe('current value on onShowSizeChange when total is 0', () => {
+  let wrapper;
+  const onShowSizeChange = jest.fn();
+
+  beforeEach(() => {
+    wrapper = mount(
+      <Pagination
+        selectComponentClass={Select}
+        showSizeChanger
+        onShowSizeChange={onShowSizeChange}
+        current={1}
+        total={0}
+        showTotal={(total, range) =>
+          `${range[0]} - ${range[1]} of ${total} items`
+        }
+      />,
+    );
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
+    onShowSizeChange.mockReset();
+  });
+
+  it('should call onShowSizeChange when no change', () => {
+    const sizeChanger = wrapper
+      .find('.rc-pagination-options-size-changer')
+      .at(0);
+    sizeChanger.simulate('click');
+    const input = sizeChanger.find('input');
+    input.simulate('keyDown', { key: 'Down', keyCode: 40, which: 40 });
+    input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+    expect(onShowSizeChange).not.toBeCalled();
+  });
+
+  it('current should equal to the current in onShowSizeChange', () => {
+    const sizeChanger = wrapper
+      .find('.rc-pagination-options-size-changer')
+      .at(0);
+    sizeChanger.simulate('click');
+    const input = sizeChanger.find('input');
+    input.simulate('keyDown', { key: 'Down', keyCode: 40, which: 40 });
+    input.simulate('keyDown', { key: 'Down', keyCode: 40, which: 40 });
+    input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+    expect(onShowSizeChange).toHaveBeenLastCalledWith(
+      wrapper.state().current,
+      20,
+    );
+  });
+
+  it('when total is 0, pager should show and disabled', () => {
+    const itemButton = wrapper.find('.rc-pagination-item');
+    expect(itemButton.hasClass('rc-pagination-item-disabled')).toBe(true);
+  });
+
+  it('when total is 0, `from` and `to` should be 0', () => {
+    const totalText = wrapper.find('.rc-pagination-total-text');
+    expect(totalText.text()).toBe('0 - 0 of 0 items');
   });
 });

@@ -414,9 +414,9 @@ class Pagination extends React.Component {
             onClick={this.prev}
             tabIndex={this.hasPrev() ? 0 : null}
             onKeyPress={this.runIfEnterPrev}
-            className={`${
-              this.hasPrev() ? '' : `${prefixCls}-disabled`
-            } ${prefixCls}-prev`}
+            className={classNames(`${prefixCls}-prev`, {
+              [`${prefixCls}-disabled`]: !this.hasPrev(),
+            })}
             aria-disabled={!this.hasPrev()}
           >
             {this.renderPrev(prevPage)}
@@ -441,9 +441,9 @@ class Pagination extends React.Component {
             onClick={this.next}
             tabIndex={this.hasPrev() ? 0 : null}
             onKeyPress={this.runIfEnterNext}
-            className={`${
-              this.hasNext() ? '' : `${prefixCls}-disabled`
-            } ${prefixCls}-next`}
+            className={classNames(`${prefixCls}-next`, {
+              [`${prefixCls}-disabled`]: !this.hasNext(),
+            })}
             aria-disabled={!this.hasNext()}
           >
             {this.renderNext(nextPage)}

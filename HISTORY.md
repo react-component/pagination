@@ -1,3 +1,7 @@
+# 2.1.1
+
+- Fix items count not being consistent.
+
 # 2.1.0
 
 - When `total` is greater then 100, will show size changer defaultly.

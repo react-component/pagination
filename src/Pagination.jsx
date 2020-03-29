@@ -470,7 +470,7 @@ class Pagination extends React.Component {
       );
     }
 
-    if (allPages <= 5 + pageBufferSize * 2) {
+    if (allPages <= 3 + pageBufferSize * 2) {
       const pagerProps = {
         locale,
         rootPrefixCls: prefixCls,

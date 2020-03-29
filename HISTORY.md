@@ -1,4 +1,4 @@
-# 2.1.1
+# 2.2.0
 
 - Add prop `totalBoundaryShowSizeChanger`.
 - Fix items count not being consistent. [#18201](https://github.com/ant-design/ant-design/issues/18201)

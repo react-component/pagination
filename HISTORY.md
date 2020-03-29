@@ -1,3 +1,9 @@
+# 2.2.0
+
+- Add prop `totalBoundaryShowSizeChanger`.
+- Fix items count not being consistent. [#18201](https://github.com/ant-design/ant-design/issues/18201)
+- Update default page size options from `10,25,30,40` to `10,20,50,100`.
+
 # 2.1.0
 
 - When `total` is greater then 100, will show size changer defaultly.

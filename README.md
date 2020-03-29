@@ -57,7 +57,8 @@ ReactDOM.render(<Pagination />, container);
 | defaultPageSize     | default items per page              | Number                                             | 10                                                                                     |
 | pageSize            | items per page                      | Number                                             | 10                                                                                     |
 | onChange            | page change callback                | Function(current, pageSize)                        | -                                                                                      |
-| showSizeChanger     | show pageSize changer               | Bool                     | `false` when total less then 100, `true` when otherwise |
+| showSizeChanger     | show pageSize changer               | Bool                     | `false` when total less then `totalBoundaryShowSizeChanger`, `true` when otherwise |
+| totalBoundaryShowSizeChanger | when total larger than it, `showSizeChanger` will be true | number | 50 |
 | pageSizeOptions     | specify the sizeChanger selections  | Array<String>                                      | ['10', '20', '30', '40']                                                               |
 | onShowSizeChange    | pageSize change callback            | Function(current, size)                            | -                                                                                      |
 | hideOnSinglePage    | hide on single page                 | Bool                                               | false                                                                                  |

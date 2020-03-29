@@ -43,6 +43,7 @@ class Pagination extends React.Component {
     locale: LOCALE,
     style: {},
     itemRender: defaultItemRender,
+    totalBoundaryShowSizeChanger: 50,
   };
 
   constructor(props) {
@@ -278,11 +279,11 @@ class Pagination extends React.Component {
     this.state.current < calculatePage(undefined, this.state, this.props);
 
  getShowSizeChanger() {
-   const { showSizeChanger, total } = this.props;
+   const { showSizeChanger, total, totalBoundaryShowSizeChanger } = this.props;
    if (typeof showSizeChanger !== 'undefined') {
      return showSizeChanger;
    }
-   return total >= 100;
+   return total > totalBoundaryShowSizeChanger;
  }
 
   runIfEnter = (event, callback, ...restParams) => {
@@ -470,7 +471,7 @@ class Pagination extends React.Component {
       );
     }
 
-    if (allPages <= 5 + pageBufferSize * 2) {
+    if (allPages <= 3 + pageBufferSize * 2) {
       const pagerProps = {
         locale,
         rootPrefixCls: prefixCls,

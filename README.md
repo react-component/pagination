@@ -30,13 +30,9 @@ npm start
 
 ## Example
 
-http://localhost:3000/examples/
+http://localhost:9001
 
-online example: http://react-component.github.io/pagination/examples/
-
-## Feature
-
-- support ie9,ie9+,chrome,firefox,safari
+online example: http://react-component.github.io/pagination/
 
 ## Install
 
@@ -45,9 +41,9 @@ online example: http://react-component.github.io/pagination/examples/
 ## Usage
 
 ```js
-var Pagination = require('rc-pagination');
-var React = require('react');
-React.render(<Pagination />, container);
+import Pagination from 'rc-pagination';
+
+ReactDOM.render(<Pagination />, container);
 ```
 
 ## API

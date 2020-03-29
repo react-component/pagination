@@ -213,7 +213,7 @@ describe('Other props', () => {
   });
 
   describe('hideOnSinglePage props', () => {
-    const itemRender = (current) => <a href={`#${current}`}>{current}</a>;
+    const itemRender = current => <a href={`#${current}`}>{current}</a>;
 
     it('should hide pager if hideOnSinglePage equals true', () => {
       const wrapper = mount(
@@ -261,8 +261,18 @@ describe('Other props', () => {
     expect(wrapper.find('.rc-pagination-disabled').exists()).toBe(true);
     expect(wrapper.find('input').exists()).toBe(true);
     expect(wrapper.find(Select).props().disabled).toBe(true);
-    expect(wrapper.find('input').at(0).getDOMNode().disabled).toBe(true);
-    expect(wrapper.find('button').at(0).getDOMNode().disabled).toBe(true);
+    expect(
+      wrapper
+        .find('input')
+        .at(0)
+        .getDOMNode().disabled,
+    ).toBe(true);
+    expect(
+      wrapper
+        .find('button')
+        .at(0)
+        .getDOMNode().disabled,
+    ).toBe(true);
   });
 });
 
@@ -313,7 +323,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
     input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
     expect(onShowSizeChange).toHaveBeenLastCalledWith(
       wrapper.state().current,
-      25,
+      20,
     );
   });
 
@@ -329,11 +339,17 @@ describe('current value on onShowSizeChange when total is 0', () => {
 
   it('size changer show logic', () => {
     const wrapper1 = mount(
-      <Pagination selectComponentClass={Select} total={50} />,
+      <Pagination
+        selectComponentClass={Select}
+        total={50}
+      />,
     );
     expect(wrapper1.exists('.rc-pagination-options-size-changer')).toBe(false);
     const wrapper2 = mount(
-      <Pagination selectComponentClass={Select} total={51} />,
+      <Pagination
+        selectComponentClass={Select}
+        total={51}
+      />,
     );
     expect(wrapper2.exists('.rc-pagination-options-size-changer')).toBe(true);
     const wrapper3 = mount(
@@ -345,7 +361,11 @@ describe('current value on onShowSizeChange when total is 0', () => {
     );
     expect(wrapper3.exists('.rc-pagination-options-size-changer')).toBe(false);
     const wrapper4 = mount(
-      <Pagination selectComponentClass={Select} showSizeChanger total={50} />,
+      <Pagination
+        selectComponentClass={Select}
+        showSizeChanger
+        total={50}
+      />,
     );
     expect(wrapper4.exists('.rc-pagination-options-size-changer')).toBe(true);
   });

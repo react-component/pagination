@@ -323,7 +323,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
     input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
     expect(onShowSizeChange).toHaveBeenLastCalledWith(
       wrapper.state().current,
-      20,
+      25,
     );
   });
 
@@ -335,5 +335,38 @@ describe('current value on onShowSizeChange when total is 0', () => {
   it('when total is 0, `from` and `to` should be 0', () => {
     const totalText = wrapper.find('.rc-pagination-total-text');
     expect(totalText.text()).toBe('0 - 0 of 0 items');
+  });
+
+  it('size changer show logic', () => {
+    const wrapper1 = mount(
+      <Pagination
+        selectComponentClass={Select}
+        total={99}
+      />,
+    );
+    expect(wrapper1.exists('.rc-pagination-options-size-changer')).toBe(false);
+    const wrapper2 = mount(
+      <Pagination
+        selectComponentClass={Select}
+        total={100}
+      />,
+    );
+    expect(wrapper2.exists('.rc-pagination-options-size-changer')).toBe(true);
+    const wrapper3 = mount(
+      <Pagination
+        selectComponentClass={Select}
+        showSizeChanger={false}
+        total={100}
+      />,
+    );
+    expect(wrapper3.exists('.rc-pagination-options-size-changer')).toBe(false);
+    const wrapper4 = mount(
+      <Pagination
+        selectComponentClass={Select}
+        showSizeChanger
+        total={99}
+      />,
+    );
+    expect(wrapper4.exists('.rc-pagination-options-size-changer')).toBe(true);
   });
 });

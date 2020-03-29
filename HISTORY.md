@@ -1,6 +1,11 @@
+# 2.1.0
+
+- When `total` is greater then 100, will show size changer defaultly.
+- Update default page size options from `10,20,30,40` to `10,25,50,100`.
+
 # 2.0.0
 
-- Remove prop-types and react-lifecycles-compat
+- Remove `prop-types` and `react-lifecycles-compat`
 
   # 1.20.0
 

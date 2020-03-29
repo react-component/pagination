@@ -28,7 +28,14 @@ class App extends React.Component {
         />
         <Pagination
           selectComponentClass={Select}
-          showSizeChanger
+          pageSize={this.state.pageSize}
+          onShowSizeChange={this.onShowSizeChange}
+          defaultCurrent={3}
+          total={500}
+        />
+        <Pagination
+          selectComponentClass={Select}
+          showSizeChanger={false}
           pageSize={this.state.pageSize}
           onShowSizeChange={this.onShowSizeChange}
           defaultCurrent={3}

@@ -4,7 +4,7 @@ import KEYCODE from './KeyCode';
 
 class Options extends React.Component {
   static defaultProps = {
-    pageSizeOptions: ['10', '20', '30', '40'],
+    pageSizeOptions: ['10', '25', '50', '100'],
   };
 
   state = {

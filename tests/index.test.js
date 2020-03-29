@@ -323,7 +323,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
     input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
     expect(onShowSizeChange).toHaveBeenLastCalledWith(
       wrapper.state().current,
-      25,
+      20,
     );
   });
 
@@ -341,14 +341,14 @@ describe('current value on onShowSizeChange when total is 0', () => {
     const wrapper1 = mount(
       <Pagination
         selectComponentClass={Select}
-        total={99}
+        total={50}
       />,
     );
     expect(wrapper1.exists('.rc-pagination-options-size-changer')).toBe(false);
     const wrapper2 = mount(
       <Pagination
         selectComponentClass={Select}
-        total={100}
+        total={51}
       />,
     );
     expect(wrapper2.exists('.rc-pagination-options-size-changer')).toBe(true);
@@ -356,7 +356,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
       <Pagination
         selectComponentClass={Select}
         showSizeChanger={false}
-        total={100}
+        total={51}
       />,
     );
     expect(wrapper3.exists('.rc-pagination-options-size-changer')).toBe(false);
@@ -364,7 +364,44 @@ describe('current value on onShowSizeChange when total is 0', () => {
       <Pagination
         selectComponentClass={Select}
         showSizeChanger
-        total={99}
+        total={50}
+      />,
+    );
+    expect(wrapper4.exists('.rc-pagination-options-size-changer')).toBe(true);
+  });
+
+  it('totalBoundaryShowSizeChanger works', () => {
+    const wrapper1 = mount(
+      <Pagination
+        selectComponentClass={Select}
+        total={100}
+        totalBoundaryShowSizeChanger={100}
+      />,
+    );
+    expect(wrapper1.exists('.rc-pagination-options-size-changer')).toBe(false);
+    const wrapper2 = mount(
+      <Pagination
+        selectComponentClass={Select}
+        total={101}
+        totalBoundaryShowSizeChanger={100}
+      />,
+    );
+    expect(wrapper2.exists('.rc-pagination-options-size-changer')).toBe(true);
+    const wrapper3 = mount(
+      <Pagination
+        selectComponentClass={Select}
+        showSizeChanger={false}
+        total={101}
+        totalBoundaryShowSizeChanger={100}
+      />,
+    );
+    expect(wrapper3.exists('.rc-pagination-options-size-changer')).toBe(false);
+    const wrapper4 = mount(
+      <Pagination
+        selectComponentClass={Select}
+        showSizeChanger
+        total={100}
+        totalBoundaryShowSizeChanger={100}
       />,
     );
     expect(wrapper4.exists('.rc-pagination-options-size-changer')).toBe(true);

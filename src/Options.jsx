@@ -4,7 +4,7 @@ import KEYCODE from './KeyCode';
 
 class Options extends React.Component {
   static defaultProps = {
-    pageSizeOptions: ['10', '20', '50', '100'],
+    pageSizeOptions: ['10', '25', '50', '100'],
   };
 
   state = {
@@ -17,19 +17,19 @@ class Options extends React.Component {
     return !goInputText || isNaN(goInputText) ? current : Number(goInputText);
   }
 
-  buildOptionText = value => `${value} ${this.props.locale.items_per_page}`;
+  buildOptionText = (value) => `${value} ${this.props.locale.items_per_page}`;
 
-  changeSize = value => {
+  changeSize = (value) => {
     this.props.changeSize(Number(value));
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
       goInputText: e.target.value,
     });
   };
 
-  handleBlur = e => {
+  handleBlur = (e) => {
     const { goButton, quickGo, rootPrefixCls } = this.props;
     if (goButton) {
       return;
@@ -44,7 +44,7 @@ class Options extends React.Component {
     quickGo(this.getValidValue());
   };
 
-  go = e => {
+  go = (e) => {
     const { goInputText } = this.state;
     if (goInputText === '') {
       return;
@@ -99,7 +99,7 @@ class Options extends React.Component {
           dropdownMatchSelectWidth={false}
           value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={this.changeSize}
-          getPopupContainer={triggerNode => triggerNode.parentNode}
+          getPopupContainer={(triggerNode) => triggerNode.parentNode}
         >
           {options}
         </Select>

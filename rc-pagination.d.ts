@@ -17,6 +17,7 @@ declare module 'rc-pagination' {
     showPrevNextJumpers: boolean;
     showQuickJumper: boolean | object;
     showTitle: boolean;
+    simple: boolean;
 
     locale: object;
 

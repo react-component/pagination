@@ -57,10 +57,26 @@ class Options extends React.Component {
     }
   };
 
-  render() {
+  getPageSizeOptions() {
     const {
       pageSize,
       pageSizeOptions,
+    } = this.props;
+    if (pageSizeOptions.some(option => option.toString() === pageSize.toString())) {
+      return pageSizeOptions;
+    }
+    return pageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
+      // eslint-disable-next-line no-restricted-globals
+      const numberA = isNaN(Number(a)) ? 0 : Number(a);
+      // eslint-disable-next-line no-restricted-globals
+      const numberB = isNaN(Number(b)) ? 0 : Number(b);
+      return numberA - numberB;
+    });
+  }
+
+  render() {
+    const {
+      pageSize,
       locale,
       rootPrefixCls,
       changeSize,
@@ -81,6 +97,8 @@ class Options extends React.Component {
     if (!changeSize && !quickGo) {
       return null;
     }
+
+    const pageSizeOptions = this.getPageSizeOptions();
 
     if (changeSize && Select) {
       const options = pageSizeOptions.map((opt, i) => (

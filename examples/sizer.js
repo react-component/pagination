@@ -7,7 +7,7 @@ import 'rc-select/assets/index.less';
 
 class App extends React.Component {
   state = {
-    pageSize: 10,
+    pageSize: 15,
   };
 
   onShowSizeChange = (current, pageSize) => {
@@ -16,26 +16,27 @@ class App extends React.Component {
   };
 
   render() {
+    const { pageSize } = this.state;
     return (
       <div style={{ margin: 10 }}>
         <Pagination
           selectComponentClass={Select}
           showSizeChanger
-          pageSize={this.state.pageSize}
+          pageSize={pageSize}
           onShowSizeChange={this.onShowSizeChange}
           defaultCurrent={3}
           total={40}
         />
         <Pagination
           selectComponentClass={Select}
-          pageSize={this.state.pageSize}
+          pageSize={pageSize}
           onShowSizeChange={this.onShowSizeChange}
           defaultCurrent={3}
           total={50}
         />
         <Pagination
           selectComponentClass={Select}
-          pageSize={this.state.pageSize}
+          pageSize={pageSize}
           onShowSizeChange={this.onShowSizeChange}
           defaultCurrent={3}
           total={60}
@@ -43,7 +44,7 @@ class App extends React.Component {
         <Pagination
           selectComponentClass={Select}
           showSizeChanger={false}
-          pageSize={this.state.pageSize}
+          pageSize={pageSize}
           onShowSizeChange={this.onShowSizeChange}
           defaultCurrent={3}
           total={60}

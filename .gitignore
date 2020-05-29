@@ -30,3 +30,4 @@ package-lock.json
 coverage/
 .doc
 dist
+.vscode

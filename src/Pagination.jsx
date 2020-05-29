@@ -222,6 +222,11 @@ class Pagination extends React.Component {
         });
       }
     }
+
+    if ('onChange' in this.props) {
+      this.props.onChange(current, size)
+    }
+
     this.props.onShowSizeChange(current, size);
   };
 

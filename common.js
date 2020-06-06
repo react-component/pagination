@@ -2295,34 +2295,12 @@ var Pagination = function (_React$Component) {
       return value;
     }
   }, {
-    key: 'renderPrev',
-    value: function renderPrev(prevPage) {
-      var _props = this.props,
-          prevIcon = _props.prevIcon,
-          itemRender = _props.itemRender;
-
-      var prevButton = itemRender(prevPage, 'prev', this.getItemIcon(prevIcon));
-      var disabled = !this.hasPrev();
-      return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_react__["isValidElement"])(prevButton) ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_react__["cloneElement"])(prevButton, { disabled: disabled }) : prevButton;
-    }
-  }, {
-    key: 'renderNext',
-    value: function renderNext(nextPage) {
-      var _props2 = this.props,
-          nextIcon = _props2.nextIcon,
-          itemRender = _props2.itemRender;
-
-      var nextButton = itemRender(nextPage, 'next', this.getItemIcon(nextIcon));
-      var disabled = !this.hasNext();
-      return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_react__["isValidElement"])(nextButton) ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_6_react__["cloneElement"])(nextButton, { disabled: disabled }) : nextButton;
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var _props3 = this.props,
-          prefixCls = _props3.prefixCls,
-          className = _props3.className,
-          disabled = _props3.disabled;
+      var _props = this.props,
+          prefixCls = _props.prefixCls,
+          className = _props.className,
+          disabled = _props.disabled;
 
       // When hideOnSinglePage is true and there is only 1 page, hide the pager
 
@@ -2407,7 +2385,7 @@ var Pagination = function (_React$Component) {
               className: (this.hasPrev() ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-prev',
               'aria-disabled': !this.hasPrev()
             },
-            this.renderPrev(prevPage)
+            props.itemRender(prevPage, 'prev', this.getItemIcon(props.prevIcon))
           ),
           __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
             'li',
@@ -2440,7 +2418,7 @@ var Pagination = function (_React$Component) {
               className: (this.hasNext() ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-next',
               'aria-disabled': !this.hasNext()
             },
-            this.renderNext(nextPage)
+            props.itemRender(nextPage, 'next', this.getItemIcon(props.nextIcon))
           ),
           gotoButton
         );
@@ -2608,7 +2586,7 @@ var Pagination = function (_React$Component) {
             className: (!prevDisabled ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-prev',
             'aria-disabled': prevDisabled
           },
-          this.renderPrev(prevPage)
+          props.itemRender(prevPage, 'prev', this.getItemIcon(props.prevIcon))
         ),
         pagerList,
         __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(
@@ -2621,7 +2599,7 @@ var Pagination = function (_React$Component) {
             className: (!nextDisabled ? '' : prefixCls + '-disabled') + ' ' + prefixCls + '-next',
             'aria-disabled': nextDisabled
           },
-          this.renderNext(nextPage)
+          props.itemRender(nextPage, 'next', this.getItemIcon(props.nextIcon))
         ),
         __WEBPACK_IMPORTED_MODULE_6_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__Options__["a" /* default */], {
           disabled: disabled,
@@ -2756,10 +2734,10 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.shouldDisplayQuickJumper = function () {
-    var _props4 = _this2.props,
-        showQuickJumper = _props4.showQuickJumper,
-        pageSize = _props4.pageSize,
-        total = _props4.total;
+    var _props2 = _this2.props,
+        showQuickJumper = _props2.showQuickJumper,
+        pageSize = _props2.pageSize,
+        total = _props2.total;
 
     if (total <= pageSize) {
       return false;

@@ -40,6 +40,28 @@ describe('Pagination with sizer', () => {
       />,
     );
     wrapper.find(Select).find('input').simulate('mousedown');
-    expect(wrapper.find(Select).find('.rc-select-item').at(2).text()).toBe('45 条/页✓');
+    expect(wrapper.find(Select).find('.rc-select-item').at(2).text()).toBe(
+      '45 条/页✓',
+    );
+  });
+
+  it('should onChange called when pageSize change', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <Pagination
+        selectComponentClass={Select}
+        onChange={onChange}
+        total={500}
+        defaultPageSize={20}
+      />,
+    );
+    wrapper.find(Select).find('input').simulate('mousedown');
+    expect(wrapper.find(Select).find('.rc-select-item').at(2).text()).toBe(
+      '50 条/页',
+    );
+    const pageSize1 = wrapper.find(Select).find('.rc-select-item').at(0);
+    pageSize1.simulate('click');
+    expect(onChange).toBeCalled();
+    expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
 });

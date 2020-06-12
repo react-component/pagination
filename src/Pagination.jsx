@@ -133,7 +133,7 @@ class Pagination extends React.Component {
    * @param {React.ReactNode | React.ComponentType<PaginationProps>} icon received icon.
    * @returns {React.ReactNode}
    */
-  getItemIcon = icon => {
+  getItemIcon = (icon) => {
     const { prefixCls } = this.props;
     // eslint-disable-next-line jsx-a11y/anchor-has-content
     let iconNode = icon || <a className={`${prefixCls}-item-link`} />;
@@ -161,11 +161,11 @@ class Pagination extends React.Component {
     return value;
   }
 
-  savePaginationNode = node => {
+  savePaginationNode = (node) => {
     this.paginationNode = node;
   };
 
-  isValid = page => isInteger(page) && page !== this.state.current;
+  isValid = (page) => isInteger(page) && page !== this.state.current;
 
   shouldDisplayQuickJumper = () => {
     const { showQuickJumper, pageSize, total } = this.props;
@@ -175,13 +175,13 @@ class Pagination extends React.Component {
     return showQuickJumper;
   };
 
-  handleKeyDown = e => {
+  handleKeyDown = (e) => {
     if (e.keyCode === KEYCODE.ARROW_UP || e.keyCode === KEYCODE.ARROW_DOWN) {
       e.preventDefault();
     }
   };
 
-  handleKeyUp = e => {
+  handleKeyUp = (e) => {
     const value = this.getValidValue(e);
     const { currentInputValue } = this.state;
     if (value !== currentInputValue) {
@@ -198,7 +198,7 @@ class Pagination extends React.Component {
     }
   };
 
-  changePageSize = size => {
+  changePageSize = (size) => {
     let { current } = this.state;
     const newCurrent = calculatePage(size, this.state, this.props);
     current = current > newCurrent ? newCurrent : current;
@@ -222,10 +222,15 @@ class Pagination extends React.Component {
         });
       }
     }
+
+    if ('onChange' in this.props && this.props.onChange) {
+      this.props.onChange(current, size);
+    }
+
     this.props.onShowSizeChange(current, size);
   };
 
-  handleChange = p => {
+  handleChange = (p) => {
     const { disabled } = this.props;
 
     let page = p;
@@ -278,13 +283,13 @@ class Pagination extends React.Component {
   hasNext = () =>
     this.state.current < calculatePage(undefined, this.state, this.props);
 
- getShowSizeChanger() {
-   const { showSizeChanger, total, totalBoundaryShowSizeChanger } = this.props;
-   if (typeof showSizeChanger !== 'undefined') {
-     return showSizeChanger;
-   }
-   return total > totalBoundaryShowSizeChanger;
- }
+  getShowSizeChanger() {
+    const { showSizeChanger, total, totalBoundaryShowSizeChanger } = this.props;
+    if (typeof showSizeChanger !== 'undefined') {
+      return showSizeChanger;
+    }
+    return total > totalBoundaryShowSizeChanger;
+  }
 
   runIfEnter = (event, callback, ...restParams) => {
     if (event.key === 'Enter' || event.charCode === 13) {
@@ -292,23 +297,23 @@ class Pagination extends React.Component {
     }
   };
 
-  runIfEnterPrev = e => {
+  runIfEnterPrev = (e) => {
     this.runIfEnter(e, this.prev);
   };
 
-  runIfEnterNext = e => {
+  runIfEnterNext = (e) => {
     this.runIfEnter(e, this.next);
   };
 
-  runIfEnterJumpPrev = e => {
+  runIfEnterJumpPrev = (e) => {
     this.runIfEnter(e, this.jumpPrev);
   };
 
-  runIfEnterJumpNext = e => {
+  runIfEnterJumpNext = (e) => {
     this.runIfEnter(e, this.jumpNext);
   };
 
-  handleGoTO = e => {
+  handleGoTO = (e) => {
     if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
       this.handleChange(this.state.currentInputValue);
     }

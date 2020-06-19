@@ -133,10 +133,15 @@ class Pagination extends React.Component {
    * @param {React.ReactNode | React.ComponentType<PaginationProps>} icon received icon.
    * @returns {React.ReactNode}
    */
-  getItemIcon = (icon) => {
+  getItemIcon = (icon, label) => {
     const { prefixCls } = this.props;
-    // eslint-disable-next-line jsx-a11y/anchor-has-content
-    let iconNode = icon || <a className={`${prefixCls}-item-link`} />;
+    let iconNode = icon || (
+      <button
+        type="button"
+        label={label}
+        className={`${prefixCls}-item-link`}
+      />
+    );
     if (typeof icon === 'function') {
       iconNode = React.createElement(icon, { ...this.props });
     }
@@ -321,7 +326,11 @@ class Pagination extends React.Component {
 
   renderPrev(prevPage) {
     const { prevIcon, itemRender } = this.props;
-    const prevButton = itemRender(prevPage, 'prev', this.getItemIcon(prevIcon));
+    const prevButton = itemRender(
+      prevPage,
+      'prev',
+      this.getItemIcon(prevIcon, 'prev page'),
+    );
     const disabled = !this.hasPrev();
     return isValidElement(prevButton)
       ? cloneElement(prevButton, { disabled })
@@ -330,7 +339,11 @@ class Pagination extends React.Component {
 
   renderNext(nextPage) {
     const { nextIcon, itemRender } = this.props;
-    const nextButton = itemRender(nextPage, 'next', this.getItemIcon(nextIcon));
+    const nextButton = itemRender(
+      nextPage,
+      'next',
+      this.getItemIcon(nextIcon, 'next page'),
+    );
     const disabled = !this.hasNext();
     return isValidElement(nextButton)
       ? cloneElement(nextButton, { disabled })

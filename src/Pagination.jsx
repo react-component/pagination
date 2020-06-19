@@ -138,7 +138,7 @@ class Pagination extends React.Component {
     let iconNode = icon || (
       <button
         type="button"
-        label={label}
+        aria-label={label}
         className={`${prefixCls}-item-link`}
       />
     );

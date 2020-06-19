@@ -17,19 +17,19 @@ class Options extends React.Component {
     return !goInputText || isNaN(goInputText) ? current : Number(goInputText);
   }
 
-  buildOptionText = value => `${value} ${this.props.locale.items_per_page}`;
+  buildOptionText = (value) => `${value} ${this.props.locale.items_per_page}`;
 
-  changeSize = value => {
+  changeSize = (value) => {
     this.props.changeSize(Number(value));
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
       goInputText: e.target.value,
     });
   };
 
-  handleBlur = e => {
+  handleBlur = (e) => {
     const { goButton, quickGo, rootPrefixCls } = this.props;
     if (goButton) {
       return;
@@ -44,7 +44,7 @@ class Options extends React.Component {
     quickGo(this.getValidValue());
   };
 
-  go = e => {
+  go = (e) => {
     const { goInputText } = this.state;
     if (goInputText === '') {
       return;
@@ -58,11 +58,12 @@ class Options extends React.Component {
   };
 
   getPageSizeOptions() {
-    const {
-      pageSize,
-      pageSizeOptions,
-    } = this.props;
-    if (pageSizeOptions.some(option => option.toString() === pageSize.toString())) {
+    const { pageSize, pageSizeOptions } = this.props;
+    if (
+      pageSizeOptions.some(
+        (option) => option.toString() === pageSize.toString(),
+      )
+    ) {
       return pageSizeOptions;
     }
     return pageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
@@ -117,7 +118,7 @@ class Options extends React.Component {
           dropdownMatchSelectWidth={false}
           value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={this.changeSize}
-          getPopupContainer={triggerNode => triggerNode.parentNode}
+          getPopupContainer={(triggerNode) => triggerNode.parentNode}
         >
           {options}
         </Select>
@@ -133,6 +134,7 @@ class Options extends React.Component {
               onClick={this.go}
               onKeyUp={this.go}
               disabled={disabled}
+              className={`${prefixCls}-quick-jumper-button`}
             >
               {locale.jump_to_confirm}
             </button>

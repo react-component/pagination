@@ -51,7 +51,13 @@ describe('simple quick jumper', () => {
         onChange={onChange}
         defaultCurrent={1}
         total={25}
-        showQuickJumper={{ goButton: <button type="button">go</button> }}
+        showQuickJumper={{
+          goButton: (
+            <button type="button" className="go-button">
+              go
+            </button>
+          ),
+        }}
         showTotal={(total, range) =>
           `${range[0]} - ${range[1]} of ${total} items`
         }
@@ -67,7 +73,7 @@ describe('simple quick jumper', () => {
   it('should quick jump to expect page', () => {
     const quickJumper = wrapper.find('.rc-pagination-simple');
     const input = quickJumper.find('input');
-    const goButton = quickJumper.find('button');
+    const goButton = quickJumper.find('.go-button');
     input.simulate('change', { target: { value: '2' } });
     goButton.simulate('click');
     expect(wrapper.state().current).toBe(2);
@@ -81,7 +87,13 @@ describe('simple quick jumper', () => {
           onChange={onChange}
           defaultCurrent={1}
           total={25}
-          showQuickJumper={{ goButton: <button type="button">go</button> }}
+          showQuickJumper={{
+            goButton: (
+              <button type="button" className="go-button">
+                go
+              </button>
+            ),
+          }}
           showTotal={(total, range) =>
             `${range[0]} - ${range[1]} of ${total} items`
           }
@@ -92,7 +104,7 @@ describe('simple quick jumper', () => {
     it('should quick jump to expect page', () => {
       const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
       const input = quickJumper.find('input');
-      const goButton = quickJumper.find('button');
+      const goButton = quickJumper.find('.go-button');
       input.simulate('change', { target: { value: '2' } });
       goButton.simulate('click');
       expect(wrapper.state().current).toBe(2);
@@ -120,7 +132,9 @@ describe('simple quick jumper', () => {
         showQuickJumper={{ goButton: true }}
       />,
     );
-    expect(wrapper.find('button').exists()).toBe(true);
+    expect(
+      wrapper.find('.rc-pagination-options-quick-jumper-button').exists(),
+    ).toBe(true);
   });
 
   it('goButton defaultly hidden', () => {
@@ -132,7 +146,9 @@ describe('simple quick jumper', () => {
         showQuickJumper
       />,
     );
-    expect(wrapper.find('button').exists()).toBe(false);
+    expect(
+      wrapper.find('.rc-pagination-options-quick-jumper-button').exists(),
+    ).toBe(false);
   });
 
   it('goButton could be false', () => {
@@ -144,6 +160,8 @@ describe('simple quick jumper', () => {
         showQuickJumper={{ goButton: false }}
       />,
     );
-    expect(wrapper.find('button').exists()).toBe(false);
+    expect(
+      wrapper.find('.rc-pagination-options-quick-jumper-button').exists(),
+    ).toBe(false);
   });
 });

@@ -64,4 +64,25 @@ describe('Pagination with sizer', () => {
     expect(onChange).toBeCalled();
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
+
+  it('should be total when choose display all', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <Pagination
+        selectComponentClass={Select}
+        onChange={onChange}
+        showTotalPageSize
+        total={1250}
+        defaultPageSize={20}
+      />,
+    );
+    wrapper.find(Select).find('input').simulate('mousedown');
+    expect(wrapper.find(Select).find('.rc-select-item').at(4).text()).toBe(
+      '显示全部',
+    );
+    const totalBtn = wrapper.find(Select).find('.rc-select-item').at(4);
+    totalBtn.simulate('click');
+    expect(onChange).toBeCalled();
+    expect(onChange).toHaveBeenLastCalledWith(1, 1250);
+  });
 });

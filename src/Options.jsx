@@ -5,6 +5,8 @@ import KEYCODE from './KeyCode';
 class Options extends React.Component {
   static defaultProps = {
     pageSizeOptions: ['10', '20', '50', '100'],
+    totalPageSize: 0,
+    showTotalPageSize: false,
   };
 
   state = {
@@ -100,6 +102,7 @@ class Options extends React.Component {
     }
 
     const pageSizeOptions = this.getPageSizeOptions();
+    const { totalPageSize, showTotalPageSize } = this.props;
 
     if (changeSize && Select) {
       const options = pageSizeOptions.map((opt, i) => (
@@ -121,6 +124,12 @@ class Options extends React.Component {
           getPopupContainer={(triggerNode) => triggerNode.parentNode}
         >
           {options}
+          {showTotalPageSize && pageSize !== totalPageSize && (
+            <Select.Option value={totalPageSize}>
+              {this.props.locale.show_total ||
+                (buildOptionText || this.buildOptionText)(totalPageSize)}
+            </Select.Option>
+          )}
         </Select>
       );
     }

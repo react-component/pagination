@@ -65,23 +65,23 @@ describe('Pagination with sizer', () => {
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
 
-  it('should show display all option at index 3 when includes show all', () => {
+  it('should show display all option when allow show all', () => {
     const wrapper = mount(
       <Pagination
         selectComponentClass={Select}
-        pageSizeOptions={['10', '20', '50', Pagination.SHOW_ALL, '100']}
+        showTotalPageSize
         total={1250}
         defaultPageSize={20}
       />,
     );
     wrapper.find(Select).find('input').simulate('mousedown');
     expect(wrapper.find(Select).find('.rc-select-item').length).toBe(5);
-    expect(wrapper.find(Select).find('.rc-select-item').at(3).text()).toBe(
+    expect(wrapper.find(Select).find('.rc-select-item').at(4).text()).toBe(
       '显示全部',
     );
   });
 
-  it("should not show display all option when doesn't include show all", () => {
+  it('should not show display all option when not allow show all', () => {
     const wrapper = mount(
       <Pagination
         selectComponentClass={Select}
@@ -96,11 +96,11 @@ describe('Pagination with sizer', () => {
     );
   });
 
-  it('should not render duplicate option equals total when includes show all', () => {
+  it('should not render duplicate option equals total when allow show all', () => {
     const wrapper = mount(
       <Pagination
         selectComponentClass={Select}
-        pageSizeOptions={['10', '20', '50', '100', Pagination.SHOW_ALL]}
+        showTotalPageSize
         total={100}
         defaultPageSize={20}
       />,
@@ -118,7 +118,7 @@ describe('Pagination with sizer', () => {
       <Pagination
         selectComponentClass={Select}
         onChange={onChange}
-        pageSizeOptions={['10', '20', '50', '100', Pagination.SHOW_ALL]}
+        showTotalPageSize
         total={1250}
         defaultPageSize={20}
       />,

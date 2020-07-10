@@ -228,11 +228,12 @@ class Pagination extends React.Component {
       }
     }
 
+    this.props.onShowSizeChange(current, size);
+
     if ('onChange' in this.props && this.props.onChange) {
       this.props.onChange(current, size);
     }
 
-    this.props.onShowSizeChange(current, size);
   };
 
   handleChange = (p) => {

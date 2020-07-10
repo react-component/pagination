@@ -60,11 +60,17 @@ class Options extends React.Component {
   };
 
   getPageSizeOptions() {
-    const { pageSize, pageSizeOptions } = this.props;
+    const {
+      pageSize,
+      pageSizeOptions,
+      showTotalPageSize,
+      totalPageSize,
+    } = this.props;
     if (
       pageSizeOptions.some(
         (option) => option.toString() === pageSize.toString(),
-      )
+      ) ||
+      (showTotalPageSize && totalPageSize === pageSize)
     ) {
       return pageSizeOptions;
     }
@@ -124,8 +130,8 @@ class Options extends React.Component {
           getPopupContainer={(triggerNode) => triggerNode.parentNode}
         >
           {options}
-          {showTotalPageSize && pageSize !== totalPageSize && (
-            <Select.Option value={totalPageSize}>
+          {showTotalPageSize && (
+            <Select.Option value={totalPageSize.toString()}>
               {this.props.locale.show_total ||
                 (buildOptionText || this.buildOptionText)(totalPageSize)}
             </Select.Option>

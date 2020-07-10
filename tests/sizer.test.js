@@ -65,6 +65,53 @@ describe('Pagination with sizer', () => {
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
 
+  it('should show display all option when allow show all', () => {
+    const wrapper = mount(
+      <Pagination
+        selectComponentClass={Select}
+        showTotalPageSize
+        total={1250}
+        defaultPageSize={20}
+      />,
+    );
+    wrapper.find(Select).find('input').simulate('mousedown');
+    expect(wrapper.find(Select).find('.rc-select-item').length).toBe(5);
+    expect(wrapper.find(Select).find('.rc-select-item').at(4).text()).toBe(
+      '显示全部',
+    );
+  });
+
+  it('should not show display all option when not allow show all', () => {
+    const wrapper = mount(
+      <Pagination
+        selectComponentClass={Select}
+        total={1250}
+        defaultPageSize={20}
+      />,
+    );
+    wrapper.find(Select).find('input').simulate('mousedown');
+    expect(wrapper.find(Select).find('.rc-select-item').length).toBe(4);
+    expect(wrapper.find(Select).find('.rc-select-item').at(3).text()).toBe(
+      '100 条/页',
+    );
+  });
+
+  it('should not render duplicate option equals total when allow show all', () => {
+    const wrapper = mount(
+      <Pagination
+        selectComponentClass={Select}
+        showTotalPageSize
+        total={100}
+        defaultPageSize={20}
+      />,
+    );
+    wrapper.find(Select).find('input').simulate('mousedown');
+    expect(wrapper.find(Select).find('.rc-select-item').length).toBe(4);
+    expect(wrapper.find(Select).find('.rc-select-item').at(3).text()).toBe(
+      '显示全部',
+    );
+  });
+
   it('should be total when choose display all', () => {
     const onChange = jest.fn();
     const wrapper = mount(

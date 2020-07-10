@@ -66,15 +66,25 @@ class Options extends React.Component {
       showTotalPageSize,
       totalPageSize,
     } = this.props;
+    const [...displayPageSizeOptions] = pageSizeOptions;
+    if (showTotalPageSize) {
+      const existPageSizeOptionIndex = pageSizeOptions.findIndex(
+        (option) => option.toString() === totalPageSize.toString(),
+      );
+      if (existPageSizeOptionIndex >= 0) {
+        // prevent render duplicate option equals totalPageSize
+        displayPageSizeOptions.splice(existPageSizeOptionIndex, 1);
+      }
+    }
     if (
-      pageSizeOptions.some(
+      displayPageSizeOptions.some(
         (option) => option.toString() === pageSize.toString(),
       ) ||
       (showTotalPageSize && totalPageSize === pageSize)
     ) {
-      return pageSizeOptions;
+      return displayPageSizeOptions;
     }
-    return pageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
+    return displayPageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
       // eslint-disable-next-line no-restricted-globals
       const numberA = isNaN(Number(a)) ? 0 : Number(a);
       // eslint-disable-next-line no-restricted-globals

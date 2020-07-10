@@ -28,7 +28,7 @@ class Pagination extends React.Component {
   static defaultProps = {
     defaultCurrent: 1,
     total: 0,
-    showTotalPageSize: false,
+    allowShowAll: false,
     defaultPageSize: 10,
     onChange: noop,
     className: '',
@@ -701,7 +701,7 @@ class Pagination extends React.Component {
           pageSize={pageSize}
           pageSizeOptions={pageSizeOptions}
           totalPageSize={this.props.total}
-          showTotalPageSize={this.props.showTotalPageSize}
+          allowShowAll={this.props.allowShowAll}
           quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
           goButton={goButton}
         />

@@ -69,7 +69,7 @@ describe('Pagination with sizer', () => {
     const wrapper = mount(
       <Pagination
         selectComponentClass={Select}
-        showTotalPageSize
+        allowShowAll
         total={1250}
         defaultPageSize={20}
       />,
@@ -100,7 +100,7 @@ describe('Pagination with sizer', () => {
     const wrapper = mount(
       <Pagination
         selectComponentClass={Select}
-        showTotalPageSize
+        allowShowAll
         total={100}
         defaultPageSize={20}
       />,
@@ -118,7 +118,7 @@ describe('Pagination with sizer', () => {
       <Pagination
         selectComponentClass={Select}
         onChange={onChange}
-        showTotalPageSize
+        allowShowAll
         total={1250}
         defaultPageSize={20}
       />,

@@ -2,11 +2,11 @@
 import React from 'react';
 import KEYCODE from './KeyCode';
 
-export const SHOW_ALL = 'SHOW_ALL';
-
 class Options extends React.Component {
   static defaultProps = {
     pageSizeOptions: ['10', '20', '50', '100'],
+    totalPageSize: 0,
+    showTotalPageSize: false,
   };
 
   state = {
@@ -59,35 +59,22 @@ class Options extends React.Component {
     }
   };
 
-  getHasIncludeShowAll() {
-    const { pageSizeOptions, totalPageSize } = this.props;
-    return [...pageSizeOptions].includes(SHOW_ALL) && totalPageSize;
-  }
-
   getPageSizeOptions() {
-    const { pageSize, pageSizeOptions, totalPageSize } = this.props;
-    const hasIncludeShowAll = this.getHasIncludeShowAll();
-    let [...displayPageSizeOptions] = pageSizeOptions;
-    if (hasIncludeShowAll) {
-      const existPageSizeOptionIndex = pageSizeOptions.findIndex(
-        (option) => option.toString() === totalPageSize.toString(),
-      );
-      if (existPageSizeOptionIndex >= 0) {
-        // prevent render duplicate option equals totalPageSize
-        displayPageSizeOptions.splice(existPageSizeOptionIndex, 1);
-      }
-      displayPageSizeOptions = displayPageSizeOptions.map((opt) =>
-        opt === SHOW_ALL ? totalPageSize.toString() : opt,
-      );
-    }
+    const {
+      pageSize,
+      pageSizeOptions,
+      showTotalPageSize,
+      totalPageSize,
+    } = this.props;
     if (
-      displayPageSizeOptions.some(
+      pageSizeOptions.some(
         (option) => option.toString() === pageSize.toString(),
-      )
+      ) ||
+      (showTotalPageSize && totalPageSize === pageSize)
     ) {
-      return displayPageSizeOptions;
+      return pageSizeOptions;
     }
-    return displayPageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
+    return pageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
       // eslint-disable-next-line no-restricted-globals
       const numberA = isNaN(Number(a)) ? 0 : Number(a);
       // eslint-disable-next-line no-restricted-globals
@@ -121,22 +108,14 @@ class Options extends React.Component {
     }
 
     const pageSizeOptions = this.getPageSizeOptions();
-    const { totalPageSize } = this.props;
-    const hasIncludeShowAll = this.getHasIncludeShowAll();
+    const { totalPageSize, showTotalPageSize } = this.props;
 
     if (changeSize && Select) {
-      const options = pageSizeOptions.map((opt, i) => {
-        const isShowAllOpt =
-          hasIncludeShowAll && opt === totalPageSize.toString();
-        const text = isShowAllOpt
-          ? this.props.locale.show_total
-          : (buildOptionText || this.buildOptionText)(opt);
-        return (
-          <Select.Option key={i} value={opt}>
-            {text}
-          </Select.Option>
-        );
-      });
+      const options = pageSizeOptions.map((opt, i) => (
+        <Select.Option key={i} value={opt}>
+          {(buildOptionText || this.buildOptionText)(opt)}
+        </Select.Option>
+      ));
 
       changeSelect = (
         <Select
@@ -151,6 +130,12 @@ class Options extends React.Component {
           getPopupContainer={(triggerNode) => triggerNode.parentNode}
         >
           {options}
+          {showTotalPageSize && (
+            <Select.Option value={totalPageSize.toString()}>
+              {this.props.locale.show_total ||
+                (buildOptionText || this.buildOptionText)(totalPageSize)}
+            </Select.Option>
+          )}
         </Select>
       );
     }

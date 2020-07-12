@@ -9,6 +9,7 @@ module.exports = {
     'react/no-array-index-key': 0,
     'react/sort-comp': 0,
     '@typescript-eslint/no-explicit-any': 0,
+    'jsx-a11y/role-supports-aria-props': 0,
     'jsx-a11y/no-noninteractive-tabindex': 0,
   },
 };

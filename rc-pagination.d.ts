@@ -13,7 +13,6 @@ declare module 'rc-pagination' {
 
     hideOnSinglePage: boolean;
     showSizeChanger: boolean;
-    allowShowAll: boolean;
     showLessItems: boolean;
     showPrevNextJumpers: boolean;
     showQuickJumper: boolean | object;
@@ -42,5 +41,7 @@ declare module 'rc-pagination' {
     showTotal?: (total: number, range: [number, number]) => React.ReactNode;
   }
 
-  export default class Pagination extends React.Component<PaginationProps> {}
+  export default class Pagination extends React.Component<PaginationProps> {
+    static SHOW_ALL: string;
+  }
 }

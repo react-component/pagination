@@ -32,7 +32,7 @@ const App = () => (
       selectComponentClass={Select}
       showQuickJumper
       showSizeChanger
-      allowShowAll
+      pageSizeOptions={['10', '20', '50', Pagination.SHOW_ALL]}
       defaultPageSize={20}
       defaultCurrent={5}
       onShowSizeChange={onShowSizeChange}

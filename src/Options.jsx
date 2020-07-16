@@ -2,11 +2,12 @@
 import React from 'react';
 import KEYCODE from './KeyCode';
 
+export const SHOW_ALL = 'SHOW_ALL';
+
 class Options extends React.Component {
   static defaultProps = {
     pageSizeOptions: ['10', '20', '50', '100'],
     totalPageSize: 0,
-    allowShowAll: false,
   };
 
   state = {
@@ -59,15 +60,19 @@ class Options extends React.Component {
     }
   };
 
+  getHasIncludeShowAll() {
+    const { pageSizeOptions } = this.props;
+    return [...pageSizeOptions].includes(SHOW_ALL);
+  }
+
   getPageSizeOptions() {
-    const {
-      pageSize,
-      pageSizeOptions,
-      allowShowAll,
-      totalPageSize,
-    } = this.props;
-    const [...displayPageSizeOptions] = pageSizeOptions;
-    if (allowShowAll) {
+    const { pageSize, pageSizeOptions, totalPageSize } = this.props;
+    const hasIncludeShowAll = this.getHasIncludeShowAll();
+    let [...displayPageSizeOptions] = pageSizeOptions;
+    displayPageSizeOptions = displayPageSizeOptions.filter(
+      (opt) => opt !== SHOW_ALL,
+    );
+    if (hasIncludeShowAll) {
       const existPageSizeOptionIndex = pageSizeOptions.findIndex(
         (option) => option.toString() === totalPageSize.toString(),
       );
@@ -80,7 +85,7 @@ class Options extends React.Component {
       displayPageSizeOptions.some(
         (option) => option.toString() === pageSize.toString(),
       ) ||
-      (allowShowAll && totalPageSize === pageSize)
+      (hasIncludeShowAll && totalPageSize === pageSize)
     ) {
       return displayPageSizeOptions;
     }
@@ -118,7 +123,8 @@ class Options extends React.Component {
     }
 
     const pageSizeOptions = this.getPageSizeOptions();
-    const { totalPageSize, allowShowAll } = this.props;
+    const { totalPageSize } = this.props;
+    const hasIncludeShowAll = this.getHasIncludeShowAll();
 
     if (changeSize && Select) {
       const options = pageSizeOptions.map((opt, i) => (
@@ -140,7 +146,7 @@ class Options extends React.Component {
           getPopupContainer={(triggerNode) => triggerNode.parentNode}
         >
           {options}
-          {allowShowAll && (
+          {hasIncludeShowAll && (
             <Select.Option value={totalPageSize.toString()}>
               {this.props.locale.show_total ||
                 (buildOptionText || this.buildOptionText)(totalPageSize)}

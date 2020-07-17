@@ -65,18 +65,18 @@ describe('Pagination with sizer', () => {
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
 
-  it('should show display all option when includes show all', () => {
+  it('should show display all option at index 3 when includes show all', () => {
     const wrapper = mount(
       <Pagination
         selectComponentClass={Select}
-        pageSizeOptions={['10', '20', '50', '100', Pagination.SHOW_ALL]}
+        pageSizeOptions={['10', '20', '50', Pagination.SHOW_ALL, '100']}
         total={1250}
         defaultPageSize={20}
       />,
     );
     wrapper.find(Select).find('input').simulate('mousedown');
     expect(wrapper.find(Select).find('.rc-select-item').length).toBe(5);
-    expect(wrapper.find(Select).find('.rc-select-item').at(4).text()).toBe(
+    expect(wrapper.find(Select).find('.rc-select-item').at(3).text()).toBe(
       '显示全部',
     );
   });

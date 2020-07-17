@@ -7,7 +7,6 @@ export const SHOW_ALL = 'SHOW_ALL';
 class Options extends React.Component {
   static defaultProps = {
     pageSizeOptions: ['10', '20', '50', '100'],
-    totalPageSize: 0,
   };
 
   state = {
@@ -61,17 +60,14 @@ class Options extends React.Component {
   };
 
   getHasIncludeShowAll() {
-    const { pageSizeOptions } = this.props;
-    return [...pageSizeOptions].includes(SHOW_ALL);
+    const { pageSizeOptions, totalPageSize } = this.props;
+    return [...pageSizeOptions].includes(SHOW_ALL) && totalPageSize;
   }
 
   getPageSizeOptions() {
     const { pageSize, pageSizeOptions, totalPageSize } = this.props;
     const hasIncludeShowAll = this.getHasIncludeShowAll();
     let [...displayPageSizeOptions] = pageSizeOptions;
-    displayPageSizeOptions = displayPageSizeOptions.filter(
-      (opt) => opt !== SHOW_ALL,
-    );
     if (hasIncludeShowAll) {
       const existPageSizeOptionIndex = pageSizeOptions.findIndex(
         (option) => option.toString() === totalPageSize.toString(),
@@ -80,12 +76,14 @@ class Options extends React.Component {
         // prevent render duplicate option equals totalPageSize
         displayPageSizeOptions.splice(existPageSizeOptionIndex, 1);
       }
+      displayPageSizeOptions = displayPageSizeOptions.map((opt) =>
+        opt === SHOW_ALL ? totalPageSize.toString() : opt,
+      );
     }
     if (
       displayPageSizeOptions.some(
         (option) => option.toString() === pageSize.toString(),
-      ) ||
-      (hasIncludeShowAll && totalPageSize === pageSize)
+      )
     ) {
       return displayPageSizeOptions;
     }
@@ -127,11 +125,18 @@ class Options extends React.Component {
     const hasIncludeShowAll = this.getHasIncludeShowAll();
 
     if (changeSize && Select) {
-      const options = pageSizeOptions.map((opt, i) => (
-        <Select.Option key={i} value={opt}>
-          {(buildOptionText || this.buildOptionText)(opt)}
-        </Select.Option>
-      ));
+      const options = pageSizeOptions.map((opt, i) => {
+        const isShowAllOpt =
+          hasIncludeShowAll && opt === totalPageSize.toString();
+        const text = isShowAllOpt
+          ? this.props.locale.show_total
+          : (buildOptionText || this.buildOptionText)(opt);
+        return (
+          <Select.Option key={i} value={opt}>
+            {text}
+          </Select.Option>
+        );
+      });
 
       changeSelect = (
         <Select
@@ -146,12 +151,6 @@ class Options extends React.Component {
           getPopupContainer={(triggerNode) => triggerNode.parentNode}
         >
           {options}
-          {hasIncludeShowAll && (
-            <Select.Option value={totalPageSize.toString()}>
-              {this.props.locale.show_total ||
-                (buildOptionText || this.buildOptionText)(totalPageSize)}
-            </Select.Option>
-          )}
         </Select>
       );
     }

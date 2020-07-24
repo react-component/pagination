@@ -20,7 +20,7 @@ function defaultItemRender(page, type, element) {
 }
 
 function calculatePage(p, state, props) {
-  const pageSize = typeof p === 'undefined' ? state.pageSize : p;
+  const pageSize = typeof p === 'undefined' ? state?.pageSize ?? Pagination.defaultProps.defaultPageSize : p;
   return Math.floor((props.total - 1) / pageSize) + 1;
 }
 
@@ -57,19 +57,9 @@ class Pagination extends React.Component {
         'Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.',
       );
     }
-
-    let current = props.defaultCurrent;
-    if ('current' in props) {
-      // eslint-disable-next-line prefer-destructuring
-      current = props.current;
-    }
-
-    let pageSize = props.defaultPageSize;
-    if ('pageSize' in props) {
-      // eslint-disable-next-line prefer-destructuring
-      pageSize = props.pageSize;
-    }
-
+    
+    const pageSize = props?.pageSize ?? props.defaultPageSize;
+    let current = props?.current ?? props.defaultCurrent;
     current = Math.min(current, calculatePage(pageSize, undefined, props));
 
     this.state = {

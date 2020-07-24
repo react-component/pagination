@@ -20,7 +20,7 @@ function defaultItemRender(page, type, element) {
 }
 
 function calculatePage(p, state, props) {
-  const pageSize = typeof p === 'undefined' ? state?.pageSize ?? Pagination.defaultProps.defaultPageSize : p;
+  const pageSize = typeof p === 'undefined' ? state?.pageSize ?? 10 : p;
   return Math.floor((props.total - 1) / pageSize) + 1;
 }
 

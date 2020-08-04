@@ -233,7 +233,6 @@ class Pagination extends React.Component {
     if ('onChange' in this.props && this.props.onChange) {
       this.props.onChange(current, size);
     }
-
   };
 
   handleChange = (p) => {
@@ -441,7 +440,12 @@ class Pagination extends React.Component {
 
       return (
         <ul
-          className={classNames(prefixCls, `${prefixCls}-simple`, className)}
+          className={classNames(
+            prefixCls,
+            `${prefixCls}-simple`,
+            { [`${prefixCls}-disabled`]: disabled },
+            className,
+          )}
           style={style}
           ref={this.savePaginationNode}
           {...dataOrAriaAttributeProps}
@@ -465,6 +469,7 @@ class Pagination extends React.Component {
             <input
               type="text"
               value={currentInputValue}
+              disabled={disabled}
               onKeyDown={this.handleKeyDown}
               onKeyUp={this.handleKeyUp}
               onChange={this.handleKeyUp}

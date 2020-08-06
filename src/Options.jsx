@@ -31,7 +31,8 @@ class Options extends React.Component {
 
   handleBlur = (e) => {
     const { goButton, quickGo, rootPrefixCls } = this.props;
-    if (goButton) {
+    const { goInputText } = this.state;
+    if (goButton || goInputText === '') {
       return;
     }
     if (
@@ -41,6 +42,9 @@ class Options extends React.Component {
     ) {
       return;
     }
+    this.setState({
+      goInputText: '',
+    });
     quickGo(this.getValidValue());
   };
 

@@ -538,7 +538,7 @@ class Pagination extends React.Component {
             {itemRender(
               this.getJumpPrevPage(),
               'jump-prev',
-              this.getItemIcon(jumpPrevIcon),
+              this.getItemIcon(jumpPrevIcon, 'prev page'),
             )}
           </li>
         );
@@ -556,7 +556,7 @@ class Pagination extends React.Component {
             {itemRender(
               this.getJumpNextPage(),
               'jump-next',
-              this.getItemIcon(jumpNextIcon),
+              this.getItemIcon(jumpNextIcon, 'next page'),
             )}
           </li>
         );

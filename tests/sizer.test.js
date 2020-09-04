@@ -64,4 +64,19 @@ describe('Pagination with sizer', () => {
     expect(onChange).toBeCalled();
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
+
+  // https://github.com/ant-design/ant-design/issues/26580
+  it('should contains locale text in selected pageSize when pageSizeOptions are numbers', () => {
+    const wrapper = mount(
+      <Pagination
+        selectComponentClass={Select}
+        total={500}
+        defaultPageSize={20}
+        pageSizeOptions={[20, 50]}
+      />,
+    );
+    expect(wrapper.find(Select).find('.rc-select-selection-item').text()).toBe(
+      '20 条/页',
+    );
+  });
 });

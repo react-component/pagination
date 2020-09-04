@@ -107,7 +107,7 @@ class Options extends React.Component {
 
     if (changeSize && Select) {
       const options = pageSizeOptions.map((opt, i) => (
-        <Select.Option key={i} value={opt}>
+        <Select.Option key={i} value={opt.toString()}>
           {(buildOptionText || this.buildOptionText)(opt)}
         </Select.Option>
       ));
@@ -122,7 +122,7 @@ class Options extends React.Component {
           dropdownMatchSelectWidth={false}
           value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={this.changeSize}
-          getPopupContainer={(triggerNode) => triggerNode.parentNode}
+          getPopupContainer={triggerNode => triggerNode.parentNode}
         >
           {options}
         </Select>

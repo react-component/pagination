@@ -1,6 +1,7 @@
 export default {
   // Options.jsx
   items_per_page: '/ page',
+  show_total: 'Display All',
   jump_to: 'Go to',
   jump_to_confirm: 'confirm',
   page: '',

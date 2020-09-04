@@ -41,5 +41,7 @@ declare module 'rc-pagination' {
     showTotal?: (total: number, range: [number, number]) => React.ReactNode;
   }
 
-  export default class Pagination extends React.Component<PaginationProps> {}
+  export default class Pagination extends React.Component<PaginationProps> {
+    static SHOW_ALL: string;
+  }
 }

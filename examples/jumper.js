@@ -30,6 +30,18 @@ const App = () => (
     <br />
     <Pagination
       selectComponentClass={Select}
+      showQuickJumper
+      showSizeChanger
+      pageSizeOptions={['10', '20', '50', Pagination.SHOW_ALL]}
+      defaultPageSize={20}
+      defaultCurrent={5}
+      onShowSizeChange={onShowSizeChange}
+      onChange={onChange}
+      total={1435}
+    />
+    <br />
+    <Pagination
+      selectComponentClass={Select}
       showQuickJumper={{ goButton: true }}
       showSizeChanger
       defaultPageSize={20}

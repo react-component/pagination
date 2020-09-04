@@ -2,7 +2,7 @@
 import React, { cloneElement, isValidElement } from 'react';
 import classNames from 'classnames';
 import Pager from './Pager';
-import Options from './Options';
+import Options, { SHOW_ALL } from './Options';
 import KEYCODE from './KeyCode';
 import LOCALE from './locale/zh_CN';
 
@@ -704,6 +704,7 @@ class Pagination extends React.Component {
           current={current}
           pageSize={pageSize}
           pageSizeOptions={pageSizeOptions}
+          totalPageSize={this.props.total}
           quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
           goButton={goButton}
         />
@@ -711,5 +712,7 @@ class Pagination extends React.Component {
     );
   }
 }
+
+Pagination.SHOW_ALL = SHOW_ALL;
 
 export default Pagination;

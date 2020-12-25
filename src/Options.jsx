@@ -12,9 +12,9 @@ class Options extends React.Component {
   };
 
   getValidValue() {
-    const { goInputText, current } = this.state;
+    const { goInputText } = this.state;
     // eslint-disable-next-line no-restricted-globals
-    return !goInputText || isNaN(goInputText) ? current : Number(goInputText);
+    return !goInputText || isNaN(goInputText) ? undefined : Number(goInputText);
   }
 
   buildOptionText = (value) => `${value} ${this.props.locale.items_per_page}`;

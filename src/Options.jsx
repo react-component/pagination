@@ -12,7 +12,8 @@ class Options extends React.Component {
   };
 
   getValidValue() {
-    const { goInputText, current } = this.state;
+    const { goInputText } = this.state;
+    const { current } = this.props;
     // eslint-disable-next-line no-restricted-globals
     return !goInputText || isNaN(goInputText) ? current : Number(goInputText);
   }

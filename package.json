@@ -59,7 +59,7 @@
     "enzyme-to-json": "^3.4.0",
     "eslint": "^7.0.0",
     "father": "^2.13.4",
-    "less": "^3.10.3",
+    "less": "^4.1.0",
     "np": "^7.0.0",
     "prettier": "^2.0.1",
     "pretty-quick": "^3.0.0",

@@ -9,7 +9,7 @@ React Pagination Component.
 [![Test coverage][coveralls-image]][coveralls-url]
 [![codecov](https://codecov.io/gh/react-component/pagination/branch/master/graph/badge.svg)](https://codecov.io/gh/react-component/pagination)
 [![Dependencies](https://img.shields.io/david/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination)
-[![DevDependencies](https://img.shields.io/david/dev/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination?type=dev)
+[![DevDependencies](https://img.shields.io/david/dev/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination?type=dev) [![Meercode CI Score](https://meercode.io/badge/react-component/pagination?type=ci-score&branch=master)](https://meercode.io/react-component/pagination)
 [![npm download][download-image]][download-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-pagination.svg?style=flat-square

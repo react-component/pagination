@@ -38,6 +38,32 @@ describe('Pagination with jumper', () => {
     expect(wrapper.state().current).toBe(10);
     expect(onChange).not.toBeCalled();
   });
+
+  it('should not jumper when click pre/next button', () => {
+    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
+    const input = quickJumper.find('input');
+    input.simulate('change', { target: { value: '13' } });
+    const preBtn = wrapper.find('[aria-label="prev page"]').at(0);
+    preBtn.simulate('click');
+    expect(wrapper.state().current).toBe(9);
+    // expect(input.instance().value).toBe('');
+
+    input.simulate('change', { target: { value: '15' } });
+    const nextBtn = wrapper.find('[aria-label="next page"]').at(0);
+    nextBtn.simulate('click');
+    expect(wrapper.state().current).toBe(10);
+    // expect(input.instance().value).toBe('');
+  });
+
+  it('should not jumper when click page', () => {
+    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
+    const input = quickJumper.find('input');
+    input.simulate('change', { target: { value: '13' } });
+    const preBtn = wrapper.find('.rc-pagination-item-1').at(0);
+    preBtn.simulate('click');
+    expect(wrapper.state().current).toBe(1);
+    expect(input.instance().value).toBe('');
+  });
 });
 
 describe('simple quick jumper', () => {

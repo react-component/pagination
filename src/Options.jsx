@@ -35,16 +35,16 @@ class Options extends React.Component {
     if (goButton || goInputText === '') {
       return;
     }
-    if (
-      e.relatedTarget &&
-      (e.relatedTarget.className.indexOf(`${rootPrefixCls}-prev`) >= 0 ||
-        e.relatedTarget.className.indexOf(`${rootPrefixCls}-next`) >= 0)
-    ) {
-      return;
-    }
     this.setState({
       goInputText: '',
     });
+    if (
+      e.relatedTarget &&
+      (e.relatedTarget.className.indexOf(`${rootPrefixCls}-item-link`) >= 0 ||
+        e.relatedTarget.className.indexOf(`${rootPrefixCls}-item`) >= 0)
+    ) {
+      return;
+    }
     quickGo(this.getValidValue());
   };
 
@@ -122,7 +122,7 @@ class Options extends React.Component {
           dropdownMatchSelectWidth={false}
           value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={this.changeSize}
-          getPopupContainer={triggerNode => triggerNode.parentNode}
+          getPopupContainer={(triggerNode) => triggerNode.parentNode}
         >
           {options}
         </Select>

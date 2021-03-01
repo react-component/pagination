@@ -43,26 +43,28 @@ describe('Pagination with jumper', () => {
     const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
     const input = quickJumper.find('input');
     input.simulate('change', { target: { value: '13' } });
-    const preBtn = wrapper.find('[aria-label="prev page"]').at(0);
-    preBtn.simulate('click');
-    expect(wrapper.state().current).toBe(9);
-    // expect(input.instance().value).toBe('');
-
-    input.simulate('change', { target: { value: '15' } });
-    const nextBtn = wrapper.find('[aria-label="next page"]').at(0);
-    nextBtn.simulate('click');
-    expect(wrapper.state().current).toBe(10);
-    // expect(input.instance().value).toBe('');
+    const mockEvent = {
+      relatedTarget: {
+        className: 'rc-pagination-item-link',
+      },
+    };
+    input.simulate('blur', mockEvent);
+    expect(input.instance().value).toBe('');
+    expect(onChange).not.toBeCalled();
   });
 
   it('should not jumper when click page', () => {
     const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
     const input = quickJumper.find('input');
     input.simulate('change', { target: { value: '13' } });
-    const preBtn = wrapper.find('.rc-pagination-item-1').at(0);
-    preBtn.simulate('click');
-    expect(wrapper.state().current).toBe(1);
+    const mockEvent = {
+      relatedTarget: {
+        className: 'rc-pagination-item',
+      },
+    };
+    input.simulate('blur', mockEvent);
     expect(input.instance().value).toBe('');
+    expect(onChange).not.toBeCalled();
   });
 });
 

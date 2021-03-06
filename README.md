@@ -1,16 +1,8 @@
 # rc-pagination
 
----
-
 React Pagination Component.
 
-[![NPM version][npm-image]][npm-url]
-[![build status][github-actions-image]][github-actions-url]
-[![Test coverage][coveralls-image]][coveralls-url]
-[![codecov](https://codecov.io/gh/react-component/pagination/branch/master/graph/badge.svg)](https://codecov.io/gh/react-component/pagination)
-[![Dependencies](https://img.shields.io/david/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination)
-[![DevDependencies](https://img.shields.io/david/dev/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination?type=dev)
-[![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url] [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi) [![build status][github-actions-image]][github-actions-url] [![Test coverage][coveralls-image]][coveralls-url] [![codecov](https://codecov.io/gh/react-component/pagination/branch/master/graph/badge.svg)](https://codecov.io/gh/react-component/pagination) [![Dependencies](https://img.shields.io/david/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination) [![DevDependencies](https://img.shields.io/david/dev/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination?type=dev) [![npm download][download-image]][download-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-pagination.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-pagination
@@ -32,7 +24,7 @@ npm start
 
 http://localhost:9001
 
-online example: http://react-component.github.io/pagination/
+online example: https://pagination-react-component.vercel.app
 
 ## Install
 

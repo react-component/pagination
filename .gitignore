@@ -31,3 +31,8 @@ coverage/
 .doc
 dist
 .vscode
+# umi
+.umi
+.umi-production
+.umi-test
+.env.local

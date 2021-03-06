@@ -1,6 +1,6 @@
-import '../assets/index.less';
+import '../../assets/index.less';
 import React from 'react';
-import Pagination from '..';
+import Pagination from 'rc-pagination';
 
 const itemRender = (current, type, element) => {
   if (type === 'page') {

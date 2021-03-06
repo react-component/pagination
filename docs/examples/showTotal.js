@@ -1,6 +1,6 @@
 import React from 'react';
-import Pagination from '..';
-import '../assets/index.less';
+import Pagination from 'rc-pagination';
+import '../../assets/index.less';
 
 const App = () => (
   <>

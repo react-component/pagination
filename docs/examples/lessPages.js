@@ -1,7 +1,7 @@
 /* eslint func-names: 0, no-console: 0 */
 import React from 'react';
-import Pagination from '..';
-import '../assets/index.less';
+import Pagination from 'rc-pagination';
+import '../../assets/index.less';
 
 const arrowPath =
   'M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h' +

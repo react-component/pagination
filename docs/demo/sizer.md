@@ -1,3 +1,3 @@
 ## sizer
 
-<code src="../examples/sizer.js">
+<code src="../examples/sizer.jsx">

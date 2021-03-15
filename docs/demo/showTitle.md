@@ -1,3 +1,3 @@
 ## showTitle
 
-<code src="../examples/showTitle.js">
+<code src="../examples/showTitle.jsx">

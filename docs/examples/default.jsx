@@ -10,7 +10,7 @@ export default class App extends React.Component {
   };
 
   onChange = page => {
-    console.log(page);
+    // console.log(page);
     this.setState({
       current: page,
     });
@@ -20,7 +20,7 @@ export default class App extends React.Component {
     return (
       <Pagination
         onChange={this.onChange}
-        current={this.state.current}
+        current={1}
         total={25}
       />
     );

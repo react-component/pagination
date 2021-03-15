@@ -1,3 +1,3 @@
 ## more
 
-<code src="../examples/more.js">
+<code src="../examples/more.jsx">

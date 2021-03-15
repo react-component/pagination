@@ -1,3 +1,3 @@
 ## styles
 
-<code src="../examples/styles.js">
+<code src="../examples/styles.jsx">

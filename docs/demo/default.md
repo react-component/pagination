@@ -1,3 +1,3 @@
 ## default
 
-<code src="../examples/default.js">
+<code src="../examples/default.jsx">

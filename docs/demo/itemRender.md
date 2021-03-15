@@ -1,3 +1,3 @@
 ## itemRender
 
-<code src="../examples/itemRender.js">
+<code src="../examples/itemRender.jsx">

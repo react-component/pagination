@@ -1,3 +1,3 @@
 ## showTotal
 
-<code src="../examples/showTotal.js">
+<code src="../examples/showTotal.jsx">

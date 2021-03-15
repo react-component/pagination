@@ -1,3 +1,3 @@
 ## locale
 
-<code src="../examples/locale.js">
+<code src="../examples/locale.jsx">

@@ -1,3 +1,3 @@
 ## lessPages
 
-<code src="../examples/lessPages.js">
+<code src="../examples/lessPages.jsx">

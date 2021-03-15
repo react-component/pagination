@@ -1,3 +1,3 @@
 ## simple
 
-<code src="../examples/simple.js">
+<code src="../examples/simple.jsx">

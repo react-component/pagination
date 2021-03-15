@@ -1,3 +1,3 @@
 ## jumperWithGoButton
 
-<code src="../examples/jumperWithGoButton.js">
+<code src="../examples/jumperWithGoButton.jsx">

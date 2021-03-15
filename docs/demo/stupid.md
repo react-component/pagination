@@ -1,3 +1,3 @@
 ## stupid
 
-<code src="../examples/stupid.js">
+<code src="../examples/stupid.jsx">

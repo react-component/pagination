@@ -1,3 +1,3 @@
 ## jumper
 
-<code src="../examples/jumper.js">
+<code src="../examples/jumper.jsx">

@@ -90,11 +90,6 @@ class Pagination extends React.Component {
       if (lastCurrentNode && document.activeElement === lastCurrentNode) {
         lastCurrentNode.blur();
       }
-    } else if (this.paginationNode) {
-      const activeNode = this.paginationNode.querySelector(
-        `.${prefixCls}-item-active`,
-      );
-      activeNode?.focus();
     }
   }
 

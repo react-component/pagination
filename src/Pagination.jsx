@@ -79,18 +79,19 @@ class Pagination extends React.Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate() {
     // When current page change, fix focused style of prev item
     // A hacky solution of https://github.com/ant-design/ant-design/issues/8948
+    if (!this.paginationNode) {
+      return;
+    }
+
     const { prefixCls } = this.props;
-    if (prevState.current !== this.state.current && this.paginationNode) {
-      const lastCurrentNode = this.paginationNode.querySelector(
-        `.${prefixCls}-item-${prevState.current}`,
-      );
-      if (lastCurrentNode && document.activeElement === lastCurrentNode) {
-        lastCurrentNode.blur();
-      }
-    } else if (this.paginationNode) {
+    if (
+      document.activeElement.className !== 'rc-pagination-item-link' &&
+      document.activeElement.parentElement.className !==
+        'rc-pagination-options-quick-jumper'
+    ) {
       const activeNode = this.paginationNode.querySelector(
         `.${prefixCls}-item-active`,
       );
@@ -252,12 +253,10 @@ class Pagination extends React.Component {
         page = 1;
       }
 
-      if (!('current' in this.props)) {
-        this.setState({
-          current: page,
-          currentInputValue: page,
-        });
-      }
+      this.setState({
+        current: page,
+        currentInputValue: page,
+      });
 
       const { pageSize } = this.state;
       this.props.onChange(page, pageSize);

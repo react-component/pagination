@@ -19,7 +19,7 @@ declare module 'rc-pagination' {
     showTitle: boolean;
     simple: boolean;
 
-    locale: object;
+    locale: PaginationLocale;
 
     style: React.CSSProperties;
 
@@ -28,6 +28,22 @@ declare module 'rc-pagination' {
     nextIcon: React.ComponentType | React.ReactNode;
     jumpPrevIcon: React.ComponentType | React.ReactNode;
     jumpNextIcon: React.ComponentType | React.ReactNode;
+  }
+
+  export interface PaginationLocale {
+    // Options.jsx
+    items_per_page?: string;
+    jump_to?: string;
+    jump_to_confirm?: string;
+    page?: string;
+
+    // Pagination.jsx
+    prev_page?: string;
+    next_page?: string;
+    prev_5?: string;
+    next_5?: string;
+    prev_3?: string;
+    next_3?: string;
   }
 
   export interface PaginationProps extends Partial<PaginationData> {

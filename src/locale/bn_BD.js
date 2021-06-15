@@ -7,7 +7,7 @@ export default {
 
   // Pagination.jsx
   prev_page: 'আগের পৃষ্ঠা',
-  next_page: 'পরবর্তী পৃষ্ঠা',
+  next_page: 'পরের পৃষ্ঠা',
   prev_5: 'পূর্ববর্তী ৫ পৃষ্ঠা',
   next_5: 'পরবর্তী ৫ পৃষ্ঠা',
   prev_3: 'পূর্ববর্তী ৩ পৃষ্ঠা',

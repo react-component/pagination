@@ -1,5 +1,5 @@
 ---
-title: rc-image
+title: rc-pagination
 ---
 
 <embed src="../README.md"></embed>

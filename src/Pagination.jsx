@@ -293,7 +293,7 @@ class Pagination extends React.Component {
     if (typeof showSizeChanger !== 'undefined') {
       return showSizeChanger;
     }
-    return total > totalBoundaryShowSizeChanger;
+    return total > totalBoundaryShowSizeChanger && !('pageSize' in this.props);
   }
 
   runIfEnter = (event, callback, ...restParams) => {

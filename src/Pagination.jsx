@@ -509,8 +509,8 @@ class Pagination extends React.Component {
           <Pager
             {...pagerProps}
             key="noPager"
-            page={allPages}
-            className={`${prefixCls}-disabled`}
+            page={1}
+            className={`${prefixCls}-item-disabled`}
           />,
         );
       }

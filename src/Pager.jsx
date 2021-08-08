@@ -4,16 +4,11 @@ import classNames from 'classnames';
 
 const Pager = (props) => {
   const prefixCls = `${props.rootPrefixCls}-item`;
-  const cls = classNames(
-    prefixCls,
-    `${prefixCls}-${props.page}`,
-    {
-      [`${prefixCls}-active`]: props.active,
-      [props.className]: !!props.className,
-      [`${prefixCls}-disabled`]: !props.page,
-    },
-    props.className,
-  );
+  const cls = classNames(prefixCls, `${prefixCls}-${props.page}`, {
+    [`${prefixCls}-active`]: props.active,
+    [`${prefixCls}-disabled`]: !props.page,
+    [props.className]: !!props.className,
+  });
 
   const handleClick = () => {
     props.onClick(props.page);

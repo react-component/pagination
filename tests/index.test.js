@@ -324,9 +324,10 @@ describe('current value on onShowSizeChange when total is 0', () => {
     );
   });
 
-  it('when total is 0, pager should show and disabled', () => {
+  it('when total is 0, pager should show `1` and being disabled', () => {
     const itemButton = wrapper.find('.rc-pagination-item');
     expect(itemButton.hasClass('rc-pagination-item-disabled')).toBe(true);
+    expect(itemButton.text()).toBe('1');
   });
 
   it('when total is 0, `from` and `to` should be 0', () => {

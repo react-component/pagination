@@ -3,7 +3,7 @@ export default {
   items_per_page: '/ Seite',
   jump_to: 'Gehe zu',
   jump_to_confirm: 'bestätigen',
-  page: '',
+  page: 'Seite',
 
   // Pagination.jsx
   prev_page: 'Vorherige Seite',
@@ -12,4 +12,5 @@ export default {
   next_5: '5 Seiten vor',
   prev_3: '3 Seiten zurück',
   next_3: '3 Seiten vor',
+  page_size: 'Page Size',
 };

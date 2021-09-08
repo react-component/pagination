@@ -3,7 +3,7 @@ export default {
   items_per_page: '/ side',
   jump_to: 'Gå til',
   jump_to_confirm: 'bekræft',
-  page: '',
+  page: 'Side',
 
   // Pagination.jsx
   prev_page: 'Forrige Side',
@@ -12,4 +12,5 @@ export default {
   next_5: 'Næste 5 Sider',
   prev_3: 'Forrige 3 Sider',
   next_3: 'Næste 3 Sider',
+  page_size: 'sidestørrelse',
 };

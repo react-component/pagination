@@ -3,7 +3,7 @@ export default {
   items_per_page: '/ página',
   jump_to: 'Saltar',
   jump_to_confirm: 'confirmar',
-  page: '',
+  page: 'Página',
 
   // Pagination.jsx
   prev_page: 'Página Anterior',
@@ -12,4 +12,5 @@ export default {
   next_5: 'Avançar 5 Páginas',
   prev_3: 'Recuar 3 Páginas',
   next_3: 'Avançar 3 Páginas',
+  page_size: 'mărimea paginii',
 };

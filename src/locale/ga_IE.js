@@ -12,4 +12,5 @@ export default {
   next_5: 'Ar Aghaidh 5 Leathanaigh',
   prev_3: '3 leathanach roimhe seo',
   next_3: 'Ar Aghaidh 3 Leathanaigh',
+  page_size: 'Page Size',
 };

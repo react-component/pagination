@@ -12,4 +12,5 @@ export default {
   next_5: 'اگلے 5 صفحات',
   prev_3: 'پچھلے 3 صفحات',
   next_3: 'اگلے 3 صفحات',
+  page_size: 'Page Size',
 };

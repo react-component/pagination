@@ -12,4 +12,5 @@ export default {
   next_5: 'Наредни 5 страници',
   prev_3: 'Претходни 3 страници',
   next_3: 'Наредни 3 страници',
+  page_size: 'Page Size',
 };

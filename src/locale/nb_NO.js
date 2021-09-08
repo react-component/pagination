@@ -2,7 +2,7 @@ export default {
   // Options.jsx
   items_per_page: '/ side',
   jump_to: 'Gå til side',
-  page: '',
+  page: 'Side',
 
   // Pagination.jsx
   prev_page: 'Forrige side',
@@ -11,4 +11,5 @@ export default {
   next_5: '5 neste',
   prev_3: '3 forrige',
   next_3: '3 neste',
+  page_size: 'sidestørrelse',
 };

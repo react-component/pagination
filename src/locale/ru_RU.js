@@ -3,7 +3,7 @@ export default {
   items_per_page: '/ стр.',
   jump_to: 'Перейти',
   jump_to_confirm: 'подтвердить',
-  page: '',
+  page: 'Страница',
 
   // Pagination.jsx
   prev_page: 'Назад',
@@ -12,4 +12,5 @@ export default {
   next_5: 'Следующие 5',
   prev_3: 'Предыдущие 3',
   next_3: 'Следующие 3',
+  page_size: 'размер страницы',
 };

@@ -12,4 +12,5 @@ export default {
   next_5: 'ਅਗਲੇ 5 ਪੰਨੇ',
   prev_3: 'ਪਿਛਲੇ 3 ਪੰਨੇ',
   next_3: 'ਅਗਲੇ 3 ਪੰਨੇ',
+  page_size: 'Page Size',
 };

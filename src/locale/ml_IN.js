@@ -12,4 +12,5 @@ export default {
   next_5: 'അടുത്ത 5 പേജുകൾ',
   prev_3: 'മുൻപുള്ള 3 പേജുകൾ',
   next_3: 'അടുത്ത 3 പേജുകൾ',
+  page_size: 'Page Size',
 };

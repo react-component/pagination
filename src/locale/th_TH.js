@@ -3,7 +3,7 @@ export default {
   items_per_page: '/ หน้า',
   jump_to: 'ไปยัง',
   jump_to_confirm: 'ยืนยัน',
-  page: '',
+  page: 'หน้า',
 
   // Pagination.jsx
   prev_page: 'หน้าก่อนหน้า',
@@ -12,4 +12,5 @@ export default {
   next_5: 'ถัดไป 5 หน้า',
   prev_3: 'ย้อนกลับ 3 หน้า',
   next_3: 'ถัดไป 3 หน้า',
+  page_size: 'ขนาดหน้า',
 };

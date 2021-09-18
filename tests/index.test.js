@@ -3,6 +3,27 @@ import { mount } from 'enzyme';
 import Select from 'rc-select';
 import Pagination from '../src';
 
+describe('Default Pagination', () => {
+  let wrapper;
+  const onChange = jest.fn();
+
+  beforeEach(() => {
+    wrapper = mount(<Pagination onChange={onChange} />);
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
+    onChange.mockReset();
+  });
+
+  it('onChange should be forbidden when total is default', () => {
+    const pagers = wrapper.find('.rc-pagination-item');
+    const page1 = pagers.at(0);
+    page1.simulate('click');
+    expect(onChange).toBeCalledTimes(0);
+  });
+});
+
 describe('Uncontrolled Pagination', () => {
   let wrapper;
   const onChange = jest.fn();

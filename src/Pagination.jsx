@@ -170,7 +170,10 @@ class Pagination extends React.Component {
     this.paginationNode = node;
   };
 
-  isValid = (page) => isInteger(page) && page !== this.state.current;
+  isValid = (page) => {
+    const { total } = this.props;
+    return isInteger(page) && page !== this.state.current && isInteger(total) && total > 0;
+  };
 
   shouldDisplayQuickJumper = () => {
     const { showQuickJumper, pageSize, total } = this.props;

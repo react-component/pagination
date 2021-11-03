@@ -172,7 +172,12 @@ class Pagination extends React.Component {
 
   isValid = (page) => {
     const { total } = this.props;
-    return isInteger(page) && page !== this.state.current && isInteger(total) && total > 0;
+    return (
+      isInteger(page) &&
+      page !== this.state.current &&
+      isInteger(total) &&
+      total > 0
+    );
   };
 
   shouldDisplayQuickJumper = () => {
@@ -204,6 +209,11 @@ class Pagination extends React.Component {
     } else if (e.keyCode === KEYCODE.ARROW_DOWN) {
       this.handleChange(value + 1);
     }
+  };
+
+  handleBlur = (e) => {
+    const value = this.getValidValue(e);
+    this.handleChange(value);
   };
 
   changePageSize = (size) => {
@@ -476,6 +486,7 @@ class Pagination extends React.Component {
               onKeyDown={this.handleKeyDown}
               onKeyUp={this.handleKeyUp}
               onChange={this.handleKeyUp}
+              onBlur={this.handleBlur}
               size="3"
             />
             <span className={`${prefixCls}-slash`}>/</span>

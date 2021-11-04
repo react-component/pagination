@@ -31,12 +31,12 @@ describe('Pagination with jumper', () => {
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
 
-  it('should call onChange when value changed and input blur', () => {
+  it('should not call onChange when blur input', () => {
     const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
     const input = quickJumper.find('input');
-    input.simulate('change', { target: { value: '2' } });
     input.simulate('blur');
-    expect(onChange).toBeCalled();
+    expect(wrapper.state().current).toBe(10);
+    expect(onChange).not.toBeCalled();
   });
 
   it('should not jumper when click pre/next button', () => {

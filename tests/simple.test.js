@@ -22,6 +22,18 @@ describe('simple Pagination', () => {
     wrapper.unmount();
   });
 
+  it('input change value will emit onChange when input blur', () => {
+    const onChange = jest.fn();
+    const component = mount(
+      <Pagination simple total={25} onChange={onChange} />,
+    );
+    const greaterCurrent = component.find('.rc-pagination-simple');
+    const input = greaterCurrent.find('input');
+    input.simulate('change', { target: { value: '2' } });
+    input.simulate('blur');
+    expect(onChange).toBeCalled();
+  });
+
   it('default current page is 1', () => {
     expect(wrapper.state().current).toBe(1);
   });

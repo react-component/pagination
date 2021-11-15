@@ -12,4 +12,5 @@ export default {
   next_5: 'Келесі 5',
   prev_3: 'Алдыңғы 3',
   next_3: 'Келесі 3',
+  page_size: 'Page Size',
 };

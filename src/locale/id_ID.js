@@ -3,7 +3,7 @@ export default {
   items_per_page: '/ halaman',
   jump_to: 'Menuju',
   jump_to_confirm: 'konfirmasi',
-  page: '',
+  page: 'Halaman',
 
   // Pagination.jsx
   prev_page: 'Halaman Sebelumnya',
@@ -12,4 +12,5 @@ export default {
   next_5: '5 Halaman Berikutnya',
   prev_3: '3 Halaman Sebelumnya',
   next_3: '3 Halaman Berikutnya',
+  page_size: 'ukuran halaman',
 };

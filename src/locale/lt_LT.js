@@ -12,4 +12,5 @@ export default {
   next_5: 'Peršokti 5 pls.',
   prev_3: 'Grįžti 3 pls.',
   next_3: 'Peršokti 3 pls.',
+  page_size: 'Page Size',
 };

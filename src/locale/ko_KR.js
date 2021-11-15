@@ -3,7 +3,7 @@ export default {
   items_per_page: '/ 쪽',
   jump_to: '이동하기',
   jump_to_confirm: '확인하다',
-  page: '',
+  page: '페이지',
 
   // Pagination.jsx
   prev_page: '이전 페이지',
@@ -12,4 +12,5 @@ export default {
   next_5: '다음 5 페이지',
   prev_3: '이전 3 페이지',
   next_3: '다음 3 페이지',
+  page_size: '페이지 크기',
 };

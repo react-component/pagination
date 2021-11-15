@@ -12,4 +12,5 @@ export default {
   next_5: 'Następne 5 stron',
   prev_3: 'Poprzednie 3 strony',
   next_3: 'Następne 3 strony',
+  page_size: 'rozmiar strony',
 };

@@ -11,4 +11,5 @@ export default {
   next_5: 'შემდეგი 5 გვერდი',
   prev_3: 'წინა 3 გვერდი',
   next_3: 'შემდეგი 3 გვერდი',
+  page_size: 'Page Size',
 };

@@ -12,4 +12,5 @@ export default {
   next_5: '向後 5 頁',
   prev_3: '向前 3 頁',
   next_3: '向後 3 頁',
+  page_size: '頁碼',
 };

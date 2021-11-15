@@ -12,4 +12,5 @@ export default {
   next_5: 'Naslednjih 5 strani',
   prev_3: 'Prejšnje 3 strani',
   next_3: 'Naslednje 3 strani',
+  page_size: 'Page Size',
 };

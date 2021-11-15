@@ -12,4 +12,5 @@ export default {
   next_5: '5 Pagini Următoare',
   prev_3: '3 Pagini Anterioare',
   next_3: '3 Pagini Următoare',
+  page_size: 'Page Size',
 };

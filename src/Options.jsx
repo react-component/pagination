@@ -123,6 +123,8 @@ class Options extends React.Component {
           value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={this.changeSize}
           getPopupContainer={(triggerNode) => triggerNode.parentNode}
+          aria-label={locale.page_size}
+          defaultOpen={false}
         >
           {options}
         </Select>
@@ -158,6 +160,7 @@ class Options extends React.Component {
             onChange={this.handleChange}
             onKeyUp={this.go}
             onBlur={this.handleBlur}
+            aria-label={locale.page}
           />
           {locale.page}
           {gotoButton}

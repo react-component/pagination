@@ -3,7 +3,7 @@ export default {
   items_per_page: '/ sivu',
   jump_to: 'Mene',
   jump_to_confirm: 'Potvrdite',
-  page: '',
+  page: 'Sivu',
 
   // Pagination.jsx
   prev_page: 'Edellinen sivu',
@@ -12,4 +12,5 @@ export default {
   next_5: 'Seuraavat 5 sivua',
   prev_3: 'Edelliset 3 sivua',
   next_3: 'Seuraavat 3 sivua',
+  page_size: 'Page Size',
 };

@@ -3,7 +3,7 @@ export default {
   items_per_page: '/ sayfa',
   jump_to: 'Git',
   jump_to_confirm: 'onayla',
-  page: '',
+  page: 'Sayfa',
 
   // Pagination.jsx
   prev_page: 'Önceki Sayfa',
@@ -12,4 +12,5 @@ export default {
   next_5: 'Sonraki 5 Sayfa',
   prev_3: 'Önceki 3 Sayfa',
   next_3: 'Sonraki 3 Sayfa',
+  page_size: 'sayfa boyutu',
 };

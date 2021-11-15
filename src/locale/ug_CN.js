@@ -11,4 +11,5 @@ export default {
   next_5: 'كەينىگە 5 بەت',
   prev_3: 'ئالدىغا 3 بەت',
   next_3: 'كەينىگە 3 بەت',
+  page_size: 'Page Size',
 };

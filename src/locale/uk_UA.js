@@ -12,4 +12,5 @@ export default {
   next_5: 'Наступні 5 сторінок',
   prev_3: 'Попередні 3 сторінки',
   next_3: 'Наступні 3 сторінки',
+  page_size: 'Page Size',
 };

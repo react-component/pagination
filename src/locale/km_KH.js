@@ -12,4 +12,5 @@ export default {
   next_5: '៥ ទំព័រទៅមុខ',
   prev_3: '៣ ទំព័រថយក្រោយ',
   next_3: '៣ ទំព័រទៅមុខ',
+  page_size: 'Page Size',
 };

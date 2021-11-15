@@ -12,4 +12,5 @@ export default {
   next_5: '5 páxinas seguintes',
   prev_3: '3 páxinas previas',
   next_3: '3 páxinas seguintes',
+  page_size: 'Page Size',
 };

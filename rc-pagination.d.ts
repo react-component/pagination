@@ -52,7 +52,7 @@ declare module 'rc-pagination' {
     onShowSizeChange?: (current: number, size: number) => void;
     itemRender?: (
       page: number,
-      type: string,
+      type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next',
       element: React.ReactNode,
     ) => React.ReactNode;
     showTotal?: (total: number, range: [number, number]) => React.ReactNode;

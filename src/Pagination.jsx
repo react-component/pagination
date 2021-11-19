@@ -8,10 +8,14 @@ import LOCALE from './locale/zh_CN';
 
 function noop() {}
 
-function isInteger(value) {
+function isInteger(v) {
+  const value = Number(v);
   return (
     // eslint-disable-next-line no-restricted-globals
-    typeof value === 'number' && isFinite(value) && Math.floor(value) === value
+    typeof value === 'number' &&
+    !isNaN(value) &&
+    isFinite(value) &&
+    Math.floor(value) === value
   );
 }
 

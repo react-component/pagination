@@ -416,3 +416,26 @@ describe('current value on onShowSizeChange when total is 0', () => {
     expect(wrapper4.exists('.rc-pagination-options-size-changer')).toBe(true);
   });
 });
+
+describe('should emit onChange when total is string', () => {
+  let wrapper;
+  const onChange = jest.fn();
+
+  beforeEach(() => {
+    wrapper = mount(
+      <Pagination total="100" pageSize={10} onChange={onChange} />,
+    );
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
+    onChange.mockReset();
+  });
+
+  it('onChange should be called when click page', () => {
+    const pagers = wrapper.find('.rc-pagination-item-3');
+    const page1 = pagers.at(0);
+    page1.simulate('click');
+    expect(onChange).toBeCalledWith(3, 10);
+  });
+});

@@ -192,4 +192,28 @@ describe('simple quick jumper', () => {
       wrapper.find('.rc-pagination-options-quick-jumper-button').exists(),
     ).toBe(false);
   });
+
+  it('Quick Jumper should hide when only one page', () => {
+    wrapper = mount(
+      <Pagination onChange={onChange} total={5} showQuickJumper />,
+    );
+    expect(wrapper.find('.rc-pagination-options-quick-jumper').exists()).toBe(
+      false,
+    );
+  });
+
+  // https://github.com/ant-design/ant-design/issues/32991
+  it('Quick Jumper should hide when only one page when has pageSize', () => {
+    wrapper = mount(
+      <Pagination
+        onChange={onChange}
+        total={5}
+        pageSize={10}
+        showQuickJumper
+      />,
+    );
+    expect(wrapper.find('.rc-pagination-options-quick-jumper').exists()).toBe(
+      false,
+    );
+  });
 });

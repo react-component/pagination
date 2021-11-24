@@ -185,7 +185,8 @@ class Pagination extends React.Component {
   };
 
   shouldDisplayQuickJumper = () => {
-    const { showQuickJumper, pageSize, total } = this.props;
+    const { showQuickJumper, total } = this.props;
+    const { pageSize } = this.state;
     if (total <= pageSize) {
       return false;
     }

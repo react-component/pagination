@@ -17,6 +17,7 @@ function onChange(current, pageSize) {
 
 const App = () => (
   <>
+    <h3>默认</h3>
     <Pagination
       selectComponentClass={Select}
       showQuickJumper
@@ -27,10 +28,10 @@ const App = () => (
       onChange={onChange}
       total={450}
     />
-    <br />
+    <h3>禁用</h3>
     <Pagination
       selectComponentClass={Select}
-      showQuickJumper={{ goButton: true }}
+      showQuickJumper
       showSizeChanger
       defaultPageSize={20}
       defaultCurrent={5}
@@ -38,6 +39,25 @@ const App = () => (
       onChange={onChange}
       total={450}
       disabled
+    />
+    <h3>单页默认隐藏</h3>
+    <Pagination
+      selectComponentClass={Select}
+      showQuickJumper
+      showSizeChanger
+      onShowSizeChange={onShowSizeChange}
+      onChange={onChange}
+      total={8}
+    />
+    <br />
+    <Pagination
+      selectComponentClass={Select}
+      showQuickJumper
+      showSizeChanger
+      onShowSizeChange={onShowSizeChange}
+      onChange={onChange}
+      pageSize={10}
+      total={8}
     />
   </>
 );

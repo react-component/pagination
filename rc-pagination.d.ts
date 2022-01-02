@@ -3,7 +3,7 @@ declare module 'rc-pagination' {
     className: string;
     selectPrefixCls: string;
     prefixCls: string;
-    pageSizeOptions: string[];
+    pageSizeOptions: string[] | number[];
 
     current: number;
     defaultCurrent: number;

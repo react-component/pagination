@@ -725,6 +725,7 @@ class Pagination extends React.Component {
           pageSizeOptions={pageSizeOptions}
           quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
           goButton={goButton}
+          showTitle={showTitle}
         />
       </ul>
     );

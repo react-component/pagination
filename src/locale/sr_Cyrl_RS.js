@@ -13,4 +13,3 @@ export default {
   next_3: 'Следећих 3 Стране',
   page_size: 'Page Size',
 };
-  

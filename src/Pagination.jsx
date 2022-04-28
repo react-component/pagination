@@ -253,32 +253,31 @@ class Pagination extends React.Component {
     }
   };
 
-  handleChange = (p) => {
-    const { disabled } = this.props;
-
-    let page = p;
+  handleChange = (page) => {
+    const { disabled, onChange } = this.props;
+    const { pageSize, current, currentInputValue } = this.state;
     if (this.isValid(page) && !disabled) {
       const currentPage = calculatePage(undefined, this.state, this.props);
+      let newPage = page;
       if (page > currentPage) {
-        page = currentPage;
+        newPage = currentPage;
       } else if (page < 1) {
-        page = 1;
+        newPage = 1;
       }
-
       if (!('current' in this.props)) {
         this.setState({
-          current: page,
-          currentInputValue: page,
+          current: newPage,
         });
       }
-
-      const { pageSize } = this.state;
-      this.props.onChange(page, pageSize);
-
-      return page;
+      if (newPage !== currentInputValue) {
+        this.setState({
+          currentInputValue: newPage,
+        });
+      }
+      onChange(newPage, pageSize);
+      return newPage;
     }
-
-    return this.state.current;
+    return current;
   };
 
   prev = () => {

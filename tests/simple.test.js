@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { mount } from 'enzyme';
 import Pagination from '../src';
 
@@ -32,6 +32,30 @@ describe('simple Pagination', () => {
     input.simulate('change', { target: { value: '2' } });
     input.simulate('blur');
     expect(onChange).toBeCalled();
+  });
+
+  it('should return to 1 when blur goto input in uncontrol mode', () => {
+    const component = mount(
+      <Pagination simple defaultCurrent={1} total={25} />,
+    );
+    const input = component.find('.rc-pagination-simple').find('input');
+    input.simulate('focus');
+    input.simulate('change', { target: { value: '' } });
+    input.simulate('blur');
+    expect(input.getDOMNode().value).toBe('1');
+  });
+
+  it('should return to 1 when blur goto input in control mode', () => {
+    const App = () => {
+      const [current, setCurrent] = useState(1);
+      return <Pagination simple current={1} total={25} onChange={setCurrent} />;
+    };
+    const component = mount(<App />);
+    const input = component.find('.rc-pagination-simple').find('input');
+    input.simulate('focus');
+    input.simulate('change', { target: { value: '' } });
+    input.simulate('blur');
+    expect(input.getDOMNode().value).toBe('1');
   });
 
   it('default current page is 1', () => {

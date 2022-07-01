@@ -69,7 +69,7 @@ class Pagination extends React.Component {
     }
 
     let pageSize = props.defaultPageSize;
-    if ('pageSize' in props) {
+    if (props.pageSize != null) {
       // eslint-disable-next-line prefer-destructuring
       pageSize = props.pageSize;
     }
@@ -108,7 +108,7 @@ class Pagination extends React.Component {
       }
     }
 
-    if ('pageSize' in props && props.pageSize !== prevState.pageSize) {
+    if (props.pageSize != null && props.pageSize !== prevState.pageSize) {
       let { current } = prevState;
       const newCurrent = calculatePage(props.pageSize, prevState, props);
       current = current > newCurrent ? newCurrent : current;

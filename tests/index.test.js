@@ -292,6 +292,11 @@ describe('Other props', () => {
         .getDOMNode().disabled,
     ).toBe(true);
   });
+
+  it('should not error on nullable pageSize', () => {
+    const wrapper = mount(<Pagination pageSize={null} />);
+    expect(wrapper.find('.rc-pagination').exists()).toBe(true);
+  });
 });
 
 // https://github.com/ant-design/ant-design/issues/10524

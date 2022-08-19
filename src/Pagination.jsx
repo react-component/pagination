@@ -425,6 +425,19 @@ class Pagination extends React.Component {
       },
       {},
     );
+    
+    let totalText = null;
+
+    if (showTotal) {
+      totalText = (
+        <li className={`${prefixCls}-total-text`}>
+          {showTotal(total, [
+            total === 0 ? 0 : (current - 1) * pageSize + 1,
+            current * pageSize > total ? total : current * pageSize,
+          ])}
+        </li>
+      );
+    }
 
     if (simple) {
       if (goButton) {
@@ -467,6 +480,7 @@ class Pagination extends React.Component {
           ref={this.savePaginationNode}
           {...dataOrAriaAttributeProps}
         >
+          {totalText}
           <li
             title={showTitle ? locale.prev_page : null}
             onClick={this.prev}
@@ -661,19 +675,7 @@ class Pagination extends React.Component {
         pagerList.push(lastPager);
       }
     }
-
-    let totalText = null;
-
-    if (showTotal) {
-      totalText = (
-        <li className={`${prefixCls}-total-text`}>
-          {showTotal(total, [
-            total === 0 ? 0 : (current - 1) * pageSize + 1,
-            current * pageSize > total ? total : current * pageSize,
-          ])}
-        </li>
-      );
-    }
+    
     const prevDisabled = !this.hasPrev() || !allPages;
     const nextDisabled = !this.hasNext() || !allPages;
     return (

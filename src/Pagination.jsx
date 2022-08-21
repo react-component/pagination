@@ -426,7 +426,7 @@ class Pagination extends React.Component {
       {},
     );
     
-   const totalText = showTotal && (
+    const totalText = showTotal && (
       <li className={`${prefixCls}-total-text`}>
         {showTotal(total, [
           total === 0 ? 0 : (current - 1) * pageSize + 1,

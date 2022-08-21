@@ -426,18 +426,14 @@ class Pagination extends React.Component {
       {},
     );
     
-    let totalText = null;
-
-    if (showTotal) {
-      totalText = (
-        <li className={`${prefixCls}-total-text`}>
-          {showTotal(total, [
-            total === 0 ? 0 : (current - 1) * pageSize + 1,
-            current * pageSize > total ? total : current * pageSize,
-          ])}
-        </li>
-      );
-    }
+   const totalText = showTotal && (
+      <li className={`${prefixCls}-total-text`}>
+        {showTotal(total, [
+          total === 0 ? 0 : (current - 1) * pageSize + 1,
+          current * pageSize > total ? total : current * pageSize,
+        ])}
+      </li>
+    );
 
     if (simple) {
       if (goButton) {

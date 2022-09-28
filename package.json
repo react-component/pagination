@@ -61,7 +61,7 @@
     "enzyme-adapter-react-16": "^1.0.1",
     "enzyme-to-json": "^3.4.0",
     "eslint": "^7.0.0",
-    "father": "^2.13.4",
+    "father": "^4.0.6",
     "gh-pages": "^4.0.0",
     "glob": "^7.1.6",
     "less": "^3.10.3",

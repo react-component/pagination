@@ -71,7 +71,7 @@
     "pretty-quick": "^3.0.0",
     "rc-select": "^14.1.2",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react-dom": "^18.2.0",
     "react-test-renderer": "^16.0.0"
   },
   "peerDependencies": {

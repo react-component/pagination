@@ -425,7 +425,7 @@ class Pagination extends React.Component {
       },
       {},
     );
-    
+
     const totalText = showTotal && (
       <li className={`${prefixCls}-total-text`}>
         {showTotal(total, [
@@ -671,7 +671,7 @@ class Pagination extends React.Component {
         pagerList.push(lastPager);
       }
     }
-    
+
     const prevDisabled = !this.hasPrev() || !allPages;
     const nextDisabled = !this.hasNext() || !allPages;
     return (
@@ -680,7 +680,6 @@ class Pagination extends React.Component {
           [`${prefixCls}-disabled`]: disabled,
         })}
         style={style}
-        unselectable="unselectable"
         ref={this.savePaginationNode}
         {...dataOrAriaAttributeProps}
       >

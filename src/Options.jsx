@@ -122,7 +122,6 @@ class Options extends React.Component {
           dropdownMatchSelectWidth={false}
           value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={this.changeSize}
-          getPopupContainer={(triggerNode) => triggerNode.parentNode}
           aria-label={locale.page_size}
           defaultOpen={false}
         >

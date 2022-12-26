@@ -48,6 +48,7 @@ class Pagination extends React.Component {
     style: {},
     itemRender: defaultItemRender,
     totalBoundaryShowSizeChanger: 50,
+    buildOptionText: null,
   };
 
   constructor(props) {
@@ -388,6 +389,7 @@ class Pagination extends React.Component {
       selectComponentClass,
       selectPrefixCls,
       pageSizeOptions,
+      buildOptionText,
     } = this.props;
 
     const { current, pageSize, currentInputValue } = this.state;
@@ -721,6 +723,7 @@ class Pagination extends React.Component {
           pageSizeOptions={pageSizeOptions}
           quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
           goButton={goButton}
+          buildOptionText={buildOptionText}
         />
       </ul>
     );

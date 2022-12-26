@@ -91,6 +91,7 @@ class Options extends React.Component {
       buildOptionText,
       selectPrefixCls,
       disabled,
+      showTitle,
     } = this.props;
     const { goInputText } = this.state;
     const prefixCls = `${rootPrefixCls}-options`;
@@ -106,11 +107,14 @@ class Options extends React.Component {
     const pageSizeOptions = this.getPageSizeOptions();
 
     if (changeSize && Select) {
-      const options = pageSizeOptions.map((opt, i) => (
-        <Select.Option key={i} value={opt.toString()}>
-          {(buildOptionText || this.buildOptionText)(opt)}
-        </Select.Option>
-      ));
+      const options = pageSizeOptions.map((opt, i) => {
+        const optionText = (buildOptionText || this.buildOptionText)(opt);
+        return (
+          <Select.Option key={i} value={opt.toString()} title={showTitle ? optionText : ''}>
+            {optionText}
+          </Select.Option>
+        );
+      })
 
       changeSelect = (
         <Select

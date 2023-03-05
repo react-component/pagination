@@ -1,3 +1,8 @@
-## itemRender
+---
+title: itemRender
+nav:
+  title: Demo
+  path: /demo
+---
 
-<code src="../examples/itemRender.jsx">
+<code src="../examples/itemRender.tsx"></code>

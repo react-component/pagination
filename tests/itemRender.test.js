@@ -5,7 +5,7 @@ import Pagination from '../src';
 describe('itemRender', () => {
   let wrapper;
   const currentPage = 12;
-  const itemRender = current => <a href={`#${current}`}>{current}</a>;
+  const itemRender = (current) => <a href={`#${current}`}>{current}</a>;
 
   beforeEach(() => {
     wrapper = mount(

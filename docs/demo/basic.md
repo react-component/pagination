@@ -1,8 +1,8 @@
 ---
-title: simple
+title: basic
 nav:
   title: Demo
   path: /demo
 ---
 
-<code src="../examples/simple.tsx"></code>
+<code src="../examples/basic.tsx"></code>

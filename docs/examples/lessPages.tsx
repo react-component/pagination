@@ -58,7 +58,7 @@ class App extends React.Component {
     current: 3,
     useIcon: true,
   };
-  onChange = page => {
+  onChange = (page) => {
     console.log(page);
     this.setState({
       current: page,

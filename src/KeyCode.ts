@@ -1,4 +1,4 @@
-export default {
+const KeyCode =  {
   ZERO: 48,
   NINE: 57,
 
@@ -12,3 +12,5 @@ export default {
   ARROW_UP: 38,
   ARROW_DOWN: 40,
 };
+
+export default KeyCode;

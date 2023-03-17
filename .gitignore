@@ -31,6 +31,7 @@ pnpm-lock.yaml
 coverage/
 .doc
 dist
+docs-dist
 .vscode
 # umi
 .umi

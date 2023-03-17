@@ -18,7 +18,6 @@
     "assets/*.less",
     "es",
     "lib",
-    "dist",
     "rc-pagination.d.ts"
   ],
   "homepage": "https://react-component.github.io/pagination",

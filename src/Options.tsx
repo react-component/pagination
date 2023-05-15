@@ -137,7 +137,7 @@ class Options extends React.Component<Props, State> {
           showSearch={false}
           className={`${prefixCls}-size-changer`}
           optionLabelProp="children"
-          dropdownMatchSelectWidth={false}
+          popupMatchSelectWidth={false}
           value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={this.changeSize}
           getPopupContainer={(triggerNode) => triggerNode.parentNode}

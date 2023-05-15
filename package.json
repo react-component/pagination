@@ -32,7 +32,7 @@
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
-    "docs:deploy": "gh-pages -d .doc",
+    "docs:deploy": "gh-pages -d does-dist",
     "gh-pages": "npm run docs:build && npm run docs:deploy",
     "compile": "father build && lessc assets/index.less assets/index.css",
     "prepublishOnly": "npm run compile && np --yolo --no-publish && npm run gh-pages",

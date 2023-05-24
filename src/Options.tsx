@@ -134,7 +134,7 @@ class Options extends React.Component<Props, State> {
         <Select
           disabled={disabled}
           prefixCls={selectPrefixCls}
-          showSearch={false}
+          showSearch
           className={`${prefixCls}-size-changer`}
           optionLabelProp="children"
           popupMatchSelectWidth={false}

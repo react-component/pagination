@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import classNames from 'classnames';
+import pickAttrs from 'rc-util/lib/pickAttrs';
 import React, { cloneElement, isValidElement } from 'react';
 import KEYCODE from './KeyCode';
 import LOCALE from './locale/zh_CN';
@@ -486,20 +486,10 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     const prevPage = current - 1 > 0 ? current - 1 : 0;
     const nextPage = current + 1 < allPages ? current + 1 : allPages;
 
-    const dataOrAriaAttributeProps = Object.keys(this.props).reduce(
-      (prev, key) => {
-        if (
-          key.substr(0, 5) === 'data-' ||
-          key.substr(0, 5) === 'aria-' ||
-          key === 'role'
-        ) {
-          // eslint-disable-next-line no-param-reassign
-          prev[key] = this.props[key];
-        }
-        return prev;
-      },
-      {},
-    );
+    const dataOrAriaAttributeProps = pickAttrs(this.props, {
+      aria: true,
+      data: true,
+    });
 
     const totalText = showTotal && (
       <li className={`${prefixCls}-total-text`}>

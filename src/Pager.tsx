@@ -49,15 +49,20 @@ const Pager: React.FC<Props> = (props) => {
     onKeyPress(e, onClick, page);
   };
 
-  return itemRender(page, 'page', <a rel="nofollow">{page}</a>) ? <li
-    title={showTitle ? page.toString() : null}
-    className={cls}
-    onClick={handleClick}
-    onKeyPress={handleKeyPress}
-    tabIndex={0}
-  >
-    {itemRender(page, 'page', <a rel="nofollow">{page}</a>)}
-  </li> : null;
+  const pager = itemRender(page, 'page', <a rel="nofollow">{page}</a>);
+  if (!pager) return null;
+
+  return (
+    <li
+      title={showTitle ? page.toString() : null}
+      className={cls}
+      onClick={handleClick}
+      onKeyPress={handleKeyPress}
+      tabIndex={0}
+    >
+      {pager}
+    </li>
+  );
 };
 
 export default Pager;

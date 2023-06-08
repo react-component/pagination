@@ -72,7 +72,8 @@ interface PaginationState {
   pageSize: number;
 }
 
-function noop() {}
+function noop() {
+}
 
 function isInteger(v: number) {
   const value = Number(v);
@@ -124,6 +125,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     totalBoundaryShowSizeChanger: 50,
   };
   paginationNode = React.createRef<HTMLUListElement>();
+
   constructor(props: PaginationProps) {
     super(props);
 
@@ -542,18 +544,20 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
           {...dataOrAriaAttributeProps}
         >
           {totalText}
-          <li
-            title={showTitle ? locale.prev_page : null}
-            onClick={this.prev}
-            tabIndex={this.hasPrev() ? 0 : null}
-            onKeyPress={this.runIfEnterPrev}
-            className={classNames(`${prefixCls}-prev`, {
-              [`${prefixCls}-disabled`]: !this.hasPrev(),
-            })}
-            aria-disabled={!this.hasPrev()}
-          >
-            {this.renderPrev(prevPage)}
-          </li>
+          {
+            this.renderPrev(prevPage) ? <li
+              title={showTitle ? locale.prev_page : null}
+              onClick={this.prev}
+              tabIndex={this.hasPrev() ? 0 : null}
+              onKeyPress={this.runIfEnterPrev}
+              className={classNames(`${prefixCls}-prev`, {
+                [`${prefixCls}-disabled`]: !this.hasPrev(),
+              })}
+              aria-disabled={!this.hasPrev()}
+            >
+              {this.renderPrev(prevPage)}
+            </li> : null
+          }
           <li
             title={showTitle ? `${current}/${allPages}` : null}
             className={`${prefixCls}-simple-pager`}
@@ -610,7 +614,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
       for (let i = 1; i <= allPages; i += 1) {
         const active = current === i;
         pagerList.push(
-          <Pager {...pagerProps} key={i} page={i} active={active} />,
+          <Pager {...pagerProps} key={i} page={i} active={active}/>,
         );
       }
     } else {
@@ -749,31 +753,35 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
         {...dataOrAriaAttributeProps}
       >
         {totalText}
-        <li
-          title={showTitle ? locale.prev_page : null}
-          onClick={this.prev}
-          tabIndex={prevDisabled ? null : 0}
-          onKeyPress={this.runIfEnterPrev}
-          className={classNames(`${prefixCls}-prev`, {
-            [`${prefixCls}-disabled`]: prevDisabled,
-          })}
-          aria-disabled={prevDisabled}
-        >
-          {this.renderPrev(prevPage)}
-        </li>
+        {
+          this.renderPrev(prevPage) ? <li
+            title={showTitle ? locale.prev_page : null}
+            onClick={this.prev}
+            tabIndex={prevDisabled ? null : 0}
+            onKeyPress={this.runIfEnterPrev}
+            className={classNames(`${prefixCls}-prev`, {
+              [`${prefixCls}-disabled`]: prevDisabled,
+            })}
+            aria-disabled={prevDisabled}
+          >
+            {this.renderPrev(prevPage)}
+          </li> : null
+        }
         {pagerList}
-        <li
-          title={showTitle ? locale.next_page : null}
-          onClick={this.next}
-          tabIndex={nextDisabled ? null : 0}
-          onKeyPress={this.runIfEnterNext}
-          className={classNames(`${prefixCls}-next`, {
-            [`${prefixCls}-disabled`]: nextDisabled,
-          })}
-          aria-disabled={nextDisabled}
-        >
-          {this.renderNext(nextPage)}
-        </li>
+        {
+          this.renderNext(nextPage) ? <li
+            title={showTitle ? locale.next_page : null}
+            onClick={this.next}
+            tabIndex={nextDisabled ? null : 0}
+            onKeyPress={this.runIfEnterNext}
+            className={classNames(`${prefixCls}-next`, {
+              [`${prefixCls}-disabled`]: nextDisabled,
+            })}
+            aria-disabled={nextDisabled}
+          >
+            {this.renderNext(nextPage)}
+          </li> : null
+        }
         <Options
           disabled={disabled}
           locale={locale}

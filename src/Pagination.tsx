@@ -531,6 +531,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
         );
       }
 
+      const prev = this.renderPrev(prevPage);
       return (
         <ul
           className={classNames(
@@ -545,7 +546,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
         >
           {totalText}
           {
-            this.renderPrev(prevPage) ? <li
+            prev ? <li
               title={showTitle ? locale.prev_page : null}
               onClick={this.prev}
               tabIndex={this.hasPrev() ? 0 : null}
@@ -555,7 +556,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
               })}
               aria-disabled={!this.hasPrev()}
             >
-              {this.renderPrev(prevPage)}
+              {prev}
             </li> : null
           }
           <li
@@ -743,6 +744,9 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
 
     const prevDisabled = !this.hasPrev() || !allPages;
     const nextDisabled = !this.hasNext() || !allPages;
+
+    const prev = this.renderPrev(prevPage);
+    const next = this.renderNext(nextPage);
     return (
       <ul
         className={classNames(prefixCls, className, {
@@ -754,7 +758,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
       >
         {totalText}
         {
-          this.renderPrev(prevPage) ? <li
+          prev ? <li
             title={showTitle ? locale.prev_page : null}
             onClick={this.prev}
             tabIndex={prevDisabled ? null : 0}
@@ -764,12 +768,12 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
             })}
             aria-disabled={prevDisabled}
           >
-            {this.renderPrev(prevPage)}
+            {prev}
           </li> : null
         }
         {pagerList}
         {
-          this.renderNext(nextPage) ? <li
+          next ? <li
             title={showTitle ? locale.next_page : null}
             onClick={this.next}
             tabIndex={nextDisabled ? null : 0}
@@ -779,7 +783,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
             })}
             aria-disabled={nextDisabled}
           >
-            {this.renderNext(nextPage)}
+            {next}
           </li> : null
         }
         <Options

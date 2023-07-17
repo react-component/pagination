@@ -615,7 +615,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
       for (let i = 1; i <= allPages; i += 1) {
         const active = current === i;
         pagerList.push(
-          <Pager {...pagerProps} key={i} page={i} active={active}/>,
+          <Pager {...pagerProps} key={i} page={i} active={active} />,
         );
       }
     } else {

@@ -777,18 +777,20 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
         }
         {pagerList}
         {
-          next ? (<li
-            title={showTitle ? locale.next_page : null}
-            onClick={this.next}
-            tabIndex={nextDisabled ? null : 0}
-            onKeyPress={this.runIfEnterNext}
-            className={classNames(`${prefixCls}-next`, {
-              [`${prefixCls}-disabled`]: nextDisabled,
-            })}
-            aria-disabled={nextDisabled}
-          >
-            {next}
-          </li>) : null
+          next ? (
+            <li
+              title={showTitle ? locale.next_page : null}
+              onClick={this.next}
+              tabIndex={nextDisabled ? null : 0}
+              onKeyPress={this.runIfEnterNext}
+              className={classNames(`${prefixCls}-next`, {
+                [`${prefixCls}-disabled`]: nextDisabled,
+              })}
+              aria-disabled={nextDisabled}
+            >
+              {next}
+            </li>
+          ) : null
         }
         <Options
           disabled={disabled}

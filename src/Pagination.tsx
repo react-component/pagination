@@ -777,7 +777,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
         }
         {pagerList}
         {
-          next ? <li
+          next ? (<li
             title={showTitle ? locale.next_page : null}
             onClick={this.next}
             tabIndex={nextDisabled ? null : 0}
@@ -788,7 +788,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
             aria-disabled={nextDisabled}
           >
             {next}
-          </li> : null
+          </li>) : null
         }
         <Options
           disabled={disabled}

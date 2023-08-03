@@ -546,18 +546,20 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
         >
           {totalText}
           {
-            prev ? <li
-              title={showTitle ? locale.prev_page : null}
-              onClick={this.prev}
-              tabIndex={this.hasPrev() ? 0 : null}
-              onKeyPress={this.runIfEnterPrev}
-              className={classNames(`${prefixCls}-prev`, {
-                [`${prefixCls}-disabled`]: !this.hasPrev(),
-              })}
-              aria-disabled={!this.hasPrev()}
-            >
-              {prev}
-            </li> : null
+            prev ? (
+              <li
+                title={showTitle ? locale.prev_page : null}
+                onClick={this.prev}
+                tabIndex={this.hasPrev() ? 0 : null}
+                onKeyPress={this.runIfEnterPrev}
+                className={classNames(`${prefixCls}-prev`, {
+                  [`${prefixCls}-disabled`]: !this.hasPrev(),
+                })}
+                aria-disabled={!this.hasPrev()}
+              >
+                {prev}
+              </li>
+            ) : null
           }
           <li
             title={showTitle ? `${current}/${allPages}` : null}

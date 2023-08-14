@@ -41,6 +41,52 @@ describe('itemRender', () => {
     );
   });
 
+  it('should support empty custom itemRender', () => {
+    const pageEmptyWrapper = mount(
+      <Pagination
+        total={1000}
+        current={currentPage}
+        itemRender={(page, type, originalElement) => {
+          if (type === 'page') {
+            return null;
+          }
+          return originalElement;
+        }}
+      />,
+    );
+    expect(pageEmptyWrapper.find('.rc-pagination-item').length).toBe(0);
+
+    const turnPageWrapper = mount(
+      <Pagination
+        total={1000}
+        current={currentPage}
+        itemRender={(page, type, originalElement) => {
+          if (type === 'prev' || type === 'next') {
+            return null;
+          }
+          return originalElement;
+        }}
+      />,
+    );
+    expect(turnPageWrapper.find('.rc-pagination-prev').length).toBe(0);
+    expect(turnPageWrapper.find('.rc-pagination-next').length).toBe(0);
+
+    const jumpPageWrapper = mount(
+      <Pagination
+        total={1000}
+        current={currentPage}
+        itemRender={(page, type, originalElement) => {
+          if (type === 'jump-prev' || type === 'jump-next') {
+            return null;
+          }
+          return originalElement;
+        }}
+      />,
+    );
+    expect(jumpPageWrapper.find('.rc-pagination-jump-prev').length).toBe(0);
+    expect(jumpPageWrapper.find('.rc-pagination-jump-next').length).toBe(0);
+  });
+
   it('should support pass disabled to prev and next buttons', () => {
     const component = mount(
       <Pagination total={1000} current={1} itemRender={itemRender} />,

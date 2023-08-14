@@ -623,9 +623,20 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     } else {
       const prevItemTitle = showLessItems ? locale.prev_3 : locale.prev_5;
       const nextItemTitle = showLessItems ? locale.next_3 : locale.next_5;
+
+      const jumpPrevContent = itemRender(
+        this.getJumpPrevPage(),
+        'jump-prev',
+        this.getItemIcon(jumpPrevIcon, 'prev page'),
+      );
+      const jumpNextContent = itemRender(
+        this.getJumpNextPage(),
+        'jump-next',
+        this.getItemIcon(jumpNextIcon, 'next page'),
+      );
       if (showPrevNextJumpers) {
         jumpPrev = (
-          <li
+          jumpPrevContent ? <li
             title={showTitle ? prevItemTitle : null}
             key="prev"
             onClick={this.jumpPrev}
@@ -635,15 +646,11 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
               [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
             })}
           >
-            {itemRender(
-              this.getJumpPrevPage(),
-              'jump-prev',
-              this.getItemIcon(jumpPrevIcon, 'prev page'),
-            )}
-          </li>
+            {jumpPrevContent}
+          </li> : null
         );
         jumpNext = (
-          <li
+          jumpNextContent ? <li
             title={showTitle ? nextItemTitle : null}
             key="next"
             tabIndex={0}
@@ -653,12 +660,8 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
               [`${prefixCls}-jump-next-custom-icon`]: !!jumpNextIcon,
             })}
           >
-            {itemRender(
-              this.getJumpNextPage(),
-              'jump-next',
-              this.getItemIcon(jumpNextIcon, 'next page'),
-            )}
-          </li>
+            {jumpNextContent}
+          </li> : null
         );
       }
       lastPager = (

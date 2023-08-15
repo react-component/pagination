@@ -49,6 +49,9 @@ const Pager: React.FC<Props> = (props) => {
     onKeyPress(e, onClick, page);
   };
 
+  const pager = itemRender(page, 'page', <a rel="nofollow">{page}</a>);
+  if (!pager) return null;
+
   return (
     <li
       title={showTitle ? page.toString() : null}
@@ -57,7 +60,7 @@ const Pager: React.FC<Props> = (props) => {
       onKeyPress={handleKeyPress}
       tabIndex={0}
     >
-      {itemRender(page, 'page', <a rel="nofollow">{page}</a>)}
+      {pager}
     </li>
   );
 };

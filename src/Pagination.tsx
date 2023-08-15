@@ -72,7 +72,8 @@ interface PaginationState {
   pageSize: number;
 }
 
-function noop() {}
+function noop() {
+}
 
 function isInteger(v: number) {
   const value = Number(v);
@@ -124,6 +125,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     totalBoundaryShowSizeChanger: 50,
   };
   paginationNode = React.createRef<HTMLUListElement>();
+
   constructor(props: PaginationProps) {
     super(props);
 
@@ -529,6 +531,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
         );
       }
 
+      const prev = this.renderPrev(prevPage);
       return (
         <ul
           className={classNames(
@@ -542,18 +545,22 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
           {...dataOrAriaAttributeProps}
         >
           {totalText}
-          <li
-            title={showTitle ? locale.prev_page : null}
-            onClick={this.prev}
-            tabIndex={this.hasPrev() ? 0 : null}
-            onKeyPress={this.runIfEnterPrev}
-            className={classNames(`${prefixCls}-prev`, {
-              [`${prefixCls}-disabled`]: !this.hasPrev(),
-            })}
-            aria-disabled={!this.hasPrev()}
-          >
-            {this.renderPrev(prevPage)}
-          </li>
+          {
+            prev ? (
+              <li
+                title={showTitle ? locale.prev_page : null}
+                onClick={this.prev}
+                tabIndex={this.hasPrev() ? 0 : null}
+                onKeyPress={this.runIfEnterPrev}
+                className={classNames(`${prefixCls}-prev`, {
+                  [`${prefixCls}-disabled`]: !this.hasPrev(),
+                })}
+                aria-disabled={!this.hasPrev()}
+              >
+                {prev}
+              </li>
+            ) : null
+          }
           <li
             title={showTitle ? `${current}/${allPages}` : null}
             className={`${prefixCls}-simple-pager`}
@@ -616,9 +623,20 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     } else {
       const prevItemTitle = showLessItems ? locale.prev_3 : locale.prev_5;
       const nextItemTitle = showLessItems ? locale.next_3 : locale.next_5;
+
+      const jumpPrevContent = itemRender(
+        this.getJumpPrevPage(),
+        'jump-prev',
+        this.getItemIcon(jumpPrevIcon, 'prev page'),
+      );
+      const jumpNextContent = itemRender(
+        this.getJumpNextPage(),
+        'jump-next',
+        this.getItemIcon(jumpNextIcon, 'next page'),
+      );
       if (showPrevNextJumpers) {
         jumpPrev = (
-          <li
+          jumpPrevContent ? <li
             title={showTitle ? prevItemTitle : null}
             key="prev"
             onClick={this.jumpPrev}
@@ -628,15 +646,11 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
               [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
             })}
           >
-            {itemRender(
-              this.getJumpPrevPage(),
-              'jump-prev',
-              this.getItemIcon(jumpPrevIcon, 'prev page'),
-            )}
-          </li>
+            {jumpPrevContent}
+          </li> : null
         );
         jumpNext = (
-          <li
+          jumpNextContent ? <li
             title={showTitle ? nextItemTitle : null}
             key="next"
             tabIndex={0}
@@ -646,12 +660,8 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
               [`${prefixCls}-jump-next-custom-icon`]: !!jumpNextIcon,
             })}
           >
-            {itemRender(
-              this.getJumpNextPage(),
-              'jump-next',
-              this.getItemIcon(jumpNextIcon, 'next page'),
-            )}
-          </li>
+            {jumpNextContent}
+          </li> : null
         );
       }
       lastPager = (
@@ -739,6 +749,9 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
 
     const prevDisabled = !this.hasPrev() || !allPages;
     const nextDisabled = !this.hasNext() || !allPages;
+
+    const prev = this.renderPrev(prevPage);
+    const next = this.renderNext(nextPage);
     return (
       <ul
         className={classNames(prefixCls, className, {
@@ -749,31 +762,39 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
         {...dataOrAriaAttributeProps}
       >
         {totalText}
-        <li
-          title={showTitle ? locale.prev_page : null}
-          onClick={this.prev}
-          tabIndex={prevDisabled ? null : 0}
-          onKeyPress={this.runIfEnterPrev}
-          className={classNames(`${prefixCls}-prev`, {
-            [`${prefixCls}-disabled`]: prevDisabled,
-          })}
-          aria-disabled={prevDisabled}
-        >
-          {this.renderPrev(prevPage)}
-        </li>
+        {
+          prev ? (
+            <li
+              title={showTitle ? locale.prev_page : null}
+              onClick={this.prev}
+              tabIndex={prevDisabled ? null : 0}
+              onKeyPress={this.runIfEnterPrev}
+              className={classNames(`${prefixCls}-prev`, {
+                [`${prefixCls}-disabled`]: prevDisabled,
+              })}
+              aria-disabled={prevDisabled}
+            >
+              {prev}
+            </li>
+          ) : null
+        }
         {pagerList}
-        <li
-          title={showTitle ? locale.next_page : null}
-          onClick={this.next}
-          tabIndex={nextDisabled ? null : 0}
-          onKeyPress={this.runIfEnterNext}
-          className={classNames(`${prefixCls}-next`, {
-            [`${prefixCls}-disabled`]: nextDisabled,
-          })}
-          aria-disabled={nextDisabled}
-        >
-          {this.renderNext(nextPage)}
-        </li>
+        {
+          next ? (
+            <li
+              title={showTitle ? locale.next_page : null}
+              onClick={this.next}
+              tabIndex={nextDisabled ? null : 0}
+              onKeyPress={this.runIfEnterNext}
+              className={classNames(`${prefixCls}-next`, {
+                [`${prefixCls}-disabled`]: nextDisabled,
+              })}
+              aria-disabled={nextDisabled}
+            >
+              {next}
+            </li>
+          ) : null
+        }
         <Options
           disabled={disabled}
           locale={locale}

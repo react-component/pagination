@@ -33,11 +33,10 @@ npm install
 npm start
 ```
 
-## Example
+## Examples
 
-http://localhost:9001
-
-online example: https://pagination-react-component.vercel.app
+Online example: `https://pagination-react-component.vercel.app`
+Local example: `npm run start` then `http://localhost:9001`
 
 ## Install
 
@@ -77,10 +76,10 @@ ReactDOM.render(<Pagination />, container);
 | showLessItems                | show less page items                                      | Bool                                                                                                                                                 | false                                                                                  |
 | showTitle                    | show page items title                                     | Bool                                                                                                                                                 | true                                                                                   |
 | itemRender                   | custom page item renderer                                 | Function(current, type: 'page' \| 'prev' \| 'next' \| 'jump-prev' \| 'jump-next', element): React.ReactNode \| `(current, type, element) => element` |                                                                                        |
-| prevIcon                     | specifict the default previous icon                       | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
-| nextIcon                     | specifict the default next icon                       | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
-| jumpPrevIcon                 | specifict the default previous icon                       | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
-| jumpNextIcon                 | specifict the default next icon                       | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
+| prevIcon                     | specify the default previous icon                         | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
+| nextIcon                     | specify the default next icon                             | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
+| jumpPrevIcon                 | specify the default previous icon                         | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
+| jumpNextIcon                 | specify the default next icon                             | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
 
 ## License
 

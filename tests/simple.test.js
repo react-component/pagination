@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { mount } from 'enzyme';
+import Select from 'rc-select';
 import Pagination from '../src';
 
 describe('simple Pagination', () => {
@@ -84,4 +85,40 @@ describe('simple Pagination', () => {
     expect(input.getDOMNode().value).toBe('3');
     expect(component.state().current).toBe(3);
   });
+
+  it('should merge custom pageSize to pageSizeOptions', () => {
+    const wrapper = mount(
+      <Pagination
+        simple
+        total={500}
+        pageSize={15}
+        showSizeChanger
+        selectComponentClass={Select}
+      />,
+    );
+    wrapper.find(Select).find('input').simulate('mousedown');
+    expect(wrapper.find(Select).find('.rc-select-item').length).toBe(5);
+  });
+
+  it('should onChange called when pageSize change', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <Pagination
+        simple
+        selectComponentClass={Select}
+        onChange={onChange}
+        total={500}
+        defaultPageSize={20}
+      />,
+    );
+    wrapper.find(Select).find('input').simulate('mousedown');
+    expect(wrapper.find(Select).find('.rc-select-item').at(2).text()).toBe(
+      '50 条/页',
+    );
+    const pageSize1 = wrapper.find(Select).find('.rc-select-item').at(0);
+    pageSize1.simulate('click');
+    expect(onChange).toBeCalled();
+    expect(onChange).toHaveBeenLastCalledWith(1, 10);
+  });
+
 });

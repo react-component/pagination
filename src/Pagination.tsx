@@ -590,7 +590,19 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
           >
             {this.renderNext(nextPage)}
           </li>
-          {gotoButton}
+          <Options
+            disabled={disabled}
+            locale={locale}
+            rootPrefixCls={prefixCls}
+            selectComponentClass={selectComponentClass}
+            selectPrefixCls={selectPrefixCls}
+            changeSize={this.getShowSizeChanger() ? this.changePageSize : null}
+            current={current}
+            pageSize={pageSize}
+            pageSizeOptions={pageSizeOptions}
+            quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
+            goButton={gotoButton}
+          />
         </ul>
       );
     }

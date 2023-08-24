@@ -120,5 +120,4 @@ describe('simple Pagination', () => {
     expect(onChange).toBeCalled();
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
-
 });

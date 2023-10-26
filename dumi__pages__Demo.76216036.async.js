@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkrc_pagination=self.webpackChunkrc_pagination||[]).push([[448],{26280:function(f,n,e){e.r(n),e.d(n,{default:function(){return u}});var a=e(8141),o=e(67294),r=function(){var d=(0,a.UO)(),m=d.id,s=(0,a.WF)(),c=s.demos,i=c[m]||{},t=i.component;return t&&(0,o.createElement)(t)},u=r}}]);

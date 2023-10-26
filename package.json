@@ -38,9 +38,8 @@
     "prepublishOnly": "npm run compile && np --yolo --no-publish && npm run gh-pages",
     "lint": "eslint src/ --ext .ts,.tsx,.jsx,.js,.md",
     "prettier": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
-    "pretty-quick": "pretty-quick",
     "test": "rc-test",
-    "coverage": "father test --coverage",
+    "coverage": "rc-test --coverage",
     "now-build": "npm run docs:build",
     "prepare": "husky install"
   },

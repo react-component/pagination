@@ -18,48 +18,49 @@ interface OptionsProps {
   };
 }
 
-interface State {
-  goInputText: string;
-}
+const defaultPageSizeOptions = ['10', '20', '50', '100'];
 
-/**
- * @deprecated Please use `Options` instead.
- */
-class _Options extends React.Component<OptionsProps, State> {
-  static defaultProps = {
-    pageSizeOptions: ['10', '20', '50', '100'],
-  };
+function Options(props: OptionsProps) {
+  const {
+    pageSizeOptions = defaultPageSizeOptions,
+    locale,
+    changeSize,
+    pageSize,
+    goButton,
+    quickGo,
+    rootPrefixCls,
+    selectComponentClass: Select,
+    selectPrefixCls,
+    disabled,
+    buildOptionText,
+  } = props;
 
-  state = {
-    goInputText: '',
-  };
+  const [goInputText, setGoInputText] = React.useState('');
 
-  getValidValue = () => {
-    const { goInputText } = this.state;
-    // eslint-disable-next-line no-restricted-globals
+  const getValidValue = () => {
     return !goInputText || Number.isNaN(goInputText)
       ? undefined
       : Number(goInputText);
   };
 
-  buildOptionText = (value: string) =>
-    `${value} ${this.props.locale.items_per_page}`;
+  const mergeBuildOptionText =
+    typeof buildOptionText === 'function'
+      ? buildOptionText
+      : (value: string) => `${value} ${locale.items_per_page}`;
 
-  changeSize = (value: number) => {
-    this.props.changeSize(Number(value));
+  const changeSizeHandle = (value: number) => {
+    changeSize(Number(value));
   };
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ goInputText: e.target.value });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGoInputText(e.target.value);
   };
 
-  handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    const { goButton, quickGo, rootPrefixCls } = this.props;
-    const { goInputText } = this.state;
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     if (goButton || goInputText === '') {
       return;
     }
-    this.setState({ goInputText: '' });
+    setGoInputText('');
     if (
       e.relatedTarget &&
       (e.relatedTarget.className.indexOf(`${rootPrefixCls}-item-link`) >= 0 ||
@@ -67,22 +68,20 @@ class _Options extends React.Component<OptionsProps, State> {
     ) {
       return;
     }
-    quickGo(this.getValidValue());
+    quickGo(getValidValue());
   };
 
-  go = (e: any) => {
-    const { goInputText } = this.state;
+  const go = (e: any) => {
     if (goInputText === '') {
       return;
     }
     if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
-      this.setState({ goInputText: '' });
-      this.props.quickGo(this.getValidValue());
+      setGoInputText('');
+      quickGo(getValidValue());
     }
   };
 
-  getPageSizeOptions() {
-    const { pageSize, pageSizeOptions } = this.props;
+  const getPageSizeOptions = () => {
     if (
       pageSizeOptions.some(
         (option) => option.toString() === pageSize.toString(),
@@ -91,110 +90,94 @@ class _Options extends React.Component<OptionsProps, State> {
       return pageSizeOptions;
     }
     return pageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
-      // eslint-disable-next-line no-restricted-globals
       const numberA = Number.isNaN(Number(a)) ? 0 : Number(a);
-      // eslint-disable-next-line no-restricted-globals
       const numberB = Number.isNaN(Number(b)) ? 0 : Number(b);
       return numberA - numberB;
     });
+  };
+  // ============== cls ==============
+  const prefixCls = `${rootPrefixCls}-options`;
+
+  // ============== render ==============
+
+  if (!changeSize && !quickGo) {
+    return null;
   }
 
-  render() {
-    const {
-      pageSize,
-      locale,
-      rootPrefixCls,
-      changeSize,
-      quickGo,
-      goButton,
-      selectComponentClass,
-      buildOptionText,
-      selectPrefixCls,
-      disabled,
-    } = this.props;
-    const { goInputText } = this.state;
-    const prefixCls = `${rootPrefixCls}-options`;
-    const Select = selectComponentClass;
-    let changeSelect = null;
-    let goInput = null;
-    let gotoButton = null;
+  let changeSelect = null;
+  let goInput = null;
+  let gotoButton = null;
 
-    if (!changeSize && !quickGo) {
-      return null;
-    }
+  if (changeSize && Select) {
+    const options = getPageSizeOptions().map((opt, i) => (
+      <Select.Option key={i} value={opt.toString()}>
+        {mergeBuildOptionText(opt)}
+      </Select.Option>
+    ));
 
-    const pageSizeOptions = this.getPageSizeOptions();
-
-    if (changeSize && Select) {
-      const options = pageSizeOptions.map((opt, i) => (
-        <Select.Option key={i} value={opt.toString()}>
-          {(buildOptionText || this.buildOptionText)(opt)}
-        </Select.Option>
-      ));
-
-      changeSelect = (
-        <Select
-          disabled={disabled}
-          prefixCls={selectPrefixCls}
-          showSearch={false}
-          className={`${prefixCls}-size-changer`}
-          optionLabelProp="children"
-          popupMatchSelectWidth={false}
-          value={(pageSize || pageSizeOptions[0]).toString()}
-          onChange={this.changeSize}
-          getPopupContainer={(triggerNode) => triggerNode.parentNode}
-          aria-label={locale.page_size}
-          defaultOpen={false}
-        >
-          {options}
-        </Select>
-      );
-    }
-
-    if (quickGo) {
-      if (goButton) {
-        gotoButton =
-          typeof goButton === 'boolean' ? (
-            <button
-              type="button"
-              onClick={this.go}
-              onKeyUp={this.go}
-              disabled={disabled}
-              className={`${prefixCls}-quick-jumper-button`}
-            >
-              {locale.jump_to_confirm}
-            </button>
-          ) : (
-            <span onClick={this.go} onKeyUp={this.go}>
-              {goButton}
-            </span>
-          );
-      }
-      goInput = (
-        <div className={`${prefixCls}-quick-jumper`}>
-          {locale.jump_to}
-          <input
-            disabled={disabled}
-            type="text"
-            value={goInputText}
-            onChange={this.handleChange}
-            onKeyUp={this.go}
-            onBlur={this.handleBlur}
-            aria-label={locale.page}
-          />
-          {locale.page}
-          {gotoButton}
-        </div>
-      );
-    }
-
-    return (
-      <li className={`${prefixCls}`}>
-        {changeSelect}
-        {goInput}
-      </li>
+    changeSelect = (
+      <Select
+        disabled={disabled}
+        prefixCls={selectPrefixCls}
+        showSearch={false}
+        className={`${prefixCls}-size-changer`}
+        optionLabelProp="children"
+        popupMatchSelectWidth={false}
+        value={(pageSize || pageSizeOptions[0]).toString()}
+        onChange={changeSizeHandle}
+        getPopupContainer={(triggerNode) => triggerNode.parentNode}
+        aria-label={locale.page_size}
+        defaultOpen={false}
+      >
+        {options}
+      </Select>
     );
   }
+
+  if (quickGo) {
+    if (goButton) {
+      gotoButton =
+        typeof goButton === 'boolean' ? (
+          <button
+            type="button"
+            onClick={go}
+            onKeyUp={go}
+            disabled={disabled}
+            className={`${prefixCls}-quick-jumper-button`}
+          >
+            {locale.jump_to_confirm}
+          </button>
+        ) : (
+          <span onClick={go} onKeyUp={go}>
+            {goButton}
+          </span>
+        );
+    }
+
+    goInput = (
+      <div className={`${prefixCls}-quick-jumper`}>
+        {locale.jump_to}
+        <input
+          disabled={disabled}
+          type="text"
+          value={goInputText}
+          onChange={handleChange}
+          onKeyUp={go}
+          onBlur={handleBlur}
+          aria-label={locale.page}
+        />
+        {locale.page}
+        {gotoButton}
+      </div>
+    );
+  }
+
+  return (
+    <li className={prefixCls}>
+      {changeSelect}
+      {goInput}
+    </li>
+  );
 }
 
-export default _Options;
+export default Options;

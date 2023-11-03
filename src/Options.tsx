@@ -1,8 +1,7 @@
-/* eslint react/prop-types: 0 */
 import KEYCODE from 'rc-util/lib/KeyCode';
 import React from 'react';
 
-interface Props {
+interface OptionsProps {
   disabled: boolean;
   locale: any;
   rootPrefixCls: string;
@@ -23,7 +22,7 @@ interface State {
   goInputText: string;
 }
 
-class Options extends React.Component<Props, State> {
+class Options extends React.Component<OptionsProps, State> {
   static defaultProps = {
     pageSizeOptions: ['10', '20', '50', '100'],
   };

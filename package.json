@@ -67,6 +67,7 @@
     "gh-pages": "^4.0.0",
     "glob": "^7.1.6",
     "husky": "^8.0.3",
+    "identity-obj-proxy": "^3.0.0",
     "less": "^3.10.3",
     "lint-staged": "^15.0.2",
     "np": "^7.0.0",

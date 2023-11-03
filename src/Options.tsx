@@ -22,7 +22,10 @@ interface State {
   goInputText: string;
 }
 
-class Options extends React.Component<OptionsProps, State> {
+/**
+ * @deprecated Please use `Options` instead.
+ */
+class _Options extends React.Component<OptionsProps, State> {
   static defaultProps = {
     pageSizeOptions: ['10', '20', '50', '100'],
   };
@@ -194,4 +197,4 @@ class Options extends React.Component<OptionsProps, State> {
   }
 }
 
-export default Options;
+export default _Options;

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
+import KEYCODE from 'rc-util/lib/KeyCode';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React, { cloneElement, isValidElement } from 'react';
-import KEYCODE from './KeyCode';
 import Options from './Options';
 import Pager from './Pager';
 import type { PaginationProps, PaginationState } from './interface';
@@ -205,7 +205,7 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
   };
 
   handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.keyCode === KEYCODE.ARROW_UP || e.keyCode === KEYCODE.ARROW_DOWN) {
+    if (e.keyCode === KEYCODE.UP || e.keyCode === KEYCODE.DOWN) {
       e.preventDefault();
     }
   };
@@ -225,12 +225,11 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
     ) {
       this.handleChange(value);
     } else if (
-      (e as React.KeyboardEvent<HTMLInputElement>).keyCode === KEYCODE.ARROW_UP
+      (e as React.KeyboardEvent<HTMLInputElement>).keyCode === KEYCODE.UP
     ) {
       this.handleChange(value - 1);
     } else if (
-      (e as React.KeyboardEvent<HTMLInputElement>).keyCode ===
-      KEYCODE.ARROW_DOWN
+      (e as React.KeyboardEvent<HTMLInputElement>).keyCode === KEYCODE.DOWN
     ) {
       this.handleChange(value + 1);
     }

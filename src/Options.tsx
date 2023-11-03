@@ -1,6 +1,6 @@
 /* eslint react/prop-types: 0 */
+import KEYCODE from 'rc-util/lib/KeyCode';
 import React from 'react';
-import KEYCODE from './KeyCode';
 
 interface Props {
   disabled: boolean;

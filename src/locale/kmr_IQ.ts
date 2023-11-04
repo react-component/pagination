@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ rûpel',
   jump_to: 'Biçe',
   jump_to_confirm: 'piştrast bike',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Rûpelê Pêş',
   next_page: 'Rûpelê Paş',
   prev_5: '5 Rûpelên Pêş',
@@ -14,3 +16,5 @@ export default {
   next_3: '3 Rûpelên Paş',
   page_size: 'Page Size',
 };
+
+export default locale;

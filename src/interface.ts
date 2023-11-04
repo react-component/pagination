@@ -14,6 +14,7 @@ export interface PaginationLocale {
   next_5?: string;
   prev_3?: string;
   next_3?: string;
+  page_size?: string;
 }
 
 export interface PaginationData {

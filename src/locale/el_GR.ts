@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ σελίδα',
   jump_to: 'Μετάβαση',
   jump_to_confirm: 'επιβεβαιώνω',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Προηγούμενη Σελίδα',
   next_page: 'Επόμενη Σελίδα',
   prev_5: 'Προηγούμενες 5 Σελίδες',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Επόμενες 3 Σελίδες',
   page_size: 'Μέγεθος σελίδας',
 };
+
+export default locale;

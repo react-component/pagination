@@ -1,10 +1,12 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ გვერდი.',
   jump_to: 'გადასვლა',
   jump_to_confirm: 'დადასტურება',
   page: '',
-  // Pagination.jsx
+  // Pagination
   prev_page: 'წინა გვერდი',
   next_page: 'შემდეგი გვერდი',
   prev_5: 'წინა 5 გვერდი',
@@ -13,3 +15,5 @@ export default {
   next_3: 'შემდეგი 3 გვერდი',
   page_size: 'Page Size',
 };
+
+export default locale;

@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ orrialde',
   jump_to: '-ra joan',
   jump_to_confirm: 'baieztatu',
   page: 'Orrialde',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Aurreko orrialdea',
   next_page: 'Hurrengo orrialdea',
   prev_5: 'aurreko 5 orrialde',
@@ -14,3 +16,5 @@ export default {
   next_3: 'hurrengo 3 orrialde',
   page_size: 'orrien tamaina',
 };
+
+export default locale;

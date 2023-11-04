@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ පිටුව',
   jump_to: 'වෙත යන්න',
   jump_to_confirm: 'තහවුරු',
   page: 'පිටුව',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'කලින් පිටුව',
   next_page: 'ඊළඟ පිටුව',
   prev_5: 'කලින් පිටු 5',
@@ -14,3 +16,5 @@ export default {
   next_3: 'ඊළඟ පිටු 3',
   page_size: 'පිටුවේ ප්‍රමාණය',
 };
+
+export default locale;

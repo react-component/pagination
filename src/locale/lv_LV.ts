@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ lappuse',
   jump_to: 'iet uz',
   jump_to_confirm: 'apstiprināt',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Iepriekšējā lapa',
   next_page: 'Nākamā lapaspuse',
   prev_5: 'Iepriekšējās 5 lapas',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Nākamās 3 lapas',
   page_size: 'Page Size',
 };
+
+export default locale;

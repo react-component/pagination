@@ -1,9 +1,10 @@
 import KEYCODE from 'rc-util/lib/KeyCode';
 import React from 'react';
+import type { PaginationLocale } from './interface';
 
 interface OptionsProps {
   disabled: boolean;
-  locale: any;
+  locale: PaginationLocale;
   rootPrefixCls: string;
   selectPrefixCls: string;
   current: number;

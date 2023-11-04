@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ sahypa',
   jump_to: 'Git',
   jump_to_confirm: 'tassykla',
   page: 'Sahypa',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Öňki sahypa',
   next_page: 'Soňky sahypa',
   prev_5: 'Öňki 5 sahypa',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Soňky 3 sahypa',
   page_size: 'Sahypa sany',
 };
+
+export default locale;

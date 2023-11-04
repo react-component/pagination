@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ страница',
   jump_to: 'Към',
   jump_to_confirm: 'потвърждавам',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Предишна страница',
   next_page: 'Следваща страница',
   prev_5: 'Предишни 5 страници',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Следващи 3 страници',
   page_size: 'Page Size',
 };
+
+export default locale;

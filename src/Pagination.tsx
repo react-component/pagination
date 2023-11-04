@@ -37,7 +37,10 @@ function calculatePage(
   return Math.floor((props.total - 1) / pageSize) + 1;
 }
 
-class Pagination extends React.Component<PaginationProps, PaginationState> {
+/**
+ * @deprecated use `Pagination` instead.
+ */
+class _Pagination extends React.Component<PaginationProps, PaginationState> {
   static defaultProps = {
     defaultCurrent: 1,
     total: 0,
@@ -752,4 +755,4 @@ class Pagination extends React.Component<PaginationProps, PaginationState> {
   }
 }
 
-export default Pagination;
+export default _Pagination;

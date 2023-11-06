@@ -5,7 +5,7 @@ import path from 'path';
 const exampleDir = path.resolve(__dirname, '../docs/examples');
 const files = fs
   .readdirSync(exampleDir)
-  .filter((file) => file.endsWith('.tsx'));
+  .filter((file) => file.endsWith('.tsx') && !file.startsWith('_'));
 
 describe('Example', () => {
   files.forEach((file) => {

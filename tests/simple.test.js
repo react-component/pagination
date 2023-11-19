@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { mount } from 'enzyme';
 import Select from 'rc-select';
+import React, { useState } from 'react';
 import Pagination from '../src';
 
 describe('simple Pagination', () => {
@@ -60,7 +60,13 @@ describe('simple Pagination', () => {
   });
 
   it('default current page is 1', () => {
-    expect(wrapper.state().current).toBe(1);
+    // expect(wrapper.state().current).toBe(1); // Class Component
+    expect(wrapper.find('.rc-pagination-simple-pager').prop('title')).toBe(
+      '1/3',
+    );
+    expect(
+      wrapper.find('.rc-pagination-simple').find('input').getDOMNode().value,
+    ).toBe('1');
   });
 
   it('prev-button should be disabled', () => {
@@ -78,12 +84,18 @@ describe('simple Pagination', () => {
     const component = mount(
       <Pagination simple defaultCurrent={100} total={25} />,
     );
-    expect(component.state().current).toBe(3);
+    // expect(component.state().current).toBe(3); // Class Component
+    expect(component.find('.rc-pagination-simple-pager').prop('title')).toBe(
+      '3/3',
+    );
     const greaterCurrent = component.find('.rc-pagination-simple');
     const input = greaterCurrent.find('input');
     input.simulate('change', { target: { value: '313423434343343452121' } });
     expect(input.getDOMNode().value).toBe('3');
-    expect(component.state().current).toBe(3);
+    // expect(component.state().current).toBe(3); // Class Component
+    expect(component.find('.rc-pagination-simple-pager').prop('title')).toBe(
+      '3/3',
+    );
   });
 
   it('should merge custom pageSize to pageSizeOptions', () => {

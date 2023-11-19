@@ -1,3 +1,4 @@
+import Select from 'rc-select';
 import React from 'react';
 import '../../assets/index.less';
 import Pagination from '../../src/Pagination';
@@ -9,12 +10,12 @@ const App = () => {
   const [all, setAll] = React.useState(false);
 
   const props: PaginationProps = {
-    onChange: console.log,
-    defaultCurrent: 1,
-    total: 25,
-    showQuickJumper: {
-      goButton: true,
-    },
+    selectComponentClass: Select,
+    showSizeChanger: true,
+    onShowSizeChange: console.log,
+    onChange: console.warn,
+    current: 1,
+    total: 0,
     showTotal: (total, range) => `${range[0]} - ${range[1]} of ${total} items`,
   };
 

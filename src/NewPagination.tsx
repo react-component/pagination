@@ -271,6 +271,12 @@ function Pagination(props: PaginationProps) {
       : nextButton;
   }
 
+  function handleGoTO(event: any) {
+    if (event.type === 'click' || event.keyCode === KeyCode.ENTER) {
+      handleChange(current);
+    }
+  }
+
   let jumpPrev: React.ReactElement = null;
 
   const dataOrAriaAttributeProps = pickAttrs(props, {
@@ -312,7 +318,50 @@ function Pagination(props: PaginationProps) {
   const goButton = showQuickJumper && (showQuickJumper as any).goButton;
 
   // ================== Simple ==================
-  const gotoButton: React.ReactNode = null;
+  // FIXME: ts type
+  let gotoButton: any = goButton;
+  let simplePager: React.ReactNode = null;
+
+  if (simple) {
+    if (typeof goButton === 'boolean') {
+      gotoButton = (
+        <button type="button" onClick={handleGoTO} onKeyUp={handleGoTO}>
+          {locale.jump_to_confirm}
+        </button>
+      );
+    } else {
+      <span onClick={this.handleGoTO} onKeyUp={this.handleGoTO}>
+        {goButton}
+      </span>;
+    }
+
+    gotoButton = (
+      <li
+        title={showTitle ? `${locale.jump_to}${current}/${allPages}` : null}
+        className={`${prefixCls}-simple-pager`}
+      >
+        {gotoButton}
+      </li>
+    );
+
+    simplePager = (
+      <>
+        <input
+          type="text"
+          value={current}
+          disabled={disabled}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+          // fixme: ts type
+          onChange={handleKeyUp}
+          onBlur={handleBlur}
+          size={3}
+        />
+        <span className={`${prefixCls}-slash`}>/</span>
+        {allPages}
+      </>
+    );
+  }
 
   // ====================== Normal ======================
   const pageBufferSize = showLessItems ? 1 : 2;
@@ -465,18 +514,21 @@ function Pagination(props: PaginationProps) {
     );
   }
 
+  const cls = classNames(prefixCls, className, {
+    [`${prefixCls}-simple`]: simple,
+    [`${prefixCls}-disabled`]: disabled,
+  });
+
   return (
     <ul
-      className={classNames(prefixCls, className, {
-        [`${prefixCls}-disabled`]: disabled,
-      })}
+      className={cls}
       style={style}
       ref={paginationRef}
       {...dataOrAriaAttributeProps}
     >
       {totalText}
       {prev}
-      {pagerList}
+      {simple ? simplePager : pagerList}
       {next}
       <Options
         locale={locale}
@@ -489,7 +541,7 @@ function Pagination(props: PaginationProps) {
         pageSize={pageSize}
         pageSizeOptions={pageSizeOptions}
         quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
-        goButton={goButton}
+        goButton={gotoButton}
       />
     </ul>
   );

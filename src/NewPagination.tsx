@@ -177,8 +177,8 @@ function Pagination(props: PaginationProps) {
     }
   }
 
-  function handleBlur(event: React.FocusEvent<HTMLInputElement>) {
-    setCurrent(getValidValue(event));
+  function handleBlur(event: React.FocusEvent<HTMLInputElement, Element>) {
+    handleChange(getValidValue(event));
   }
 
   function changePageSize(size: number) {
@@ -187,8 +187,13 @@ function Pagination(props: PaginationProps) {
       current > newCurrent && newCurrent !== 0 ? newCurrent : current;
 
     setPageSize(size);
-    setCurrent(nextCurrent);
-    setInternalInputVal(newCurrent);
+    /**
+     * Not used `setCurrent` here. @see useMergedState
+     * It is possible that the current has not changed, but the page size has changed.
+     */
+    onChange(nextCurrent, size);
+
+    setInternalInputVal(nextCurrent);
     onShowSizeChange?.(nextCurrent, size);
   }
 

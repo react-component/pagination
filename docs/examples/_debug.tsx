@@ -9,9 +9,23 @@ const App = () => {
   const [all, setAll] = React.useState(false);
 
   const props: PaginationProps = {
-    total: 100,
-    defaultCurrent: 2,
+    onChange: console.log,
+    defaultCurrent: 1,
+    total: 25,
+    showQuickJumper: {
+      goButton: true,
+    },
+    showTotal: (total, range) => `${range[0]} - ${range[1]} of ${total} items`,
   };
+
+  // <Pagination
+  //       simple
+  //       defaultCurrent={1}
+  //       total={25}
+  //       showTotal={(total, range) =>
+  //         `${range[0]} - ${range[1]} of ${total} items`
+  //       }
+  //     />,
 
   const originTip = <span style={{ color: 'red' }}>Origin</span>;
   const newTip = <span style={{ color: 'green' }}>New</span>;
@@ -40,6 +54,7 @@ const App = () => {
 };
 
 export default App;
+// export { default } from '../../tests/two-pagination.jsx'
 
 interface IProps {
   value: string;

@@ -361,7 +361,10 @@ function Pagination(props: PaginationProps) {
     );
 
     simplePager = (
-      <>
+      <li
+        title={showTitle ? `${current}/${allPages}` : null}
+        className={`${prefixCls}-simple-pager`}
+      >
         <input
           type="text"
           value={internalInputVal}
@@ -375,7 +378,7 @@ function Pagination(props: PaginationProps) {
         />
         <span className={`${prefixCls}-slash`}>/</span>
         {allPages}
-      </>
+      </li>
     );
   }
 

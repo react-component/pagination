@@ -89,12 +89,6 @@ function Pagination(props: PaginationProps) {
 
   const [internalInputVal, setInternalInputVal] = React.useState(current);
 
-  // TODO: Should be deleted. assign: @Wuxh<wxh1220@gmail.com>
-  globalThis.console.log('%c@Wuxh(Red)', 'color:red;', {
-    value: 1403439,
-    internalInputVal,
-  });
-
   const hasOnChange = onChange !== noop;
   const hasCurrent = 'current' in props;
 

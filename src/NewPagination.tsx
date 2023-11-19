@@ -84,6 +84,15 @@ function Pagination(props: PaginationProps) {
     value: currentProp,
     defaultValue: defaultCurrent,
     postState: (c) => Math.min(c, calculatePage(pageSize, undefined, total)),
+    onChange: (c) => onChange(c, pageSize),
+  });
+
+  const [internalInputVal, setInternalInputVal] = React.useState(current);
+
+  // TODO: Should be deleted. assign: @Wuxh<wxh1220@gmail.com>
+  globalThis.console.log('%c@Wuxh(Red)', 'color:red;', {
+    value: 1403439,
+    internalInputVal,
   });
 
   const hasOnChange = onChange !== noop;
@@ -126,7 +135,7 @@ function Pagination(props: PaginationProps) {
     if (inputValue === '') {
       value = inputValue;
     } else if (Number.isNaN(Number(inputValue))) {
-      value = current;
+      value = internalInputVal;
     } else if (inputValue >= allPages) {
       value = allPages;
     } else {
@@ -149,8 +158,8 @@ function Pagination(props: PaginationProps) {
 
   function handleKeyUp(event: React.KeyboardEvent<HTMLInputElement>) {
     const value = getValidValue(event);
-    if (value !== current) {
-      setCurrent(value);
+    if (value !== internalInputVal) {
+      setInternalInputVal(value);
     }
 
     switch (event.keyCode) {
@@ -178,8 +187,9 @@ function Pagination(props: PaginationProps) {
       current > newCurrent && newCurrent !== 0 ? newCurrent : current;
 
     setPageSize(size);
+    setCurrent(nextCurrent);
+    setInternalInputVal(newCurrent);
     onShowSizeChange?.(nextCurrent, size);
-    onChange?.(nextCurrent, size);
   }
 
   function handleChange(page: number) {
@@ -191,7 +201,13 @@ function Pagination(props: PaginationProps) {
       } else if (page < 1) {
         newPage = 1;
       }
-      onChange?.(newPage, pageSize);
+
+      if (newPage !== internalInputVal) {
+        setInternalInputVal(newPage);
+      }
+
+      setCurrent(newPage);
+
       return newPage;
     }
 
@@ -267,13 +283,13 @@ function Pagination(props: PaginationProps) {
       getItemIcon(nextIcon, 'next page'),
     );
     return React.isValidElement(nextButton)
-      ? React.cloneElement<any>(nextButton, { disabled: hasNext })
+      ? React.cloneElement<any>(nextButton, { disabled: !hasNext })
       : nextButton;
   }
 
   function handleGoTO(event: any) {
     if (event.type === 'click' || event.keyCode === KeyCode.ENTER) {
-      handleChange(current);
+      handleChange(internalInputVal);
     }
   }
 
@@ -348,7 +364,7 @@ function Pagination(props: PaginationProps) {
       <>
         <input
           type="text"
-          value={current}
+          value={internalInputVal}
           disabled={disabled}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
@@ -540,7 +556,7 @@ function Pagination(props: PaginationProps) {
         current={current}
         pageSize={pageSize}
         pageSizeOptions={pageSizeOptions}
-        quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
+        quickGo={shouldDisplayQuickJumper ? handleChange : null}
         goButton={gotoButton}
       />
     </ul>

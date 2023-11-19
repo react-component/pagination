@@ -1,13 +1,43 @@
 import React from 'react';
 import '../../assets/index.less';
 import Pagination from '../../src/NewPagination';
-// import Pagination from '../../src/Pagination';
+import OriginPagination from '../../src/Pagination';
+import type { PaginationProps } from '../../src/interface';
 
-const App = () => (
-  <>
-    <Pagination total={25} />
-  </>
-);
+const App = () => {
+  const [origin, setOrigin] = React.useState(false);
+  const [all, setAll] = React.useState(false);
+
+  const props: PaginationProps = {
+    total: 100,
+    defaultCurrent: 2,
+  };
+
+  const originTip = <span style={{ color: 'red' }}>Origin</span>;
+  const newTip = <span style={{ color: 'green' }}>New</span>;
+
+  return (
+    <>
+      <h2>{all ? null : origin ? originTip : newTip}</h2>
+      <button onClick={() => setOrigin((prev) => !prev)}>切换</button>
+      <button onClick={() => setAll((prev) => !prev)}>全量</button>
+      <hr />
+      {!all &&
+        React.createElement(origin ? OriginPagination : Pagination, props)}
+      {all && (
+        <>
+          {originTip}
+          <br />
+          <OriginPagination {...props} />
+          <hr />
+          {newTip}
+          <br />
+          <Pagination {...props} />
+        </>
+      )}
+    </>
+  );
+};
 
 export default App;
 

@@ -515,13 +515,21 @@ function Pagination(props: PaginationProps) {
 
   let next = renderNext(nextPage);
   if (next) {
-    const nextDisabled = !hasNext || !allPages;
+    let nextDisabled: boolean, nextTabIndex: number | null;
+
+    if (simple) {
+      nextDisabled = !hasNext;
+      nextTabIndex = hasPrev ? 0 : null;
+    } else {
+      nextDisabled = !hasNext || !allPages;
+      nextTabIndex = nextDisabled ? null : 0;
+    }
 
     next = (
       <li
         title={showTitle ? locale.next_page : null}
         onClick={nextHandle}
-        tabIndex={nextDisabled ? null : 0}
+        tabIndex={nextTabIndex}
         onKeyPress={runIfEnterNext}
         className={classNames(`${prefixCls}-next`, {
           [`${prefixCls}-disabled`]: nextDisabled,

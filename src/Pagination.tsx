@@ -94,8 +94,8 @@ function Pagination(props: PaginationProps) {
 
   if (process.env.NODE_ENV !== 'production') {
     warning(
-      hasCurrent && hasOnChange,
-      'Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.',
+      hasCurrent ? hasOnChange : true,
+      'You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.',
     );
   }
 

@@ -168,6 +168,15 @@ describe('Uncontrolled Pagination', () => {
     nextButton.simulate('click');
     expect(totalText.text()).toBe('21 - 25 of 25 items');
   });
+
+  it('readonly warning should be displayed', () => {
+    const warnSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mount(<Pagination current={2} />);
+    expect(warnSpy).toHaveBeenCalledWith(
+      'Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.',
+    );
+    warnSpy.mockRestore();
+  });
 });
 
 describe('Controlled Pagination', () => {

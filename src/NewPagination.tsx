@@ -1,8 +1,12 @@
 import classNames from 'classnames';
+import KeyCode from 'rc-util/lib/KeyCode';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import warning from 'rc-util/lib/warning';
 import React from 'react';
+import Options from './Options';
+import type { PagerProps } from './Pager';
+import Pager from './Pager';
 import type { PaginationProps } from './interface';
 import zhCN from './locale/zh_CN';
 
@@ -14,22 +18,38 @@ const defaultItemRender: PaginationProps['itemRender'] = (
 
 function noop() {}
 
+function isInteger(v: number) {
+  const value = Number(v);
+  return (
+    typeof value === 'number' &&
+    !Number.isNaN(value) &&
+    isFinite(value) &&
+    Math.floor(value) === value
+  );
+}
+
 function calculatePage(p: number | undefined, pageSize: number, total: number) {
   const _pageSize = typeof p === 'undefined' ? pageSize : p;
   return Math.floor((total - 1) / _pageSize) + 1;
 }
+
 function Pagination(props: PaginationProps) {
   const {
+    // cls
     prefixCls = 'rc-pagination',
     selectPrefixCls = 'rc-select',
     className,
+    selectComponentClass,
+
+    // control
     current: currentProp,
     defaultCurrent = 1,
     total = 0,
     pageSize: pageSizeProp,
     defaultPageSize = 10,
     onChange = noop,
-    selectComponentClass,
+
+    // config
     hideOnSinglePage,
     showPrevNextJumpers = true,
     showQuickJumper,
@@ -38,13 +58,17 @@ function Pagination(props: PaginationProps) {
     onShowSizeChange = noop,
     locale = zhCN,
     style,
-    itemRender = defaultItemRender,
     totalBoundaryShowSizeChanger = 50,
     disabled,
     simple,
     showTotal,
+    showSizeChanger: showSizeChangerProp,
+    pageSizeOptions,
+
     // render
+    itemRender = defaultItemRender,
     jumpPrevIcon,
+    jumpNextIcon,
     prevIcon,
     nextIcon,
   } = props;
@@ -72,27 +96,16 @@ function Pagination(props: PaginationProps) {
     );
   }
 
-  // TODO: Should be deleted. assign: @Wuxh<wxh1220@gmail.com>
-  globalThis.console.log('%c<Pagination />', 'color:lightBlue;', {
-    total,
-    hasOnChange,
-    hasCurrent,
-    current,
-    pageSize,
-  });
+  const jumpPrevPage = Math.max(1, current - (showLessItems ? 3 : 5));
+  const jumpNextPage = Math.min(
+    calculatePage(undefined, pageSize, total),
+    current + (showLessItems ? 3 : 5),
+  );
 
-  const getJumpPrevPage = () => Math.max(1, current - (showLessItems ? 3 : 5));
-
-  const getJumpNextPage = () =>
-    Math.min(
-      calculatePage(undefined, pageSize, total),
-      this.state.current + (this.props.showLessItems ? 3 : 5),
-    );
-
-  const getItemIcon = (
+  function getItemIcon(
     icon: React.ReactNode | React.ComponentType<PaginationProps>,
     label: string,
-  ) => {
+  ) {
     let iconNode = icon || (
       <button
         type="button"
@@ -104,7 +117,7 @@ function Pagination(props: PaginationProps) {
       iconNode = React.createElement(icon, { ...props });
     }
     return iconNode as React.ReactNode;
-  };
+  }
 
   function getValidValue(e: any): number {
     const inputValue = e.target.value;
@@ -112,7 +125,6 @@ function Pagination(props: PaginationProps) {
     let value: number;
     if (inputValue === '') {
       value = inputValue;
-      // eslint-disable-next-line no-restricted-globals
     } else if (Number.isNaN(Number(inputValue))) {
       value = current;
     } else if (inputValue >= allPages) {
@@ -123,86 +135,159 @@ function Pagination(props: PaginationProps) {
     return value;
   }
 
-  const runIfEnter = (event, callback, ...restParams) => {
-    if (event.key === 'Enter' || event.charCode === 13) {
+  function isValid(page: number) {
+    return isInteger(page) && page !== current && isInteger(total) && total > 0;
+  }
+
+  const shouldDisplayQuickJumper = total > pageSize ? showQuickJumper : false;
+
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.keyCode === KeyCode.UP || event.keyCode === KeyCode.DOWN) {
+      event.preventDefault();
+    }
+  }
+
+  function handleKeyUp(event: React.KeyboardEvent<HTMLInputElement>) {
+    const value = getValidValue(event);
+    if (value !== current) {
+      setCurrent(value);
+    }
+
+    switch (event.keyCode) {
+      case KeyCode.ENTER:
+        handleChange(value);
+        break;
+      case KeyCode.UP:
+        handleChange(value - 1);
+        break;
+      case KeyCode.DOWN:
+        handleChange(value + 1);
+        break;
+      default:
+        break;
+    }
+  }
+
+  function handleBlur(event: React.FocusEvent<HTMLInputElement>) {
+    setCurrent(getValidValue(event));
+  }
+
+  function changePageSize(size: number) {
+    const newCurrent = calculatePage(size, pageSize, total);
+    const nextCurrent =
+      current > newCurrent && newCurrent !== 0 ? newCurrent : current;
+
+    setPageSize(size);
+    onShowSizeChange?.(nextCurrent, size);
+    onChange?.(nextCurrent, size);
+  }
+
+  function handleChange(page: number) {
+    if (isValid(page) && !disabled) {
+      const currentPage = calculatePage(undefined, pageSize, total);
+      let newPage = page;
+      if (page > currentPage) {
+        newPage = currentPage;
+      } else if (page < 1) {
+        newPage = 1;
+      }
+      onChange?.(newPage, pageSize);
+      return newPage;
+    }
+
+    return current;
+  }
+
+  const hasPrev = current > 1;
+  const hasNext = current < calculatePage(undefined, current, total);
+  const showSizeChanger =
+    showSizeChangerProp ?? total > totalBoundaryShowSizeChanger;
+
+  function prevHandle() {
+    if (hasPrev) handleChange(current - 1);
+  }
+
+  function nextHandle() {
+    if (hasNext) handleChange(current + 1);
+  }
+
+  function jumpPrevHandle() {
+    handleChange(jumpPrevPage);
+  }
+
+  function jumpNextHandle() {
+    handleChange(jumpNextPage);
+  }
+
+  function runIfEnter(
+    event: React.KeyboardEvent<HTMLLIElement>,
+    callback,
+    ...restParams
+  ) {
+    if (
+      event.key === 'Enter' ||
+      event.charCode === KeyCode.ENTER ||
+      event.keyCode === KeyCode.ENTER
+    ) {
       callback(...restParams);
     }
-  };
+  }
 
-  const hasPrev = () => current > 1;
-  const hasNext = () => current < calculatePage(undefined, current, total);
+  function runIfEnterPrev(event: React.KeyboardEvent<HTMLLIElement>) {
+    runIfEnter(event, prevHandle);
+  }
 
-  const renderPrev = (prevPage: number) => {
+  function runIfEnterNext(event: React.KeyboardEvent<HTMLLIElement>) {
+    runIfEnter(event, nextHandle);
+  }
+
+  function runIfEnterJumpPrev(event: React.KeyboardEvent<HTMLLIElement>) {
+    runIfEnter(event, jumpPrevHandle);
+  }
+
+  function runIfEnterJumpNext(event: React.KeyboardEvent<HTMLLIElement>) {
+    runIfEnter(event, jumpNextHandle);
+  }
+
+  function renderPrev(prevPage: number) {
     const prevButton = itemRender(
       prevPage,
       'prev',
-      this.getItemIcon(prevIcon, 'prev page'),
+      getItemIcon(prevIcon, 'prev page'),
     );
     return React.isValidElement(prevButton)
-      ? React.cloneElement<any>(prevButton, { disabled: !hasPrev() })
+      ? React.cloneElement<any>(prevButton, { disabled: !hasPrev })
       : prevButton;
-  };
+  }
 
-  const renderNext = (nextPage: number) => {
+  function renderNext(nextPage: number) {
     const nextButton = itemRender(
       nextPage,
       'next',
       getItemIcon(nextIcon, 'next page'),
     );
     return React.isValidElement(nextButton)
-      ? React.cloneElement<any>(nextButton, { disabled: hasNext() })
+      ? React.cloneElement<any>(nextButton, { disabled: hasNext })
       : nextButton;
-  };
+  }
 
-  const prevHandle = () => {
-    if (hasPrev()) {
-      // this.handleChange(this.state.current - 1);
-    }
-  };
-
-  let jumpPrev: React.ReactNode = null;
-
-  const jumpPrevContent = itemRender(
-    getJumpPrevPage(),
-    'jump-prev',
-    getItemIcon(jumpPrevIcon, 'prev page'),
-  );
-
-  const prevItemTitle = showLessItems ? locale.prev_3 : locale.prev_5;
-  const nextItemTitle = showLessItems ? locale.next_3 : locale.next_5;
+  let jumpPrev: React.ReactElement = null;
 
   const dataOrAriaAttributeProps = pickAttrs(props, {
     aria: true,
     data: true,
   });
 
-  jumpPrev = jumpPrevContent ? (
-    <li
-      title={showTitle ? prevItemTitle : null}
-      key="prev"
-      onClick={this.jumpPrev}
-      tabIndex={0}
-      onKeyPress={this.runIfEnterJumpPrev}
-      className={classNames(`${prefixCls}-jump-prev`, {
-        [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
-      })}
-    >
-      {jumpPrevContent}
-    </li>
-  ) : null;
-
-  const totalText: React.ReactNode = showTotal ? (
+  const totalText = showTotal && (
     <li className={`${prefixCls}-total-text`}>
       {showTotal(total, [
         total === 0 ? 0 : (current - 1) * pageSize + 1,
         current * pageSize > total ? total : current * pageSize,
       ])}
     </li>
-  ) : null;
+  );
 
-  const jumpNext: React.ReactNode = null;
-  const firstPager: React.ReactNode = null;
-  const lastPager: React.ReactNode = null;
+  let jumpNext: React.ReactElement = null;
 
   const allPages = calculatePage(undefined, pageSize, total);
 
@@ -212,106 +297,201 @@ function Pagination(props: PaginationProps) {
     return null;
   }
 
-  // ================== Simple ==================
-  let gotoButton: React.ReactNode = null;
-  const goButton = showQuickJumper && (showQuickJumper as any).goButton;
+  const pagerList: React.ReactElement[] = [];
+  const pagerProps: PagerProps = {
+    rootPrefixCls: prefixCls,
+    onClick: handleChange,
+    onKeyPress: runIfEnter,
+    showTitle,
+    itemRender,
+    page: -1,
+  };
+
   const prevPage = current - 1 > 0 ? current - 1 : 0;
   const nextPage = current + 1 < allPages ? current + 1 : allPages;
+  const goButton = showQuickJumper && (showQuickJumper as any).goButton;
 
-  if (simple) {
-    if (goButton) {
-      if (typeof goButton === 'boolean') {
-        gotoButton = (
-          <button
-            type="button"
-            onClick={this.handleGoTO}
-            onKeyUp={this.handleGoTO}
-          >
-            {locale.jump_to_confirm}
-          </button>
-        );
-      } else {
-        gotoButton = (
-          <span onClick={this.handleGoTO} onKeyUp={this.handleGoTO}>
-            {goButton}
-          </span>
-        );
-      }
-      gotoButton = (
-        <li
-          title={showTitle ? `${locale.jump_to}${current}/${allPages}` : null}
-          className={`${prefixCls}-simple-pager`}
-        >
-          {gotoButton}
-        </li>
+  // ================== Simple ==================
+  const gotoButton: React.ReactNode = null;
+
+  // ====================== Normal ======================
+  const pageBufferSize = showLessItems ? 1 : 2;
+  if (allPages <= 3 + pageBufferSize * 2) {
+    if (!allPages) {
+      pagerList.push(
+        <Pager
+          {...pagerProps}
+          key="noPager"
+          page={1}
+          className={`${prefixCls}-item-disabled`}
+        />,
       );
     }
 
-    const prevNode = renderPrev(prevPage);
-    return (
-      <ul
-        className={classNames(
-          prefixCls,
-          `${prefixCls}-simple`,
-          { [`${prefixCls}-disabled`]: disabled },
-          className,
-        )}
-        style={style}
-        ref={paginationRef}
-        {...dataOrAriaAttributeProps}
-      >
-        {totalText}
-        {prevNode ? (
-          <li
-            title={showTitle ? locale.prev_page : null}
-            onClick={prevHandle}
-            tabIndex={hasPrev() ? 0 : null}
-            // onKeyPress={this.runIfEnterPrev}
-            className={classNames(`${prefixCls}-prev`, {
-              [`${prefixCls}-disabled`]: !hasPrev(),
-            })}
-            aria-disabled={!hasPrev()}
-          >
-            {prevNode}
-          </li>
-        ) : null}
+    for (let i = 1; i <= allPages; i += 1) {
+      pagerList.push(
+        <Pager {...pagerProps} key={i} page={i} active={current === i} />,
+      );
+    }
+  } else {
+    const prevItemTitle = showLessItems ? locale.prev_3 : locale.prev_5;
+    const nextItemTitle = showLessItems ? locale.next_3 : locale.next_5;
+
+    const jumpPrevContent = itemRender(
+      jumpPrevPage,
+      'jump-prev',
+      getItemIcon(jumpPrevIcon, 'prev page'),
+    );
+    const jumpNextContent = itemRender(
+      jumpNextPage,
+      'jump-next',
+      getItemIcon(jumpNextIcon, 'next page'),
+    );
+
+    if (showPrevNextJumpers) {
+      jumpPrev = jumpPrevContent ? (
         <li
-          title={showTitle ? `${current}/${allPages}` : null}
-          className={`${prefixCls}-simple-pager`}
-        >
-          <input
-            type="text"
-            value={current}
-            disabled={disabled}
-            // onKeyDown={this.handleKeyDown}
-            // onKeyUp={this.handleKeyUp}
-            // onChange={this.handleKeyUp}
-            // onBlur={this.handleBlur}
-            size={3}
-          />
-          <span className={`${prefixCls}-slash`}>/</span>
-          {allPages}
-        </li>
-        <li
-          title={showTitle ? locale.next_page : null}
-          onClick={this.next}
-          tabIndex={hasPrev() ? 0 : null}
-          // onKeyPress={this.runIfEnterNext}
-          className={classNames(`${prefixCls}-next`, {
-            [`${prefixCls}-disabled`]: !this.hasNext(),
+          title={showTitle ? prevItemTitle : null}
+          key="prev"
+          onClick={jumpPrevHandle}
+          tabIndex={0}
+          onKeyPress={runIfEnterJumpPrev}
+          className={classNames(`${prefixCls}-jump-prev`, {
+            [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
           })}
-          aria-disabled={!this.hasNext()}
         >
-          {renderNext(nextPage)}
+          {jumpPrevContent}
         </li>
-      </ul>
+      ) : null;
+
+      jumpNext = jumpNextContent ? (
+        <li
+          title={showTitle ? nextItemTitle : null}
+          key="next"
+          onClick={jumpNextHandle}
+          tabIndex={0}
+          onKeyPress={runIfEnterJumpNext}
+          className={classNames(`${prefixCls}-jump-next`, {
+            [`${prefixCls}-jump-next-custom-icon`]: !!jumpNextIcon,
+          })}
+        >
+          {jumpNextContent}
+        </li>
+      ) : null;
+    }
+
+    let left = Math.max(1, current - pageBufferSize);
+    let right = Math.min(current + pageBufferSize, allPages);
+
+    if (current - 1 <= pageBufferSize) {
+      right = 1 + pageBufferSize * 2;
+    }
+    if (allPages - current <= pageBufferSize) {
+      left = allPages - pageBufferSize * 2;
+    }
+
+    for (let i = left; i <= right; i += 1) {
+      pagerList.push(
+        <Pager {...pagerProps} key={i} page={i} active={current === i} />,
+      );
+    }
+
+    if (current - 1 >= pageBufferSize * 2 && current !== 1 + 2) {
+      pagerList[0] = React.cloneElement(pagerList[0], {
+        className: classNames(
+          `${prefixCls}-item-after-jump-prev`,
+          pagerList[0].props.className,
+        ),
+      });
+
+      pagerList.unshift(jumpPrev);
+    }
+
+    if (allPages - current >= pageBufferSize * 2 && current !== allPages - 2) {
+      pagerList[pagerList.length - 1] = React.cloneElement(pagerList.at(-1), {
+        className: classNames(
+          `${prefixCls}-item-before-jump-next`,
+          pagerList.at(-1).props.className,
+        ),
+      });
+
+      pagerList.push(jumpNext);
+    }
+
+    if (left !== 1) {
+      pagerList.unshift(<Pager {...pagerProps} key={1} page={1} />);
+    }
+    if (right !== allPages) {
+      pagerList.push(<Pager {...pagerProps} key={allPages} page={allPages} />);
+    }
+  }
+
+  let prev = renderPrev(prevPage);
+  if (prev) {
+    const prevDisabled = !hasPrev || !allPages;
+    prev = (
+      <li
+        title={showTitle ? locale.prev_page : null}
+        onClick={prevHandle}
+        tabIndex={prevDisabled ? null : 0}
+        onKeyPress={runIfEnterPrev}
+        className={classNames(`${prefixCls}-prev`, {
+          [`${prefixCls}-disabled`]: prevDisabled,
+        })}
+        aria-disabled={prevDisabled}
+      >
+        {prev}
+      </li>
+    );
+  }
+
+  let next = renderNext(nextPage);
+  if (next) {
+    const nextDisabled = !hasNext || !allPages;
+
+    next = (
+      <li
+        title={showTitle ? locale.next_page : null}
+        onClick={nextHandle}
+        tabIndex={nextDisabled ? null : 0}
+        onKeyPress={runIfEnterNext}
+        className={classNames(`${prefixCls}-next`, {
+          [`${prefixCls}-disabled`]: nextDisabled,
+        })}
+        aria-disabled={nextDisabled}
+      >
+        {next}
+      </li>
     );
   }
 
   return (
-    <div>
-      <h1>NEW Pagination</h1>
-    </div>
+    <ul
+      className={classNames(prefixCls, className, {
+        [`${prefixCls}-disabled`]: disabled,
+      })}
+      style={style}
+      ref={paginationRef}
+      {...dataOrAriaAttributeProps}
+    >
+      {totalText}
+      {prev}
+      {pagerList}
+      {next}
+      <Options
+        locale={locale}
+        rootPrefixCls={prefixCls}
+        disabled={disabled}
+        selectComponentClass={selectComponentClass}
+        selectPrefixCls={selectPrefixCls}
+        changeSize={showSizeChanger ? changePageSize : null}
+        current={current}
+        pageSize={pageSize}
+        pageSizeOptions={pageSizeOptions}
+        quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
+        goButton={goButton}
+      />
+    </ul>
   );
 }
 

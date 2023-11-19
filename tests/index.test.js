@@ -323,6 +323,7 @@ describe('Other props', () => {
 describe('current value on onShowSizeChange when total is 0', () => {
   let wrapper;
   const onShowSizeChange = jest.fn();
+  const onChange = jest.fn();
 
   beforeEach(() => {
     wrapper = mount(
@@ -330,6 +331,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
         selectComponentClass={Select}
         showSizeChanger
         onShowSizeChange={onShowSizeChange}
+        onChange={onChange}
         current={1}
         total={0}
         showTotal={(total, range) =>
@@ -342,6 +344,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
   afterEach(() => {
     wrapper.unmount();
     onShowSizeChange.mockReset();
+    onChange.mockReset();
   });
 
   it('should call onShowSizeChange when no change', () => {
@@ -353,6 +356,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
     input.simulate('keyDown', { key: 'Down', keyCode: 40, which: 40 });
     input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
     expect(onShowSizeChange).not.toBeCalled();
+    expect(onChange).not.toBeCalled();
   });
 
   it('current should equal to the current in onShowSizeChange', () => {
@@ -366,9 +370,10 @@ describe('current value on onShowSizeChange when total is 0', () => {
     input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
     expect(onShowSizeChange).toHaveBeenLastCalledWith(
       // wrapper.state().current,
-      0,
+      1,
       20,
     );
+    expect(onChange).toHaveBeenLastCalledWith(1, 20);
   });
 
   it('when total is 0, pager should show `1` and being disabled', () => {

@@ -215,7 +215,7 @@ function Pagination(props: PaginationProps) {
   }
 
   const hasPrev = current > 1;
-  const hasNext = current < calculatePage(undefined, current, total);
+  const hasNext = current < calculatePage(undefined, pageSize, total);
   const showSizeChanger =
     showSizeChangerProp ?? total > totalBoundaryShowSizeChanger;
 

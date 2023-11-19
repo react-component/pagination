@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../assets/index.less';
-import Pagination from '../../src/NewPagination';
-import OriginPagination from '../../src/Pagination';
+import Pagination from '../../src/Pagination';
+import OriginPagination from '../../src/Pagination_deprecated';
 import type { PaginationProps } from '../../src/interface';
 
 const App = () => {

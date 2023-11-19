@@ -612,8 +612,6 @@ class _Pagination extends React.Component<PaginationProps, PaginationState> {
       }
       lastPager = (
         <Pager
-          locale={locale}
-          last
           rootPrefixCls={prefixCls}
           onClick={this.handleChange}
           onKeyPress={this.runIfEnter}
@@ -626,7 +624,6 @@ class _Pagination extends React.Component<PaginationProps, PaginationState> {
       );
       firstPager = (
         <Pager
-          locale={locale}
           rootPrefixCls={prefixCls}
           onClick={this.handleChange}
           onKeyPress={this.runIfEnter}
@@ -653,7 +650,6 @@ class _Pagination extends React.Component<PaginationProps, PaginationState> {
         const active = current === i;
         pagerList.push(
           <Pager
-            locale={locale}
             rootPrefixCls={prefixCls}
             onClick={this.handleChange}
             onKeyPress={this.runIfEnter}

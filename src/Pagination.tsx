@@ -150,13 +150,17 @@ function Pagination(props: PaginationProps) {
     }
   }
 
-  function handleKeyUp(event: React.KeyboardEvent<HTMLInputElement>) {
+  function handleKeyUp(
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLInputElement>,
+  ) {
     const value = getValidValue(event);
     if (value !== internalInputVal) {
       setInternalInputVal(value);
     }
 
-    switch (event.keyCode) {
+    switch ((event as React.KeyboardEvent<HTMLInputElement>).keyCode) {
       case KeyCode.ENTER:
         handleChange(value);
         break;

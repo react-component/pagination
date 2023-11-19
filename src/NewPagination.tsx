@@ -346,7 +346,7 @@ function Pagination(props: PaginationProps) {
         </button>
       );
     } else {
-      <span onClick={this.handleGoTO} onKeyUp={this.handleGoTO}>
+      <span onClick={handleGoTO} onKeyUp={handleGoTO}>
         {goButton}
       </span>;
     }

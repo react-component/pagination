@@ -67,6 +67,33 @@ describe('Pagination with jumper', () => {
     expect(input.instance().value).toBe('');
     expect(onChange).not.toBeCalled();
   });
+
+  it('should not jump when input empty string', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <Pagination
+        onChange={onChange}
+        total={25}
+        showQuickJumper={{
+          goButton: (
+            <button type="button" className="go-button">
+              go
+            </button>
+          ),
+        }}
+      />,
+    );
+    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
+    const input = quickJumper.find('input');
+    const goButton = quickJumper.find('.go-button');
+    input.simulate('change', { target: { value: '3' } });
+    goButton.simulate('click');
+    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('3');
+    input.simulate('change', { target: { value: '' } });
+    goButton.simulate('click');
+    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('3');
+    expect(onChange).toHaveBeenLastCalledWith(3, 10);
+  });
 });
 
 describe('simple quick jumper', () => {

@@ -5,4 +5,5 @@ module.exports = {
     [pkg.name]: '<rootDir>/src/index.ts',
     '\\.less$': 'identity-obj-proxy',
   },
+  collectCoverageFrom: ['src/**', '!src/Pagination_deprecated.tsx'],
 };

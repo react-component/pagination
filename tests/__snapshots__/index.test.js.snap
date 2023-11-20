@@ -1,0 +1,926 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+[
+  "rc-pagination-prev rc-pagination-disabled",
+  "rc-pagination-item rc-pagination-item-1 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-next",
+]
+`;
+
+exports[` 2`] = `
+[
+  "rc-pagination-prev rc-pagination-disabled",
+  "rc-pagination-item rc-pagination-item-1 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-next",
+]
+`;
+
+exports[` 3`] = `
+[
+  "rc-pagination-prev rc-pagination-disabled",
+  "rc-pagination-item rc-pagination-item-1 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[` 4`] = `
+[
+  "rc-pagination-prev rc-pagination-disabled",
+  "rc-pagination-item rc-pagination-item-1 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[` 5`] = `
+[
+  "rc-pagination-prev rc-pagination-disabled",
+  "rc-pagination-item rc-pagination-item-1 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[` 6`] = `
+[
+  "rc-pagination-prev rc-pagination-disabled",
+  "rc-pagination-item rc-pagination-item-1 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[` 7`] = `
+[
+  "rc-pagination-prev rc-pagination-disabled",
+  "rc-pagination-item rc-pagination-item-1 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-10",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[` 8`] = `
+[
+  "rc-pagination-prev rc-pagination-disabled",
+  "rc-pagination-item rc-pagination-item-1 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-12",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[` 9`] = `
+[
+  "rc-pagination-prev rc-pagination-disabled",
+  "rc-pagination-item rc-pagination-item-1 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-50",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 25 pages should select page 2 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-next",
+]
+`;
+
+exports[`select in sequence should sequence select 25 pages should select page 3 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+]
+`;
+
+exports[`select in sequence should sequence select 50 pages should select page 2 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-next",
+]
+`;
+
+exports[`select in sequence should sequence select 50 pages should select page 3 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-next",
+]
+`;
+
+exports[`select in sequence should sequence select 50 pages should select page 4 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-next",
+]
+`;
+
+exports[`select in sequence should sequence select 50 pages should select page 5 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 2 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 3 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 4 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 5 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 6 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 7 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 2 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 3 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 4 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 5 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 6 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 7 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 8 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 2 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 2 2`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 3 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 3 2`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 4 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 4 2`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 5 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 5 2`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 6 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 6 2`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 7 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 7 2`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 8 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 8 2`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 2 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-10",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 3 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-10",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 4 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-10",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 5 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-10",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 6 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-item rc-pagination-item-9",
+  "rc-pagination-item rc-pagination-item-10 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 7 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-item rc-pagination-item-9",
+  "rc-pagination-item rc-pagination-item-10 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 8 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-7",
+  "rc-pagination-item rc-pagination-item-8",
+  "rc-pagination-item rc-pagination-item-9",
+  "rc-pagination-item rc-pagination-item-10 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 2 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-12",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 3 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-12",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 4 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-12",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 5 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-12",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 6 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-8 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-9",
+  "rc-pagination-item rc-pagination-item-10 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-11",
+  "rc-pagination-item rc-pagination-item-12",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 7 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-8 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-9",
+  "rc-pagination-item rc-pagination-item-10",
+  "rc-pagination-item rc-pagination-item-11",
+  "rc-pagination-item rc-pagination-item-12 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 8 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-8 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-9",
+  "rc-pagination-item rc-pagination-item-10",
+  "rc-pagination-item rc-pagination-item-11",
+  "rc-pagination-item rc-pagination-item-12 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 2 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-50",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 3 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-50",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 4 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-item rc-pagination-item-2",
+  "rc-pagination-item rc-pagination-item-3",
+  "rc-pagination-item rc-pagination-item-4 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-5",
+  "rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-50",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 5 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-4",
+  "rc-pagination-item rc-pagination-item-5 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-6",
+  "rc-pagination-item rc-pagination-item-7 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-50",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 6 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-8 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-9",
+  "rc-pagination-item rc-pagination-item-10 rc-pagination-item-active",
+  "rc-pagination-item rc-pagination-item-11",
+  "rc-pagination-item rc-pagination-item-12 rc-pagination-item-before-jump-next",
+  "rc-pagination-jump-next",
+  "rc-pagination-item rc-pagination-item-50",
+  "rc-pagination-next",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 7 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-46 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-47",
+  "rc-pagination-item rc-pagination-item-48",
+  "rc-pagination-item rc-pagination-item-49",
+  "rc-pagination-item rc-pagination-item-50 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 8 1`] = `
+[
+  "rc-pagination-prev",
+  "rc-pagination-item rc-pagination-item-1",
+  "rc-pagination-jump-prev",
+  "rc-pagination-item rc-pagination-item-46 rc-pagination-item-after-jump-prev",
+  "rc-pagination-item rc-pagination-item-47",
+  "rc-pagination-item rc-pagination-item-48",
+  "rc-pagination-item rc-pagination-item-49",
+  "rc-pagination-item rc-pagination-item-50 rc-pagination-item-active",
+  "rc-pagination-next rc-pagination-disabled",
+  "rc-pagination-options",
+]
+`;

@@ -470,3 +470,37 @@ describe('should emit onChange when total is string', () => {
     expect(onChange).toBeCalledWith(3, 10);
   });
 });
+
+describe('select in sequence', () => {
+  const serializeCls = (items) => items.map((item) => item.prop('className'));
+
+  function sequenceSelector(total) {
+    describe(`should sequence select ${total} pages`, () => {
+      const wrapper = mount(<Pagination total={total} />);
+      const items = wrapper.find('li');
+      const cls = serializeCls(items);
+
+      expect(cls).toMatchSnapshot();
+
+      for (let i = 2; i < items.length - 1; i++) {
+        it(`should select page ${i}`, () => {
+          items.at(i).simulate('click');
+          const newItems = wrapper.find('li');
+          const newCls = serializeCls(newItems);
+          expect(newCls).toMatchSnapshot();
+        });
+      }
+    });
+  }
+
+  // coped examples/basic.tsx
+  sequenceSelector(25);
+  sequenceSelector(50);
+  sequenceSelector(60);
+  sequenceSelector(70);
+  sequenceSelector(80);
+  sequenceSelector(80);
+  sequenceSelector(100);
+  sequenceSelector(120);
+  sequenceSelector(500);
+});

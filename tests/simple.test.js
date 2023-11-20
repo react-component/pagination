@@ -132,4 +132,21 @@ describe('simple Pagination', () => {
     expect(onChange).toBeCalled();
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
+
+  it('should support keyboard event', () => {
+    const input = wrapper.find('.rc-pagination-simple').find('input');
+    input.simulate('change', { target: { value: '2' } });
+    input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+    expect(input.getDOMNode().value).toBe('2');
+  });
+
+  it('should support keyboard event when press up or down key', () => {
+    const input = wrapper.find('.rc-pagination-simple').find('input');
+    input.simulate('keyUp', { key: 'ArrowDown', keyCode: 40, which: 40 });
+    input.simulate('keyUp', { key: 'ArrowDown', keyCode: 40, which: 40 });
+    expect(input.getDOMNode().value).toBe('3');
+
+    input.simulate('keyUp', { key: 'ArrowUp', keyCode: 38, which: 38 });
+    expect(input.getDOMNode().value).toBe('2');
+  });
 });

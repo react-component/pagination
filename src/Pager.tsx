@@ -55,7 +55,7 @@ const Pager: React.FC<PagerProps> = (props) => {
       title={showTitle ? String(page) : null}
       className={cls}
       onClick={handleClick}
-      onKeyPress={handleKeyPress}
+      onKeyDown={handleKeyPress}
       tabIndex={0}
     >
       {pager}

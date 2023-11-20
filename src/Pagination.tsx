@@ -1,14 +1,14 @@
 import classNames from 'classnames';
-import KeyCode from 'rc-util/lib/KeyCode';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
+import KeyCode from 'rc-util/lib/KeyCode';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import warning from 'rc-util/lib/warning';
 import React from 'react';
+import type { PaginationProps } from './interface';
+import zhCN from './locale/zh_CN';
 import Options from './Options';
 import type { PagerProps } from './Pager';
 import Pager from './Pager';
-import type { PaginationProps } from './interface';
-import zhCN from './locale/zh_CN';
 
 const defaultItemRender: PaginationProps['itemRender'] = (
   page,
@@ -422,7 +422,7 @@ function Pagination(props: PaginationProps) {
           key="prev"
           onClick={jumpPrevHandle}
           tabIndex={0}
-          onKeyPress={runIfEnterJumpPrev}
+          onKeyDown={runIfEnterJumpPrev}
           className={classNames(`${prefixCls}-jump-prev`, {
             [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
           })}
@@ -437,7 +437,7 @@ function Pagination(props: PaginationProps) {
           key="next"
           onClick={jumpNextHandle}
           tabIndex={0}
-          onKeyPress={runIfEnterJumpNext}
+          onKeyDown={runIfEnterJumpNext}
           className={classNames(`${prefixCls}-jump-next`, {
             [`${prefixCls}-jump-next-custom-icon`]: !!jumpNextIcon,
           })}
@@ -501,7 +501,7 @@ function Pagination(props: PaginationProps) {
         title={showTitle ? locale.prev_page : null}
         onClick={prevHandle}
         tabIndex={prevDisabled ? null : 0}
-        onKeyPress={runIfEnterPrev}
+        onKeyDown={runIfEnterPrev}
         className={classNames(`${prefixCls}-prev`, {
           [`${prefixCls}-disabled`]: prevDisabled,
         })}
@@ -529,7 +529,7 @@ function Pagination(props: PaginationProps) {
         title={showTitle ? locale.next_page : null}
         onClick={nextHandle}
         tabIndex={nextTabIndex}
-        onKeyPress={runIfEnterNext}
+        onKeyDown={runIfEnterNext}
         className={classNames(`${prefixCls}-next`, {
           [`${prefixCls}-disabled`]: nextDisabled,
         })}

@@ -479,6 +479,76 @@ describe('should emit onChange when total is string', () => {
   });
 });
 
+describe('keyboard support', () => {
+  let wrapper;
+  const onChange = jest.fn();
+
+  beforeEach(() => {
+    wrapper = mount(
+      <Pagination defaultCurrent={50} total={1000} onChange={onChange} />,
+    );
+  });
+
+  afterEach(() => {
+    wrapper.unmount();
+    onChange.mockReset();
+  });
+
+  it('should work for prev page', () => {
+    const prevButton = wrapper.find('li.rc-pagination-prev');
+    expect(prevButton.exists()).toBeTruthy();
+
+    prevButton.simulate('click');
+    prevButton.simulate('click');
+
+    prevButton.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+    prevButton.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+
+    expect(onChange).toHaveBeenLastCalledWith(46, 10);
+  });
+
+  it('should work for next page', () => {
+    const nextButton = wrapper.find('li.rc-pagination-next');
+    expect(nextButton.exists()).toBeTruthy();
+
+    nextButton.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+    nextButton.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+
+    nextButton.simulate('click');
+    nextButton.simulate('click');
+
+    expect(onChange).toHaveBeenLastCalledWith(54, 10);
+  });
+
+  it('should work for jump prev page', () => {
+    const jumpPrevButton = wrapper.find('li.rc-pagination-jump-prev');
+    expect(jumpPrevButton.exists()).toBeTruthy();
+
+    jumpPrevButton.simulate('keyDown', {
+      key: 'Enter',
+      keyCode: 13,
+      which: 13,
+    });
+    jumpPrevButton.simulate('click');
+
+    expect(onChange).toHaveBeenLastCalledWith(40, 10);
+  });
+
+  it('should work for jump next page', () => {
+    const jumpNextButton = wrapper.find('li.rc-pagination-jump-next');
+    expect(jumpNextButton.exists()).toBeTruthy();
+
+    jumpNextButton.simulate('click');
+    jumpNextButton.simulate('keyDown', {
+      key: 'Enter',
+      keyCode: 13,
+      which: 13,
+    });
+
+    expect(onChange).toHaveBeenLastCalledWith(60, 10);
+  });
+});
+
 describe('select in sequence', () => {
   const serializeCls = (items) => items.map((item) => item.prop('className'));
 

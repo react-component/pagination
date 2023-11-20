@@ -4,6 +4,13 @@ import KEYCODE from 'rc-util/lib/KeyCode';
 import React from 'react';
 import type { PaginationLocale } from './interface';
 
+interface InternalSelectProps extends SelectProps {
+  /**
+   * form antd v5.5.0, popupMatchSelectWidth default is true
+   */
+  popupMatchSelectWidth?: boolean;
+}
+
 interface OptionsProps {
   disabled?: boolean;
   locale: PaginationLocale;
@@ -15,7 +22,7 @@ interface OptionsProps {
   changeSize?: (size: number) => void;
   quickGo?: (value: number) => void;
   buildOptionText?: (value: string | number) => string;
-  selectComponentClass: React.ComponentType<Partial<SelectProps>> & {
+  selectComponentClass: React.ComponentType<Partial<InternalSelectProps>> & {
     Option?: React.ComponentType<Partial<OptionProps>>;
   };
 }
@@ -124,6 +131,7 @@ function Options(props: OptionsProps) {
         showSearch={false}
         className={`${prefixCls}-size-changer`}
         optionLabelProp="children"
+        popupMatchSelectWidth={false}
         value={(pageSize || pageSizeOptions[0]).toString()}
         onChange={changeSizeHandle}
         getPopupContainer={(triggerNode) => triggerNode.parentNode}

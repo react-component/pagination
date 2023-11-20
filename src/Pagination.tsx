@@ -83,8 +83,8 @@ function Pagination(props: PaginationProps) {
   const [current, setCurrent] = useMergedState<number>(1, {
     value: currentProp,
     defaultValue: defaultCurrent,
-    postState: (c) => Math.min(c, calculatePage(pageSize, undefined, total)),
-    onChange: (c) => onChange(c, pageSize),
+    postState: (c) =>
+      Math.max(1, Math.min(c, calculatePage(undefined, pageSize, total))),
   });
 
   const [internalInputVal, setInternalInputVal] = React.useState(current);
@@ -185,14 +185,10 @@ function Pagination(props: PaginationProps) {
       current > newCurrent && newCurrent !== 0 ? newCurrent : current;
 
     setPageSize(size);
-    /**
-     * Not used `setCurrent` here. @see useMergedState
-     * It is possible that the current has not changed, but the page size has changed.
-     */
-    onChange(nextCurrent, size);
-
     setInternalInputVal(nextCurrent);
-    onShowSizeChange?.(nextCurrent, size);
+    onShowSizeChange?.(current, size);
+    setCurrent(nextCurrent);
+    onChange?.(nextCurrent, size);
   }
 
   function handleChange(page: number) {
@@ -210,6 +206,7 @@ function Pagination(props: PaginationProps) {
       }
 
       setCurrent(newPage);
+      onChange?.(newPage, pageSize);
 
       return newPage;
     }

@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import KEYCODE from 'rc-util/lib/KeyCode';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import React, { cloneElement, isValidElement } from 'react';
-import Options from './Options';
-import Pager from './Pager';
 import type { PaginationProps, PaginationState } from './interface';
 import LOCALE from './locale/zh_CN';
+import Options from './Options';
+import Pager from './Pager';
 
 function noop() {}
 
@@ -38,7 +38,12 @@ function calculatePage(
 }
 
 /**
- * @deprecated use `Pagination` instead.
+ * @summary This is a deprecated component. Do not use it.
+ * @since 3.8.0 below
+ * @deprecated use `Pagination` instead. next minor version will remove
+ * @description
+ *  I'm a little concerned that there aren't enough test cases to support refactoring😭
+ *  So I keep the old code here.
  */
 class _Pagination extends React.Component<PaginationProps, PaginationState> {
   static defaultProps = {

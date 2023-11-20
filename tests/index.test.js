@@ -550,34 +550,50 @@ describe('keyboard support', () => {
 });
 
 describe('select in sequence', () => {
-  const serializeCls = (items) => items.map((item) => item.prop('className'));
+  const serializeCls = (items) =>
+    items.map((item) =>
+      String(item.prop('className')).replaceAll('rc-pagination-', ''),
+    );
+
+  class Demo extends React.Component {
+    state = { current: 1 };
+
+    changeHandle = (current) => this.setState({ current });
+
+    render() {
+      return (
+        <Pagination
+          {...this.props}
+          current={this.state.current}
+          onChange={this.changeHandle}
+        />
+      );
+    }
+  }
 
   function sequenceSelector(total) {
     describe(`should sequence select ${total} pages`, () => {
-      const wrapper = mount(<Pagination total={total} />);
-      const items = wrapper.find('li');
-      const cls = serializeCls(items);
-
+      const wrapper = mount(<Demo total={total} />);
+      const cls = serializeCls(wrapper.find('li'));
       expect(cls).toMatchSnapshot();
 
-      for (let i = 2; i < items.length - 1; i++) {
+      const pages = Math.floor((total - 1) / 10) + 1;
+      for (let i = 2; i <= pages; i++) {
         it(`should select page ${i}`, () => {
-          items.at(i).simulate('click');
-          const newItems = wrapper.find('li');
-          const newCls = serializeCls(newItems);
-          expect(newCls).toMatchSnapshot();
+          wrapper.setState({ current: i });
+          const cls = serializeCls(wrapper.find('li'));
+          expect(cls).toMatchSnapshot();
         });
       }
     });
   }
-
   // coped examples/basic.tsx
   sequenceSelector(25);
   sequenceSelector(50);
   sequenceSelector(60);
   sequenceSelector(70);
   sequenceSelector(80);
-  sequenceSelector(80);
+  sequenceSelector(90);
   sequenceSelector(100);
   sequenceSelector(120);
   sequenceSelector(500);

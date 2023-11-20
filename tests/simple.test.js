@@ -149,4 +149,20 @@ describe('simple Pagination', () => {
     input.simulate('keyUp', { key: 'ArrowUp', keyCode: 38, which: 38 });
     expect(input.getDOMNode().value).toBe('2');
   });
+
+  it('gotoButton should work', () => {
+    const wrapper = mount(
+      <Pagination simple total={25} showQuickJumper={{ goButton: true }} />,
+    );
+
+    const input = wrapper.find('.rc-pagination-options').find('input');
+    const gotoButton = wrapper.find('.rc-pagination-options').find('button');
+
+    input.simulate('change', { target: { value: '2' } });
+    gotoButton.simulate('click');
+
+    expect(
+      wrapper.find('.rc-pagination-simple-pager').at(0).prop('title'),
+    ).toBe('2/3');
+  });
 });

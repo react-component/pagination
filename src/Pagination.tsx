@@ -563,7 +563,6 @@ function Pagination(props: PaginationProps) {
         selectComponentClass={selectComponentClass}
         selectPrefixCls={selectPrefixCls}
         changeSize={showSizeChanger ? changePageSize : null}
-        current={current}
         pageSize={pageSize}
         pageSizeOptions={pageSizeOptions}
         quickGo={shouldDisplayQuickJumper ? handleChange : null}

@@ -1,21 +1,22 @@
+import type { SelectProps } from 'rc-select';
+import type { OptionProps } from 'rc-select/es/Option';
 import KEYCODE from 'rc-util/lib/KeyCode';
 import React from 'react';
 import type { PaginationLocale } from './interface';
 
 interface OptionsProps {
-  disabled: boolean;
+  disabled?: boolean;
   locale: PaginationLocale;
   rootPrefixCls: string;
-  selectPrefixCls: string;
-  current: number;
+  selectPrefixCls?: string;
   pageSize: number;
-  pageSizeOptions: (string | number)[];
-  goButton: boolean | string;
-  changeSize: (size: number) => void;
-  quickGo: (value: number) => void;
+  pageSizeOptions?: (string | number)[];
+  goButton?: boolean | string;
+  changeSize?: (size: number) => void;
+  quickGo?: (value: number) => void;
   buildOptionText?: (value: string | number) => string;
-  selectComponentClass: React.ComponentType<any> & {
-    Option?: React.ComponentType<any>;
+  selectComponentClass: React.ComponentType<Partial<SelectProps>> & {
+    Option?: React.ComponentType<Partial<OptionProps>>;
   };
 }
 
@@ -50,7 +51,7 @@ function Options(props: OptionsProps) {
       : (value: string) => `${value} ${locale.items_per_page}`;
 
   const changeSizeHandle = (value: number) => {
-    changeSize(Number(value));
+    changeSize?.(Number(value));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +70,7 @@ function Options(props: OptionsProps) {
     ) {
       return;
     }
-    quickGo(getValidValue());
+    quickGo?.(getValidValue());
   };
 
   const go = (e: any) => {
@@ -78,7 +79,7 @@ function Options(props: OptionsProps) {
     }
     if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
       setGoInputText('');
-      quickGo(getValidValue());
+      quickGo?.(getValidValue());
     }
   };
 
@@ -123,7 +124,6 @@ function Options(props: OptionsProps) {
         showSearch={false}
         className={`${prefixCls}-size-changer`}
         optionLabelProp="children"
-        popupMatchSelectWidth={false}
         value={(pageSize || pageSizeOptions[0]).toString()}
         onChange={changeSizeHandle}
         getPopupContainer={(triggerNode) => triggerNode.parentNode}

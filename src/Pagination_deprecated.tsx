@@ -531,7 +531,6 @@ class _Pagination extends React.Component<PaginationProps, PaginationState> {
             selectComponentClass={selectComponentClass}
             selectPrefixCls={selectPrefixCls}
             changeSize={this.getShowSizeChanger() ? this.changePageSize : null}
-            current={current}
             pageSize={pageSize}
             pageSizeOptions={pageSizeOptions}
             quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}
@@ -740,7 +739,6 @@ class _Pagination extends React.Component<PaginationProps, PaginationState> {
           selectComponentClass={selectComponentClass}
           selectPrefixCls={selectPrefixCls}
           changeSize={this.getShowSizeChanger() ? this.changePageSize : null}
-          current={current}
           pageSize={pageSize}
           pageSizeOptions={pageSizeOptions}
           quickGo={this.shouldDisplayQuickJumper() ? this.handleChange : null}

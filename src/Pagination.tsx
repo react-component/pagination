@@ -371,7 +371,6 @@ function Pagination(props: PaginationProps) {
           disabled={disabled}
           onKeyDown={handleKeyDown}
           onKeyUp={handleKeyUp}
-          // fixme: ts type
           onChange={handleKeyUp}
           onBlur={handleBlur}
           size={3}

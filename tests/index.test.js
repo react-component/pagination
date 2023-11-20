@@ -177,6 +177,14 @@ describe('Uncontrolled Pagination', () => {
     );
     warnSpy.mockRestore();
   });
+
+  it('should response keyboard event', () => {
+    const pagers = wrapper.find('.rc-pagination-item');
+    const page2 = pagers.at(2);
+    page2.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('3');
+    expect(onChange).toHaveBeenLastCalledWith(3, 10);
+  });
 });
 
 describe('Controlled Pagination', () => {

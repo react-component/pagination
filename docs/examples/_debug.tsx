@@ -1,9 +1,9 @@
 import Select from 'rc-select';
 import React from 'react';
 import '../../assets/index.less';
+import type { PaginationProps } from '../../src/interface';
 import Pagination from '../../src/Pagination';
 import OriginPagination from '../../src/Pagination_deprecated';
-import type { PaginationProps } from '../../src/interface';
 
 const App = () => {
   const [origin, setOrigin] = React.useState(false);
@@ -19,22 +19,17 @@ const App = () => {
     showTotal: (total, range) => `${range[0]} - ${range[1]} of ${total} items`,
   };
 
-  // <Pagination
-  //       simple
-  //       defaultCurrent={1}
-  //       total={25}
-  //       showTotal={(total, range) =>
-  //         `${range[0]} - ${range[1]} of ${total} items`
-  //       }
-  //     />,
-
   const originTip = <span style={{ color: 'red' }}>Origin</span>;
   const newTip = <span style={{ color: 'green' }}>New</span>;
 
   return (
     <>
       <h2>{all ? null : origin ? originTip : newTip}</h2>
-      <button onClick={() => setOrigin((prev) => !prev)}>切换</button>
+      {!all && (
+        <button onClick={() => setOrigin((prev) => !prev)}>
+          切换为{origin ? 'new' : 'origin'}
+        </button>
+      )}
       <button onClick={() => setAll((prev) => !prev)}>全量</button>
       <hr />
       {!all &&
@@ -56,49 +51,3 @@ const App = () => {
 
 export default App;
 // export { default } from '../../tests/two-pagination.jsx'
-
-interface IProps {
-  value: string;
-  onChange: (info: {
-    firstName: string;
-    lastName: string;
-    fullName: string;
-  }) => void;
-  separator?: string;
-}
-
-const MyComponent = (props: IProps) => {
-  const { value = '', onChange, separator = ' ' } = props;
-  const [firstName, lastName] = value.split(separator)[0];
-
-  const fullName = `${firstName}${separator}${lastName}`;
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    type: 'firstName' | 'lastName',
-  ) => {
-    const { value: input } = e.target;
-
-    onChange({
-      firstName: type === 'firstName' ? input : firstName,
-      lastName: type === 'lastName' ? input : lastName,
-      fullName,
-    });
-  };
-
-  return (
-    <>
-      <input
-        type="text"
-        value={firstName}
-        onChange={(e) => handleChange(e, 'firstName')}
-      />
-      {separator}
-      <input
-        type="text"
-        value={lastName}
-        onChange={(e) => handleChange(e, 'lastName')}
-      />
-    </>
-  );
-};

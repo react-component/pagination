@@ -55,7 +55,7 @@
     "@types/keyv": "^4.2.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "@umijs/fabric": "^2.0.3",
+    "@umijs/fabric": "^4.0.1",
     "coveralls": "^3.0.6",
     "cross-env": "^7.0.0",
     "dumi": "^2.1.2",

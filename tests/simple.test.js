@@ -150,6 +150,20 @@ describe('simple Pagination', () => {
     expect(input.getDOMNode().value).toBe('2');
   });
 
+  it('should work form keyboard enter', () => {
+    const wrapper = mount(<Pagination total={100} defaultCurrent={5} simple />);
+    const input = wrapper.find('.rc-pagination-simple').find('input');
+
+    expect(input.exists()).toBeTruthy();
+
+    input.simulate('change', { target: { value: '8' } });
+    input.simulate('keyUp', { key: 'Enter', keyCode: 13, which: 13 });
+
+    expect(
+      wrapper.find('.rc-pagination-simple-pager').at(0).prop('title'),
+    ).toBe('8/10');
+  });
+
   it('gotoButton should work', () => {
     const wrapper = mount(
       <Pagination simple total={25} showQuickJumper={{ goButton: true }} />,

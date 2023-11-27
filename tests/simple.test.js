@@ -183,6 +183,20 @@ describe('simple Pagination', () => {
     expect(input.getDOMNode().value).toBe('8');
   });
 
+  it('should work when input is not number', () => {
+    const wrapper = mount(<Pagination total={100} defaultCurrent={5} simple />);
+    const input = wrapper.find('.rc-pagination-simple').find('input');
+
+    expect(input.exists()).toBeTruthy();
+
+    input.simulate('change', { target: { value: 'a' } }); // NaN case
+    input.simulate('blur');
+
+    expect(
+      wrapper.find('.rc-pagination-simple-pager').at(0).prop('title'),
+    ).toBe('5/10');
+  });
+
   it('gotoButton should work', () => {
     const wrapper = mount(
       <Pagination simple total={25} showQuickJumper={{ goButton: true }} />,

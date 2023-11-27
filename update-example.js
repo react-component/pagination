@@ -11,7 +11,7 @@ const suffix = '.js';
 
 const paths = glob.sync(`./docs/examples/*${suffix}`);
 
-paths.forEach(path => {
+paths.forEach((path) => {
   const name = path.split('/').pop().split('.')[0];
   fs.writeFile(
     `./docs/demo/${name}.md`,
@@ -20,12 +20,12 @@ paths.forEach(path => {
 <code src="../examples/${name}${suffix}">
 `,
     'utf8',
-    function(error) {
-      if(error){
+    function (error) {
+      if (error) {
         console.log(error);
         return false;
       }
       console.log(`${name} 更新成功~`);
-    }
-  )
+    },
+  );
 });

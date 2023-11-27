@@ -5,16 +5,10 @@ import 'rc-select/assets/index.less';
 
 const App = () => {
   const [current, setCurrent] = useState(1);
-  const onChange = page => {
+  const onChange = (page) => {
     setCurrent(page);
   };
-  return (
-    <Pagination
-      onChange={onChange}
-      current={current}
-      total={25}
-    />
-  );
+  return <Pagination onChange={onChange} current={current} total={25} />;
 };
 
 export default App;

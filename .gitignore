@@ -31,9 +31,14 @@ pnpm-lock.yaml
 coverage/
 .doc
 dist
+docs-dist
 .vscode
 # umi
 .umi
 .umi-production
 .umi-test
 .env.local
+
+# dumi
+.dumi/tmp
+.dumi/tmp-production

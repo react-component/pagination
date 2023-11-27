@@ -1,6 +1,6 @@
-import 'rc-select/assets/index.less';
-import React from 'react';
+// import 'rc-select/assets/index.less';
 import Select from 'rc-select';
+import React from 'react';
 import Pagination from '../src';
 
 class Hello extends React.Component {

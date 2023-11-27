@@ -2,7 +2,28 @@
 import React from 'react';
 import KEYCODE from './KeyCode';
 
-class Options extends React.Component {
+interface Props {
+  disabled: boolean;
+  locale: any;
+  rootPrefixCls: string;
+  selectPrefixCls: string;
+  current: number;
+  pageSize: number;
+  pageSizeOptions: (string | number)[];
+  goButton: boolean | string;
+  changeSize: (size: number) => void;
+  quickGo: (value: number) => void;
+  buildOptionText?: (value: string | number) => string;
+  selectComponentClass: React.ComponentType<any> & {
+    Option?: React.ComponentType<any>;
+  };
+}
+
+interface State {
+  goInputText: string;
+}
+
+class Options extends React.Component<Props, State> {
   static defaultProps = {
     pageSizeOptions: ['10', '20', '50', '100'],
   };
@@ -11,33 +32,32 @@ class Options extends React.Component {
     goInputText: '',
   };
 
-  getValidValue() {
+  getValidValue = () => {
     const { goInputText } = this.state;
     // eslint-disable-next-line no-restricted-globals
-    return !goInputText || isNaN(goInputText) ? undefined : Number(goInputText);
-  }
+    return !goInputText || Number.isNaN(goInputText)
+      ? undefined
+      : Number(goInputText);
+  };
 
-  buildOptionText = (value) => `${value} ${this.props.locale.items_per_page}`;
+  buildOptionText = (value: string) =>
+    `${value} ${this.props.locale.items_per_page}`;
 
-  changeSize = (value) => {
+  changeSize = (value: number) => {
     this.props.changeSize(Number(value));
   };
 
-  handleChange = (e) => {
-    this.setState({
-      goInputText: e.target.value,
-    });
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ goInputText: e.target.value });
   };
 
-  handleBlur = (e) => {
+  handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     const { goButton, quickGo, rootPrefixCls } = this.props;
     const { goInputText } = this.state;
     if (goButton || goInputText === '') {
       return;
     }
-    this.setState({
-      goInputText: '',
-    });
+    this.setState({ goInputText: '' });
     if (
       e.relatedTarget &&
       (e.relatedTarget.className.indexOf(`${rootPrefixCls}-item-link`) >= 0 ||
@@ -48,15 +68,13 @@ class Options extends React.Component {
     quickGo(this.getValidValue());
   };
 
-  go = (e) => {
+  go = (e: any) => {
     const { goInputText } = this.state;
     if (goInputText === '') {
       return;
     }
     if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
-      this.setState({
-        goInputText: '',
-      });
+      this.setState({ goInputText: '' });
       this.props.quickGo(this.getValidValue());
     }
   };
@@ -72,9 +90,9 @@ class Options extends React.Component {
     }
     return pageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
       // eslint-disable-next-line no-restricted-globals
-      const numberA = isNaN(Number(a)) ? 0 : Number(a);
+      const numberA = Number.isNaN(Number(a)) ? 0 : Number(a);
       // eslint-disable-next-line no-restricted-globals
-      const numberB = isNaN(Number(b)) ? 0 : Number(b);
+      const numberB = Number.isNaN(Number(b)) ? 0 : Number(b);
       return numberA - numberB;
     });
   }
@@ -119,7 +137,7 @@ class Options extends React.Component {
           showSearch={false}
           className={`${prefixCls}-size-changer`}
           optionLabelProp="children"
-          dropdownMatchSelectWidth={false}
+          popupMatchSelectWidth={false}
           value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={this.changeSize}
           getPopupContainer={(triggerNode) => triggerNode.parentNode}

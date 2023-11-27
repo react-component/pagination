@@ -2,16 +2,29 @@
 
 React Pagination Component.
 
-[![NPM version][npm-image]][npm-url] [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi) [![build status][github-actions-image]][github-actions-url] [![Test coverage][coveralls-image]][coveralls-url] [![codecov](https://codecov.io/gh/react-component/pagination/branch/master/graph/badge.svg)](https://codecov.io/gh/react-component/pagination) [![Dependencies](https://img.shields.io/david/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination) [![DevDependencies](https://img.shields.io/david/dev/react-component/pagination.svg?style=flat-square)](https://david-dm.org/react-component/pagination?type=dev) [![npm download][download-image]][download-url]
+[![NPM version][npm-image]][npm-url]
+[![npm download][download-image]][download-url]
+[![build status][github-actions-image]][github-actions-url]
+[![Codecov][codecov-image]][codecov-url]
+[![bundle size][bundlephobia-image]][bundlephobia-url]
+[![dumi][dumi-image]][dumi-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-pagination.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-pagination
 [github-actions-image]: https://github.com/react-component/pagination/workflows/CI/badge.svg
 [github-actions-url]: https://github.com/react-component/pagination/actions
-[coveralls-image]: https://img.shields.io/coveralls/react-component/pagination.svg?style=flat-square
-[coveralls-url]: https://coveralls.io/r/react-component/pagination?branch=master
+[codecov-image]: https://img.shields.io/codecov/c/github/react-component/pagination/master.svg?style=flat-square
+[codecov-url]: https://codecov.io/gh/react-component/pagination/branch/master
+[david-url]: https://david-dm.org/react-component/pagination
+[david-image]: https://david-dm.org/react-component/pagination/status.svg?style=flat-square
+[david-dev-url]: https://david-dm.org/react-component/pagination?type=dev
+[david-dev-image]: https://david-dm.org/react-component/pagination/dev-status.svg?style=flat-square
 [download-image]: https://img.shields.io/npm/dm/rc-pagination.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-pagination
+[bundlephobia-url]: https://bundlephobia.com/result?p=rc-pagination
+[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-pagination
+[dumi-url]: https://github.com/umijs/dumi
+[dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
 
 ## Development
 
@@ -20,11 +33,10 @@ npm install
 npm start
 ```
 
-## Example
+## Examples
 
-http://localhost:9001
-
-online example: https://pagination-react-component.vercel.app
+Online example: `https://pagination-react-component.vercel.app`
+Local example: `npm run start` then `http://localhost:9001`
 
 ## Install
 
@@ -64,10 +76,10 @@ ReactDOM.render(<Pagination />, container);
 | showLessItems                | show less page items                                      | Bool                                                                                                                                                 | false                                                                                  |
 | showTitle                    | show page items title                                     | Bool                                                                                                                                                 | true                                                                                   |
 | itemRender                   | custom page item renderer                                 | Function(current, type: 'page' \| 'prev' \| 'next' \| 'jump-prev' \| 'jump-next', element): React.ReactNode \| `(current, type, element) => element` |                                                                                        |
-| prevIcon                     | specifict the default previous icon                       | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
-| nextIcon                     | specifict the default previous icon                       | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
-| jumpPrevIcon                 | specifict the default previous icon                       | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
-| jumpNextIcon                 | specifict the default previous icon                       | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
+| prevIcon                     | specify the default previous icon                         | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
+| nextIcon                     | specify the default next icon                             | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
+| jumpPrevIcon                 | specify the default previous icon                         | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
+| jumpNextIcon                 | specify the default next icon                             | ReactNode \| (props: PaginationProps) => ReactNode                                                                                                   |                                                                                        |
 
 ## License
 

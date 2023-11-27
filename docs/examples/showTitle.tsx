@@ -8,7 +8,7 @@ class App extends React.Component {
     current: 3,
   };
 
-  onChange = page => {
+  onChange = (page) => {
     console.log(page);
     this.setState({
       current: page,

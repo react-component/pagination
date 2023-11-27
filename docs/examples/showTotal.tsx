@@ -4,7 +4,7 @@ import '../../assets/index.less';
 
 const App = () => (
   <>
-    <Pagination showTotal={total => `Total ${total} items`} total={455} />
+    <Pagination showTotal={(total) => `Total ${total} items`} total={455} />
     <br />
     <Pagination
       showTotal={(total, range) =>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 import Pagination from '../src';
 
@@ -99,7 +98,7 @@ describe('simple quick jumper', () => {
   });
 
   it('should quick jump to expect page', () => {
-    const quickJumper = wrapper.find('.rc-pagination-simple');
+    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
     const input = quickJumper.find('input');
     const goButton = quickJumper.find('.go-button');
     input.simulate('change', { target: { value: '2' } });

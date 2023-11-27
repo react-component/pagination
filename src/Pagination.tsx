@@ -144,6 +144,10 @@ function Pagination(props: PaginationProps) {
 
   const shouldDisplayQuickJumper = total > pageSize ? showQuickJumper : false;
 
+  /**
+   * prevent "up arrow" key reseting cursor position within textbox
+   * @see https://stackoverflow.com/a/1081114
+   */
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (event.keyCode === KeyCode.UP || event.keyCode === KeyCode.DOWN) {
       event.preventDefault();

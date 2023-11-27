@@ -164,6 +164,25 @@ describe('simple Pagination', () => {
     ).toBe('8/10');
   });
 
+  it(`prevent "up arrow" key reseting cursor position within textbox`, () => {
+    const mockPreventDefault = jest.fn();
+    const wrapper = mount(<Pagination total={100} defaultCurrent={5} simple />);
+    const input = wrapper.find('.rc-pagination-simple').find('input');
+
+    expect(input.exists()).toBeTruthy();
+
+    input.simulate('change', { target: { value: '8' } });
+    input.simulate('keyDown', {
+      key: 'ArrowUp',
+      keyCode: 38,
+      which: 38,
+      preventDefault: mockPreventDefault,
+    });
+
+    expect(mockPreventDefault).toHaveBeenCalled();
+    expect(input.getDOMNode().value).toBe('8');
+  });
+
   it('gotoButton should work', () => {
     const wrapper = mount(
       <Pagination simple total={25} showQuickJumper={{ goButton: true }} />,

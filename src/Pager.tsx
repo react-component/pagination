@@ -63,4 +63,8 @@ const Pager: React.FC<PagerProps> = (props) => {
   ) : null;
 };
 
+if (process.env.NODE_ENV !== 'production') {
+  Pager.displayName = 'Pager';
+}
+
 export default Pager;

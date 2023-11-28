@@ -60,6 +60,7 @@ export interface PaginationProps extends Partial<PaginationData> {
   ) => React.ReactNode;
   showTotal?: (total: number, range: [number, number]) => React.ReactNode;
 }
+
 export interface PaginationState {
   current: number;
   currentInputValue: number;

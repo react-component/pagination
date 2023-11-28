@@ -29,7 +29,7 @@ interface OptionsProps {
 
 const defaultPageSizeOptions = ['10', '20', '50', '100'];
 
-function Options(props: OptionsProps) {
+const Options: React.FC<OptionsProps> = (props) => {
   const {
     pageSizeOptions = defaultPageSizeOptions,
     locale,
@@ -113,9 +113,9 @@ function Options(props: OptionsProps) {
     return null;
   }
 
-  let changeSelect = null;
-  let goInput = null;
-  let gotoButton = null;
+  let changeSelect: React.ReactNode = null;
+  let goInput: React.ReactNode = null;
+  let gotoButton: React.ReactNode = null;
 
   if (changeSize && Select) {
     const options = getPageSizeOptions().map((opt, i) => (
@@ -187,6 +187,10 @@ function Options(props: OptionsProps) {
       {goInput}
     </li>
   );
+};
+
+if (process.env.NODE_ENV !== 'production') {
+  Options.displayName = 'Options';
 }
 
 export default Options;

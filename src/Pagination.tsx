@@ -33,7 +33,7 @@ function calculatePage(p: number | undefined, pageSize: number, total: number) {
   return Math.floor((total - 1) / _pageSize) + 1;
 }
 
-function Pagination(props: PaginationProps) {
+const Pagination: React.FC<PaginationProps> = (props) => {
   const {
     // cls
     prefixCls = 'rc-pagination',
@@ -117,7 +117,7 @@ function Pagination(props: PaginationProps) {
       />
     );
     if (typeof icon === 'function') {
-      iconNode = React.createElement(icon, { ...props });
+      iconNode = React.createElement<PaginationProps>(icon, { ...props });
     }
     return iconNode as React.ReactNode;
   }
@@ -275,8 +275,8 @@ function Pagination(props: PaginationProps) {
       'prev',
       getItemIcon(prevIcon, 'prev page'),
     );
-    return React.isValidElement(prevButton)
-      ? React.cloneElement<any>(prevButton, { disabled: !hasPrev })
+    return React.isValidElement<HTMLButtonElement>(prevButton)
+      ? React.cloneElement(prevButton, { disabled: !hasPrev })
       : prevButton;
   }
 
@@ -286,8 +286,8 @@ function Pagination(props: PaginationProps) {
       'next',
       getItemIcon(nextIcon, 'next page'),
     );
-    return React.isValidElement(nextButton)
-      ? React.cloneElement<any>(nextButton, { disabled: !hasNext })
+    return React.isValidElement<HTMLButtonElement>(nextButton)
+      ? React.cloneElement(nextButton, { disabled: !hasNext })
       : nextButton;
   }
 
@@ -323,7 +323,8 @@ function Pagination(props: PaginationProps) {
     return null;
   }
 
-  const pagerList: React.ReactElement[] = [];
+  const pagerList: React.ReactElement<PagerProps>[] = [];
+
   const pagerProps: PagerProps = {
     rootPrefixCls: prefixCls,
     onClick: handleChange,
@@ -468,7 +469,7 @@ function Pagination(props: PaginationProps) {
     }
 
     if (current - 1 >= pageBufferSize * 2 && current !== 1 + 2) {
-      pagerList[0] = React.cloneElement(pagerList[0], {
+      pagerList[0] = React.cloneElement<PagerProps>(pagerList[0], {
         className: classNames(
           `${prefixCls}-item-after-jump-prev`,
           pagerList[0].props.className,
@@ -574,6 +575,10 @@ function Pagination(props: PaginationProps) {
       />
     </ul>
   );
+};
+
+if (process.env.NODE_ENV !== 'production') {
+  Pagination.displayName = 'Pagination';
 }
 
 export default Pagination;

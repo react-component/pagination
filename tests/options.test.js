@@ -1,4 +1,4 @@
-import { mount } from 'enzyme';
+import { render as mount } from '@testing-library/react';
 import Select from 'rc-select';
 import zhCN from '../src/locale/zh_CN';
 import Options from '../src/Options';

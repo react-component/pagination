@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ sivu',
   jump_to: 'Mene',
   jump_to_confirm: 'Potvrdite',
   page: 'Sivu',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Edellinen sivu',
   next_page: 'Seuraava sivu',
   prev_5: 'Edelliset 5 sivua',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Seuraavat 3 sivua',
   page_size: 'Page Size',
 };
+
+export default locale;

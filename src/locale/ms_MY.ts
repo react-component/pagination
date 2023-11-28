@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ halaman',
   jump_to: 'Lompat ke',
   jump_to_confirm: 'Sahkan',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Halaman sebelumnya',
   next_page: 'Halam seterusnya',
   prev_5: '5 halaman sebelum',
@@ -14,3 +16,5 @@ export default {
   next_3: '3 halaman seterusnya',
   page_size: 'Page Size',
 };
+
+export default locale;

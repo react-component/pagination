@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ ಪುಟ',
   jump_to: 'ಜಿಗಿತವನ್ನು',
   jump_to_confirm: 'ಖಚಿತಪಡಿಸಲು ಜಿಗಿತವನ್ನು',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'ಹಿಂದಿನ ಪುಟ',
   next_page: 'ಮುಂದಿನ ಪುಟ',
   prev_5: 'ಹಿಂದಿನ 5 ಪುಟಗಳು',
@@ -14,3 +16,5 @@ export default {
   next_3: 'ಮುಂದಿನ 3 ಪುಟಗಳು',
   page_size: 'Page Size',
 };
+
+export default locale;

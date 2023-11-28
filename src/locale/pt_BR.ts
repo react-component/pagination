@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ página',
   jump_to: 'Vá até',
   jump_to_confirm: 'confirme',
   page: 'Página',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Página anterior',
   next_page: 'Próxima página',
   prev_5: '5 páginas anteriores',
@@ -14,3 +16,5 @@ export default {
   next_3: '3 próximas páginas',
   page_size: 'tamanho da página',
 };
+
+export default locale;

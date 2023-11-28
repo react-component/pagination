@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { mount } from 'enzyme';
 import Select from 'rc-select';
+import React, { useState } from 'react';
 import Pagination from '../src';
 
 describe('simple Pagination', () => {
@@ -60,7 +60,13 @@ describe('simple Pagination', () => {
   });
 
   it('default current page is 1', () => {
-    expect(wrapper.state().current).toBe(1);
+    // expect(wrapper.state().current).toBe(1); // Class Component
+    expect(wrapper.find('.rc-pagination-simple-pager').prop('title')).toBe(
+      '1/3',
+    );
+    expect(
+      wrapper.find('.rc-pagination-simple').find('input').getDOMNode().value,
+    ).toBe('1');
   });
 
   it('prev-button should be disabled', () => {
@@ -78,12 +84,18 @@ describe('simple Pagination', () => {
     const component = mount(
       <Pagination simple defaultCurrent={100} total={25} />,
     );
-    expect(component.state().current).toBe(3);
+    // expect(component.state().current).toBe(3); // Class Component
+    expect(component.find('.rc-pagination-simple-pager').prop('title')).toBe(
+      '3/3',
+    );
     const greaterCurrent = component.find('.rc-pagination-simple');
     const input = greaterCurrent.find('input');
     input.simulate('change', { target: { value: '313423434343343452121' } });
     expect(input.getDOMNode().value).toBe('3');
-    expect(component.state().current).toBe(3);
+    // expect(component.state().current).toBe(3); // Class Component
+    expect(component.find('.rc-pagination-simple-pager').prop('title')).toBe(
+      '3/3',
+    );
   });
 
   it('should merge custom pageSize to pageSizeOptions', () => {
@@ -119,5 +131,85 @@ describe('simple Pagination', () => {
     pageSize1.simulate('click');
     expect(onChange).toBeCalled();
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
+  });
+
+  it('should support keyboard event', () => {
+    const input = wrapper.find('.rc-pagination-simple').find('input');
+    input.simulate('change', { target: { value: '2' } });
+    input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+    expect(input.getDOMNode().value).toBe('2');
+  });
+
+  it('should support keyboard event when press up or down key', () => {
+    const input = wrapper.find('.rc-pagination-simple').find('input');
+    input.simulate('keyUp', { key: 'ArrowDown', keyCode: 40, which: 40 });
+    input.simulate('keyUp', { key: 'ArrowDown', keyCode: 40, which: 40 });
+    expect(input.getDOMNode().value).toBe('3');
+
+    input.simulate('keyUp', { key: 'ArrowUp', keyCode: 38, which: 38 });
+    expect(input.getDOMNode().value).toBe('2');
+  });
+
+  it('should work form keyboard enter', () => {
+    const wrapper = mount(<Pagination total={100} defaultCurrent={5} simple />);
+    const input = wrapper.find('.rc-pagination-simple').find('input');
+
+    expect(input.exists()).toBeTruthy();
+
+    input.simulate('change', { target: { value: '8' } });
+    input.simulate('keyUp', { key: 'Enter', keyCode: 13, which: 13 });
+
+    expect(
+      wrapper.find('.rc-pagination-simple-pager').at(0).prop('title'),
+    ).toBe('8/10');
+  });
+
+  it(`prevent "up arrow" key reseting cursor position within textbox`, () => {
+    const mockPreventDefault = jest.fn();
+    const wrapper = mount(<Pagination total={100} defaultCurrent={5} simple />);
+    const input = wrapper.find('.rc-pagination-simple').find('input');
+
+    expect(input.exists()).toBeTruthy();
+
+    input.simulate('change', { target: { value: '8' } });
+    input.simulate('keyDown', {
+      key: 'ArrowUp',
+      keyCode: 38,
+      which: 38,
+      preventDefault: mockPreventDefault,
+    });
+
+    expect(mockPreventDefault).toHaveBeenCalled();
+    expect(input.getDOMNode().value).toBe('8');
+  });
+
+  it('should work when input is not number', () => {
+    const wrapper = mount(<Pagination total={100} defaultCurrent={5} simple />);
+    const input = wrapper.find('.rc-pagination-simple').find('input');
+
+    expect(input.exists()).toBeTruthy();
+
+    input.simulate('change', { target: { value: 'a' } }); // NaN case
+    input.simulate('blur');
+
+    expect(
+      wrapper.find('.rc-pagination-simple-pager').at(0).prop('title'),
+    ).toBe('5/10');
+  });
+
+  it('gotoButton should work', () => {
+    const wrapper = mount(
+      <Pagination simple total={25} showQuickJumper={{ goButton: true }} />,
+    );
+
+    const input = wrapper.find('.rc-pagination-options').find('input');
+    const gotoButton = wrapper.find('.rc-pagination-options').find('button');
+
+    input.simulate('change', { target: { value: '2' } });
+    gotoButton.simulate('click');
+
+    expect(
+      wrapper.find('.rc-pagination-simple-pager').at(0).prop('title'),
+    ).toBe('2/3');
   });
 });

@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ strana',
   jump_to: 'Choď na',
   jump_to_confirm: 'potvrdit',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Predchádzajúca strana',
   next_page: 'Nasledujúca strana',
   prev_5: 'Predchádzajúcich 5 strán',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Nasledujúce 3 strany',
   page_size: 'Page Size',
 };
+
+export default locale;

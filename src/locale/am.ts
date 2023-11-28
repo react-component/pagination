@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ ግፅ',
   jump_to: 'ሂድ ወደ',
   jump_to_confirm: 'አረጋግጥ',
   page: 'ገፅ',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'ያለፈው ገፅ',
   next_page: 'ቀጣይ ገፅ',
   prev_5: 'ያለፈው 5 ገፅ',
@@ -14,3 +16,5 @@ export default {
   next_3: 'ቀጣይ 3 ገፅ',
   page_size: 'የገፅ መጠን',
 };
+
+export default locale;

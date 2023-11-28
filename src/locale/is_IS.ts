@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ síðu',
   jump_to: 'Síða',
   jump_to_confirm: 'staðfest',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Fyrri síða',
   next_page: 'Næsta síða',
   prev_5: 'Til baka 5 síður',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Áfram 3 síður',
   page_size: 'Page Size',
 };
+
+export default locale;

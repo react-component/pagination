@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ sah.',
   jump_to: "O'tish",
   jump_to_confirm: 'tasdiqlash',
   page: 'Sahifa',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Orqaga',
   next_page: 'Oldinga',
   prev_5: 'Oldingi 5',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Keyingi 3',
   page_size: 'sahifa hajmi',
 };
+
+export default locale;

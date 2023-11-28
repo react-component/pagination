@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ עמוד',
   jump_to: 'עבור אל',
   jump_to_confirm: 'אישור',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'העמוד הקודם',
   next_page: 'העמוד הבא',
   prev_5: '5 עמודים קודמים',
@@ -14,3 +16,5 @@ export default {
   next_3: '3 עמודים הבאים',
   page_size: 'Page Size',
 };
+
+export default locale;

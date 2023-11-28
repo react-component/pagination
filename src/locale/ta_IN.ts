@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ பக்கம்',
   jump_to: 'அடுத்த',
   jump_to_confirm: 'உறுதிப்படுத்தவும்',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'முந்தைய பக்கம்',
   next_page: 'அடுத்த பக்கம்',
   prev_5: 'முந்தைய 5 பக்கங்கள்',
@@ -14,3 +16,5 @@ export default {
   next_3: 'அடுத்த 3 பக்கங்கள்',
   page_size: 'Page Size',
 };
+
+export default locale;

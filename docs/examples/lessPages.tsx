@@ -20,18 +20,17 @@ const doublePath = [
     '1c9.1-11.7 9.1-27.9 0-39.5z',
 ];
 
-const getSvgIcon = (path, reverse, type) => {
+const getSvgIcon = (
+  path: string | string[],
+  reverse: boolean,
+  type: string,
+) => {
   const paths = Array.isArray(path) ? path : [path];
-  const renderPaths = paths.map((p, i) => {
-    return <path key={i} d={p} />;
-  });
+  const renderPaths = paths.map<React.ReactNode>((p, i) => (
+    <path key={i} d={p} />
+  ));
   return (
-    <i
-      className={`custom-icon-${type}`}
-      style={{
-        fontSize: '16px',
-      }}
-    >
+    <i className={`custom-icon-${type}`} style={{ fontSize: '16px' }}>
       <svg
         viewBox="0 0 1024 1024"
         width="1em"
@@ -58,11 +57,9 @@ class App extends React.Component {
     current: 3,
     useIcon: true,
   };
-  onChange = (page) => {
+  onChange = (page: number) => {
     console.log(page);
-    this.setState({
-      current: page,
-    });
+    this.setState({ current: page });
   };
   toggleCustomIcon = () => {
     this.setState({

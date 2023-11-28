@@ -118,7 +118,7 @@ const Options: React.FC<OptionsProps> = (props) => {
   let gotoButton: React.ReactNode = null;
 
   if (changeSize && Select) {
-    const options = getPageSizeOptions().map((opt, i) => (
+    const options = getPageSizeOptions().map<React.ReactNode>((opt, i) => (
       <Select.Option key={i} value={opt.toString()}>
         {mergeBuildOptionText(opt)}
       </Select.Option>

@@ -7,7 +7,6 @@ module.exports = {
   },
   collectCoverageFrom: [
     'src/**',
-    '!src/Pagination_deprecated.tsx',
     '!src/locale/**',
   ],
 };

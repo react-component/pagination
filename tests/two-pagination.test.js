@@ -1,13 +1,14 @@
-import { mount } from 'enzyme';
+import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
-import Pagination from '../src';
 import TwoPagination from './two-pagination';
 
 describe('Two Pagination', () => {
   let wrapper;
+  let mockPagination;
 
   beforeEach(() => {
-    wrapper = mount(<TwoPagination />);
+    jest.mock('../src', () => {});
+    wrapper = render(<TwoPagination />);
   });
 
   afterEach(() => {
@@ -15,24 +16,33 @@ describe('Two Pagination', () => {
   });
 
   it('should has initial pageSize 20', () => {
-    const p1 = wrapper.find(Pagination).at(0);
-    const p2 = wrapper.find(Pagination).at(1);
-    // expect(p1.state().pageSize).toBe(20); // Class component
-    expect(p1.props().pageSize).toBe(20); // Function component
-    // expect(p2.state().pageSize).toBe(20); // Class component
-    expect(p2.props().pageSize).toBe(20); // Function component
+    const findPagination = wrapper.container.querySelectorAll('.rc-pagination');
+    expect(findPagination).toHaveLength(2);
+    const [p1, p2] = findPagination;
+
+    const p1Items = p1.querySelectorAll('.rc-pagination-item');
+    expect(p1Items).toHaveLength(6);
+    expect(p1Items[p1Items.length - 1].textContent).toBe('25');
+
+    const p2Items = p2.querySelectorAll('.rc-pagination-item');
+    expect(p2Items).toHaveLength(6);
+    expect(p2Items[p2Items.length - 1].textContent).toBe('25');
   });
 
   it('should sync pageSize via state', () => {
-    const p1 = wrapper.find(Pagination).at(0);
-    const p2 = wrapper.find(Pagination).at(1);
-    wrapper.find('.hook').simulate('click');
-    // wrapper.update();
-    const newP1 = wrapper.find(Pagination).at(0);
-    const newP2 = wrapper.find(Pagination).at(1);
-    // expect(p1.state().pageSize).toBe(50); // Class component
-    expect(newP1.props().pageSize).toBe(50); // Function component
-    // expect(p2.state().pageSize).toBe(50); // Class component
-    expect(newP2.props().pageSize).toBe(50); // Function component
+    const findPagination = wrapper.container.querySelectorAll('.rc-pagination');
+    const [p1, p2] = findPagination;
+
+    const button = wrapper.container.querySelector('.hook');
+    expect(button).toBeTruthy();
+    fireEvent.click(button);
+
+    const p1Items = p1.querySelectorAll('.rc-pagination-item');
+    expect(p1Items).toHaveLength(6);
+    expect(p1Items[p1Items.length - 1].textContent).toBe('10');
+
+    const p2Items = p2.querySelectorAll('.rc-pagination-item');
+    expect(p2Items).toHaveLength(6);
+    expect(p2Items[p2Items.length - 1].textContent).toBe('10');
   });
 });

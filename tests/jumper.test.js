@@ -1,12 +1,13 @@
-import { mount } from 'enzyme';
+import { render, fireEvent } from '@testing-library/react';
 import Pagination from '../src';
 
 describe('Pagination with jumper', () => {
   let wrapper;
   const onChange = jest.fn();
+  const $$ = (selector) => wrapper.container.querySelector(selector);
 
   beforeEach(() => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination
         onChange={onChange}
         defaultCurrent={10}
@@ -22,55 +23,52 @@ describe('Pagination with jumper', () => {
   });
 
   it('when input less than 1', () => {
-    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
-    const input = quickJumper.find('input');
-    input.simulate('change', { target: { value: '-1' } });
-    input.simulate('keyUp', { key: 'Enter', keyCode: 13, which: 13 });
-    // expect(wrapper.state().current).toBe(1); // Class component
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('1');
+    const quickJumper = $$('.rc-pagination-options-quick-jumper');
+    expect(quickJumper).toBeTruthy();
+    const input = quickJumper.querySelector('input');
+    fireEvent.change(input, { target: { value: '-1' } });
+    fireEvent.keyUp(input, { key: 'Enter', keyCode: 13, which: 13 });
+    expect($$('.rc-pagination-item-active')).toHaveTextContent('1');
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
 
   it('should not call onChange when blur input', () => {
-    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
-    const input = quickJumper.find('input');
-    input.simulate('blur');
-    // expect(wrapper.state().current).toBe(10); // Class component
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('10');
-    expect(onChange).not.toBeCalled();
+    const quickJumper = $$('.rc-pagination-options-quick-jumper');
+    const input = quickJumper.querySelector('input');
+    fireEvent.blur(input);
+    expect($$('.rc-pagination-item-active')).toHaveTextContent('10');
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it('should not jumper when click pre/next button', () => {
-    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
-    const input = quickJumper.find('input');
-    input.simulate('change', { target: { value: '13' } });
-    const mockEvent = {
-      relatedTarget: {
-        className: 'rc-pagination-item-link',
-      },
-    };
-    input.simulate('blur', mockEvent);
-    expect(input.instance().value).toBe('');
-    expect(onChange).not.toBeCalled();
+    const quickJumper = $$('.rc-pagination-options-quick-jumper');
+    const input = quickJumper.querySelector('input');
+    fireEvent.change(input, { target: { value: '13' } });
+
+    const relatedTarget = document.createElement('a');
+    relatedTarget.className = 'rc-pagination-item-link';
+    fireEvent.blur(input, { relatedTarget });
+
+    expect(input).toHaveValue('');
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it('should not jumper when click page', () => {
-    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
-    const input = quickJumper.find('input');
-    input.simulate('change', { target: { value: '13' } });
-    const mockEvent = {
-      relatedTarget: {
-        className: 'rc-pagination-item',
-      },
-    };
-    input.simulate('blur', mockEvent);
-    expect(input.instance().value).toBe('');
-    expect(onChange).not.toBeCalled();
+    const quickJumper = $$('.rc-pagination-options-quick-jumper');
+    const input = quickJumper.querySelector('input');
+    fireEvent.change(input, { target: { value: '13' } });
+
+    const relatedTarget = document.createElement('a');
+    relatedTarget.className = 'rc-pagination-item';
+    fireEvent.blur(input, { relatedTarget });
+
+    expect(input).toHaveValue('');
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it('should not jump when input empty string', () => {
     const onChange = jest.fn();
-    const wrapper = mount(
+    const { container } = render(
       <Pagination
         onChange={onChange}
         total={25}
@@ -83,15 +81,21 @@ describe('Pagination with jumper', () => {
         }}
       />,
     );
-    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
-    const input = quickJumper.find('input');
-    const goButton = quickJumper.find('.go-button');
-    input.simulate('change', { target: { value: '3' } });
-    goButton.simulate('click');
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('3');
-    input.simulate('change', { target: { value: '' } });
-    goButton.simulate('click');
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('3');
+    const quickJumper = container.querySelector(
+      '.rc-pagination-options-quick-jumper',
+    );
+    const input = quickJumper.querySelector('input');
+    const goButton = quickJumper.querySelector('.go-button');
+    fireEvent.change(input, { target: { value: '3' } });
+    fireEvent.click(goButton);
+    expect(
+      container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('3');
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.click(goButton);
+    expect(
+      container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('3');
     expect(onChange).toHaveBeenLastCalledWith(3, 10);
   });
 });
@@ -101,7 +105,7 @@ describe('simple quick jumper', () => {
   const onChange = jest.fn();
 
   beforeEach(() => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination
         simple
         onChange={onChange}
@@ -127,22 +131,22 @@ describe('simple quick jumper', () => {
   });
 
   it('should quick jump to expect page', () => {
-    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
-    const input = quickJumper.find('input');
-    const goButton = quickJumper.find('.go-button');
-    input.simulate('change', { target: { value: '2' } });
-    goButton.simulate('click');
-    // expect(wrapper.state().current).toBe(2); // Class component
+    const quickJumper = wrapper.container.querySelector(
+      '.rc-pagination-options-quick-jumper',
+    );
+    const input = quickJumper.querySelector('input');
+    const goButton = quickJumper.querySelector('.go-button');
+    fireEvent.change(input, { target: { value: '2' } });
+    fireEvent.click(goButton);
     expect(
-      wrapper.find('.rc-pagination-simple-pager').find('input').getDOMNode()
-        .value,
-    ).toBe('2');
+      wrapper.container.querySelector('.rc-pagination-simple-pager input'),
+    ).toHaveValue('2');
     expect(onChange).toHaveBeenLastCalledWith(2, 10);
   });
 
   describe('custom showQuickJumper button Pagination', () => {
     beforeEach(() => {
-      wrapper = mount(
+      wrapper = render(
         <Pagination
           onChange={onChange}
           defaultCurrent={1}
@@ -162,31 +166,35 @@ describe('simple quick jumper', () => {
     });
 
     it('should quick jump to expect page', () => {
-      const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
-      const input = quickJumper.find('input');
-      const goButton = quickJumper.find('.go-button');
-      input.simulate('change', { target: { value: '2' } });
-      goButton.simulate('click');
-      // expect(wrapper.state().current).toBe(2); // Class component
-      expect(wrapper.find('.rc-pagination-item-active').text()).toBe('2');
+      const quickJumper = wrapper.container.querySelector(
+        '.rc-pagination-options-quick-jumper',
+      );
+      const input = quickJumper.querySelector('input');
+      const goButton = quickJumper.querySelector('.go-button');
+      fireEvent.change(input, { target: { value: '2' } });
+      fireEvent.click(goButton);
+      expect(
+        wrapper.container.querySelector('.rc-pagination-item-active'),
+      ).toHaveTextContent('2');
       expect(onChange).toHaveBeenLastCalledWith(2, 10);
     });
 
     // https://github.com/ant-design/ant-design/issues/10080
     it('should not quick jump to previous page when input invalid char', () => {
-      const nextButton = wrapper.find('.rc-pagination-next');
-      nextButton.simulate('click');
-      const input = wrapper.find('input');
-      input.simulate('change', { target: { value: '&' } });
-      input.simulate('keyUp', { key: 'Enter', keyCode: 13, which: 13 });
-      // expect(wrapper.state().current).toBe(2); // Class component
-      expect(wrapper.find('.rc-pagination-item-active').text()).toBe('2');
+      const nextButton = wrapper.container.querySelector('.rc-pagination-next');
+      fireEvent.click(nextButton);
+      const input = wrapper.container.querySelector('input');
+      fireEvent.change(input, { target: { value: '&' } });
+      fireEvent.keyUp(input, { key: 'Enter', keyCode: 13, which: 13 });
+      expect(
+        wrapper.container.querySelector('.rc-pagination-item-active'),
+      ).toHaveTextContent('2');
       expect(onChange).toHaveBeenLastCalledWith(2, 10);
     });
   });
 
   it('goButton could be true', () => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination
         onChange={onChange}
         defaultCurrent={10}
@@ -195,12 +203,14 @@ describe('simple quick jumper', () => {
       />,
     );
     expect(
-      wrapper.find('.rc-pagination-options-quick-jumper-button').exists(),
-    ).toBe(true);
+      wrapper.container.querySelector(
+        '.rc-pagination-options-quick-jumper-button',
+      ),
+    ).toBeTruthy();
   });
 
   it('goButton defaultly hidden', () => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination
         onChange={onChange}
         defaultCurrent={10}
@@ -209,12 +219,14 @@ describe('simple quick jumper', () => {
       />,
     );
     expect(
-      wrapper.find('.rc-pagination-options-quick-jumper-button').exists(),
-    ).toBe(false);
+      wrapper.container.querySelector(
+        '.rc-pagination-options-quick-jumper-button',
+      ),
+    ).toBeFalsy();
   });
 
   it('goButton could be false', () => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination
         onChange={onChange}
         defaultCurrent={10}
@@ -223,22 +235,26 @@ describe('simple quick jumper', () => {
       />,
     );
     expect(
-      wrapper.find('.rc-pagination-options-quick-jumper-button').exists(),
-    ).toBe(false);
+      wrapper.container.querySelector(
+        '.rc-pagination-options-quick-jumper-button',
+      ),
+    ).toBeFalsy();
   });
 
   it('Quick Jumper should hide when only one page', () => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination onChange={onChange} total={5} showQuickJumper />,
     );
-    expect(wrapper.find('.rc-pagination-options-quick-jumper').exists()).toBe(
-      false,
-    );
+    expect(
+      wrapper.container.querySelector(
+        '.rc-pagination-options-quick-jumper-button',
+      ),
+    ).toBeFalsy();
   });
 
   // https://github.com/ant-design/ant-design/issues/32991
   it('Quick Jumper should hide when only one page when has pageSize', () => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination
         onChange={onChange}
         total={5}
@@ -246,8 +262,10 @@ describe('simple quick jumper', () => {
         showQuickJumper
       />,
     );
-    expect(wrapper.find('.rc-pagination-options-quick-jumper').exists()).toBe(
-      false,
-    );
+    expect(
+      wrapper.container.querySelector(
+        '.rc-pagination-options-quick-jumper-button',
+      ),
+    ).toBeFalsy();
   });
 });

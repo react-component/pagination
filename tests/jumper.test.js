@@ -26,7 +26,8 @@ describe('Pagination with jumper', () => {
     const input = quickJumper.find('input');
     input.simulate('change', { target: { value: '-1' } });
     input.simulate('keyUp', { key: 'Enter', keyCode: 13, which: 13 });
-    expect(wrapper.state().current).toBe(1);
+    // expect(wrapper.state().current).toBe(1); // Class component
+    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('1');
     expect(onChange).toHaveBeenLastCalledWith(1, 10);
   });
 
@@ -34,7 +35,8 @@ describe('Pagination with jumper', () => {
     const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
     const input = quickJumper.find('input');
     input.simulate('blur');
-    expect(wrapper.state().current).toBe(10);
+    // expect(wrapper.state().current).toBe(10); // Class component
+    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('10');
     expect(onChange).not.toBeCalled();
   });
 
@@ -64,6 +66,33 @@ describe('Pagination with jumper', () => {
     input.simulate('blur', mockEvent);
     expect(input.instance().value).toBe('');
     expect(onChange).not.toBeCalled();
+  });
+
+  it('should not jump when input empty string', () => {
+    const onChange = jest.fn();
+    const wrapper = mount(
+      <Pagination
+        onChange={onChange}
+        total={25}
+        showQuickJumper={{
+          goButton: (
+            <button type="button" className="go-button">
+              go
+            </button>
+          ),
+        }}
+      />,
+    );
+    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
+    const input = quickJumper.find('input');
+    const goButton = quickJumper.find('.go-button');
+    input.simulate('change', { target: { value: '3' } });
+    goButton.simulate('click');
+    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('3');
+    input.simulate('change', { target: { value: '' } });
+    goButton.simulate('click');
+    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('3');
+    expect(onChange).toHaveBeenLastCalledWith(3, 10);
   });
 });
 
@@ -103,7 +132,11 @@ describe('simple quick jumper', () => {
     const goButton = quickJumper.find('.go-button');
     input.simulate('change', { target: { value: '2' } });
     goButton.simulate('click');
-    expect(wrapper.state().current).toBe(2);
+    // expect(wrapper.state().current).toBe(2); // Class component
+    expect(
+      wrapper.find('.rc-pagination-simple-pager').find('input').getDOMNode()
+        .value,
+    ).toBe('2');
     expect(onChange).toHaveBeenLastCalledWith(2, 10);
   });
 
@@ -134,7 +167,8 @@ describe('simple quick jumper', () => {
       const goButton = quickJumper.find('.go-button');
       input.simulate('change', { target: { value: '2' } });
       goButton.simulate('click');
-      expect(wrapper.state().current).toBe(2);
+      // expect(wrapper.state().current).toBe(2); // Class component
+      expect(wrapper.find('.rc-pagination-item-active').text()).toBe('2');
       expect(onChange).toHaveBeenLastCalledWith(2, 10);
     });
 
@@ -145,7 +179,8 @@ describe('simple quick jumper', () => {
       const input = wrapper.find('input');
       input.simulate('change', { target: { value: '&' } });
       input.simulate('keyUp', { key: 'Enter', keyCode: 13, which: 13 });
-      expect(wrapper.state().current).toBe(2);
+      // expect(wrapper.state().current).toBe(2); // Class component
+      expect(wrapper.find('.rc-pagination-item-active').text()).toBe('2');
       expect(onChange).toHaveBeenLastCalledWith(2, 10);
     });
   });

@@ -1,10 +1,12 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/старонка',
   jump_to: 'Перайсці',
   jump_to_confirm: 'Пацвердзіць',
   page: '',
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Назад',
   next_page: 'Наперад',
   prev_5: 'Папярэднія 5',
@@ -13,3 +15,5 @@ export default {
   next_3: 'Наступныя 3',
   page_size: 'памер старонкі',
 };
+
+export default locale;

@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ side',
   jump_to: 'Gå til',
   jump_to_confirm: 'bekræft',
   page: 'Side',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Forrige Side',
   next_page: 'Næste Side',
   prev_5: 'Forrige 5 Sider',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Næste 3 Sider',
   page_size: 'sidestørrelse',
 };
+
+export default locale;

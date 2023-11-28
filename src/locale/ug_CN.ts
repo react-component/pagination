@@ -1,10 +1,12 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: 'تال/ھەر بەت',
   jump_to: 'بەتكە سەكرەش',
   jump_to_confirm: 'مۇقىملاشتۇرۇش',
   page: 'بەت',
-  // Pagination.jsx
+  // Pagination
   prev_page: 'ئالدىنقى',
   next_page: 'كېيىنكى',
   prev_5: 'ئالدىغا 5 بەت',
@@ -13,3 +15,5 @@ export default {
   next_3: 'كەينىگە 3 بەت',
   page_size: 'Page Size',
 };
+
+export default locale;

@@ -1,0 +1,1723 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+[
+  "prev disabled",
+  "item item-1 item-active",
+  "item item-2",
+  "item item-3",
+  "next",
+]
+`;
+
+exports[` 2`] = `
+[
+  "prev disabled",
+  "item item-1 item-active",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5",
+  "next",
+]
+`;
+
+exports[` 3`] = `
+[
+  "prev disabled",
+  "item item-1 item-active",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5",
+  "item item-6",
+  "next",
+  "options",
+]
+`;
+
+exports[` 4`] = `
+[
+  "prev disabled",
+  "item item-1 item-active",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5",
+  "item item-6",
+  "item item-7",
+  "next",
+  "options",
+]
+`;
+
+exports[` 5`] = `
+[
+  "prev disabled",
+  "item item-1 item-active",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-8",
+  "next",
+  "options",
+]
+`;
+
+exports[` 6`] = `
+[
+  "prev disabled",
+  "item item-1 item-active",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-9",
+  "next",
+  "options",
+]
+`;
+
+exports[` 7`] = `
+[
+  "prev disabled",
+  "item item-1 item-active",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-10",
+  "next",
+  "options",
+]
+`;
+
+exports[` 8`] = `
+[
+  "prev disabled",
+  "item item-1 item-active",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[` 9`] = `
+[
+  "prev disabled",
+  "item item-1 item-active",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 25 pages should select page 2 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2 item-active",
+  "item item-3",
+  "next",
+]
+`;
+
+exports[`select in sequence should sequence select 25 pages should select page 3 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3 item-active",
+  "next disabled",
+]
+`;
+
+exports[`select in sequence should sequence select 50 pages should select page 2 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2 item-active",
+  "item item-3",
+  "item item-4",
+  "item item-5",
+  "next",
+]
+`;
+
+exports[`select in sequence should sequence select 50 pages should select page 3 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3 item-active",
+  "item item-4",
+  "item item-5",
+  "next",
+]
+`;
+
+exports[`select in sequence should sequence select 50 pages should select page 4 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4 item-active",
+  "item item-5",
+  "next",
+]
+`;
+
+exports[`select in sequence should sequence select 50 pages should select page 5 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-active",
+  "next disabled",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 2 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2 item-active",
+  "item item-3",
+  "item item-4",
+  "item item-5",
+  "item item-6",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 3 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3 item-active",
+  "item item-4",
+  "item item-5",
+  "item item-6",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 4 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4 item-active",
+  "item item-5",
+  "item item-6",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 5 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-active",
+  "item item-6",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 60 pages should select page 6 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5",
+  "item item-6 item-active",
+  "next disabled",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 2 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2 item-active",
+  "item item-3",
+  "item item-4",
+  "item item-5",
+  "item item-6",
+  "item item-7",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 3 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3 item-active",
+  "item item-4",
+  "item item-5",
+  "item item-6",
+  "item item-7",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 4 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4 item-active",
+  "item item-5",
+  "item item-6",
+  "item item-7",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 5 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-active",
+  "item item-6",
+  "item item-7",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 6 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5",
+  "item item-6 item-active",
+  "item item-7",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 70 pages should select page 7 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4",
+  "item item-5",
+  "item item-6",
+  "item item-7 item-active",
+  "next disabled",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 2 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2 item-active",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-8",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 3 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3 item-active",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-8",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 4 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4 item-active",
+  "item item-5",
+  "item item-6 item-before-jump-next",
+  "jump-next",
+  "item item-8",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 5 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-3 item-after-jump-prev",
+  "item item-4",
+  "item item-5 item-active",
+  "item item-6",
+  "item item-7",
+  "item item-8",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 6 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-4 item-after-jump-prev",
+  "item item-5",
+  "item item-6 item-active",
+  "item item-7",
+  "item item-8",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 7 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-4 item-after-jump-prev",
+  "item item-5",
+  "item item-6",
+  "item item-7 item-active",
+  "item item-8",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 80 pages should select page 8 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-4 item-after-jump-prev",
+  "item item-5",
+  "item item-6",
+  "item item-7",
+  "item item-8 item-active",
+  "next disabled",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 90 pages should select page 2 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2 item-active",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-9",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 90 pages should select page 3 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3 item-active",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-9",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 90 pages should select page 4 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4 item-active",
+  "item item-5",
+  "item item-6 item-before-jump-next",
+  "jump-next",
+  "item item-9",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 90 pages should select page 5 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-3 item-after-jump-prev",
+  "item item-4",
+  "item item-5 item-active",
+  "item item-6",
+  "item item-7 item-before-jump-next",
+  "jump-next",
+  "item item-9",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 90 pages should select page 6 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-4 item-after-jump-prev",
+  "item item-5",
+  "item item-6 item-active",
+  "item item-7",
+  "item item-8",
+  "item item-9",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 90 pages should select page 7 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-5 item-after-jump-prev",
+  "item item-6",
+  "item item-7 item-active",
+  "item item-8",
+  "item item-9",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 90 pages should select page 8 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-5 item-after-jump-prev",
+  "item item-6",
+  "item item-7",
+  "item item-8 item-active",
+  "item item-9",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 90 pages should select page 9 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-5 item-after-jump-prev",
+  "item item-6",
+  "item item-7",
+  "item item-8",
+  "item item-9 item-active",
+  "next disabled",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 2 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2 item-active",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-10",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 3 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3 item-active",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-10",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 4 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4 item-active",
+  "item item-5",
+  "item item-6 item-before-jump-next",
+  "jump-next",
+  "item item-10",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 5 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-3 item-after-jump-prev",
+  "item item-4",
+  "item item-5 item-active",
+  "item item-6",
+  "item item-7 item-before-jump-next",
+  "jump-next",
+  "item item-10",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 6 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-4 item-after-jump-prev",
+  "item item-5",
+  "item item-6 item-active",
+  "item item-7",
+  "item item-8 item-before-jump-next",
+  "jump-next",
+  "item item-10",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 7 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-5 item-after-jump-prev",
+  "item item-6",
+  "item item-7 item-active",
+  "item item-8",
+  "item item-9",
+  "item item-10",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 8 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-6 item-after-jump-prev",
+  "item item-7",
+  "item item-8 item-active",
+  "item item-9",
+  "item item-10",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 9 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-6 item-after-jump-prev",
+  "item item-7",
+  "item item-8",
+  "item item-9 item-active",
+  "item item-10",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 100 pages should select page 10 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-6 item-after-jump-prev",
+  "item item-7",
+  "item item-8",
+  "item item-9",
+  "item item-10 item-active",
+  "next disabled",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 2 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2 item-active",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 3 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3 item-active",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 4 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4 item-active",
+  "item item-5",
+  "item item-6 item-before-jump-next",
+  "jump-next",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 5 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-3 item-after-jump-prev",
+  "item item-4",
+  "item item-5 item-active",
+  "item item-6",
+  "item item-7 item-before-jump-next",
+  "jump-next",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 6 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-4 item-after-jump-prev",
+  "item item-5",
+  "item item-6 item-active",
+  "item item-7",
+  "item item-8 item-before-jump-next",
+  "jump-next",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 7 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-5 item-after-jump-prev",
+  "item item-6",
+  "item item-7 item-active",
+  "item item-8",
+  "item item-9 item-before-jump-next",
+  "jump-next",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 8 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-6 item-after-jump-prev",
+  "item item-7",
+  "item item-8 item-active",
+  "item item-9",
+  "item item-10 item-before-jump-next",
+  "jump-next",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 9 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-7 item-after-jump-prev",
+  "item item-8",
+  "item item-9 item-active",
+  "item item-10",
+  "item item-11",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 10 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-8 item-after-jump-prev",
+  "item item-9",
+  "item item-10 item-active",
+  "item item-11",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 11 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-8 item-after-jump-prev",
+  "item item-9",
+  "item item-10",
+  "item item-11 item-active",
+  "item item-12",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 120 pages should select page 12 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-8 item-after-jump-prev",
+  "item item-9",
+  "item item-10",
+  "item item-11",
+  "item item-12 item-active",
+  "next disabled",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 2 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2 item-active",
+  "item item-3",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 3 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3 item-active",
+  "item item-4",
+  "item item-5 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 4 1`] = `
+[
+  "prev",
+  "item item-1",
+  "item item-2",
+  "item item-3",
+  "item item-4 item-active",
+  "item item-5",
+  "item item-6 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 5 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-3 item-after-jump-prev",
+  "item item-4",
+  "item item-5 item-active",
+  "item item-6",
+  "item item-7 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 6 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-4 item-after-jump-prev",
+  "item item-5",
+  "item item-6 item-active",
+  "item item-7",
+  "item item-8 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 7 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-5 item-after-jump-prev",
+  "item item-6",
+  "item item-7 item-active",
+  "item item-8",
+  "item item-9 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 8 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-6 item-after-jump-prev",
+  "item item-7",
+  "item item-8 item-active",
+  "item item-9",
+  "item item-10 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 9 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-7 item-after-jump-prev",
+  "item item-8",
+  "item item-9 item-active",
+  "item item-10",
+  "item item-11 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 10 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-8 item-after-jump-prev",
+  "item item-9",
+  "item item-10 item-active",
+  "item item-11",
+  "item item-12 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 11 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-9 item-after-jump-prev",
+  "item item-10",
+  "item item-11 item-active",
+  "item item-12",
+  "item item-13 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 12 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-10 item-after-jump-prev",
+  "item item-11",
+  "item item-12 item-active",
+  "item item-13",
+  "item item-14 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 13 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-11 item-after-jump-prev",
+  "item item-12",
+  "item item-13 item-active",
+  "item item-14",
+  "item item-15 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 14 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-12 item-after-jump-prev",
+  "item item-13",
+  "item item-14 item-active",
+  "item item-15",
+  "item item-16 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 15 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-13 item-after-jump-prev",
+  "item item-14",
+  "item item-15 item-active",
+  "item item-16",
+  "item item-17 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 16 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-14 item-after-jump-prev",
+  "item item-15",
+  "item item-16 item-active",
+  "item item-17",
+  "item item-18 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 17 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-15 item-after-jump-prev",
+  "item item-16",
+  "item item-17 item-active",
+  "item item-18",
+  "item item-19 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 18 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-16 item-after-jump-prev",
+  "item item-17",
+  "item item-18 item-active",
+  "item item-19",
+  "item item-20 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 19 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-17 item-after-jump-prev",
+  "item item-18",
+  "item item-19 item-active",
+  "item item-20",
+  "item item-21 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 20 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-18 item-after-jump-prev",
+  "item item-19",
+  "item item-20 item-active",
+  "item item-21",
+  "item item-22 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 21 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-19 item-after-jump-prev",
+  "item item-20",
+  "item item-21 item-active",
+  "item item-22",
+  "item item-23 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 22 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-20 item-after-jump-prev",
+  "item item-21",
+  "item item-22 item-active",
+  "item item-23",
+  "item item-24 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 23 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-21 item-after-jump-prev",
+  "item item-22",
+  "item item-23 item-active",
+  "item item-24",
+  "item item-25 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 24 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-22 item-after-jump-prev",
+  "item item-23",
+  "item item-24 item-active",
+  "item item-25",
+  "item item-26 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 25 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-23 item-after-jump-prev",
+  "item item-24",
+  "item item-25 item-active",
+  "item item-26",
+  "item item-27 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 26 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-24 item-after-jump-prev",
+  "item item-25",
+  "item item-26 item-active",
+  "item item-27",
+  "item item-28 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 27 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-25 item-after-jump-prev",
+  "item item-26",
+  "item item-27 item-active",
+  "item item-28",
+  "item item-29 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 28 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-26 item-after-jump-prev",
+  "item item-27",
+  "item item-28 item-active",
+  "item item-29",
+  "item item-30 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 29 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-27 item-after-jump-prev",
+  "item item-28",
+  "item item-29 item-active",
+  "item item-30",
+  "item item-31 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 30 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-28 item-after-jump-prev",
+  "item item-29",
+  "item item-30 item-active",
+  "item item-31",
+  "item item-32 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 31 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-29 item-after-jump-prev",
+  "item item-30",
+  "item item-31 item-active",
+  "item item-32",
+  "item item-33 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 32 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-30 item-after-jump-prev",
+  "item item-31",
+  "item item-32 item-active",
+  "item item-33",
+  "item item-34 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 33 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-31 item-after-jump-prev",
+  "item item-32",
+  "item item-33 item-active",
+  "item item-34",
+  "item item-35 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 34 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-32 item-after-jump-prev",
+  "item item-33",
+  "item item-34 item-active",
+  "item item-35",
+  "item item-36 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 35 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-33 item-after-jump-prev",
+  "item item-34",
+  "item item-35 item-active",
+  "item item-36",
+  "item item-37 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 36 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-34 item-after-jump-prev",
+  "item item-35",
+  "item item-36 item-active",
+  "item item-37",
+  "item item-38 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 37 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-35 item-after-jump-prev",
+  "item item-36",
+  "item item-37 item-active",
+  "item item-38",
+  "item item-39 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 38 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-36 item-after-jump-prev",
+  "item item-37",
+  "item item-38 item-active",
+  "item item-39",
+  "item item-40 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 39 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-37 item-after-jump-prev",
+  "item item-38",
+  "item item-39 item-active",
+  "item item-40",
+  "item item-41 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 40 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-38 item-after-jump-prev",
+  "item item-39",
+  "item item-40 item-active",
+  "item item-41",
+  "item item-42 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 41 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-39 item-after-jump-prev",
+  "item item-40",
+  "item item-41 item-active",
+  "item item-42",
+  "item item-43 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 42 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-40 item-after-jump-prev",
+  "item item-41",
+  "item item-42 item-active",
+  "item item-43",
+  "item item-44 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 43 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-41 item-after-jump-prev",
+  "item item-42",
+  "item item-43 item-active",
+  "item item-44",
+  "item item-45 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 44 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-42 item-after-jump-prev",
+  "item item-43",
+  "item item-44 item-active",
+  "item item-45",
+  "item item-46 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 45 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-43 item-after-jump-prev",
+  "item item-44",
+  "item item-45 item-active",
+  "item item-46",
+  "item item-47 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 46 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-44 item-after-jump-prev",
+  "item item-45",
+  "item item-46 item-active",
+  "item item-47",
+  "item item-48 item-before-jump-next",
+  "jump-next",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 47 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-45 item-after-jump-prev",
+  "item item-46",
+  "item item-47 item-active",
+  "item item-48",
+  "item item-49",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 48 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-46 item-after-jump-prev",
+  "item item-47",
+  "item item-48 item-active",
+  "item item-49",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 49 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-46 item-after-jump-prev",
+  "item item-47",
+  "item item-48",
+  "item item-49 item-active",
+  "item item-50",
+  "next",
+  "options",
+]
+`;
+
+exports[`select in sequence should sequence select 500 pages should select page 50 1`] = `
+[
+  "prev",
+  "item item-1",
+  "jump-prev",
+  "item item-46 item-after-jump-prev",
+  "item item-47",
+  "item item-48",
+  "item item-49",
+  "item item-50 item-active",
+  "next disabled",
+  "options",
+]
+`;

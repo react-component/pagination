@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ trang',
   jump_to: 'Đến',
   jump_to_confirm: 'xác nhận',
   page: 'Trang',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Trang Trước',
   next_page: 'Trang Kế',
   prev_5: 'Về 5 Trang Trước',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Đến 3 Trang Kế',
   page_size: 'kích thước trang',
 };
+
+export default locale;

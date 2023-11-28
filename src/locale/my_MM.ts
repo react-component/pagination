@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ စာမျက်နှာ',
   jump_to: 'သွားရန်',
   jump_to_confirm: 'သေချာပြီ',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'ယခင်စာမျက်နှာ',
   next_page: 'နောက်စာမျက်နှာ',
   prev_5: 'ယခင် ၅ခုမြောက်',
@@ -14,3 +16,5 @@ export default {
   next_3: 'နောက် ၃ခုမြောက်',
   page_size: 'Page Size',
 };
+
+export default locale;

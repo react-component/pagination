@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ хуудас',
   jump_to: 'Шилжих',
   jump_to_confirm: 'сонгох',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Өмнөх хуудас',
   next_page: 'Дараагийн хуудас',
   prev_5: 'Дараагийн 5 хуудас',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Дараагийн 3 хуудас',
   page_size: 'Page Size',
 };
+
+export default locale;

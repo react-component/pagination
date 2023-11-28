@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ psl.',
   jump_to: 'Pereiti į',
   jump_to_confirm: 'patvirtinti',
   page: 'psl.',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Atgal',
   next_page: 'Pirmyn',
   prev_5: 'Grįžti 5 psl.',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Peršokti 3 psl.',
   page_size: 'Puslapio dydis',
 };
+
+export default locale;

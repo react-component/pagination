@@ -1,10 +1,9 @@
 /* eslint react/prop-types: 0 */
 import classNames from 'classnames';
 import React from 'react';
+import type { PaginationProps } from './interface';
 
-interface Props {
-  last?: boolean;
-  locale?: any;
+export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
   rootPrefixCls: string;
   page: number;
   active?: boolean;
@@ -13,17 +12,12 @@ interface Props {
   onClick?: (page: number) => void;
   onKeyPress?: (
     e: React.KeyboardEvent<HTMLLIElement>,
-    onClick: Props['onClick'],
-    page: Props['page'],
+    onClick: PagerProps['onClick'],
+    page: PagerProps['page'],
   ) => void;
-  itemRender?: (
-    page: number,
-    type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next',
-    element: React.ReactNode,
-  ) => React.ReactNode;
 }
 
-const Pager: React.FC<Props> = (props) => {
+const Pager: React.FC<PagerProps> = (props) => {
   const {
     rootPrefixCls,
     page,
@@ -35,11 +29,16 @@ const Pager: React.FC<Props> = (props) => {
     itemRender,
   } = props;
   const prefixCls = `${rootPrefixCls}-item`;
-  const cls = classNames(prefixCls, `${prefixCls}-${page}`, {
-    [`${prefixCls}-active`]: active,
-    [`${prefixCls}-disabled`]: !page,
-    [props.className]: className,
-  });
+
+  const cls = classNames(
+    prefixCls,
+    `${prefixCls}-${page}`,
+    {
+      [`${prefixCls}-active`]: active,
+      [`${prefixCls}-disabled`]: !page,
+    },
+    className,
+  );
 
   const handleClick = () => {
     onClick(page);
@@ -50,19 +49,22 @@ const Pager: React.FC<Props> = (props) => {
   };
 
   const pager = itemRender(page, 'page', <a rel="nofollow">{page}</a>);
-  if (!pager) return null;
 
-  return (
+  return pager ? (
     <li
-      title={showTitle ? page.toString() : null}
+      title={showTitle ? String(page) : null}
       className={cls}
       onClick={handleClick}
-      onKeyPress={handleKeyPress}
+      onKeyDown={handleKeyPress}
       tabIndex={0}
     >
       {pager}
     </li>
-  );
+  ) : null;
 };
+
+if (process.env.NODE_ENV !== 'production') {
+  Pager.displayName = 'Pager';
+}
 
 export default Pager;

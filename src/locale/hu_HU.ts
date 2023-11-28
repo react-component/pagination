@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ oldal', // '/ page',
   jump_to: 'Ugrás', // 'Goto',
   jump_to_confirm: 'megerősít', // 'confirm',
   page: '',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Előző oldal', // 'Previous Page',
   next_page: 'Következő oldal', // 'Next Page',
   prev_5: 'Előző 5 oldal', // 'Previous 5 Pages',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Következő 3 oldal', // 'Next 3 Pages',
   page_size: 'Page Size',
 };
+
+export default locale;

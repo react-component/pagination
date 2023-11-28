@@ -1,11 +1,13 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ sayfa',
   jump_to: 'Git',
   jump_to_confirm: 'onayla',
   page: 'Sayfa',
 
-  // Pagination.jsx
+  // Pagination
   prev_page: 'Önceki Sayfa',
   next_page: 'Sonraki Sayfa',
   prev_5: 'Önceki 5 Sayfa',
@@ -14,3 +16,5 @@ export default {
   next_3: 'Sonraki 3 Sayfa',
   page_size: 'sayfa boyutu',
 };
+
+export default locale;

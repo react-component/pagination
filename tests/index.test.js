@@ -1,14 +1,16 @@
-import { mount } from 'enzyme';
+import { render, fireEvent } from '@testing-library/react';
 import Select from 'rc-select';
 import React from 'react';
 import Pagination from '../src';
+import { resetWarned } from 'rc-util/lib/warning';
 
 describe('Default Pagination', () => {
   let wrapper;
   const onChange = jest.fn();
+  const $$ = (selector) => wrapper.container.querySelectorAll(selector);
 
   beforeEach(() => {
-    wrapper = mount(<Pagination onChange={onChange} />);
+    wrapper = render(<Pagination onChange={onChange} />);
   });
 
   afterEach(() => {
@@ -17,32 +19,30 @@ describe('Default Pagination', () => {
   });
 
   it('onChange should be forbidden when total is default', () => {
-    const pagers = wrapper.find('.rc-pagination-item');
-    const page1 = pagers.at(0);
-    page1.simulate('click');
-    expect(onChange).toBeCalledTimes(0);
+    const pagers = $$('.rc-pagination-item');
+    fireEvent.click(pagers[0]);
+    expect(onChange).not.toHaveBeenCalled();
   });
 });
 
 describe('Uncontrolled Pagination', () => {
   let wrapper;
   const onChange = jest.fn();
+  const $$ = (selector) => wrapper.container.querySelectorAll(selector);
 
-  function shouldHighlightRight(current) {
-    const pagers = wrapper.find('li:not(.rc-pagination-total-text)');
-    pagers.forEach((pager, index) => {
-      // if (index === wrapper.state().current) { // Class Component
-      const props = wrapper.props();
-      if (index === (current ?? props.current ?? props.defaultCurrent)) {
-        expect(pager.hasClass('rc-pagination-item-active')).toBe(true);
+  function shouldHighlightRight(current = 1) {
+    const pagers = $$('li:not(.rc-pagination-total-text)');
+    Array.from(pagers).forEach((pager, index) => {
+      if (index === current) {
+        expect(pager).toHaveClass('rc-pagination-item-active');
       } else {
-        expect(pager.hasClass('rc-pagination-item-active')).toBe(false);
+        expect(pager).not.toHaveClass('rc-pagination-item-active');
       }
     });
   }
 
   beforeEach(() => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination
         defaultCurrent={1}
         onChange={onChange}
@@ -61,23 +61,24 @@ describe('Uncontrolled Pagination', () => {
   });
 
   it('default current page is 1', () => {
-    // expect(wrapper.state().current).toBe(1); // Class Component
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('1');
-    expect(wrapper.find('.rc-pagination-item').first().text()).toBe('1');
-    expect(wrapper.find('.rc-pagination-item').first().prop('title')).toBe('1');
+    expect(
+      wrapper.container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('1');
+    expect($$('.rc-pagination-item')[0]).toHaveTextContent('1');
+    expect($$('.rc-pagination-item')[0]).toHaveAttribute('title', '1');
   });
 
   it('prev-button should be disabled', () => {
-    const prevButton = wrapper.find('.rc-pagination-prev');
-    expect(prevButton.hasClass('rc-pagination-disabled')).toBe(true);
-    expect(prevButton.getDOMNode().getAttribute('aria-disabled')).toBe('true');
+    const prevButton = wrapper.container.querySelector('.rc-pagination-prev');
+    expect(prevButton).toHaveClass('rc-pagination-disabled');
+    expect(prevButton).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('should hightlight current page and not highlight other page', () =>
     shouldHighlightRight());
 
   it('should calc page right', () => {
-    const pagers = wrapper.find(
+    const pagers = $$(
       'li:not(.rc-pagination-total-text):not(.rc-pagination-options)',
     );
     const knownPageCount = 3;
@@ -86,92 +87,107 @@ describe('Uncontrolled Pagination', () => {
   });
 
   it('next button should not be disabled', () => {
-    const nextButton = wrapper.find('.rc-pagination-next');
-    expect(nextButton.hasClass('rc-pagination-disabled')).toBe(false);
-    expect(nextButton.getDOMNode().getAttribute('aria-disabled')).toBe('false');
+    const nextButton = wrapper.container.querySelector('.rc-pagination-next');
+    expect(nextButton).not.toHaveClass('rc-pagination-disabled');
+    expect(nextButton).toHaveAttribute('aria-disabled', 'false');
   });
 
   it('should response mouse click right', () => {
-    const pagers = wrapper.find('.rc-pagination-item');
-    expect(pagers.length).toBe(3);
-    const page2 = pagers.at(1);
-    expect(page2.hasClass('rc-pagination-item-2')).toBe(true);
-    page2.simulate('click');
-    // expect(wrapper.state().current).toBe(2); // Class Component
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('2');
+    const pagers = $$('.rc-pagination-item');
+    expect(pagers).toHaveLength(3);
+    const page2 = pagers[1];
+    expect(page2).toHaveClass('rc-pagination-item-2');
+    fireEvent.click(page2);
+    expect(
+      wrapper.container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('2');
     expect(onChange).toHaveBeenLastCalledWith(2, 10);
     shouldHighlightRight(2);
   });
 
   it('should response next page', () => {
-    const nextButton = wrapper.find('.rc-pagination-next');
-    nextButton.simulate('click');
-    // expect(wrapper.state().current).toBe(2); // Class Component
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('2');
+    const nextButton = wrapper.container.querySelector('.rc-pagination-next');
+    fireEvent.click(nextButton);
+    expect(
+      wrapper.container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('2');
     expect(onChange).toHaveBeenLastCalledWith(2, 10);
     shouldHighlightRight(2);
   });
 
   it('should quick jump to expect page', () => {
-    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
-    const input = quickJumper.find('input');
-    const goButton = quickJumper.find(
+    const quickJumper = wrapper.container.querySelector(
+      '.rc-pagination-options-quick-jumper',
+    );
+    const input = quickJumper.querySelector('input');
+    const goButton = quickJumper.querySelector(
       '.rc-pagination-options-quick-jumper-button',
     );
-    input.simulate('change', { target: { value: '2' } });
-    goButton.simulate('click');
-    // expect(wrapper.state().current).toBe(2); // Class Component
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('2');
+    fireEvent.change(input, { target: { value: '2' } });
+    fireEvent.click(goButton);
+    expect(
+      wrapper.container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('2');
     expect(onChange).toHaveBeenLastCalledWith(2, 10);
   });
 
   // https://github.com/ant-design/ant-design/issues/17763
   it('should not jump when blur input when there is goButton', () => {
-    const quickJumper = wrapper.find('.rc-pagination-options-quick-jumper');
-    const input = quickJumper.find('input');
-    input.simulate('focus');
-    input.simulate('change', { target: { value: '2' } });
-    input.simulate('blur');
-    // expect(wrapper.state().current).toBe(1);
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('1');
-    expect(onChange).not.toBeCalled();
+    const input = wrapper.container.querySelector(
+      '.rc-pagination-options-quick-jumper input',
+    );
+    fireEvent.focus(input);
+    fireEvent.change(input, { target: { value: '2' } });
+    fireEvent.blur(input);
+    expect(
+      wrapper.container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('1');
+
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   // https://github.com/ant-design/ant-design/issues/17763
   it('should not jump when blur input when there is not goButton', () => {
-    const component = mount(
+    const { container } = render(
       <Pagination pageSize={10} total={20} showQuickJumper />,
     );
-    const quickJumper = component.find('.rc-pagination-options-quick-jumper');
-    const input = quickJumper.find('input');
-    input.simulate('change', { target: { value: '2' } });
-    input.simulate('blur');
-    // expect(component.state().current).toBe(2);
-    expect(component.find('.rc-pagination-item-active').text()).toBe('2');
+    const input = container.querySelector(
+      '.rc-pagination-options-quick-jumper input',
+    );
+    fireEvent.change(input, { target: { value: '2' } });
+    fireEvent.blur(input);
+    expect(
+      container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('2');
   });
 
   // https://github.com/ant-design/ant-design/issues/15539
   it('should hide quick jumper when only one page', () => {
-    const component = mount(
+    const { container } = render(
       <Pagination pageSize={10} total={10} showQuickJumper />,
     );
-    const quickJumper = component.find('.rc-pagination-options-quick-jumper');
-    expect(quickJumper.length).toBe(0);
+    const quickJumper = container.querySelectorAll(
+      '.rc-pagination-options-quick-jumper',
+    );
+    expect(quickJumper).toHaveLength(0);
   });
 
   it('should display total items', () => {
-    const totalText = wrapper.find('.rc-pagination-total-text');
-    expect(totalText.text()).toBe('1 - 10 of 25 items');
-    const nextButton = wrapper.find('.rc-pagination-next');
-    nextButton.simulate('click');
-    expect(totalText.text()).toBe('11 - 20 of 25 items');
-    nextButton.simulate('click');
-    expect(totalText.text()).toBe('21 - 25 of 25 items');
+    const totalText = wrapper.container.querySelector(
+      '.rc-pagination-total-text',
+    );
+    expect(totalText).toHaveTextContent('1 - 10 of 25 items');
+    const nextButton = wrapper.container.querySelector('.rc-pagination-next');
+    fireEvent.click(nextButton);
+    expect(totalText).toHaveTextContent('11 - 20 of 25 items');
+    fireEvent.click(nextButton);
+    expect(totalText).toHaveTextContent('21 - 25 of 25 items');
   });
 
   it('readonly warning should be displayed', () => {
+    resetWarned();
     const warnSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    mount(<Pagination current={2} />);
+    render(<Pagination current={2} />);
     expect(warnSpy).toHaveBeenCalledWith(
       'Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.',
     );
@@ -179,10 +195,11 @@ describe('Uncontrolled Pagination', () => {
   });
 
   it('should response keyboard event', () => {
-    const pagers = wrapper.find('.rc-pagination-item');
-    const page2 = pagers.at(2);
-    page2.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('3');
+    const pagers = $$('.rc-pagination-item');
+    fireEvent.keyDown(pagers[2], { key: 'Enter', keyCode: 13, which: 13 });
+    expect(
+      wrapper.container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('3');
     expect(onChange).toHaveBeenLastCalledWith(3, 10);
   });
 });
@@ -192,7 +209,7 @@ describe('Controlled Pagination', () => {
   const onChange = jest.fn();
 
   beforeEach(() => {
-    wrapper = mount(<Pagination current={2} onChange={onChange} total={25} />);
+    wrapper = render(<Pagination current={2} onChange={onChange} total={25} />);
   });
 
   afterEach(() => {
@@ -201,22 +218,23 @@ describe('Controlled Pagination', () => {
   });
 
   it('current should equal defaultCurrent', () => {
-    // expect(wrapper.state().current).toBe(2); // Class Component
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('2');
-    expect(wrapper.find('.rc-pagination-item').first().text()).toBe('1');
     expect(
-      wrapper
-        .find('.rc-pagination-item')
-        .at(1)
-        .hasClass('rc-pagination-item-active'),
-    ).toBe(true);
+      wrapper.container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('2');
+    expect(
+      wrapper.container.querySelector('.rc-pagination-item'),
+    ).toHaveTextContent('1');
+    expect(
+      wrapper.container.querySelectorAll('.rc-pagination-item')[1],
+    ).toHaveClass('rc-pagination-item-active');
   });
 
   it('should not response mouse click', () => {
-    const nextButton = wrapper.find('.rc-pagination-next');
-    nextButton.simulate('click');
-    // expect(wrapper.state().current).toBe(2); // Class Component
-    expect(wrapper.find('.rc-pagination-item-active').text()).toBe('2');
+    const nextButton = wrapper.container.querySelector('.rc-pagination-next');
+    fireEvent.click(nextButton);
+    expect(
+      wrapper.container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('2');
     expect(onChange).toHaveBeenLastCalledWith(3, 10);
   });
 });
@@ -233,38 +251,38 @@ describe('Other props', () => {
       jumpPrevIcon,
       jumpNextIcon,
     };
-    const wrapper = mount(
+    const { container } = render(
       <Pagination total={1000} current={12} {...iconsProps} />,
     );
-    const prev = wrapper.find('.rc-pagination-prev');
-    const next = wrapper.find('.rc-pagination-next');
-    const jumpPrev = wrapper.find('.rc-pagination-jump-prev');
-    const jumpNext = wrapper.find('.rc-pagination-jump-next');
-    expect(prev.text()).toBe('prevIcon');
-    expect(next.text()).toBe('nextIcon');
-    expect(jumpPrev.text()).toBe('jumpPrevIcon');
-    expect(jumpNext.text()).toBe('jumpNextIcon');
+    const prev = container.querySelector('.rc-pagination-prev');
+    const next = container.querySelector('.rc-pagination-next');
+    const jumpPrev = container.querySelector('.rc-pagination-jump-prev');
+    const jumpNext = container.querySelector('.rc-pagination-jump-next');
+    expect(prev).toHaveTextContent('prevIcon');
+    expect(next).toHaveTextContent('nextIcon');
+    expect(jumpPrev).toHaveTextContent('jumpPrevIcon');
+    expect(jumpNext).toHaveTextContent('jumpNextIcon');
   });
 
   describe('showPrevNextJumpers props', () => {
     it('should hide jump-prev, jump-next if showPrevNextJumpers equals false', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Pagination total={1000} current={12} showPrevNextJumpers={false} />,
       );
-      const prev = wrapper.find('.rc-pagination-jump-prev');
-      const next = wrapper.find('.rc-pagination-jump-next');
-      expect(prev.exists()).toBe(false);
-      expect(next.exists()).toBe(false);
+      const prev = container.querySelector('.rc-pagination-jump-prev');
+      const next = container.querySelector('.rc-pagination-jump-next');
+      expect(prev).toBeNull();
+      expect(next).toBeNull();
     });
 
     it('should show jump-prev, jump-next if showPrevNextJumpers equals true', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Pagination total={1000} current={12} showPrevNextJumpers />,
       );
-      const prev = wrapper.find('.rc-pagination-jump-prev');
-      const next = wrapper.find('.rc-pagination-jump-next');
-      expect(prev.exists()).toBe(true);
-      expect(next.exists()).toBe(true);
+      const prev = container.querySelector('.rc-pagination-jump-prev');
+      const next = container.querySelector('.rc-pagination-jump-next');
+      expect(prev).toBeTruthy();
+      expect(next).toBeTruthy();
     });
   });
 
@@ -272,25 +290,25 @@ describe('Other props', () => {
     const itemRender = (current) => <a href={`#${current}`}>{current}</a>;
 
     it('should hide pager if hideOnSinglePage equals true', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Pagination total={10} itemRender={itemRender} hideOnSinglePage />,
       );
-      expect(wrapper.find('.rc-pagination').exists()).toBe(false);
+      expect(container.querySelector('.rc-pagination')).toBeFalsy();
     });
 
     it('should show pager if hideOnSinglePage equals false', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Pagination
           total={10}
           itemRender={itemRender}
           hideOnSinglePage={false}
         />,
       );
-      expect(wrapper.find('.rc-pagination').exists()).toBe(true);
+      expect(container.querySelector('.rc-pagination')).toBeTruthy();
     });
 
     it('should show pager if hideOnSinglePage equals true but more than 1 page', () => {
-      const wrapper = mount(
+      const { container } = render(
         <Pagination
           total={10}
           pageSize={5}
@@ -298,12 +316,12 @@ describe('Other props', () => {
           hideOnSinglePage={false}
         />,
       );
-      expect(wrapper.find('.rc-pagination').exists()).toBe(true);
+      expect(container.querySelector('.rc-pagination')).toBeTruthy();
     });
   });
 
   it('disabled', () => {
-    const wrapper = mount(
+    const { container, getByRole } = render(
       <Pagination
         selectComponentClass={Select}
         showQuickJumper={{ goButton: true }}
@@ -314,16 +332,13 @@ describe('Other props', () => {
         disabled
       />,
     );
-    expect(wrapper.find('.rc-pagination-disabled').exists()).toBe(true);
-    expect(wrapper.find('input').exists()).toBe(true);
-    expect(wrapper.find(Select).props().disabled).toBe(true);
-    expect(wrapper.find('input').at(0).getDOMNode().disabled).toBe(true);
+    expect(container.querySelector('.rc-pagination-disabled')).toBeTruthy();
+    expect(container.querySelector('input')).toBeTruthy();
+    expect(getByRole('combobox')).toBeDisabled();
+    expect(container.querySelector('input')).toBeDisabled();
     expect(
-      wrapper
-        .find('.rc-pagination-options-quick-jumper-button')
-        .at(0)
-        .getDOMNode().disabled,
-    ).toBe(true);
+      container.querySelector('.rc-pagination-options-quick-jumper-button'),
+    ).toBeDisabled();
   });
 });
 
@@ -334,7 +349,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
   const onChange = jest.fn();
 
   beforeEach(() => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination
         selectComponentClass={Select}
         showSizeChanger
@@ -356,86 +371,95 @@ describe('current value on onShowSizeChange when total is 0', () => {
   });
 
   it('should call onShowSizeChange when no change', () => {
-    const sizeChanger = wrapper
-      .find('.rc-pagination-options-size-changer')
-      .at(0);
-    sizeChanger.simulate('click');
-    const input = sizeChanger.find('input');
-    input.simulate('keyDown', { key: 'Down', keyCode: 40, which: 40 });
-    input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
-    expect(onShowSizeChange).not.toBeCalled();
-    expect(onChange).not.toBeCalled();
+    const sizeChanger = wrapper.container.querySelector(
+      '.rc-pagination-options-size-changer',
+    );
+    fireEvent.click(sizeChanger);
+    const input = sizeChanger.querySelector('input');
+    fireEvent.keyDown(input, { key: 'Down', keyCode: 40, which: 40 });
+    fireEvent.keyDown(input, { key: 'Enter', keyCode: 13, which: 13 });
+    expect(onShowSizeChange).not.toHaveBeenCalled();
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it('current should equal to the current in onShowSizeChange', () => {
-    const sizeChanger = wrapper
-      .find('.rc-pagination-options-size-changer')
-      .at(0);
-    sizeChanger.simulate('click');
-    const input = sizeChanger.find('input');
-    input.simulate('keyDown', { key: 'Down', keyCode: 40, which: 40 });
-    input.simulate('keyDown', { key: 'Down', keyCode: 40, which: 40 });
-    input.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
-    expect(onShowSizeChange).toHaveBeenLastCalledWith(
-      // wrapper.state().current,
-      1,
-      20,
+    const sizeChanger = wrapper.container.querySelector(
+      '.rc-pagination-options-size-changer',
     );
+    fireEvent.click(sizeChanger);
+    const input = sizeChanger.querySelector('input');
+    fireEvent.keyDown(input, { key: 'Down', keyCode: 40, which: 40 });
+    fireEvent.keyDown(input, { key: 'Down', keyCode: 40, which: 40 });
+    fireEvent.keyDown(input, { key: 'Enter', keyCode: 13, which: 13 });
+    expect(onShowSizeChange).toHaveBeenLastCalledWith(1, 20);
     expect(onChange).toHaveBeenLastCalledWith(1, 20);
   });
 
   it('when total is 0, pager should show `1` and being disabled', () => {
-    const itemButton = wrapper.find('.rc-pagination-item');
-    expect(itemButton.hasClass('rc-pagination-item-disabled')).toBe(true);
-    expect(itemButton.text()).toBe('1');
+    const itemButton = wrapper.container.querySelector('.rc-pagination-item');
+    expect(itemButton).toHaveClass('rc-pagination-item-disabled');
+    expect(itemButton).toHaveTextContent('1');
   });
 
   it('when total is 0, `from` and `to` should be 0', () => {
-    const totalText = wrapper.find('.rc-pagination-total-text');
-    expect(totalText.text()).toBe('0 - 0 of 0 items');
+    expect(
+      wrapper.container.querySelector('.rc-pagination-total-text'),
+    ).toHaveTextContent('0 - 0 of 0 items');
   });
 
   it('size changer show logic', () => {
-    const wrapper1 = mount(
+    const wrapper1 = render(
       <Pagination selectComponentClass={Select} total={50} />,
     );
-    expect(wrapper1.exists('.rc-pagination-options-size-changer')).toBe(false);
-    const wrapper2 = mount(
+    expect(
+      wrapper1.container.querySelector('.rc-pagination-options-size-changer'),
+    ).toBeFalsy();
+    const wrapper2 = render(
       <Pagination selectComponentClass={Select} total={51} />,
     );
-    expect(wrapper2.exists('.rc-pagination-options-size-changer')).toBe(true);
-    const wrapper3 = mount(
+    expect(
+      wrapper2.container.querySelector('.rc-pagination-options-size-changer'),
+    ).toBeTruthy();
+    const wrapper3 = render(
       <Pagination
         selectComponentClass={Select}
         showSizeChanger={false}
         total={51}
       />,
     );
-    expect(wrapper3.exists('.rc-pagination-options-size-changer')).toBe(false);
-    const wrapper4 = mount(
+    expect(
+      wrapper3.container.querySelector('.rc-pagination-options-size-changer'),
+    ).toBeFalsy();
+    const wrapper4 = render(
       <Pagination selectComponentClass={Select} showSizeChanger total={50} />,
     );
-    expect(wrapper4.exists('.rc-pagination-options-size-changer')).toBe(true);
+    expect(
+      wrapper4.container.querySelector('.rc-pagination-options-size-changer'),
+    ).toBeTruthy();
   });
 
   it('totalBoundaryShowSizeChanger works', () => {
-    const wrapper1 = mount(
+    const wrapper1 = render(
       <Pagination
         selectComponentClass={Select}
         total={100}
         totalBoundaryShowSizeChanger={100}
       />,
     );
-    expect(wrapper1.exists('.rc-pagination-options-size-changer')).toBe(false);
-    const wrapper2 = mount(
+    expect(
+      wrapper1.container.querySelector('.rc-pagination-options-size-changer'),
+    ).toBeFalsy();
+    const wrapper2 = render(
       <Pagination
         selectComponentClass={Select}
         total={101}
         totalBoundaryShowSizeChanger={100}
       />,
     );
-    expect(wrapper2.exists('.rc-pagination-options-size-changer')).toBe(true);
-    const wrapper3 = mount(
+    expect(
+      wrapper2.container.querySelector('.rc-pagination-options-size-changer'),
+    ).toBeTruthy();
+    const wrapper3 = render(
       <Pagination
         selectComponentClass={Select}
         showSizeChanger={false}
@@ -443,8 +467,10 @@ describe('current value on onShowSizeChange when total is 0', () => {
         totalBoundaryShowSizeChanger={100}
       />,
     );
-    expect(wrapper3.exists('.rc-pagination-options-size-changer')).toBe(false);
-    const wrapper4 = mount(
+    expect(
+      wrapper3.container.querySelector('.rc-pagination-options-size-changer'),
+    ).toBeFalsy();
+    const wrapper4 = render(
       <Pagination
         selectComponentClass={Select}
         showSizeChanger
@@ -452,7 +478,9 @@ describe('current value on onShowSizeChange when total is 0', () => {
         totalBoundaryShowSizeChanger={100}
       />,
     );
-    expect(wrapper4.exists('.rc-pagination-options-size-changer')).toBe(true);
+    expect(
+      wrapper4.container.querySelector('.rc-pagination-options-size-changer'),
+    ).toBeTruthy();
   });
 });
 
@@ -461,7 +489,7 @@ describe('should emit onChange when total is string', () => {
   const onChange = jest.fn();
 
   beforeEach(() => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination total="100" pageSize={10} onChange={onChange} />,
     );
   });
@@ -472,19 +500,20 @@ describe('should emit onChange when total is string', () => {
   });
 
   it('onChange should be called when click page', () => {
-    const pagers = wrapper.find('.rc-pagination-item-3');
-    const page1 = pagers.at(0);
-    page1.simulate('click');
-    expect(onChange).toBeCalledWith(3, 10);
+    const pagers = wrapper.container.querySelectorAll('.rc-pagination-item-3');
+    fireEvent.click(pagers[0]);
+    expect(onChange).toHaveBeenCalledWith(3, 10);
   });
 });
 
 describe('keyboard support', () => {
   let wrapper;
   const onChange = jest.fn();
+  const $$ = (selector) => wrapper.container.querySelectorAll(selector);
+  const $ = (selector) => wrapper.container.querySelector(selector);
 
   beforeEach(() => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination defaultCurrent={50} total={1000} onChange={onChange} />,
     );
   });
@@ -495,55 +524,47 @@ describe('keyboard support', () => {
   });
 
   it('should work for prev page', () => {
-    const prevButton = wrapper.find('li.rc-pagination-prev');
-    expect(prevButton.exists()).toBeTruthy();
+    const prevButton = $('li.rc-pagination-prev');
+    expect(prevButton).toBeTruthy();
 
-    prevButton.simulate('click');
-    prevButton.simulate('click');
+    fireEvent.click(prevButton);
+    fireEvent.click(prevButton);
 
-    prevButton.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
-    prevButton.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+    fireEvent.keyDown(prevButton, { key: 'Enter', keyCode: 13, which: 13 });
+    fireEvent.keyDown(prevButton, { key: 'Enter', keyCode: 13, which: 13 });
 
     expect(onChange).toHaveBeenLastCalledWith(46, 10);
   });
 
   it('should work for next page', () => {
-    const nextButton = wrapper.find('li.rc-pagination-next');
-    expect(nextButton.exists()).toBeTruthy();
+    const nextButton = $('li.rc-pagination-next');
+    expect(nextButton).toBeTruthy();
 
-    nextButton.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
-    nextButton.simulate('keyDown', { key: 'Enter', keyCode: 13, which: 13 });
+    fireEvent.keyDown(nextButton, { key: 'Enter', keyCode: 13, which: 13 });
+    fireEvent.keyDown(nextButton, { key: 'Enter', keyCode: 13, which: 13 });
 
-    nextButton.simulate('click');
-    nextButton.simulate('click');
+    fireEvent.click(nextButton);
+    fireEvent.click(nextButton);
 
     expect(onChange).toHaveBeenLastCalledWith(54, 10);
   });
 
   it('should work for jump prev page', () => {
-    const jumpPrevButton = wrapper.find('li.rc-pagination-jump-prev');
-    expect(jumpPrevButton.exists()).toBeTruthy();
+    const jumpPrevButton = $('li.rc-pagination-jump-prev');
+    expect(jumpPrevButton).toBeTruthy();
 
-    jumpPrevButton.simulate('keyDown', {
-      key: 'Enter',
-      keyCode: 13,
-      which: 13,
-    });
-    jumpPrevButton.simulate('click');
+    fireEvent.keyDown(jumpPrevButton, { key: 'Enter', keyCode: 13, which: 13 });
+    fireEvent.click(jumpPrevButton);
 
     expect(onChange).toHaveBeenLastCalledWith(40, 10);
   });
 
   it('should work for jump next page', () => {
-    const jumpNextButton = wrapper.find('li.rc-pagination-jump-next');
-    expect(jumpNextButton.exists()).toBeTruthy();
+    const jumpNextButton = $('li.rc-pagination-jump-next');
+    expect(jumpNextButton).toBeTruthy();
 
-    jumpNextButton.simulate('click');
-    jumpNextButton.simulate('keyDown', {
-      key: 'Enter',
-      keyCode: 13,
-      which: 13,
-    });
+    fireEvent.click(jumpNextButton);
+    fireEvent.keyDown(jumpNextButton, { key: 'Enter', keyCode: 13, which: 13 });
 
     expect(onChange).toHaveBeenLastCalledWith(60, 10);
   });
@@ -551,37 +572,23 @@ describe('keyboard support', () => {
 
 describe('select in sequence', () => {
   const serializeCls = (items) =>
-    items.map((item) =>
-      String(item.prop('className')).replaceAll('rc-pagination-', ''),
+    Array.from(items).map((item) =>
+      item.getAttribute('class').replaceAll('rc-pagination-', ''),
     );
-
-  class Demo extends React.Component {
-    state = { current: 1 };
-
-    changeHandle = (current) => this.setState({ current });
-
-    render() {
-      return (
-        <Pagination
-          {...this.props}
-          current={this.state.current}
-          onChange={this.changeHandle}
-        />
-      );
-    }
-  }
 
   function sequenceSelector(total) {
     describe(`should sequence select ${total} pages`, () => {
-      const wrapper = mount(<Demo total={total} />);
-      const cls = serializeCls(wrapper.find('li'));
+      const { container } = render(<Pagination total={total} current={1} />);
+      const cls = serializeCls(container.querySelectorAll('li'));
       expect(cls).toMatchSnapshot();
 
       const pages = Math.floor((total - 1) / 10) + 1;
       for (let i = 2; i <= pages; i++) {
         it(`should select page ${i}`, () => {
-          wrapper.setState({ current: i });
-          const cls = serializeCls(wrapper.find('li'));
+          const { container } = render(
+            <Pagination total={total} current={i} />,
+          );
+          const cls = serializeCls(container.querySelectorAll('li'));
           expect(cls).toMatchSnapshot();
         });
       }

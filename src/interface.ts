@@ -50,7 +50,9 @@ export interface PaginationData {
   jumpNextIcon: React.ComponentType | React.ReactNode;
 }
 
-export interface PaginationProps extends Partial<PaginationData> {
+export interface PaginationProps
+  extends Partial<PaginationData>,
+    React.AriaAttributes {
   onChange?: (page: number, pageSize: number) => void;
   onShowSizeChange?: (current: number, size: number) => void;
   itemRender?: (
@@ -59,6 +61,9 @@ export interface PaginationProps extends Partial<PaginationData> {
     element: React.ReactNode,
   ) => React.ReactNode;
   showTotal?: (total: number, range: [number, number]) => React.ReactNode;
+
+  // WAI-ARIA
+  role?: React.AriaRole | undefined;
 }
 export interface PaginationState {
   current: number;

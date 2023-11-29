@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import fs from 'fs';
 import path from 'path';
+import * as React from 'react';
 
 const exampleDir = path.resolve(__dirname, '../docs/examples');
 const files = fs

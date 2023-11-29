@@ -1,5 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import Pagination from '../src';
+import * as React from 'react';
 
 describe('Pagination with jumper', () => {
   let wrapper;

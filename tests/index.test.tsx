@@ -490,6 +490,7 @@ describe('should emit onChange when total is string', () => {
 
   beforeEach(() => {
     wrapper = render(
+      // @ts-ignore
       <Pagination total="100" pageSize={10} onChange={onChange} />,
     );
   });
@@ -572,7 +573,7 @@ describe('keyboard support', () => {
 
 describe('select in sequence', () => {
   const serializeCls = (items) =>
-    Array.from(items).map((item) =>
+    Array.from(items).map((item: HTMLElement) =>
       item.getAttribute('class').replaceAll('rc-pagination-', ''),
     );
 

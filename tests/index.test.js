@@ -370,7 +370,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
     onChange.mockReset();
   });
 
-  it('should call onShowSizeChange when no change', () => {
+  it('should not call onShowSizeChange when no change', () => {
     const sizeChanger = wrapper.container.querySelector(
       '.rc-pagination-options-size-changer',
     );

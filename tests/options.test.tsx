@@ -1,7 +1,8 @@
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import Select from 'rc-select';
 import zhCN from '../src/locale/zh_CN';
 import Options from '../src/Options';
+import * as React from 'react';
 
 const WrapperOptions = (props) => {
   return (
@@ -19,8 +20,8 @@ const WrapperOptions = (props) => {
 
 describe('Options', () => {
   it('should render correctly', () => {
-    const wrapper = mount(<WrapperOptions />);
-    expect(wrapper.html()).toMatchSnapshot();
+    const { container } = render(<WrapperOptions />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   describe('props:buildOptionText', () => {
@@ -30,12 +31,12 @@ describe('Options', () => {
         .mockImplementation((value) => (
           <div className="custom-options">buildOptionText-{value}</div>
         ));
-      const wrapper = mount(
+      const { container } = render(
         <WrapperOptions buildOptionText={mockBuildOptionText} />,
       );
-      const options = wrapper.find('.custom-options');
+      const options = container.querySelector('.custom-options');
       expect(options).toBeTruthy();
-      expect(options.text()).toBe('buildOptionText-10');
+      expect(options).toHaveTextContent('buildOptionText-10');
     });
   });
 });

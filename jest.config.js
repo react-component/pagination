@@ -1,12 +1,9 @@
 const pkg = require('./package.json');
 module.exports = {
-  snapshotSerializers: [require.resolve('enzyme-to-json/serializer')],
+  setupFilesAfterEnv: ['<rootDir>/tests/setupAfterEnv.ts'],
   moduleNameMapper: {
     [pkg.name]: '<rootDir>/src/index.ts',
     '\\.less$': 'identity-obj-proxy',
   },
-  collectCoverageFrom: [
-    'src/**',
-    '!src/locale/**',
-  ],
+  collectCoverageFrom: ['src/**', '!src/locale/**'],
 };

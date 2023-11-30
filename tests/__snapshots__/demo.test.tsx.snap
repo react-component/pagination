@@ -1,0 +1,1580 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Example basic 1`] = `
+<ul
+  class="rc-pagination"
+>
+  <li
+    aria-disabled="true"
+    class="rc-pagination-prev rc-pagination-disabled"
+    title="上一页"
+  >
+    <button
+      aria-label="prev page"
+      class="rc-pagination-item-link"
+      disabled=""
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
+    tabindex="0"
+    title="1"
+  >
+    <a
+      rel="nofollow"
+    >
+      1
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-2"
+    tabindex="0"
+    title="2"
+  >
+    <a
+      rel="nofollow"
+    >
+      2
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-3"
+    tabindex="0"
+    title="3"
+  >
+    <a
+      rel="nofollow"
+    >
+      3
+    </a>
+  </li>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-next"
+    tabindex="0"
+    title="下一页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+</ul>
+`;
+
+exports[`Example controlled 1`] = `
+<ul
+  class="rc-pagination"
+>
+  <li
+    aria-disabled="true"
+    class="rc-pagination-prev rc-pagination-disabled"
+    title="上一页"
+  >
+    <button
+      aria-label="prev page"
+      class="rc-pagination-item-link"
+      disabled=""
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
+    tabindex="0"
+    title="1"
+  >
+    <a
+      rel="nofollow"
+    >
+      1
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-2"
+    tabindex="0"
+    title="2"
+  >
+    <a
+      rel="nofollow"
+    >
+      2
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-3"
+    tabindex="0"
+    title="3"
+  >
+    <a
+      rel="nofollow"
+    >
+      3
+    </a>
+  </li>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-next"
+    tabindex="0"
+    title="下一页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+</ul>
+`;
+
+exports[`Example itemRender 1`] = `
+<ul
+  class="rc-pagination"
+>
+  <li
+    aria-disabled="true"
+    class="rc-pagination-prev rc-pagination-disabled"
+    title="上一页"
+  >
+    <button
+      aria-label="prev page"
+      class="rc-pagination-item-link"
+      disabled=""
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
+    tabindex="0"
+    title="1"
+  >
+    <a
+      href="#1"
+    >
+      1
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-2"
+    tabindex="0"
+    title="2"
+  >
+    <a
+      href="#2"
+    >
+      2
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-3"
+    tabindex="0"
+    title="3"
+  >
+    <a
+      href="#3"
+    >
+      3
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-4"
+    tabindex="0"
+    title="4"
+  >
+    <a
+      href="#4"
+    >
+      4
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    tabindex="0"
+    title="5"
+  >
+    <a
+      href="#5"
+    >
+      5
+    </a>
+  </li>
+  <li
+    class="rc-pagination-jump-next"
+    tabindex="0"
+    title="向后 5 页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-10"
+    tabindex="0"
+    title="10"
+  >
+    <a
+      href="#10"
+    >
+      10
+    </a>
+  </li>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-next"
+    tabindex="0"
+    title="下一页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-options"
+  />
+</ul>
+`;
+
+exports[`Example jumper 1`] = `
+<h3>
+  默认
+</h3>
+`;
+
+exports[`Example jumperWithGoButton 1`] = `
+<p>
+   customize node 
+</p>
+`;
+
+exports[`Example lessPages 1`] = `
+<div>
+  <ul
+    class="rc-pagination"
+    style="margin-bottom: 2rem;"
+  >
+    <li
+      aria-disabled="false"
+      class="rc-pagination-prev"
+      tabindex="0"
+      title="上一页"
+    >
+      <i
+        class="custom-icon-prev"
+        style="font-size: 16px;"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          style="vertical-align: -.125em; transform: rotate(180deg);"
+          viewBox="0 0 1024 1024"
+          width="1em"
+        >
+          <path
+            d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
+          />
+        </svg>
+      </i>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-1"
+      tabindex="0"
+      title="1"
+    >
+      <a
+        rel="nofollow"
+      >
+        1
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+      tabindex="0"
+      title="2"
+    >
+      <a
+        rel="nofollow"
+      >
+        2
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
+      tabindex="0"
+      title="3"
+    >
+      <a
+        rel="nofollow"
+      >
+        3
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-before-jump-next"
+      tabindex="0"
+      title="4"
+    >
+      <a
+        rel="nofollow"
+      >
+        4
+      </a>
+    </li>
+    <li
+      class="rc-pagination-jump-next rc-pagination-jump-next-custom-icon"
+      tabindex="0"
+      title="向后 3 页"
+    >
+      <i
+        class="custom-icon-jump-next"
+        style="font-size: 16px;"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          style="vertical-align: -.125em; transform: rotate(0deg);"
+          viewBox="0 0 1024 1024"
+          width="1em"
+        >
+          <path
+            d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
+          />
+          <path
+            d="M837.2 492.3L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
+          />
+        </svg>
+      </i>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-8"
+      tabindex="0"
+      title="8"
+    >
+      <a
+        rel="nofollow"
+      >
+        8
+      </a>
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      tabindex="0"
+      title="下一页"
+    >
+      <i
+        class="custom-icon-next"
+        style="font-size: 16px;"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          style="vertical-align: -.125em; transform: rotate(0deg);"
+          viewBox="0 0 1024 1024"
+          width="1em"
+        >
+          <path
+            d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
+          />
+        </svg>
+      </i>
+    </li>
+    <li
+      class="rc-pagination-options"
+    />
+  </ul>
+  <ul
+    class="rc-pagination"
+  >
+    <li
+      aria-disabled="true"
+      class="rc-pagination-prev rc-pagination-disabled"
+      title="上一页"
+    >
+      <i
+        class="custom-icon-prev"
+        disabled=""
+        style="font-size: 16px;"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          style="vertical-align: -.125em; transform: rotate(180deg);"
+          viewBox="0 0 1024 1024"
+          width="1em"
+        >
+          <path
+            d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
+          />
+        </svg>
+      </i>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
+      tabindex="0"
+      title="1"
+    >
+      <a
+        rel="nofollow"
+      >
+        1
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+      tabindex="0"
+      title="2"
+    >
+      <a
+        rel="nofollow"
+      >
+        2
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-before-jump-next"
+      tabindex="0"
+      title="3"
+    >
+      <a
+        rel="nofollow"
+      >
+        3
+      </a>
+    </li>
+    <li
+      class="rc-pagination-jump-next rc-pagination-jump-next-custom-icon"
+      tabindex="0"
+      title="向后 3 页"
+    >
+      <i
+        class="custom-icon-jump-next"
+        style="font-size: 16px;"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          style="vertical-align: -.125em; transform: rotate(0deg);"
+          viewBox="0 0 1024 1024"
+          width="1em"
+        >
+          <path
+            d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
+          />
+          <path
+            d="M837.2 492.3L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
+          />
+        </svg>
+      </i>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-6"
+      tabindex="0"
+      title="6"
+    >
+      <a
+        rel="nofollow"
+      >
+        6
+      </a>
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      tabindex="0"
+      title="下一页"
+    >
+      <i
+        class="custom-icon-next"
+        style="font-size: 16px;"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          style="vertical-align: -.125em; transform: rotate(0deg);"
+          viewBox="0 0 1024 1024"
+          width="1em"
+        >
+          <path
+            d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
+          />
+        </svg>
+      </i>
+    </li>
+    <li
+      class="rc-pagination-options"
+    />
+  </ul>
+  <div>
+    <button>
+      Toggle Custom Icon
+    </button>
+    <span
+      style="margin-left: 1rem;"
+    >
+      Is using icon: 
+      true
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Example locale 1`] = `
+<ul
+  class="rc-pagination"
+>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-prev"
+    tabindex="0"
+    title="Previous Page"
+  >
+    <button
+      aria-label="prev page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-1"
+    tabindex="0"
+    title="1"
+  >
+    <a
+      rel="nofollow"
+    >
+      1
+    </a>
+  </li>
+  <li
+    class="rc-pagination-jump-prev"
+    tabindex="0"
+    title="Previous 5 Pages"
+  >
+    <button
+      aria-label="prev page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev"
+    tabindex="0"
+    title="3"
+  >
+    <a
+      rel="nofollow"
+    >
+      3
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-4"
+    tabindex="0"
+    title="4"
+  >
+    <a
+      rel="nofollow"
+    >
+      4
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
+    tabindex="0"
+    title="5"
+  >
+    <a
+      rel="nofollow"
+    >
+      5
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-6"
+    tabindex="0"
+    title="6"
+  >
+    <a
+      rel="nofollow"
+    >
+      6
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-7 rc-pagination-item-before-jump-next"
+    tabindex="0"
+    title="7"
+  >
+    <a
+      rel="nofollow"
+    >
+      7
+    </a>
+  </li>
+  <li
+    class="rc-pagination-jump-next"
+    tabindex="0"
+    title="Next 5 Pages"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-23"
+    tabindex="0"
+    title="23"
+  >
+    <a
+      rel="nofollow"
+    >
+      23
+    </a>
+  </li>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-next"
+    tabindex="0"
+    title="Next Page"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-options"
+  >
+    <div
+      aria-label="Page Size"
+      class="rc-select rc-pagination-options-size-changer rc-select-single"
+    >
+      <div
+        class="rc-select-selector"
+      >
+        <span
+          class="rc-select-selection-search"
+        >
+          <input
+            aria-autocomplete="list"
+            aria-controls="rc_select_TEST_OR_SSR_list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="Page Size"
+            aria-owns="rc_select_TEST_OR_SSR_list"
+            autocomplete="off"
+            class="rc-select-selection-search-input"
+            id="rc_select_TEST_OR_SSR"
+            readonly=""
+            role="combobox"
+            style="opacity: 0;"
+            type="search"
+            unselectable="on"
+            value=""
+          />
+        </span>
+        <span
+          class="rc-select-selection-item"
+          title="20 / page"
+        >
+          20 / page
+        </span>
+      </div>
+    </div>
+    <div
+      class="rc-pagination-options-quick-jumper"
+    >
+      Go to
+      <input
+        aria-label="Page"
+        type="text"
+        value=""
+      />
+      Page
+    </div>
+  </li>
+</ul>
+`;
+
+exports[`Example more 1`] = `
+<ul
+  class="rc-pagination ant-pagination"
+>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-prev"
+    tabindex="0"
+    title="上一页"
+  >
+    <button
+      aria-label="prev page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-1"
+    tabindex="0"
+    title="1"
+  >
+    <a
+      rel="nofollow"
+    >
+      1
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-2"
+    tabindex="0"
+    title="2"
+  >
+    <a
+      rel="nofollow"
+    >
+      2
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
+    tabindex="0"
+    title="3"
+  >
+    <a
+      rel="nofollow"
+    >
+      3
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-4"
+    tabindex="0"
+    title="4"
+  >
+    <a
+      rel="nofollow"
+    >
+      4
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    tabindex="0"
+    title="5"
+  >
+    <a
+      rel="nofollow"
+    >
+      5
+    </a>
+  </li>
+  <li
+    class="rc-pagination-jump-next"
+    tabindex="0"
+    title="向后 5 页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-45"
+    tabindex="0"
+    title="45"
+  >
+    <a
+      rel="nofollow"
+    >
+      45
+    </a>
+  </li>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-next"
+    tabindex="0"
+    title="下一页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-options"
+  />
+</ul>
+`;
+
+exports[`Example showTitle 1`] = `
+<div>
+  <ul
+    class="rc-pagination"
+  >
+    <li
+      aria-disabled="false"
+      class="rc-pagination-prev"
+      tabindex="0"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-1"
+      tabindex="0"
+    >
+      <a
+        rel="nofollow"
+      >
+        1
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+      tabindex="0"
+    >
+      <a
+        rel="nofollow"
+      >
+        2
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
+      tabindex="0"
+    >
+      <a
+        rel="nofollow"
+      >
+        3
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-before-jump-next"
+      tabindex="0"
+    >
+      <a
+        rel="nofollow"
+      >
+        4
+      </a>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+      tabindex="0"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-8"
+      tabindex="0"
+    >
+      <a
+        rel="nofollow"
+      >
+        8
+      </a>
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      tabindex="0"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-options"
+    />
+  </ul>
+  <ul
+    class="rc-pagination"
+  >
+    <li
+      aria-disabled="true"
+      class="rc-pagination-prev rc-pagination-disabled"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        disabled=""
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
+      tabindex="0"
+    >
+      <a
+        rel="nofollow"
+      >
+        1
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+      tabindex="0"
+    >
+      <a
+        rel="nofollow"
+      >
+        2
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-before-jump-next"
+      tabindex="0"
+    >
+      <a
+        rel="nofollow"
+      >
+        3
+      </a>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+      tabindex="0"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-6"
+      tabindex="0"
+    >
+      <a
+        rel="nofollow"
+      >
+        6
+      </a>
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      tabindex="0"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-options"
+    />
+  </ul>
+</div>
+`;
+
+exports[`Example showTotal 1`] = `
+<ul
+  class="rc-pagination"
+>
+  <li
+    class="rc-pagination-total-text"
+  >
+    Total 455 items
+  </li>
+  <li
+    aria-disabled="true"
+    class="rc-pagination-prev rc-pagination-disabled"
+    title="上一页"
+  >
+    <button
+      aria-label="prev page"
+      class="rc-pagination-item-link"
+      disabled=""
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
+    tabindex="0"
+    title="1"
+  >
+    <a
+      rel="nofollow"
+    >
+      1
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-2"
+    tabindex="0"
+    title="2"
+  >
+    <a
+      rel="nofollow"
+    >
+      2
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-3"
+    tabindex="0"
+    title="3"
+  >
+    <a
+      rel="nofollow"
+    >
+      3
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-4"
+    tabindex="0"
+    title="4"
+  >
+    <a
+      rel="nofollow"
+    >
+      4
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    tabindex="0"
+    title="5"
+  >
+    <a
+      rel="nofollow"
+    >
+      5
+    </a>
+  </li>
+  <li
+    class="rc-pagination-jump-next"
+    tabindex="0"
+    title="向后 5 页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-46"
+    tabindex="0"
+    title="46"
+  >
+    <a
+      rel="nofollow"
+    >
+      46
+    </a>
+  </li>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-next"
+    tabindex="0"
+    title="下一页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-options"
+  />
+</ul>
+`;
+
+exports[`Example simple 1`] = `
+<ul
+  class="rc-pagination rc-pagination-simple"
+>
+  <li
+    aria-disabled="true"
+    class="rc-pagination-prev rc-pagination-disabled"
+    title="上一页"
+  >
+    <button
+      aria-label="prev page"
+      class="rc-pagination-item-link"
+      disabled=""
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-simple-pager"
+    title="1/5"
+  >
+    <input
+      size="3"
+      type="text"
+      value="1"
+    />
+    <span
+      class="rc-pagination-slash"
+    >
+      /
+    </span>
+    5
+  </li>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-next"
+    title="下一页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+</ul>
+`;
+
+exports[`Example sizer 1`] = `
+<div
+  style="margin: 10px;"
+>
+  <ul
+    class="rc-pagination"
+  >
+    <li
+      aria-disabled="false"
+      class="rc-pagination-prev"
+      tabindex="0"
+      title="上一页"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-1"
+      tabindex="0"
+      title="1"
+    >
+      <a
+        rel="nofollow"
+      >
+        1
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+      tabindex="0"
+      title="2"
+    >
+      <a
+        rel="nofollow"
+      >
+        2
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
+      tabindex="0"
+      title="3"
+    >
+      <a
+        rel="nofollow"
+      >
+        3
+      </a>
+    </li>
+    <li
+      aria-disabled="true"
+      class="rc-pagination-next rc-pagination-disabled"
+      title="下一页"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        disabled=""
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-options"
+    >
+      <div
+        aria-label="页码"
+        class="rc-select rc-pagination-options-size-changer rc-select-single"
+      >
+        <div
+          class="rc-select-selector"
+        >
+          <span
+            class="rc-select-selection-search"
+          >
+            <input
+              aria-autocomplete="list"
+              aria-controls="rc_select_TEST_OR_SSR_list"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-label="页码"
+              aria-owns="rc_select_TEST_OR_SSR_list"
+              autocomplete="off"
+              class="rc-select-selection-search-input"
+              id="rc_select_TEST_OR_SSR"
+              readonly=""
+              role="combobox"
+              style="opacity: 0;"
+              type="search"
+              unselectable="on"
+              value=""
+            />
+          </span>
+          <span
+            class="rc-select-selection-item"
+            title="15 条/页"
+          >
+            15 条/页
+          </span>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <ul
+    class="rc-pagination"
+  >
+    <li
+      aria-disabled="false"
+      class="rc-pagination-prev"
+      tabindex="0"
+      title="上一页"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-1"
+      tabindex="0"
+      title="1"
+    >
+      <a
+        rel="nofollow"
+      >
+        1
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+      tabindex="0"
+      title="2"
+    >
+      <a
+        rel="nofollow"
+      >
+        2
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
+      tabindex="0"
+      title="3"
+    >
+      <a
+        rel="nofollow"
+      >
+        3
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+      tabindex="0"
+      title="4"
+    >
+      <a
+        rel="nofollow"
+      >
+        4
+      </a>
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      tabindex="0"
+      title="下一页"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+  </ul>
+  <ul
+    class="rc-pagination"
+  >
+    <li
+      aria-disabled="false"
+      class="rc-pagination-prev"
+      tabindex="0"
+      title="上一页"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-1"
+      tabindex="0"
+      title="1"
+    >
+      <a
+        rel="nofollow"
+      >
+        1
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+      tabindex="0"
+      title="2"
+    >
+      <a
+        rel="nofollow"
+      >
+        2
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
+      tabindex="0"
+      title="3"
+    >
+      <a
+        rel="nofollow"
+      >
+        3
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+      tabindex="0"
+      title="4"
+    >
+      <a
+        rel="nofollow"
+      >
+        4
+      </a>
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      tabindex="0"
+      title="下一页"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-options"
+    >
+      <div
+        aria-label="页码"
+        class="rc-select rc-pagination-options-size-changer rc-select-single"
+      >
+        <div
+          class="rc-select-selector"
+        >
+          <span
+            class="rc-select-selection-search"
+          >
+            <input
+              aria-autocomplete="list"
+              aria-controls="rc_select_TEST_OR_SSR_list"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-label="页码"
+              aria-owns="rc_select_TEST_OR_SSR_list"
+              autocomplete="off"
+              class="rc-select-selection-search-input"
+              id="rc_select_TEST_OR_SSR"
+              readonly=""
+              role="combobox"
+              style="opacity: 0;"
+              type="search"
+              unselectable="on"
+              value=""
+            />
+          </span>
+          <span
+            class="rc-select-selection-item"
+            title="15 条/页"
+          >
+            15 条/页
+          </span>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <ul
+    class="rc-pagination"
+  >
+    <li
+      aria-disabled="false"
+      class="rc-pagination-prev"
+      tabindex="0"
+      title="上一页"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-1"
+      tabindex="0"
+      title="1"
+    >
+      <a
+        rel="nofollow"
+      >
+        1
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+      tabindex="0"
+      title="2"
+    >
+      <a
+        rel="nofollow"
+      >
+        2
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
+      tabindex="0"
+      title="3"
+    >
+      <a
+        rel="nofollow"
+      >
+        3
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+      tabindex="0"
+      title="4"
+    >
+      <a
+        rel="nofollow"
+      >
+        4
+      </a>
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      tabindex="0"
+      title="下一页"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Example styles 1`] = `
+<ul
+  class="rc-pagination"
+  style="margin: 100px;"
+>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-prev"
+    tabindex="0"
+    title="上一页"
+  >
+    <button
+      aria-label="prev page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-1"
+    tabindex="0"
+    title="1"
+  >
+    <a
+      rel="nofollow"
+    >
+      1
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-2 rc-pagination-item-active"
+    tabindex="0"
+    title="2"
+  >
+    <a
+      rel="nofollow"
+    >
+      2
+    </a>
+  </li>
+  <li
+    class="rc-pagination-item rc-pagination-item-3"
+    tabindex="0"
+    title="3"
+  >
+    <a
+      rel="nofollow"
+    >
+      3
+    </a>
+  </li>
+  <li
+    aria-disabled="false"
+    class="rc-pagination-next"
+    tabindex="0"
+    title="下一页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      type="button"
+    />
+  </li>
+</ul>
+`;

@@ -1,6 +1,7 @@
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import fs from 'fs';
 import path from 'path';
+import * as React from 'react';
 
 const exampleDir = path.resolve(__dirname, '../docs/examples');
 const files = fs
@@ -13,8 +14,8 @@ describe('Example', () => {
     it(name, () => {
       const Example = require(path.join(exampleDir, file)).default;
 
-      const wrapper = mount(<Example />);
-      expect(wrapper.html()).toMatchSnapshot();
+      const { container } = render(<Example />);
+      expect(container.firstChild).toMatchSnapshot();
     });
   });
 });

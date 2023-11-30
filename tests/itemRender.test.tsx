@@ -1,14 +1,15 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import Pagination from '../src';
 
 describe('itemRender', () => {
   let wrapper;
   const currentPage = 12;
   const itemRender = (current) => <a href={`#${current}`}>{current}</a>;
+  const $$ = (selector) => wrapper.container.querySelector(selector);
 
   beforeEach(() => {
-    wrapper = mount(
+    wrapper = render(
       <Pagination total={1000} current={currentPage} itemRender={itemRender} />,
     );
   });
@@ -18,31 +19,31 @@ describe('itemRender', () => {
   });
 
   it('should support custom itemRender', () => {
-    const prev = wrapper.find('.rc-pagination-prev');
-    const next = wrapper.find('.rc-pagination-next');
-    const jumpPrev = wrapper.find('.rc-pagination-jump-prev');
-    const jumpNext = wrapper.find('.rc-pagination-jump-next');
-    const active = wrapper.find('.rc-pagination-item-active');
+    const prev = $$('.rc-pagination-prev');
+    const next = $$('.rc-pagination-next');
+    const jumpPrev = $$('.rc-pagination-jump-prev');
+    const jumpNext = $$('.rc-pagination-jump-next');
+    const active = $$('.rc-pagination-item-active');
 
-    expect(prev.getDOMNode().innerHTML).toBe(
+    expect(prev.innerHTML).toBe(
       `<a href="#${currentPage - 1}">${currentPage - 1}</a>`,
     );
-    expect(next.getDOMNode().innerHTML).toBe(
+    expect(next.innerHTML).toBe(
       `<a href="#${currentPage + 1}">${currentPage + 1}</a>`,
     );
-    expect(jumpPrev.getDOMNode().innerHTML).toBe(
+    expect(jumpPrev.innerHTML).toBe(
       `<a href="#${currentPage - 5}">${currentPage - 5}</a>`,
     );
-    expect(jumpNext.getDOMNode().innerHTML).toBe(
+    expect(jumpNext.innerHTML).toBe(
       `<a href="#${currentPage + 5}">${currentPage + 5}</a>`,
     );
-    expect(active.getDOMNode().innerHTML).toBe(
+    expect(active.innerHTML).toBe(
       `<a href="#${currentPage}">${currentPage}</a>`,
     );
   });
 
   it('should support empty custom itemRender', () => {
-    const pageEmptyWrapper = mount(
+    const pageEmptyWrapper = render(
       <Pagination
         total={1000}
         current={currentPage}
@@ -54,9 +55,11 @@ describe('itemRender', () => {
         }}
       />,
     );
-    expect(pageEmptyWrapper.find('.rc-pagination-item').length).toBe(0);
+    expect(
+      pageEmptyWrapper.container.querySelectorAll('.rc-pagination-item'),
+    ).toHaveLength(0);
 
-    const turnPageWrapper = mount(
+    const turnPageWrapper = render(
       <Pagination
         total={1000}
         current={currentPage}
@@ -68,10 +71,14 @@ describe('itemRender', () => {
         }}
       />,
     );
-    expect(turnPageWrapper.find('.rc-pagination-prev').length).toBe(0);
-    expect(turnPageWrapper.find('.rc-pagination-next').length).toBe(0);
+    expect(
+      turnPageWrapper.container.querySelectorAll('.rc-pagination-prev'),
+    ).toHaveLength(0);
+    expect(
+      turnPageWrapper.container.querySelectorAll('.rc-pagination-next'),
+    ).toHaveLength(0);
 
-    const jumpPageWrapper = mount(
+    const jumpPageWrapper = render(
       <Pagination
         total={1000}
         current={currentPage}
@@ -83,17 +90,21 @@ describe('itemRender', () => {
         }}
       />,
     );
-    expect(jumpPageWrapper.find('.rc-pagination-jump-prev').length).toBe(0);
-    expect(jumpPageWrapper.find('.rc-pagination-jump-next').length).toBe(0);
+    expect(
+      jumpPageWrapper.container.querySelectorAll('.rc-pagination-jump-prev'),
+    ).toHaveLength(0);
+    expect(
+      jumpPageWrapper.container.querySelectorAll('.rc-pagination-jump-next'),
+    ).toHaveLength(0);
   });
 
   it('should support pass disabled to prev and next buttons', () => {
-    const component = mount(
+    const { container } = render(
       <Pagination total={1000} current={1} itemRender={itemRender} />,
     );
-    const prev = component.find('.rc-pagination-prev');
-    const next = component.find('.rc-pagination-next');
-    expect(prev.getDOMNode().innerHTML).toBe('<a href="#0" disabled="">0</a>');
-    expect(next.getDOMNode().innerHTML).toBe('<a href="#2">2</a>');
+    const prev = container.querySelector('.rc-pagination-prev');
+    const next = container.querySelector('.rc-pagination-next');
+    expect(prev.innerHTML).toBe('<a href="#0" disabled="">0</a>');
+    expect(next.innerHTML).toBe('<a href="#2">2</a>');
   });
 });

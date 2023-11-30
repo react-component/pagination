@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import Pagination from '../src';
 
 describe('data and aria props', () => {
@@ -7,7 +7,7 @@ describe('data and aria props', () => {
 
   describe('with simple prop', () => {
     beforeEach(() => {
-      wrapper = mount(
+      wrapper = render(
         <Pagination
           simple
           data-test="test-id"
@@ -24,25 +24,35 @@ describe('data and aria props', () => {
     });
 
     it('renders data attributes', () => {
-      expect(wrapper.getDOMNode().getAttribute('data-test')).toBe('test-id');
-      expect(wrapper.getDOMNode().getAttribute('data-id')).toBe('12345');
+      expect(wrapper.container.firstChild).toHaveAttribute(
+        'data-test',
+        'test-id',
+      );
+      expect(wrapper.container.firstChild).toHaveAttribute('data-id', '12345');
     });
 
     it('renders aria attributes', () => {
-      expect(wrapper.getDOMNode().getAttribute('aria-labelledby')).toBe(
+      expect(wrapper.container.firstChild).toHaveAttribute(
+        'aria-labelledby',
         'labelledby-id',
       );
-      expect(wrapper.getDOMNode().getAttribute('aria-label')).toBe('label-id');
+      expect(wrapper.container.firstChild).toHaveAttribute(
+        'aria-label',
+        'label-id',
+      );
     });
 
     it('renders role attribute', () => {
-      expect(wrapper.getDOMNode().getAttribute('role')).toBe('navigation');
+      expect(wrapper.container.firstChild).toHaveAttribute(
+        'role',
+        'navigation',
+      );
     });
   });
 
   describe('without simple prop', () => {
     beforeEach(() => {
-      wrapper = mount(
+      wrapper = render(
         <Pagination
           data-test="test-id"
           data-id="12345"
@@ -58,19 +68,29 @@ describe('data and aria props', () => {
     });
 
     it('renders data attributes', () => {
-      expect(wrapper.getDOMNode().getAttribute('data-test')).toBe('test-id');
-      expect(wrapper.getDOMNode().getAttribute('data-id')).toBe('12345');
+      expect(wrapper.container.firstChild).toHaveAttribute(
+        'data-test',
+        'test-id',
+      );
+      expect(wrapper.container.firstChild).toHaveAttribute('data-id', '12345');
     });
 
     it('renders aria attributes', () => {
-      expect(wrapper.getDOMNode().getAttribute('aria-labelledby')).toBe(
+      expect(wrapper.container.firstChild).toHaveAttribute(
+        'aria-labelledby',
         'labelledby-id',
       );
-      expect(wrapper.getDOMNode().getAttribute('aria-label')).toBe('label-id');
+      expect(wrapper.container.firstChild).toHaveAttribute(
+        'aria-label',
+        'label-id',
+      );
     });
 
     it('renders role attribute', () => {
-      expect(wrapper.getDOMNode().getAttribute('role')).toBe('navigation');
+      expect(wrapper.container.firstChild).toHaveAttribute(
+        'role',
+        'navigation',
+      );
     });
   });
 });

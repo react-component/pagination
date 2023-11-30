@@ -1,12 +1,13 @@
 import React from 'react';
+import type { RenderResult } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import Pagination from '../src';
 
 describe('itemRender', () => {
-  let wrapper;
+  let wrapper: RenderResult;
   const currentPage = 12;
-  const itemRender = (current) => <a href={`#${current}`}>{current}</a>;
-  const $$ = (selector) => wrapper.container.querySelector(selector);
+  const itemRender = (current: number) => <a href={`#${current}`}>{current}</a>;
+  const $$ = (selector: string) => wrapper.container.querySelector(selector);
 
   beforeEach(() => {
     wrapper = render(
@@ -47,7 +48,7 @@ describe('itemRender', () => {
       <Pagination
         total={1000}
         current={currentPage}
-        itemRender={(page, type, originalElement) => {
+        itemRender={(_, type, originalElement) => {
           if (type === 'page') {
             return null;
           }
@@ -63,7 +64,7 @@ describe('itemRender', () => {
       <Pagination
         total={1000}
         current={currentPage}
-        itemRender={(page, type, originalElement) => {
+        itemRender={(_, type, originalElement) => {
           if (type === 'prev' || type === 'next') {
             return null;
           }

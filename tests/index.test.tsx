@@ -1,3 +1,4 @@
+import type { RenderResult } from '@testing-library/react';
 import { render, fireEvent } from '@testing-library/react';
 import Select from 'rc-select';
 import React from 'react';
@@ -5,9 +6,9 @@ import Pagination from '../src';
 import { resetWarned } from 'rc-util/lib/warning';
 
 describe('Default Pagination', () => {
-  let wrapper;
+  let wrapper: RenderResult;
   const onChange = jest.fn();
-  const $$ = (selector) => wrapper.container.querySelectorAll(selector);
+  const $$ = (selector: string) => wrapper.container.querySelectorAll(selector);
 
   beforeEach(() => {
     wrapper = render(<Pagination onChange={onChange} />);
@@ -26,9 +27,9 @@ describe('Default Pagination', () => {
 });
 
 describe('Uncontrolled Pagination', () => {
-  let wrapper;
+  let wrapper: RenderResult;
   const onChange = jest.fn();
-  const $$ = (selector) => wrapper.container.querySelectorAll(selector);
+  const $$ = (selector: string) => wrapper.container.querySelectorAll(selector);
 
   function shouldHighlightRight(current = 1) {
     const pagers = $$('li:not(.rc-pagination-total-text)');
@@ -205,7 +206,7 @@ describe('Uncontrolled Pagination', () => {
 });
 
 describe('Controlled Pagination', () => {
-  let wrapper;
+  let wrapper: RenderResult;
   const onChange = jest.fn();
 
   beforeEach(() => {
@@ -344,7 +345,7 @@ describe('Other props', () => {
 
 // https://github.com/ant-design/ant-design/issues/10524
 describe('current value on onShowSizeChange when total is 0', () => {
-  let wrapper;
+  let wrapper: RenderResult;
   const onShowSizeChange = jest.fn();
   const onChange = jest.fn();
 
@@ -485,7 +486,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
 });
 
 describe('should emit onChange when total is string', () => {
-  let wrapper;
+  let wrapper: RenderResult;
   const onChange = jest.fn();
 
   beforeEach(() => {
@@ -508,10 +509,9 @@ describe('should emit onChange when total is string', () => {
 });
 
 describe('keyboard support', () => {
-  let wrapper;
+  let wrapper: RenderResult;
   const onChange = jest.fn();
-  const $$ = (selector) => wrapper.container.querySelectorAll(selector);
-  const $ = (selector) => wrapper.container.querySelector(selector);
+  const $ = (selector: string) => wrapper.container.querySelector(selector);
 
   beforeEach(() => {
     wrapper = render(
@@ -572,12 +572,12 @@ describe('keyboard support', () => {
 });
 
 describe('select in sequence', () => {
-  const serializeCls = (items) =>
-    Array.from(items).map((item: HTMLElement) =>
+  const serializeCls = (items: NodeListOf<HTMLLIElement>) =>
+    Array.from(items).map((item) =>
       item.getAttribute('class').replaceAll('rc-pagination-', ''),
     );
 
-  function sequenceSelector(total) {
+  function sequenceSelector(total: number) {
     describe(`should sequence select ${total} pages`, () => {
       const { container } = render(<Pagination total={total} current={1} />);
       const cls = serializeCls(container.querySelectorAll('li'));
@@ -586,11 +586,11 @@ describe('select in sequence', () => {
       const pages = Math.floor((total - 1) / 10) + 1;
       for (let i = 2; i <= pages; i++) {
         it(`should select page ${i}`, () => {
-          const { container } = render(
+          const { container: pageContainer } = render(
             <Pagination total={total} current={i} />,
           );
-          const cls = serializeCls(container.querySelectorAll('li'));
-          expect(cls).toMatchSnapshot();
+          const clsString = serializeCls(pageContainer.querySelectorAll('li'));
+          expect(clsString).toMatchSnapshot();
         });
       }
     });

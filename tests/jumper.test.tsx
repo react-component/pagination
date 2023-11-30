@@ -1,11 +1,12 @@
+import type { RenderResult } from '@testing-library/react';
 import { render, fireEvent } from '@testing-library/react';
 import Pagination from '../src';
 import * as React from 'react';
 
 describe('Pagination with jumper', () => {
-  let wrapper;
+  let wrapper: RenderResult;
   const onChange = jest.fn();
-  const $$ = (selector) => wrapper.container.querySelector(selector);
+  const $$ = (selector: string) => wrapper.container.querySelector(selector);
 
   beforeEach(() => {
     wrapper = render(
@@ -68,10 +69,10 @@ describe('Pagination with jumper', () => {
   });
 
   it('should not jump when input empty string', () => {
-    const onChange = jest.fn();
+    const onChangeFn = jest.fn();
     const { container } = render(
       <Pagination
-        onChange={onChange}
+        onChange={onChangeFn}
         total={25}
         showQuickJumper={{
           goButton: (
@@ -102,7 +103,7 @@ describe('Pagination with jumper', () => {
 });
 
 describe('simple quick jumper', () => {
-  let wrapper;
+  let wrapper: RenderResult;
   const onChange = jest.fn();
 
   beforeEach(() => {

@@ -1,10 +1,10 @@
+import type { RenderResult } from '@testing-library/react';
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
 import TwoPagination from './two-pagination';
 
 describe('Two Pagination', () => {
-  let wrapper;
-  let mockPagination;
+  let wrapper: RenderResult;
 
   beforeEach(() => {
     jest.mock('../src', () => {});

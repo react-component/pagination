@@ -9,10 +9,10 @@ class Hello extends React.Component {
   };
 
   changeSize = () => {
-    this.setState({
-      pageSize: 50,
-    });
+    this.setState({ pageSize: 50 });
   };
+
+  onShowSizeChange = () => {};
 
   render() {
     return (

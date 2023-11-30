@@ -4,19 +4,17 @@ import zhCN from '../src/locale/zh_CN';
 import Options from '../src/Options';
 import * as React from 'react';
 
-const WrapperOptions = (props) => {
-  return (
-    <Options
-      locale={zhCN}
-      rootPrefixCls="rc-pagination"
-      selectComponentClass={Select}
-      pageSize={10}
-      changeSize={jest.fn()}
-      quickGo={jest.fn()}
-      {...props}
-    />
-  );
-};
+const WrapperOptions: React.FC<any> = (props) => (
+  <Options
+    locale={zhCN}
+    rootPrefixCls="rc-pagination"
+    selectComponentClass={Select}
+    pageSize={10}
+    changeSize={jest.fn()}
+    quickGo={jest.fn()}
+    {...props}
+  />
+);
 
 describe('Options', () => {
   it('should render correctly', () => {

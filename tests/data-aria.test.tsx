@@ -1,9 +1,10 @@
 import React from 'react';
+import type { RenderResult } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import Pagination from '../src';
 
 describe('data and aria props', () => {
-  let wrapper;
+  let wrapper: RenderResult;
 
   describe('with simple prop', () => {
     beforeEach(() => {

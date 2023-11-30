@@ -1,10 +1,11 @@
+import type { RenderResult } from '@testing-library/react';
 import { render, fireEvent, createEvent } from '@testing-library/react';
 import Select from 'rc-select';
 import React, { useState } from 'react';
 import Pagination from '../src';
 
 describe('simple Pagination', () => {
-  let wrapper;
+  let wrapper: RenderResult;
 
   beforeEach(() => {
     wrapper = render(
@@ -48,7 +49,7 @@ describe('simple Pagination', () => {
 
   it('should return to 1 when blur goto input in control mode', () => {
     const App = () => {
-      const [current, setCurrent] = useState(1);
+      const [, setCurrent] = useState(1);
       return <Pagination simple current={1} total={25} onChange={setCurrent} />;
     };
     const { container } = render(<App />);

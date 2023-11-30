@@ -98,7 +98,7 @@ describe('Pagination with jumper', () => {
     expect(
       container.querySelector('.rc-pagination-item-active'),
     ).toHaveTextContent('3');
-    expect(onChange).toHaveBeenLastCalledWith(3, 10);
+    expect(onChangeFn).toHaveBeenLastCalledWith(3, 10);
   });
 });
 

@@ -480,10 +480,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     }
 
     if (allPages - current >= pageBufferSize * 2 && current !== allPages - 2) {
-      pagerList[pagerList.length - 1] = React.cloneElement(pagerList.at(-1), {
+      const lastOne = pagerList[pagerList.length - 1];
+      pagerList[pagerList.length - 1] = React.cloneElement(lastOne, {
         className: classNames(
           `${prefixCls}-item-before-jump-next`,
-          pagerList.at(-1).props.className,
+          lastOne.props.className,
         ),
       });
 

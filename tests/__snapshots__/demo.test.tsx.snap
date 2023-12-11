@@ -1105,49 +1105,9 @@ exports[`Example showTotal 1`] = `
 `;
 
 exports[`Example simple 1`] = `
-<ul
-  class="rc-pagination rc-pagination-simple"
->
-  <li
-    aria-disabled="true"
-    class="rc-pagination-prev rc-pagination-disabled"
-    title="上一页"
-  >
-    <button
-      aria-label="prev page"
-      class="rc-pagination-item-link"
-      disabled=""
-      type="button"
-    />
-  </li>
-  <li
-    class="rc-pagination-simple-pager"
-    title="1/5"
-  >
-    <input
-      size="3"
-      type="text"
-      value="1"
-    />
-    <span
-      class="rc-pagination-slash"
-    >
-      /
-    </span>
-    5
-  </li>
-  <li
-    aria-disabled="false"
-    class="rc-pagination-next"
-    title="下一页"
-  >
-    <button
-      aria-label="next page"
-      class="rc-pagination-item-link"
-      type="button"
-    />
-  </li>
-</ul>
+<button>
+  increase
+</button>
 `;
 
 exports[`Example sizer 1`] = `

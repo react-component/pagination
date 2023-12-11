@@ -223,4 +223,30 @@ describe('simple Pagination', () => {
       container.querySelector('.rc-pagination-simple-pager'),
     ).toHaveAttribute('title', '2/3');
   });
+
+  it('page should displayed correctly when controlled', () => {
+    const Demo = () => {
+      const [current, setCurrent] = React.useState(1);
+
+      return (
+        <div>
+          <button onClick={() => setCurrent((i) => ++i)}>increase</button>
+          <Pagination
+            simple
+            current={current}
+            total={25}
+            onChange={setCurrent}
+          />
+        </div>
+      );
+    };
+
+    const { container } = render(<Demo />);
+    const input = container.querySelector('.rc-pagination-simple input');
+    const button = container.querySelector('button');
+
+    expect(input).toHaveProperty('value', '1');
+    fireEvent.click(button);
+    expect(input).toHaveProperty('value', '2');
+  });
 });

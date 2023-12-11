@@ -3,7 +3,7 @@ import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import KeyCode from 'rc-util/lib/KeyCode';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import warning from 'rc-util/lib/warning';
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { PaginationProps } from './interface';
 import zhCN from './locale/zh_CN';
 import Options from './Options';
@@ -88,6 +88,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   });
 
   const [internalInputVal, setInternalInputVal] = React.useState(current);
+
+  useEffect(() => {
+    setInternalInputVal(current);
+  }, [current]);
 
   const hasOnChange = onChange !== noop;
   const hasCurrent = 'current' in props;

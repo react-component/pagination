@@ -1,2 +1,2 @@
 export { default } from './Pagination';
-export type * from './interface';
+export * from './interface';

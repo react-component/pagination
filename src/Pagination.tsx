@@ -357,9 +357,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           </button>
         );
       } else {
-        <span onClick={handleGoTO} onKeyUp={handleGoTO}>
-          {goButton}
-        </span>;
+        gotoButton = (
+          <span onClick={handleGoTO} onKeyUp={handleGoTO}>
+            {goButton}
+          </span>
+        );
       }
 
       gotoButton = (

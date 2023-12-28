@@ -348,26 +348,31 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   let simplePager: React.ReactNode = null;
 
   if (simple) {
-    if (typeof goButton === 'boolean') {
-      gotoButton = (
-        <button type="button" onClick={handleGoTO} onKeyUp={handleGoTO}>
-          {locale.jump_to_confirm}
-        </button>
-      );
-    } else {
-      <span onClick={handleGoTO} onKeyUp={handleGoTO}>
-        {goButton}
-      </span>;
-    }
+    // ====== Simple quick jump ======
+    if (goButton) {
+      if (typeof goButton === 'boolean') {
+        gotoButton = (
+          <button type="button" onClick={handleGoTO} onKeyUp={handleGoTO}>
+            {locale.jump_to_confirm}
+          </button>
+        );
+      } else {
+        gotoButton = (
+          <span onClick={handleGoTO} onKeyUp={handleGoTO}>
+            {goButton}
+          </span>
+        );
+      }
 
-    gotoButton = (
-      <li
-        title={showTitle ? `${locale.jump_to}${current}/${allPages}` : null}
-        className={`${prefixCls}-simple-pager`}
-      >
-        {gotoButton}
-      </li>
-    );
+      gotoButton = (
+        <li
+          title={showTitle ? `${locale.jump_to}${current}/${allPages}` : null}
+          className={`${prefixCls}-simple-pager`}
+        >
+          {gotoButton}
+        </li>
+      );
+    }
 
     simplePager = (
       <li

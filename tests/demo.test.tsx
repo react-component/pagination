@@ -15,7 +15,7 @@ describe('Example', () => {
       const Example = require(path.join(exampleDir, file)).default;
 
       const { container } = render(<Example />);
-      expect(container.firstChild).toMatchSnapshot();
+      expect(container).toMatchSnapshot();
     });
   });
 });

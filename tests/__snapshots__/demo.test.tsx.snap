@@ -3429,6 +3429,106 @@ exports[`Example simple 1`] = `
       </div>
     </li>
   </ul>
+  <hr />
+  <a
+    href="https://github.com/ant-design/ant-design/issues/46671"
+  >
+    Antd #46671
+  </a>
+  <ul
+    class="rc-pagination rc-pagination-simple"
+  >
+    <li
+      aria-disabled="true"
+      class="rc-pagination-prev rc-pagination-disabled"
+      title="上一页"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        disabled=""
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-simple-pager"
+      title="1/5"
+    >
+      <input
+        size="3"
+        type="text"
+        value="1"
+      />
+      <span
+        class="rc-pagination-slash"
+      >
+        /
+      </span>
+      5
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      title="下一页"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-options"
+    >
+      <div
+        aria-label="页码"
+        class="rc-select rc-pagination-options-size-changer rc-select-single"
+      >
+        <div
+          class="rc-select-selector"
+        >
+          <span
+            class="rc-select-selection-search"
+          >
+            <input
+              aria-autocomplete="list"
+              aria-controls="rc_select_TEST_OR_SSR_list"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-label="页码"
+              aria-owns="rc_select_TEST_OR_SSR_list"
+              autocomplete="off"
+              class="rc-select-selection-search-input"
+              id="rc_select_TEST_OR_SSR"
+              readonly=""
+              role="combobox"
+              style="opacity: 0;"
+              type="search"
+              unselectable="on"
+              value=""
+            />
+          </span>
+          <span
+            class="rc-select-selection-item"
+            title="10 条/页"
+          >
+            10 条/页
+          </span>
+        </div>
+      </div>
+      <div
+        class="rc-pagination-options-quick-jumper"
+      >
+        跳至
+        <input
+          aria-label="页"
+          type="text"
+          value=""
+        />
+        页
+      </div>
+    </li>
+  </ul>
 </div>
 `;
 

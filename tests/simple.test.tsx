@@ -251,21 +251,52 @@ describe('simple Pagination', () => {
   });
 
   // 修复 4.0.0 重构导致的问题: https://github.com/ant-design/ant-design/issues/46671
-  it('should render normally quick-jumper', () => {
-    const { container } = render(
+  describe('props: showQuickJumper', () => {
+    const Demo: typeof Pagination = (props) => (
       <Pagination
         simple
         defaultCurrent={1}
         total={50}
         showSizeChanger
-        showQuickJumper
-      />,
+        {...props}
+      />
     );
 
-    const quickJumper = container.querySelector(
-      '.rc-pagination-options-quick-jumper',
-    );
-    expect(quickJumper).toBeTruthy();
-    expect(quickJumper).toMatchSnapshot();
+    it('should render normally quick-jumper', () => {
+      const { container } = render(<Demo showQuickJumper />);
+
+      const quickJumper = container.querySelector(
+        '.rc-pagination-options-quick-jumper',
+      );
+      expect(quickJumper).toBeTruthy();
+      expect(quickJumper).toMatchSnapshot();
+    });
+
+    it('should render normally quick-jumper with goButton', () => {
+      const { container } = render(
+        <Demo showQuickJumper={{ goButton: true }} />,
+      );
+
+      const quickJumper = container.querySelector(
+        '.rc-pagination-options-quick-jumper',
+      );
+      expect(quickJumper).toBeTruthy();
+      expect(quickJumper).toMatchSnapshot();
+    });
+
+    // custom goButton
+    it('should render normally quick-jumper with custom goButton', () => {
+      const { container } = render(
+        <Demo
+          showQuickJumper={{ goButton: <button className="foo">go</button> }}
+        />,
+      );
+
+      const quickJumper = container.querySelector(
+        '.rc-pagination-options-quick-jumper',
+      );
+      expect(quickJumper.querySelector('.foo')).toBeTruthy();
+      expect(quickJumper).toMatchSnapshot();
+    });
   });
 });

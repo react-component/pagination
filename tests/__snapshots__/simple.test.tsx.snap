@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`simple Pagination should render normally quick-jumper 1`] = `
+exports[`simple Pagination props: showQuickJumper should render normally quick-jumper 1`] = `
 <div
   class="rc-pagination-options-quick-jumper"
 >
@@ -11,5 +11,59 @@ exports[`simple Pagination should render normally quick-jumper 1`] = `
     value=""
   />
   页
+</div>
+`;
+
+exports[`simple Pagination props: showQuickJumper should render normally quick-jumper with custom goButton 1`] = `
+<div
+  class="rc-pagination-options-quick-jumper"
+>
+  跳至
+  <input
+    aria-label="页"
+    type="text"
+    value=""
+  />
+  页
+  <span>
+    <li
+      class="rc-pagination-simple-pager"
+      title="跳至1/5"
+    >
+      <span>
+        <button
+          class="foo"
+        >
+          go
+        </button>
+      </span>
+    </li>
+  </span>
+</div>
+`;
+
+exports[`simple Pagination props: showQuickJumper should render normally quick-jumper with goButton 1`] = `
+<div
+  class="rc-pagination-options-quick-jumper"
+>
+  跳至
+  <input
+    aria-label="页"
+    type="text"
+    value=""
+  />
+  页
+  <span>
+    <li
+      class="rc-pagination-simple-pager"
+      title="跳至1/5"
+    >
+      <button
+        type="button"
+      >
+        确定
+      </button>
+    </li>
+  </span>
 </div>
 `;

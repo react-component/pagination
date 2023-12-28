@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`simple Pagination should render normally quick-jumper 1`] = `
+<div
+  class="rc-pagination-options-quick-jumper"
+>
+  跳至
+  <input
+    aria-label="页"
+    type="text"
+    value=""
+  />
+  页
+</div>
+`;

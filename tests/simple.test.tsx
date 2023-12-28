@@ -249,4 +249,23 @@ describe('simple Pagination', () => {
     fireEvent.click(button);
     expect(input).toHaveProperty('value', '2');
   });
+
+  // 修复 4.0.0 重构导致的问题: https://github.com/ant-design/ant-design/issues/46671
+  it('should render normally quick-jumper', () => {
+    const { container } = render(
+      <Pagination
+        simple
+        defaultCurrent={1}
+        total={50}
+        showSizeChanger
+        showQuickJumper
+      />,
+    );
+
+    const quickJumper = container.querySelector(
+      '.rc-pagination-options-quick-jumper',
+    );
+    expect(quickJumper).toBeTruthy();
+    expect(quickJumper).toMatchSnapshot();
+  });
 });

@@ -42,6 +42,7 @@ const Options: React.FC<OptionsProps> = (props) => {
     selectPrefixCls,
     disabled,
     buildOptionText,
+    showsSizeOtionsSearch
   } = props;
 
   const [goInputText, setGoInputText] = React.useState('');
@@ -128,7 +129,7 @@ const Options: React.FC<OptionsProps> = (props) => {
       <Select
         disabled={disabled}
         prefixCls={selectPrefixCls}
-        showSearch={false}
+        showSearch={showsSizeOtionsSearch}
         className={`${prefixCls}-size-changer`}
         optionLabelProp="children"
         popupMatchSelectWidth={false}

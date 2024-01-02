@@ -25,6 +25,7 @@ interface OptionsProps {
   selectComponentClass: React.ComponentType<Partial<InternalSelectProps>> & {
     Option?: React.ComponentType<Partial<OptionProps>>;
   };
+  showsSizeOtionsSearch?: boolean;
 }
 
 const defaultPageSizeOptions = ['10', '20', '50', '100'];

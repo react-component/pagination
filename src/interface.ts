@@ -64,7 +64,6 @@ export interface PaginationProps
 
   // WAI-ARIA
   role?: React.AriaRole | undefined;
-  showsSizeOtionsSearch?: boolean;
 }
 
 export interface PaginationState {

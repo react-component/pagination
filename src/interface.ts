@@ -38,6 +38,7 @@ export interface PaginationData {
   showTitle: boolean;
   simple: boolean;
   disabled: boolean;
+  showSizeOptionsSearch: boolean;
 
   locale: PaginationLocale;
 

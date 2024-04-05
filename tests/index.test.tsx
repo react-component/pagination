@@ -321,6 +321,27 @@ describe('Other props', () => {
     });
   });
 
+  describe('should support direction props', () => {
+    it('should support direction to start', () => {
+      const { container } = render(<Pagination direction="start" />);
+      expect(
+        container.querySelector('.rc-pagination-flex.rc-pagination-start'),
+      ).toBeTruthy();
+    });
+    it('should support direction to center', () => {
+      const { container } = render(<Pagination direction="center" />);
+      expect(
+        container.querySelector('.rc-pagination-flex.rc-pagination-center'),
+      ).toBeTruthy();
+    });
+    it('should support direction to end', () => {
+      const { container } = render(<Pagination direction="end" />);
+      expect(
+        container.querySelector('.rc-pagination-flex.rc-pagination-end'),
+      ).toBeTruthy();
+    });
+  });
+
   it('disabled', () => {
     const { container, getByRole } = render(
       <Pagination

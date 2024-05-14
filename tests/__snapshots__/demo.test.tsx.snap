@@ -3,7 +3,7 @@
 exports[`Example align 1`] = `
 <div>
   <ul
-    class="rc-pagination rc-pagination-flex rc-pagination-start"
+    class="rc-pagination rc-pagination-start"
   >
     <li
       aria-disabled="true"
@@ -42,7 +42,7 @@ exports[`Example align 1`] = `
     </li>
   </ul>
   <ul
-    class="rc-pagination rc-pagination-flex rc-pagination-center"
+    class="rc-pagination rc-pagination-center"
   >
     <li
       aria-disabled="true"
@@ -81,7 +81,7 @@ exports[`Example align 1`] = `
     </li>
   </ul>
   <ul
-    class="rc-pagination rc-pagination-flex rc-pagination-end"
+    class="rc-pagination rc-pagination-end"
   >
     <li
       aria-disabled="true"
@@ -1075,128 +1075,6 @@ exports[`Example controlled 1`] = `
       <button
         aria-label="next page"
         class="rc-pagination-item-link"
-        type="button"
-      />
-    </li>
-  </ul>
-</div>
-`;
-
-exports[`Example direction 1`] = `
-<div>
-  <ul
-    class="rc-pagination rc-pagination-flex rc-pagination-start"
-  >
-    <li
-      aria-disabled="true"
-      class="rc-pagination-prev rc-pagination-disabled"
-      title="上一页"
-    >
-      <button
-        aria-label="prev page"
-        class="rc-pagination-item-link"
-        disabled=""
-        type="button"
-      />
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        rel="nofollow"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-disabled="true"
-      class="rc-pagination-next rc-pagination-disabled"
-      title="下一页"
-    >
-      <button
-        aria-label="next page"
-        class="rc-pagination-item-link"
-        disabled=""
-        type="button"
-      />
-    </li>
-  </ul>
-  <ul
-    class="rc-pagination rc-pagination-flex rc-pagination-center"
-  >
-    <li
-      aria-disabled="true"
-      class="rc-pagination-prev rc-pagination-disabled"
-      title="上一页"
-    >
-      <button
-        aria-label="prev page"
-        class="rc-pagination-item-link"
-        disabled=""
-        type="button"
-      />
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        rel="nofollow"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-disabled="true"
-      class="rc-pagination-next rc-pagination-disabled"
-      title="下一页"
-    >
-      <button
-        aria-label="next page"
-        class="rc-pagination-item-link"
-        disabled=""
-        type="button"
-      />
-    </li>
-  </ul>
-  <ul
-    class="rc-pagination rc-pagination-flex rc-pagination-end"
-  >
-    <li
-      aria-disabled="true"
-      class="rc-pagination-prev rc-pagination-disabled"
-      title="上一页"
-    >
-      <button
-        aria-label="prev page"
-        class="rc-pagination-item-link"
-        disabled=""
-        type="button"
-      />
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        rel="nofollow"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-disabled="true"
-      class="rc-pagination-next rc-pagination-disabled"
-      title="下一页"
-    >
-      <button
-        aria-label="next page"
-        class="rc-pagination-item-link"
-        disabled=""
         type="button"
       />
     </li>

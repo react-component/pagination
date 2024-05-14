@@ -557,7 +557,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   const cls = classNames(prefixCls, className, {
-    [`${prefixCls}-flex`]: !!align,
     [`${prefixCls}-start`]: align === 'start',
     [`${prefixCls}-center`]: align === 'center',
     [`${prefixCls}-end`]: align === 'end',

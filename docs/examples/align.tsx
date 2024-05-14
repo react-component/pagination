@@ -4,9 +4,9 @@ import Pagination from 'rc-pagination';
 
 const App = () => (
   <>
-    <Pagination direction="start" />
-    <Pagination direction="center" />
-    <Pagination direction="end" />
+    <Pagination align="start" />
+    <Pagination align="center" />
+    <Pagination align="end" />
   </>
 );
 

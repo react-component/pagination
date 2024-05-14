@@ -321,21 +321,21 @@ describe('Other props', () => {
     });
   });
 
-  describe('should support direction props', () => {
-    it('should support direction to start', () => {
-      const { container } = render(<Pagination direction="start" />);
+  describe('should support align props', () => {
+    it('should support align to start', () => {
+      const { container } = render(<Pagination align="start" />);
       expect(
         container.querySelector('.rc-pagination-flex.rc-pagination-start'),
       ).toBeTruthy();
     });
-    it('should support direction to center', () => {
-      const { container } = render(<Pagination direction="center" />);
+    it('should support align to center', () => {
+      const { container } = render(<Pagination align="center" />);
       expect(
         container.querySelector('.rc-pagination-flex.rc-pagination-center'),
       ).toBeTruthy();
     });
-    it('should support direction to end', () => {
-      const { container } = render(<Pagination direction="end" />);
+    it('should support align to end', () => {
+      const { container } = render(<Pagination align="end" />);
       expect(
         container.querySelector('.rc-pagination-flex.rc-pagination-end'),
       ).toBeTruthy();

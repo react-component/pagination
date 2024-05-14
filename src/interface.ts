@@ -31,6 +31,7 @@ export interface PaginationData {
   defaultPageSize: number;
 
   hideOnSinglePage: boolean;
+  align: 'start' | 'center' | 'end';
   showSizeChanger: boolean;
   showLessItems: boolean;
   showPrevNextJumpers: boolean;

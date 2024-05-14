@@ -13,6 +13,7 @@
 @pagination-item-input-bg: #fff;
 
 .@{pagination-prefix-cls} {
+  display: flex;
   margin: 0;
   padding: 0;
   font-size: 14px;
@@ -22,6 +23,18 @@
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  &-start {
+    justify-content: start;
+  }
+
+  &-center {
+    justify-content: center;
+  }
+
+  &-end {
+    justify-content: end;
   }
 
   &::after {

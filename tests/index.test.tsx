@@ -321,6 +321,21 @@ describe('Other props', () => {
     });
   });
 
+  describe('should support align props', () => {
+    it('should support align to start', () => {
+      const { container } = render(<Pagination align="start" />);
+      expect(container.querySelector('.rc-pagination-start')).toBeTruthy();
+    });
+    it('should support align to center', () => {
+      const { container } = render(<Pagination align="center" />);
+      expect(container.querySelector('.rc-pagination-center')).toBeTruthy();
+    });
+    it('should support align to end', () => {
+      const { container } = render(<Pagination align="end" />);
+      expect(container.querySelector('.rc-pagination-end')).toBeTruthy();
+    });
+  });
+
   it('disabled', () => {
     const { container, getByRole } = render(
       <Pagination

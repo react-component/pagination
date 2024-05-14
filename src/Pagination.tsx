@@ -51,6 +51,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
     // config
     hideOnSinglePage,
+    align,
     showPrevNextJumpers = true,
     showQuickJumper,
     showLessItems,
@@ -556,6 +557,9 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   const cls = classNames(prefixCls, className, {
+    [`${prefixCls}-start`]: align === 'start',
+    [`${prefixCls}-center`]: align === 'center',
+    [`${prefixCls}-end`]: align === 'end',
     [`${prefixCls}-simple`]: simple,
     [`${prefixCls}-disabled`]: disabled,
   });

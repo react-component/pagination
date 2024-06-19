@@ -36,6 +36,7 @@ export interface PaginationData {
   showLessItems: boolean;
   showPrevNextJumpers: boolean;
   showQuickJumper: boolean | object;
+  showSimpleQuickJumper: boolean;
   showTitle: boolean;
   simple: boolean;
   disabled: boolean;

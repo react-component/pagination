@@ -298,5 +298,12 @@ describe('simple Pagination', () => {
       expect(quickJumper.querySelector('.foo')).toBeTruthy();
       expect(quickJumper).toMatchSnapshot();
     });
+
+    it('should support showSimpleQuickJumper prop', () => {
+      const { container } = render(
+        <Pagination simple showSimpleQuickJumper={false} />,
+      );
+      expect(container.firstChild).toMatchSnapshot();
+    });
   });
 });

@@ -54,6 +54,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     align,
     showPrevNextJumpers = true,
     showQuickJumper,
+    showSimpleQuickJumper = true,
     showLessItems,
     showTitle = true,
     onShowSizeChange = noop,
@@ -380,16 +381,20 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         title={showTitle ? `${current}/${allPages}` : null}
         className={`${prefixCls}-simple-pager`}
       >
-        <input
-          type="text"
-          value={internalInputVal}
-          disabled={disabled}
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
-          onChange={handleKeyUp}
-          onBlur={handleBlur}
-          size={3}
-        />
+        {showSimpleQuickJumper ? (
+          <input
+            type="text"
+            value={internalInputVal}
+            disabled={disabled}
+            onKeyDown={handleKeyDown}
+            onKeyUp={handleKeyUp}
+            onChange={handleKeyUp}
+            onBlur={handleBlur}
+            size={3}
+          />
+        ) : (
+          internalInputVal
+        )}
         <span className={`${prefixCls}-slash`}>/</span>
         {allPages}
       </li>

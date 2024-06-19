@@ -20,13 +20,6 @@ export default () => {
       <br />
       <Pagination
         simple
-        showSimpleQuickJumper={false}
-        defaultCurrent={1}
-        total={50}
-      />
-      <br />
-      <Pagination
-        simple
         defaultCurrent={1}
         total={50}
         showTotal={(total) => `Total ${total} items`}

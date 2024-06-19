@@ -11,6 +11,7 @@ describe('simple Pagination', () => {
     wrapper = render(
       <Pagination
         simple
+        showQuickJumper
         defaultCurrent={1}
         total={25}
         showTotal={(total, range) =>
@@ -27,7 +28,7 @@ describe('simple Pagination', () => {
   it('input change value will emit onChange when input blur', () => {
     const onChange = jest.fn();
     const { container } = render(
-      <Pagination simple total={25} onChange={onChange} />,
+      <Pagination simple showQuickJumper total={25} onChange={onChange} />,
     );
     const input = container.querySelector('.rc-pagination-simple input');
     fireEvent.change(input, { target: { value: '2' } });
@@ -38,7 +39,7 @@ describe('simple Pagination', () => {
 
   it('should return to 1 when blur goto input in uncontrol mode', () => {
     const { container } = render(
-      <Pagination simple defaultCurrent={1} total={25} />,
+      <Pagination simple showQuickJumper defaultCurrent={1} total={25} />,
     );
     const input = container.querySelector('.rc-pagination-simple input');
     fireEvent.focus(input);
@@ -50,7 +51,15 @@ describe('simple Pagination', () => {
   it('should return to 1 when blur goto input in control mode', () => {
     const App = () => {
       const [, setCurrent] = useState(1);
-      return <Pagination simple current={1} total={25} onChange={setCurrent} />;
+      return (
+        <Pagination
+          simple
+          showQuickJumper
+          current={1}
+          total={25}
+          onChange={setCurrent}
+        />
+      );
     };
     const { container } = render(<App />);
     const input = container.querySelector('.rc-pagination-simple input');
@@ -84,7 +93,7 @@ describe('simple Pagination', () => {
 
   it('simple Pagination when current is greater than page count', () => {
     const { container } = render(
-      <Pagination simple defaultCurrent={100} total={25} />,
+      <Pagination simple showQuickJumper defaultCurrent={100} total={25} />,
     );
 
     expect(
@@ -105,6 +114,7 @@ describe('simple Pagination', () => {
         total={500}
         pageSize={15}
         showSizeChanger
+        showQuickJumper
         selectComponentClass={Select}
       />,
     );
@@ -156,7 +166,7 @@ describe('simple Pagination', () => {
 
   it('should work form keyboard enter', () => {
     const { container } = render(
-      <Pagination total={100} defaultCurrent={5} simple />,
+      <Pagination total={100} defaultCurrent={5} simple showQuickJumper />,
     );
     const input = container.querySelector('.rc-pagination-simple input');
 
@@ -172,7 +182,7 @@ describe('simple Pagination', () => {
 
   it(`prevent "up arrow" key reseting cursor position within textbox`, () => {
     const { container } = render(
-      <Pagination total={100} defaultCurrent={5} simple />,
+      <Pagination total={100} defaultCurrent={5} simple showQuickJumper />,
     );
     const input = container.querySelector('.rc-pagination-simple input');
     expect(input).toBeTruthy();
@@ -194,7 +204,7 @@ describe('simple Pagination', () => {
 
   it('should work when input is not number', () => {
     const { container } = render(
-      <Pagination total={100} defaultCurrent={5} simple />,
+      <Pagination total={100} defaultCurrent={5} simple showQuickJumper />,
     );
     const input = container.querySelector('.rc-pagination-simple input');
 
@@ -236,6 +246,7 @@ describe('simple Pagination', () => {
             current={current}
             total={25}
             onChange={setCurrent}
+            showQuickJumper
           />
         </div>
       );
@@ -299,9 +310,9 @@ describe('simple Pagination', () => {
       expect(quickJumper).toMatchSnapshot();
     });
 
-    it('should support showSimpleQuickJumper prop', () => {
+    it('pagination snapshot when showQuickJumper prop is false', () => {
       const { container } = render(
-        <Pagination simple showSimpleQuickJumper={false} />,
+        <Pagination simple showQuickJumper={false} />,
       );
       expect(container.firstChild).toMatchSnapshot();
     });

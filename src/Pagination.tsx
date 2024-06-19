@@ -54,7 +54,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     align,
     showPrevNextJumpers = true,
     showQuickJumper,
-    showSimpleQuickJumper = true,
     showLessItems,
     showTitle = true,
     onShowSizeChange = noop,
@@ -381,7 +380,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         title={showTitle ? `${current}/${allPages}` : null}
         className={`${prefixCls}-simple-pager`}
       >
-        {showSimpleQuickJumper ? (
+        {showQuickJumper ? (
           <input
             type="text"
             value={internalInputVal}

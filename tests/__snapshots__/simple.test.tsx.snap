@@ -1,5 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`simple Pagination props: showQuickJumper pagination snapshot when showQuickJumper prop is false 1`] = `
+<ul
+  class="rc-pagination rc-pagination-simple"
+>
+  <li
+    aria-disabled="true"
+    class="rc-pagination-prev rc-pagination-disabled"
+    title="上一页"
+  >
+    <button
+      aria-label="prev page"
+      class="rc-pagination-item-link"
+      disabled=""
+      type="button"
+    />
+  </li>
+  <li
+    class="rc-pagination-simple-pager"
+    title="1/0"
+  >
+    1
+    <span
+      class="rc-pagination-slash"
+    >
+      /
+    </span>
+    0
+  </li>
+  <li
+    aria-disabled="true"
+    class="rc-pagination-next rc-pagination-disabled"
+    title="下一页"
+  >
+    <button
+      aria-label="next page"
+      class="rc-pagination-item-link"
+      disabled=""
+      type="button"
+    />
+  </li>
+</ul>
+`;
+
 exports[`simple Pagination props: showQuickJumper should render normally quick-jumper 1`] = `
 <div
   class="rc-pagination-options-quick-jumper"
@@ -66,47 +109,4 @@ exports[`simple Pagination props: showQuickJumper should render normally quick-j
     </li>
   </span>
 </div>
-`;
-
-exports[`simple Pagination props: showQuickJumper should support showSimpleQuickJumper prop 1`] = `
-<ul
-  class="rc-pagination rc-pagination-simple"
->
-  <li
-    aria-disabled="true"
-    class="rc-pagination-prev rc-pagination-disabled"
-    title="上一页"
-  >
-    <button
-      aria-label="prev page"
-      class="rc-pagination-item-link"
-      disabled=""
-      type="button"
-    />
-  </li>
-  <li
-    class="rc-pagination-simple-pager"
-    title="1/0"
-  >
-    1
-    <span
-      class="rc-pagination-slash"
-    >
-      /
-    </span>
-    0
-  </li>
-  <li
-    aria-disabled="true"
-    class="rc-pagination-next rc-pagination-disabled"
-    title="下一页"
-  >
-    <button
-      aria-label="next page"
-      class="rc-pagination-item-link"
-      disabled=""
-      type="button"
-    />
-  </li>
-</ul>
 `;

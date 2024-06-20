@@ -345,7 +345,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   // ================== Simple ==================
   // FIXME: ts type
-  const isReadOnly = (simple as { readOnly?: boolean })?.readOnly;
+  const isReadOnly = typeof simple === 'object' ? simple.readOnly : !simple;
   let gotoButton: any = goButton;
   let simplePager: React.ReactNode = null;
 

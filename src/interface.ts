@@ -37,7 +37,7 @@ export interface PaginationData {
   showPrevNextJumpers: boolean;
   showQuickJumper: boolean | object;
   showTitle: boolean;
-  simple: boolean;
+  simple: boolean | object;
   disabled: boolean;
 
   locale: PaginationLocale;

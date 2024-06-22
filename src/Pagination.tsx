@@ -345,6 +345,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   // ================== Simple ==================
   // FIXME: ts type
+  const isReadOnly = typeof simple === 'object' ? simple.readOnly : !simple;
   let gotoButton: any = goButton;
   let simplePager: React.ReactNode = null;
 
@@ -380,16 +381,20 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         title={showTitle ? `${current}/${allPages}` : null}
         className={`${prefixCls}-simple-pager`}
       >
-        <input
-          type="text"
-          value={internalInputVal}
-          disabled={disabled}
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
-          onChange={handleKeyUp}
-          onBlur={handleBlur}
-          size={3}
-        />
+        {isReadOnly ? (
+          internalInputVal
+        ) : (
+          <input
+            type="text"
+            value={internalInputVal}
+            disabled={disabled}
+            onKeyDown={handleKeyDown}
+            onKeyUp={handleKeyUp}
+            onChange={handleKeyUp}
+            onBlur={handleBlur}
+            size={3}
+          />
+        )}
         <span className={`${prefixCls}-slash`}>/</span>
         {allPages}
       </li>

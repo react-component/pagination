@@ -16,6 +16,13 @@ export default () => {
         onChange={setPageIndex}
       />
       <br />
+      <Pagination
+        simple={{ readOnly: true }}
+        current={pageIndex}
+        total={50}
+        onChange={setPageIndex}
+      />
+      <br />
       <Pagination simple defaultCurrent={1} total={50} />
       <br />
       <Pagination

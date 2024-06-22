@@ -299,4 +299,9 @@ describe('simple Pagination', () => {
       expect(quickJumper).toMatchSnapshot();
     });
   });
+
+  it('should support simple is readOnly value', () => {
+    const { container } = render(<Pagination simple={{ readOnly: true }} />);
+    expect(container).toMatchSnapshot();
+  });
 });

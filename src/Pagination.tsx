@@ -65,6 +65,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     showTotal,
     showSizeChanger: showSizeChangerProp,
     pageSizeOptions,
+    showSizeOptionsSearch = false,
 
     // render
     itemRender = defaultItemRender,
@@ -591,6 +592,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         pageSizeOptions={pageSizeOptions}
         quickGo={shouldDisplayQuickJumper ? handleChange : null}
         goButton={gotoButton}
+        showSizeOptionsSearch={showSizeOptionsSearch}
       />
     </ul>
   );

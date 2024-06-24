@@ -50,6 +50,7 @@ const App = () => (
       total={8}
     />
     <br />
+    <h3>Page options showSizeOptionsSearch is enabled</h3>
     <Pagination
       selectComponentClass={Select}
       showQuickJumper
@@ -58,6 +59,7 @@ const App = () => (
       onChange={onChange}
       pageSize={10}
       total={8}
+      showSizeOptionsSearch={true}
     />
   </>
 );

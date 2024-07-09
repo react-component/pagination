@@ -2,7 +2,7 @@ import type { SelectProps } from 'rc-select';
 import type { OptionProps } from 'rc-select/es/Option';
 import KEYCODE from 'rc-util/lib/KeyCode';
 import React from 'react';
-import type { PaginationLocale } from './interface';
+import type { PaginationLocale, PaginationData } from './interface';
 
 interface InternalSelectProps extends SelectProps {
   /**
@@ -11,7 +11,7 @@ interface InternalSelectProps extends SelectProps {
   popupMatchSelectWidth?: boolean;
 }
 
-interface OptionsProps {
+interface OptionsProps extends Pick<PaginationData, 'inputComponentClass'> {
   disabled?: boolean;
   locale: PaginationLocale;
   rootPrefixCls: string;
@@ -39,8 +39,9 @@ const Options: React.FC<OptionsProps> = (props) => {
     quickGo,
     rootPrefixCls,
     selectComponentClass: Select,
+    inputComponentClass: Input = 'input',
     selectPrefixCls,
-    disabled,
+    disabled = false,
     buildOptionText,
   } = props;
 
@@ -166,7 +167,7 @@ const Options: React.FC<OptionsProps> = (props) => {
     goInput = (
       <div className={`${prefixCls}-quick-jumper`}>
         {locale.jump_to}
-        <input
+        <Input
           disabled={disabled}
           type="text"
           value={goInputText}

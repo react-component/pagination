@@ -2874,6 +2874,134 @@ exports[`Example more 1`] = `
 </div>
 `;
 
+exports[`Example pageSizeChanger 1`] = `
+<div>
+  <ul
+    class="rc-pagination"
+  >
+    <li
+      aria-disabled="true"
+      class="rc-pagination-prev rc-pagination-disabled"
+      title="上一页"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        disabled=""
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
+      tabindex="0"
+      title="1"
+    >
+      <a
+        rel="nofollow"
+      >
+        1
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+      tabindex="0"
+      title="2"
+    >
+      <a
+        rel="nofollow"
+      >
+        2
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3"
+      tabindex="0"
+      title="3"
+    >
+      <a
+        rel="nofollow"
+      >
+        3
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+      tabindex="0"
+      title="4"
+    >
+      <a
+        rel="nofollow"
+      >
+        4
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5"
+      tabindex="0"
+      title="5"
+    >
+      <a
+        rel="nofollow"
+      >
+        5
+      </a>
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      tabindex="0"
+      title="下一页"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-options"
+    >
+      <div
+        aria-label="页码"
+        class="rc-select rc-pagination-options-size-changer rc-select-single"
+      >
+        <div
+          class="rc-select-selector"
+        >
+          <span
+            class="rc-select-selection-search"
+          >
+            <input
+              aria-autocomplete="list"
+              aria-controls="rc_select_TEST_OR_SSR_list"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-label="页码"
+              aria-owns="rc_select_TEST_OR_SSR_list"
+              autocomplete="off"
+              class="rc-select-selection-search-input"
+              id="rc_select_TEST_OR_SSR"
+              readonly=""
+              role="combobox"
+              style="opacity: 0;"
+              type="search"
+              unselectable="on"
+              value=""
+            />
+          </span>
+          <span
+            class="rc-select-selection-item"
+            title="10 条/页"
+          >
+            10 条/页
+          </span>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+`;
+
 exports[`Example showTitle 1`] = `
 <div>
   <div>

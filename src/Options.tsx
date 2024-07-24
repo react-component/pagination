@@ -25,6 +25,8 @@ interface OptionsProps {
   selectComponentClass: React.ComponentType<Partial<InternalSelectProps>> & {
     Option?: React.ComponentType<Partial<OptionProps>>;
   };
+  showSearch: boolean;
+  onChange: (size: number) => void;
 }
 
 const defaultPageSizeOptions = ['10', '20', '50', '100'];
@@ -42,6 +44,8 @@ const Options: React.FC<OptionsProps> = (props) => {
     selectPrefixCls,
     disabled,
     buildOptionText,
+    showSearch = false,
+    onChange,
   } = props;
 
   const [goInputText, setGoInputText] = React.useState('');
@@ -59,6 +63,7 @@ const Options: React.FC<OptionsProps> = (props) => {
 
   const changeSizeHandle = (value: number) => {
     changeSize?.(Number(value));
+    onChange?.(Number(value));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,7 +133,7 @@ const Options: React.FC<OptionsProps> = (props) => {
       <Select
         disabled={disabled}
         prefixCls={selectPrefixCls}
-        showSearch={false}
+        showSearch={showSearch}
         className={`${prefixCls}-size-changer`}
         optionLabelProp="children"
         popupMatchSelectWidth={false}

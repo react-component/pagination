@@ -17,11 +17,18 @@ export interface PaginationLocale {
   page_size?: string;
 }
 
+export interface pageSizeChangerLocale {
+  options?: string[] | number[];
+  showSearch?: boolean;
+  onChange?: (size: number) => void;
+}
+
 export interface PaginationData {
   className: string;
   selectPrefixCls: string;
   prefixCls: string;
   pageSizeOptions: string[] | number[];
+  pageSizeChanger: pageSizeChangerLocale;
 
   current: number;
   defaultCurrent: number;
@@ -37,7 +44,7 @@ export interface PaginationData {
   showPrevNextJumpers: boolean;
   showQuickJumper: boolean | object;
   showTitle: boolean;
-  simple: boolean | { readOnly?: boolean; };
+  simple: boolean | { readOnly?: boolean };
   disabled: boolean;
 
   locale: PaginationLocale;

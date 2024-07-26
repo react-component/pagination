@@ -356,6 +356,56 @@ describe('Other props', () => {
       container.querySelector('.rc-pagination-options-quick-jumper-button'),
     ).toBeDisabled();
   });
+
+  it('should support inputComponentClass', () => {
+    const Input = jest.fn((props) => (
+      <input {...props} data-testid="custom-input" />
+    ));
+    const { getByTestId } = render(
+      <Pagination
+        showQuickJumper
+        inputComponentClass={Input}
+        defaultPageSize={20}
+        defaultCurrent={5}
+        total={450}
+      />,
+    );
+    const inputDom = getByTestId('custom-input');
+    expect(inputDom).toBeTruthy();
+
+    // expect params
+    expect(Input).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        'aria-label': expect.any(String),
+        disabled: expect.anything(),
+        onBlur: expect.any(Function),
+        onChange: expect.any(Function),
+        onKeyUp: expect.any(Function),
+        type: 'text',
+        value: expect.any(String),
+      }),
+      expect.anything(),
+    );
+
+    // input change value
+    fireEvent.change(inputDom, { target: { value: '2' } });
+    expect(inputDom).toHaveValue('2');
+    expect(Input).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        value: '2',
+      }),
+      expect.anything(),
+    );
+
+    // input blur
+    fireEvent.blur(inputDom);
+    expect(Input).toHaveBeenLastCalledWith(
+      expect.objectContaining({
+        value: '',
+      }),
+      expect.anything(),
+    );
+  });
 });
 
 // https://github.com/ant-design/ant-design/issues/10524

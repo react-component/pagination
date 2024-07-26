@@ -40,6 +40,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     selectPrefixCls = 'rc-select',
     className,
     selectComponentClass,
+    inputComponentClass,
 
     // control
     current: currentProp,
@@ -585,6 +586,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         rootPrefixCls={prefixCls}
         disabled={disabled}
         selectComponentClass={selectComponentClass}
+        inputComponentClass={inputComponentClass}
         selectPrefixCls={selectPrefixCls}
         changeSize={showSizeChanger ? changePageSize : null}
         pageSize={pageSize}

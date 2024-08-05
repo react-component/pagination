@@ -17,12 +17,6 @@ export interface PaginationLocale {
   page_size?: string;
 }
 
-export interface showSizeChangerLocale {
-  options?: string[] | number[];
-  showSearch?: boolean;
-  onChange?: (size: number) => void;
-}
-
 type ShowSizeChanger = boolean | {
   options?: string[] | number[];
   showSearch?: boolean;

@@ -588,9 +588,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         selectPrefixCls={selectPrefixCls}
         changeSize={showSizeChanger ? changePageSize : null}
         pageSize={pageSize}
-        pageSizeOptions={pageSizeOptions}
+        pageSizeOptions={(typeof showSizeChanger === 'object' && showSizeChanger?.options) || pageSizeOptions}
         quickGo={shouldDisplayQuickJumper ? handleChange : null}
         goButton={gotoButton}
+        onChange={typeof showSizeChanger === 'object' && showSizeChanger?.onChange}
+        showSearch={Boolean(typeof showSizeChanger === 'object' && showSizeChanger?.showSearch)}
       />
     </ul>
   );

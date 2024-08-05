@@ -14,10 +14,21 @@ export default () => {
         defaultCurrent={1}
         total={50}
         selectComponentClass={Select}
+        showSizeChanger={false}
+      />
+      <Pagination
+        defaultCurrent={1}
+        total={50}
+        selectComponentClass={Select}
         showSizeChanger
-        pageSizeChanger={{
+      />
+      <Pagination
+        defaultCurrent={1}
+        total={50}
+        selectComponentClass={Select}
+        showSizeChanger={{
           options: [10, 25, 50, 75, 100],
-          showSearch: false,
+          showSearch: true,
           onChange: pageSizeOnChange,
         }}
       />

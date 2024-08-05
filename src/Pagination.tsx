@@ -16,10 +16,6 @@ const defaultItemRender: PaginationProps['itemRender'] = (
   element,
 ) => element;
 
-const defaultPageSizeChanger: PaginationProps['pageSizeChanger'] = {
-  showSearch: false,
-};
-
 function noop() {}
 
 function isInteger(v: number) {
@@ -69,7 +65,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     showTotal,
     showSizeChanger: showSizeChangerProp,
     pageSizeOptions,
-    pageSizeChanger = defaultPageSizeChanger,
 
     // render
     itemRender = defaultItemRender,
@@ -593,11 +588,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         selectPrefixCls={selectPrefixCls}
         changeSize={showSizeChanger ? changePageSize : null}
         pageSize={pageSize}
-        pageSizeOptions={pageSizeOptions || pageSizeChanger?.options}
+        pageSizeOptions={(typeof showSizeChanger === 'object' && showSizeChanger?.options) || pageSizeOptions}
         quickGo={shouldDisplayQuickJumper ? handleChange : null}
         goButton={gotoButton}
-        onChange={pageSizeChanger?.onChange}
-        showSearch={pageSizeChanger?.showSearch}
+        onChange={typeof showSizeChanger === 'object' && showSizeChanger?.onChange}
+        showSearch={Boolean(typeof showSizeChanger === 'object' && showSizeChanger?.showSearch)}
       />
     </ul>
   );

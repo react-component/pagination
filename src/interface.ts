@@ -17,7 +17,7 @@ export interface PaginationLocale {
   page_size?: string;
 }
 
-export interface pageSizeChangerLocale {
+export interface showSizeChangerLocale {
   options?: string[] | number[];
   showSearch?: boolean;
   onChange?: (size: number) => void;
@@ -28,7 +28,6 @@ export interface PaginationData {
   selectPrefixCls: string;
   prefixCls: string;
   pageSizeOptions: string[] | number[];
-  pageSizeChanger: pageSizeChangerLocale;
 
   current: number;
   defaultCurrent: number;
@@ -39,7 +38,7 @@ export interface PaginationData {
 
   hideOnSinglePage: boolean;
   align: 'start' | 'center' | 'end';
-  showSizeChanger: boolean;
+  showSizeChanger: boolean | showSizeChangerLocale;
   showLessItems: boolean;
   showPrevNextJumpers: boolean;
   showQuickJumper: boolean | object;

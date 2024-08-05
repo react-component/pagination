@@ -63,7 +63,9 @@ const Options: React.FC<OptionsProps> = (props) => {
 
   const changeSizeHandle = (value: number) => {
     changeSize?.(Number(value));
-    onChange?.(Number(value));
+    if (onChange && typeof onChange === 'function') {
+      onChange?.(Number(value));
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

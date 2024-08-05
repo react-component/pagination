@@ -23,6 +23,12 @@ export interface showSizeChangerLocale {
   onChange?: (size: number) => void;
 }
 
+type ShowSizeChanger = boolean | {
+  options?: string[] | number[];
+  showSearch?: boolean;
+  onChange?: (size: number) => void;
+}
+
 export interface PaginationData {
   className: string;
   selectPrefixCls: string;
@@ -38,7 +44,7 @@ export interface PaginationData {
 
   hideOnSinglePage: boolean;
   align: 'start' | 'center' | 'end';
-  showSizeChanger: boolean | showSizeChangerLocale;
+  showSizeChanger: ShowSizeChanger;
   showLessItems: boolean;
   showPrevNextJumpers: boolean;
   showQuickJumper: boolean | object;

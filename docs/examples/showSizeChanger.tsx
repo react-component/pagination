@@ -32,7 +32,8 @@ export default () => {
             { value: '25', label: '25 条每页' },
             { value: '100', label: '100 条每页' },
           ],
-          showSearch: false,
+          className: 'my-select',
+          showSearch: true,
           onChange: onPageSizeOnChange,
         }}
       />

@@ -25,8 +25,7 @@ interface OptionsProps {
   selectComponentClass: React.ComponentType<Partial<InternalSelectProps>> & {
     Option?: React.ComponentType<Partial<OptionProps>>;
   };
-  showSearch: boolean;
-  onChange: (size: number) => void;
+  showSizeChanger: SelectProps,
 }
 
 const defaultPageSizeOptions = ['10', '20', '50', '100'];
@@ -44,8 +43,7 @@ const Options: React.FC<OptionsProps> = (props) => {
     selectPrefixCls,
     disabled,
     buildOptionText,
-    showSearch = false,
-    onChange,
+    showSizeChanger,
   } = props;
 
   const [goInputText, setGoInputText] = React.useState('');
@@ -63,9 +61,6 @@ const Options: React.FC<OptionsProps> = (props) => {
 
   const changeSizeHandle = (value: number) => {
     changeSize?.(Number(value));
-    if (onChange && typeof onChange === 'function') {
-      onChange?.(Number(value));
-    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,7 +120,7 @@ const Options: React.FC<OptionsProps> = (props) => {
   let gotoButton: React.ReactNode = null;
 
   if (changeSize && Select) {
-    const options = getPageSizeOptions().map<React.ReactNode>((opt, i) => (
+    const options = getPageSizeOptions().map((opt, i) => (
       <Select.Option key={i} value={opt.toString()}>
         {mergeBuildOptionText(opt)}
       </Select.Option>
@@ -135,7 +130,7 @@ const Options: React.FC<OptionsProps> = (props) => {
       <Select
         disabled={disabled}
         prefixCls={selectPrefixCls}
-        showSearch={showSearch}
+        showSearch={false}
         className={`${prefixCls}-size-changer`}
         optionLabelProp="children"
         popupMatchSelectWidth={false}
@@ -144,6 +139,7 @@ const Options: React.FC<OptionsProps> = (props) => {
         getPopupContainer={(triggerNode) => triggerNode.parentNode}
         aria-label={locale.page_size}
         defaultOpen={false}
+        {...showSizeChanger}
       >
         {options}
       </Select>

@@ -189,6 +189,9 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   function changePageSize(size: number) {
+    if (!showSizeChanger) {
+      return;
+    }
     const newCurrent = calculatePage(size, pageSize, total);
     const nextCurrent =
       current > newCurrent && newCurrent !== 0 ? newCurrent : current;
@@ -586,13 +589,12 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         disabled={disabled}
         selectComponentClass={selectComponentClass}
         selectPrefixCls={selectPrefixCls}
-        changeSize={showSizeChanger ? changePageSize : null}
+        changeSize={changePageSize}
         pageSize={pageSize}
-        pageSizeOptions={(typeof showSizeChanger === 'object' && showSizeChanger?.options) || pageSizeOptions}
+        pageSizeOptions={pageSizeOptions}
         quickGo={shouldDisplayQuickJumper ? handleChange : null}
         goButton={gotoButton}
-        onChange={typeof showSizeChanger === 'object' && showSizeChanger?.onChange}
-        showSearch={Boolean(typeof showSizeChanger === 'object' && showSizeChanger?.showSearch)}
+        showSizeChanger={showSizeChanger}
       />
     </ul>
   );

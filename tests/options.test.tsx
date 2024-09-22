@@ -12,6 +12,7 @@ const WrapperOptions: React.FC<any> = (props) => (
     pageSize={10}
     changeSize={jest.fn()}
     quickGo={jest.fn()}
+    showSizeChanger
     {...props}
   />
 );
@@ -22,19 +23,17 @@ describe('Options', () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  describe('props:buildOptionText', () => {
-    it('should render correctly', () => {
-      const mockBuildOptionText = jest
-        .fn()
-        .mockImplementation((value) => (
-          <div className="custom-options">buildOptionText-{value}</div>
-        ));
-      const { container } = render(
-        <WrapperOptions buildOptionText={mockBuildOptionText} />,
-      );
-      const options = container.querySelector('.custom-options');
-      expect(options).toBeTruthy();
-      expect(options).toHaveTextContent('buildOptionText-10');
-    });
+  it('props:buildOptionText should render correctly', () => {
+    const mockBuildOptionText = jest
+      .fn()
+      .mockImplementation((value) => (
+        <div className="custom-options">buildOptionText-{value}</div>
+      ));
+    const { container } = render(
+      <WrapperOptions buildOptionText={mockBuildOptionText} />,
+    );
+    const options = container.querySelector('.custom-options');
+    expect(options).toBeTruthy();
+    expect(options).toHaveTextContent('buildOptionText-10');
   });
 });

@@ -121,13 +121,14 @@ const Options: React.FC<OptionsProps> = (props) => {
   let gotoButton: React.ReactNode = null;
 
   if (showSizeChanger && Select) {
-    // use showSizeChanger.options if existed, otherwise use pageSizeOptions
-    const showSizeChangerOptions =
-      typeof showSizeChanger === 'object' ? showSizeChanger.options : undefined;
-    const showSizeChangerClassName =
+    const {
+      options: showSizeChangerOptions,
+      className: showSizeChangerClassName,
+    } =
       typeof showSizeChanger === 'object'
-        ? showSizeChanger.className
-        : undefined;
+        ? showSizeChanger
+        : ({} as SelectProps);
+    // use showSizeChanger.options if existed, otherwise use pageSizeOptions
     const options = showSizeChangerOptions
       ? undefined
       : getPageSizeOptions().map((opt, i) => (

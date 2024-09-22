@@ -3169,7 +3169,7 @@ exports[`Example showSizeChanger 1`] = `
     >
       <div
         aria-label="页码"
-        class="rc-select rc-pagination-options-size-changer rc-select-single rc-select-show-search"
+        class="rc-select rc-pagination-options-size-changer my-select rc-select-single rc-select-show-search"
       >
         <div
           class="rc-select-selector"
@@ -3194,9 +3194,9 @@ exports[`Example showSizeChanger 1`] = `
           </span>
           <span
             class="rc-select-selection-item"
-            title="10 条/页"
+            title="10 条每页"
           >
-            10 条/页
+            10 条每页
           </span>
         </div>
       </div>

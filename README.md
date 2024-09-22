@@ -63,7 +63,7 @@ ReactDOM.render(<Pagination />, container);
 | defaultPageSize | default items per page | Number | 10 |
 | pageSize | items per page | Number | 10 |
 | onChange | page change callback | Function(current, pageSize) | - |
-| showSizeChanger | show pageSize changer | boolean \| [SelectProps](https://github.com/react-component/select/blob/561f8b7d69fd5dd2cd7d917c88976cca4e539a9d/src/Select.tsx#L112) | `false` when total less then `totalBoundaryShowSizeChanger`, `true` when otherwise |
+| showSizeChanger | show pageSize changer | boolean \| [SelectProps](https://github.com/react-component/select/blob/561f8b7d69fd5dd2cd7d917c88976cca4e539a9d/src/Select.tsx#L112) | `false` when total less than `totalBoundaryShowSizeChanger`, `true` when otherwise |
 | totalBoundaryShowSizeChanger | when total larger than it, `showSizeChanger` will be true | number | 50 |
 | pageSizeOptions | specify the sizeChanger selections | Array<String> | ['10', '20', '50', '100'] |
 | onShowSizeChange | pageSize change callback | Function(current, size) | - |

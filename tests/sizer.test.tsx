@@ -84,7 +84,7 @@ describe('Pagination with sizer', () => {
     ).toHaveTextContent('20 条/页');
   });
 
-  describe('Pagination with showSizeChanger', () => {
+  describe('showSizeChanger is object', () => {
     const options = [
       { value: '10', label: '10 条每页' },
       { value: '25', label: '25 条每页' },

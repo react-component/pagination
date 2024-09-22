@@ -189,9 +189,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   function changePageSize(size: number) {
-    if (!showSizeChanger) {
-      return;
-    }
     const newCurrent = calculatePage(size, pageSize, total);
     const nextCurrent =
       current > newCurrent && newCurrent !== 0 ? newCurrent : current;

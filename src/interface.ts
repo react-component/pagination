@@ -37,7 +37,7 @@ export interface PaginationData {
   showPrevNextJumpers: boolean;
   showQuickJumper: boolean | object;
   showTitle: boolean;
-  simple: boolean | { readOnly?: boolean; };
+  simple: boolean | { readOnly?: boolean };
   disabled: boolean;
 
   locale: PaginationLocale;
@@ -45,6 +45,10 @@ export interface PaginationData {
   style: React.CSSProperties;
 
   selectComponentClass: React.ComponentType;
+  /**
+   * @since 4.3.0
+   */
+  inputComponentClass?: React.ComponentType<React.InputHTMLAttributes<any>>;
   prevIcon: React.ComponentType | React.ReactNode;
   nextIcon: React.ComponentType | React.ReactNode;
   jumpPrevIcon: React.ComponentType | React.ReactNode;

@@ -63,7 +63,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     disabled,
     simple,
     showTotal,
-    showSizeChanger: showSizeChangerProp,
+    showSizeChanger = total > totalBoundaryShowSizeChanger,
     pageSizeOptions,
 
     // render
@@ -225,8 +225,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   const hasPrev = current > 1;
   const hasNext = current < calculatePage(undefined, pageSize, total);
-  const showSizeChanger =
-    showSizeChangerProp ?? total > totalBoundaryShowSizeChanger;
 
   function prevHandle() {
     if (hasPrev) handleChange(current - 1);
@@ -586,11 +584,12 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         disabled={disabled}
         selectComponentClass={selectComponentClass}
         selectPrefixCls={selectPrefixCls}
-        changeSize={showSizeChanger ? changePageSize : null}
+        changeSize={changePageSize}
         pageSize={pageSize}
         pageSizeOptions={pageSizeOptions}
         quickGo={shouldDisplayQuickJumper ? handleChange : null}
         goButton={gotoButton}
+        showSizeChanger={showSizeChanger}
       />
     </ul>
   );

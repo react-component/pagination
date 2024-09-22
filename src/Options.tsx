@@ -1,8 +1,9 @@
 import type { SelectProps } from 'rc-select';
 import type { OptionProps } from 'rc-select/es/Option';
 import KEYCODE from 'rc-util/lib/KeyCode';
+import classNames from 'classnames';
 import React from 'react';
-import type { PaginationLocale } from './interface';
+import type { PaginationLocale, PaginationProps } from './interface';
 
 interface InternalSelectProps extends SelectProps {
   /**
@@ -25,6 +26,7 @@ interface OptionsProps {
   selectComponentClass: React.ComponentType<Partial<InternalSelectProps>> & {
     Option?: React.ComponentType<Partial<OptionProps>>;
   };
+  showSizeChanger: PaginationProps['showSizeChanger'];
 }
 
 const defaultPageSizeOptions = ['10', '20', '50', '100'];
@@ -42,6 +44,7 @@ const Options: React.FC<OptionsProps> = (props) => {
     selectPrefixCls,
     disabled,
     buildOptionText,
+    showSizeChanger,
   } = props;
 
   const [goInputText, setGoInputText] = React.useState('');
@@ -57,8 +60,11 @@ const Options: React.FC<OptionsProps> = (props) => {
       ? buildOptionText
       : (value: string) => `${value} ${locale.items_per_page}`;
 
-  const changeSizeHandle = (value: number) => {
+  const changeSizeHandle = (value: number, option) => {
     changeSize?.(Number(value));
+    if (typeof showSizeChanger === 'object') {
+      showSizeChanger.onChange?.(value, option);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,7 +115,7 @@ const Options: React.FC<OptionsProps> = (props) => {
 
   // ============== render ==============
 
-  if (!changeSize && !quickGo) {
+  if (!showSizeChanger && !quickGo) {
     return null;
   }
 
@@ -117,26 +123,41 @@ const Options: React.FC<OptionsProps> = (props) => {
   let goInput: React.ReactNode = null;
   let gotoButton: React.ReactNode = null;
 
-  if (changeSize && Select) {
-    const options = getPageSizeOptions().map<React.ReactNode>((opt, i) => (
-      <Select.Option key={i} value={opt.toString()}>
-        {mergeBuildOptionText(opt)}
-      </Select.Option>
-    ));
+  if (showSizeChanger && Select) {
+    const {
+      options: showSizeChangerOptions,
+      className: showSizeChangerClassName,
+    } =
+      typeof showSizeChanger === 'object'
+        ? showSizeChanger
+        : ({} as SelectProps);
+    // use showSizeChanger.options if existed, otherwise use pageSizeOptions
+    const options = showSizeChangerOptions
+      ? undefined
+      : getPageSizeOptions().map((opt, i) => (
+          <Select.Option key={i} value={opt.toString()}>
+            {mergeBuildOptionText(opt)}
+          </Select.Option>
+        ));
 
     changeSelect = (
       <Select
         disabled={disabled}
         prefixCls={selectPrefixCls}
         showSearch={false}
-        className={`${prefixCls}-size-changer`}
-        optionLabelProp="children"
+        optionLabelProp={showSizeChangerOptions ? 'label' : 'children'}
         popupMatchSelectWidth={false}
         value={(pageSize || pageSizeOptions[0]).toString()}
-        onChange={changeSizeHandle}
         getPopupContainer={(triggerNode) => triggerNode.parentNode}
         aria-label={locale.page_size}
         defaultOpen={false}
+        {...(typeof showSizeChanger === 'object' ? showSizeChanger : null)}
+        className={classNames(
+          `${prefixCls}-size-changer`,
+          showSizeChangerClassName,
+        )}
+        options={showSizeChangerOptions}
+        onChange={changeSizeHandle}
       >
         {options}
       </Select>

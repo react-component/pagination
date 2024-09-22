@@ -1,6 +1,7 @@
 import type { SelectProps } from 'rc-select';
 import type { OptionProps } from 'rc-select/es/Option';
 import KEYCODE from 'rc-util/lib/KeyCode';
+import classNames from 'classnames';
 import React from 'react';
 import type { PaginationLocale, PaginationProps } from './interface';
 
@@ -111,7 +112,7 @@ const Options: React.FC<OptionsProps> = (props) => {
 
   // ============== render ==============
 
-  if (!changeSize && !quickGo) {
+  if (!showSizeChanger && !quickGo) {
     return null;
   }
 
@@ -119,27 +120,40 @@ const Options: React.FC<OptionsProps> = (props) => {
   let goInput: React.ReactNode = null;
   let gotoButton: React.ReactNode = null;
 
-  if (changeSize && Select) {
-    const options = getPageSizeOptions().map((opt, i) => (
-      <Select.Option key={i} value={opt.toString()}>
-        {mergeBuildOptionText(opt)}
-      </Select.Option>
-    ));
+  if (showSizeChanger && Select) {
+    // use showSizeChanger.options if existed, otherwise use pageSizeOptions
+    const showSizeChangerOptions =
+      typeof showSizeChanger === 'object' ? showSizeChanger.options : undefined;
+    const showSizeChangerClassName =
+      typeof showSizeChanger === 'object'
+        ? showSizeChanger.className
+        : undefined;
+    const options = showSizeChangerOptions
+      ? undefined
+      : getPageSizeOptions().map((opt, i) => (
+          <Select.Option key={i} value={opt.toString()}>
+            {mergeBuildOptionText(opt)}
+          </Select.Option>
+        ));
 
     changeSelect = (
       <Select
         disabled={disabled}
         prefixCls={selectPrefixCls}
         showSearch={false}
-        className={`${prefixCls}-size-changer`}
-        optionLabelProp="children"
+        optionLabelProp={showSizeChangerOptions ? 'label' : 'children'}
         popupMatchSelectWidth={false}
         value={(pageSize || pageSizeOptions[0]).toString()}
         onChange={changeSizeHandle}
         getPopupContainer={(triggerNode) => triggerNode.parentNode}
         aria-label={locale.page_size}
         defaultOpen={false}
-        {...showSizeChanger}
+        {...(typeof showSizeChanger === 'object' ? showSizeChanger : null)}
+        className={classNames(
+          `${prefixCls}-size-changer`,
+          showSizeChangerClassName,
+        )}
+        options={showSizeChangerOptions}
       >
         {options}
       </Select>

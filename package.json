@@ -39,7 +39,7 @@
     "test": "rc-test",
     "coverage": "rc-test --coverage",
     "now-build": "npm run docs:build",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@babel/runtime": "^7.10.1",
@@ -87,8 +87,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,tsx,ts,md,json}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   }
 }

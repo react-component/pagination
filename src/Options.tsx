@@ -2,7 +2,7 @@ import type { SelectProps } from 'rc-select';
 import type { OptionProps } from 'rc-select/es/Option';
 import KEYCODE from 'rc-util/lib/KeyCode';
 import React from 'react';
-import type { PaginationLocale } from './interface';
+import type { PaginationLocale, PaginationProps } from './interface';
 
 interface InternalSelectProps extends SelectProps {
   /**
@@ -25,7 +25,7 @@ interface OptionsProps {
   selectComponentClass: React.ComponentType<Partial<InternalSelectProps>> & {
     Option?: React.ComponentType<Partial<OptionProps>>;
   };
-  showSizeChanger: SelectProps,
+  showSizeChanger: PaginationProps['showSizeChanger'];
 }
 
 const defaultPageSizeOptions = ['10', '20', '50', '100'];

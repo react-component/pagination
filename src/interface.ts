@@ -1,4 +1,5 @@
 import type React from 'react';
+import type { SelectProps } from 'rc-select';
 
 export interface PaginationLocale {
   // Options
@@ -17,12 +18,6 @@ export interface PaginationLocale {
   page_size?: string;
 }
 
-type ShowSizeChanger = boolean | {
-  options?: string[] | number[];
-  showSearch?: boolean;
-  onChange?: (size: number) => void;
-}
-
 export interface PaginationData {
   className: string;
   selectPrefixCls: string;
@@ -38,7 +33,7 @@ export interface PaginationData {
 
   hideOnSinglePage: boolean;
   align: 'start' | 'center' | 'end';
-  showSizeChanger: ShowSizeChanger;
+  showSizeChanger: boolean | SelectProps;
   showLessItems: boolean;
   showPrevNextJumpers: boolean;
   showQuickJumper: boolean | object;
@@ -68,7 +63,6 @@ export interface PaginationProps
     element: React.ReactNode,
   ) => React.ReactNode;
   showTotal?: (total: number, range: [number, number]) => React.ReactNode;
-
   // WAI-ARIA
   role?: React.AriaRole | undefined;
 }

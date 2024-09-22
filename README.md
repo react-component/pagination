@@ -86,7 +86,3 @@ ReactDOM.render(<Pagination />, container);
 ## License
 
 rc-pagination is released under the MIT license.
-
-```
-
-```

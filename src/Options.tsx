@@ -60,8 +60,11 @@ const Options: React.FC<OptionsProps> = (props) => {
       ? buildOptionText
       : (value: string) => `${value} ${locale.items_per_page}`;
 
-  const changeSizeHandle = (value: number) => {
+  const changeSizeHandle = (value: number, option) => {
     changeSize?.(Number(value));
+    if (typeof showSizeChanger === 'object') {
+      showSizeChanger.onChange?.(value, option);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -145,7 +148,6 @@ const Options: React.FC<OptionsProps> = (props) => {
         optionLabelProp={showSizeChangerOptions ? 'label' : 'children'}
         popupMatchSelectWidth={false}
         value={(pageSize || pageSizeOptions[0]).toString()}
-        onChange={changeSizeHandle}
         getPopupContainer={(triggerNode) => triggerNode.parentNode}
         aria-label={locale.page_size}
         defaultOpen={false}
@@ -155,6 +157,7 @@ const Options: React.FC<OptionsProps> = (props) => {
           showSizeChangerClassName,
         )}
         options={showSizeChangerOptions}
+        onChange={changeSizeHandle}
       >
         {options}
       </Select>

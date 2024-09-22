@@ -4,7 +4,7 @@ import Select from 'rc-select';
 import '../../assets/index.less';
 
 export default () => {
-  const pageSizeOnChange = (value) => {
+  const onPageSizeOnChange = (value) => {
     console.log(value);
   };
 
@@ -32,9 +32,8 @@ export default () => {
             { value: '25', label: '25 条每页' },
             { value: '100', label: '100 条每页' },
           ],
-          className: 'my-select',
-          showSearch: true,
-          onChange: pageSizeOnChange,
+          showSearch: false,
+          onChange: onPageSizeOnChange,
         }}
       />
     </>

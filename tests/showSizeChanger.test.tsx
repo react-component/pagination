@@ -1,9 +1,8 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Select from 'rc-select';
 import Pagination from '../src';
-
-const onChange = jest.fn();
 
 const options = [
   { value: '10', label: '10 条每页' },
@@ -15,6 +14,7 @@ const options = [
 
 describe('Pagination with showSizeChanger', () => {
   it('should onChange called when pageSize change', () => {
+    const onChange = jest.fn();
     const { container, getByRole } = render(
       <Pagination
         defaultCurrent={1}
@@ -22,7 +22,6 @@ describe('Pagination with showSizeChanger', () => {
         selectComponentClass={Select}
         showSizeChanger={{
           options,
-          showSearch: false,
           onChange,
         }}
       />,
@@ -33,12 +32,16 @@ describe('Pagination with showSizeChanger', () => {
     expect(container.querySelectorAll('.rc-select-item')[2]).toHaveTextContent(
       '50 条每页',
     );
-    const pageSize1 = container.querySelectorAll('.rc-select-item')[0];
-    expect(pageSize1).toBeInTheDocument();
+    const pageSize1 = container.querySelectorAll('.rc-select-item')[1];
     fireEvent.click(pageSize1);
+    expect(onChange).toHaveBeenCalledWith('25', {
+      label: '25 条每页',
+      value: '25',
+    });
   });
 
-  it('should onChange called when pageSize change with search', () => {
+  it('should onChange called when pageSize change with search', async () => {
+    const onChange = jest.fn();
     const { container } = render(
       <Pagination
         defaultCurrent={1}
@@ -46,14 +49,15 @@ describe('Pagination with showSizeChanger', () => {
         selectComponentClass={Select}
         showSizeChanger={{
           options,
-          showSearch: false,
+          showSearch: true,
           onChange,
         }}
       />,
     );
-    fireEvent.change(container.querySelector('input'), {
-      target: { value: '25' },
-    });
+    expect(container.querySelector('input').hasAttribute('readOnly')).toBe(
+      false,
+    );
+    await userEvent.type(container.querySelector('input'), '25');
     expect(
       container.querySelectorAll('.rc-select-item-option-content'),
     ).toHaveLength(1);
@@ -63,5 +67,9 @@ describe('Pagination with showSizeChanger', () => {
     const pageSize1 = container.querySelector('.rc-select-item-option-content');
     expect(pageSize1).toBeInTheDocument();
     fireEvent.click(pageSize1);
+    expect(onChange).toHaveBeenCalledWith('25', {
+      label: '25 条每页',
+      value: '25',
+    });
   });
 });

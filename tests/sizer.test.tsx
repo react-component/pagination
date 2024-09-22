@@ -92,6 +92,23 @@ describe('Pagination with sizer', () => {
       { value: '75', label: '75 条每页' },
       { value: '100', label: '100 条每页' },
     ];
+
+    it('showSizeChanger.className should be added to select node', async () => {
+      const { container } = render(
+        <Pagination
+          defaultCurrent={1}
+          total={500}
+          selectComponentClass={Select}
+          showSizeChanger={{
+            className: 'custom-class-name',
+          }}
+        />,
+      );
+      const select = container.querySelector('.rc-select');
+      expect(select.className).toContain('custom-class-name');
+      expect(select.className).toContain('rc-pagination-options-size-changer');
+    });
+
     it('should onChange called when pageSize change', () => {
       const onChange = jest.fn();
       const { container, getByRole } = render(

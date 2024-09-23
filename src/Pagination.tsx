@@ -118,20 +118,21 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     return iconNode as React.ReactNode;
   };
 
-  const getValidValue = (e: any): number => {
+  const getValidValue = (e: React.ChangeEvent<HTMLInputElement>): number => {
     const inputValue = e.target.value;
     const allPages = calculatePage(undefined, pageSize, total);
-    let value: number;
+
     if (inputValue === '') {
-      value = inputValue;
-    } else if (Number.isNaN(Number(inputValue))) {
-      value = internalInputVal;
-    } else if (inputValue >= allPages) {
-      value = allPages;
-    } else {
-      value = Number(inputValue);
+      return 1; // 返回1作为默认值
     }
-    return value;
+
+    const parsedValue = Number(inputValue);
+
+    if (isNaN(parsedValue)) {
+      return internalInputVal; // 返回内部值
+    }
+
+    return Math.min(Math.max(parsedValue, 1), allPages); // 限制在有效范围内
   };
 
   const isValid = (page: number) =>
@@ -140,12 +141,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   const handleChange = (page: number) => {
     if (isValid(page) && !disabled) {
       const currentPage = calculatePage(undefined, pageSize, total);
-      let newPage = page;
-      if (page > currentPage) {
-        newPage = currentPage;
-      } else if (page < 1) {
-        newPage = 1;
-      }
+      const newPage = Math.max(1, Math.min(page, currentPage));
 
       if (newPage !== internalInputVal) {
         setInternalInputVal(newPage);
@@ -178,19 +174,16 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       setInternalInputVal(value);
     }
 
-    switch ((event as React.KeyboardEvent<HTMLInputElement>).keyCode) {
-      case KeyCode.ENTER:
-        handleChange(value);
-        break;
-      case KeyCode.UP:
-        handleChange(value - 1);
-        break;
-      case KeyCode.DOWN:
-        handleChange(value + 1);
-        break;
-      default:
-        break;
-    }
+    const keyActions: { [key: number]: () => void } = {
+      [KeyCode.ENTER]: () => handleChange(value),
+      [KeyCode.UP]: () => handleChange(value - 1),
+      [KeyCode.DOWN]: () => handleChange(value + 1),
+    };
+
+    (
+      keyActions[(event as React.KeyboardEvent<HTMLInputElement>).keyCode] ||
+      (() => {})
+    )();
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
@@ -307,30 +300,26 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   let simplePager: React.ReactNode = null;
 
   if (simple) {
-    if (goButton) {
-      if (typeof goButton === 'boolean') {
-        gotoButton = (
-          <button type="button" onClick={handleGoTO} onKeyUp={handleGoTO}>
-            {locale.jump_to_confirm}
-          </button>
-        );
-      } else {
-        gotoButton = (
-          <span onClick={handleGoTO} onKeyUp={handleGoTO}>
-            {goButton}
-          </span>
-        );
-      }
+    gotoButton = goButton ? (
+      typeof goButton === 'boolean' ? (
+        <button type="button" onClick={handleGoTO} onKeyUp={handleGoTO}>
+          {locale.jump_to_confirm}
+        </button>
+      ) : (
+        <span onClick={handleGoTO} onKeyUp={handleGoTO}>
+          {goButton}
+        </span>
+      )
+    ) : null;
 
-      gotoButton = (
-        <li
-          title={showTitle ? `${locale.jump_to}${current}/${allPages}` : null}
-          className={`${prefixCls}-simple-pager`}
-        >
-          {gotoButton}
-        </li>
-      );
-    }
+    gotoButton = (
+      <li
+        title={showTitle ? `${locale.jump_to}${current}/${allPages}` : null}
+        className={`${prefixCls}-simple-pager`}
+      >
+        {gotoButton}
+      </li>
+    );
 
     simplePager = (
       <li

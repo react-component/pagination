@@ -115,7 +115,10 @@ const Options: React.FC<OptionsProps> = ({
     const {
       options: showSizeChangerOptions,
       className: showSizeChangerClassName,
-    } = typeof showSizeChanger === 'object' ? showSizeChanger : {};
+    } =
+      typeof showSizeChanger === 'object'
+        ? showSizeChanger
+        : ({} as SelectProps);
     const options = showSizeChangerOptions
       ? undefined
       : getPageSizeOptions().map((opt, i) => (

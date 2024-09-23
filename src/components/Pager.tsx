@@ -1,7 +1,6 @@
-/* eslint react/prop-types: 0 */
 import classNames from 'classnames';
 import React from 'react';
-import type { PaginationProps } from './interface';
+import type { PaginationProps } from '../interface';
 
 export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
   rootPrefixCls: string;

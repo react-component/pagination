@@ -3,7 +3,7 @@ import type { OptionProps } from 'rc-select/es/Option';
 import KEYCODE from 'rc-util/lib/KeyCode';
 import classNames from 'classnames';
 import React from 'react';
-import type { PaginationLocale, PaginationProps } from './interface';
+import type { PaginationLocale, PaginationProps } from '../interface';
 
 interface InternalSelectProps extends SelectProps {
   /**

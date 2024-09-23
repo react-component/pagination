@@ -67,7 +67,9 @@ const Options: React.FC<OptionsProps> = ({
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    if (goButton || goInputText === '') return;
+    if (goButton || goInputText === '') {
+      return;
+    }
     setGoInputText('');
     if (
       e.relatedTarget &&
@@ -78,8 +80,10 @@ const Options: React.FC<OptionsProps> = ({
     quickGo?.(getValidValue());
   };
 
-  const go = (e: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent) => {
-    if (goInputText === '') return;
+  const go = (e: any) => {
+    if (goInputText === '') {
+      return;
+    }
     if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
       setGoInputText('');
       quickGo?.(getValidValue());

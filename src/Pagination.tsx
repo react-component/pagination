@@ -118,7 +118,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     return iconNode as React.ReactNode;
   };
 
-  const getValidValue = (e: React.ChangeEvent<HTMLInputElement>): number => {
+  const getValidValue = (e: any): number => {
     const inputValue = e.target.value;
     const allPages = calculatePage(undefined, pageSize, total);
 
@@ -174,6 +174,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       setInternalInputVal(value);
     }
 
+    // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
     const keyActions: { [key: number]: () => void } = {
       [KeyCode.ENTER]: () => handleChange(value),
       [KeyCode.UP]: () => handleChange(value - 1),
@@ -212,8 +213,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   const runIfEnter = (
     event: React.KeyboardEvent<HTMLLIElement>,
-    callback: () => void,
-    ...restParams: any[]
+    callback,
+    ...restParams
   ) => {
     if (
       event.key === 'Enter' ||
@@ -239,7 +240,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       'prev',
       getItemIcon(prevIcon, 'prev page'),
     );
-    return React.isValidElement(prevButton)
+    return React.isValidElement<HTMLButtonElement>(prevButton)
       ? React.cloneElement(prevButton, { disabled: !hasPrev })
       : prevButton;
   };
@@ -250,7 +251,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       'next',
       getItemIcon(nextIcon, 'next page'),
     );
-    return React.isValidElement(nextButton)
+    return React.isValidElement<HTMLButtonElement>(nextButton)
       ? React.cloneElement(nextButton, { disabled: !hasNext })
       : nextButton;
   };

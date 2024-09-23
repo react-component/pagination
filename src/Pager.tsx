@@ -1,4 +1,3 @@
-/* eslint react/prop-types: 0 */
 import classNames from 'classnames';
 import React from 'react';
 import type { PaginationProps } from './interface';
@@ -9,25 +8,24 @@ export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
   active?: boolean;
   className?: string;
   showTitle: boolean;
-  onClick?: (page: number) => void;
-  onKeyPress?: (
+  onClick: (page: number) => void;
+  onKeyPress: (
     e: React.KeyboardEvent<HTMLLIElement>,
     onClick: PagerProps['onClick'],
-    page: PagerProps['page'],
+    page: number,
   ) => void;
 }
 
-const Pager: React.FC<PagerProps> = (props) => {
-  const {
-    rootPrefixCls,
-    page,
-    active,
-    className,
-    showTitle,
-    onClick,
-    onKeyPress,
-    itemRender,
-  } = props;
+const Pager: React.FC<PagerProps> = ({
+  rootPrefixCls,
+  page,
+  active,
+  className,
+  showTitle,
+  onClick,
+  onKeyPress,
+  itemRender,
+}) => {
   const prefixCls = `${rootPrefixCls}-item`;
 
   const cls = classNames(
@@ -40,9 +38,7 @@ const Pager: React.FC<PagerProps> = (props) => {
     className,
   );
 
-  const handleClick = () => {
-    onClick(page);
-  };
+  const handleClick = () => onClick(page);
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLLIElement>) => {
     onKeyPress(e, onClick, page);

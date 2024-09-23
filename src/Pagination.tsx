@@ -3,7 +3,7 @@ import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import KeyCode from 'rc-util/lib/KeyCode';
 import pickAttrs from 'rc-util/lib/pickAttrs';
 import warning from 'rc-util/lib/warning';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { PaginationProps } from './interface';
 import zhCN from './locale/zh_CN';
 import Options from './Options';
@@ -16,40 +16,34 @@ const defaultItemRender: PaginationProps['itemRender'] = (
   element,
 ) => element;
 
-function noop() {}
+const noop = () => {};
 
-function isInteger(v: number) {
+const isInteger = (v: number) => {
   const value = Number(v);
-  return (
-    typeof value === 'number' &&
-    !Number.isNaN(value) &&
-    isFinite(value) &&
-    Math.floor(value) === value
-  );
-}
+  return !Number.isNaN(value) && isFinite(value) && Math.floor(value) === value;
+};
 
-function calculatePage(p: number | undefined, pageSize: number, total: number) {
-  const _pageSize = typeof p === 'undefined' ? pageSize : p;
+const calculatePage = (
+  p: number | undefined,
+  pageSize: number,
+  total: number,
+) => {
+  const _pageSize = p ?? pageSize;
   return Math.floor((total - 1) / _pageSize) + 1;
-}
+};
 
 const Pagination: React.FC<PaginationProps> = (props) => {
   const {
-    // cls
     prefixCls = 'rc-pagination',
     selectPrefixCls = 'rc-select',
     className,
     selectComponentClass,
-
-    // control
     current: currentProp,
     defaultCurrent = 1,
     total = 0,
     pageSize: pageSizeProp,
     defaultPageSize = 10,
     onChange = noop,
-
-    // config
     hideOnSinglePage,
     align,
     showPrevNextJumpers = true,
@@ -65,8 +59,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     showTotal,
     showSizeChanger = total > totalBoundaryShowSizeChanger,
     pageSizeOptions,
-
-    // render
     itemRender = defaultItemRender,
     jumpPrevIcon,
     jumpNextIcon,
@@ -74,21 +66,20 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     nextIcon,
   } = props;
 
-  const paginationRef = React.useRef<HTMLUListElement>(null);
-
-  const [pageSize, setPageSize] = useMergedState<number>(10, {
+  const paginationRef = useRef<HTMLUListElement>(null);
+  const [pageSize, setPageSize] = useMergedState<number>(defaultPageSize, {
     value: pageSizeProp,
     defaultValue: defaultPageSize,
   });
 
-  const [current, setCurrent] = useMergedState<number>(1, {
+  const [current, setCurrent] = useMergedState<number>(defaultCurrent, {
     value: currentProp,
     defaultValue: defaultCurrent,
     postState: (c) =>
       Math.max(1, Math.min(c, calculatePage(undefined, pageSize, total))),
   });
 
-  const [internalInputVal, setInternalInputVal] = React.useState(current);
+  const [internalInputVal, setInternalInputVal] = useState(current);
 
   useEffect(() => {
     setInternalInputVal(current);
@@ -110,10 +101,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     current + (showLessItems ? 3 : 5),
   );
 
-  function getItemIcon(
+  const getItemIcon = (
     icon: React.ReactNode | React.ComponentType<PaginationProps>,
     label: string,
-  ) {
+  ) => {
     let iconNode = icon || (
       <button
         type="button"
@@ -125,9 +116,9 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       iconNode = React.createElement<PaginationProps>(icon, { ...props });
     }
     return iconNode as React.ReactNode;
-  }
+  };
 
-  function getValidValue(e: any): number {
+  const getValidValue = (e: any): number => {
     const inputValue = e.target.value;
     const allPages = calculatePage(undefined, pageSize, total);
     let value: number;
@@ -141,66 +132,12 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       value = Number(inputValue);
     }
     return value;
-  }
+  };
 
-  function isValid(page: number) {
-    return isInteger(page) && page !== current && isInteger(total) && total > 0;
-  }
+  const isValid = (page: number) =>
+    isInteger(page) && page !== current && isInteger(total) && total > 0;
 
-  const shouldDisplayQuickJumper = total > pageSize ? showQuickJumper : false;
-
-  /**
-   * prevent "up arrow" key reseting cursor position within textbox
-   * @see https://stackoverflow.com/a/1081114
-   */
-  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
-    if (event.keyCode === KeyCode.UP || event.keyCode === KeyCode.DOWN) {
-      event.preventDefault();
-    }
-  }
-
-  function handleKeyUp(
-    event:
-      | React.KeyboardEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLInputElement>,
-  ) {
-    const value = getValidValue(event);
-    if (value !== internalInputVal) {
-      setInternalInputVal(value);
-    }
-
-    switch ((event as React.KeyboardEvent<HTMLInputElement>).keyCode) {
-      case KeyCode.ENTER:
-        handleChange(value);
-        break;
-      case KeyCode.UP:
-        handleChange(value - 1);
-        break;
-      case KeyCode.DOWN:
-        handleChange(value + 1);
-        break;
-      default:
-        break;
-    }
-  }
-
-  function handleBlur(event: React.FocusEvent<HTMLInputElement, Element>) {
-    handleChange(getValidValue(event));
-  }
-
-  function changePageSize(size: number) {
-    const newCurrent = calculatePage(size, pageSize, total);
-    const nextCurrent =
-      current > newCurrent && newCurrent !== 0 ? newCurrent : current;
-
-    setPageSize(size);
-    setInternalInputVal(nextCurrent);
-    onShowSizeChange?.(current, size);
-    setCurrent(nextCurrent);
-    onChange?.(nextCurrent, size);
-  }
-
-  function handleChange(page: number) {
+  const handleChange = (page: number) => {
     if (isValid(page) && !disabled) {
       const currentPage = calculatePage(undefined, pageSize, total);
       let newPage = page;
@@ -221,32 +158,70 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     }
 
     return current;
-  }
+  };
+
+  const shouldDisplayQuickJumper = total > pageSize ? showQuickJumper : false;
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.keyCode === KeyCode.UP || event.keyCode === KeyCode.DOWN) {
+      event.preventDefault();
+    }
+  };
+
+  const handleKeyUp = (
+    event:
+      | React.KeyboardEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const value = getValidValue(event);
+    if (value !== internalInputVal) {
+      setInternalInputVal(value);
+    }
+
+    switch ((event as React.KeyboardEvent<HTMLInputElement>).keyCode) {
+      case KeyCode.ENTER:
+        handleChange(value);
+        break;
+      case KeyCode.UP:
+        handleChange(value - 1);
+        break;
+      case KeyCode.DOWN:
+        handleChange(value + 1);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
+    handleChange(getValidValue(event));
+  };
+
+  const changePageSize = (size: number) => {
+    const newCurrent = calculatePage(size, pageSize, total);
+    const nextCurrent =
+      current > newCurrent && newCurrent !== 0 ? newCurrent : current;
+
+    setPageSize(size);
+    setInternalInputVal(nextCurrent);
+    onShowSizeChange?.(current, size);
+    setCurrent(nextCurrent);
+    onChange?.(nextCurrent, size);
+  };
 
   const hasPrev = current > 1;
   const hasNext = current < calculatePage(undefined, pageSize, total);
 
-  function prevHandle() {
-    if (hasPrev) handleChange(current - 1);
-  }
+  const prevHandle = () => hasPrev && handleChange(current - 1);
+  const nextHandle = () => hasNext && handleChange(current + 1);
+  const jumpPrevHandle = () => handleChange(jumpPrevPage);
+  const jumpNextHandle = () => handleChange(jumpNextPage);
 
-  function nextHandle() {
-    if (hasNext) handleChange(current + 1);
-  }
-
-  function jumpPrevHandle() {
-    handleChange(jumpPrevPage);
-  }
-
-  function jumpNextHandle() {
-    handleChange(jumpNextPage);
-  }
-
-  function runIfEnter(
+  const runIfEnter = (
     event: React.KeyboardEvent<HTMLLIElement>,
-    callback,
-    ...restParams
-  ) {
+    callback: () => void,
+    ...restParams: any[]
+  ) => {
     if (
       event.key === 'Enter' ||
       event.charCode === KeyCode.ENTER ||
@@ -254,58 +229,49 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     ) {
       callback(...restParams);
     }
-  }
+  };
 
-  function runIfEnterPrev(event: React.KeyboardEvent<HTMLLIElement>) {
+  const runIfEnterPrev = (event: React.KeyboardEvent<HTMLLIElement>) =>
     runIfEnter(event, prevHandle);
-  }
-
-  function runIfEnterNext(event: React.KeyboardEvent<HTMLLIElement>) {
+  const runIfEnterNext = (event: React.KeyboardEvent<HTMLLIElement>) =>
     runIfEnter(event, nextHandle);
-  }
-
-  function runIfEnterJumpPrev(event: React.KeyboardEvent<HTMLLIElement>) {
+  const runIfEnterJumpPrev = (event: React.KeyboardEvent<HTMLLIElement>) =>
     runIfEnter(event, jumpPrevHandle);
-  }
-
-  function runIfEnterJumpNext(event: React.KeyboardEvent<HTMLLIElement>) {
+  const runIfEnterJumpNext = (event: React.KeyboardEvent<HTMLLIElement>) =>
     runIfEnter(event, jumpNextHandle);
-  }
 
-  function renderPrev(prevPage: number) {
+  const renderPrev = (prevPage: number) => {
     const prevButton = itemRender(
       prevPage,
       'prev',
       getItemIcon(prevIcon, 'prev page'),
     );
-    return React.isValidElement<HTMLButtonElement>(prevButton)
+    return React.isValidElement(prevButton)
       ? React.cloneElement(prevButton, { disabled: !hasPrev })
       : prevButton;
-  }
+  };
 
-  function renderNext(nextPage: number) {
+  const renderNext = (nextPage: number) => {
     const nextButton = itemRender(
       nextPage,
       'next',
       getItemIcon(nextIcon, 'next page'),
     );
-    return React.isValidElement<HTMLButtonElement>(nextButton)
+    return React.isValidElement(nextButton)
       ? React.cloneElement(nextButton, { disabled: !hasNext })
       : nextButton;
-  }
+  };
 
-  function handleGoTO(event: any) {
+  const handleGoTO = (event: any) => {
     if (event.type === 'click' || event.keyCode === KeyCode.ENTER) {
       handleChange(internalInputVal);
     }
-  }
+  };
 
-  let jumpPrev: React.ReactElement = null;
+  let jumpPrev: React.ReactElement | null = null;
+  let jumpNext: React.ReactElement | null = null;
 
-  const dataOrAriaAttributeProps = pickAttrs(props, {
-    aria: true,
-    data: true,
-  });
+  const dataOrAriaAttributeProps = pickAttrs(props, { aria: true, data: true });
 
   const totalText = showTotal && (
     <li className={`${prefixCls}-total-text`}>
@@ -316,18 +282,13 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     </li>
   );
 
-  let jumpNext: React.ReactElement = null;
-
   const allPages = calculatePage(undefined, pageSize, total);
 
-  // ================== Render ==================
-  // When hideOnSinglePage is true and there is only 1 page, hide the pager
   if (hideOnSinglePage && total <= pageSize) {
     return null;
   }
 
   const pagerList: React.ReactElement<PagerProps>[] = [];
-
   const pagerProps: PagerProps = {
     rootPrefixCls: prefixCls,
     onClick: handleChange,
@@ -341,14 +302,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   const nextPage = current + 1 < allPages ? current + 1 : allPages;
   const goButton = showQuickJumper && (showQuickJumper as any).goButton;
 
-  // ================== Simple ==================
-  // FIXME: ts type
   const isReadOnly = typeof simple === 'object' ? simple.readOnly : !simple;
   let gotoButton: any = goButton;
   let simplePager: React.ReactNode = null;
 
   if (simple) {
-    // ====== Simple quick jump ======
     if (goButton) {
       if (typeof goButton === 'boolean') {
         gotoButton = (
@@ -399,7 +357,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     );
   }
 
-  // ====================== Normal ======================
   const pageBufferSize = showLessItems ? 1 : 2;
   if (allPages <= 3 + pageBufferSize * 2) {
     if (!allPages) {
@@ -512,52 +469,41 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     }
   }
 
-  let prev = renderPrev(prevPage);
-  if (prev) {
-    const prevDisabled = !hasPrev || !allPages;
-    prev = (
-      <li
-        title={showTitle ? locale.prev_page : null}
-        onClick={prevHandle}
-        tabIndex={prevDisabled ? null : 0}
-        onKeyDown={runIfEnterPrev}
-        className={classNames(`${prefixCls}-prev`, {
-          [`${prefixCls}-disabled`]: prevDisabled,
-        })}
-        aria-disabled={prevDisabled}
-      >
-        {prev}
-      </li>
-    );
-  }
+  const prev = renderPrev(prevPage);
+  const prevElement = prev && (
+    <li
+      title={showTitle ? locale.prev_page : null}
+      onClick={prevHandle}
+      tabIndex={!hasPrev || !allPages ? null : 0}
+      onKeyDown={runIfEnterPrev}
+      className={classNames(`${prefixCls}-prev`, {
+        [`${prefixCls}-disabled`]: !hasPrev || !allPages,
+      })}
+      aria-disabled={!hasPrev || !allPages}
+    >
+      {prev}
+    </li>
+  );
 
-  let next = renderNext(nextPage);
-  if (next) {
-    let nextDisabled: boolean, nextTabIndex: number | null;
-
-    if (simple) {
-      nextDisabled = !hasNext;
-      nextTabIndex = hasPrev ? 0 : null;
-    } else {
-      nextDisabled = !hasNext || !allPages;
-      nextTabIndex = nextDisabled ? null : 0;
-    }
-
-    next = (
-      <li
-        title={showTitle ? locale.next_page : null}
-        onClick={nextHandle}
-        tabIndex={nextTabIndex}
-        onKeyDown={runIfEnterNext}
-        className={classNames(`${prefixCls}-next`, {
-          [`${prefixCls}-disabled`]: nextDisabled,
-        })}
-        aria-disabled={nextDisabled}
-      >
-        {next}
-      </li>
-    );
-  }
+  const next = renderNext(nextPage);
+  const nextElement = next && (
+    <li
+      title={showTitle ? locale.next_page : null}
+      onClick={nextHandle}
+      tabIndex={
+        simple ? (hasNext ? 0 : null) : !hasNext || !allPages ? null : 0
+      }
+      onKeyDown={
+        simple ? (hasNext ? runIfEnterNext : undefined) : runIfEnterNext
+      }
+      className={classNames(`${prefixCls}-next`, {
+        [`${prefixCls}-disabled`]: !hasNext || !allPages,
+      })}
+      aria-disabled={!hasNext || !allPages}
+    >
+      {next}
+    </li>
+  );
 
   const cls = classNames(prefixCls, className, {
     [`${prefixCls}-start`]: align === 'start',
@@ -575,9 +521,9 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       {...dataOrAriaAttributeProps}
     >
       {totalText}
-      {prev}
+      {prevElement}
       {simple ? simplePager : pagerList}
-      {next}
+      {nextElement}
       <Options
         locale={locale}
         rootPrefixCls={prefixCls}

@@ -2,13 +2,10 @@ import type { SelectProps } from 'rc-select';
 import type { OptionProps } from 'rc-select/es/Option';
 import KEYCODE from 'rc-util/lib/KeyCode';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 import type { PaginationLocale, PaginationProps } from './interface';
 
 interface InternalSelectProps extends SelectProps {
-  /**
-   * form antd v5.5.0, popupMatchSelectWidth default is true
-   */
   popupMatchSelectWidth?: boolean;
 }
 
@@ -31,26 +28,24 @@ interface OptionsProps {
 
 const defaultPageSizeOptions = ['10', '20', '50', '100'];
 
-const Options: React.FC<OptionsProps> = (props) => {
-  const {
-    pageSizeOptions = defaultPageSizeOptions,
-    locale,
-    changeSize,
-    pageSize,
-    goButton,
-    quickGo,
-    rootPrefixCls,
-    selectComponentClass: Select,
-    selectPrefixCls,
-    disabled,
-    buildOptionText,
-    showSizeChanger,
-  } = props;
-
-  const [goInputText, setGoInputText] = React.useState('');
+const Options: React.FC<OptionsProps> = ({
+  pageSizeOptions = defaultPageSizeOptions,
+  locale,
+  changeSize,
+  pageSize,
+  goButton,
+  quickGo,
+  rootPrefixCls,
+  selectComponentClass: Select,
+  selectPrefixCls,
+  disabled,
+  buildOptionText,
+  showSizeChanger,
+}) => {
+  const [goInputText, setGoInputText] = useState('');
 
   const getValidValue = () => {
-    return !goInputText || Number.isNaN(goInputText)
+    return !goInputText || isNaN(Number(goInputText))
       ? undefined
       : Number(goInputText);
   };
@@ -71,25 +66,20 @@ const Options: React.FC<OptionsProps> = (props) => {
     setGoInputText(e.target.value);
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    if (goButton || goInputText === '') {
-      return;
-    }
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (goButton || goInputText === '') return;
     setGoInputText('');
     if (
       e.relatedTarget &&
-      (e.relatedTarget.className.indexOf(`${rootPrefixCls}-item-link`) >= 0 ||
-        e.relatedTarget.className.indexOf(`${rootPrefixCls}-item`) >= 0)
-    ) {
+      (e.relatedTarget.className.includes(`${rootPrefixCls}-item-link`) ||
+        e.relatedTarget.className.includes(`${rootPrefixCls}-item`))
+    )
       return;
-    }
     quickGo?.(getValidValue());
   };
 
-  const go = (e: any) => {
-    if (goInputText === '') {
-      return;
-    }
+  const go = (e: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent) => {
+    if (goInputText === '') return;
     if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
       setGoInputText('');
       quickGo?.(getValidValue());
@@ -104,20 +94,14 @@ const Options: React.FC<OptionsProps> = (props) => {
     ) {
       return pageSizeOptions;
     }
-    return pageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
-      const numberA = Number.isNaN(Number(a)) ? 0 : Number(a);
-      const numberB = Number.isNaN(Number(b)) ? 0 : Number(b);
-      return numberA - numberB;
-    });
+    return [...pageSizeOptions, pageSize.toString()].sort(
+      (a, b) => Number(a) - Number(b),
+    );
   };
-  // ============== cls ==============
+
   const prefixCls = `${rootPrefixCls}-options`;
 
-  // ============== render ==============
-
-  if (!showSizeChanger && !quickGo) {
-    return null;
-  }
+  if (!showSizeChanger && !quickGo) return null;
 
   let changeSelect: React.ReactNode = null;
   let goInput: React.ReactNode = null;
@@ -127,11 +111,7 @@ const Options: React.FC<OptionsProps> = (props) => {
     const {
       options: showSizeChangerOptions,
       className: showSizeChangerClassName,
-    } =
-      typeof showSizeChanger === 'object'
-        ? showSizeChanger
-        : ({} as SelectProps);
-    // use showSizeChanger.options if existed, otherwise use pageSizeOptions
+    } = typeof showSizeChanger === 'object' ? showSizeChanger : {};
     const options = showSizeChangerOptions
       ? undefined
       : getPageSizeOptions().map((opt, i) => (

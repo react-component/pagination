@@ -70,7 +70,7 @@
     "lint-staged": "^15.0.2",
     "np": "^10.0.5",
     "prettier": "^3.1.0",
-    "rc-select": "^14.1.2",
+    "rc-select": "^14.16.4",
     "rc-test": "^7.0.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

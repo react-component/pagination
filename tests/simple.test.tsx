@@ -3,11 +3,7 @@ import { render, fireEvent, createEvent } from '@testing-library/react';
 import Select from 'rc-select';
 import React, { useState } from 'react';
 import Pagination from '../src';
-
-console.log('React >>>', React);
-console.log('Pagination >>>', Pagination);
-console.log('Select >>>', Select);
-process.exit(0);
+import { sizeChangerRender } from './commonUtil';
 
 describe('simple Pagination', () => {
   let wrapper: RenderResult;
@@ -110,7 +106,8 @@ describe('simple Pagination', () => {
         total={500}
         pageSize={15}
         showSizeChanger
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
       />,
     );
     fireEvent.mouseDown(getByRole('combobox'));
@@ -122,7 +119,8 @@ describe('simple Pagination', () => {
     const { container, getByRole } = render(
       <Pagination
         simple
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
         onChange={onChange}
         total={500}
         defaultPageSize={20}
@@ -235,7 +233,7 @@ describe('simple Pagination', () => {
 
       return (
         <div>
-          <button onClick={() => setCurrent((i) => ++i)}>increase</button>
+          <button onClick={() => setCurrent((i) => i + 1)}>increase</button>
           <Pagination
             simple
             current={current}

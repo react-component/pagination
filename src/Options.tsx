@@ -34,7 +34,7 @@ interface OptionsProps {
   goButton?: boolean | string;
   changeSize?: (size: number) => void;
   quickGo?: (value: number) => void;
-  buildOptionText?: (value: number) => string;
+  buildOptionText?: (value: number | string) => string;
   // selectComponentClass: React.ComponentType<Partial<InternalSelectProps>> & {
   //   Option?: React.ComponentType<Partial<OptionProps>>;
   // };
@@ -73,7 +73,7 @@ const Options: React.FC<OptionsProps> = (props) => {
   const mergeBuildOptionText =
     typeof buildOptionText === 'function'
       ? buildOptionText
-      : (value: number) => `${value} ${locale.items_per_page}`;
+      : (value: string | number) => `${value} ${locale.items_per_page}`;
 
   // const changeSizeHandle = (value: number, option) => {
   //   changeSize?.(Number(value));

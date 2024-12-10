@@ -4,6 +4,7 @@ import Select from 'rc-select';
 import React from 'react';
 import Pagination from '../src';
 import { resetWarned } from 'rc-util/lib/warning';
+import { sizeChangerRender } from './commonUtil';
 
 describe('Default Pagination', () => {
   let wrapper: RenderResult;
@@ -339,7 +340,8 @@ describe('Other props', () => {
   it('disabled', () => {
     const { container, getByRole } = render(
       <Pagination
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
         showQuickJumper={{ goButton: true }}
         showSizeChanger
         defaultPageSize={20}
@@ -367,7 +369,8 @@ describe('current value on onShowSizeChange when total is 0', () => {
   beforeEach(() => {
     wrapper = render(
       <Pagination
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
         showSizeChanger
         onShowSizeChange={onShowSizeChange}
         onChange={onChange}
@@ -425,20 +428,29 @@ describe('current value on onShowSizeChange when total is 0', () => {
 
   it('size changer show logic', () => {
     const wrapper1 = render(
-      <Pagination selectComponentClass={Select} total={50} />,
+      <Pagination
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
+        total={50}
+      />,
     );
     expect(
       wrapper1.container.querySelector('.rc-pagination-options-size-changer'),
     ).toBeFalsy();
     const wrapper2 = render(
-      <Pagination selectComponentClass={Select} total={51} />,
+      <Pagination
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
+        total={51}
+      />,
     );
     expect(
       wrapper2.container.querySelector('.rc-pagination-options-size-changer'),
     ).toBeTruthy();
     const wrapper3 = render(
       <Pagination
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
         showSizeChanger={false}
         total={51}
       />,
@@ -447,7 +459,12 @@ describe('current value on onShowSizeChange when total is 0', () => {
       wrapper3.container.querySelector('.rc-pagination-options-size-changer'),
     ).toBeFalsy();
     const wrapper4 = render(
-      <Pagination selectComponentClass={Select} showSizeChanger total={50} />,
+      <Pagination
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
+        showSizeChanger
+        total={50}
+      />,
     );
     expect(
       wrapper4.container.querySelector('.rc-pagination-options-size-changer'),
@@ -457,7 +474,8 @@ describe('current value on onShowSizeChange when total is 0', () => {
   it('totalBoundaryShowSizeChanger works', () => {
     const wrapper1 = render(
       <Pagination
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
         total={100}
         totalBoundaryShowSizeChanger={100}
       />,
@@ -467,7 +485,8 @@ describe('current value on onShowSizeChange when total is 0', () => {
     ).toBeFalsy();
     const wrapper2 = render(
       <Pagination
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
         total={101}
         totalBoundaryShowSizeChanger={100}
       />,
@@ -477,7 +496,8 @@ describe('current value on onShowSizeChange when total is 0', () => {
     ).toBeTruthy();
     const wrapper3 = render(
       <Pagination
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
         showSizeChanger={false}
         total={101}
         totalBoundaryShowSizeChanger={100}
@@ -488,7 +508,8 @@ describe('current value on onShowSizeChange when total is 0', () => {
     ).toBeFalsy();
     const wrapper4 = render(
       <Pagination
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
+        sizeChangerRender={sizeChangerRender}
         showSizeChanger
         total={100}
         totalBoundaryShowSizeChanger={100}

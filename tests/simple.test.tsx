@@ -4,6 +4,11 @@ import Select from 'rc-select';
 import React, { useState } from 'react';
 import Pagination from '../src';
 
+console.log('React >>>', React);
+console.log('Pagination >>>', Pagination);
+console.log('Select >>>', Select);
+process.exit(0);
+
 describe('simple Pagination', () => {
   let wrapper: RenderResult;
 

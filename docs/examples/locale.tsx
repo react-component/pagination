@@ -1,7 +1,5 @@
 /* eslint func-names: 0, no-console: 0 */
 import React from 'react';
-import Select from 'rc-select';
-import Pagination from 'rc-pagination';
 import localeInfo from '../../src/locale/en_US';
 import '../../assets/index.less';
 import 'rc-select/assets/index.less';

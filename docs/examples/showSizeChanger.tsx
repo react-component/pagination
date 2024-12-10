@@ -1,6 +1,4 @@
 import React from 'react';
-import Pagination from 'rc-pagination';
-import Select from 'rc-select';
 import '../../assets/index.less';
 import PaginationWithSizeChanger from './utils/commonUtil';
 

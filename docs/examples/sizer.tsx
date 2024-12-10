@@ -1,7 +1,5 @@
 /* eslint func-names: 0, no-console: 0 */
 import React from 'react';
-import Select from 'rc-select';
-import Pagination from 'rc-pagination';
 import '../../assets/index.less';
 import 'rc-select/assets/index.less';
 import PaginationWithSizeChanger from './utils/commonUtil';
@@ -28,7 +26,7 @@ class App extends React.Component {
           defaultCurrent={3}
           total={40}
         />
-        <PaginationWithSizeChanger
+        {/* <PaginationWithSizeChanger
           // selectComponentClass={Select}
           pageSize={pageSize}
           onShowSizeChange={this.onShowSizeChange}
@@ -49,7 +47,7 @@ class App extends React.Component {
           onShowSizeChange={this.onShowSizeChange}
           defaultCurrent={3}
           total={60}
-        />
+        /> */}
       </div>
     );
   }

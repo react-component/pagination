@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Pagination from 'rc-pagination';
-import Select from 'rc-select';
+import Pagination from '../../src';
 import '../../assets/index.less';
 import PaginationWithSizeChanger from './utils/commonUtil';
 

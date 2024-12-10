@@ -1,5 +1,5 @@
 import React from 'react';
-import Pagination from 'rc-pagination';
+import Pagination from '../../src';
 import '../../assets/index.less';
 
 const App = () => (

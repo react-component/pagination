@@ -1,16 +1,16 @@
-import type { SelectProps } from 'rc-select';
-import type { OptionProps } from 'rc-select/es/Option';
+// import type { SelectProps } from 'rc-select';
+// import type { OptionProps } from 'rc-select/es/Option';
 import KEYCODE from 'rc-util/lib/KeyCode';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import React from 'react';
-import type { PaginationLocale, PaginationProps } from '../interface';
+import type { PaginationLocale } from './interface';
 
-interface InternalSelectProps extends SelectProps {
-  /**
-   * form antd v5.5.0, popupMatchSelectWidth default is true
-   */
-  popupMatchSelectWidth?: boolean;
-}
+// interface InternalSelectProps extends SelectProps {
+//   /**
+//    * form antd v5.5.0, popupMatchSelectWidth default is true
+//    */
+//   popupMatchSelectWidth?: boolean;
+// }
 
 export type SizeChangerRender = (info: {
   disabled: boolean;

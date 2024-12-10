@@ -19,7 +19,7 @@ export const getSizeChangerRender = (selectProps?: any) => {
       // optionLabelProp={showSizeChangerOptions ? 'label' : 'children'}
       // popupMatchSelectWidth={false}
       dropdownMatchSelectWidth={false}
-      value={(pageSize || options[0].value).toString()}
+      value={pageSize || options[0].value}
       getPopupContainer={(triggerNode) => triggerNode.parentNode}
       aria-label={ariaLabel}
       defaultOpen={false}

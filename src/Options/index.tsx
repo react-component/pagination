@@ -3,7 +3,7 @@ import type { OptionProps } from 'rc-select/es/Option';
 import KEYCODE from 'rc-util/lib/KeyCode';
 import classNames from 'classnames';
 import React from 'react';
-import type { PaginationLocale, PaginationProps } from './interface';
+import type { PaginationLocale, PaginationProps } from '../interface';
 
 interface InternalSelectProps extends SelectProps {
   /**
@@ -11,6 +11,18 @@ interface InternalSelectProps extends SelectProps {
    */
   popupMatchSelectWidth?: boolean;
 }
+
+export type SizeChangerRender = (info: {
+  disabled: boolean;
+  size: number;
+  onSizeChange: (value: string | number) => void;
+  'aria-label': string;
+  className: string;
+  options: {
+    label: string;
+    value: string | number;
+  }[];
+}) => React.ReactNode;
 
 interface OptionsProps {
   disabled?: boolean;
@@ -23,10 +35,12 @@ interface OptionsProps {
   changeSize?: (size: number) => void;
   quickGo?: (value: number) => void;
   buildOptionText?: (value: string | number) => string;
-  selectComponentClass: React.ComponentType<Partial<InternalSelectProps>> & {
-    Option?: React.ComponentType<Partial<OptionProps>>;
-  };
-  showSizeChanger: PaginationProps['showSizeChanger'];
+  // selectComponentClass: React.ComponentType<Partial<InternalSelectProps>> & {
+  //   Option?: React.ComponentType<Partial<OptionProps>>;
+  // };
+  // showSizeChanger: PaginationProps['showSizeChanger'];
+  showSizeChanger: boolean;
+  sizeChangerRender?: SizeChangerRender;
 }
 
 const defaultPageSizeOptions = ['10', '20', '50', '100'];
@@ -40,11 +54,12 @@ const Options: React.FC<OptionsProps> = (props) => {
     goButton,
     quickGo,
     rootPrefixCls,
-    selectComponentClass: Select,
-    selectPrefixCls,
+    // selectComponentClass,
+    // selectPrefixCls,
     disabled,
     buildOptionText,
     showSizeChanger,
+    sizeChangerRender,
   } = props;
 
   const [goInputText, setGoInputText] = React.useState('');
@@ -60,12 +75,12 @@ const Options: React.FC<OptionsProps> = (props) => {
       ? buildOptionText
       : (value: string) => `${value} ${locale.items_per_page}`;
 
-  const changeSizeHandle = (value: number, option) => {
-    changeSize?.(Number(value));
-    if (typeof showSizeChanger === 'object') {
-      showSizeChanger.onChange?.(value, option);
-    }
-  };
+  // const changeSizeHandle = (value: number, option) => {
+  //   changeSize?.(Number(value));
+  //   if (typeof showSizeChanger === 'object') {
+  //     showSizeChanger.onChange?.(value, option);
+  //   }
+  // };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGoInputText(e.target.value);
@@ -123,47 +138,65 @@ const Options: React.FC<OptionsProps> = (props) => {
   let goInput: React.ReactNode = null;
   let gotoButton: React.ReactNode = null;
 
-  if (showSizeChanger && Select) {
-    const {
-      options: showSizeChangerOptions,
-      className: showSizeChangerClassName,
-    } =
-      typeof showSizeChanger === 'object'
-        ? showSizeChanger
-        : ({} as SelectProps);
-    // use showSizeChanger.options if existed, otherwise use pageSizeOptions
-    const options = showSizeChangerOptions
-      ? undefined
-      : getPageSizeOptions().map((opt, i) => (
-          <Select.Option key={i} value={opt.toString()}>
-            {mergeBuildOptionText(opt)}
-          </Select.Option>
-        ));
-
-    changeSelect = (
-      <Select
-        disabled={disabled}
-        prefixCls={selectPrefixCls}
-        showSearch={false}
-        optionLabelProp={showSizeChangerOptions ? 'label' : 'children'}
-        popupMatchSelectWidth={false}
-        value={(pageSize || pageSizeOptions[0]).toString()}
-        getPopupContainer={(triggerNode) => triggerNode.parentNode}
-        aria-label={locale.page_size}
-        defaultOpen={false}
-        {...(typeof showSizeChanger === 'object' ? showSizeChanger : null)}
-        className={classNames(
-          `${prefixCls}-size-changer`,
-          showSizeChangerClassName,
-        )}
-        options={showSizeChangerOptions}
-        onChange={changeSizeHandle}
-      >
-        {options}
-      </Select>
-    );
+  // >>>>> Size Changer
+  if (showSizeChanger && sizeChangerRender) {
+    changeSelect = sizeChangerRender({
+      disabled,
+      size: pageSize,
+      onSizeChange: (nextValue) => {
+        changeSize?.(Number(nextValue));
+      },
+      'aria-label': locale.page_size,
+      className: `${prefixCls}-size-changer`,
+      options: getPageSizeOptions().map((opt) => ({
+        label: mergeBuildOptionText(opt),
+        value: opt,
+      })),
+    });
   }
 
+  // if (showSizeChanger && Select) {
+  //   const {
+  //     options: showSizeChangerOptions,
+  //     className: showSizeChangerClassName,
+  //   } =
+  //     typeof showSizeChanger === 'object'
+  //       ? showSizeChanger
+  //       : ({} as SelectProps);
+  //   // use showSizeChanger.options if existed, otherwise use pageSizeOptions
+  //   const options = showSizeChangerOptions
+  //     ? undefined
+  //     : getPageSizeOptions().map((opt, i) => (
+  //         <Select.Option key={i} value={opt.toString()}>
+  //           {mergeBuildOptionText(opt)}
+  //         </Select.Option>
+  //       ));
+
+  //   changeSelect = (
+  //     <Select
+  //       disabled={disabled}
+  //       prefixCls={selectPrefixCls}
+  //       showSearch={false}
+  //       optionLabelProp={showSizeChangerOptions ? 'label' : 'children'}
+  //       popupMatchSelectWidth={false}
+  //       value={(pageSize || pageSizeOptions[0]).toString()}
+  //       getPopupContainer={(triggerNode) => triggerNode.parentNode}
+  //       aria-label={locale.page_size}
+  //       defaultOpen={false}
+  //       {...(typeof showSizeChanger === 'object' ? showSizeChanger : null)}
+  //       className={classNames(
+  //         `${prefixCls}-size-changer`,
+  //         showSizeChangerClassName,
+  //       )}
+  //       options={showSizeChangerOptions}
+  //       onChange={changeSizeHandle}
+  //     >
+  //       {options}
+  //     </Select>
+  //   );
+  // }
+
+  // >>>>> Quick Go
   if (quickGo) {
     if (goButton) {
       gotoButton =

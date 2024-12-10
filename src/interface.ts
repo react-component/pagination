@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { SelectProps } from 'rc-select';
+import type { SizeChangerRender } from './Options';
 
 export interface PaginationLocale {
   // Options
@@ -33,7 +33,8 @@ export interface PaginationData {
 
   hideOnSinglePage: boolean;
   align: 'start' | 'center' | 'end';
-  showSizeChanger: boolean | SelectProps;
+  showSizeChanger: boolean;
+  sizeChangerRender?: SizeChangerRender;
   showLessItems: boolean;
   showPrevNextJumpers: boolean;
   showQuickJumper: boolean | object;
@@ -45,7 +46,7 @@ export interface PaginationData {
 
   style: React.CSSProperties;
 
-  selectComponentClass: React.ComponentType;
+  // selectComponentClass: React.ComponentType;
   prevIcon: React.ComponentType | React.ReactNode;
   nextIcon: React.ComponentType | React.ReactNode;
   jumpPrevIcon: React.ComponentType | React.ReactNode;

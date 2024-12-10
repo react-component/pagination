@@ -26,7 +26,7 @@ class App extends React.Component {
           defaultCurrent={3}
           total={40}
         />
-        {/* <PaginationWithSizeChanger
+        <PaginationWithSizeChanger
           // selectComponentClass={Select}
           pageSize={pageSize}
           onShowSizeChange={this.onShowSizeChange}
@@ -47,7 +47,7 @@ class App extends React.Component {
           onShowSizeChange={this.onShowSizeChange}
           defaultCurrent={3}
           total={60}
-        /> */}
+        />
       </div>
     );
   }

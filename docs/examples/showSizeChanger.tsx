@@ -23,13 +23,13 @@ export default () => {
       />
       <PaginationWithSizeChanger
         defaultCurrent={1}
-        total={100}
+        showSizeChanger
         // selectComponentClass={Select}
         sizeChangerProps={{
           options: [
-            { value: '10', label: '10 条每页' },
-            { value: '25', label: '25 条每页' },
-            { value: '100', label: '100 条每页' },
+            { value: 10, label: '10 条每页' },
+            { value: 25, label: '25 条每页' },
+            { value: 100, label: '100 条每页' },
           ],
           // className: 'my-select',
           // showSearch: true,

@@ -1,6 +1,6 @@
 /* eslint func-names: 0, no-console: 0 */
 import React from 'react';
-import Pagination from 'rc-pagination';
+import Pagination from '../../src';
 import '../../assets/index.less';
 
 class App extends React.Component {

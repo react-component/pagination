@@ -39,7 +39,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     prefixCls = 'rc-pagination',
     selectPrefixCls = 'rc-select',
     className,
-    selectComponentClass,
+    // selectComponentClass,
 
     // control
     current: currentProp,
@@ -64,6 +64,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     simple,
     showTotal,
     showSizeChanger = total > totalBoundaryShowSizeChanger,
+    sizeChangerRender,
     pageSizeOptions,
 
     // render
@@ -582,7 +583,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         locale={locale}
         rootPrefixCls={prefixCls}
         disabled={disabled}
-        selectComponentClass={selectComponentClass}
+        // selectComponentClass={selectComponentClass}
         selectPrefixCls={selectPrefixCls}
         changeSize={changePageSize}
         pageSize={pageSize}
@@ -590,6 +591,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         quickGo={shouldDisplayQuickJumper ? handleChange : null}
         goButton={gotoButton}
         showSizeChanger={showSizeChanger}
+        sizeChangerRender={sizeChangerRender}
       />
     </ul>
   );

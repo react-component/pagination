@@ -1,14 +1,16 @@
 import { render } from '@testing-library/react';
-import Select from 'rc-select';
+// import Select from 'rc-select';
 import zhCN from '../src/locale/zh_CN';
 import Options from '../src/Options';
 import * as React from 'react';
+import { sizeChangerRender } from './commonUtil';
 
 const WrapperOptions: React.FC<any> = (props) => (
   <Options
     locale={zhCN}
     rootPrefixCls="rc-pagination"
-    selectComponentClass={Select}
+    // selectComponentClass={Select}
+    sizeChangerRender={sizeChangerRender}
     pageSize={10}
     changeSize={jest.fn()}
     quickGo={jest.fn()}

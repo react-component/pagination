@@ -1,7 +1,7 @@
 // import 'rc-select/assets/index.less';
-import Select from 'rc-select';
 import React from 'react';
 import Pagination from '../src';
+import { sizeChangerRender } from './commonUtil';
 
 class Hello extends React.Component {
   state = {
@@ -22,7 +22,8 @@ class Hello extends React.Component {
         </button>
         <Pagination
           className="p1"
-          selectComponentClass={Select}
+          // selectComponentClass={Select}
+          sizeChangerRender={sizeChangerRender}
           showSizeChanger
           pageSize={this.state.pageSize}
           onShowSizeChange={this.onShowSizeChange}
@@ -31,7 +32,8 @@ class Hello extends React.Component {
         />
         <Pagination
           className="p2"
-          selectComponentClass={Select}
+          // selectComponentClass={Select}
+          sizeChangerRender={sizeChangerRender}
           showSizeChanger
           pageSize={this.state.pageSize}
           onShowSizeChange={this.onShowSizeChange}

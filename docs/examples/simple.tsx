@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Pagination from 'rc-pagination';
-import Select from 'rc-select';
+import Pagination from '../../src';
 import '../../assets/index.less';
+import PaginationWithSizeChanger from './utils/commonUtil';
 
 export default () => {
   const [pageIndex, setPageIndex] = useState(1);
@@ -32,24 +32,24 @@ export default () => {
         showTotal={(total) => `Total ${total} items`}
       />
       <br />
-      <Pagination
+      <PaginationWithSizeChanger
         simple
         defaultCurrent={1}
         total={50}
         showSizeChanger
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
       />
       <hr />
       <a href="https://github.com/ant-design/ant-design/issues/46671">
         Antd #46671
       </a>
-      <Pagination
+      <PaginationWithSizeChanger
         simple
         defaultCurrent={1}
         total={50}
         showSizeChanger
         showQuickJumper
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
       />
     </>
   );

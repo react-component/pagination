@@ -30,11 +30,11 @@ interface OptionsProps {
   rootPrefixCls: string;
   selectPrefixCls?: string;
   pageSize: number;
-  pageSizeOptions?: (string | number)[];
+  pageSizeOptions?: number[];
   goButton?: boolean | string;
   changeSize?: (size: number) => void;
   quickGo?: (value: number) => void;
-  buildOptionText?: (value: string | number) => string;
+  buildOptionText?: (value: number) => string;
   // selectComponentClass: React.ComponentType<Partial<InternalSelectProps>> & {
   //   Option?: React.ComponentType<Partial<OptionProps>>;
   // };
@@ -43,7 +43,7 @@ interface OptionsProps {
   sizeChangerRender?: SizeChangerRender;
 }
 
-const defaultPageSizeOptions = ['10', '20', '50', '100'];
+const defaultPageSizeOptions = [10, 20, 50, 100];
 
 const Options: React.FC<OptionsProps> = (props) => {
   const {
@@ -73,7 +73,7 @@ const Options: React.FC<OptionsProps> = (props) => {
   const mergeBuildOptionText =
     typeof buildOptionText === 'function'
       ? buildOptionText
-      : (value: string) => `${value} ${locale.items_per_page}`;
+      : (value: number) => `${value} ${locale.items_per_page}`;
 
   // const changeSizeHandle = (value: number, option) => {
   //   changeSize?.(Number(value));
@@ -119,7 +119,7 @@ const Options: React.FC<OptionsProps> = (props) => {
     ) {
       return pageSizeOptions;
     }
-    return pageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
+    return pageSizeOptions.concat([pageSize]).sort((a, b) => {
       const numberA = Number.isNaN(Number(a)) ? 0 : Number(a);
       const numberB = Number.isNaN(Number(b)) ? 0 : Number(b);
       return numberA - numberB;

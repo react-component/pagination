@@ -22,7 +22,8 @@ export interface PaginationData {
   className: string;
   selectPrefixCls: string;
   prefixCls: string;
-  pageSizeOptions: string[] | number[];
+  // pageSizeOptions: string[] | number[];
+  pageSizeOptions: number[];
 
   current: number;
   defaultCurrent: number;

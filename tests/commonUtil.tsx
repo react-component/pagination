@@ -9,17 +9,19 @@ export const sizeChangerRender: PaginationProps['sizeChangerRender'] = ({
   'aria-label': ariaLabel,
   className,
   options,
-}) => (
-  <Select
-    disabled={disabled}
-    showSearch={false}
-    dropdownMatchSelectWidth={false}
-    value={pageSize || options[0].value}
-    getPopupContainer={(triggerNode) => triggerNode.parentNode}
-    aria-label={ariaLabel}
-    defaultOpen={false}
-    className={className}
-    options={options}
-    onChange={onSizeChange}
-  />
-);
+}) => {
+  return (
+    <Select
+      disabled={disabled}
+      showSearch={false}
+      dropdownMatchSelectWidth={false}
+      value={pageSize || options[0].value}
+      getPopupContainer={(triggerNode) => triggerNode.parentNode}
+      aria-label={ariaLabel}
+      defaultOpen={false}
+      className={className}
+      options={options}
+      onChange={onSizeChange}
+    />
+  );
+};

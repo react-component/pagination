@@ -2,6 +2,7 @@ import React from 'react';
 import Pagination from 'rc-pagination';
 import Select from 'rc-select';
 import '../../assets/index.less';
+import PaginationWithSizeChanger from './utils/commonUtil';
 
 export default () => {
   const onPageSizeOnChange = (value) => {
@@ -10,31 +11,31 @@ export default () => {
 
   return (
     <>
-      <Pagination
+      <PaginationWithSizeChanger
         defaultCurrent={1}
         total={50}
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
         showSizeChanger={false}
       />
-      <Pagination
+      <PaginationWithSizeChanger
         defaultCurrent={1}
         total={50}
-        selectComponentClass={Select}
+        // selectComponentClass={Select}
         showSizeChanger
       />
-      <Pagination
+      <PaginationWithSizeChanger
         defaultCurrent={1}
-        total={50}
-        selectComponentClass={Select}
-        showSizeChanger={{
+        total={100}
+        // selectComponentClass={Select}
+        sizeChangerProps={{
           options: [
             { value: '10', label: '10 条每页' },
             { value: '25', label: '25 条每页' },
             { value: '100', label: '100 条每页' },
           ],
-          className: 'my-select',
-          showSearch: true,
-          onChange: onPageSizeOnChange,
+          // className: 'my-select',
+          // showSearch: true,
+          // onChange: onPageSizeOnChange,
         }}
       />
     </>

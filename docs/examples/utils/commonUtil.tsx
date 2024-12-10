@@ -3,15 +3,15 @@ import Pagination from 'rc-pagination';
 import Select from 'rc-select';
 import React from 'react';
 
-export const sizeChangerRender: PaginationProps['sizeChangerRender'] = ({
-  disabled,
-  size: pageSize,
-  onSizeChange,
-  'aria-label': ariaLabel,
-  className,
-  options,
-}) => {
-  return (
+export const getSizeChangerRender = (selectProps?: any) => {
+  const render: PaginationProps['sizeChangerRender'] = ({
+    disabled,
+    size: pageSize,
+    onSizeChange,
+    'aria-label': ariaLabel,
+    className,
+    options,
+  }) => (
     <Select
       disabled={disabled}
       // prefixCls={selectPrefixCls}
@@ -27,14 +27,23 @@ export const sizeChangerRender: PaginationProps['sizeChangerRender'] = ({
       className={className}
       options={options}
       onChange={onSizeChange}
+      {...selectProps}
     />
   );
+
+  return render;
 };
 
-export default function PaginationWithSizeChanger(
-  props: Omit<PaginationProps, 'sizeChangerRender'> & {
-    sizeChangerRender?: boolean;
-  },
-) {
-  return <Pagination {...props} sizeChangerRender={sizeChangerRender} />;
+export default function PaginationWithSizeChanger({
+  sizeChangerProps,
+  ...props
+}: Omit<PaginationProps, 'sizeChangerRender'> & {
+  sizeChangerProps?: any;
+}) {
+  return (
+    <Pagination
+      {...props}
+      sizeChangerRender={getSizeChangerRender(sizeChangerProps)}
+    />
+  );
 }

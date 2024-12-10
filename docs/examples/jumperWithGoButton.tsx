@@ -4,6 +4,7 @@ import Select from 'rc-select';
 import Pagination from 'rc-pagination';
 import '../../assets/index.less';
 import 'rc-select/assets/index.less';
+import PaginationWithSizeChanger from './utils/commonUtil';
 
 class App extends React.Component {
   onShowSizeChange = (current, pageSize) => {
@@ -20,8 +21,8 @@ class App extends React.Component {
     return (
       <>
         <p> customize node </p>
-        <Pagination
-          selectComponentClass={Select}
+        <PaginationWithSizeChanger
+          // selectComponentClass={Select}
           showSizeChanger
           showQuickJumper={{ goButton: <button type="button">确定</button> }}
           defaultPageSize={20}

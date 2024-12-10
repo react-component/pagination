@@ -4,6 +4,7 @@ import Select from 'rc-select';
 import Pagination from 'rc-pagination';
 import '../../assets/index.less';
 import 'rc-select/assets/index.less';
+import PaginationWithSizeChanger from './utils/commonUtil';
 
 function onShowSizeChange(current, pageSize) {
   console.log(current);
@@ -18,8 +19,8 @@ function onChange(current, pageSize) {
 const App = () => (
   <>
     <h3>默认</h3>
-    <Pagination
-      selectComponentClass={Select}
+    <PaginationWithSizeChanger
+      // selectComponentClass={Select}
       showQuickJumper
       showSizeChanger
       defaultPageSize={20}
@@ -29,8 +30,8 @@ const App = () => (
       total={450}
     />
     <h3>禁用</h3>
-    <Pagination
-      selectComponentClass={Select}
+    <PaginationWithSizeChanger
+      // selectComponentClass={Select}
       showQuickJumper
       showSizeChanger
       defaultPageSize={20}
@@ -41,8 +42,8 @@ const App = () => (
       disabled
     />
     <h3>单页默认隐藏</h3>
-    <Pagination
-      selectComponentClass={Select}
+    <PaginationWithSizeChanger
+      // selectComponentClass={Select}
       showQuickJumper
       showSizeChanger
       onShowSizeChange={onShowSizeChange}
@@ -50,8 +51,8 @@ const App = () => (
       total={8}
     />
     <br />
-    <Pagination
-      selectComponentClass={Select}
+    <PaginationWithSizeChanger
+      // selectComponentClass={Select}
       showQuickJumper
       showSizeChanger
       onShowSizeChange={onShowSizeChange}

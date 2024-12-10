@@ -22,7 +22,6 @@ export interface PaginationData {
   className: string;
   selectPrefixCls: string;
   prefixCls: string;
-  // pageSizeOptions: string[] | number[];
   pageSizeOptions: number[];
 
   current: number;
@@ -47,7 +46,6 @@ export interface PaginationData {
 
   style: React.CSSProperties;
 
-  // selectComponentClass: React.ComponentType;
   prevIcon: React.ComponentType | React.ReactNode;
   nextIcon: React.ComponentType | React.ReactNode;
   jumpPrevIcon: React.ComponentType | React.ReactNode;

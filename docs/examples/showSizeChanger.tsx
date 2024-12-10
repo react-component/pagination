@@ -12,19 +12,16 @@ export default () => {
       <PaginationWithSizeChanger
         defaultCurrent={1}
         total={50}
-        // selectComponentClass={Select}
         showSizeChanger={false}
       />
       <PaginationWithSizeChanger
         defaultCurrent={1}
         total={50}
-        // selectComponentClass={Select}
         showSizeChanger
       />
       <PaginationWithSizeChanger
         defaultCurrent={1}
         showSizeChanger
-        // selectComponentClass={Select}
         sizeChangerProps={{
           options: [
             { value: 10, label: '10 条每页' },

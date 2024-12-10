@@ -106,7 +106,6 @@ describe('simple Pagination', () => {
         total={500}
         pageSize={15}
         showSizeChanger
-        // selectComponentClass={Select}
         sizeChangerRender={sizeChangerRender}
       />,
     );
@@ -119,7 +118,6 @@ describe('simple Pagination', () => {
     const { container, getByRole } = render(
       <Pagination
         simple
-        // selectComponentClass={Select}
         sizeChangerRender={sizeChangerRender}
         onChange={onChange}
         total={500}

@@ -19,7 +19,6 @@ class App extends React.Component {
     return (
       <div style={{ margin: 10 }}>
         <PaginationWithSizeChanger
-          // selectComponentClass={Select}
           showSizeChanger
           pageSize={pageSize}
           onShowSizeChange={this.onShowSizeChange}
@@ -27,21 +26,18 @@ class App extends React.Component {
           total={40}
         />
         <PaginationWithSizeChanger
-          // selectComponentClass={Select}
           pageSize={pageSize}
           onShowSizeChange={this.onShowSizeChange}
           defaultCurrent={3}
           total={50}
         />
         <PaginationWithSizeChanger
-          // selectComponentClass={Select}
           pageSize={pageSize}
           onShowSizeChange={this.onShowSizeChange}
           defaultCurrent={3}
           total={60}
         />
         <PaginationWithSizeChanger
-          // selectComponentClass={Select}
           showSizeChanger={false}
           pageSize={pageSize}
           onShowSizeChange={this.onShowSizeChange}

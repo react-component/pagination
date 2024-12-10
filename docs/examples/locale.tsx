@@ -17,7 +17,6 @@ function onChange(current, pageSize) {
 
 const App = () => (
   <PaginationWithSizeChanger
-    // selectComponentClass={Select}
     showQuickJumper
     showSizeChanger
     defaultPageSize={20}

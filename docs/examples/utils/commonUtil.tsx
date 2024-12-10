@@ -14,16 +14,12 @@ export const getSizeChangerRender = (selectProps?: any) => {
   }) => (
     <Select
       disabled={disabled}
-      // prefixCls={selectPrefixCls}
       showSearch={false}
-      // optionLabelProp={showSizeChangerOptions ? 'label' : 'children'}
-      // popupMatchSelectWidth={false}
       dropdownMatchSelectWidth={false}
       value={pageSize || options[0].value}
       getPopupContainer={(triggerNode) => triggerNode.parentNode}
       aria-label={ariaLabel}
       defaultOpen={false}
-      // {...(typeof showSizeChanger === 'object' ? showSizeChanger : null)}
       className={className}
       options={options}
       onChange={onSizeChange}

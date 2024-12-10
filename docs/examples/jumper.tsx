@@ -18,7 +18,6 @@ const App = () => (
   <>
     <h3>默认</h3>
     <PaginationWithSizeChanger
-      // selectComponentClass={Select}
       showQuickJumper
       showSizeChanger
       defaultPageSize={20}
@@ -29,7 +28,6 @@ const App = () => (
     />
     <h3>禁用</h3>
     <PaginationWithSizeChanger
-      // selectComponentClass={Select}
       showQuickJumper
       showSizeChanger
       defaultPageSize={20}
@@ -41,7 +39,6 @@ const App = () => (
     />
     <h3>单页默认隐藏</h3>
     <PaginationWithSizeChanger
-      // selectComponentClass={Select}
       showQuickJumper
       showSizeChanger
       onShowSizeChange={onShowSizeChange}
@@ -50,7 +47,6 @@ const App = () => (
     />
     <br />
     <PaginationWithSizeChanger
-      // selectComponentClass={Select}
       showQuickJumper
       showSizeChanger
       onShowSizeChange={onShowSizeChange}

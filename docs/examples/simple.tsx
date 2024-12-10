@@ -37,7 +37,6 @@ export default () => {
         defaultCurrent={1}
         total={50}
         showSizeChanger
-        // selectComponentClass={Select}
       />
       <hr />
       <a href="https://github.com/ant-design/ant-design/issues/46671">
@@ -49,7 +48,6 @@ export default () => {
         total={50}
         showSizeChanger
         showQuickJumper
-        // selectComponentClass={Select}
       />
     </>
   );

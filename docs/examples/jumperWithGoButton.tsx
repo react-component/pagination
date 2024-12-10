@@ -21,7 +21,6 @@ class App extends React.Component {
       <>
         <p> customize node </p>
         <PaginationWithSizeChanger
-          // selectComponentClass={Select}
           showSizeChanger
           showQuickJumper={{ goButton: <button type="button">确定</button> }}
           defaultPageSize={20}

@@ -22,7 +22,6 @@ class Hello extends React.Component {
         </button>
         <Pagination
           className="p1"
-          // selectComponentClass={Select}
           sizeChangerRender={sizeChangerRender}
           showSizeChanger
           pageSize={this.state.pageSize}
@@ -32,7 +31,6 @@ class Hello extends React.Component {
         />
         <Pagination
           className="p2"
-          // selectComponentClass={Select}
           sizeChangerRender={sizeChangerRender}
           showSizeChanger
           pageSize={this.state.pageSize}

@@ -39,7 +39,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     prefixCls = 'rc-pagination',
     selectPrefixCls = 'rc-select',
     className,
-    // selectComponentClass,
 
     // control
     current: currentProp,
@@ -583,7 +582,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         locale={locale}
         rootPrefixCls={prefixCls}
         disabled={disabled}
-        // selectComponentClass={selectComponentClass}
         selectPrefixCls={selectPrefixCls}
         changeSize={changePageSize}
         pageSize={pageSize}

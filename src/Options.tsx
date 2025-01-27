@@ -1,4 +1,4 @@
-import KEYCODE from 'rc-util/lib/KeyCode';
+import KEYCODE from '@rc-component/util/lib/KeyCode';
 import React from 'react';
 import type { PaginationLocale } from './interface';
 

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import KeyCode from 'rc-util/lib/KeyCode';
-import pickAttrs from 'rc-util/lib/pickAttrs';
-import warning from 'rc-util/lib/warning';
+import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import KeyCode from '@rc-component/util/lib/KeyCode';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import warning from '@rc-component/util/lib/warning';
 import React, { useEffect } from 'react';
 import type { PaginationProps } from './interface';
 import zhCN from './locale/zh_CN';

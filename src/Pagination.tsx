@@ -326,7 +326,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     return null;
   }
 
-  const pagerList: React.ReactElement<PagerProps>[] = [];
+  const pagerList: React.ReactElement[] = [];
 
   const pagerProps: PagerProps = {
     rootPrefixCls: prefixCls,

@@ -300,7 +300,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     }
   }
 
-  let jumpPrev: React.ReactElement = null;
+  let jumpPrev: React.ReactElement<PagerProps> = null;
 
   const dataOrAriaAttributeProps = pickAttrs(props, {
     aria: true,
@@ -316,7 +316,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     </li>
   );
 
-  let jumpNext: React.ReactElement = null;
+  let jumpNext: React.ReactElement<PagerProps> = null;
 
   const allPages = calculatePage(undefined, pageSize, total);
 
@@ -326,7 +326,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     return null;
   }
 
-  const pagerList: React.ReactElement[] = [];
+  const pagerList: React.ReactElement<PagerProps>[] = [];
 
   const pagerProps: PagerProps = {
     rootPrefixCls: prefixCls,

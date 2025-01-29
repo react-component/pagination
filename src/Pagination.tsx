@@ -10,11 +10,8 @@ import Options from './Options';
 import type { PagerProps } from './Pager';
 import Pager from './Pager';
 
-const defaultItemRender: PaginationProps['itemRender'] = (
-  page,
-  type,
-  element,
-) => element;
+const defaultItemRender: PaginationProps['itemRender'] = (_, __, element) =>
+  element;
 
 function noop() {}
 
@@ -244,8 +241,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   function runIfEnter(
     event: React.KeyboardEvent<HTMLLIElement>,
-    callback,
-    ...restParams
+    callback: (...args: any[]) => void,
+    ...restParams: any[]
   ) {
     if (
       event.key === 'Enter' ||

@@ -249,6 +249,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       event.charCode === KeyCode.ENTER ||
       event.keyCode === KeyCode.ENTER
     ) {
+      event.preventDefault();
       callback(...restParams);
     }
   }

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import KeyCode from 'rc-util/lib/KeyCode';
-import pickAttrs from 'rc-util/lib/pickAttrs';
-import warning from 'rc-util/lib/warning';
+import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import KeyCode from '@rc-component/util/lib/KeyCode';
+import pickAttrs from '@rc-component/util/lib/pickAttrs';
+import warning from '@rc-component/util/lib/warning';
 import React, { useEffect } from 'react';
 import type { PaginationProps } from './interface';
 import zhCN from './locale/zh_CN';
@@ -10,11 +10,8 @@ import Options from './Options';
 import type { PagerProps } from './Pager';
 import Pager from './Pager';
 
-const defaultItemRender: PaginationProps['itemRender'] = (
-  page,
-  type,
-  element,
-) => element;
+const defaultItemRender: PaginationProps['itemRender'] = (_, __, element) =>
+  element;
 
 function noop() {}
 
@@ -244,8 +241,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   function runIfEnter(
     event: React.KeyboardEvent<HTMLLIElement>,
-    callback,
-    ...restParams
+    callback: (...args: any[]) => void,
+    ...restParams: any[]
   ) {
     if (
       event.key === 'Enter' ||
@@ -300,7 +297,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     }
   }
 
-  let jumpPrev: React.ReactElement = null;
+  let jumpPrev: React.ReactElement<PagerProps> = null;
 
   const dataOrAriaAttributeProps = pickAttrs(props, {
     aria: true,
@@ -316,7 +313,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     </li>
   );
 
-  let jumpNext: React.ReactElement = null;
+  let jumpNext: React.ReactElement<PagerProps> = null;
 
   const allPages = calculatePage(undefined, pageSize, total);
 

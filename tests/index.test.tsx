@@ -1,9 +1,8 @@
 import type { RenderResult } from '@testing-library/react';
 import { render, fireEvent } from '@testing-library/react';
-import Select from 'rc-select';
 import React from 'react';
 import Pagination from '../src';
-import { resetWarned } from 'rc-util/lib/warning';
+import { resetWarned } from '@rc-component/util/lib/warning';
 import { sizeChangerRender } from './commonUtil';
 
 describe('Default Pagination', () => {

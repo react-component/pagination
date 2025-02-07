@@ -1,4 +1,4 @@
-import KEYCODE from 'rc-util/lib/KeyCode';
+import KEYCODE from '@rc-component/util/lib/KeyCode';
 import React from 'react';
 import type { PaginationLocale } from './interface';
 
@@ -48,11 +48,11 @@ const Options: React.FC<OptionsProps> = (props) => {
 
   const [goInputText, setGoInputText] = React.useState('');
 
-  const getValidValue = () => {
+  const getValidValue = React.useMemo<number>(() => {
     return !goInputText || Number.isNaN(goInputText)
       ? undefined
       : Number(goInputText);
-  };
+  }, [goInputText]);
 
   const mergeBuildOptionText =
     typeof buildOptionText === 'function'
@@ -70,12 +70,12 @@ const Options: React.FC<OptionsProps> = (props) => {
     setGoInputText('');
     if (
       e.relatedTarget &&
-      (e.relatedTarget.className.indexOf(`${rootPrefixCls}-item-link`) >= 0 ||
-        e.relatedTarget.className.indexOf(`${rootPrefixCls}-item`) >= 0)
+      (e.relatedTarget.className.includes(`${rootPrefixCls}-item-link`) ||
+        e.relatedTarget.className.includes(`${rootPrefixCls}-item`))
     ) {
       return;
     }
-    quickGo?.(getValidValue());
+    quickGo?.(getValidValue);
   };
 
   const go = (e: any) => {
@@ -84,7 +84,7 @@ const Options: React.FC<OptionsProps> = (props) => {
     }
     if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
       setGoInputText('');
-      quickGo?.(getValidValue());
+      quickGo?.(getValidValue);
     }
   };
 

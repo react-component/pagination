@@ -119,7 +119,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       />
     );
     if (typeof icon === 'function') {
-      iconNode = React.createElement<PaginationProps>(icon, { ...props });
+      iconNode = React.createElement<PaginationProps>(icon, props);
     }
     return iconNode as React.ReactNode;
   }

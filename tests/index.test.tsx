@@ -241,6 +241,19 @@ describe('Controlled Pagination', () => {
 });
 
 describe('Other props', () => {
+  it('support classnames and styles', () => {
+    const { container } = render(
+      <Pagination
+        total={1000}
+        current={12}
+        classNames={{ item: 'custom-test' }}
+        styles={{ item: { color: 'red' } }}
+      />,
+    );
+    const item = container.querySelector('.rc-pagination-item');
+    expect(item).toHaveClass('custom-test');
+    expect(item).toHaveStyle('color: red');
+  });
   it('should support custom default icon', () => {
     const nextIcon = () => <span>nextIcon</span>;
     const prevIcon = () => <span>prevIcon</span>;

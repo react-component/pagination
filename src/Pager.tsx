@@ -8,6 +8,7 @@ export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
   page: number;
   active?: boolean;
   className?: string;
+  style?: React.CSSProperties;
   showTitle: boolean;
   onClick?: (page: number) => void;
   onKeyPress?: (
@@ -23,6 +24,7 @@ const Pager: React.FC<PagerProps> = (props) => {
     page,
     active,
     className,
+    style,
     showTitle,
     onClick,
     onKeyPress,
@@ -54,6 +56,7 @@ const Pager: React.FC<PagerProps> = (props) => {
     <li
       title={showTitle ? String(page) : null}
       className={cls}
+      style={style}
       onClick={handleClick}
       onKeyDown={handleKeyPress}
       tabIndex={0}

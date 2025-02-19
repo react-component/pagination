@@ -36,6 +36,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     prefixCls = 'rc-pagination',
     selectPrefixCls = 'rc-select',
     className,
+    classNames: paginationClassNames,
+    styles,
 
     // control
     current: currentProp,
@@ -332,6 +334,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     showTitle,
     itemRender,
     page: -1,
+    className: paginationClassNames?.item,
+    style: styles?.item,
   };
 
   const prevPage = current - 1 > 0 ? current - 1 : 0;

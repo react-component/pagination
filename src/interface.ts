@@ -18,7 +18,11 @@ export interface PaginationLocale {
   page_size?: string;
 }
 
+type SemanticName = 'item';
+
 export interface PaginationData {
+  styles?: Partial<Record<SemanticName, React.CSSProperties>>;
+  classNames?: Partial<Record<SemanticName, string>>;
   className: string;
   selectPrefixCls: string;
   prefixCls: string;

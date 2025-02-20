@@ -251,8 +251,26 @@ describe('Other props', () => {
       />,
     );
     const item = container.querySelector('.rc-pagination-item');
+    const prev = container.querySelector('.rc-pagination-prev');
+    const next = container.querySelector('.rc-pagination-next');
     expect(item).toHaveClass('custom-test');
+    expect(prev).toHaveClass('custom-test');
+    expect(next).toHaveClass('custom-test');
     expect(item).toHaveStyle('color: red');
+    expect(prev).toHaveStyle('color: red');
+    expect(next).toHaveStyle('color: red');
+  });
+  it('should have 5 items when there are 3 pages and current page is 2', () => {
+    const { container } = render(
+      <Pagination
+        total={15}
+        pageSize={5}
+        current={2}
+        classNames={{ item: 'custom-test' }}
+      />,
+    );
+    const items = container.querySelectorAll('.custom-test');
+    expect(items.length).toBe(5);
   });
   it('should support custom default icon', () => {
     const nextIcon = () => <span>nextIcon</span>;

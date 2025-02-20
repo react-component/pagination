@@ -523,9 +523,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         onClick={prevHandle}
         tabIndex={prevDisabled ? null : 0}
         onKeyDown={runIfEnterPrev}
-        className={classNames(`${prefixCls}-prev`, {
+        className={classNames(`${prefixCls}-prev`, paginationClassNames?.item, {
           [`${prefixCls}-disabled`]: prevDisabled,
         })}
+        style={styles?.item}
         aria-disabled={prevDisabled}
       >
         {prev}
@@ -551,9 +552,10 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         onClick={nextHandle}
         tabIndex={nextTabIndex}
         onKeyDown={runIfEnterNext}
-        className={classNames(`${prefixCls}-next`, {
+        className={classNames(`${prefixCls}-next`, paginationClassNames?.item, {
           [`${prefixCls}-disabled`]: nextDisabled,
         })}
+        style={styles?.item}
         aria-disabled={nextDisabled}
       >
         {next}

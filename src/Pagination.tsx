@@ -81,7 +81,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   );
 
   const [internalCurrent, setCurrent] = useControlledState<number>(
-    defaultCurrent || 1,
+    defaultCurrent,
     currentProp,
   );
 

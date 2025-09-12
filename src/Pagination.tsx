@@ -76,7 +76,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   const paginationRef = React.useRef<HTMLUListElement>(null);
 
   const [pageSize, setPageSize] = useControlledState<number>(
-    defaultPageSize || 10,
+    defaultPageSize,
     pageSizeProp,
   );
 

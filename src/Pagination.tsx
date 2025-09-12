@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
 import KeyCode from '@rc-component/util/lib/KeyCode';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
 import warning from '@rc-component/util/lib/warning';
@@ -75,17 +75,20 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   const paginationRef = React.useRef<HTMLUListElement>(null);
 
-  const [pageSize, setPageSize] = useMergedState<number>(10, {
-    value: pageSizeProp,
-    defaultValue: defaultPageSize,
-  });
+  const [pageSize, setPageSize] = useControlledState<number>(
+    defaultPageSize || 10,
+    pageSizeProp,
+  );
 
-  const [current, setCurrent] = useMergedState<number>(1, {
-    value: currentProp,
-    defaultValue: defaultCurrent,
-    postState: (c) =>
-      Math.max(1, Math.min(c, calculatePage(undefined, pageSize, total))),
-  });
+  const [internalCurrent, setCurrent] = useControlledState<number>(
+    defaultCurrent || 1,
+    currentProp,
+  );
+
+  const current = Math.max(
+    1,
+    Math.min(internalCurrent, calculatePage(undefined, pageSize, total)),
+  );
 
   const [internalInputVal, setInternalInputVal] = React.useState(current);
 

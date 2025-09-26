@@ -205,6 +205,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   function handleChange(page: number) {
     if (isValid(page) && !disabled) {
       const currentPage = calculatePage(undefined, pageSize, total);
+      let originalPage = page;
       let newPage = page;
       if (page > currentPage) {
         newPage = currentPage;
@@ -217,7 +218,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       }
 
       setCurrent(newPage);
-      onChange?.(newPage, pageSize);
+      onChange?.(newPage, pageSize, originalPage);
 
       return newPage;
     }

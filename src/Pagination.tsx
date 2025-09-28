@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
 import KeyCode from '@rc-component/util/lib/KeyCode';
 import pickAttrs from '@rc-component/util/lib/pickAttrs';
@@ -446,7 +446,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           onClick={jumpPrevHandle}
           tabIndex={0}
           onKeyDown={runIfEnterJumpPrev}
-          className={classNames(`${prefixCls}-jump-prev`, {
+          className={clsx(`${prefixCls}-jump-prev`, {
             [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
           })}
         >
@@ -461,7 +461,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           onClick={jumpNextHandle}
           tabIndex={0}
           onKeyDown={runIfEnterJumpNext}
-          className={classNames(`${prefixCls}-jump-next`, {
+          className={clsx(`${prefixCls}-jump-next`, {
             [`${prefixCls}-jump-next-custom-icon`]: !!jumpNextIcon,
           })}
         >
@@ -488,7 +488,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
     if (current - 1 >= pageBufferSize * 2 && current !== 1 + 2) {
       pagerList[0] = React.cloneElement<PagerProps>(pagerList[0], {
-        className: classNames(
+        className: clsx(
           `${prefixCls}-item-after-jump-prev`,
           pagerList[0].props.className,
         ),
@@ -500,7 +500,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     if (allPages - current >= pageBufferSize * 2 && current !== allPages - 2) {
       const lastOne = pagerList[pagerList.length - 1];
       pagerList[pagerList.length - 1] = React.cloneElement(lastOne, {
-        className: classNames(
+        className: clsx(
           `${prefixCls}-item-before-jump-next`,
           lastOne.props.className,
         ),
@@ -526,7 +526,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         onClick={prevHandle}
         tabIndex={prevDisabled ? null : 0}
         onKeyDown={runIfEnterPrev}
-        className={classNames(`${prefixCls}-prev`, paginationClassNames?.item, {
+        className={clsx(`${prefixCls}-prev`, paginationClassNames?.item, {
           [`${prefixCls}-disabled`]: prevDisabled,
         })}
         style={styles?.item}
@@ -555,7 +555,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         onClick={nextHandle}
         tabIndex={nextTabIndex}
         onKeyDown={runIfEnterNext}
-        className={classNames(`${prefixCls}-next`, paginationClassNames?.item, {
+        className={clsx(`${prefixCls}-next`, paginationClassNames?.item, {
           [`${prefixCls}-disabled`]: nextDisabled,
         })}
         style={styles?.item}
@@ -566,7 +566,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     );
   }
 
-  const cls = classNames(prefixCls, className, {
+  const cls = clsx(prefixCls, className, {
     [`${prefixCls}-start`]: align === 'start',
     [`${prefixCls}-center`]: align === 'center',
     [`${prefixCls}-end`]: align === 'end',

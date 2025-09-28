@@ -1,5 +1,5 @@
 /* eslint react/prop-types: 0 */
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import React from 'react';
 import type { PaginationProps } from './interface';
 
@@ -32,7 +32,7 @@ const Pager: React.FC<PagerProps> = (props) => {
   } = props;
   const prefixCls = `${rootPrefixCls}-item`;
 
-  const cls = classNames(
+  const cls = clsx(
     prefixCls,
     `${prefixCls}-${page}`,
     {

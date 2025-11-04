@@ -321,6 +321,6 @@ describe('simple Pagination', () => {
 
     const simplePager = container.querySelector('.rc-pagination-simple-pager');
     expect(simplePager).toHaveClass(customClassName);
-    expect(simplePager).toHaveStyle('background-color: red');
+    expect(simplePager).toHaveStyle({ 'background-color': 'red' });
   });
 });

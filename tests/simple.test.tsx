@@ -305,4 +305,22 @@ describe('simple Pagination', () => {
     const { container } = render(<Pagination simple={{ readOnly: true }} />);
     expect(container).toMatchSnapshot();
   });
+
+  it('should apply semantic item styles to simplePager', () => {
+    const customClassName = 'custom-item-class';
+    const customStyle = { backgroundColor: 'red' };
+
+    const { container } = render(
+      <Pagination
+        simple
+        total={25}
+        classNames={{ item: customClassName }}
+        styles={{ item: customStyle }}
+      />,
+    );
+
+    const simplePager = container.querySelector('.rc-pagination-simple-pager');
+    expect(simplePager).toHaveClass(customClassName);
+    expect(simplePager).toHaveStyle('background-color: red');
+  });
 });

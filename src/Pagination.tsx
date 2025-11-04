@@ -381,7 +381,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     simplePager = (
       <li
         title={showTitle ? `${current}/${allPages}` : null}
-        className={`${prefixCls}-simple-pager`}
+        className={clsx(
+          `${prefixCls}-simple-pager`,
+          paginationClassNames?.item,
+        )}
+        style={styles?.item}
       >
         {isReadOnly ? (
           internalInputVal

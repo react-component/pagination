@@ -29,6 +29,8 @@ describe('Pagination with jumper', () => {
     expect(quickJumper).toBeTruthy();
     const input = quickJumper.querySelector('input');
     fireEvent.change(input, { target: { value: '-1' } });
+    expect(input.value).toBe('');
+    fireEvent.change(input, { target: { value: '1' } });
     fireEvent.keyUp(input, { key: 'Enter', keyCode: 13, which: 13 });
     expect($$('.rc-pagination-item-active')).toHaveTextContent('1');
     expect(onChange).toHaveBeenLastCalledWith(1, 10);

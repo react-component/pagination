@@ -27,6 +27,7 @@ interface OptionsProps {
   buildOptionText?: (value: number | string) => string;
   showSizeChanger: boolean;
   sizeChangerRender?: SizeChangerRender;
+  inputType?: 'text' | 'number';
 }
 
 const defaultPageSizeOptions = [10, 20, 50, 100];
@@ -44,6 +45,7 @@ const Options: React.FC<OptionsProps> = (props) => {
     buildOptionText,
     showSizeChanger,
     sizeChangerRender,
+    inputType = 'text',
   } = props;
 
   const [goInputText, setGoInputText] = React.useState('');
@@ -158,7 +160,7 @@ const Options: React.FC<OptionsProps> = (props) => {
         {locale.jump_to}
         <input
           disabled={disabled}
-          type="text"
+          type={inputType}
           value={goInputText}
           onChange={handleChange}
           onKeyUp={go}

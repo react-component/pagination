@@ -22,7 +22,9 @@ class App extends React.Component {
         <p> customize node </p>
         <PaginationWithSizeChanger
           showSizeChanger
-          showQuickJumper={{ goButton: <button type="button">确定</button> }}
+          showQuickJumper={{
+            goButton: <button type="button">确定</button>,
+          }}
           defaultPageSize={20}
           defaultCurrent={5}
           onShowSizeChange={this.onShowSizeChange}
@@ -33,6 +35,13 @@ class App extends React.Component {
         <Pagination
           simple
           showQuickJumper={{ goButton: true }}
+          defaultCurrent={1}
+          total={50}
+        />
+        <p> input only numbers</p>
+        <Pagination
+          simple
+          showQuickJumper={{ goButton: true, inputType: 'number' }}
           defaultCurrent={1}
           total={50}
         />

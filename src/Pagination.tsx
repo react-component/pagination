@@ -344,6 +344,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   const prevPage = current - 1 > 0 ? current - 1 : 0;
   const nextPage = current + 1 < allPages ? current + 1 : allPages;
   const goButton = showQuickJumper && (showQuickJumper as any).goButton;
+  const inputType = showQuickJumper && (showQuickJumper as any).inputType;
 
   // ================== Simple ==================
   // FIXME: ts type
@@ -596,6 +597,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         selectPrefixCls={selectPrefixCls}
         changeSize={changePageSize}
         pageSize={pageSize}
+        inputType={inputType}
         pageSizeOptions={pageSizeOptions}
         quickGo={shouldDisplayQuickJumper ? handleChange : null}
         goButton={gotoButton}

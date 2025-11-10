@@ -344,7 +344,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   const prevPage = current - 1 > 0 ? current - 1 : 0;
   const nextPage = current + 1 < allPages ? current + 1 : allPages;
   const goButton = showQuickJumper && (showQuickJumper as any).goButton;
-  const inputType = showQuickJumper && (showQuickJumper as any).inputType;
+  const inputType =
+    typeof showQuickJumper === 'object' ? showQuickJumper.inputType : undefined;
 
   // ================== Simple ==================
   // FIXME: ts type

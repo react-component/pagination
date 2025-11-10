@@ -271,3 +271,43 @@ describe('simple quick jumper', () => {
     ).toBeFalsy();
   });
 });
+
+describe('inputType number', () => {
+  it('should accept only number', () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <Pagination
+        onChange={onChange}
+        defaultCurrent={1}
+        total={95}
+        pageSize={10}
+        showQuickJumper={{ inputType: 'number' }}
+      />,
+    );
+    const quickJumper = container.querySelector(
+      '.rc-pagination-options-quick-jumper',
+    );
+    const input = quickJumper.querySelector('input');
+    fireEvent.change(input, { target: { value: '42' } });
+    expect(input.value).toBe('42');
+  });
+
+  it('should not accept non-number', () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <Pagination
+        onChange={onChange}
+        defaultCurrent={1}
+        total={95}
+        pageSize={10}
+        showQuickJumper={{ inputType: 'number' }}
+      />,
+    );
+    const quickJumper = container.querySelector(
+      '.rc-pagination-options-quick-jumper',
+    );
+    const input = quickJumper.querySelector('input');
+    fireEvent.change(input, { target: { value: 'abc' } });
+    expect(input.value).toBe('');
+  });
+});

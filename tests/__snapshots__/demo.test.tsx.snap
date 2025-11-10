@@ -1882,6 +1882,191 @@ exports[`Example jumper 1`] = `
     </li>
   </ul>
   <h3>
+    仅输入数字
+  </h3>
+  <ul
+    class="rc-pagination"
+  >
+    <li
+      aria-disabled="false"
+      class="rc-pagination-prev"
+      tabindex="0"
+      title="上一页"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-1"
+      tabindex="0"
+      title="1"
+    >
+      <a
+        rel="nofollow"
+      >
+        1
+      </a>
+    </li>
+    <li
+      class="rc-pagination-jump-prev"
+      tabindex="0"
+      title="向前 5 页"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev"
+      tabindex="0"
+      title="3"
+    >
+      <a
+        rel="nofollow"
+      >
+        3
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+      tabindex="0"
+      title="4"
+    >
+      <a
+        rel="nofollow"
+      >
+        4
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
+      tabindex="0"
+      title="5"
+    >
+      <a
+        rel="nofollow"
+      >
+        5
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-6"
+      tabindex="0"
+      title="6"
+    >
+      <a
+        rel="nofollow"
+      >
+        6
+      </a>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-7 rc-pagination-item-before-jump-next"
+      tabindex="0"
+      title="7"
+    >
+      <a
+        rel="nofollow"
+      >
+        7
+      </a>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+      tabindex="0"
+      title="向后 5 页"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-23"
+      tabindex="0"
+      title="23"
+    >
+      <a
+        rel="nofollow"
+      >
+        23
+      </a>
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      tabindex="0"
+      title="下一页"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-options"
+    >
+      <div
+        aria-label="页码"
+        class="rc-select rc-pagination-options-size-changer rc-select-single"
+      >
+        <div
+          class="rc-select-selector"
+        >
+          <span
+            class="rc-select-selection-wrap"
+          >
+            <span
+              class="rc-select-selection-search"
+            >
+              <input
+                aria-autocomplete="list"
+                aria-controls="rc_select_TEST_OR_SSR_list"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                aria-label="页码"
+                aria-owns="rc_select_TEST_OR_SSR_list"
+                autocomplete="off"
+                class="rc-select-selection-search-input"
+                id="rc_select_TEST_OR_SSR"
+                readonly=""
+                role="combobox"
+                style="opacity: 0;"
+                type="search"
+                unselectable="on"
+                value=""
+              />
+            </span>
+            <span
+              class="rc-select-selection-item"
+              title="20 条/页"
+            >
+              20 条/页
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        class="rc-pagination-options-quick-jumper"
+      >
+        跳至
+        <input
+          aria-label="页"
+          type="number"
+          value=""
+        />
+        页
+      </div>
+    </li>
+  </ul>
+  <h3>
     单页默认隐藏
   </h3>
   <ul
@@ -2304,6 +2489,80 @@ exports[`Example jumperWithGoButton 1`] = `
         <input
           aria-label="页"
           type="text"
+          value=""
+        />
+        页
+        <span>
+          <li
+            class="rc-pagination-simple-pager"
+            title="跳至1/5"
+          >
+            <button
+              type="button"
+            >
+              确定
+            </button>
+          </li>
+        </span>
+      </div>
+    </li>
+  </ul>
+  <p>
+     input only numbers
+  </p>
+  <ul
+    class="rc-pagination rc-pagination-simple"
+  >
+    <li
+      aria-disabled="true"
+      class="rc-pagination-prev rc-pagination-disabled"
+      title="上一页"
+    >
+      <button
+        aria-label="prev page"
+        class="rc-pagination-item-link"
+        disabled=""
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-simple-pager"
+      title="1/5"
+    >
+      <input
+        aria-label="跳至"
+        size="3"
+        type="text"
+        value="1"
+      />
+      <span
+        class="rc-pagination-slash"
+      >
+        /
+      </span>
+      5
+    </li>
+    <li
+      aria-disabled="false"
+      class="rc-pagination-next"
+      title="下一页"
+    >
+      <button
+        aria-label="next page"
+        class="rc-pagination-item-link"
+        type="button"
+      />
+    </li>
+    <li
+      class="rc-pagination-options"
+    >
+      <div
+        class="rc-pagination-options-quick-jumper"
+      >
+        跳至
+        <input
+          aria-label="页"
+          type="number"
           value=""
         />
         页

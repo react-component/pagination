@@ -46,7 +46,6 @@ const App = () => (
       onShowSizeChange={onShowSizeChange}
       onChange={onChange}
       total={450}
-      disabled
     />
     <h3>单页默认隐藏</h3>
     <PaginationWithSizeChanger

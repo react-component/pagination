@@ -20,11 +20,6 @@ export interface PaginationLocale {
 
 type SemanticName = 'item';
 
-type QuickJumperOptions = {
-  goButton?: boolean | React.ReactNode;
-  inputType?: 'text' | 'number';
-};
-
 export interface PaginationData {
   styles?: Partial<Record<SemanticName, React.CSSProperties>>;
   classNames?: Partial<Record<SemanticName, string>>;
@@ -46,7 +41,7 @@ export interface PaginationData {
   sizeChangerRender?: SizeChangerRender;
   showLessItems: boolean;
   showPrevNextJumpers: boolean;
-  showQuickJumper: boolean | QuickJumperOptions;
+  showQuickJumper: boolean | object;
   showTitle: boolean;
   simple: boolean | { readOnly?: boolean };
   disabled: boolean;

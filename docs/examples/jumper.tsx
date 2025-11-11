@@ -37,16 +37,6 @@ const App = () => (
       total={450}
       disabled
     />
-    <h3>仅输入数字</h3>
-    <PaginationWithSizeChanger
-      showQuickJumper={{ inputType: 'number' }}
-      showSizeChanger
-      defaultPageSize={20}
-      defaultCurrent={5}
-      onShowSizeChange={onShowSizeChange}
-      onChange={onChange}
-      total={450}
-    />
     <h3>单页默认隐藏</h3>
     <PaginationWithSizeChanger
       showQuickJumper

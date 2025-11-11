@@ -51,7 +51,7 @@ describe('Pagination with jumper', () => {
     relatedTarget.className = 'rc-pagination-item-link';
     fireEvent.blur(input, { relatedTarget });
 
-    expect(input).toHaveValue('');
+    expect(input).toHaveValue(null);
     expect(onChange).not.toHaveBeenCalled();
   });
 
@@ -64,7 +64,7 @@ describe('Pagination with jumper', () => {
     relatedTarget.className = 'rc-pagination-item';
     fireEvent.blur(input, { relatedTarget });
 
-    expect(input).toHaveValue('');
+    expect(input).toHaveValue(null);
     expect(onChange).not.toHaveBeenCalled();
   });
 

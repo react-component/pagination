@@ -50,7 +50,7 @@ exports[`Options should render correctly 1`] = `
     跳至
     <input
       aria-label="页"
-      type="text"
+      type="number"
       value=""
     />
     页

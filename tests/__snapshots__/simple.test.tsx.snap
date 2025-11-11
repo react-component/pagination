@@ -7,7 +7,7 @@ exports[`simple Pagination props: showQuickJumper should render normally quick-j
   跳至
   <input
     aria-label="页"
-    type="text"
+    type="number"
     value=""
   />
   页
@@ -21,7 +21,7 @@ exports[`simple Pagination props: showQuickJumper should render normally quick-j
   跳至
   <input
     aria-label="页"
-    type="text"
+    type="number"
     value=""
   />
   页
@@ -49,7 +49,7 @@ exports[`simple Pagination props: showQuickJumper should render normally quick-j
   跳至
   <input
     aria-label="页"
-    type="text"
+    type="number"
     value=""
   />
   页

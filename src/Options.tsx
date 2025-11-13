@@ -60,7 +60,10 @@ const Options: React.FC<OptionsProps> = (props) => {
       : (value: string | number) => `${value} ${locale.items_per_page}`;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setGoInputText(e.target.value);
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) {
+      setGoInputText(value);
+    }
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {

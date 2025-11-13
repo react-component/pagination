@@ -1,4 +1,4 @@
-# rc-pagination
+# @rc-component/pagination
 
 React Pagination Component.
 
@@ -9,20 +9,16 @@ React Pagination Component.
 [![bundle size][bundlephobia-image]][bundlephobia-url]
 [![dumi][dumi-image]][dumi-url]
 
-[npm-image]: http://img.shields.io/npm/v/rc-pagination.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/rc-pagination
-[github-actions-image]: https://github.com/react-component/pagination/workflows/CI/badge.svg
-[github-actions-url]: https://github.com/react-component/pagination/actions
+[npm-image]: http://img.shields.io/npm/v/@rc-component/pagination.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/@rc-component/pagination
+[github-actions-image]: https://github.com/react-component/pagination/actions/workflows/main.yml/badge.svg
+[github-actions-url]: https://github.com/react-component/pagination/actions/workflows/main.yml
 [codecov-image]: https://img.shields.io/codecov/c/github/react-component/pagination/master.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/react-component/pagination/branch/master
-[david-url]: https://david-dm.org/react-component/pagination
-[david-image]: https://david-dm.org/react-component/pagination/status.svg?style=flat-square
-[david-dev-url]: https://david-dm.org/react-component/pagination?type=dev
-[david-dev-image]: https://david-dm.org/react-component/pagination/dev-status.svg?style=flat-square
-[download-image]: https://img.shields.io/npm/dm/rc-pagination.svg?style=flat-square
-[download-url]: https://npmjs.org/package/rc-pagination
-[bundlephobia-url]: https://bundlephobia.com/result?p=rc-pagination
-[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-pagination
+[download-image]: https://img.shields.io/npm/dm/@rc-component/pagination.svg?style=flat-square
+[download-url]: https://npmjs.org/package/@rc-component/pagination
+[bundlephobia-url]: https://bundlephobia.com/result?p=@rc-component/pagination
+[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@rc-component/pagination
 [dumi-url]: https://github.com/umijs/dumi
 [dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
 
@@ -40,12 +36,12 @@ Local example: `npm run start` then `http://localhost:9001`
 
 ## Install
 
-[![rc-pagination](https://nodei.co/npm/rc-pagination.png)](https://npmjs.org/package/rc-pagination)
+[![@rc-component/pagination](https://nodei.co/npm/@rc-component/pagination.png)](https://npmjs.org/package/@rc-component/pagination)
 
 ## Usage
 
 ```js
-import Pagination from 'rc-pagination';
+import Pagination from '@rc-component/pagination';
 
 ReactDOM.render(<Pagination />, container);
 ```
@@ -85,4 +81,4 @@ ReactDOM.render(<Pagination />, container);
 
 ## License
 
-rc-pagination is released under the MIT license.
+@rc-component/pagination is released under the MIT license.

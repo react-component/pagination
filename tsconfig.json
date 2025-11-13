@@ -10,7 +10,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@@/*": [".dumi/tmp/*"],
-      "rc-pagination": ["src/index.ts"]
+      "@rc-component/pagination": ["src/index.ts"]
     }
   },
   "include": [".dumirc.ts", "**/*.ts", "**/*.tsx"]

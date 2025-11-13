@@ -1,4 +1,4 @@
-import Pagination, { type PaginationProps } from '@rc-component/pagination';
+import Pagination, { type PaginationProps } from '../../../src';
 import Select from 'rc-select';
 import React from 'react';
 

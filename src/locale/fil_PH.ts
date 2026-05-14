@@ -18,3 +18,4 @@ const locale: PaginationLocale = {
 };
 
 export default locale;
+

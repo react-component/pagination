@@ -14,7 +14,7 @@ const locale: PaginationLocale = {
   next_5: 'Susunod na 5 na Pahina',
   prev_3: 'Nakaraang 3 na Pahina',
   next_3: 'Susunod na 3 na Pahina',
-  page_size: 'Sukat ng Pahina',
+  page_size: 'Laki ng Pahina',
 };
 
 export default locale;

@@ -10,10 +10,10 @@ const locale: PaginationLocale = {
   // Pagination
   prev_page: 'Nakaraang Pahina',
   next_page: 'Susunod na Pahina',
-  prev_5: 'Nakaraang 5 Pahina',
-  next_5: 'Susunod na 5 Pahina',
-  prev_3: 'Nakaraang 3 Pahina',
-  next_3: 'Susunod na 3 Pahina',
+  prev_5: 'Nakaraang 5 na Pahina',
+  next_5: 'Susunod na 5 na Pahina',
+  prev_3: 'Nakaraang 3 na Pahina',
+  next_3: 'Susunod na 3 na Pahina',
   page_size: 'Sukat ng Pahina',
 };
 

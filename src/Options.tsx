@@ -1,4 +1,4 @@
-import KEYCODE from '@rc-component/util/lib/KeyCode';
+import { KeyCode } from '@rc-component/util';
 import React from 'react';
 import type { PaginationLocale } from './interface';
 
@@ -85,7 +85,7 @@ const Options: React.FC<OptionsProps> = (props) => {
     if (goInputText === '') {
       return;
     }
-    if (e.keyCode === KEYCODE.ENTER || e.type === 'click') {
+    if (e.keyCode === KeyCode.ENTER || e.type === 'click') {
       setGoInputText('');
       quickGo?.(getValidValue);
     }

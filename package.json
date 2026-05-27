@@ -12,6 +12,30 @@
   ],
   "main": "./lib/index",
   "module": "./es/index",
+  "types": "./es/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.js",
+      "require": "./lib/index.js"
+    },
+    "./assets/*": "./assets/*",
+    "./locale/*": {
+      "types": "./es/locale/*.d.ts",
+      "import": "./es/locale/*.js",
+      "require": "./lib/locale/*.js"
+    },
+    "./lib/locale/*": {
+      "types": "./es/locale/*.d.ts",
+      "import": "./es/locale/*.js",
+      "require": "./lib/locale/*.js"
+    },
+    "./es/locale/*": {
+      "types": "./es/locale/*.d.ts",
+      "import": "./es/locale/*.js",
+      "require": "./lib/locale/*.js"
+    }
+  },
   "files": [
     "assets/*.css",
     "assets/*.less",

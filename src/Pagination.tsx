@@ -1,8 +1,10 @@
 import { clsx } from 'clsx';
-import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
-import KeyCode from '@rc-component/util/lib/KeyCode';
-import pickAttrs from '@rc-component/util/lib/pickAttrs';
-import warning from '@rc-component/util/lib/warning';
+import {
+  KeyCode,
+  pickAttrs,
+  useControlledState,
+  warning,
+} from '@rc-component/util';
 import React, { useEffect } from 'react';
 import type { PaginationProps } from './interface';
 import zhCN from './locale/zh_CN';

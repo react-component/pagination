@@ -66,6 +66,10 @@ describe('Uncontrolled Pagination', () => {
       wrapper.container.querySelector('.rc-pagination-item-active'),
     ).toHaveTextContent('1');
     expect($$('.rc-pagination-item')[0]).toHaveTextContent('1');
+    expect($$('.rc-pagination-item')[0]).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
     expect($$('.rc-pagination-item')[0]).toHaveAttribute('title', '1');
   });
 
@@ -91,6 +95,20 @@ describe('Uncontrolled Pagination', () => {
     const nextButton = wrapper.container.querySelector('.rc-pagination-next');
     expect(nextButton).not.toHaveClass('rc-pagination-disabled');
     expect(nextButton).toHaveAttribute('aria-disabled', 'false');
+  });
+
+  it('should expose role and label for navigation items', () => {
+    const prevButton = wrapper.container.querySelector('.rc-pagination-prev');
+    const nextButton = wrapper.container.querySelector('.rc-pagination-next');
+    const currentPage = wrapper.container.querySelector(
+      '.rc-pagination-item-active',
+    );
+    expect(prevButton).toHaveAttribute('role', 'button');
+    expect(prevButton).toHaveAttribute('aria-label');
+    expect(nextButton).toHaveAttribute('role', 'button');
+    expect(nextButton).toHaveAttribute('aria-label');
+    expect(currentPage).toHaveAttribute('role', 'button');
+    expect(currentPage).toHaveAttribute('aria-current', 'page');
   });
 
   it('should response mouse click right', () => {

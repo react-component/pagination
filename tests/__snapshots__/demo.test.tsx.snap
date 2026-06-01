@@ -2687,7 +2687,7 @@ exports[`Example jumperWithGoButton 1`] = `
       title="1/5"
     >
       <input
-        aria-label="跳至"
+        aria-label="页"
         size="3"
         type="text"
         value="1"
@@ -4332,7 +4332,7 @@ exports[`Example simple 1`] = `
       title="1/5"
     >
       <input
-        aria-label="跳至"
+        aria-label="页"
         size="3"
         type="text"
         value="1"
@@ -4429,7 +4429,7 @@ exports[`Example simple 1`] = `
       title="1/5"
     >
       <input
-        aria-label="跳至"
+        aria-label="页"
         size="3"
         type="text"
         value="1"
@@ -4485,7 +4485,7 @@ exports[`Example simple 1`] = `
       title="1/5"
     >
       <input
-        aria-label="跳至"
+        aria-label="页"
         size="3"
         type="text"
         value="1"
@@ -4536,7 +4536,7 @@ exports[`Example simple 1`] = `
       title="1/5"
     >
       <input
-        aria-label="跳至"
+        aria-label="页"
         size="3"
         type="text"
         value="1"
@@ -4619,7 +4619,7 @@ exports[`Example simple 1`] = `
       title="1/5"
     >
       <input
-        aria-label="跳至"
+        aria-label="页"
         size="3"
         type="text"
         value="1"

@@ -413,7 +413,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         ) : (
           <input
             type="text"
-            aria-label={locale.jump_to}
+            aria-label={locale.page}
             value={internalInputVal}
             disabled={disabled}
             onKeyDown={handleKeyDown}

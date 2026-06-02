@@ -621,6 +621,16 @@ describe('keyboard support', () => {
     expect(onChange).toHaveBeenLastCalledWith(46, 10);
   });
 
+  it('should work for prev page with space key', () => {
+    const prevButton = $('li.rc-pagination-prev');
+    expect(prevButton).toBeTruthy();
+
+    fireEvent.keyDown(prevButton, { key: ' ', keyCode: 13, which: 13 });
+    fireEvent.keyDown(prevButton, { key: 'Spacebar', keyCode: 13, which: 13 });
+
+    expect(onChange).toHaveBeenLastCalledWith(48, 10);
+  });
+
   it('should work for next page', () => {
     const nextButton = $('li.rc-pagination-next');
     expect(nextButton).toBeTruthy();
@@ -634,6 +644,16 @@ describe('keyboard support', () => {
     expect(onChange).toHaveBeenLastCalledWith(54, 10);
   });
 
+  it('should work for next page with space key', () => {
+    const nextButton = $('li.rc-pagination-next');
+    expect(nextButton).toBeTruthy();
+
+    fireEvent.keyDown(nextButton, { key: ' ', keyCode: 13, which: 13 });
+    fireEvent.keyDown(nextButton, { key: 'Spacebar', keyCode: 13, which: 13 });
+
+    expect(onChange).toHaveBeenLastCalledWith(52, 10);
+  });
+
   it('should work for jump prev page', () => {
     const jumpPrevButton = $('li.rc-pagination-jump-prev');
     expect(jumpPrevButton).toBeTruthy();
@@ -644,12 +664,40 @@ describe('keyboard support', () => {
     expect(onChange).toHaveBeenLastCalledWith(40, 10);
   });
 
+  it('should work for jump prev page with space key', () => {
+    const jumpPrevButton = $('li.rc-pagination-jump-prev');
+    expect(jumpPrevButton).toBeTruthy();
+
+    fireEvent.keyDown(jumpPrevButton, { key: ' ', keyCode: 13, which: 13 });
+    fireEvent.keyDown(jumpPrevButton, {
+      key: 'Spacebar',
+      keyCode: 13,
+      which: 13,
+    });
+
+    expect(onChange).toHaveBeenLastCalledWith(40, 10);
+  });
+
   it('should work for jump next page', () => {
     const jumpNextButton = $('li.rc-pagination-jump-next');
     expect(jumpNextButton).toBeTruthy();
 
     fireEvent.click(jumpNextButton);
     fireEvent.keyDown(jumpNextButton, { key: 'Enter', keyCode: 13, which: 13 });
+
+    expect(onChange).toHaveBeenLastCalledWith(60, 10);
+  });
+
+  it('should work for jump next page with space key', () => {
+    const jumpNextButton = $('li.rc-pagination-jump-next');
+    expect(jumpNextButton).toBeTruthy();
+
+    fireEvent.keyDown(jumpNextButton, { key: ' ', keyCode: 13, which: 13 });
+    fireEvent.keyDown(jumpNextButton, {
+      key: 'Spacebar',
+      keyCode: 13,
+      which: 13,
+    });
 
     expect(onChange).toHaveBeenLastCalledWith(60, 10);
   });

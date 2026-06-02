@@ -111,6 +111,21 @@ describe('Uncontrolled Pagination', () => {
     expect(currentPage).toHaveAttribute('aria-current', 'page');
   });
 
+  it('should fallback navigation labels when locale values are missing', () => {
+    const { container } = render(
+      <Pagination total={50} locale={{ prev_page: '', next_page: '' }} />,
+    );
+
+    expect(container.querySelector('.rc-pagination-prev')).toHaveAttribute(
+      'aria-label',
+      'prev page',
+    );
+    expect(container.querySelector('.rc-pagination-next')).toHaveAttribute(
+      'aria-label',
+      'next page',
+    );
+  });
+
   it('should response mouse click right', () => {
     const pagers = $$('.rc-pagination-item');
     expect(pagers).toHaveLength(3);
@@ -625,8 +640,8 @@ describe('keyboard support', () => {
     const prevButton = $('li.rc-pagination-prev');
     expect(prevButton).toBeTruthy();
 
-    fireEvent.keyDown(prevButton, { key: ' ', keyCode: 13, which: 13 });
-    fireEvent.keyDown(prevButton, { key: 'Spacebar', keyCode: 13, which: 13 });
+    fireEvent.keyDown(prevButton, { key: ' ', keyCode: 32, which: 32 });
+    fireEvent.keyDown(prevButton, { key: 'Spacebar', keyCode: 32, which: 32 });
 
     expect(onChange).toHaveBeenLastCalledWith(48, 10);
   });
@@ -648,8 +663,8 @@ describe('keyboard support', () => {
     const nextButton = $('li.rc-pagination-next');
     expect(nextButton).toBeTruthy();
 
-    fireEvent.keyDown(nextButton, { key: ' ', keyCode: 13, which: 13 });
-    fireEvent.keyDown(nextButton, { key: 'Spacebar', keyCode: 13, which: 13 });
+    fireEvent.keyDown(nextButton, { key: ' ', keyCode: 32, which: 32 });
+    fireEvent.keyDown(nextButton, { key: 'Spacebar', keyCode: 32, which: 32 });
 
     expect(onChange).toHaveBeenLastCalledWith(52, 10);
   });
@@ -677,11 +692,11 @@ describe('keyboard support', () => {
     const jumpPrevButton = $('li.rc-pagination-jump-prev');
     expect(jumpPrevButton).toBeTruthy();
 
-    fireEvent.keyDown(jumpPrevButton, { key: ' ', keyCode: 13, which: 13 });
+    fireEvent.keyDown(jumpPrevButton, { key: ' ', keyCode: 32, which: 32 });
     fireEvent.keyDown(jumpPrevButton, {
       key: 'Spacebar',
-      keyCode: 13,
-      which: 13,
+      keyCode: 32,
+      which: 32,
     });
 
     expect(onChange).toHaveBeenLastCalledWith(40, 10);
@@ -701,11 +716,11 @@ describe('keyboard support', () => {
     const jumpNextButton = $('li.rc-pagination-jump-next');
     expect(jumpNextButton).toBeTruthy();
 
-    fireEvent.keyDown(jumpNextButton, { key: ' ', keyCode: 13, which: 13 });
+    fireEvent.keyDown(jumpNextButton, { key: ' ', keyCode: 32, which: 32 });
     fireEvent.keyDown(jumpNextButton, {
       key: 'Spacebar',
-      keyCode: 13,
-      which: 13,
+      keyCode: 32,
+      which: 32,
     });
 
     expect(onChange).toHaveBeenLastCalledWith(60, 10);

@@ -283,13 +283,14 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   function renderPrev(prevPage: number) {
+    const prevPageTitle = locale.prev_page || 'prev page';
     const prevButton = itemRender(
       prevPage,
       'prev',
       getItemIcon(
         prevIcon,
-        locale.prev_page,
-        showTitle ? locale.prev_page : undefined,
+        prevPageTitle,
+        showTitle ? prevPageTitle : undefined,
       ),
     );
     return React.isValidElement<HTMLButtonElement>(prevButton)
@@ -298,13 +299,14 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   function renderNext(nextPage: number) {
+    const nextPageTitle = locale.next_page || 'next page';
     const nextButton = itemRender(
       nextPage,
       'next',
       getItemIcon(
         nextIcon,
-        locale.next_page,
-        showTitle ? locale.next_page : undefined,
+        nextPageTitle,
+        showTitle ? nextPageTitle : undefined,
       ),
     );
     return React.isValidElement<HTMLButtonElement>(nextButton)
@@ -409,7 +411,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         ) : (
           <input
             type="text"
-            aria-label={locale.page}
+            aria-label={locale.jump_to || 'Go to'}
             value={internalInputVal}
             disabled={disabled}
             onKeyDown={handleKeyDown}
@@ -562,7 +564,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         style={styles?.item}
         aria-disabled={prevDisabled}
         role="button"
-        aria-label={locale.prev_page}
+        aria-label={locale.prev_page || 'prev page'}
       >
         {prev}
       </li>
@@ -592,7 +594,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         style={styles?.item}
         aria-disabled={nextDisabled}
         role="button"
-        aria-label={locale.next_page}
+        aria-label={locale.next_page || 'next page'}
       >
         {next}
       </li>

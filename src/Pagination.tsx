@@ -413,7 +413,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         ) : (
           <input
             type="text"
-            aria-label={locale.page}
+            aria-label={locale.jump_to || 'Go to'}
             value={internalInputVal}
             disabled={disabled}
             onKeyDown={handleKeyDown}
@@ -582,7 +582,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         style={styles?.item}
         aria-disabled={prevDisabled}
         role="button"
-        aria-label={locale.prev_page}
+        aria-label={locale.prev_page || 'prev page'}
       >
         {prev}
       </li>
@@ -612,7 +612,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         style={styles?.item}
         aria-disabled={nextDisabled}
         role="button"
-        aria-label={locale.next_page}
+        aria-label={locale.next_page || 'next page'}
       >
         {next}
       </li>

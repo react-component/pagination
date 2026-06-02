@@ -654,6 +654,15 @@ describe('keyboard support', () => {
     expect(onChange).toHaveBeenLastCalledWith(52, 10);
   });
 
+  it('should work for next page with enter keyCode only', () => {
+    const nextButton = $('li.rc-pagination-next');
+    expect(nextButton).toBeTruthy();
+
+    fireEvent.keyDown(nextButton, { keyCode: 13, which: 13 });
+
+    expect(onChange).toHaveBeenLastCalledWith(51, 10);
+  });
+
   it('should work for jump prev page', () => {
     const jumpPrevButton = $('li.rc-pagination-jump-prev');
     expect(jumpPrevButton).toBeTruthy();

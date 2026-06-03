@@ -256,6 +256,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   ) {
     if (
       event.key === 'Enter' ||
+      // React normalizes "Spacebar" to " " in testing-library keyDown events.
       event.key === ' ' ||
       event.key === 'Spacebar' ||
       event.charCode === KeyCode.ENTER ||

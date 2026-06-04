@@ -59,7 +59,7 @@ const Pager: React.FC<PagerProps> = (props) => {
       {page}
     </a>,
   );
-  const pagerLabel = `${pageLabel || 'Page'} ${page}`.trim();
+  const pagerLabel = `${pageLabel} ${page}`.trim();
 
   return pager ? (
     <li

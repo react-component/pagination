@@ -6,6 +6,7 @@ import {
   warning,
 } from '@rc-component/util';
 import React, { useEffect } from 'react';
+import isEnterOrSpaceKey from './isEnterOrSpaceKey';
 import type { PaginationProps } from './interface';
 import zhCN from './locale/zh_CN';
 import Options from './Options';
@@ -254,14 +255,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     callback: (...args: any[]) => void,
     ...restParams: any[]
   ) {
-    if (
-      event.key === 'Enter' ||
-      // React normalizes "Spacebar" to " " in testing-library keyDown events.
-      event.key === ' ' ||
-      event.key === 'Spacebar' ||
-      event.charCode === KeyCode.ENTER ||
-      event.keyCode === KeyCode.ENTER
-    ) {
+    if (isEnterOrSpaceKey(event)) {
       event.preventDefault();
       callback(...restParams);
     }

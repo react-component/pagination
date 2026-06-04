@@ -559,7 +559,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         style={styles?.item}
         aria-disabled={prevDisabled}
         role="button"
-        aria-label={locale.prev_page || 'prev page'}
+        aria-label={locale.prev_page}
       >
         {prev}
       </li>
@@ -589,7 +589,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         style={styles?.item}
         aria-disabled={nextDisabled}
         role="button"
-        aria-label={locale.next_page || 'next page'}
+        aria-label={locale.next_page}
       >
         {next}
       </li>

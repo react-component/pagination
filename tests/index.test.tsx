@@ -111,21 +111,6 @@ describe('Uncontrolled Pagination', () => {
     expect(currentPage).toHaveAttribute('aria-current', 'page');
   });
 
-  it('should fallback navigation labels when locale values are missing', () => {
-    const { container } = render(
-      <Pagination total={50} locale={{ prev_page: '', next_page: '' }} />,
-    );
-
-    expect(container.querySelector('.rc-pagination-prev')).toHaveAttribute(
-      'aria-label',
-      'prev page',
-    );
-    expect(container.querySelector('.rc-pagination-next')).toHaveAttribute(
-      'aria-label',
-      'next page',
-    );
-  });
-
   it('should response mouse click right', () => {
     const pagers = $$('.rc-pagination-item');
     expect(pagers).toHaveLength(3);

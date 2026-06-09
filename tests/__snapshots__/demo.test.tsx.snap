@@ -1550,18 +1550,7 @@ exports[`Example jumper 1`] = `
       />
     </li>
     <li
-      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        rel="nofollow"
-      >
-        3
-      </a>
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-4"
+      class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
       tabindex="0"
       title="4"
     >
@@ -1583,7 +1572,7 @@ exports[`Example jumper 1`] = `
       </a>
     </li>
     <li
-      class="rc-pagination-item rc-pagination-item-6"
+      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
       tabindex="0"
       title="6"
     >
@@ -1591,17 +1580,6 @@ exports[`Example jumper 1`] = `
         rel="nofollow"
       >
         6
-      </a>
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-7 rc-pagination-item-before-jump-next"
-      tabindex="0"
-      title="7"
-    >
-      <a
-        rel="nofollow"
-      >
-        7
       </a>
     </li>
     <li
@@ -1735,18 +1713,7 @@ exports[`Example jumper 1`] = `
       />
     </li>
     <li
-      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        rel="nofollow"
-      >
-        3
-      </a>
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-4"
+      class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
       tabindex="0"
       title="4"
     >
@@ -1768,7 +1735,7 @@ exports[`Example jumper 1`] = `
       </a>
     </li>
     <li
-      class="rc-pagination-item rc-pagination-item-6"
+      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
       tabindex="0"
       title="6"
     >
@@ -1776,17 +1743,6 @@ exports[`Example jumper 1`] = `
         rel="nofollow"
       >
         6
-      </a>
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-7 rc-pagination-item-before-jump-next"
-      tabindex="0"
-      title="7"
-    >
-      <a
-        rel="nofollow"
-      >
-        7
       </a>
     </li>
     <li
@@ -2097,18 +2053,7 @@ exports[`Example jumperWithGoButton 1`] = `
       />
     </li>
     <li
-      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        rel="nofollow"
-      >
-        3
-      </a>
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-4"
+      class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
       tabindex="0"
       title="4"
     >
@@ -2130,7 +2075,7 @@ exports[`Example jumperWithGoButton 1`] = `
       </a>
     </li>
     <li
-      class="rc-pagination-item rc-pagination-item-6"
+      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
       tabindex="0"
       title="6"
     >
@@ -2138,17 +2083,6 @@ exports[`Example jumperWithGoButton 1`] = `
         rel="nofollow"
       >
         6
-      </a>
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-7 rc-pagination-item-before-jump-next"
-      tabindex="0"
-      title="7"
-    >
-      <a
-        rel="nofollow"
-      >
-        7
       </a>
     </li>
     <li
@@ -2639,18 +2573,7 @@ exports[`Example locale 1`] = `
       />
     </li>
     <li
-      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-after-jump-prev"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        rel="nofollow"
-      >
-        3
-      </a>
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-4"
+      class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
       tabindex="0"
       title="4"
     >
@@ -2672,7 +2595,7 @@ exports[`Example locale 1`] = `
       </a>
     </li>
     <li
-      class="rc-pagination-item rc-pagination-item-6"
+      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
       tabindex="0"
       title="6"
     >
@@ -2680,17 +2603,6 @@ exports[`Example locale 1`] = `
         rel="nofollow"
       >
         6
-      </a>
-    </li>
-    <li
-      class="rc-pagination-item rc-pagination-item-7 rc-pagination-item-before-jump-next"
-      tabindex="0"
-      title="7"
-    >
-      <a
-        rel="nofollow"
-      >
-        7
       </a>
     </li>
     <li

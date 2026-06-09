@@ -486,13 +486,27 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       left = allPages - pageBufferSize * 2;
     }
 
+    const hasJumpPrev =
+      !!jumpPrev && current - 1 >= pageBufferSize * 2 && current !== 1 + 2;
+    const hasJumpNext =
+      !!jumpNext &&
+      allPages - current >= pageBufferSize * 2 &&
+      current !== allPages - 2;
+
+    if (!showLessItems && hasJumpPrev && right !== allPages) {
+      left += 1;
+    }
+    if (!showLessItems && hasJumpNext && left !== 1) {
+      right -= 1;
+    }
+
     for (let i = left; i <= right; i += 1) {
       pagerList.push(
         <Pager {...pagerProps} key={i} page={i} active={current === i} />,
       );
     }
 
-    if (current - 1 >= pageBufferSize * 2 && current !== 1 + 2) {
+    if (hasJumpPrev) {
       pagerList[0] = React.cloneElement<PagerProps>(pagerList[0], {
         className: clsx(
           `${prefixCls}-item-after-jump-prev`,
@@ -503,7 +517,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       pagerList.unshift(jumpPrev);
     }
 
-    if (allPages - current >= pageBufferSize * 2 && current !== allPages - 2) {
+    if (hasJumpNext) {
       const lastOne = pagerList[pagerList.length - 1];
       pagerList[pagerList.length - 1] = React.cloneElement(lastOne, {
         className: clsx(

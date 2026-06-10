@@ -336,6 +336,30 @@ describe('Other props', () => {
     });
   });
 
+  describe('pager item count', () => {
+    const getPagerItems = (container: HTMLElement) =>
+      container.querySelectorAll(
+        'li:not(.rc-pagination-prev):not(.rc-pagination-next):not(.rc-pagination-options)',
+      );
+    const currentList = [1, 2, 3, 4, 5, 6, 50, 95, 96, 97, 98, 99, 100];
+
+    it('should keep pager item count when jumpers appear', () => {
+      currentList.forEach((current) => {
+        const { container, unmount } = render(
+          <Pagination
+            total={1000}
+            current={current}
+            onChange={jest.fn()}
+            showQuickJumper
+          />,
+        );
+
+        expect(getPagerItems(container)).toHaveLength(7);
+        unmount();
+      });
+    });
+  });
+
   describe('hideOnSinglePage props', () => {
     const itemRender = (current) => <a href={`#${current}`}>{current}</a>;
 

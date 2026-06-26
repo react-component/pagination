@@ -7,9 +7,9 @@ class TestMessageChannel {
 
   port2 = {
     postMessage: (data: unknown) => {
-      setTimeout(() => {
+      queueMicrotask(() => {
         this.port1.onmessage?.({ data } as MessageEvent);
-      }, 0);
+      });
     },
   };
 }

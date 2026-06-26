@@ -4,6 +4,15 @@
   <p>📄 React pagination primitives for page navigation, size changing, quick jumping, and locale-aware controls.</p>
 </div>
 
+<p align="center">
+  <sub>
+    <a href="https://ant.design">
+      <img alt="Ant Design" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" height="16">
+    </a>
+    Part of the Ant Design ecosystem.
+  </sub>
+</p>
+
 <div align="center">
 
 [![NPM version][npm-image]][npm-url]

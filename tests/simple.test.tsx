@@ -1,6 +1,6 @@
 import type { RenderResult } from '@testing-library/react';
 import { render, fireEvent, createEvent } from '@testing-library/react';
-import Select from 'rc-select';
+import Select from '@rc-component/select';
 import React, { useState } from 'react';
 import Pagination from '../src';
 import { sizeChangerRender } from './commonUtil';

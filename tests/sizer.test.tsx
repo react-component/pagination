@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Select from 'rc-select';
+import Select from '@rc-component/select';
 import Pagination from '../src';
 import { sizeChangerRender } from './commonUtil';
 
@@ -80,8 +80,8 @@ describe('Pagination with sizer', () => {
         pageSizeOptions={[20, 50]}
       />,
     );
-    expect(
-      container.querySelector('.rc-select-selection-item'),
-    ).toHaveTextContent('20 条/页');
+    expect(container.querySelector('.rc-select-content')).toHaveTextContent(
+      '20 条/页',
+    );
   });
 });

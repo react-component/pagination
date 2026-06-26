@@ -1,6 +1,9 @@
-# @rc-component/pagination
+<div align="center">
+  <h1>@rc-component/pagination</h1>
+  <p>📄 React pagination primitives for page navigation, size changing, quick jumping, and locale-aware controls.</p>
+</div>
 
-React Pagination Component.
+<div align="center">
 
 [![NPM version][npm-image]][npm-url]
 [![npm download][download-image]][download-url]
@@ -9,76 +12,157 @@ React Pagination Component.
 [![bundle size][bundlephobia-image]][bundlephobia-url]
 [![dumi][dumi-image]][dumi-url]
 
-[npm-image]: http://img.shields.io/npm/v/@rc-component/pagination.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/@rc-component/pagination
-[github-actions-image]: https://github.com/react-component/pagination/actions/workflows/main.yml/badge.svg
-[github-actions-url]: https://github.com/react-component/pagination/actions/workflows/main.yml
-[codecov-image]: https://img.shields.io/codecov/c/github/react-component/pagination/master.svg?style=flat-square
-[codecov-url]: https://codecov.io/gh/react-component/pagination/branch/master
-[download-image]: https://img.shields.io/npm/dm/@rc-component/pagination.svg?style=flat-square
-[download-url]: https://npmjs.org/package/@rc-component/pagination
-[bundlephobia-url]: https://bundlephobia.com/result?p=@rc-component/pagination
-[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@rc-component/pagination
-[dumi-url]: https://github.com/umijs/dumi
-[dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square
+</div>
 
-## Development
+<div align="center">
+  <sub>
+    Part of the <a href="https://ant.design">Ant Design</a> ecosystem
+    <img
+      alt="Ant Design"
+      height="14"
+      src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+    />
+  </sub>
+</div>
 
+## Highlights
+
+- Controlled and uncontrolled pagination state.
+- Page-size changer, quick jumper, simple mode, compact item count, and custom item rendering.
+- Locale packages exposed from `@rc-component/pagination/locale/*`.
+- Semantic `classNames` and `styles` for item-level customization.
+- TypeScript definitions for props, locale, callbacks, and state.
+- Used by Ant Design as the shared pagination foundation.
+
+## Install
+
+```bash
+npm install @rc-component/pagination
 ```
-npm install
-npm start
+
+## Usage
+
+```tsx | pure
+import Pagination from '@rc-component/pagination';
+import '@rc-component/pagination/assets/index.css';
+import React, { useState } from 'react';
+
+export default () => {
+  const [current, setCurrent] = useState(1);
+
+  return (
+    <Pagination
+      current={current}
+      total={120}
+      showSizeChanger
+      showQuickJumper
+      onChange={setCurrent}
+    />
+  );
+};
+```
+
+```tsx | pure
+import Pagination from '@rc-component/pagination';
+import enUS from '@rc-component/pagination/locale/en_US';
+import React from 'react';
+
+export default () => (
+  <Pagination
+    defaultCurrent={2}
+    total={500}
+    locale={enUS}
+    showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
+  />
+);
 ```
 
 ## Examples
 
-Online example: `https://pagination-react-component.vercel.app`
-Local example: `npm run start` then `http://localhost:9001`
+Run the examples locally:
 
-## Install
-
-[![@rc-component/pagination](https://nodei.co/npm/@rc-component/pagination.png)](https://npmjs.org/package/@rc-component/pagination)
-
-## Usage
-
-```js
-import Pagination from '@rc-component/pagination';
-
-ReactDOM.render(<Pagination />, container);
+```bash
+npm install
+npm start
 ```
+
+Then open the dumi dev server in your browser.
 
 ## API
 
-// prettier-ignore
-| Parameter | Description | Type | Default |
-| --- | --- | --- | --- |
-| disabled | disable pagination | Bool | - |
-| align | align of pagination | start \| center \| end | undefined |
-| defaultCurrent | uncontrolled current page | Number | 1 |
-| current | current page | Number | undefined |
-| total | items total count | Number | 0 |
-| defaultPageSize | default items per page | Number | 10 |
-| pageSize | items per page | Number | 10 |
-| onChange | page change callback | Function(current, pageSize) | - |
-| showSizeChanger | show pageSize changer | boolean \| [SelectProps](https://github.com/react-component/select/blob/561f8b7d69fd5dd2cd7d917c88976cca4e539a9d/src/Select.tsx#L112) | `false` when total less than `totalBoundaryShowSizeChanger`, `true` when otherwise |
-| totalBoundaryShowSizeChanger | when total larger than it, `showSizeChanger` will be true | number | 50 |
-| pageSizeOptions | specify the sizeChanger selections | Array<String> | ['10', '20', '50', '100'] |
-| onShowSizeChange | pageSize change callback | Function(current, size) | - |
-| hideOnSinglePage | hide on single page | Bool | false |
-| showPrevNextJumpers | show jump-prev, jump-next | Bool | true |
-| showQuickJumper | show quick goto jumper | Bool / Object | false / {goButton: true} |
-| showTotal | show total records and range | Function(total, [from, to]) | - |
-| className | className of pagination | String | - |
-| simple | when set, show simple pager | Bool / { readOnly?: boolean; } | - |
-| locale | to set l10n config | Object | [zh_CN](https://github.com/react-component/pagination/blob/master/src/locale/zh_CN.js) |
-| style | the style of pagination | Object | {} |
-| showLessItems | show less page items | Bool | false |
-| showTitle | show page items title | Bool | true |
-| itemRender | custom page item renderer | Function(current, type: 'page' \| 'prev' \| 'next' \| 'jump-prev' \| 'jump-next', element): React.ReactNode \| `(current, type, element) => element` | |
-| prevIcon | specify the default previous icon | ReactNode \| (props: PaginationProps) => ReactNode | |
-| nextIcon | specify the default next icon | ReactNode \| (props: PaginationProps) => ReactNode | |
-| jumpPrevIcon | specify the default previous icon | ReactNode \| (props: PaginationProps) => ReactNode | |
-| jumpNextIcon | specify the default next icon | ReactNode \| (props: PaginationProps) => ReactNode | |
+### Pagination
+
+| Property                     | Type                                       | Default                                | Description                                     |
+| ---------------------------- | ------------------------------------------ | -------------------------------------- | ----------------------------------------------- |
+| align                        | `'start' \| 'center' \| 'end'`             | -                                      | Align pagination items.                         |
+| className                    | `string`                                   | -                                      | Class name for the root element.                |
+| classNames                   | `Partial<Record<'item', string>>`          | -                                      | Semantic class names.                           |
+| current                      | `number`                                   | -                                      | Controlled current page.                        |
+| defaultCurrent               | `number`                                   | `1`                                    | Initial current page.                           |
+| defaultPageSize              | `number`                                   | `10`                                   | Initial page size.                              |
+| disabled                     | `boolean`                                  | `false`                                | Disable pagination interactions.                |
+| hideOnSinglePage             | `boolean`                                  | `false`                                | Hide when there is only one page.               |
+| itemRender                   | `(page, type, element) => ReactNode`       | -                                      | Customize page, previous, next, and jump items. |
+| jumpNextIcon                 | `ReactNode \| ComponentType`               | -                                      | Custom next-jump icon.                          |
+| jumpPrevIcon                 | `ReactNode \| ComponentType`               | -                                      | Custom previous-jump icon.                      |
+| locale                       | `PaginationLocale`                         | `zh_CN`                                | Locale text.                                    |
+| nextIcon                     | `ReactNode \| ComponentType`               | -                                      | Custom next icon.                               |
+| pageSize                     | `number`                                   | -                                      | Controlled page size.                           |
+| pageSizeOptions              | `number[]`                                 | -                                      | Page-size options.                              |
+| prefixCls                    | `string`                                   | `rc-pagination`                        | Class name prefix.                              |
+| prevIcon                     | `ReactNode \| ComponentType`               | -                                      | Custom previous icon.                           |
+| role                         | `React.AriaRole`                           | -                                      | WAI-ARIA role.                                  |
+| selectPrefixCls              | `string`                                   | `rc-select`                            | Prefix for the size changer select.             |
+| showLessItems                | `boolean`                                  | `false`                                | Show fewer page items.                          |
+| showPrevNextJumpers          | `boolean`                                  | `true`                                 | Show previous and next jumpers.                 |
+| showQuickJumper              | `boolean \| object`                        | `false`                                | Show quick page jumper.                         |
+| showSizeChanger              | `boolean`                                  | `total > totalBoundaryShowSizeChanger` | Show page-size changer.                         |
+| showTitle                    | `boolean`                                  | `true`                                 | Show title on page items.                       |
+| showTotal                    | `(total, range) => ReactNode`              | -                                      | Render total text.                              |
+| simple                       | `boolean \| { readOnly?: boolean }`        | `false`                                | Use simple pager.                               |
+| sizeChangerRender            | `SizeChangerRender`                        | -                                      | Customize the size changer.                     |
+| style                        | `React.CSSProperties`                      | -                                      | Root inline style.                              |
+| styles                       | `Partial<Record<'item', CSSProperties>>`   | -                                      | Semantic styles.                                |
+| total                        | `number`                                   | `0`                                    | Total item count.                               |
+| totalBoundaryShowSizeChanger | `number`                                   | `50`                                   | Boundary for default `showSizeChanger`.         |
+| onChange                     | `(page: number, pageSize: number) => void` | -                                      | Triggered when page or page size changes.       |
+| onShowSizeChange             | `(current: number, size: number) => void`  | -                                      | Triggered when page size changes.               |
+
+## Development
+
+```bash
+npm install
+npm start
+npm test
+npm run tsc
+npm run coverage
+npm run compile
+npm run build
+```
+
+## Release
+
+The package is published with [`@rc-component/np`](https://github.com/react-component/np):
+
+```bash
+npm run prepublishOnly
+```
+
+This runs the package build before the release helper.
 
 ## License
 
-@rc-component/pagination is released under the MIT license.
+`@rc-component/pagination` is released under the MIT license.
+
+[npm-image]: https://img.shields.io/npm/v/@rc-component/pagination.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@rc-component/pagination
+[github-actions-image]: https://github.com/react-component/pagination/actions/workflows/react-component-ci.yml/badge.svg
+[github-actions-url]: https://github.com/react-component/pagination/actions/workflows/react-component-ci.yml
+[codecov-image]: https://img.shields.io/codecov/c/github/react-component/pagination/master.svg?style=flat-square
+[codecov-url]: https://app.codecov.io/gh/react-component/pagination
+[download-image]: https://img.shields.io/npm/dm/@rc-component/pagination.svg?style=flat-square
+[download-url]: https://npmjs.org/package/@rc-component/pagination
+[bundlephobia-url]: https://bundlephobia.com/package/@rc-component/pagination
+[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@rc-component/pagination
+[dumi-url]: https://github.com/umijs/dumi
+[dumi-image]: https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square

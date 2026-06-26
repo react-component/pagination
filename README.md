@@ -1,5 +1,6 @@
 <div align="center">
   <h1>@rc-component/pagination</h1>
+  <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/bmw-prod/ae669a89-0c24-40ff-a91d-2b83497170f6.svg" />
   <p>📄 React pagination primitives for page navigation, size changing, quick jumping, and locale-aware controls.</p>
 </div>
 

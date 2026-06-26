@@ -66,6 +66,10 @@ describe('Uncontrolled Pagination', () => {
       wrapper.container.querySelector('.rc-pagination-item-active'),
     ).toHaveTextContent('1');
     expect($$('.rc-pagination-item')[0]).toHaveTextContent('1');
+    expect($$('.rc-pagination-item')[0]).toHaveAttribute(
+      'aria-current',
+      'page',
+    );
     expect($$('.rc-pagination-item')[0]).toHaveAttribute('title', '1');
   });
 
@@ -91,6 +95,20 @@ describe('Uncontrolled Pagination', () => {
     const nextButton = wrapper.container.querySelector('.rc-pagination-next');
     expect(nextButton).not.toHaveClass('rc-pagination-disabled');
     expect(nextButton).toHaveAttribute('aria-disabled', 'false');
+  });
+
+  it('should expose role and label for navigation items', () => {
+    const prevButton = wrapper.container.querySelector('.rc-pagination-prev');
+    const nextButton = wrapper.container.querySelector('.rc-pagination-next');
+    const currentPage = wrapper.container.querySelector(
+      '.rc-pagination-item-active',
+    );
+    expect(prevButton).toHaveAttribute('role', 'button');
+    expect(prevButton).toHaveAttribute('aria-label');
+    expect(nextButton).toHaveAttribute('role', 'button');
+    expect(nextButton).toHaveAttribute('aria-label');
+    expect(currentPage).toHaveAttribute('role', 'button');
+    expect(currentPage).toHaveAttribute('aria-current', 'page');
   });
 
   it('should response mouse click right', () => {
@@ -627,6 +645,16 @@ describe('keyboard support', () => {
     expect(onChange).toHaveBeenLastCalledWith(46, 10);
   });
 
+  it('should work for prev page with space key', () => {
+    const prevButton = $('li.rc-pagination-prev');
+    expect(prevButton).toBeTruthy();
+
+    fireEvent.keyDown(prevButton, { key: ' ', keyCode: 32, which: 32 });
+    fireEvent.keyDown(prevButton, { key: 'Spacebar', keyCode: 32, which: 32 });
+
+    expect(onChange).toHaveBeenLastCalledWith(48, 10);
+  });
+
   it('should work for next page', () => {
     const nextButton = $('li.rc-pagination-next');
     expect(nextButton).toBeTruthy();
@@ -640,6 +668,25 @@ describe('keyboard support', () => {
     expect(onChange).toHaveBeenLastCalledWith(54, 10);
   });
 
+  it('should work for next page with space key', () => {
+    const nextButton = $('li.rc-pagination-next');
+    expect(nextButton).toBeTruthy();
+
+    fireEvent.keyDown(nextButton, { key: ' ', keyCode: 32, which: 32 });
+    fireEvent.keyDown(nextButton, { key: 'Spacebar', keyCode: 32, which: 32 });
+
+    expect(onChange).toHaveBeenLastCalledWith(52, 10);
+  });
+
+  it('should work for next page with enter keyCode only', () => {
+    const nextButton = $('li.rc-pagination-next');
+    expect(nextButton).toBeTruthy();
+
+    fireEvent.keyDown(nextButton, { keyCode: 13, which: 13 });
+
+    expect(onChange).toHaveBeenLastCalledWith(51, 10);
+  });
+
   it('should work for jump prev page', () => {
     const jumpPrevButton = $('li.rc-pagination-jump-prev');
     expect(jumpPrevButton).toBeTruthy();
@@ -650,12 +697,40 @@ describe('keyboard support', () => {
     expect(onChange).toHaveBeenLastCalledWith(40, 10);
   });
 
+  it('should work for jump prev page with space key', () => {
+    const jumpPrevButton = $('li.rc-pagination-jump-prev');
+    expect(jumpPrevButton).toBeTruthy();
+
+    fireEvent.keyDown(jumpPrevButton, { key: ' ', keyCode: 32, which: 32 });
+    fireEvent.keyDown(jumpPrevButton, {
+      key: 'Spacebar',
+      keyCode: 32,
+      which: 32,
+    });
+
+    expect(onChange).toHaveBeenLastCalledWith(40, 10);
+  });
+
   it('should work for jump next page', () => {
     const jumpNextButton = $('li.rc-pagination-jump-next');
     expect(jumpNextButton).toBeTruthy();
 
     fireEvent.click(jumpNextButton);
     fireEvent.keyDown(jumpNextButton, { key: 'Enter', keyCode: 13, which: 13 });
+
+    expect(onChange).toHaveBeenLastCalledWith(60, 10);
+  });
+
+  it('should work for jump next page with space key', () => {
+    const jumpNextButton = $('li.rc-pagination-jump-next');
+    expect(jumpNextButton).toBeTruthy();
+
+    fireEvent.keyDown(jumpNextButton, { key: ' ', keyCode: 32, which: 32 });
+    fireEvent.keyDown(jumpNextButton, {
+      key: 'Spacebar',
+      keyCode: 32,
+      which: 32,
+    });
 
     expect(onChange).toHaveBeenLastCalledWith(60, 10);
   });

@@ -6,6 +6,7 @@ import type { PaginationProps } from './interface';
 export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
   rootPrefixCls: string;
   page: number;
+  pageLabel?: string;
   active?: boolean;
   className?: string;
   style?: React.CSSProperties;
@@ -22,6 +23,7 @@ const Pager: React.FC<PagerProps> = (props) => {
   const {
     rootPrefixCls,
     page,
+    pageLabel,
     active,
     className,
     style,
@@ -50,7 +52,14 @@ const Pager: React.FC<PagerProps> = (props) => {
     onKeyPress(e, onClick, page);
   };
 
-  const pager = itemRender(page, 'page', <a rel="nofollow">{page}</a>);
+  const pager = itemRender(
+    page,
+    'page',
+    <a tabIndex={-1} aria-hidden="true" rel="nofollow">
+      {page}
+    </a>,
+  );
+  const pagerLabel = `${pageLabel} ${page}`.trim();
 
   return pager ? (
     <li
@@ -60,6 +69,9 @@ const Pager: React.FC<PagerProps> = (props) => {
       onClick={handleClick}
       onKeyDown={handleKeyPress}
       tabIndex={0}
+      role="button"
+      aria-label={pagerLabel}
+      aria-current={active ? 'page' : undefined}
     >
       {pager}
     </li>

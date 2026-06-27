@@ -1,7 +1,6 @@
 <div align="center">
   <h1>@rc-component/pagination</h1>
-  <p><sub>Ant Design 生态的一部分。</sub></p>
-  <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
+  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Ant Design 生态的一部分。</sub></p>
   <p>📄 React 分页组件，支持页码、快速跳转、尺寸切换和本地化。</p>
 </div>
 
@@ -22,11 +21,11 @@
 
 ## 特性
 
-- Controlled and uncontrolled pagination state.
-- Page-size changer, quick jumper, simple mode, compact item count, and custom item rendering.
-- Locale packages exposed from `@rc-component/pagination/locale/*`.
-- Semantic `classNames` and `styles` for item-level customization.
-- TypeScript definitions for props, locale, callbacks, and state.
+- 受控和非受控分页状态。
+- 页面大小更改器、快速跳转、简单模式、紧凑项目计数和自定义项目渲染。
+- 从 `@rc-component/pagination/locale/*` 公开的语言环境包。
+- 用于项目级自定义的语义 `classNames` 和 `styles`。
+- 属性、本地化、回调和状态的 TypeScript 定义。
 - 被 Ant Design 用作共享的 pagination 基础能力。
 
 ## 安装
@@ -75,39 +74,39 @@ npm start
 
 | 参数                     | 类型                                       | 默认值                                | 说明                                     |
 | ---------------------------- | ------------------------------------------ | -------------------------------------- | ----------------------------------------------- |
-| align                        | `'start' \| 'center' \| 'end'`             | -                                      | Align pagination items.                         |
-| className                    | `string`                                   | -                                      | Class name for the root element.                |
-| classNames                   | `Partial<Record<'item', string>>`          | -                                      | Semantic class names.                           |
-| current                      | `number`                                   | -                                      | Controlled current page.                        |
-| defaultCurrent               | `number`                                   | `1`                                    | Initial current page.                           |
-| defaultPageSize              | `number`                                   | `10`                                   | Initial page size.                              |
-| disabled                     | `boolean`                                  | `false`                                | Disable pagination interactions.                |
-| hideOnSinglePage             | `boolean`                                  | `false`                                | Hide when there is only one page.               |
-| itemRender                   | `(page, type, element) => ReactNode`       | -                                      | Customize page, previous, next, and jump items. |
-| jumpNextIcon                 | `ReactNode \| ComponentType`               | -                                      | Custom next-jump icon.                          |
-| jumpPrevIcon                 | `ReactNode \| ComponentType`               | -                                      | Custom previous-jump icon.                      |
-| locale                       | `PaginationLocale`                         | `zh_CN`                                | Locale text.                                    |
-| nextIcon                     | `ReactNode \| ComponentType`               | -                                      | Custom next icon.                               |
-| pageSize                     | `number`                                   | -                                      | Controlled page size.                           |
-| pageSizeOptions              | `number[]`                                 | -                                      | Page-size options.                              |
-| prefixCls                    | `string`                                   | `rc-pagination`                        | Class name prefix.                              |
-| prevIcon                     | `ReactNode \| ComponentType`               | -                                      | Custom previous icon.                           |
+| align                        | `'start' \| 'center' \| 'end'`             | -                                      | 对齐分页项目。                         |
+| className                    | `string`                                   | -                                      | 根元素的className。                |
+| classNames                   | `Partial<Record<'item', string>>`          | -                                      | 语义className。                           |
+| 当前的                      | `number`                                   | -                                      | 控制当前页面。                        |
+| defaultCurrent               | `number`                                   | `1`                                    | 初始当前页面。                           |
+| defaultPageSize              | `number`                                   | `10`                                   | 初始页面大小。                              |
+| disabled                     | `boolean`                                  | `false`                                | 禁用分页交互。                |
+| hideOnSinglePage             | `boolean`                                  | `false`                                | 当只有一页时隐藏。               |
+| itemRender                   | `(page, type, element) => ReactNode`       | -                                      | 自定义页面、上一个、下一个和跳转项目。 |
+| jumpNextIcon                 | `ReactNode \| ComponentType`               | -                                      | 自定义下一跳图标。                          |
+| jumpPrevIcon                 | `ReactNode \| ComponentType`               | -                                      | 自定义上一跳转图标。                      |
+| 语言环境                       | `PaginationLocale`                         | `zh_CN`                                | 区域设置文本。                                    |
+| nextIcon                     | `ReactNode \| ComponentType`               | -                                      | 自定义下一个图标。                               |
+| pageSize                     | `number`                                   | -                                      | 受控的页面大小。                           |
+| pageSizeOptions              | `number[]`                                 | -                                      | 页面大小选项。                              |
+| prefixCls                    | `string`                                   | `rc-pagination`                        | className前缀。                              |
+| prevIcon                     | `ReactNode \| ComponentType`               | -                                      | 自定义上一个图标。                           |
 | role                         | `React.AriaRole`                           | -                                      | WAI-ARIA role.                                  |
-| selectPrefixCls              | `string`                                   | `rc-select`                            | Prefix for the size changer select.             |
-| showLessItems                | `boolean`                                  | `false`                                | Show fewer page items.                          |
-| showPrevNextJumpers          | `boolean`                                  | `true`                                 | Show previous and next jumpers.                 |
-| showQuickJumper              | `boolean \| object`                        | `false`                                | Show quick page jumper.                         |
-| showSizeChanger              | `boolean`                                  | `total > totalBoundaryShowSizeChanger` | Show page-size changer.                         |
-| showTitle                    | `boolean`                                  | `true`                                 | Show title on page items.                       |
-| showTotal                    | `(total, range) => ReactNode`              | -                                      | Render total text.                              |
+| selectPrefixCls              | `string`                                   | `rc-select`                            | 尺寸变换器选择的前缀。             |
+| showLessItems                | `boolean`                                  | `false`                                | 显示较少的页面项目。                          |
+| showPrevNextJumpers          | `boolean`                                  | `true`                                 | 显示上一个和下一个跳线。                 |
+| showQuickJumper              | `boolean \| object`                        | `false`                                | 显示快速跳页。                         |
+| showSizeChanger              | `boolean`                                  | `total > totalBoundaryShowSizeChanger` | 显示页面大小更改器。                         |
+| showTitle                    | `boolean`                                  | `true`                                 | 在页面项目上显示标题。                       |
+| showTotal                    | `(total, range) => ReactNode`              | -                                      | 渲染总文本。                              |
 | simple                       | `boolean \| { readOnly?: boolean }`        | `false`                                | Use simple pager.                               |
-| sizeChangerRender            | `SizeChangerRender`                        | -                                      | Customize the size changer.                     |
-| style                        | `React.CSSProperties`                      | -                                      | Root inline style.                              |
-| styles                       | `Partial<Record<'item', CSSProperties>>`   | -                                      | Semantic styles.                                |
-| total                        | `number`                                   | `0`                                    | Total item count.                               |
-| totalBoundaryShowSizeChanger | `number`                                   | `50`                                   | Boundary for default `showSizeChanger`.         |
-| onChange                     | `(page: number, pageSize: number) => void` | -                                      | Triggered when page or page size changes.       |
-| onShowSizeChange             | `(current: number, size: number) => void`  | -                                      | Triggered when page size changes.               |
+| sizeChangerRender            | `SizeChangerRender`                        | -                                      | 定制尺寸变换器。                     |
+| 风格                        | `React.CSSProperties`                      | -                                      | 根内联样式。                              |
+| styles                       | `Partial<Record<'item', CSSProperties>>`   | -                                      | 语义化样式。                                |
+| total                        | `number`                                   | `0`                                    | 项目总数。                               |
+| totalBoundaryShowSizeChanger | `number`                                   | `50`                                   | 默认的边界 `showSizeChanger`。         |
+| onChange                     | `(page: number, pageSize: number) => void` | -                                      | 当页面或页面大小更改时触发。       |
+| onShowSizeChange             | `(current: number, size: number) => void`  | -                                      | 当页面大小改变时触发。               |
 
 ## 本地开发
 
@@ -127,11 +126,11 @@ npm run build
 npm run prepublishOnly
 ```
 
-The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
+包构建完成后，发布流程由 `@rc-component/np` 通过 `rc-np` 命令处理。
 
 ## 许可证
 
-@rc-component/pagination is released under the [MIT](./LICENSE.md) license.
+@rc-component/pagination 基于 [MIT](./LICENSE.md) 许可证发布。
 
 [npm-image]: https://img.shields.io/npm/v/@rc-component/pagination.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@rc-component/pagination

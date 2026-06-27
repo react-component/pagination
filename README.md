@@ -1,17 +1,10 @@
 <div align="center">
   <h1>@rc-component/pagination</h1>
+  <p><sub>Part of the Ant Design ecosystem.</sub></p>
   <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/bmw-prod/ae669a89-0c24-40ff-a91d-2b83497170f6.svg" />
   <p>📄 React pagination primitives for page navigation, size changing, quick jumping, and locale-aware controls.</p>
 </div>
 
-<p align="center">
-  <sub>
-    <a href="https://ant.design">
-      <img alt="Ant Design" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" height="16">
-    </a>
-    Part of the Ant Design ecosystem.
-  </sub>
-</p>
 
 <div align="center">
 
@@ -55,28 +48,14 @@ npm install @rc-component/pagination
 ```tsx | pure
 import Pagination from '@rc-component/pagination';
 import '@rc-component/pagination/assets/index.css';
-import React, { useState } from 'react';
-
-export default () => {
-  const [current, setCurrent] = useState(1);
-
-  return (
-    <Pagination
-      current={current}
-      total={120}
-      showSizeChanger
-      showQuickJumper
-      onChange={setCurrent}
-    />
-  );
-};
+export default () => (
+  <Pagination defaultCurrent={1} total={120} showSizeChanger showQuickJumper />
+);
 ```
 
 ```tsx | pure
 import Pagination from '@rc-component/pagination';
 import enUS from '@rc-component/pagination/locale/en_US';
-import React from 'react';
-
 export default () => (
   <Pagination
     defaultCurrent={2}

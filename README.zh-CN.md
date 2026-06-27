@@ -1,11 +1,11 @@
 <div align="center">
   <h1>@rc-component/pagination</h1>
-  <p><sub>Part of the Ant Design ecosystem.</sub></p>
+  <p><sub>Ant Design 生态的一部分。</sub></p>
   <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
-  <p>📄 React pagination primitives for page navigation, size changing, quick jumping, and locale-aware controls.</p>
+  <p>📄 React 分页组件，支持页码、快速跳转、尺寸切换和本地化。</p>
 </div>
 
-<p align="center">English | <a href="./README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="./README.md">English</a> | 简体中文</p>
 
 
 <div align="center">
@@ -20,22 +20,22 @@
 </div>
 
 
-## Highlights
+## 特性
 
 - Controlled and uncontrolled pagination state.
 - Page-size changer, quick jumper, simple mode, compact item count, and custom item rendering.
 - Locale packages exposed from `@rc-component/pagination/locale/*`.
 - Semantic `classNames` and `styles` for item-level customization.
 - TypeScript definitions for props, locale, callbacks, and state.
-- Used by Ant Design as the shared pagination foundation.
+- 被 Ant Design 用作共享的 pagination 基础能力。
 
-## Install
+## 安装
 
 ```bash
 npm install @rc-component/pagination
 ```
 
-## Usage
+## 使用
 
 ```tsx | pure
 import Pagination from '@rc-component/pagination';
@@ -58,22 +58,22 @@ export default () => (
 );
 ```
 
-## Examples
+## 示例
 
-Run the examples locally:
+本地运行示例：
 
 ```bash
 npm install
 npm start
 ```
 
-Then open the dumi dev server in your browser.
+然后在浏览器中打开 dumi 开发服务地址。
 
 ## API
 
 ### Pagination
 
-| Property                     | Type                                       | Default                                | Description                                     |
+| 参数                     | 类型                                       | 默认值                                | 说明                                     |
 | ---------------------------- | ------------------------------------------ | -------------------------------------- | ----------------------------------------------- |
 | align                        | `'start' \| 'center' \| 'end'`             | -                                      | Align pagination items.                         |
 | className                    | `string`                                   | -                                      | Class name for the root element.                |
@@ -109,7 +109,7 @@ Then open the dumi dev server in your browser.
 | onChange                     | `(page: number, pageSize: number) => void` | -                                      | Triggered when page or page size changes.       |
 | onShowSizeChange             | `(current: number, size: number) => void`  | -                                      | Triggered when page size changes.               |
 
-## Development
+## 本地开发
 
 ```bash
 npm install
@@ -121,7 +121,7 @@ npm run compile
 npm run build
 ```
 
-## Release
+## 发布
 
 ```bash
 npm run prepublishOnly
@@ -129,7 +129,7 @@ npm run prepublishOnly
 
 The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
 
-## License
+## 许可证
 
 @rc-component/pagination is released under the [MIT](./LICENSE.md) license.
 

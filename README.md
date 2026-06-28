@@ -8,7 +8,7 @@
     <a href="https://npmjs.org/package/@rc-component/pagination"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@rc-component/pagination.svg?style=flat-square"></a>
     <a href="https://github.com/react-component/pagination/actions/workflows/react-component-ci.yml"><img alt="build status" src="https://github.com/react-component/pagination/actions/workflows/react-component-ci.yml/badge.svg"></a>
     <a href="https://app.codecov.io/gh/react-component/pagination"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/react-component/pagination/master.svg?style=flat-square"></a>
-    <a href="https://bundlephobia.com/package/@rc-component/pagination"><img alt="bundle size" src="https://badgen.net/bundlephobia/minzip/@rc-component/pagination"></a>
+    <a href="https://bundlephobia.com/package/@rc-component/pagination"><img alt="bundle size" src="https://img.shields.io/bundlephobia/minzip/@rc-component/pagination?style=flat-square"></a>
     <a href="https://github.com/umijs/dumi"><img alt="dumi" src="https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square"></a>
   </p>
 </div>

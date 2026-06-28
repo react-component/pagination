@@ -73,8 +73,8 @@ npm start
 | 参数                         | 类型                                       | 默认值                                 | 说明                                   |
 | ---------------------------- | ------------------------------------------ | -------------------------------------- | -------------------------------------- |
 | align                        | `'start' \| 'center' \| 'end'`             | -                                      | 对齐分页项目。                         |
-| className                    | `string`                                   | -                                      | 根元素的className。                    |
-| classNames                   | `Partial<Record<'item', string>>`          | -                                      | 语义className。                        |
+| className                    | `string`                                   | -                                      | 根元素的 className。                   |
+| classNames                   | `Partial<Record<'item', string>>`          | -                                      | 语义 className。                       |
 | current                      | `number`                                   | -                                      | 控制当前页面。                         |
 | defaultCurrent               | `number`                                   | `1`                                    | 初始当前页面。                         |
 | defaultPageSize              | `number`                                   | `10`                                   | 初始页面大小。                         |
@@ -87,7 +87,7 @@ npm start
 | nextIcon                     | `ReactNode \| ComponentType`               | -                                      | 自定义下一个图标。                     |
 | pageSize                     | `number`                                   | -                                      | 受控的页面大小。                       |
 | pageSizeOptions              | `number[]`                                 | -                                      | 页面大小选项。                         |
-| prefixCls                    | `string`                                   | `rc-pagination`                        | className前缀。                        |
+| prefixCls                    | `string`                                   | `rc-pagination`                        | className 前缀。                       |
 | prevIcon                     | `ReactNode \| ComponentType`               | -                                      | 自定义上一个图标。                     |
 | role                         | `React.AriaRole`                           | -                                      | WAI-ARIA role.                         |
 | selectPrefixCls              | `string`                                   | `rc-select`                            | 尺寸变换器选择的前缀。                 |

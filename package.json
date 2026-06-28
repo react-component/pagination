@@ -45,10 +45,10 @@
   "homepage": "https://react-component.github.io/pagination",
   "repository": {
     "type": "git",
-    "url": "git@github.com:react-component/pagination.git"
+    "url": "https://github.com/react-component/pagination.git"
   },
   "bugs": {
-    "url": "http://github.com/react-component/pagination/issues"
+    "url": "https://github.com/react-component/pagination/issues"
   },
   "license": "MIT",
   "scripts": {
@@ -111,5 +111,8 @@
     "**/*.{js,jsx,tsx,ts,md,json}": [
       "prettier --write --ignore-unknown"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

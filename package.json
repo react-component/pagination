@@ -109,9 +109,7 @@
     "mode": "npm"
   },
   "lint-staged": {
-    "**/*.{js,jsx,tsx,ts,md,json}": [
-      "prettier --write --ignore-unknown"
-    ]
+    "*": "prettier --write --ignore-unknown"
   },
   "publishConfig": {
     "access": "public"

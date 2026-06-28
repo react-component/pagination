@@ -89,7 +89,7 @@ npm start
 | pageSizeOptions              | `number[]`                                 | -                                      | 页面大小选项。                         |
 | prefixCls                    | `string`                                   | `rc-pagination`                        | className 前缀。                       |
 | prevIcon                     | `ReactNode \| ComponentType`               | -                                      | 自定义上一个图标。                     |
-| role                         | `React.AriaRole`                           | -                                      | WAI-ARIA role.                         |
+| role                         | `React.AriaRole`                           | -                                      | WAI-ARIA 角色。                        |
 | selectPrefixCls              | `string`                                   | `rc-select`                            | 尺寸变换器选择的前缀。                 |
 | showLessItems                | `boolean`                                  | `false`                                | 显示较少的页面项目。                   |
 | showPrevNextJumpers          | `boolean`                                  | `true`                                 | 显示上一个和下一个跳线。               |

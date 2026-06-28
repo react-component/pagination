@@ -97,7 +97,7 @@ npm start
 | showSizeChanger              | `boolean`                                  | `total > totalBoundaryShowSizeChanger` | 显示页面大小更改器。                   |
 | showTitle                    | `boolean`                                  | `true`                                 | 在页面项目上显示标题。                 |
 | showTotal                    | `(total, range) => ReactNode`              | -                                      | 渲染总文本。                           |
-| simple                       | `boolean \| { readOnly?: boolean }`        | `false`                                | Use simple pager.                      |
+| simple                       | `boolean \| { readOnly?: boolean }`        | `false`                                | 使用简洁分页器。                       |
 | sizeChangerRender            | `SizeChangerRender`                        | -                                      | 定制尺寸变换器。                       |
 | style                        | `React.CSSProperties`                      | -                                      | 根内联样式。                           |
 | styles                       | `Partial<Record<'item', CSSProperties>>`   | -                                      | 语义化样式。                           |

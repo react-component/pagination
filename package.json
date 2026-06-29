@@ -75,7 +75,7 @@
     "@rc-component/np": "^1.0.4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^15.0.7",
-    "@testing-library/user-event": "14.5.2",
+    "@testing-library/user-event": "14.6.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^26.0.1",
     "@types/react": "^18.3.31",

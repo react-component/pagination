@@ -131,7 +131,7 @@ describe('simple Pagination', () => {
     const pageSize1 = container.querySelectorAll('.rc-select-item')[0];
     fireEvent.click(pageSize1);
     expect(onChange).toHaveBeenCalled();
-    expect(onChange).toHaveBeenLastCalledWith(1, 10);
+    expect(onChange).toHaveBeenLastCalledWith(1, 10, 2);
   });
 
   it('should support keyboard event', () => {

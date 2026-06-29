@@ -483,7 +483,7 @@ describe('current value on onShowSizeChange when total is 0', () => {
     fireEvent.keyDown(input, { key: 'Down', keyCode: 40, which: 40 });
     fireEvent.keyDown(input, { key: 'Enter', keyCode: 13, which: 13 });
     expect(onShowSizeChange).toHaveBeenLastCalledWith(1, 20);
-    expect(onChange).toHaveBeenLastCalledWith(1, 20);
+    expect(onChange).toHaveBeenLastCalledWith(1, 20, 1);
   });
 
   it('when total is 0, pager should show `1` and being disabled', () => {

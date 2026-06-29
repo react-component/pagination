@@ -57,9 +57,8 @@ export interface PaginationData {
 }
 
 export interface PaginationProps
-  extends Partial<PaginationData>,
-    React.AriaAttributes {
-  onChange?: (page: number, pageSize: number) => void;
+  extends Partial<PaginationData>, React.AriaAttributes {
+  onChange?: (page: number, pageSize: number, recommendPage?: number) => void;
   onShowSizeChange?: (current: number, size: number) => void;
   itemRender?: (
     page: number,

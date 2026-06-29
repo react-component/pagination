@@ -67,7 +67,7 @@ describe('Pagination with sizer', () => {
     const pageSize1 = container.querySelectorAll('.rc-select-item')[0];
     fireEvent.click(pageSize1);
     expect(onChange).toHaveBeenCalled();
-    expect(onChange).toHaveBeenLastCalledWith(1, 10);
+    expect(onChange).toHaveBeenLastCalledWith(1, 10, 2);
   });
 
   // https://github.com/ant-design/ant-design/issues/26580

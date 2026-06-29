@@ -197,7 +197,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   function changePageSize(size: number) {
-    const preservedPage = Math.ceil((current * pageSize) / size);
+    const preservedPage = Math.floor(((current - 1) * pageSize) / size) + 1;
     const newCurrent = calculatePage(size, pageSize, total);
     const recommendPage =
       newCurrent === 0 ? 1 : Math.min(preservedPage, newCurrent);

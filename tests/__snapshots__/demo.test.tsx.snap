@@ -2096,43 +2096,26 @@ exports[`Example jumper 1`] = `
       class="rc-pagination-options"
     >
       <div
-        aria-label="页码"
         class="rc-select rc-pagination-options-size-changer rc-select-single"
       >
         <div
-          class="rc-select-selector"
+          class="rc-select-content rc-select-content-has-value"
+          title="20 条/页"
         >
-          <span
-            class="rc-select-selection-wrap"
-          >
-            <span
-              class="rc-select-selection-search"
-            >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-label="页码"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="rc-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
-                readonly=""
-                role="combobox"
-                style="opacity: 0;"
-                type="search"
-                unselectable="on"
-                value=""
-              />
-            </span>
-            <span
-              class="rc-select-selection-item"
-              title="20 条/页"
-            >
-              20 条/页
-            </span>
-          </span>
+          20 条/页
+          <input
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="页码"
+            autocomplete="new-password"
+            class="rc-select-input"
+            id="test-id"
+            readonly=""
+            role="combobox"
+            type="text"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -2292,44 +2275,27 @@ exports[`Example jumper 1`] = `
       class="rc-pagination-options"
     >
       <div
-        aria-label="页码"
         class="rc-select rc-pagination-options-size-changer rc-select-single rc-select-disabled"
       >
         <div
-          class="rc-select-selector"
+          class="rc-select-content rc-select-content-has-value"
+          title="20 条/页"
         >
-          <span
-            class="rc-select-selection-wrap"
-          >
-            <span
-              class="rc-select-selection-search"
-            >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-label="页码"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="rc-select-selection-search-input"
-                disabled=""
-                id="rc_select_TEST_OR_SSR"
-                readonly=""
-                role="combobox"
-                style="opacity: 0;"
-                type="search"
-                unselectable="on"
-                value=""
-              />
-            </span>
-            <span
-              class="rc-select-selection-item"
-              title="20 条/页"
-            >
-              20 条/页
-            </span>
-          </span>
+          20 条/页
+          <input
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="页码"
+            autocomplete="new-password"
+            class="rc-select-input"
+            disabled=""
+            id="test-id"
+            readonly=""
+            role="combobox"
+            type="text"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -2402,43 +2368,26 @@ exports[`Example jumper 1`] = `
       class="rc-pagination-options"
     >
       <div
-        aria-label="页码"
         class="rc-select rc-pagination-options-size-changer rc-select-single"
       >
         <div
-          class="rc-select-selector"
+          class="rc-select-content rc-select-content-has-value"
+          title="10 条/页"
         >
-          <span
-            class="rc-select-selection-wrap"
-          >
-            <span
-              class="rc-select-selection-search"
-            >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-label="页码"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="rc-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
-                readonly=""
-                role="combobox"
-                style="opacity: 0;"
-                type="search"
-                unselectable="on"
-                value=""
-              />
-            </span>
-            <span
-              class="rc-select-selection-item"
-              title="10 条/页"
-            >
-              10 条/页
-            </span>
-          </span>
+          10 条/页
+          <input
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="页码"
+            autocomplete="new-password"
+            class="rc-select-input"
+            id="test-id"
+            readonly=""
+            role="combobox"
+            type="text"
+            value=""
+          />
         </div>
       </div>
     </li>
@@ -2497,43 +2446,26 @@ exports[`Example jumper 1`] = `
       class="rc-pagination-options"
     >
       <div
-        aria-label="页码"
         class="rc-select rc-pagination-options-size-changer rc-select-single"
       >
         <div
-          class="rc-select-selector"
+          class="rc-select-content rc-select-content-has-value"
+          title="10 条/页"
         >
-          <span
-            class="rc-select-selection-wrap"
-          >
-            <span
-              class="rc-select-selection-search"
-            >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-label="页码"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="rc-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
-                readonly=""
-                role="combobox"
-                style="opacity: 0;"
-                type="search"
-                unselectable="on"
-                value=""
-              />
-            </span>
-            <span
-              class="rc-select-selection-item"
-              title="10 条/页"
-            >
-              10 条/页
-            </span>
-          </span>
+          10 条/页
+          <input
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="页码"
+            autocomplete="new-password"
+            class="rc-select-input"
+            id="test-id"
+            readonly=""
+            role="combobox"
+            type="text"
+            value=""
+          />
         </div>
       </div>
     </li>
@@ -2687,43 +2619,26 @@ exports[`Example jumperWithGoButton 1`] = `
       class="rc-pagination-options"
     >
       <div
-        aria-label="页码"
         class="rc-select rc-pagination-options-size-changer rc-select-single"
       >
         <div
-          class="rc-select-selector"
+          class="rc-select-content rc-select-content-has-value"
+          title="20 条/页"
         >
-          <span
-            class="rc-select-selection-wrap"
-          >
-            <span
-              class="rc-select-selection-search"
-            >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-label="页码"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="rc-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
-                readonly=""
-                role="combobox"
-                style="opacity: 0;"
-                type="search"
-                unselectable="on"
-                value=""
-              />
-            </span>
-            <span
-              class="rc-select-selection-item"
-              title="20 条/页"
-            >
-              20 条/页
-            </span>
-          </span>
+          20 条/页
+          <input
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="页码"
+            autocomplete="new-password"
+            class="rc-select-input"
+            id="test-id"
+            readonly=""
+            role="combobox"
+            type="text"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -3290,43 +3205,26 @@ exports[`Example locale 1`] = `
       class="rc-pagination-options"
     >
       <div
-        aria-label="Page Size"
         class="rc-select rc-pagination-options-size-changer rc-select-single"
       >
         <div
-          class="rc-select-selector"
+          class="rc-select-content rc-select-content-has-value"
+          title="20 / page"
         >
-          <span
-            class="rc-select-selection-wrap"
-          >
-            <span
-              class="rc-select-selection-search"
-            >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-label="Page Size"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="rc-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
-                readonly=""
-                role="combobox"
-                style="opacity: 0;"
-                type="search"
-                unselectable="on"
-                value=""
-              />
-            </span>
-            <span
-              class="rc-select-selection-item"
-              title="20 / page"
-            >
-              20 / page
-            </span>
-          </span>
+          20 / page
+          <input
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="Page Size"
+            autocomplete="new-password"
+            class="rc-select-input"
+            id="test-id"
+            readonly=""
+            role="combobox"
+            type="text"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -3717,43 +3615,26 @@ exports[`Example showSizeChanger 1`] = `
       class="rc-pagination-options"
     >
       <div
-        aria-label="页码"
         class="rc-select rc-pagination-options-size-changer rc-select-single"
       >
         <div
-          class="rc-select-selector"
+          class="rc-select-content rc-select-content-has-value"
+          title="10 条/页"
         >
-          <span
-            class="rc-select-selection-wrap"
-          >
-            <span
-              class="rc-select-selection-search"
-            >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-label="页码"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="rc-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
-                readonly=""
-                role="combobox"
-                style="opacity: 0;"
-                type="search"
-                unselectable="on"
-                value=""
-              />
-            </span>
-            <span
-              class="rc-select-selection-item"
-              title="10 条/页"
-            >
-              10 条/页
-            </span>
-          </span>
+          10 条/页
+          <input
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="页码"
+            autocomplete="new-password"
+            class="rc-select-input"
+            id="test-id"
+            readonly=""
+            role="combobox"
+            type="text"
+            value=""
+          />
         </div>
       </div>
     </li>
@@ -3810,43 +3691,26 @@ exports[`Example showSizeChanger 1`] = `
       class="rc-pagination-options"
     >
       <div
-        aria-label="页码"
         class="rc-select rc-pagination-options-size-changer rc-select-single"
       >
         <div
-          class="rc-select-selector"
+          class="rc-select-content rc-select-content-has-value"
+          title="10 条每页"
         >
-          <span
-            class="rc-select-selection-wrap"
-          >
-            <span
-              class="rc-select-selection-search"
-            >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-label="页码"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="rc-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
-                readonly=""
-                role="combobox"
-                style="opacity: 0;"
-                type="search"
-                unselectable="on"
-                value=""
-              />
-            </span>
-            <span
-              class="rc-select-selection-item"
-              title="10 条每页"
-            >
-              10 条每页
-            </span>
-          </span>
+          10 条每页
+          <input
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="页码"
+            autocomplete="new-password"
+            class="rc-select-input"
+            id="test-id"
+            readonly=""
+            role="combobox"
+            type="text"
+            value=""
+          />
         </div>
       </div>
     </li>
@@ -4702,43 +4566,26 @@ exports[`Example simple 1`] = `
       class="rc-pagination-options"
     >
       <div
-        aria-label="页码"
         class="rc-select rc-pagination-options-size-changer rc-select-single"
       >
         <div
-          class="rc-select-selector"
+          class="rc-select-content rc-select-content-has-value"
+          title="10 条/页"
         >
-          <span
-            class="rc-select-selection-wrap"
-          >
-            <span
-              class="rc-select-selection-search"
-            >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-label="页码"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="rc-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
-                readonly=""
-                role="combobox"
-                style="opacity: 0;"
-                type="search"
-                unselectable="on"
-                value=""
-              />
-            </span>
-            <span
-              class="rc-select-selection-item"
-              title="10 条/页"
-            >
-              10 条/页
-            </span>
-          </span>
+          10 条/页
+          <input
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="页码"
+            autocomplete="new-password"
+            class="rc-select-input"
+            id="test-id"
+            readonly=""
+            role="combobox"
+            type="text"
+            value=""
+          />
         </div>
       </div>
     </li>
@@ -4802,43 +4649,26 @@ exports[`Example simple 1`] = `
       class="rc-pagination-options"
     >
       <div
-        aria-label="页码"
         class="rc-select rc-pagination-options-size-changer rc-select-single"
       >
         <div
-          class="rc-select-selector"
+          class="rc-select-content rc-select-content-has-value"
+          title="10 条/页"
         >
-          <span
-            class="rc-select-selection-wrap"
-          >
-            <span
-              class="rc-select-selection-search"
-            >
-              <input
-                aria-autocomplete="list"
-                aria-controls="rc_select_TEST_OR_SSR_list"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                aria-label="页码"
-                aria-owns="rc_select_TEST_OR_SSR_list"
-                autocomplete="off"
-                class="rc-select-selection-search-input"
-                id="rc_select_TEST_OR_SSR"
-                readonly=""
-                role="combobox"
-                style="opacity: 0;"
-                type="search"
-                unselectable="on"
-                value=""
-              />
-            </span>
-            <span
-              class="rc-select-selection-item"
-              title="10 条/页"
-            >
-              10 条/页
-            </span>
-          </span>
+          10 条/页
+          <input
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-label="页码"
+            autocomplete="new-password"
+            class="rc-select-input"
+            id="test-id"
+            readonly=""
+            role="combobox"
+            type="text"
+            value=""
+          />
         </div>
       </div>
       <div
@@ -4945,43 +4775,26 @@ exports[`Example sizer 1`] = `
         class="rc-pagination-options"
       >
         <div
-          aria-label="页码"
           class="rc-select rc-pagination-options-size-changer rc-select-single"
         >
           <div
-            class="rc-select-selector"
+            class="rc-select-content rc-select-content-has-value"
+            title="15 条/页"
           >
-            <span
-              class="rc-select-selection-wrap"
-            >
-              <span
-                class="rc-select-selection-search"
-              >
-                <input
-                  aria-autocomplete="list"
-                  aria-controls="rc_select_TEST_OR_SSR_list"
-                  aria-expanded="false"
-                  aria-haspopup="listbox"
-                  aria-label="页码"
-                  aria-owns="rc_select_TEST_OR_SSR_list"
-                  autocomplete="off"
-                  class="rc-select-selection-search-input"
-                  id="rc_select_TEST_OR_SSR"
-                  readonly=""
-                  role="combobox"
-                  style="opacity: 0;"
-                  type="search"
-                  unselectable="on"
-                  value=""
-                />
-              </span>
-              <span
-                class="rc-select-selection-item"
-                title="15 条/页"
-              >
-                15 条/页
-              </span>
-            </span>
+            15 条/页
+            <input
+              aria-autocomplete="list"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-label="页码"
+              autocomplete="new-password"
+              class="rc-select-input"
+              id="test-id"
+              readonly=""
+              role="combobox"
+              type="text"
+              value=""
+            />
           </div>
         </div>
       </li>
@@ -5179,43 +4992,26 @@ exports[`Example sizer 1`] = `
         class="rc-pagination-options"
       >
         <div
-          aria-label="页码"
           class="rc-select rc-pagination-options-size-changer rc-select-single"
         >
           <div
-            class="rc-select-selector"
+            class="rc-select-content rc-select-content-has-value"
+            title="15 条/页"
           >
-            <span
-              class="rc-select-selection-wrap"
-            >
-              <span
-                class="rc-select-selection-search"
-              >
-                <input
-                  aria-autocomplete="list"
-                  aria-controls="rc_select_TEST_OR_SSR_list"
-                  aria-expanded="false"
-                  aria-haspopup="listbox"
-                  aria-label="页码"
-                  aria-owns="rc_select_TEST_OR_SSR_list"
-                  autocomplete="off"
-                  class="rc-select-selection-search-input"
-                  id="rc_select_TEST_OR_SSR"
-                  readonly=""
-                  role="combobox"
-                  style="opacity: 0;"
-                  type="search"
-                  unselectable="on"
-                  value=""
-                />
-              </span>
-              <span
-                class="rc-select-selection-item"
-                title="15 条/页"
-              >
-                15 条/页
-              </span>
-            </span>
+            15 条/页
+            <input
+              aria-autocomplete="list"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-label="页码"
+              autocomplete="new-password"
+              class="rc-select-input"
+              id="test-id"
+              readonly=""
+              role="combobox"
+              type="text"
+              value=""
+            />
           </div>
         </div>
       </li>

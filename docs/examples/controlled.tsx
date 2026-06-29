@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Pagination from '../../src';
 import '../../assets/index.less';
-import 'rc-select/assets/index.less';
+import '@rc-component/select/assets/index.less';
 
 const App = () => {
   const [current, setCurrent] = useState(1);

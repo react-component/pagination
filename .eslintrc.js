@@ -1,5 +1,6 @@
 module.exports = {
   extends: [require.resolve('@umijs/fabric/dist/eslint')],
+  plugins: ['@typescript-eslint'],
   rules: {
     'no-template-curly-in-string': 0,
     'prefer-promise-reject-errors': 0,

@@ -2,7 +2,7 @@
 import React from 'react';
 import localeInfo from '../../src/locale/en_US';
 import '../../assets/index.less';
-import 'rc-select/assets/index.less';
+import '@rc-component/select/assets/index.less';
 import PaginationWithSizeChanger from './utils/commonUtil';
 
 function onShowSizeChange(current, pageSize) {

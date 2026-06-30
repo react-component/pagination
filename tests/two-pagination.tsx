@@ -1,4 +1,4 @@
-// import 'rc-select/assets/index.less';
+// import '@rc-component/select/assets/index.less';
 import React from 'react';
 import Pagination from '../src';
 import { sizeChangerRender } from './commonUtil';

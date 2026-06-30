@@ -11,7 +11,9 @@
       "@/*": ["src/*"],
       "@@/*": [".dumi/tmp/*"],
       "@rc-component/pagination": ["src/index.ts"]
-    }
+    },
+    "ignoreDeprecations": "5.0"
   },
-  "include": [".dumirc.ts", "**/*.ts", "**/*.tsx"]
+  "include": [".dumirc.ts", ".fatherrc.ts", "src", "docs", "tests"],
+  "exclude": ["node_modules", "lib", "es", "dist", "docs-dist", ".dumi"]
 }

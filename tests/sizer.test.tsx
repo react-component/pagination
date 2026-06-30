@@ -1,6 +1,5 @@
-import { fireEvent } from '@testing-library/dom';
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Select from '@rc-component/select';
 import Pagination from '../src';

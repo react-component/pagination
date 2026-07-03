@@ -9,9 +9,10 @@ function onShowSizeChange(current, pageSize) {
   console.log(pageSize);
 }
 
-function onChange(current, pageSize) {
+function onChange(current, pageSize, info) {
   console.log('onChange:current=', current);
   console.log('onChange:pageSize=', pageSize);
+  console.log('onChange:recommendPage=', info?.recommendPage);
 }
 
 const App = () => (

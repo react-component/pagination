@@ -1,2 +1,6 @@
 export { default } from './Pagination';
-export type { PaginationLocale, PaginationProps } from './interface';
+export type {
+  PaginationLocale,
+  PaginationProps,
+  PaginationOnChangeInfo,
+} from './interface';

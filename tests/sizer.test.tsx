@@ -50,24 +50,21 @@ describe('Pagination with sizer', () => {
     );
   });
 
-  it('should onChange called when pageSize change', () => {
+  it('should provide correct recommendPage when shrinking pageSize', () => {
     const onChange = jest.fn();
     const { container, getByRole } = render(
       <Pagination
         sizeChangerRender={sizeChangerRender}
         onChange={onChange}
         total={500}
-        defaultPageSize={20}
+        defaultCurrent={3}
+        defaultPageSize={50}
       />,
     );
     fireEvent.mouseDown(getByRole('combobox'));
-    expect(container.querySelectorAll('.rc-select-item')[2]).toHaveTextContent(
-      '50 条/页',
-    );
-    const pageSize1 = container.querySelectorAll('.rc-select-item')[0];
-    fireEvent.click(pageSize1);
-    expect(onChange).toHaveBeenCalled();
-    expect(onChange).toHaveBeenLastCalledWith(1, 10);
+    const pageSize10 = container.querySelectorAll('.rc-select-item')[0];
+    fireEvent.click(pageSize10);
+    expect(onChange).toHaveBeenLastCalledWith(3, 10, { recommendPage: 11 });
   });
 
   // https://github.com/ant-design/ant-design/issues/26580

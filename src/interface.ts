@@ -56,12 +56,16 @@ export interface PaginationData {
   jumpNextIcon: React.ComponentType | React.ReactNode;
 }
 
+export interface PaginationOnChangeInfo {
+  recommendPage?: number;
+}
+
 export interface PaginationProps
   extends Partial<PaginationData>, React.AriaAttributes {
   onChange?: (
     page: number,
     pageSize: number,
-    info?: { recommendPage?: number },
+    info?: PaginationOnChangeInfo,
   ) => void;
   onShowSizeChange?: (current: number, size: number) => void;
   itemRender?: (

@@ -209,7 +209,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     setInternalInputVal(nextCurrent);
     onShowSizeChange?.(current, size);
     setCurrent(nextCurrent);
-    onChange?.(nextCurrent, size, recommendPage);
+    onChange?.(nextCurrent, size, { recommendPage });
   }
 
   function handleChange(page: number) {

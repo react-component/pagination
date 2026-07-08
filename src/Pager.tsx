@@ -7,6 +7,7 @@ export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
   rootPrefixCls: string;
   page: number;
   pageLabel?: string;
+  defaultItemRender?: boolean;
   active?: boolean;
   className?: string;
   style?: React.CSSProperties;
@@ -24,6 +25,7 @@ const Pager: React.FC<PagerProps> = (props) => {
     rootPrefixCls,
     page,
     pageLabel,
+    defaultItemRender,
     active,
     className,
     style,
@@ -52,24 +54,36 @@ const Pager: React.FC<PagerProps> = (props) => {
     onKeyPress(e, onClick, page);
   };
 
-  const pager = itemRender(
-    page,
-    'page',
-    <a tabIndex={-1} aria-hidden="true" rel="nofollow">
-      {page}
-    </a>,
-  );
   const pagerLabel = `${pageLabel} ${page}`.trim();
+  const itemTitle = showTitle ? String(page) : undefined;
+
+  if (defaultItemRender) {
+    return (
+      <li className={cls} style={style}>
+        <button
+          type="button"
+          onClick={handleClick}
+          title={itemTitle}
+          aria-label={pagerLabel}
+          aria-current={active ? 'page' : undefined}
+          disabled={cls.includes(`${prefixCls}-disabled`)}
+        >
+          {page}
+        </button>
+      </li>
+    );
+  }
+
+  const pager = itemRender(page, 'page', <a rel="nofollow">{page}</a>);
 
   return pager ? (
     <li
-      title={showTitle ? String(page) : null}
+      title={itemTitle}
       className={cls}
       style={style}
       onClick={handleClick}
       onKeyDown={handleKeyPress}
       tabIndex={0}
-      role="button"
       aria-label={pagerLabel}
       aria-current={active ? 'page' : undefined}
     >

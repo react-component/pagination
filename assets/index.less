@@ -71,10 +71,17 @@
     cursor: pointer;
     user-select: none;
 
-    a {
+    a,
+    button {
       display: block;
+      width: 100%;
+      height: 100%;
       padding: 0 6px;
       color: rgba(0, 0, 0, 0.85);
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      outline: none;
       transition: none;
 
       &:hover {
@@ -83,10 +90,12 @@
     }
 
     &:focus,
+    &:focus-within,
     &:hover {
       border-color: @primary-color;
       transition: all 0.3s;
-      a {
+      a,
+      button {
         color: @primary-color;
       }
     }
@@ -96,17 +105,23 @@
       background: @pagination-item-bg-active;
       border-color: @primary-color;
 
-      a {
+      a,
+      button {
         color: @primary-color;
       }
 
       &:focus,
+      &:focus-within,
       &:hover {
         border-color: #40a9ff;
       }
 
       &:focus a,
-      &:hover a {
+      &:hover a,
+      &:focus-within a,
+      &:focus button,
+      &:hover button,
+      &:focus-within button {
         color: #40a9ff;
       }
     }
@@ -115,18 +130,6 @@
   &-jump-prev,
   &-jump-next {
     outline: 0;
-
-    button {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      color: #666;
-    }
-
-    button:after {
-      display: block;
-      content: '•••';
-    }
   }
 
   &-prev,
@@ -153,20 +156,14 @@
   }
 
   &-prev,
-  &-next {
+  &-next,
+  &-jump-prev,
+  &-jump-next {
     outline: 0;
 
-    button {
-      color: rgba(0, 0, 0, 0.85);
-      cursor: pointer;
-      user-select: none;
-    }
-
-    &:hover button {
-      border-color: #40a9ff;
-    }
-
-    .@{pagination-prefix-cls}-item-link {
+    button,
+    .@{pagination-prefix-cls}-item-link,
+    .@{pagination-prefix-cls}-item-button {
       display: block;
       width: 100%;
       height: 100%;
@@ -176,24 +173,36 @@
       border: 1px solid #d9d9d9;
       border-radius: 2px;
       outline: none;
+      cursor: pointer;
+      user-select: none;
       transition: all 0.3s;
     }
 
+    button:focus,
     &:focus .@{pagination-prefix-cls}-item-link,
-    &:hover .@{pagination-prefix-cls}-item-link {
+    &:focus .@{pagination-prefix-cls}-item-button,
+    &:hover .@{pagination-prefix-cls}-item-link,
+    &:hover .@{pagination-prefix-cls}-item-button,
+    &:hover button {
       color: @primary-color;
       border-color: @primary-color;
     }
   }
 
-  &-prev button:after {
+  &-prev .@{pagination-prefix-cls}-item-link::after {
     content: '‹';
     display: block;
   }
 
-  &-next button:after {
+  &-next .@{pagination-prefix-cls}-item-link::after {
     content: '›';
     display: block;
+  }
+
+  &-jump-prev .@{pagination-prefix-cls}-item-link::after,
+  &-jump-next .@{pagination-prefix-cls}-item-link::after {
+    display: block;
+    content: '•••';
   }
 
   &-disabled {
@@ -201,7 +210,8 @@
     &:hover,
     &:focus {
       cursor: not-allowed;
-      .@{pagination-prefix-cls}-item-link {
+      .@{pagination-prefix-cls}-item-link,
+      .@{pagination-prefix-cls}-item-button {
         color: fade(#000, 25%);
         border-color: #d9d9d9;
         cursor: not-allowed;
@@ -250,7 +260,8 @@
     height: @pagination-item-size-sm;
     line-height: @pagination-item-size-sm;
     vertical-align: top;
-    .@{pagination-prefix-cls}-item-link {
+    .@{pagination-prefix-cls}-item-link,
+    .@{pagination-prefix-cls}-item-button {
       height: @pagination-item-size-sm;
       background-color: transparent;
       border: 0;
@@ -293,7 +304,8 @@
       border-color: #d9d9d9;
       cursor: not-allowed;
 
-      a {
+      a,
+      button {
         color: fade(#000, 25%);
         background: transparent;
         border: none;
@@ -303,13 +315,15 @@
       &-active {
         background: @pagination-item-disabled-bg-active;
         border-color: transparent;
-        a {
+        a,
+        button {
           color: @pagination-item-disabled-color-active;
         }
       }
     }
 
-    .@{pagination-prefix-cls}-item-link {
+    .@{pagination-prefix-cls}-item-link,
+    .@{pagination-prefix-cls}-item-button {
       color: fade(#000, 25%);
       background: hsv(0, 0, 96%);
       border-color: #d9d9d9;

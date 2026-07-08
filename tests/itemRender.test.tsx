@@ -1,6 +1,6 @@
 import React from 'react';
 import type { RenderResult } from '@testing-library/react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import Pagination from '../src';
 
 describe('itemRender', () => {
@@ -107,5 +107,32 @@ describe('itemRender', () => {
     const next = container.querySelector('.rc-pagination-next');
     expect(prev.innerHTML).toBe('<a href="#0" disabled="">0</a>');
     expect(next.innerHTML).toBe('<a href="#2">2</a>');
+  });
+
+  it('should keep wrapper interaction for custom itemRender fallback', () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <Pagination
+        total={1000}
+        defaultCurrent={12}
+        onChange={onChange}
+        itemRender={(_, __, originalElement) => originalElement}
+      />,
+    );
+
+    const pageButton = container.querySelector('.rc-pagination-item-13');
+    const jumpNextButton = container.querySelector('.rc-pagination-jump-next');
+
+    expect(pageButton).not.toHaveAttribute('role');
+    expect(jumpNextButton).not.toHaveAttribute('role');
+
+    fireEvent.click(pageButton);
+    fireEvent.keyDown(jumpNextButton, {
+      key: 'Spacebar',
+      keyCode: 32,
+      which: 32,
+    });
+
+    expect(onChange).toHaveBeenLastCalledWith(18, 10);
   });
 });

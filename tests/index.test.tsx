@@ -225,9 +225,9 @@ describe('Uncontrolled Pagination', () => {
 
   it('should response keyboard event', async () => {
     const user = userEvent.setup();
-    const page3Button = wrapper.container.querySelector(
+    const page3Button = wrapper.container.querySelector<HTMLButtonElement>(
       '.rc-pagination-item-3 button',
-    );
+    )!;
     page3Button.focus();
     await user.keyboard('{Enter}');
     expect(
@@ -693,7 +693,8 @@ describe('should emit onChange when total is string', () => {
 describe('keyboard support', () => {
   let wrapper: RenderResult;
   const onChange = jest.fn();
-  const $ = (selector: string) => wrapper.container.querySelector(selector);
+  const $button = (selector: string) =>
+    wrapper.container.querySelector<HTMLButtonElement>(selector)!;
 
   beforeEach(() => {
     wrapper = render(
@@ -708,8 +709,7 @@ describe('keyboard support', () => {
 
   it('should work for prev page', async () => {
     const user = userEvent.setup();
-    const prevButton = $('li.rc-pagination-prev button');
-    expect(prevButton).toBeTruthy();
+    const prevButton = $button('li.rc-pagination-prev button');
 
     fireEvent.click(prevButton);
     fireEvent.click(prevButton);
@@ -722,8 +722,7 @@ describe('keyboard support', () => {
 
   it('should work for prev page with space key', async () => {
     const user = userEvent.setup();
-    const prevButton = $('li.rc-pagination-prev button');
-    expect(prevButton).toBeTruthy();
+    const prevButton = $button('li.rc-pagination-prev button');
 
     prevButton.focus();
     await user.keyboard(' ');
@@ -734,8 +733,7 @@ describe('keyboard support', () => {
 
   it('should work for next page', async () => {
     const user = userEvent.setup();
-    const nextButton = $('li.rc-pagination-next button');
-    expect(nextButton).toBeTruthy();
+    const nextButton = $button('li.rc-pagination-next button');
 
     nextButton.focus();
     await user.keyboard('{Enter}{Enter}');
@@ -748,8 +746,7 @@ describe('keyboard support', () => {
 
   it('should work for next page with space key', async () => {
     const user = userEvent.setup();
-    const nextButton = $('li.rc-pagination-next button');
-    expect(nextButton).toBeTruthy();
+    const nextButton = $button('li.rc-pagination-next button');
 
     nextButton.focus();
     await user.keyboard(' ');
@@ -760,8 +757,7 @@ describe('keyboard support', () => {
 
   it('should work for next page with enter keyCode only', async () => {
     const user = userEvent.setup();
-    const nextButton = $('li.rc-pagination-next button');
-    expect(nextButton).toBeTruthy();
+    const nextButton = $button('li.rc-pagination-next button');
 
     nextButton.focus();
     await user.keyboard('{Enter}');
@@ -771,8 +767,7 @@ describe('keyboard support', () => {
 
   it('should work for jump prev page', async () => {
     const user = userEvent.setup();
-    const jumpPrevButton = $('li.rc-pagination-jump-prev button');
-    expect(jumpPrevButton).toBeTruthy();
+    const jumpPrevButton = $button('li.rc-pagination-jump-prev button');
 
     fireEvent.click(jumpPrevButton);
     jumpPrevButton.focus();
@@ -783,8 +778,7 @@ describe('keyboard support', () => {
 
   it('should work for jump prev page with space key', async () => {
     const user = userEvent.setup();
-    const jumpPrevButton = $('li.rc-pagination-jump-prev button');
-    expect(jumpPrevButton).toBeTruthy();
+    const jumpPrevButton = $button('li.rc-pagination-jump-prev button');
 
     jumpPrevButton.focus();
     await user.keyboard(' ');
@@ -795,8 +789,7 @@ describe('keyboard support', () => {
 
   it('should work for jump next page', async () => {
     const user = userEvent.setup();
-    const jumpNextButton = $('li.rc-pagination-jump-next button');
-    expect(jumpNextButton).toBeTruthy();
+    const jumpNextButton = $button('li.rc-pagination-jump-next button');
 
     fireEvent.click(jumpNextButton);
     jumpNextButton.focus();
@@ -807,8 +800,7 @@ describe('keyboard support', () => {
 
   it('should work for jump next page with space key', async () => {
     const user = userEvent.setup();
-    const jumpNextButton = $('li.rc-pagination-jump-next button');
-    expect(jumpNextButton).toBeTruthy();
+    const jumpNextButton = $button('li.rc-pagination-jump-next button');
 
     jumpNextButton.focus();
     await user.keyboard(' ');

@@ -54,7 +54,7 @@ const Pager: React.FC<PagerProps> = (props) => {
     onKeyPress(e, onClick, page);
   };
 
-  const pagerLabel = `${pageLabel} ${page}`.trim();
+  const pagerLabel = pageLabel ? `${pageLabel} ${page}` : String(page);
   const itemTitle = showTitle ? String(page) : undefined;
 
   if (defaultItemRender) {

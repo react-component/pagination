@@ -3,7 +3,10 @@ import { clsx } from 'clsx';
 import React from 'react';
 import type { PaginationProps } from './interface';
 
-export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
+export interface PagerProps extends Pick<
+  PaginationProps,
+  'disabled' | 'itemRender'
+> {
   rootPrefixCls: string;
   page: number;
   pageLabel?: string;
@@ -25,6 +28,7 @@ const Pager: React.FC<PagerProps> = (props) => {
     rootPrefixCls,
     page,
     pageLabel,
+    disabled,
     defaultItemRender,
     active,
     className,
@@ -66,7 +70,7 @@ const Pager: React.FC<PagerProps> = (props) => {
           title={itemTitle}
           aria-label={pagerLabel}
           aria-current={active ? 'page' : undefined}
-          disabled={cls.includes(`${prefixCls}-disabled`)}
+          disabled={disabled || cls.includes(`${prefixCls}-disabled`)}
         >
           {page}
         </button>

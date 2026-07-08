@@ -163,7 +163,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       <button
         type="button"
         onClick={onClick}
-        disabled={buttonDisabled}
+        disabled={disabled || buttonDisabled}
         aria-label={label}
         title={title}
         className={
@@ -339,7 +339,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             getItemIcon(showTitle ? prevPageTitle : undefined),
         );
     return React.isValidElement<HTMLButtonElement>(prevButton)
-      ? React.cloneElement(prevButton, { disabled: !hasPrev })
+      ? React.cloneElement(prevButton, { disabled: disabled || !hasPrev })
       : prevButton;
   }
 
@@ -361,7 +361,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             getItemIcon(showTitle ? nextPageTitle : undefined),
         );
     return React.isValidElement<HTMLButtonElement>(nextButton)
-      ? React.cloneElement(nextButton, { disabled: !hasNext })
+      ? React.cloneElement(nextButton, { disabled: disabled || !hasNext })
       : nextButton;
   }
 
@@ -407,6 +407,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     showTitle,
     itemRender,
     pageLabel: locale.page,
+    disabled,
     page: -1,
     className: paginationClassNames?.item,
     style: styles?.item,

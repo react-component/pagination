@@ -501,6 +501,15 @@ describe('Other props', () => {
     expect(
       container.querySelector('.rc-pagination-options-quick-jumper-button'),
     ).toBeDisabled();
+    expect(
+      container.querySelector('.rc-pagination-prev button'),
+    ).toBeDisabled();
+    expect(
+      container.querySelector('.rc-pagination-next button'),
+    ).toBeDisabled();
+    expect(
+      container.querySelector('.rc-pagination-item button'),
+    ).toBeDisabled();
   });
 });
 

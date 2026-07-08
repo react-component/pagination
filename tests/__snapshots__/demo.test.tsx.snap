@@ -1697,6 +1697,7 @@ exports[`Example jumper 1`] = `
       <button
         aria-label="上一页"
         class="rc-pagination-item-link"
+        disabled=""
         title="上一页"
         type="button"
       />
@@ -1706,6 +1707,7 @@ exports[`Example jumper 1`] = `
     >
       <button
         aria-label="页 1"
+        disabled=""
         title="1"
         type="button"
       >
@@ -1718,6 +1720,7 @@ exports[`Example jumper 1`] = `
       <button
         aria-label="向前 5 页"
         class="rc-pagination-item-link"
+        disabled=""
         title="向前 5 页"
         type="button"
       />
@@ -1727,6 +1730,7 @@ exports[`Example jumper 1`] = `
     >
       <button
         aria-label="页 4"
+        disabled=""
         title="4"
         type="button"
       >
@@ -1739,6 +1743,7 @@ exports[`Example jumper 1`] = `
       <button
         aria-current="page"
         aria-label="页 5"
+        disabled=""
         title="5"
         type="button"
       >
@@ -1750,6 +1755,7 @@ exports[`Example jumper 1`] = `
     >
       <button
         aria-label="页 6"
+        disabled=""
         title="6"
         type="button"
       >
@@ -1762,6 +1768,7 @@ exports[`Example jumper 1`] = `
       <button
         aria-label="向后 5 页"
         class="rc-pagination-item-link"
+        disabled=""
         title="向后 5 页"
         type="button"
       />
@@ -1771,6 +1778,7 @@ exports[`Example jumper 1`] = `
     >
       <button
         aria-label="页 23"
+        disabled=""
         title="23"
         type="button"
       >
@@ -1784,6 +1792,7 @@ exports[`Example jumper 1`] = `
       <button
         aria-label="下一页"
         class="rc-pagination-item-link"
+        disabled=""
         title="下一页"
         type="button"
       />

@@ -32,6 +32,7 @@ coverage/
 .doc
 dist
 docs-dist
+.vercel
 .vscode
 # umi
 .umi

@@ -2,7 +2,7 @@
 import React from 'react';
 import Pagination from '../../src';
 import '../../assets/index.less';
-import 'rc-select/assets/index.less';
+import '@rc-component/select/assets/index.less';
 import PaginationWithSizeChanger from './utils/commonUtil';
 
 class App extends React.Component {

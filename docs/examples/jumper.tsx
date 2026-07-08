@@ -1,7 +1,7 @@
 /* eslint func-names: 0, no-console: 0 */
 import React from 'react';
 import '../../assets/index.less';
-import 'rc-select/assets/index.less';
+import '@rc-component/select/assets/index.less';
 import PaginationWithSizeChanger from './utils/commonUtil';
 
 function onShowSizeChange(current, pageSize) {
@@ -9,9 +9,10 @@ function onShowSizeChange(current, pageSize) {
   console.log(pageSize);
 }
 
-function onChange(current, pageSize) {
+function onChange(current, pageSize, info) {
   console.log('onChange:current=', current);
   console.log('onChange:pageSize=', pageSize);
+  console.log('onChange:recommendPage=', info?.recommendPage);
 }
 
 const App = () => (

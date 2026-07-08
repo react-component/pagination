@@ -1,6 +1,6 @@
 import type { RenderResult } from '@testing-library/react';
 import { render, fireEvent, createEvent } from '@testing-library/react';
-import Select from 'rc-select';
+import Select from '@rc-component/select';
 import React, { useState } from 'react';
 import Pagination from '../src';
 import { sizeChangerRender } from './commonUtil';
@@ -131,7 +131,7 @@ describe('simple Pagination', () => {
     const pageSize1 = container.querySelectorAll('.rc-select-item')[0];
     fireEvent.click(pageSize1);
     expect(onChange).toHaveBeenCalled();
-    expect(onChange).toHaveBeenLastCalledWith(1, 10);
+    expect(onChange).toHaveBeenLastCalledWith(1, 10, { recommendPage: 1 });
   });
 
   it('should support keyboard event', () => {

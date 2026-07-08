@@ -16,8 +16,6 @@ import Pager from './Pager';
 const defaultItemRender: PaginationProps['itemRender'] = (_, __, element) =>
   element;
 
-type PaginationItemType = 'prev' | 'next' | 'jump-prev' | 'jump-next';
-
 function noop() {}
 
 function isInteger(v: number) {
@@ -149,7 +147,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   function renderDefaultControlButton(
-    type: PaginationItemType,
     icon: React.ReactNode | React.ComponentType<PaginationProps>,
     label?: string,
     title?: string,
@@ -236,7 +233,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   function changePageSize(size: number) {
+    const preservedPage = Math.floor(((current - 1) * pageSize) / size) + 1;
     const newCurrent = calculatePage(size, pageSize, total);
+    const recommendPage =
+      newCurrent === 0 ? 1 : Math.min(preservedPage, newCurrent);
+
     const nextCurrent =
       current > newCurrent && newCurrent !== 0 ? newCurrent : current;
 
@@ -244,7 +245,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     setInternalInputVal(nextCurrent);
     onShowSizeChange?.(current, size);
     setCurrent(nextCurrent);
-    onChange?.(nextCurrent, size);
+    onChange?.(nextCurrent, size, { recommendPage });
   }
 
   function handleChange(page: number) {
@@ -320,7 +321,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     const prevPageTitle = locale.prev_page || 'prev page';
     const prevButton = isDefaultRender
       ? renderDefaultControlButton(
-          'prev',
           prevIcon,
           prevPageTitle,
           showTitle ? prevPageTitle : undefined,
@@ -342,7 +342,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     const nextPageTitle = locale.next_page || 'next page';
     const nextButton = isDefaultRender
       ? renderDefaultControlButton(
-          'next',
           nextIcon,
           nextPageTitle,
           showTitle ? nextPageTitle : undefined,
@@ -520,7 +519,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             })}
           >
             {renderDefaultControlButton(
-              'jump-prev',
               jumpPrevIcon,
               prevItemTitle,
               showTitle ? prevItemTitle : undefined,
@@ -537,7 +535,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             })}
           >
             {renderDefaultControlButton(
-              'jump-next',
               jumpNextIcon,
               nextItemTitle,
               showTitle ? nextItemTitle : undefined,

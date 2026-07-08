@@ -1,5 +1,5 @@
 import Pagination, { type PaginationProps } from '../../../src';
-import Select from 'rc-select';
+import Select from '@rc-component/select';
 import React from 'react';
 
 export const getSizeChangerRender = (selectProps?: any) => {
@@ -14,7 +14,7 @@ export const getSizeChangerRender = (selectProps?: any) => {
     <Select
       disabled={disabled}
       showSearch={false}
-      dropdownMatchSelectWidth={false}
+      popupMatchSelectWidth={false}
       value={pageSize || options[0].value}
       getPopupContainer={(triggerNode) => triggerNode.parentNode}
       aria-label={ariaLabel}

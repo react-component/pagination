@@ -643,16 +643,18 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     const prevDisabled = !hasPrev || !allPages;
     prev = (
       <li
-        title={isDefaultRender ? null : showTitle ? locale.prev_page : null}
-        onClick={isDefaultRender ? null : prevHandle}
-        tabIndex={isDefaultRender ? null : prevDisabled ? null : 0}
-        onKeyDown={isDefaultRender ? null : runIfEnterPrev}
+        title={
+          isDefaultRender ? undefined : showTitle ? locale.prev_page : undefined
+        }
+        onClick={isDefaultRender ? undefined : prevHandle}
+        tabIndex={isDefaultRender ? undefined : prevDisabled ? undefined : 0}
+        onKeyDown={isDefaultRender ? undefined : runIfEnterPrev}
         className={clsx(`${prefixCls}-prev`, paginationClassNames?.item, {
           [`${prefixCls}-disabled`]: prevDisabled,
         })}
         style={styles?.item}
         aria-disabled={prevDisabled}
-        aria-label={isDefaultRender ? null : locale.prev_page}
+        aria-label={isDefaultRender ? undefined : locale.prev_page}
       >
         {prev}
       </li>
@@ -661,28 +663,30 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   let next = renderNext(nextPage);
   if (next) {
-    let nextDisabled: boolean, nextTabIndex: number | null;
+    let nextDisabled: boolean, nextTabIndex: number | undefined;
 
     if (simple) {
       nextDisabled = !hasNext;
-      nextTabIndex = hasPrev ? 0 : null;
+      nextTabIndex = hasPrev ? 0 : undefined;
     } else {
       nextDisabled = !hasNext || !allPages;
-      nextTabIndex = nextDisabled ? null : 0;
+      nextTabIndex = nextDisabled ? undefined : 0;
     }
 
     next = (
       <li
-        title={isDefaultRender ? null : showTitle ? locale.next_page : null}
-        onClick={isDefaultRender ? null : nextHandle}
-        tabIndex={isDefaultRender ? null : nextTabIndex}
-        onKeyDown={isDefaultRender ? null : runIfEnterNext}
+        title={
+          isDefaultRender ? undefined : showTitle ? locale.next_page : undefined
+        }
+        onClick={isDefaultRender ? undefined : nextHandle}
+        tabIndex={isDefaultRender ? undefined : nextTabIndex}
+        onKeyDown={isDefaultRender ? undefined : runIfEnterNext}
         className={clsx(`${prefixCls}-next`, paginationClassNames?.item, {
           [`${prefixCls}-disabled`]: nextDisabled,
         })}
         style={styles?.item}
         aria-disabled={nextDisabled}
-        aria-label={isDefaultRender ? null : locale.next_page}
+        aria-label={isDefaultRender ? undefined : locale.next_page}
       >
         {next}
       </li>

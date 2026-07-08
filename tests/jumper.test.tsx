@@ -185,7 +185,9 @@ describe('simple quick jumper', () => {
 
     // https://github.com/ant-design/ant-design/issues/10080
     it('should not quick jump to previous page when input invalid char', () => {
-      const nextButton = wrapper.container.querySelector('.rc-pagination-next');
+      const nextButton = wrapper.container.querySelector(
+        '.rc-pagination-next button',
+      );
       fireEvent.click(nextButton);
       const input = wrapper.container.querySelector('input');
       fireEvent.change(input, { target: { value: '&' } });

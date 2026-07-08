@@ -114,25 +114,61 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     calculatePage(undefined, pageSize, total),
     current + (showLessItems ? 3 : 5),
   );
+  const isDefaultRender = itemRender === defaultItemRender;
 
-  function getItemIcon(
+  function getIconNode(
     icon: React.ReactNode | React.ComponentType<PaginationProps>,
-    _label: string,
-    title?: string,
   ) {
-    let iconNode = icon || (
-      <button
-        type="button"
-        tabIndex={-1}
-        aria-hidden="true"
-        title={title}
-        className={`${prefixCls}-item-link`}
-      />
-    );
+    let iconNode = icon;
     if (typeof icon === 'function') {
       iconNode = React.createElement<PaginationProps>(icon, props);
     }
     return iconNode as React.ReactNode;
+  }
+
+  function getItemIcon(title?: string) {
+    return <span title={title} className={`${prefixCls}-item-link`} />;
+  }
+
+  function getControlButtonContent(
+    icon: React.ReactNode | React.ComponentType<PaginationProps>,
+  ) {
+    const iconNode = getIconNode(icon);
+
+    if (
+      React.isValidElement<{ children?: React.ReactNode }>(iconNode) &&
+      typeof iconNode.type === 'string' &&
+      (iconNode.type === 'button' || iconNode.type === 'a')
+    ) {
+      return iconNode.props.children;
+    }
+
+    return iconNode;
+  }
+
+  function renderDefaultControlButton(
+    icon: React.ReactNode | React.ComponentType<PaginationProps>,
+    label?: string,
+    title?: string,
+    onClick?: React.MouseEventHandler<HTMLButtonElement>,
+    buttonDisabled?: boolean,
+  ) {
+    const iconContent = getControlButtonContent(icon);
+
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={disabled || buttonDisabled}
+        aria-label={label}
+        title={title}
+        className={
+          iconContent ? `${prefixCls}-item-button` : `${prefixCls}-item-link`
+        }
+      >
+        {iconContent}
+      </button>
+    );
   }
 
   function getValidValue(e: any): number {
@@ -283,33 +319,43 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   function renderPrev(prevPage: number) {
     const prevPageTitle = locale.prev_page || 'prev page';
-    const prevButton = itemRender(
-      prevPage,
-      'prev',
-      getItemIcon(
-        prevIcon,
-        prevPageTitle,
-        showTitle ? prevPageTitle : undefined,
-      ),
-    );
+    const prevButton = isDefaultRender
+      ? renderDefaultControlButton(
+          prevIcon,
+          prevPageTitle,
+          showTitle ? prevPageTitle : undefined,
+          prevHandle,
+          !hasPrev,
+        )
+      : itemRender(
+          prevPage,
+          'prev',
+          getIconNode(prevIcon) ||
+            getItemIcon(showTitle ? prevPageTitle : undefined),
+        );
     return React.isValidElement<HTMLButtonElement>(prevButton)
-      ? React.cloneElement(prevButton, { disabled: !hasPrev })
+      ? React.cloneElement(prevButton, { disabled: disabled || !hasPrev })
       : prevButton;
   }
 
   function renderNext(nextPage: number) {
     const nextPageTitle = locale.next_page || 'next page';
-    const nextButton = itemRender(
-      nextPage,
-      'next',
-      getItemIcon(
-        nextIcon,
-        nextPageTitle,
-        showTitle ? nextPageTitle : undefined,
-      ),
-    );
+    const nextButton = isDefaultRender
+      ? renderDefaultControlButton(
+          nextIcon,
+          nextPageTitle,
+          showTitle ? nextPageTitle : undefined,
+          nextHandle,
+          !hasNext,
+        )
+      : itemRender(
+          nextPage,
+          'next',
+          getIconNode(nextIcon) ||
+            getItemIcon(showTitle ? nextPageTitle : undefined),
+        );
     return React.isValidElement<HTMLButtonElement>(nextButton)
-      ? React.cloneElement(nextButton, { disabled: !hasNext })
+      ? React.cloneElement(nextButton, { disabled: disabled || !hasNext })
       : nextButton;
   }
 
@@ -349,11 +395,13 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   const pagerProps: PagerProps = {
     rootPrefixCls: prefixCls,
+    defaultItemRender: isDefaultRender,
     onClick: handleChange,
     onKeyPress: runIfEnterOrSpace,
     showTitle,
     itemRender,
     pageLabel: locale.page,
+    disabled,
     page: -1,
     className: paginationClassNames?.item,
     style: styles?.item,
@@ -452,54 +500,82 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     const jumpPrevContent = itemRender(
       jumpPrevPage,
       'jump-prev',
-      getItemIcon(
-        jumpPrevIcon,
-        prevItemTitle,
-        showTitle ? prevItemTitle : undefined,
-      ),
+      getIconNode(jumpPrevIcon) ||
+        getItemIcon(showTitle ? prevItemTitle : undefined),
     );
     const jumpNextContent = itemRender(
       jumpNextPage,
       'jump-next',
-      getItemIcon(
-        jumpNextIcon,
-        nextItemTitle,
-        showTitle ? nextItemTitle : undefined,
-      ),
+      getIconNode(jumpNextIcon) ||
+        getItemIcon(showTitle ? nextItemTitle : undefined),
     );
 
     if (showPrevNextJumpers) {
-      jumpPrev = jumpPrevContent ? (
-        <li
-          key="prev"
-          onClick={jumpPrevHandle}
-          tabIndex={0}
-          onKeyDown={runIfEnterJumpPrev}
-          className={clsx(`${prefixCls}-jump-prev`, {
-            [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
-          })}
-          role="button"
-          aria-label={prevItemTitle}
-        >
-          {jumpPrevContent}
-        </li>
-      ) : null;
+      if (isDefaultRender) {
+        jumpPrev = (
+          <li
+            key="prev"
+            className={clsx(`${prefixCls}-jump-prev`, {
+              [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
+            })}
+          >
+            {renderDefaultControlButton(
+              jumpPrevIcon,
+              prevItemTitle,
+              showTitle ? prevItemTitle : undefined,
+              jumpPrevHandle,
+            )}
+          </li>
+        );
 
-      jumpNext = jumpNextContent ? (
-        <li
-          key="next"
-          onClick={jumpNextHandle}
-          tabIndex={0}
-          onKeyDown={runIfEnterJumpNext}
-          className={clsx(`${prefixCls}-jump-next`, {
-            [`${prefixCls}-jump-next-custom-icon`]: !!jumpNextIcon,
-          })}
-          role="button"
-          aria-label={nextItemTitle}
-        >
-          {jumpNextContent}
-        </li>
-      ) : null;
+        jumpNext = (
+          <li
+            key="next"
+            className={clsx(`${prefixCls}-jump-next`, {
+              [`${prefixCls}-jump-next-custom-icon`]: !!jumpNextIcon,
+            })}
+          >
+            {renderDefaultControlButton(
+              jumpNextIcon,
+              nextItemTitle,
+              showTitle ? nextItemTitle : undefined,
+              jumpNextHandle,
+            )}
+          </li>
+        );
+      } else {
+        jumpPrev = jumpPrevContent ? (
+          <li
+            key="prev"
+            title={showTitle ? prevItemTitle : null}
+            onClick={jumpPrevHandle}
+            tabIndex={0}
+            onKeyDown={runIfEnterJumpPrev}
+            className={clsx(`${prefixCls}-jump-prev`, {
+              [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
+            })}
+            aria-label={prevItemTitle}
+          >
+            {jumpPrevContent}
+          </li>
+        ) : null;
+
+        jumpNext = jumpNextContent ? (
+          <li
+            key="next"
+            title={showTitle ? nextItemTitle : null}
+            onClick={jumpNextHandle}
+            tabIndex={0}
+            onKeyDown={runIfEnterJumpNext}
+            className={clsx(`${prefixCls}-jump-next`, {
+              [`${prefixCls}-jump-next-custom-icon`]: !!jumpNextIcon,
+            })}
+            aria-label={nextItemTitle}
+          >
+            {jumpNextContent}
+          </li>
+        ) : null;
+      }
     }
 
     let left = Math.max(1, current - pageBufferSize);
@@ -568,16 +644,18 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     const prevDisabled = !hasPrev || !allPages;
     prev = (
       <li
-        onClick={prevHandle}
-        tabIndex={prevDisabled ? null : 0}
-        onKeyDown={runIfEnterPrev}
+        title={
+          isDefaultRender ? undefined : showTitle ? locale.prev_page : undefined
+        }
+        onClick={isDefaultRender ? undefined : prevHandle}
+        tabIndex={isDefaultRender ? undefined : prevDisabled ? undefined : 0}
+        onKeyDown={isDefaultRender ? undefined : runIfEnterPrev}
         className={clsx(`${prefixCls}-prev`, paginationClassNames?.item, {
           [`${prefixCls}-disabled`]: prevDisabled,
         })}
         style={styles?.item}
         aria-disabled={prevDisabled}
-        role="button"
-        aria-label={locale.prev_page}
+        aria-label={isDefaultRender ? undefined : locale.prev_page}
       >
         {prev}
       </li>
@@ -586,28 +664,30 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   let next = renderNext(nextPage);
   if (next) {
-    let nextDisabled: boolean, nextTabIndex: number | null;
+    let nextDisabled: boolean, nextTabIndex: number | undefined;
 
     if (simple) {
       nextDisabled = !hasNext;
-      nextTabIndex = hasPrev ? 0 : null;
+      nextTabIndex = hasPrev ? 0 : undefined;
     } else {
       nextDisabled = !hasNext || !allPages;
-      nextTabIndex = nextDisabled ? null : 0;
+      nextTabIndex = nextDisabled ? undefined : 0;
     }
 
     next = (
       <li
-        onClick={nextHandle}
-        tabIndex={nextTabIndex}
-        onKeyDown={runIfEnterNext}
+        title={
+          isDefaultRender ? undefined : showTitle ? locale.next_page : undefined
+        }
+        onClick={isDefaultRender ? undefined : nextHandle}
+        tabIndex={isDefaultRender ? undefined : nextTabIndex}
+        onKeyDown={isDefaultRender ? undefined : runIfEnterNext}
         className={clsx(`${prefixCls}-next`, paginationClassNames?.item, {
           [`${prefixCls}-disabled`]: nextDisabled,
         })}
         style={styles?.item}
         aria-disabled={nextDisabled}
-        role="button"
-        aria-label={locale.next_page}
+        aria-label={isDefaultRender ? undefined : locale.next_page}
       >
         {next}
       </li>

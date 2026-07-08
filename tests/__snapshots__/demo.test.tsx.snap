@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Example align 1`] = `
 <div>
@@ -7,45 +7,36 @@ exports[`Example align 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 1"
+        disabled=""
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="true"
-      aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -56,45 +47,36 @@ exports[`Example align 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 1"
+        disabled=""
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="true"
-      aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -105,45 +87,36 @@ exports[`Example align 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 1"
+        disabled=""
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="true"
-      aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -159,76 +132,57 @@ exports[`Example basic 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
       >
         2
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
       >
         3
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -239,106 +193,79 @@ exports[`Example basic 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
       >
         2
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
       >
         3
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
       >
         4
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5"
-      role="button"
-      tabindex="0"
-      title="5"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
       >
         5
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -349,121 +276,90 @@ exports[`Example basic 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
       >
         2
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
       >
         3
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
       >
         4
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5"
-      role="button"
-      tabindex="0"
-      title="5"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
       >
         5
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 6"
       class="rc-pagination-item rc-pagination-item-6"
-      role="button"
-      tabindex="0"
-      title="6"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 6"
+        title="6"
+        type="button"
       >
         6
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -477,136 +373,101 @@ exports[`Example basic 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
       >
         2
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
       >
         3
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
       >
         4
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5"
-      role="button"
-      tabindex="0"
-      title="5"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
       >
         5
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 6"
       class="rc-pagination-item rc-pagination-item-6"
-      role="button"
-      tabindex="0"
-      title="6"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 6"
+        title="6"
+        type="button"
       >
         6
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 7"
       class="rc-pagination-item rc-pagination-item-7"
-      role="button"
-      tabindex="0"
-      title="7"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 7"
+        title="7"
+        type="button"
       >
         7
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -620,135 +481,100 @@ exports[`Example basic 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="页 2"
-      class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        2
-      </a>
-    </li>
-    <li
-      aria-label="页 3"
-      class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        3
-      </a>
-    </li>
-    <li
-      aria-label="页 4"
-      class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+    >
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
+      >
+        2
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3"
+    >
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
+      >
+        3
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+    >
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 8"
       class="rc-pagination-item rc-pagination-item-8"
-      role="button"
-      tabindex="0"
-      title="8"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 8"
+        title="8"
+        type="button"
       >
         8
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -762,135 +588,100 @@ exports[`Example basic 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="页 2"
-      class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        2
-      </a>
-    </li>
-    <li
-      aria-label="页 3"
-      class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        3
-      </a>
-    </li>
-    <li
-      aria-label="页 4"
-      class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+    >
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
+      >
+        2
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3"
+    >
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
+      >
+        3
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+    >
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 9"
       class="rc-pagination-item rc-pagination-item-9"
-      role="button"
-      tabindex="0"
-      title="9"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 9"
+        title="9"
+        type="button"
       >
         9
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -904,135 +695,100 @@ exports[`Example basic 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="页 2"
-      class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        2
-      </a>
-    </li>
-    <li
-      aria-label="页 3"
-      class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        3
-      </a>
-    </li>
-    <li
-      aria-label="页 4"
-      class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+    >
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
+      >
+        2
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3"
+    >
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
+      >
+        3
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+    >
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 10"
       class="rc-pagination-item rc-pagination-item-10"
-      role="button"
-      tabindex="0"
-      title="10"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 10"
+        title="10"
+        type="button"
       >
         10
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -1046,135 +802,100 @@ exports[`Example basic 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="页 2"
-      class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        2
-      </a>
-    </li>
-    <li
-      aria-label="页 3"
-      class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        3
-      </a>
-    </li>
-    <li
-      aria-label="页 4"
-      class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+    >
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
+      >
+        2
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3"
+    >
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
+      >
+        3
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+    >
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 12"
       class="rc-pagination-item rc-pagination-item-12"
-      role="button"
-      tabindex="0"
-      title="12"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 12"
+        title="12"
+        type="button"
       >
         12
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -1188,135 +909,100 @@ exports[`Example basic 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="页 2"
-      class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        2
-      </a>
-    </li>
-    <li
-      aria-label="页 3"
-      class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        3
-      </a>
-    </li>
-    <li
-      aria-label="页 4"
-      class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+    >
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
+      >
+        2
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3"
+    >
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
+      >
+        3
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+    >
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 50"
       class="rc-pagination-item rc-pagination-item-50"
-      role="button"
-      tabindex="0"
-      title="50"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 50"
+        title="50"
+        type="button"
       >
         50
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -1335,76 +1021,57 @@ exports[`Example controlled 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
       >
         2
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
       >
         3
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -1422,22 +1089,18 @@ exports[`Example itemRender 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
+      title="上一页"
     >
-      <button
-        aria-hidden="true"
+      <span
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
-        type="button"
       />
     </li>
     <li
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -1450,7 +1113,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -1463,7 +1125,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -1476,7 +1137,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -1489,7 +1149,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -1502,21 +1161,17 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
+      title="向后 5 页"
     >
-      <button
-        aria-hidden="true"
+      <span
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
-        type="button"
       />
     </li>
     <li
       aria-label="页 10"
       class="rc-pagination-item rc-pagination-item-10"
-      role="button"
       tabindex="0"
       title="10"
     >
@@ -1530,15 +1185,12 @@ exports[`Example itemRender 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
+      title="下一页"
     >
-      <button
-        aria-hidden="true"
+      <span
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
-        type="button"
       />
     </li>
     <li
@@ -1552,7 +1204,7 @@ exports[`Example itemRender 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
+      title="上一页"
     >
       Prev
     </li>
@@ -1560,14 +1212,11 @@ exports[`Example itemRender 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         1
       </a>
@@ -1575,14 +1224,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         2
       </a>
@@ -1590,14 +1236,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         3
       </a>
@@ -1605,14 +1248,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         4
       </a>
@@ -1620,14 +1260,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         5
       </a>
@@ -1635,28 +1272,22 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
+      title="向后 5 页"
     >
-      <button
-        aria-hidden="true"
+      <span
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
-        type="button"
       />
     </li>
     <li
       aria-label="页 10"
       class="rc-pagination-item rc-pagination-item-10"
-      role="button"
       tabindex="0"
       title="10"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         10
       </a>
@@ -1665,8 +1296,8 @@ exports[`Example itemRender 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
+      title="下一页"
     >
       Next
     </li>
@@ -1681,7 +1312,7 @@ exports[`Example itemRender 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
+      title="上一页"
     >
       <button
         disabled=""
@@ -1694,14 +1325,11 @@ exports[`Example itemRender 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         1
       </a>
@@ -1709,14 +1337,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         2
       </a>
@@ -1724,14 +1349,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         3
       </a>
@@ -1739,14 +1361,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         4
       </a>
@@ -1754,14 +1373,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         5
       </a>
@@ -1769,28 +1385,22 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
+      title="向后 5 页"
     >
-      <button
-        aria-hidden="true"
+      <span
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
-        type="button"
       />
     </li>
     <li
       aria-label="页 10"
       class="rc-pagination-item rc-pagination-item-10"
-      role="button"
       tabindex="0"
       title="10"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         10
       </a>
@@ -1799,8 +1409,8 @@ exports[`Example itemRender 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
+      title="下一页"
     >
       <button
         type="button"
@@ -1819,7 +1429,7 @@ exports[`Example itemRender 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
+      title="上一页"
     >
       <div
         disabled=""
@@ -1831,14 +1441,11 @@ exports[`Example itemRender 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         1
       </a>
@@ -1846,14 +1453,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         2
       </a>
@@ -1861,14 +1465,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         3
       </a>
@@ -1876,14 +1477,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         4
       </a>
@@ -1891,14 +1489,11 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         5
       </a>
@@ -1906,28 +1501,22 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
+      title="向后 5 页"
     >
-      <button
-        aria-hidden="true"
+      <span
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
-        type="button"
       />
     </li>
     <li
       aria-label="页 10"
       class="rc-pagination-item rc-pagination-item-10"
-      role="button"
       tabindex="0"
       title="10"
     >
       <a
-        aria-hidden="true"
         rel="nofollow"
-        tabindex="-1"
       >
         10
       </a>
@@ -1936,8 +1525,8 @@ exports[`Example itemRender 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
+      title="下一页"
     >
       <div>
         Next
@@ -1960,134 +1549,98 @@ exports[`Example jumper 1`] = `
   >
     <li
       aria-disabled="false"
-      aria-label="上一页"
       class="rc-pagination-prev"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="向前 5 页"
-      class="rc-pagination-jump-prev"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="页 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-prev"
+    >
+      <button
+        aria-label="向前 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向前 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-current="page"
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="页 6"
-      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="6"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        6
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="页 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
+    >
+      <button
+        aria-current="page"
+        aria-label="页 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 6"
+        title="6"
+        type="button"
+      >
+        6
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 23"
       class="rc-pagination-item rc-pagination-item-23"
-      role="button"
-      tabindex="0"
-      title="23"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 23"
+        title="23"
+        type="button"
       >
         23
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -2139,134 +1692,107 @@ exports[`Example jumper 1`] = `
   >
     <li
       aria-disabled="false"
-      aria-label="上一页"
       class="rc-pagination-prev"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
+        disabled=""
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="向前 5 页"
-      class="rc-pagination-jump-prev"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="页 1"
+        disabled=""
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-prev"
+    >
+      <button
+        aria-label="向前 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
+        disabled=""
         title="向前 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-current="page"
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="页 6"
-      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="6"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        6
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="页 4"
+        disabled=""
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
+    >
+      <button
+        aria-current="page"
+        aria-label="页 5"
+        disabled=""
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 6"
+        disabled=""
+        title="6"
+        type="button"
+      >
+        6
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
+        disabled=""
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 23"
       class="rc-pagination-item rc-pagination-item-23"
-      role="button"
-      tabindex="0"
-      title="23"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 23"
+        disabled=""
+        title="23"
+        type="button"
       >
         23
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
+        disabled=""
         title="下一页"
         type="button"
       />
@@ -2320,46 +1846,36 @@ exports[`Example jumper 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="true"
-      aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -2398,46 +1914,36 @@ exports[`Example jumper 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="true"
-      aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -2483,134 +1989,98 @@ exports[`Example jumperWithGoButton 1`] = `
   >
     <li
       aria-disabled="false"
-      aria-label="上一页"
       class="rc-pagination-prev"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="向前 5 页"
-      class="rc-pagination-jump-prev"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="页 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-prev"
+    >
+      <button
+        aria-label="向前 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向前 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-current="page"
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="页 6"
-      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="6"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        6
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="页 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
+    >
+      <button
+        aria-current="page"
+        aria-label="页 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 6"
+        title="6"
+        type="button"
+      >
+        6
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 23"
       class="rc-pagination-item rc-pagination-item-23"
-      role="button"
-      tabindex="0"
-      title="23"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 23"
+        title="23"
+        type="button"
       >
         23
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -2669,15 +2139,12 @@ exports[`Example jumperWithGoButton 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
@@ -2701,14 +2168,11 @@ exports[`Example jumperWithGoButton 1`] = `
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -2753,153 +2217,145 @@ exports[`Example lessPages 1`] = `
     >
       <li
         aria-disabled="false"
-        aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
-        tabindex="0"
       >
-        <i
-          class="custom-icon-prev"
-          style="font-size: 16px;"
+        <button
+          aria-label="上一页"
+          class="rc-pagination-item-button"
+          title="上一页"
+          type="button"
         >
-          <svg
-            fill="currentColor"
-            height="1em"
-            style="vertical-align: -.125em; transform: rotate(180deg);"
-            viewBox="0 0 1024 1024"
-            width="1em"
+          <i
+            class="custom-icon-prev"
+            style="font-size: 16px;"
           >
-            <path
-              d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
-            />
-          </svg>
-        </i>
+            <svg
+              fill="currentColor"
+              height="1em"
+              style="vertical-align: -.125em; transform: rotate(180deg);"
+              viewBox="0 0 1024 1024"
+              width="1em"
+            >
+              <path
+                d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
+              />
+            </svg>
+          </i>
+        </button>
       </li>
       <li
-        aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
-        tabindex="0"
-        title="1"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 1"
+          title="1"
+          type="button"
         >
           1
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
-        tabindex="0"
-        title="2"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 2"
+          title="2"
+          type="button"
         >
           2
-        </a>
+        </button>
       </li>
       <li
-        aria-current="page"
-        aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
-        tabindex="0"
-        title="3"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-current="page"
+          aria-label="页 3"
+          title="3"
+          type="button"
         >
           3
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 4"
         class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-before-jump-next"
-        role="button"
-        tabindex="0"
-        title="4"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 4"
+          title="4"
+          type="button"
         >
           4
-        </a>
+        </button>
       </li>
       <li
-        aria-label="向后 3 页"
         class="rc-pagination-jump-next rc-pagination-jump-next-custom-icon"
-        role="button"
-        tabindex="0"
       >
-        <i
-          class="custom-icon-jump-next"
-          style="font-size: 16px;"
+        <button
+          aria-label="向后 3 页"
+          class="rc-pagination-item-button"
+          title="向后 3 页"
+          type="button"
         >
-          <svg
-            fill="currentColor"
-            height="1em"
-            style="vertical-align: -.125em; transform: rotate(0deg);"
-            viewBox="0 0 1024 1024"
-            width="1em"
+          <i
+            class="custom-icon-jump-next"
+            style="font-size: 16px;"
           >
-            <path
-              d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
-            />
-            <path
-              d="M837.2 492.3L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
-            />
-          </svg>
-        </i>
+            <svg
+              fill="currentColor"
+              height="1em"
+              style="vertical-align: -.125em; transform: rotate(0deg);"
+              viewBox="0 0 1024 1024"
+              width="1em"
+            >
+              <path
+                d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
+              />
+              <path
+                d="M837.2 492.3L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
+              />
+            </svg>
+          </i>
+        </button>
       </li>
       <li
-        aria-label="页 8"
         class="rc-pagination-item rc-pagination-item-8"
-        role="button"
-        tabindex="0"
-        title="8"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 8"
+          title="8"
+          type="button"
         >
           8
-        </a>
+        </button>
       </li>
       <li
         aria-disabled="false"
-        aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
-        tabindex="0"
       >
-        <i
-          class="custom-icon-next"
-          style="font-size: 16px;"
+        <button
+          aria-label="下一页"
+          class="rc-pagination-item-button"
+          title="下一页"
+          type="button"
         >
-          <svg
-            fill="currentColor"
-            height="1em"
-            style="vertical-align: -.125em; transform: rotate(0deg);"
-            viewBox="0 0 1024 1024"
-            width="1em"
+          <i
+            class="custom-icon-next"
+            style="font-size: 16px;"
           >
-            <path
-              d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
-            />
-          </svg>
-        </i>
+            <svg
+              fill="currentColor"
+              height="1em"
+              style="vertical-align: -.125em; transform: rotate(0deg);"
+              viewBox="0 0 1024 1024"
+              width="1em"
+            >
+              <path
+                d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
+              />
+            </svg>
+          </i>
+        </button>
       </li>
       <li
         class="rc-pagination-options"
@@ -2910,138 +2366,135 @@ exports[`Example lessPages 1`] = `
     >
       <li
         aria-disabled="true"
-        aria-label="上一页"
         class="rc-pagination-prev rc-pagination-disabled"
-        role="button"
       >
-        <i
-          class="custom-icon-prev"
+        <button
+          aria-label="上一页"
+          class="rc-pagination-item-button"
           disabled=""
-          style="font-size: 16px;"
+          title="上一页"
+          type="button"
         >
-          <svg
-            fill="currentColor"
-            height="1em"
-            style="vertical-align: -.125em; transform: rotate(180deg);"
-            viewBox="0 0 1024 1024"
-            width="1em"
+          <i
+            class="custom-icon-prev"
+            style="font-size: 16px;"
           >
-            <path
-              d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
-            />
-          </svg>
-        </i>
+            <svg
+              fill="currentColor"
+              height="1em"
+              style="vertical-align: -.125em; transform: rotate(180deg);"
+              viewBox="0 0 1024 1024"
+              width="1em"
+            >
+              <path
+                d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
+              />
+            </svg>
+          </i>
+        </button>
       </li>
       <li
-        aria-current="page"
-        aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-        role="button"
-        tabindex="0"
-        title="1"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-current="page"
+          aria-label="页 1"
+          title="1"
+          type="button"
         >
           1
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
-        tabindex="0"
-        title="2"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 2"
+          title="2"
+          type="button"
         >
           2
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-before-jump-next"
-        role="button"
-        tabindex="0"
-        title="3"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 3"
+          title="3"
+          type="button"
         >
           3
-        </a>
+        </button>
       </li>
       <li
-        aria-label="向后 3 页"
         class="rc-pagination-jump-next rc-pagination-jump-next-custom-icon"
-        role="button"
-        tabindex="0"
       >
-        <i
-          class="custom-icon-jump-next"
-          style="font-size: 16px;"
+        <button
+          aria-label="向后 3 页"
+          class="rc-pagination-item-button"
+          title="向后 3 页"
+          type="button"
         >
-          <svg
-            fill="currentColor"
-            height="1em"
-            style="vertical-align: -.125em; transform: rotate(0deg);"
-            viewBox="0 0 1024 1024"
-            width="1em"
+          <i
+            class="custom-icon-jump-next"
+            style="font-size: 16px;"
           >
-            <path
-              d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
-            />
-            <path
-              d="M837.2 492.3L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
-            />
-          </svg>
-        </i>
+            <svg
+              fill="currentColor"
+              height="1em"
+              style="vertical-align: -.125em; transform: rotate(0deg);"
+              viewBox="0 0 1024 1024"
+              width="1em"
+            >
+              <path
+                d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
+              />
+              <path
+                d="M837.2 492.3L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1c-4.1 5.2-0.4 12.9 6.3 12.9h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"
+              />
+            </svg>
+          </i>
+        </button>
       </li>
       <li
-        aria-label="页 6"
         class="rc-pagination-item rc-pagination-item-6"
-        role="button"
-        tabindex="0"
-        title="6"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 6"
+          title="6"
+          type="button"
         >
           6
-        </a>
+        </button>
       </li>
       <li
         aria-disabled="false"
-        aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
-        tabindex="0"
       >
-        <i
-          class="custom-icon-next"
-          style="font-size: 16px;"
+        <button
+          aria-label="下一页"
+          class="rc-pagination-item-button"
+          title="下一页"
+          type="button"
         >
-          <svg
-            fill="currentColor"
-            height="1em"
-            style="vertical-align: -.125em; transform: rotate(0deg);"
-            viewBox="0 0 1024 1024"
-            width="1em"
+          <i
+            class="custom-icon-next"
+            style="font-size: 16px;"
           >
-            <path
-              d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
-            />
-          </svg>
-        </i>
+            <svg
+              fill="currentColor"
+              height="1em"
+              style="vertical-align: -.125em; transform: rotate(0deg);"
+              viewBox="0 0 1024 1024"
+              width="1em"
+            >
+              <path
+                d="M869 487.8L491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-0.7 5.2-2L869 536.2c14.7-12.8 14.7-35.6 0-48.4z"
+              />
+            </svg>
+          </i>
+        </button>
       </li>
       <li
         class="rc-pagination-options"
@@ -3069,134 +2522,98 @@ exports[`Example locale 1`] = `
   >
     <li
       aria-disabled="false"
-      aria-label="Previous Page"
       class="rc-pagination-prev"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="Previous Page"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="Previous Page"
         type="button"
       />
     </li>
     <li
-      aria-label="Page 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="Previous 5 Pages"
-      class="rc-pagination-jump-prev"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="Page 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-prev"
+    >
+      <button
+        aria-label="Previous 5 Pages"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="Previous 5 Pages"
         type="button"
       />
     </li>
     <li
-      aria-label="Page 4"
       class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-current="page"
-      aria-label="Page 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="Page 6"
-      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="6"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        6
-      </a>
-    </li>
-    <li
-      aria-label="Next 5 Pages"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="Page 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
+    >
+      <button
+        aria-current="page"
+        aria-label="Page 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="Page 6"
+        title="6"
+        type="button"
+      >
+        6
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="Next 5 Pages"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="Next 5 Pages"
         type="button"
       />
     </li>
     <li
-      aria-label="Page 23"
       class="rc-pagination-item rc-pagination-item-23"
-      role="button"
-      tabindex="0"
-      title="23"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="Page 23"
+        title="23"
+        type="button"
       >
         23
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="Next Page"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="Next Page"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="Next Page"
         type="button"
       />
@@ -3250,135 +2667,99 @@ exports[`Example more 1`] = `
   >
     <li
       aria-disabled="false"
-      aria-label="上一页"
       class="rc-pagination-prev"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="页 2"
-      class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        2
-      </a>
-    </li>
-    <li
-      aria-current="page"
-      aria-label="页 3"
-      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        3
-      </a>
-    </li>
-    <li
-      aria-label="页 4"
-      class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="页 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+    >
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
+      >
+        2
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
+    >
+      <button
+        aria-current="page"
+        aria-label="页 3"
+        title="3"
+        type="button"
+      >
+        3
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+    >
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 45"
       class="rc-pagination-item rc-pagination-item-45"
-      role="button"
-      tabindex="0"
-      title="45"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 45"
+        title="45"
+        type="button"
       >
         45
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -3397,106 +2778,79 @@ exports[`Example showSizeChanger 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
       >
         2
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
       >
         3
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
       >
         4
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5"
-      role="button"
-      tabindex="0"
-      title="5"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
       >
         5
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -3507,106 +2861,79 @@ exports[`Example showSizeChanger 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
       >
         2
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
       >
         3
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
       >
         4
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5"
-      role="button"
-      tabindex="0"
-      title="5"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
       >
         5
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -3644,45 +2971,36 @@ exports[`Example showSizeChanger 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 1"
+        disabled=""
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="true"
-      aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -3726,113 +3044,81 @@ exports[`Example showTitle 1`] = `
     >
       <li
         aria-disabled="false"
-        aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="上一页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           type="button"
         />
       </li>
       <li
-        aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
-        tabindex="0"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 1"
+          type="button"
         >
           1
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
-        tabindex="0"
-      >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
-        >
-          2
-        </a>
-      </li>
-      <li
-        aria-current="page"
-        aria-label="页 3"
-        class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
-        tabindex="0"
-      >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
-        >
-          3
-        </a>
-      </li>
-      <li
-        aria-label="页 4"
-        class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-before-jump-next"
-        role="button"
-        tabindex="0"
-      >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
-        >
-          4
-        </a>
-      </li>
-      <li
-        aria-label="向后 3 页"
-        class="rc-pagination-jump-next"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="页 2"
+          type="button"
+        >
+          2
+        </button>
+      </li>
+      <li
+        class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
+      >
+        <button
+          aria-current="page"
+          aria-label="页 3"
+          type="button"
+        >
+          3
+        </button>
+      </li>
+      <li
+        class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-before-jump-next"
+      >
+        <button
+          aria-label="页 4"
+          type="button"
+        >
+          4
+        </button>
+      </li>
+      <li
+        class="rc-pagination-jump-next"
+      >
+        <button
+          aria-label="向后 3 页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           type="button"
         />
       </li>
       <li
-        aria-label="页 8"
         class="rc-pagination-item rc-pagination-item-8"
-        role="button"
-        tabindex="0"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 8"
+          type="button"
         >
           8
-        </a>
+        </button>
       </li>
       <li
         aria-disabled="false"
-        aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="下一页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           type="button"
         />
       </li>
@@ -3845,99 +3131,72 @@ exports[`Example showTitle 1`] = `
     >
       <li
         aria-disabled="true"
-        aria-label="上一页"
         class="rc-pagination-prev rc-pagination-disabled"
-        role="button"
       >
         <button
-          aria-hidden="true"
+          aria-label="上一页"
           class="rc-pagination-item-link"
           disabled=""
-          tabindex="-1"
           type="button"
         />
       </li>
       <li
-        aria-current="page"
-        aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-        role="button"
-        tabindex="0"
-      >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
-        >
-          1
-        </a>
-      </li>
-      <li
-        aria-label="页 2"
-        class="rc-pagination-item rc-pagination-item-2"
-        role="button"
-        tabindex="0"
-      >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
-        >
-          2
-        </a>
-      </li>
-      <li
-        aria-label="页 3"
-        class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-before-jump-next"
-        role="button"
-        tabindex="0"
-      >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
-        >
-          3
-        </a>
-      </li>
-      <li
-        aria-label="向后 3 页"
-        class="rc-pagination-jump-next"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-current="page"
+          aria-label="页 1"
+          type="button"
+        >
+          1
+        </button>
+      </li>
+      <li
+        class="rc-pagination-item rc-pagination-item-2"
+      >
+        <button
+          aria-label="页 2"
+          type="button"
+        >
+          2
+        </button>
+      </li>
+      <li
+        class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-before-jump-next"
+      >
+        <button
+          aria-label="页 3"
+          type="button"
+        >
+          3
+        </button>
+      </li>
+      <li
+        class="rc-pagination-jump-next"
+      >
+        <button
+          aria-label="向后 3 页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           type="button"
         />
       </li>
       <li
-        aria-label="页 6"
         class="rc-pagination-item rc-pagination-item-6"
-        role="button"
-        tabindex="0"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 6"
+          type="button"
         >
           6
-        </a>
+        </button>
       </li>
       <li
         aria-disabled="false"
-        aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="下一页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           type="button"
         />
       </li>
@@ -3961,135 +3220,100 @@ exports[`Example showTotal 1`] = `
     </li>
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="页 2"
-      class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        2
-      </a>
-    </li>
-    <li
-      aria-label="页 3"
-      class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        3
-      </a>
-    </li>
-    <li
-      aria-label="页 4"
-      class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+    >
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
+      >
+        2
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3"
+    >
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
+      >
+        3
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+    >
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 46"
       class="rc-pagination-item rc-pagination-item-46"
-      role="button"
-      tabindex="0"
-      title="46"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 46"
+        title="46"
+        type="button"
       >
         46
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -4109,135 +3333,100 @@ exports[`Example showTotal 1`] = `
     </li>
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-current="page"
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="1"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        1
-      </a>
-    </li>
-    <li
-      aria-label="页 2"
-      class="rc-pagination-item rc-pagination-item-2"
-      role="button"
-      tabindex="0"
-      title="2"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        2
-      </a>
-    </li>
-    <li
-      aria-label="页 3"
-      class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        3
-      </a>
-    </li>
-    <li
-      aria-label="页 4"
-      class="rc-pagination-item rc-pagination-item-4"
-      role="button"
-      tabindex="0"
-      title="4"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        4
-      </a>
-    </li>
-    <li
-      aria-label="页 5"
-      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
-      tabindex="0"
-      title="5"
-    >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
-      >
-        5
-      </a>
-    </li>
-    <li
-      aria-label="向后 5 页"
-      class="rc-pagination-jump-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-current="page"
+        aria-label="页 1"
+        title="1"
+        type="button"
+      >
+        1
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-2"
+    >
+      <button
+        aria-label="页 2"
+        title="2"
+        type="button"
+      >
+        2
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-3"
+    >
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
+      >
+        3
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-4"
+    >
+      <button
+        aria-label="页 4"
+        title="4"
+        type="button"
+      >
+        4
+      </button>
+    </li>
+    <li
+      class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
+    >
+      <button
+        aria-label="页 5"
+        title="5"
+        type="button"
+      >
+        5
+      </button>
+    </li>
+    <li
+      class="rc-pagination-jump-next"
+    >
+      <button
+        aria-label="向后 5 页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="向后 5 页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 46"
       class="rc-pagination-item rc-pagination-item-46"
-      role="button"
-      tabindex="0"
-      title="46"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 46"
+        title="46"
+        type="button"
       >
         46
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -4257,45 +3446,36 @@ exports[`Example showTotal 1`] = `
     </li>
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 1"
+        disabled=""
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="true"
-      aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -4314,15 +3494,12 @@ exports[`Example simple 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
@@ -4346,14 +3523,11 @@ exports[`Example simple 1`] = `
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -4365,15 +3539,12 @@ exports[`Example simple 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
@@ -4392,14 +3563,11 @@ exports[`Example simple 1`] = `
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -4411,15 +3579,12 @@ exports[`Example simple 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
@@ -4443,14 +3608,11 @@ exports[`Example simple 1`] = `
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -4467,15 +3629,12 @@ exports[`Example simple 1`] = `
     </li>
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
@@ -4499,14 +3658,11 @@ exports[`Example simple 1`] = `
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -4518,15 +3674,12 @@ exports[`Example simple 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
@@ -4550,14 +3703,11 @@ exports[`Example simple 1`] = `
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -4601,15 +3751,12 @@ exports[`Example simple 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
-        tabindex="-1"
         title="上一页"
         type="button"
       />
@@ -4633,14 +3780,11 @@ exports[`Example simple 1`] = `
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />
@@ -4697,76 +3841,57 @@ exports[`Example sizer 1`] = `
     >
       <li
         aria-disabled="false"
-        aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="上一页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           title="上一页"
           type="button"
         />
       </li>
       <li
-        aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
-        tabindex="0"
-        title="1"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 1"
+          title="1"
+          type="button"
         >
           1
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
-        tabindex="0"
-        title="2"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 2"
+          title="2"
+          type="button"
         >
           2
-        </a>
+        </button>
       </li>
       <li
-        aria-current="page"
-        aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
-        tabindex="0"
-        title="3"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-current="page"
+          aria-label="页 3"
+          title="3"
+          type="button"
         >
           3
-        </a>
+        </button>
       </li>
       <li
         aria-disabled="true"
-        aria-label="下一页"
         class="rc-pagination-next rc-pagination-disabled"
-        role="button"
       >
         <button
-          aria-hidden="true"
+          aria-label="下一页"
           class="rc-pagination-item-link"
           disabled=""
-          tabindex="-1"
           title="下一页"
           type="button"
         />
@@ -4804,91 +3929,67 @@ exports[`Example sizer 1`] = `
     >
       <li
         aria-disabled="false"
-        aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="上一页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           title="上一页"
           type="button"
         />
       </li>
       <li
-        aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
-        tabindex="0"
-        title="1"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 1"
+          title="1"
+          type="button"
         >
           1
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
-        tabindex="0"
-        title="2"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 2"
+          title="2"
+          type="button"
         >
           2
-        </a>
+        </button>
       </li>
       <li
-        aria-current="page"
-        aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
-        tabindex="0"
-        title="3"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-current="page"
+          aria-label="页 3"
+          title="3"
+          type="button"
         >
           3
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 4"
         class="rc-pagination-item rc-pagination-item-4"
-        role="button"
-        tabindex="0"
-        title="4"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 4"
+          title="4"
+          type="button"
         >
           4
-        </a>
+        </button>
       </li>
       <li
         aria-disabled="false"
-        aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="下一页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           title="下一页"
           type="button"
         />
@@ -4899,91 +4000,67 @@ exports[`Example sizer 1`] = `
     >
       <li
         aria-disabled="false"
-        aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="上一页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           title="上一页"
           type="button"
         />
       </li>
       <li
-        aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
-        tabindex="0"
-        title="1"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 1"
+          title="1"
+          type="button"
         >
           1
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
-        tabindex="0"
-        title="2"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 2"
+          title="2"
+          type="button"
         >
           2
-        </a>
+        </button>
       </li>
       <li
-        aria-current="page"
-        aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
-        tabindex="0"
-        title="3"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-current="page"
+          aria-label="页 3"
+          title="3"
+          type="button"
         >
           3
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 4"
         class="rc-pagination-item rc-pagination-item-4"
-        role="button"
-        tabindex="0"
-        title="4"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 4"
+          title="4"
+          type="button"
         >
           4
-        </a>
+        </button>
       </li>
       <li
         aria-disabled="false"
-        aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="下一页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           title="下一页"
           type="button"
         />
@@ -5021,91 +4098,67 @@ exports[`Example sizer 1`] = `
     >
       <li
         aria-disabled="false"
-        aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="上一页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           title="上一页"
           type="button"
         />
       </li>
       <li
-        aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
-        tabindex="0"
-        title="1"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 1"
+          title="1"
+          type="button"
         >
           1
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
-        tabindex="0"
-        title="2"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 2"
+          title="2"
+          type="button"
         >
           2
-        </a>
+        </button>
       </li>
       <li
-        aria-current="page"
-        aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
-        tabindex="0"
-        title="3"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-current="page"
+          aria-label="页 3"
+          title="3"
+          type="button"
         >
           3
-        </a>
+        </button>
       </li>
       <li
-        aria-label="页 4"
         class="rc-pagination-item rc-pagination-item-4"
-        role="button"
-        tabindex="0"
-        title="4"
       >
-        <a
-          aria-hidden="true"
-          rel="nofollow"
-          tabindex="-1"
+        <button
+          aria-label="页 4"
+          title="4"
+          type="button"
         >
           4
-        </a>
+        </button>
       </li>
       <li
         aria-disabled="false"
-        aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
-        tabindex="0"
       >
         <button
-          aria-hidden="true"
+          aria-label="下一页"
           class="rc-pagination-item-link"
-          tabindex="-1"
           title="下一页"
           type="button"
         />
@@ -5123,76 +4176,56 @@ exports[`Example styles 1`] = `
   >
     <li
       aria-disabled="false"
-      aria-label="上一页"
       class="rc-pagination-prev"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="上一页"
         type="button"
       />
     </li>
     <li
-      aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
-      tabindex="0"
-      title="1"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 1"
+        title="1"
+        type="button"
       >
         1
-      </a>
+      </button>
     </li>
     <li
-      aria-current="page"
-      aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2 rc-pagination-item-active"
-      role="button"
-      tabindex="0"
-      title="2"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-current="page"
+        aria-label="页 2"
+        title="2"
+        type="button"
       >
         2
-      </a>
+      </button>
     </li>
     <li
-      aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
-      tabindex="0"
-      title="3"
     >
-      <a
-        aria-hidden="true"
-        rel="nofollow"
-        tabindex="-1"
+      <button
+        aria-label="页 3"
+        title="3"
+        type="button"
       >
         3
-      </a>
+      </button>
     </li>
     <li
       aria-disabled="false"
-      aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
-      tabindex="0"
     >
       <button
-        aria-hidden="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
-        tabindex="-1"
         title="下一页"
         type="button"
       />

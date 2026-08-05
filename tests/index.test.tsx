@@ -236,6 +236,30 @@ describe('Uncontrolled Pagination', () => {
     ).toHaveTextContent('3');
     expect(onChange).toHaveBeenLastCalledWith(3, 10);
   });
+
+  it('should response space keyboard event', () => {
+    const page3Link = wrapper.container.querySelector<HTMLAnchorElement>(
+      '.rc-pagination-item-3 a',
+    )!;
+
+    fireEvent.keyDown(page3Link, { key: ' ' });
+    expect(
+      wrapper.container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('3');
+    expect(onChange).toHaveBeenLastCalledWith(3, 10);
+  });
+
+  it('should response legacy spacebar keyboard event', () => {
+    const page3Link = wrapper.container.querySelector<HTMLAnchorElement>(
+      '.rc-pagination-item-3 a',
+    )!;
+
+    fireEvent.keyDown(page3Link, { key: 'Spacebar' });
+    expect(
+      wrapper.container.querySelector('.rc-pagination-item-active'),
+    ).toHaveTextContent('3');
+    expect(onChange).toHaveBeenLastCalledWith(3, 10);
+  });
 });
 
 describe('Controlled Pagination', () => {

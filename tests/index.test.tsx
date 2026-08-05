@@ -66,11 +66,11 @@ describe('Uncontrolled Pagination', () => {
     const currentPage = wrapper.container.querySelector(
       '.rc-pagination-item-active',
     );
-    const currentButton = currentPage.querySelector('button');
+    const currentLink = currentPage.querySelector('a');
     expect(currentPage).toHaveTextContent('1');
     expect($$('.rc-pagination-item')[0]).toHaveTextContent('1');
-    expect(currentButton).toHaveAttribute('aria-current', 'page');
-    expect(currentButton).toHaveAttribute('title', '1');
+    expect(currentLink).toHaveAttribute('aria-current', 'page');
+    expect(currentLink).toHaveAttribute('title', '1');
   });
 
   it('prev-button should be disabled', () => {
@@ -97,7 +97,7 @@ describe('Uncontrolled Pagination', () => {
     expect(nextButton).toHaveAttribute('aria-disabled', 'false');
   });
 
-  it('should expose semantic buttons for navigation items', () => {
+  it('should expose semantic links for pages and buttons for navigation items', () => {
     const prevItem = wrapper.container.querySelector('.rc-pagination-prev');
     const nextItem = wrapper.container.querySelector('.rc-pagination-next');
     const currentItem = wrapper.container.querySelector(
@@ -105,7 +105,7 @@ describe('Uncontrolled Pagination', () => {
     );
     const prevButton = prevItem.querySelector('button');
     const nextButton = nextItem.querySelector('button');
-    const currentButton = currentItem.querySelector('button');
+    const currentLink = currentItem.querySelector('a');
 
     expect(prevItem).not.toHaveAttribute('role');
     expect(prevButton).toHaveAttribute('aria-label');
@@ -113,14 +113,15 @@ describe('Uncontrolled Pagination', () => {
     expect(nextItem).not.toHaveAttribute('role');
     expect(nextButton).toHaveAttribute('aria-label');
     expect(currentItem).not.toHaveAttribute('role');
-    expect(currentButton).toHaveAttribute('aria-current', 'page');
-    expect(currentButton).toHaveAttribute('aria-label');
+    expect(currentLink).toHaveAttribute('href', '#');
+    expect(currentLink).toHaveAttribute('aria-current', 'page');
+    expect(currentLink).toHaveAttribute('aria-label');
   });
 
   it('should response mouse click right', () => {
     const pagers = $$('.rc-pagination-item');
     expect(pagers).toHaveLength(3);
-    const page2 = pagers[1].querySelector('button');
+    const page2 = pagers[1].querySelector('a');
     expect(pagers[1]).toHaveClass('rc-pagination-item-2');
     fireEvent.click(page2);
     expect(
@@ -225,10 +226,10 @@ describe('Uncontrolled Pagination', () => {
 
   it('should response keyboard event', async () => {
     const user = userEvent.setup();
-    const page3Button = wrapper.container.querySelector<HTMLButtonElement>(
-      '.rc-pagination-item-3 button',
+    const page3Link = wrapper.container.querySelector<HTMLAnchorElement>(
+      '.rc-pagination-item-3 a',
     )!;
-    page3Button.focus();
+    page3Link.focus();
     await user.keyboard('{Enter}');
     expect(
       wrapper.container.querySelector('.rc-pagination-item-active'),
@@ -507,9 +508,14 @@ describe('Other props', () => {
     expect(
       container.querySelector('.rc-pagination-next button'),
     ).toBeDisabled();
-    expect(
-      container.querySelector('.rc-pagination-item button'),
-    ).toBeDisabled();
+    expect(container.querySelector('.rc-pagination-item a')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
+    expect(container.querySelector('.rc-pagination-item a')).toHaveAttribute(
+      'tabindex',
+      '-1',
+    );
   });
 });
 
@@ -691,10 +697,10 @@ describe('should emit onChange when total is string', () => {
   });
 
   it('onChange should be called when click page', () => {
-    const page3Button = wrapper.container.querySelector(
-      '.rc-pagination-item-3 button',
+    const page3Link = wrapper.container.querySelector(
+      '.rc-pagination-item-3 a',
     );
-    fireEvent.click(page3Button);
+    fireEvent.click(page3Link);
     expect(onChange).toHaveBeenCalledWith(3, 10);
   });
 });

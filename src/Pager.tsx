@@ -45,7 +45,7 @@ const Pager: React.FC<PagerProps> = (props) => {
     `${prefixCls}-${page}`,
     {
       [`${prefixCls}-active`]: active,
-      [`${prefixCls}-disabled`]: !page,
+      [`${prefixCls}-disabled`]: !page || disabled,
     },
     className,
   );
@@ -60,20 +60,46 @@ const Pager: React.FC<PagerProps> = (props) => {
 
   const pagerLabel = pageLabel ? `${pageLabel} ${page}` : String(page);
   const itemTitle = showTitle ? String(page) : undefined;
+  const pagerDisabled = !page || !!disabled;
+
+  const handleDefaultPagerClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ) => {
+    event.preventDefault();
+
+    if (!pagerDisabled) {
+      handleClick();
+    }
+  };
+
+  const handleDefaultPagerKeyDown = (
+    event: React.KeyboardEvent<HTMLAnchorElement>,
+  ) => {
+    if (event.key === ' ' || event.key === 'Spacebar') {
+      event.preventDefault();
+
+      if (!pagerDisabled) {
+        handleClick();
+      }
+    }
+  };
 
   if (defaultItemRender) {
     return (
       <li className={cls} style={style}>
-        <button
-          type="button"
-          onClick={handleClick}
+        <a
+          href="#"
+          rel="nofollow"
+          onClick={handleDefaultPagerClick}
+          onKeyDown={handleDefaultPagerKeyDown}
           title={itemTitle}
           aria-label={pagerLabel}
           aria-current={active ? 'page' : undefined}
-          disabled={disabled || cls.includes(`${prefixCls}-disabled`)}
+          aria-disabled={pagerDisabled || undefined}
+          tabIndex={pagerDisabled ? -1 : 0}
         >
           {page}
-        </button>
+        </a>
       </li>
     );
   }

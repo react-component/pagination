@@ -479,12 +479,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   if (allPages <= 3 + pageBufferSize * 2) {
     if (!allPages) {
       pagerList.push(
-        <Pager
-          {...pagerProps}
-          key="noPager"
-          page={1}
-          className={`${prefixCls}-item-disabled`}
-        />,
+        <Pager {...pagerProps} key="noPager" page={1} disabled={true} />,
       );
     }
 

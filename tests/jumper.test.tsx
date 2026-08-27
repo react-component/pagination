@@ -256,6 +256,28 @@ describe('simple quick jumper', () => {
     expect(onChange).toHaveBeenLastCalledWith(2, 10);
   });
 
+  it('does not activate a text goButton with empty simple input', () => {
+    wrapper = render(
+      <Pagination
+        simple
+        onChange={onChange}
+        defaultCurrent={2}
+        total={25}
+        showQuickJumper={{ goButton: 'Go' }}
+      />,
+    );
+
+    const input = wrapper.container.querySelector(
+      '.rc-pagination-simple-pager input',
+    );
+    const goButton = wrapper.getByRole('button', { name: 'Go' });
+
+    fireEvent.change(input, { target: { value: '' } });
+    fireEvent.keyDown(goButton, { key: ' ', keyCode: 32, which: 32 });
+
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
   it('goButton defaultly hidden', () => {
     wrapper = render(
       <Pagination

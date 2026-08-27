@@ -386,7 +386,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             aria-disabled={disabled || undefined}
             onClick={handleGoTO}
             onKeyDown={(event) =>
-              runIfEnterOrSpace(event, handleChange, internalInputVal)
+              runIfEnterOrSpace(event, () => {
+                if (String(internalInputVal) !== '') {
+                  handleChange(internalInputVal);
+                }
+              })
             }
           >
             {goButton}

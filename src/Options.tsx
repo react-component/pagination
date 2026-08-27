@@ -1,6 +1,7 @@
 import { KeyCode } from '@rc-component/util';
 import React from 'react';
 import type { PaginationLocale } from './interface';
+import isEnterOrSpaceKey from './isEnterOrSpaceKey';
 
 export type SizeChangerRender = (info: {
   disabled: boolean;
@@ -21,7 +22,7 @@ interface OptionsProps {
   selectPrefixCls?: string;
   pageSize: number;
   pageSizeOptions?: number[];
-  goButton?: boolean | string;
+  goButton?: boolean | React.ReactNode;
   changeSize?: (size: number) => void;
   quickGo?: (value: number) => void;
   buildOptionText?: (value: number | string) => string;
@@ -149,6 +150,21 @@ const Options: React.FC<OptionsProps> = (props) => {
           >
             {locale.jump_to_confirm}
           </button>
+        ) : typeof goButton === 'string' ? (
+          <span
+            role="button"
+            tabIndex={disabled ? -1 : 0}
+            aria-disabled={disabled || undefined}
+            onClick={go}
+            onKeyDown={(event) => {
+              if (isEnterOrSpaceKey(event)) {
+                event.preventDefault();
+                go({ type: 'click' });
+              }
+            }}
+          >
+            {goButton}
+          </span>
         ) : (
           <span onClick={go} onKeyUp={go}>
             {goButton}

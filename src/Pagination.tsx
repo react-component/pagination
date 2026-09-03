@@ -1,5 +1,6 @@
 import { clsx } from 'clsx';
 import {
+  isReactRenderable,
   KeyCode,
   pickAttrs,
   useControlledState,
@@ -120,7 +121,9 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     _label: string,
     title?: string,
   ) {
-    let iconNode = icon || (
+    let iconNode = isReactRenderable(icon) ? (
+      icon
+    ) : (
       <button
         type="button"
         tabIndex={-1}
@@ -469,14 +472,15 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     );
 
     if (showPrevNextJumpers) {
-      jumpPrev = jumpPrevContent ? (
+      jumpPrev = isReactRenderable(jumpPrevContent) ? (
         <li
           key="prev"
           onClick={jumpPrevHandle}
           tabIndex={0}
           onKeyDown={runIfEnterJumpPrev}
           className={clsx(`${prefixCls}-jump-prev`, {
-            [`${prefixCls}-jump-prev-custom-icon`]: !!jumpPrevIcon,
+            [`${prefixCls}-jump-prev-custom-icon`]:
+              isReactRenderable(jumpPrevIcon),
           })}
           role="button"
           aria-label={prevItemTitle}
@@ -485,14 +489,15 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         </li>
       ) : null;
 
-      jumpNext = jumpNextContent ? (
+      jumpNext = isReactRenderable(jumpNextContent) ? (
         <li
           key="next"
           onClick={jumpNextHandle}
           tabIndex={0}
           onKeyDown={runIfEnterJumpNext}
           className={clsx(`${prefixCls}-jump-next`, {
-            [`${prefixCls}-jump-next-custom-icon`]: !!jumpNextIcon,
+            [`${prefixCls}-jump-next-custom-icon`]:
+              isReactRenderable(jumpNextIcon),
           })}
           role="button"
           aria-label={nextItemTitle}
@@ -564,7 +569,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   let prev = renderPrev(prevPage);
-  if (prev) {
+  if (isReactRenderable(prev)) {
     const prevDisabled = !hasPrev || !allPages;
     prev = (
       <li
@@ -585,7 +590,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   let next = renderNext(nextPage);
-  if (next) {
+  if (isReactRenderable(next)) {
     let nextDisabled: boolean, nextTabIndex: number | null;
 
     if (simple) {

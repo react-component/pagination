@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import { clsx } from 'clsx';
 import React from 'react';
+import { isReactRenderable } from '@rc-component/util';
 import type { PaginationProps } from './interface';
 
 export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
@@ -61,7 +62,7 @@ const Pager: React.FC<PagerProps> = (props) => {
   );
   const pagerLabel = `${pageLabel} ${page}`.trim();
 
-  return pager ? (
+  return isReactRenderable(pager) ? (
     <li
       title={showTitle ? String(page) : null}
       className={cls}

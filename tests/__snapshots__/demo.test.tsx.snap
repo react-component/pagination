@@ -2727,7 +2727,7 @@ exports[`Example jumperWithGoButton 1`] = `
         />
         页
         <span>
-          <li
+          <span
             class="rc-pagination-simple-pager"
             title="跳至1/5"
           >
@@ -2736,7 +2736,7 @@ exports[`Example jumperWithGoButton 1`] = `
             >
               确定
             </button>
-          </li>
+          </span>
         </span>
       </div>
     </li>

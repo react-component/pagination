@@ -296,7 +296,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       ),
     );
     return React.isValidElement<HTMLButtonElement>(prevButton)
-      ? React.cloneElement(prevButton, { disabled: !hasPrev })
+      ? React.cloneElement(prevButton, { disabled: !hasPrev || disabled })
       : prevButton;
   }
 
@@ -312,7 +312,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       ),
     );
     return React.isValidElement<HTMLButtonElement>(nextButton)
-      ? React.cloneElement(nextButton, { disabled: !hasNext })
+      ? React.cloneElement(nextButton, { disabled: !hasNext || disabled })
       : nextButton;
   }
 
@@ -360,6 +360,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     page: -1,
     className: paginationClassNames?.item,
     style: styles?.item,
+    disabled,
   };
 
   const prevPage = current - 1 > 0 ? current - 1 : 0;
@@ -377,7 +378,12 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     if (goButton) {
       if (typeof goButton === 'boolean') {
         gotoButton = (
-          <button type="button" onClick={handleGoTO} onKeyUp={handleGoTO}>
+          <button
+            type="button"
+            onClick={handleGoTO}
+            onKeyUp={handleGoTO}
+            disabled={disabled}
+          >
             {locale.jump_to_confirm}
           </button>
         );
@@ -476,7 +482,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         <li
           key="prev"
           onClick={jumpPrevHandle}
-          tabIndex={0}
+          tabIndex={disabled ? null : 0}
           onKeyDown={runIfEnterJumpPrev}
           className={clsx(`${prefixCls}-jump-prev`, {
             [`${prefixCls}-jump-prev-custom-icon`]:
@@ -484,6 +490,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           })}
           role="button"
           aria-label={prevItemTitle}
+          aria-disabled={disabled || undefined}
         >
           {jumpPrevContent}
         </li>
@@ -493,7 +500,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         <li
           key="next"
           onClick={jumpNextHandle}
-          tabIndex={0}
+          tabIndex={disabled ? null : 0}
           onKeyDown={runIfEnterJumpNext}
           className={clsx(`${prefixCls}-jump-next`, {
             [`${prefixCls}-jump-next-custom-icon`]:
@@ -501,6 +508,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           })}
           role="button"
           aria-label={nextItemTitle}
+          aria-disabled={disabled || undefined}
         >
           {jumpNextContent}
         </li>
@@ -570,7 +578,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   let prev = renderPrev(prevPage);
   if (isReactRenderable(prev)) {
-    const prevDisabled = !hasPrev || !allPages;
+    const prevDisabled = !hasPrev || !allPages || !!disabled;
     prev = (
       <li
         onClick={prevHandle}
@@ -591,20 +599,12 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   let next = renderNext(nextPage);
   if (isReactRenderable(next)) {
-    let nextDisabled: boolean, nextTabIndex: number | null;
-
-    if (simple) {
-      nextDisabled = !hasNext;
-      nextTabIndex = hasPrev ? 0 : null;
-    } else {
-      nextDisabled = !hasNext || !allPages;
-      nextTabIndex = nextDisabled ? null : 0;
-    }
+    const nextDisabled = !hasNext || !allPages || !!disabled;
 
     next = (
       <li
         onClick={nextHandle}
-        tabIndex={nextTabIndex}
+        tabIndex={nextDisabled ? null : 0}
         onKeyDown={runIfEnterNext}
         className={clsx(`${prefixCls}-next`, paginationClassNames?.item, {
           [`${prefixCls}-disabled`]: nextDisabled,
@@ -632,6 +632,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       className={cls}
       style={style}
       ref={paginationRef}
+      aria-disabled={disabled || undefined}
       {...dataOrAriaAttributeProps}
     >
       {totalText}

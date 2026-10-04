@@ -429,6 +429,16 @@ describe('Other props', () => {
     expect(
       container.querySelector('.rc-pagination-options-quick-jumper-button'),
     ).toBeDisabled();
+
+    // All pagination items should not be tabbable
+    expect(container.querySelector('ul')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
+    container.querySelectorAll('li[role="button"]').forEach((item) => {
+      expect(item).toHaveAttribute('aria-disabled', 'true');
+      expect(item).not.toHaveAttribute('tabindex');
+    });
   });
 });
 

@@ -1,10 +1,12 @@
-export default {
-  // Options.jsx
+import type { PaginationLocale } from '../interface';
+
+const locale: PaginationLocale = {
+  // Options
   items_per_page: '/ страни',
   jump_to: 'Иди на',
   page: '',
-  
-  // Pagination.jsx
+
+  // Pagination
   prev_page: 'Претходна страна',
   next_page: 'Следећа страна',
   prev_5: 'Претходних 5 Страна',
@@ -13,3 +15,5 @@ export default {
   next_3: 'Следећих 3 Стране',
   page_size: 'Page Size',
 };
+
+export default locale;

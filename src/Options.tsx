@@ -1,4 +1,4 @@
-import { KeyCode } from '@rc-component/util';
+import { isReactRenderable, KeyCode } from '@rc-component/util';
 import React from 'react';
 import type { PaginationLocale } from './interface';
 
@@ -21,7 +21,7 @@ interface OptionsProps {
   selectPrefixCls?: string;
   pageSize: number;
   pageSizeOptions?: number[];
-  goButton?: boolean | string;
+  goButton?: React.ReactNode;
   changeSize?: (size: number) => void;
   quickGo?: (value: number) => void;
   buildOptionText?: (value: number | string) => string;
@@ -67,7 +67,7 @@ const Options: React.FC<OptionsProps> = (props) => {
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    if (goButton || goInputText === '') {
+    if (isReactRenderable(goButton) || goInputText === '') {
       return;
     }
     setGoInputText('');
@@ -137,7 +137,7 @@ const Options: React.FC<OptionsProps> = (props) => {
 
   // >>>>> Quick Go
   if (quickGo) {
-    if (goButton) {
+    if (isReactRenderable(goButton)) {
       gotoButton =
         typeof goButton === 'boolean' ? (
           <button

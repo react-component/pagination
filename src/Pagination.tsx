@@ -374,7 +374,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
   if (simple) {
     // ====== Simple quick jump ======
-    if (goButton) {
+    if (isReactRenderable(goButton)) {
       if (typeof goButton === 'boolean') {
         gotoButton = (
           <button type="button" onClick={handleGoTO} onKeyUp={handleGoTO}>
@@ -390,12 +390,12 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       }
 
       gotoButton = (
-        <li
+        <span
           title={showTitle ? `${locale.jump_to}${current}/${allPages}` : null}
           className={`${prefixCls}-simple-pager`}
         >
           {gotoButton}
-        </li>
+        </span>
       );
     }
 

@@ -258,7 +258,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   function runIfEnterOrSpace(
-    event: React.KeyboardEvent<HTMLLIElement>,
+    event: React.KeyboardEvent<HTMLElement>,
     callback: (...args: any[]) => void,
     ...restParams: any[]
   ) {
@@ -380,6 +380,24 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           <button type="button" onClick={handleGoTO} onKeyUp={handleGoTO}>
             {locale.jump_to_confirm}
           </button>
+        );
+      } else if (typeof goButton === 'string') {
+        gotoButton = (
+          <span
+            role="button"
+            tabIndex={disabled ? -1 : 0}
+            aria-disabled={disabled || undefined}
+            onClick={handleGoTO}
+            onKeyDown={(event) =>
+              runIfEnterOrSpace(event, () => {
+                if (String(internalInputVal) !== '') {
+                  handleChange(internalInputVal);
+                }
+              })
+            }
+          >
+            {goButton}
+          </span>
         );
       } else {
         gotoButton = (

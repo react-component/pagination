@@ -3,10 +3,14 @@ import { clsx } from 'clsx';
 import React from 'react';
 import type { PaginationProps } from './interface';
 
-export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
+export interface PagerProps extends Pick<
+  PaginationProps,
+  'disabled' | 'itemRender'
+> {
   rootPrefixCls: string;
   page: number;
   pageLabel?: string;
+  defaultItemRender?: boolean;
   active?: boolean;
   className?: string;
   style?: React.CSSProperties;
@@ -24,6 +28,8 @@ const Pager: React.FC<PagerProps> = (props) => {
     rootPrefixCls,
     page,
     pageLabel,
+    disabled,
+    defaultItemRender,
     active,
     className,
     style,
@@ -39,7 +45,7 @@ const Pager: React.FC<PagerProps> = (props) => {
     `${prefixCls}-${page}`,
     {
       [`${prefixCls}-active`]: active,
-      [`${prefixCls}-disabled`]: !page,
+      [`${prefixCls}-disabled`]: !page || disabled,
     },
     className,
   );
@@ -52,24 +58,62 @@ const Pager: React.FC<PagerProps> = (props) => {
     onKeyPress(e, onClick, page);
   };
 
-  const pager = itemRender(
-    page,
-    'page',
-    <a tabIndex={-1} aria-hidden="true" rel="nofollow">
-      {page}
-    </a>,
-  );
-  const pagerLabel = `${pageLabel} ${page}`.trim();
+  const pagerLabel = pageLabel ? `${pageLabel} ${page}` : String(page);
+  const itemTitle = showTitle ? String(page) : undefined;
+  const pagerDisabled = !page || !!disabled;
+
+  const handleDefaultPagerClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+  ) => {
+    event.preventDefault();
+
+    if (!pagerDisabled) {
+      handleClick();
+    }
+  };
+
+  const handleDefaultPagerKeyDown = (
+    event: React.KeyboardEvent<HTMLAnchorElement>,
+  ) => {
+    if (event.key === ' ' || event.key === 'Spacebar') {
+      event.preventDefault();
+
+      if (!pagerDisabled) {
+        handleClick();
+      }
+    }
+  };
+
+  if (defaultItemRender) {
+    return (
+      <li className={cls} style={style}>
+        <a
+          href="#"
+          rel="nofollow"
+          onClick={handleDefaultPagerClick}
+          onKeyDown={handleDefaultPagerKeyDown}
+          title={itemTitle}
+          aria-label={pagerLabel}
+          aria-current={active ? 'page' : undefined}
+          aria-disabled={pagerDisabled || undefined}
+          tabIndex={pagerDisabled ? -1 : 0}
+        >
+          {page}
+        </a>
+      </li>
+    );
+  }
+
+  const pager = itemRender(page, 'page', <a rel="nofollow">{page}</a>);
 
   return pager ? (
     <li
-      title={showTitle ? String(page) : null}
+      title={itemTitle}
       className={cls}
       style={style}
       onClick={handleClick}
       onKeyDown={handleKeyPress}
       tabIndex={0}
-      role="button"
       aria-label={pagerLabel}
       aria-current={active ? 'page' : undefined}
     >

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { RenderResult } from '@testing-library/react';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import Pagination from '../src';
 
 describe('itemRender', () => {
@@ -8,6 +8,15 @@ describe('itemRender', () => {
   const currentPage = 12;
   const itemRender = (current: number) => <a href={`#${current}`}>{current}</a>;
   const $$ = (selector: string) => wrapper.container.querySelector(selector);
+  const renderFallbackPagination = (onChange = jest.fn()) =>
+    render(
+      <Pagination
+        total={1000}
+        defaultCurrent={12}
+        onChange={onChange}
+        itemRender={(_, __, originalElement) => originalElement}
+      />,
+    );
 
   beforeEach(() => {
     wrapper = render(
@@ -108,4 +117,70 @@ describe('itemRender', () => {
     expect(prev.innerHTML).toBe('<a href="#0" disabled="">0</a>');
     expect(next.innerHTML).toBe('<a href="#2">2</a>');
   });
+
+  it('should keep wrapper interaction for custom itemRender fallback', () => {
+    const onChange = jest.fn();
+    const { container } = renderFallbackPagination(onChange);
+
+    const pageButton = container.querySelector('.rc-pagination-item-13');
+    const jumpNextButton = container.querySelector('.rc-pagination-jump-next');
+
+    expect(pageButton).not.toHaveAttribute('role');
+    expect(jumpNextButton).not.toHaveAttribute('role');
+
+    fireEvent.click(pageButton);
+    fireEvent.keyDown(jumpNextButton, {
+      key: 'Spacebar',
+      keyCode: 32,
+      which: 32,
+    });
+
+    expect(onChange).toHaveBeenLastCalledWith(18, 10);
+  });
+
+  it('should support keyboard interaction for custom page item wrapper', () => {
+    const onChange = jest.fn();
+    const { container } = renderFallbackPagination(onChange);
+    const pageButton = container.querySelector('.rc-pagination-item-13');
+
+    fireEvent.keyDown(pageButton, {
+      key: 'Enter',
+      keyCode: 13,
+      which: 13,
+    });
+
+    expect(onChange).toHaveBeenLastCalledWith(13, 10);
+  });
+
+  it.each([
+    [
+      'prev',
+      '.rc-pagination-prev',
+      { key: 'Enter', keyCode: 13, which: 13 },
+      11,
+    ],
+    [
+      'next',
+      '.rc-pagination-next',
+      { key: 'Enter', keyCode: 13, which: 13 },
+      13,
+    ],
+    [
+      'jump-prev',
+      '.rc-pagination-jump-prev',
+      { key: ' ', keyCode: 32, which: 32 },
+      7,
+    ],
+  ])(
+    'should support keyboard interaction for custom %s wrapper',
+    (_, selector, eventInit, expectedPage) => {
+      const onChange = jest.fn();
+      const { container } = renderFallbackPagination(onChange);
+      const wrapperButton = container.querySelector(selector);
+
+      fireEvent.keyDown(wrapperButton, eventInit);
+
+      expect(onChange).toHaveBeenLastCalledWith(expectedPage, 10);
+    },
+  );
 });

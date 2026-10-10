@@ -440,6 +440,21 @@ describe('Other props', () => {
       expect(item).not.toHaveAttribute('tabindex');
     });
   });
+
+  it('disabled should override user passed aria-disabled', () => {
+    const { container } = render(
+      <Pagination total={30} disabled aria-disabled={false} />,
+    );
+    expect(container.querySelector('ul')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
+  });
+
+  it('should ignore user passed aria-disabled when not disabled', () => {
+    const { container } = render(<Pagination aria-disabled="true" />);
+    expect(container.querySelector('ul')).not.toHaveAttribute('aria-disabled');
+  });
 });
 
 // https://github.com/ant-design/ant-design/issues/10524

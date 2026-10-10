@@ -632,8 +632,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       className={cls}
       style={style}
       ref={paginationRef}
-      aria-disabled={disabled || undefined}
       {...dataOrAriaAttributeProps}
+      aria-disabled={disabled || undefined}
     >
       {totalText}
       {prev}

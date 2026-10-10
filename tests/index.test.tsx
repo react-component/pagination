@@ -458,7 +458,11 @@ describe('Other props', () => {
 
   it('should prevent default action of itemRender link when disabled', () => {
     const itemRender = (page, type, element) =>
-      type === 'page' ? <a href={`#${page}`}>{page}</a> : element;
+      type === 'page' || type === 'prev' || type === 'next' ? (
+        <a href={`#${type}${page}`}>{page}</a>
+      ) : (
+        element
+      );
     const { container } = render(
       <Pagination
         total={50}
@@ -471,6 +475,15 @@ describe('Other props', () => {
     const event = createEvent.click(link);
     fireEvent(link, event);
     expect(event.defaultPrevented).toBe(true);
+    expect(link).toHaveAttribute('tabindex', '-1');
+    expect(container.querySelector('.rc-pagination-prev a')).toHaveAttribute(
+      'tabindex',
+      '-1',
+    );
+    expect(container.querySelector('.rc-pagination-next a')).toHaveAttribute(
+      'tabindex',
+      '-1',
+    );
   });
 
   it('should not prevent default action of itemRender link when enabled', () => {
@@ -483,6 +496,41 @@ describe('Other props', () => {
     const event = createEvent.click(link);
     fireEvent(link, event);
     expect(event.defaultPrevented).toBe(false);
+    expect(link).not.toHaveAttribute('tabindex');
+  });
+
+  it('should unfocus custom goButton and block activation keys when disabled', () => {
+    const goButton = <button type="button">Go</button>;
+    const { container } = render(
+      <Pagination total={50} showQuickJumper={{ goButton }} disabled />,
+    );
+    const button = container.querySelector(
+      '.rc-pagination-options-quick-jumper button',
+    );
+    expect(button).toHaveAttribute('tabindex', '-1');
+
+    const tabEvent = createEvent.keyDown(button, { key: 'Tab' });
+    fireEvent(button, tabEvent);
+    expect(tabEvent.defaultPrevented).toBe(false);
+
+    const enterEvent = createEvent.keyDown(button, { key: 'Enter' });
+    fireEvent(button, enterEvent);
+    expect(enterEvent.defaultPrevented).toBe(true);
+  });
+
+  it('should unfocus simple mode custom goButton when disabled', () => {
+    const goButton = <button type="button">Go</button>;
+    const { container } = render(
+      <Pagination total={50} simple showQuickJumper={{ goButton }} disabled />,
+    );
+    const button = container.querySelector(
+      '.rc-pagination-simple-pager button',
+    );
+    expect(button).toHaveAttribute('tabindex', '-1');
+
+    const enterEvent = createEvent.keyDown(button, { key: 'Enter' });
+    fireEvent(button, enterEvent);
+    expect(enterEvent.defaultPrevented).toBe(true);
   });
 });
 

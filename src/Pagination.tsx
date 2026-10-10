@@ -329,9 +329,19 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   }
 
   function preventInnerKeyDown(event: React.KeyboardEvent<HTMLElement>) {
-    if (disabled) {
+    if (disabled && isEnterOrSpaceKey(event)) {
       event.preventDefault();
     }
+  }
+
+  function withUnfocusable(node: React.ReactNode) {
+    if (
+      disabled &&
+      React.isValidElement<React.HTMLAttributes<HTMLElement>>(node)
+    ) {
+      return React.cloneElement(node, { tabIndex: -1 });
+    }
+    return node;
   }
 
   let jumpPrev: React.ReactElement<PagerProps> = null;
@@ -406,7 +416,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             onKeyUp={handleGoTO}
             onKeyDown={preventInnerKeyDown}
           >
-            {goButton}
+            {withUnfocusable(goButton)}
           </span>
         );
       }
@@ -508,7 +518,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           aria-label={prevItemTitle}
           aria-disabled={disabled || undefined}
         >
-          {jumpPrevContent}
+          {withUnfocusable(jumpPrevContent)}
         </li>
       ) : null;
 
@@ -526,7 +536,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           aria-label={nextItemTitle}
           aria-disabled={disabled || undefined}
         >
-          {jumpNextContent}
+          {withUnfocusable(jumpNextContent)}
         </li>
       ) : null;
     }
@@ -608,7 +618,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         role="button"
         aria-label={locale.prev_page}
       >
-        {prev}
+        {withUnfocusable(prev)}
       </li>
     );
   }
@@ -630,7 +640,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         role="button"
         aria-label={locale.next_page}
       >
-        {next}
+        {withUnfocusable(next)}
       </li>
     );
   }

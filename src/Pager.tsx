@@ -61,9 +61,13 @@ const Pager: React.FC<PagerProps> = (props) => {
       {page}
     </a>,
   );
+  const pagerContent =
+    disabled && React.isValidElement<React.HTMLAttributes<HTMLElement>>(pager)
+      ? React.cloneElement(pager, { tabIndex: -1 })
+      : pager;
   const pagerLabel = `${pageLabel} ${page}`.trim();
 
-  return pager ? (
+  return pagerContent ? (
     <li
       title={showTitle ? String(page) : null}
       className={cls}
@@ -76,7 +80,7 @@ const Pager: React.FC<PagerProps> = (props) => {
       aria-current={active ? 'page' : undefined}
       aria-disabled={disabled || undefined}
     >
-      {pager}
+      {pagerContent}
     </li>
   ) : null;
 };

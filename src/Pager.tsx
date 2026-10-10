@@ -11,6 +11,7 @@ export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
   className?: string;
   style?: React.CSSProperties;
   showTitle: boolean;
+  disabled?: boolean;
   onClick?: (page: number) => void;
   onKeyPress?: (
     e: React.KeyboardEvent<HTMLLIElement>,
@@ -28,6 +29,7 @@ const Pager: React.FC<PagerProps> = (props) => {
     className,
     style,
     showTitle,
+    disabled,
     onClick,
     onKeyPress,
     itemRender,
@@ -59,21 +61,26 @@ const Pager: React.FC<PagerProps> = (props) => {
       {page}
     </a>,
   );
+  const pagerContent =
+    disabled && React.isValidElement<React.HTMLAttributes<HTMLElement>>(pager)
+      ? React.cloneElement(pager, { tabIndex: -1 })
+      : pager;
   const pagerLabel = `${pageLabel} ${page}`.trim();
 
-  return pager ? (
+  return pagerContent ? (
     <li
       title={showTitle ? String(page) : null}
       className={cls}
       style={style}
       onClick={handleClick}
       onKeyDown={handleKeyPress}
-      tabIndex={0}
+      tabIndex={disabled ? null : 0}
       role="button"
       aria-label={pagerLabel}
       aria-current={active ? 'page' : undefined}
+      aria-disabled={disabled || undefined}
     >
-      {pager}
+      {pagerContent}
     </li>
   ) : null;
 };

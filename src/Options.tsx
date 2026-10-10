@@ -1,5 +1,6 @@
 import { KeyCode } from '@rc-component/util';
 import React from 'react';
+import isEnterOrSpaceKey from './isEnterOrSpaceKey';
 import type { PaginationLocale } from './interface';
 
 export type SizeChangerRender = (info: {
@@ -91,6 +92,17 @@ const Options: React.FC<OptionsProps> = (props) => {
     }
   };
 
+  const preventInnerKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+    if (disabled && isEnterOrSpaceKey(e)) {
+      e.preventDefault();
+    }
+  };
+
+  const unfocusableWhenDisabled = (node: React.ReactNode) =>
+    disabled && React.isValidElement<React.HTMLAttributes<HTMLElement>>(node)
+      ? React.cloneElement(node, { tabIndex: -1 })
+      : node;
+
   const getPageSizeOptions = () => {
     if (
       pageSizeOptions.some(
@@ -150,8 +162,8 @@ const Options: React.FC<OptionsProps> = (props) => {
             {locale.jump_to_confirm}
           </button>
         ) : (
-          <span onClick={go} onKeyUp={go}>
-            {goButton}
+          <span onClick={go} onKeyUp={go} onKeyDown={preventInnerKeyDown}>
+            {unfocusableWhenDisabled(goButton)}
           </span>
         );
     }

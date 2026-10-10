@@ -91,6 +91,12 @@ const Options: React.FC<OptionsProps> = (props) => {
     }
   };
 
+  const preventInnerKeyDown = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+    if (disabled) {
+      e.preventDefault();
+    }
+  };
+
   const getPageSizeOptions = () => {
     if (
       pageSizeOptions.some(
@@ -150,7 +156,7 @@ const Options: React.FC<OptionsProps> = (props) => {
             {locale.jump_to_confirm}
           </button>
         ) : (
-          <span onClick={go} onKeyUp={go}>
+          <span onClick={go} onKeyUp={go} onKeyDown={preventInnerKeyDown}>
             {goButton}
           </span>
         );

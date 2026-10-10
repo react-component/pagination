@@ -322,6 +322,18 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     }
   }
 
+  function preventInnerDefault(event: React.MouseEvent<HTMLUListElement>) {
+    if (disabled) {
+      event.preventDefault();
+    }
+  }
+
+  function preventInnerKeyDown(event: React.KeyboardEvent<HTMLElement>) {
+    if (disabled) {
+      event.preventDefault();
+    }
+  }
+
   let jumpPrev: React.ReactElement<PagerProps> = null;
 
   const dataOrAriaAttributeProps = pickAttrs(props, {
@@ -389,7 +401,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         );
       } else {
         gotoButton = (
-          <span onClick={handleGoTO} onKeyUp={handleGoTO}>
+          <span
+            onClick={handleGoTO}
+            onKeyUp={handleGoTO}
+            onKeyDown={preventInnerKeyDown}
+          >
             {goButton}
           </span>
         );
@@ -632,6 +648,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
       className={cls}
       style={style}
       ref={paginationRef}
+      onClick={preventInnerDefault}
       {...dataOrAriaAttributeProps}
       aria-disabled={disabled || undefined}
     >

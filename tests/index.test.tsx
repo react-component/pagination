@@ -1,5 +1,5 @@
 import type { RenderResult } from '@testing-library/react';
-import { render, fireEvent } from '@testing-library/react';
+import { createEvent, render, fireEvent } from '@testing-library/react';
 import React from 'react';
 import Pagination from '../src';
 import { resetWarned } from '@rc-component/util';
@@ -454,6 +454,35 @@ describe('Other props', () => {
   it('should ignore user passed aria-disabled when not disabled', () => {
     const { container } = render(<Pagination aria-disabled="true" />);
     expect(container.querySelector('ul')).not.toHaveAttribute('aria-disabled');
+  });
+
+  it('should prevent default action of itemRender link when disabled', () => {
+    const itemRender = (page, type, element) =>
+      type === 'page' ? <a href={`#${page}`}>{page}</a> : element;
+    const { container } = render(
+      <Pagination
+        total={50}
+        defaultCurrent={2}
+        itemRender={itemRender}
+        disabled
+      />,
+    );
+    const link = container.querySelector('.rc-pagination-item-2 a');
+    const event = createEvent.click(link);
+    fireEvent(link, event);
+    expect(event.defaultPrevented).toBe(true);
+  });
+
+  it('should not prevent default action of itemRender link when enabled', () => {
+    const itemRender = (page, type, element) =>
+      type === 'page' ? <a href={`#${page}`}>{page}</a> : element;
+    const { container } = render(
+      <Pagination total={50} defaultCurrent={2} itemRender={itemRender} />,
+    );
+    const link = container.querySelector('.rc-pagination-item-2 a');
+    const event = createEvent.click(link);
+    fireEvent(link, event);
+    expect(event.defaultPrevented).toBe(false);
   });
 });
 

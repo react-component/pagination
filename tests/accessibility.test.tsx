@@ -188,4 +188,52 @@ describe('accessible pagination controls', () => {
       container.querySelector('.rc-pagination-item-3 button'),
     ).toBeDisabled();
   });
+  it.each(['prev', 'next', 'jump-prev', 'jump-next'])(
+    'retains Enter/Space handling for opaque %s content',
+    (type) => {
+      const onChange = jest.fn();
+      const { container } = render(
+        <Pagination
+          total={1000}
+          defaultCurrent={50}
+          onChange={onChange}
+          itemRender={(page) => <span>{page}</span>}
+        />,
+      );
+      const item = container.querySelector(`.rc-pagination-${type}`);
+      fireEvent.keyDown(item, { key: 'Enter' });
+      expect(onChange).toHaveBeenCalledTimes(1);
+      fireEvent.keyDown(item, { key: ' ' });
+      expect(onChange).toHaveBeenCalledTimes(2);
+    },
+  );
+
+  it('allows a custom anchor to cancel delegated keyboard activation', () => {
+    const onChange = jest.fn();
+    const onKeyDown = jest.fn((event: React.KeyboardEvent) =>
+      event.preventDefault(),
+    );
+    const { container } = render(
+      <Pagination
+        total={100}
+        onChange={onChange}
+        itemRender={(page) => <a onKeyDown={onKeyDown}>{page}</a>}
+      />,
+    );
+    fireEvent.keyDown(container.querySelector('.rc-pagination-item-2 a'), {
+      key: 'Enter',
+    });
+    expect(onKeyDown).toHaveBeenCalledTimes(1);
+    expect(onChange).not.toHaveBeenCalled();
+  });
+  it('does not submit the quick-jump input when focusing a page control', async () => {
+    const onChange = jest.fn();
+    const { getByRole } = render(
+      <Pagination total={30} showQuickJumper onChange={onChange} />,
+    );
+    await userEvent.type(getByRole('textbox'), '3');
+    await userEvent.click(getByRole('button', { name: '页 2' }));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenLastCalledWith(2, 10);
+  });
 });

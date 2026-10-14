@@ -69,7 +69,6 @@ const Pager: React.FC<PagerProps> = (props) => {
       onClick={handleClick}
       onKeyDown={handleKeyPress}
       tabIndex={0}
-      role="button"
       aria-label={pagerLabel}
       aria-current={active ? 'page' : undefined}
     >

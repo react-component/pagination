@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Example align 1`] = `
 <div>
@@ -9,7 +9,6 @@ exports[`Example align 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -23,7 +22,6 @@ exports[`Example align 1`] = `
     <li
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -39,7 +37,6 @@ exports[`Example align 1`] = `
       aria-disabled="true"
       aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -58,7 +55,6 @@ exports[`Example align 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -72,7 +68,6 @@ exports[`Example align 1`] = `
     <li
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -88,7 +83,6 @@ exports[`Example align 1`] = `
       aria-disabled="true"
       aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -107,7 +101,6 @@ exports[`Example align 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -121,7 +114,6 @@ exports[`Example align 1`] = `
     <li
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -137,7 +129,6 @@ exports[`Example align 1`] = `
       aria-disabled="true"
       aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -161,7 +152,6 @@ exports[`Example basic 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -176,7 +166,6 @@ exports[`Example basic 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -191,7 +180,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -206,7 +194,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -222,7 +209,6 @@ exports[`Example basic 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -241,7 +227,6 @@ exports[`Example basic 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -256,7 +241,6 @@ exports[`Example basic 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -271,7 +255,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -286,7 +269,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -301,7 +283,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -316,7 +297,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -332,7 +312,6 @@ exports[`Example basic 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -351,7 +330,6 @@ exports[`Example basic 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -366,7 +344,6 @@ exports[`Example basic 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -381,7 +358,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -396,7 +372,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -411,7 +386,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -426,7 +400,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -441,7 +414,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 6"
       class="rc-pagination-item rc-pagination-item-6"
-      role="button"
       tabindex="0"
       title="6"
     >
@@ -457,7 +429,6 @@ exports[`Example basic 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -479,7 +450,6 @@ exports[`Example basic 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -494,7 +464,6 @@ exports[`Example basic 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -509,7 +478,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -524,7 +492,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -539,7 +506,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -554,7 +520,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -569,7 +534,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 6"
       class="rc-pagination-item rc-pagination-item-6"
-      role="button"
       tabindex="0"
       title="6"
     >
@@ -584,7 +548,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 7"
       class="rc-pagination-item rc-pagination-item-7"
-      role="button"
       tabindex="0"
       title="7"
     >
@@ -600,7 +563,6 @@ exports[`Example basic 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -622,7 +584,6 @@ exports[`Example basic 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -637,7 +598,6 @@ exports[`Example basic 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -652,7 +612,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -667,7 +626,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -682,7 +640,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -697,7 +654,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -712,7 +668,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -726,7 +681,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 8"
       class="rc-pagination-item rc-pagination-item-8"
-      role="button"
       tabindex="0"
       title="8"
     >
@@ -742,7 +696,6 @@ exports[`Example basic 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -764,7 +717,6 @@ exports[`Example basic 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -779,7 +731,6 @@ exports[`Example basic 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -794,7 +745,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -809,7 +759,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -824,7 +773,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -839,7 +787,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -854,7 +801,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -868,7 +814,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 9"
       class="rc-pagination-item rc-pagination-item-9"
-      role="button"
       tabindex="0"
       title="9"
     >
@@ -884,7 +829,6 @@ exports[`Example basic 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -906,7 +850,6 @@ exports[`Example basic 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -921,7 +864,6 @@ exports[`Example basic 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -936,7 +878,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -951,7 +892,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -966,7 +906,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -981,7 +920,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -996,7 +934,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1010,7 +947,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 10"
       class="rc-pagination-item rc-pagination-item-10"
-      role="button"
       tabindex="0"
       title="10"
     >
@@ -1026,7 +962,6 @@ exports[`Example basic 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1048,7 +983,6 @@ exports[`Example basic 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -1063,7 +997,6 @@ exports[`Example basic 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -1078,7 +1011,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -1093,7 +1025,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -1108,7 +1039,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -1123,7 +1053,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -1138,7 +1067,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1152,7 +1080,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 12"
       class="rc-pagination-item rc-pagination-item-12"
-      role="button"
       tabindex="0"
       title="12"
     >
@@ -1168,7 +1095,6 @@ exports[`Example basic 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1190,7 +1116,6 @@ exports[`Example basic 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -1205,7 +1130,6 @@ exports[`Example basic 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -1220,7 +1144,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -1235,7 +1158,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -1250,7 +1172,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -1265,7 +1186,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -1280,7 +1200,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1294,7 +1213,6 @@ exports[`Example basic 1`] = `
     <li
       aria-label="页 50"
       class="rc-pagination-item rc-pagination-item-50"
-      role="button"
       tabindex="0"
       title="50"
     >
@@ -1310,7 +1228,6 @@ exports[`Example basic 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1337,7 +1254,6 @@ exports[`Example controlled 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -1352,7 +1268,6 @@ exports[`Example controlled 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -1367,7 +1282,6 @@ exports[`Example controlled 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -1382,7 +1296,6 @@ exports[`Example controlled 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -1398,7 +1311,6 @@ exports[`Example controlled 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1422,7 +1334,6 @@ exports[`Example itemRender 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -1437,7 +1348,6 @@ exports[`Example itemRender 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -1450,7 +1360,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -1463,7 +1372,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -1476,7 +1384,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -1489,7 +1396,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -1502,7 +1408,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1516,7 +1421,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 10"
       class="rc-pagination-item rc-pagination-item-10"
-      role="button"
       tabindex="0"
       title="10"
     >
@@ -1530,7 +1434,6 @@ exports[`Example itemRender 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1552,7 +1455,6 @@ exports[`Example itemRender 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       Prev
     </li>
@@ -1560,7 +1462,6 @@ exports[`Example itemRender 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -1575,7 +1476,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -1590,7 +1490,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -1605,7 +1504,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -1620,7 +1518,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -1635,7 +1532,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1649,7 +1545,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 10"
       class="rc-pagination-item rc-pagination-item-10"
-      role="button"
       tabindex="0"
       title="10"
     >
@@ -1665,7 +1560,6 @@ exports[`Example itemRender 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       Next
@@ -1681,7 +1575,6 @@ exports[`Example itemRender 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         disabled=""
@@ -1694,7 +1587,6 @@ exports[`Example itemRender 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -1709,7 +1601,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -1724,7 +1615,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -1739,7 +1629,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -1754,7 +1643,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -1769,7 +1657,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1783,7 +1670,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 10"
       class="rc-pagination-item rc-pagination-item-10"
-      role="button"
       tabindex="0"
       title="10"
     >
@@ -1799,7 +1685,6 @@ exports[`Example itemRender 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1819,7 +1704,6 @@ exports[`Example itemRender 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <div
         disabled=""
@@ -1831,7 +1715,6 @@ exports[`Example itemRender 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -1846,7 +1729,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -1861,7 +1743,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -1876,7 +1757,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -1891,7 +1771,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -1906,7 +1785,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1920,7 +1798,6 @@ exports[`Example itemRender 1`] = `
     <li
       aria-label="页 10"
       class="rc-pagination-item rc-pagination-item-10"
-      role="button"
       tabindex="0"
       title="10"
     >
@@ -1936,7 +1813,6 @@ exports[`Example itemRender 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <div>
@@ -1962,7 +1838,6 @@ exports[`Example jumper 1`] = `
       aria-disabled="false"
       aria-label="上一页"
       class="rc-pagination-prev"
-      role="button"
       tabindex="0"
     >
       <button
@@ -1976,7 +1851,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -1991,7 +1865,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="向前 5 页"
       class="rc-pagination-jump-prev"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2005,7 +1878,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -2021,7 +1893,6 @@ exports[`Example jumper 1`] = `
       aria-current="page"
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -2036,7 +1907,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="页 6"
       class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="6"
     >
@@ -2051,7 +1921,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2065,7 +1934,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="页 23"
       class="rc-pagination-item rc-pagination-item-23"
-      role="button"
       tabindex="0"
       title="23"
     >
@@ -2081,7 +1949,6 @@ exports[`Example jumper 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2141,7 +2008,6 @@ exports[`Example jumper 1`] = `
       aria-disabled="false"
       aria-label="上一页"
       class="rc-pagination-prev"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2155,7 +2021,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -2170,7 +2035,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="向前 5 页"
       class="rc-pagination-jump-prev"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2184,7 +2048,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -2200,7 +2063,6 @@ exports[`Example jumper 1`] = `
       aria-current="page"
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -2215,7 +2077,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="页 6"
       class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="6"
     >
@@ -2230,7 +2091,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2244,7 +2104,6 @@ exports[`Example jumper 1`] = `
     <li
       aria-label="页 23"
       class="rc-pagination-item rc-pagination-item-23"
-      role="button"
       tabindex="0"
       title="23"
     >
@@ -2260,7 +2119,6 @@ exports[`Example jumper 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2322,7 +2180,6 @@ exports[`Example jumper 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -2337,7 +2194,6 @@ exports[`Example jumper 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -2353,7 +2209,6 @@ exports[`Example jumper 1`] = `
       aria-disabled="true"
       aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -2400,7 +2255,6 @@ exports[`Example jumper 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -2415,7 +2269,6 @@ exports[`Example jumper 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -2431,7 +2284,6 @@ exports[`Example jumper 1`] = `
       aria-disabled="true"
       aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -2485,7 +2337,6 @@ exports[`Example jumperWithGoButton 1`] = `
       aria-disabled="false"
       aria-label="上一页"
       class="rc-pagination-prev"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2499,7 +2350,6 @@ exports[`Example jumperWithGoButton 1`] = `
     <li
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -2514,7 +2364,6 @@ exports[`Example jumperWithGoButton 1`] = `
     <li
       aria-label="向前 5 页"
       class="rc-pagination-jump-prev"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2528,7 +2377,6 @@ exports[`Example jumperWithGoButton 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -2544,7 +2392,6 @@ exports[`Example jumperWithGoButton 1`] = `
       aria-current="page"
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -2559,7 +2406,6 @@ exports[`Example jumperWithGoButton 1`] = `
     <li
       aria-label="页 6"
       class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="6"
     >
@@ -2574,7 +2420,6 @@ exports[`Example jumperWithGoButton 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2588,7 +2433,6 @@ exports[`Example jumperWithGoButton 1`] = `
     <li
       aria-label="页 23"
       class="rc-pagination-item rc-pagination-item-23"
-      role="button"
       tabindex="0"
       title="23"
     >
@@ -2604,7 +2448,6 @@ exports[`Example jumperWithGoButton 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -2671,7 +2514,6 @@ exports[`Example jumperWithGoButton 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -2703,7 +2545,6 @@ exports[`Example jumperWithGoButton 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -2755,7 +2596,6 @@ exports[`Example lessPages 1`] = `
         aria-disabled="false"
         aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
         tabindex="0"
       >
         <i
@@ -2778,7 +2618,6 @@ exports[`Example lessPages 1`] = `
       <li
         aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
         tabindex="0"
         title="1"
       >
@@ -2793,7 +2632,6 @@ exports[`Example lessPages 1`] = `
       <li
         aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
         tabindex="0"
         title="2"
       >
@@ -2809,7 +2647,6 @@ exports[`Example lessPages 1`] = `
         aria-current="page"
         aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
         tabindex="0"
         title="3"
       >
@@ -2824,7 +2661,6 @@ exports[`Example lessPages 1`] = `
       <li
         aria-label="页 4"
         class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-before-jump-next"
-        role="button"
         tabindex="0"
         title="4"
       >
@@ -2839,7 +2675,6 @@ exports[`Example lessPages 1`] = `
       <li
         aria-label="向后 3 页"
         class="rc-pagination-jump-next rc-pagination-jump-next-custom-icon"
-        role="button"
         tabindex="0"
       >
         <i
@@ -2865,7 +2700,6 @@ exports[`Example lessPages 1`] = `
       <li
         aria-label="页 8"
         class="rc-pagination-item rc-pagination-item-8"
-        role="button"
         tabindex="0"
         title="8"
       >
@@ -2881,7 +2715,6 @@ exports[`Example lessPages 1`] = `
         aria-disabled="false"
         aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
         tabindex="0"
       >
         <i
@@ -2912,7 +2745,6 @@ exports[`Example lessPages 1`] = `
         aria-disabled="true"
         aria-label="上一页"
         class="rc-pagination-prev rc-pagination-disabled"
-        role="button"
       >
         <i
           class="custom-icon-prev"
@@ -2936,7 +2768,6 @@ exports[`Example lessPages 1`] = `
         aria-current="page"
         aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-        role="button"
         tabindex="0"
         title="1"
       >
@@ -2951,7 +2782,6 @@ exports[`Example lessPages 1`] = `
       <li
         aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
         tabindex="0"
         title="2"
       >
@@ -2966,7 +2796,6 @@ exports[`Example lessPages 1`] = `
       <li
         aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-before-jump-next"
-        role="button"
         tabindex="0"
         title="3"
       >
@@ -2981,7 +2810,6 @@ exports[`Example lessPages 1`] = `
       <li
         aria-label="向后 3 页"
         class="rc-pagination-jump-next rc-pagination-jump-next-custom-icon"
-        role="button"
         tabindex="0"
       >
         <i
@@ -3007,7 +2835,6 @@ exports[`Example lessPages 1`] = `
       <li
         aria-label="页 6"
         class="rc-pagination-item rc-pagination-item-6"
-        role="button"
         tabindex="0"
         title="6"
       >
@@ -3023,7 +2850,6 @@ exports[`Example lessPages 1`] = `
         aria-disabled="false"
         aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
         tabindex="0"
       >
         <i
@@ -3071,7 +2897,6 @@ exports[`Example locale 1`] = `
       aria-disabled="false"
       aria-label="Previous Page"
       class="rc-pagination-prev"
-      role="button"
       tabindex="0"
     >
       <button
@@ -3085,7 +2910,6 @@ exports[`Example locale 1`] = `
     <li
       aria-label="Page 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -3100,7 +2924,6 @@ exports[`Example locale 1`] = `
     <li
       aria-label="Previous 5 Pages"
       class="rc-pagination-jump-prev"
-      role="button"
       tabindex="0"
     >
       <button
@@ -3114,7 +2937,6 @@ exports[`Example locale 1`] = `
     <li
       aria-label="Page 4"
       class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-after-jump-prev"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -3130,7 +2952,6 @@ exports[`Example locale 1`] = `
       aria-current="page"
       aria-label="Page 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -3145,7 +2966,6 @@ exports[`Example locale 1`] = `
     <li
       aria-label="Page 6"
       class="rc-pagination-item rc-pagination-item-6 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="6"
     >
@@ -3160,7 +2980,6 @@ exports[`Example locale 1`] = `
     <li
       aria-label="Next 5 Pages"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -3174,7 +2993,6 @@ exports[`Example locale 1`] = `
     <li
       aria-label="Page 23"
       class="rc-pagination-item rc-pagination-item-23"
-      role="button"
       tabindex="0"
       title="23"
     >
@@ -3190,7 +3008,6 @@ exports[`Example locale 1`] = `
       aria-disabled="false"
       aria-label="Next Page"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -3252,7 +3069,6 @@ exports[`Example more 1`] = `
       aria-disabled="false"
       aria-label="上一页"
       class="rc-pagination-prev"
-      role="button"
       tabindex="0"
     >
       <button
@@ -3266,7 +3082,6 @@ exports[`Example more 1`] = `
     <li
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -3281,7 +3096,6 @@ exports[`Example more 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -3297,7 +3111,6 @@ exports[`Example more 1`] = `
       aria-current="page"
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -3312,7 +3125,6 @@ exports[`Example more 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -3327,7 +3139,6 @@ exports[`Example more 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -3342,7 +3153,6 @@ exports[`Example more 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -3356,7 +3166,6 @@ exports[`Example more 1`] = `
     <li
       aria-label="页 45"
       class="rc-pagination-item rc-pagination-item-45"
-      role="button"
       tabindex="0"
       title="45"
     >
@@ -3372,7 +3181,6 @@ exports[`Example more 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -3399,7 +3207,6 @@ exports[`Example showSizeChanger 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -3414,7 +3221,6 @@ exports[`Example showSizeChanger 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -3429,7 +3235,6 @@ exports[`Example showSizeChanger 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -3444,7 +3249,6 @@ exports[`Example showSizeChanger 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -3459,7 +3263,6 @@ exports[`Example showSizeChanger 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -3474,7 +3277,6 @@ exports[`Example showSizeChanger 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -3490,7 +3292,6 @@ exports[`Example showSizeChanger 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -3509,7 +3310,6 @@ exports[`Example showSizeChanger 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -3524,7 +3324,6 @@ exports[`Example showSizeChanger 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -3539,7 +3338,6 @@ exports[`Example showSizeChanger 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -3554,7 +3352,6 @@ exports[`Example showSizeChanger 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -3569,7 +3366,6 @@ exports[`Example showSizeChanger 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -3584,7 +3380,6 @@ exports[`Example showSizeChanger 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -3600,7 +3395,6 @@ exports[`Example showSizeChanger 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -3646,7 +3440,6 @@ exports[`Example showSizeChanger 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -3660,7 +3453,6 @@ exports[`Example showSizeChanger 1`] = `
     <li
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -3676,7 +3468,6 @@ exports[`Example showSizeChanger 1`] = `
       aria-disabled="true"
       aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -3728,7 +3519,6 @@ exports[`Example showTitle 1`] = `
         aria-disabled="false"
         aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
         tabindex="0"
       >
         <button
@@ -3741,7 +3531,6 @@ exports[`Example showTitle 1`] = `
       <li
         aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
         tabindex="0"
       >
         <a
@@ -3755,7 +3544,6 @@ exports[`Example showTitle 1`] = `
       <li
         aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
         tabindex="0"
       >
         <a
@@ -3770,7 +3558,6 @@ exports[`Example showTitle 1`] = `
         aria-current="page"
         aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
         tabindex="0"
       >
         <a
@@ -3784,7 +3571,6 @@ exports[`Example showTitle 1`] = `
       <li
         aria-label="页 4"
         class="rc-pagination-item rc-pagination-item-4 rc-pagination-item-before-jump-next"
-        role="button"
         tabindex="0"
       >
         <a
@@ -3798,7 +3584,6 @@ exports[`Example showTitle 1`] = `
       <li
         aria-label="向后 3 页"
         class="rc-pagination-jump-next"
-        role="button"
         tabindex="0"
       >
         <button
@@ -3811,7 +3596,6 @@ exports[`Example showTitle 1`] = `
       <li
         aria-label="页 8"
         class="rc-pagination-item rc-pagination-item-8"
-        role="button"
         tabindex="0"
       >
         <a
@@ -3826,7 +3610,6 @@ exports[`Example showTitle 1`] = `
         aria-disabled="false"
         aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
         tabindex="0"
       >
         <button
@@ -3847,7 +3630,6 @@ exports[`Example showTitle 1`] = `
         aria-disabled="true"
         aria-label="上一页"
         class="rc-pagination-prev rc-pagination-disabled"
-        role="button"
       >
         <button
           aria-hidden="true"
@@ -3861,7 +3643,6 @@ exports[`Example showTitle 1`] = `
         aria-current="page"
         aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-        role="button"
         tabindex="0"
       >
         <a
@@ -3875,7 +3656,6 @@ exports[`Example showTitle 1`] = `
       <li
         aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
         tabindex="0"
       >
         <a
@@ -3889,7 +3669,6 @@ exports[`Example showTitle 1`] = `
       <li
         aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-before-jump-next"
-        role="button"
         tabindex="0"
       >
         <a
@@ -3903,7 +3682,6 @@ exports[`Example showTitle 1`] = `
       <li
         aria-label="向后 3 页"
         class="rc-pagination-jump-next"
-        role="button"
         tabindex="0"
       >
         <button
@@ -3916,7 +3694,6 @@ exports[`Example showTitle 1`] = `
       <li
         aria-label="页 6"
         class="rc-pagination-item rc-pagination-item-6"
-        role="button"
         tabindex="0"
       >
         <a
@@ -3931,7 +3708,6 @@ exports[`Example showTitle 1`] = `
         aria-disabled="false"
         aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
         tabindex="0"
       >
         <button
@@ -3963,7 +3739,6 @@ exports[`Example showTotal 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -3978,7 +3753,6 @@ exports[`Example showTotal 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -3993,7 +3767,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -4008,7 +3781,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -4023,7 +3795,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -4038,7 +3809,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -4053,7 +3823,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -4067,7 +3836,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 46"
       class="rc-pagination-item rc-pagination-item-46"
-      role="button"
       tabindex="0"
       title="46"
     >
@@ -4083,7 +3851,6 @@ exports[`Example showTotal 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -4111,7 +3878,6 @@ exports[`Example showTotal 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4126,7 +3892,6 @@ exports[`Example showTotal 1`] = `
       aria-current="page"
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -4141,7 +3906,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -4156,7 +3920,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -4171,7 +3934,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 4"
       class="rc-pagination-item rc-pagination-item-4"
-      role="button"
       tabindex="0"
       title="4"
     >
@@ -4186,7 +3948,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 5"
       class="rc-pagination-item rc-pagination-item-5 rc-pagination-item-before-jump-next"
-      role="button"
       tabindex="0"
       title="5"
     >
@@ -4201,7 +3962,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="向后 5 页"
       class="rc-pagination-jump-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -4215,7 +3975,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 46"
       class="rc-pagination-item rc-pagination-item-46"
-      role="button"
       tabindex="0"
       title="46"
     >
@@ -4231,7 +3990,6 @@ exports[`Example showTotal 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button
@@ -4259,7 +4017,6 @@ exports[`Example showTotal 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4273,7 +4030,6 @@ exports[`Example showTotal 1`] = `
     <li
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1 rc-pagination-item-disabled"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -4289,7 +4045,6 @@ exports[`Example showTotal 1`] = `
       aria-disabled="true"
       aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4316,7 +4071,6 @@ exports[`Example simple 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4348,7 +4102,6 @@ exports[`Example simple 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4367,7 +4120,6 @@ exports[`Example simple 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4394,7 +4146,6 @@ exports[`Example simple 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4413,7 +4164,6 @@ exports[`Example simple 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4445,7 +4195,6 @@ exports[`Example simple 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4469,7 +4218,6 @@ exports[`Example simple 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4501,7 +4249,6 @@ exports[`Example simple 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4520,7 +4267,6 @@ exports[`Example simple 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4552,7 +4298,6 @@ exports[`Example simple 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4603,7 +4348,6 @@ exports[`Example simple 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4635,7 +4379,6 @@ exports[`Example simple 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
     >
       <button
         aria-hidden="true"
@@ -4699,7 +4442,6 @@ exports[`Example sizer 1`] = `
         aria-disabled="false"
         aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
         tabindex="0"
       >
         <button
@@ -4713,7 +4455,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
         tabindex="0"
         title="1"
       >
@@ -4728,7 +4469,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
         tabindex="0"
         title="2"
       >
@@ -4744,7 +4484,6 @@ exports[`Example sizer 1`] = `
         aria-current="page"
         aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
         tabindex="0"
         title="3"
       >
@@ -4760,7 +4499,6 @@ exports[`Example sizer 1`] = `
         aria-disabled="true"
         aria-label="下一页"
         class="rc-pagination-next rc-pagination-disabled"
-        role="button"
       >
         <button
           aria-hidden="true"
@@ -4806,7 +4544,6 @@ exports[`Example sizer 1`] = `
         aria-disabled="false"
         aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
         tabindex="0"
       >
         <button
@@ -4820,7 +4557,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
         tabindex="0"
         title="1"
       >
@@ -4835,7 +4571,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
         tabindex="0"
         title="2"
       >
@@ -4851,7 +4586,6 @@ exports[`Example sizer 1`] = `
         aria-current="page"
         aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
         tabindex="0"
         title="3"
       >
@@ -4866,7 +4600,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 4"
         class="rc-pagination-item rc-pagination-item-4"
-        role="button"
         tabindex="0"
         title="4"
       >
@@ -4882,7 +4615,6 @@ exports[`Example sizer 1`] = `
         aria-disabled="false"
         aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
         tabindex="0"
       >
         <button
@@ -4901,7 +4633,6 @@ exports[`Example sizer 1`] = `
         aria-disabled="false"
         aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
         tabindex="0"
       >
         <button
@@ -4915,7 +4646,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
         tabindex="0"
         title="1"
       >
@@ -4930,7 +4660,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
         tabindex="0"
         title="2"
       >
@@ -4946,7 +4675,6 @@ exports[`Example sizer 1`] = `
         aria-current="page"
         aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
         tabindex="0"
         title="3"
       >
@@ -4961,7 +4689,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 4"
         class="rc-pagination-item rc-pagination-item-4"
-        role="button"
         tabindex="0"
         title="4"
       >
@@ -4977,7 +4704,6 @@ exports[`Example sizer 1`] = `
         aria-disabled="false"
         aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
         tabindex="0"
       >
         <button
@@ -5023,7 +4749,6 @@ exports[`Example sizer 1`] = `
         aria-disabled="false"
         aria-label="上一页"
         class="rc-pagination-prev"
-        role="button"
         tabindex="0"
       >
         <button
@@ -5037,7 +4762,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 1"
         class="rc-pagination-item rc-pagination-item-1"
-        role="button"
         tabindex="0"
         title="1"
       >
@@ -5052,7 +4776,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 2"
         class="rc-pagination-item rc-pagination-item-2"
-        role="button"
         tabindex="0"
         title="2"
       >
@@ -5068,7 +4791,6 @@ exports[`Example sizer 1`] = `
         aria-current="page"
         aria-label="页 3"
         class="rc-pagination-item rc-pagination-item-3 rc-pagination-item-active"
-        role="button"
         tabindex="0"
         title="3"
       >
@@ -5083,7 +4805,6 @@ exports[`Example sizer 1`] = `
       <li
         aria-label="页 4"
         class="rc-pagination-item rc-pagination-item-4"
-        role="button"
         tabindex="0"
         title="4"
       >
@@ -5099,7 +4820,6 @@ exports[`Example sizer 1`] = `
         aria-disabled="false"
         aria-label="下一页"
         class="rc-pagination-next"
-        role="button"
         tabindex="0"
       >
         <button
@@ -5125,7 +4845,6 @@ exports[`Example styles 1`] = `
       aria-disabled="false"
       aria-label="上一页"
       class="rc-pagination-prev"
-      role="button"
       tabindex="0"
     >
       <button
@@ -5139,7 +4858,6 @@ exports[`Example styles 1`] = `
     <li
       aria-label="页 1"
       class="rc-pagination-item rc-pagination-item-1"
-      role="button"
       tabindex="0"
       title="1"
     >
@@ -5155,7 +4873,6 @@ exports[`Example styles 1`] = `
       aria-current="page"
       aria-label="页 2"
       class="rc-pagination-item rc-pagination-item-2 rc-pagination-item-active"
-      role="button"
       tabindex="0"
       title="2"
     >
@@ -5170,7 +4887,6 @@ exports[`Example styles 1`] = `
     <li
       aria-label="页 3"
       class="rc-pagination-item rc-pagination-item-3"
-      role="button"
       tabindex="0"
       title="3"
     >
@@ -5186,7 +4902,6 @@ exports[`Example styles 1`] = `
       aria-disabled="false"
       aria-label="下一页"
       class="rc-pagination-next"
-      role="button"
       tabindex="0"
     >
       <button

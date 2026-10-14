@@ -97,17 +97,20 @@ describe('Uncontrolled Pagination', () => {
     expect(nextButton).toHaveAttribute('aria-disabled', 'false');
   });
 
-  it('should expose role and label for navigation items', () => {
+  it('should expose label and keyboard semantics for navigation items', () => {
     const prevButton = wrapper.container.querySelector('.rc-pagination-prev');
     const nextButton = wrapper.container.querySelector('.rc-pagination-next');
     const currentPage = wrapper.container.querySelector(
       '.rc-pagination-item-active',
     );
-    expect(prevButton).toHaveAttribute('role', 'button');
+    // `role="button"` is not allowed on `li` inside `ul` (axe aria-allowed-role),
+    // so items keep implicit listitem semantics while staying keyboard reachable.
+    expect(prevButton).not.toHaveAttribute('role');
     expect(prevButton).toHaveAttribute('aria-label');
-    expect(nextButton).toHaveAttribute('role', 'button');
+    expect(nextButton).not.toHaveAttribute('role');
     expect(nextButton).toHaveAttribute('aria-label');
-    expect(currentPage).toHaveAttribute('role', 'button');
+    expect(nextButton).toHaveAttribute('tabindex');
+    expect(currentPage).not.toHaveAttribute('role');
     expect(currentPage).toHaveAttribute('aria-current', 'page');
   });
 

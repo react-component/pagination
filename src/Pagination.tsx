@@ -482,7 +482,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             [`${prefixCls}-jump-prev-custom-icon`]:
               isReactRenderable(jumpPrevIcon),
           })}
-          role="button"
           aria-label={prevItemTitle}
         >
           {jumpPrevContent}
@@ -499,7 +498,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             [`${prefixCls}-jump-next-custom-icon`]:
               isReactRenderable(jumpNextIcon),
           })}
-          role="button"
           aria-label={nextItemTitle}
         >
           {jumpNextContent}
@@ -581,7 +579,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         })}
         style={styles?.item}
         aria-disabled={prevDisabled}
-        role="button"
         aria-label={locale.prev_page}
       >
         {prev}
@@ -611,7 +608,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         })}
         style={styles?.item}
         aria-disabled={nextDisabled}
-        role="button"
         aria-label={locale.next_page}
       >
         {next}

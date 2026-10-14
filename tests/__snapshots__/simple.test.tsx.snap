@@ -75,12 +75,11 @@ exports[`simple Pagination should support simple is readOnly value 1`] = `
   >
     <li
       aria-disabled="true"
-      aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-disabled="true"
+        aria-label="上一页"
         class="rc-pagination-item-link"
         disabled=""
         tabindex="-1"
@@ -102,12 +101,11 @@ exports[`simple Pagination should support simple is readOnly value 1`] = `
     </li>
     <li
       aria-disabled="true"
-      aria-label="下一页"
       class="rc-pagination-next rc-pagination-disabled"
-      role="button"
     >
       <button
-        aria-hidden="true"
+        aria-disabled="true"
+        aria-label="下一页"
         class="rc-pagination-item-link"
         disabled=""
         tabindex="-1"

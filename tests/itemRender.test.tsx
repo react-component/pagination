@@ -26,21 +26,31 @@ describe('itemRender', () => {
     const jumpNext = $$('.rc-pagination-jump-next');
     const active = $$('.rc-pagination-item-active');
 
-    expect(prev.innerHTML).toBe(
-      `<a href="#${currentPage - 1}">${currentPage - 1}</a>`,
+    [prev, next, jumpPrev, jumpNext, active].forEach((item) => {
+      const link = item.querySelector('a');
+      expect(link).toHaveAttribute('href');
+      expect(link).toHaveAttribute('aria-label');
+      expect(link).toHaveAttribute('tabindex', '0');
+      expect(item).not.toHaveAttribute('tabindex');
+      expect(item).not.toHaveAttribute('role');
+    });
+    expect(prev.querySelector('a')).toHaveAttribute(
+      'href',
+      `#${currentPage - 1}`,
     );
-    expect(next.innerHTML).toBe(
-      `<a href="#${currentPage + 1}">${currentPage + 1}</a>`,
+    expect(next.querySelector('a')).toHaveAttribute(
+      'href',
+      `#${currentPage + 1}`,
     );
-    expect(jumpPrev.innerHTML).toBe(
-      `<a href="#${currentPage - 5}">${currentPage - 5}</a>`,
+    expect(jumpPrev.querySelector('a')).toHaveAttribute(
+      'href',
+      `#${currentPage - 5}`,
     );
-    expect(jumpNext.innerHTML).toBe(
-      `<a href="#${currentPage + 5}">${currentPage + 5}</a>`,
+    expect(jumpNext.querySelector('a')).toHaveAttribute(
+      'href',
+      `#${currentPage + 5}`,
     );
-    expect(active.innerHTML).toBe(
-      `<a href="#${currentPage}">${currentPage}</a>`,
-    );
+    expect(active.querySelector('a')).toHaveAttribute('aria-current', 'page');
   });
 
   it('should support empty custom itemRender', () => {
@@ -105,7 +115,9 @@ describe('itemRender', () => {
     );
     const prev = container.querySelector('.rc-pagination-prev');
     const next = container.querySelector('.rc-pagination-next');
-    expect(prev.innerHTML).toBe('<a href="#0" disabled="">0</a>');
-    expect(next.innerHTML).toBe('<a href="#2">2</a>');
+    expect(prev.querySelector('a')).toHaveAttribute('aria-disabled', 'true');
+    expect(prev.querySelector('a')).toHaveAttribute('tabindex', '-1');
+    expect(prev.querySelector('a')).not.toHaveAttribute('disabled');
+    expect(next.querySelector('a')).toHaveAttribute('aria-disabled', 'false');
   });
 });

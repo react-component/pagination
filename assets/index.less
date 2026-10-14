@@ -83,6 +83,7 @@
     }
 
     &:focus,
+    &:focus-within,
     &:hover {
       border-color: @primary-color;
       transition: all 0.3s;
@@ -101,11 +102,13 @@
       }
 
       &:focus,
+      &:focus-within,
       &:hover {
         border-color: #40a9ff;
       }
 
       &:focus a,
+      &:focus-within a,
       &:hover a {
         color: #40a9ff;
       }

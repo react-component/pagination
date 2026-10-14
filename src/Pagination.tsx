@@ -13,6 +13,7 @@ import zhCN from './locale/zh_CN';
 import Options from './Options';
 import type { PagerProps } from './Pager';
 import Pager from './Pager';
+import PaginationItem from './PaginationItem';
 
 const defaultItemRender: PaginationProps['itemRender'] = (_, __, element) =>
   element;
@@ -126,8 +127,6 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     ) : (
       <button
         type="button"
-        tabIndex={-1}
-        aria-hidden="true"
         title={title}
         className={`${prefixCls}-item-link`}
       />
@@ -295,9 +294,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         showTitle ? prevPageTitle : undefined,
       ),
     );
-    return React.isValidElement<HTMLButtonElement>(prevButton)
-      ? React.cloneElement(prevButton, { disabled: !hasPrev })
-      : prevButton;
+    return prevButton;
   }
 
   function renderNext(nextPage: number) {
@@ -311,9 +308,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         showTitle ? nextPageTitle : undefined,
       ),
     );
-    return React.isValidElement<HTMLButtonElement>(nextButton)
-      ? React.cloneElement(nextButton, { disabled: !hasNext })
-      : nextButton;
+    return nextButton;
   }
 
   function handleGoTO(event: any) {
@@ -355,6 +350,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     onClick: handleChange,
     onKeyPress: runIfEnterOrSpace,
     showTitle,
+    disabled,
     itemRender,
     pageLabel: locale.page,
     page: -1,
@@ -437,6 +433,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         <Pager
           {...pagerProps}
           key="noPager"
+          disabled
           page={1}
           className={`${prefixCls}-item-disabled`}
         />,
@@ -473,7 +470,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
     if (showPrevNextJumpers) {
       jumpPrev = isReactRenderable(jumpPrevContent) ? (
-        <li
+        <PaginationItem
           key="prev"
           onClick={jumpPrevHandle}
           tabIndex={0}
@@ -482,15 +479,15 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             [`${prefixCls}-jump-prev-custom-icon`]:
               isReactRenderable(jumpPrevIcon),
           })}
-          role="button"
+          disabled={disabled}
           aria-label={prevItemTitle}
         >
           {jumpPrevContent}
-        </li>
+        </PaginationItem>
       ) : null;
 
       jumpNext = isReactRenderable(jumpNextContent) ? (
-        <li
+        <PaginationItem
           key="next"
           onClick={jumpNextHandle}
           tabIndex={0}
@@ -499,11 +496,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
             [`${prefixCls}-jump-next-custom-icon`]:
               isReactRenderable(jumpNextIcon),
           })}
-          role="button"
+          disabled={disabled}
           aria-label={nextItemTitle}
         >
           {jumpNextContent}
-        </li>
+        </PaginationItem>
       ) : null;
     }
 
@@ -572,7 +569,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   if (isReactRenderable(prev)) {
     const prevDisabled = !hasPrev || !allPages;
     prev = (
-      <li
+      <PaginationItem
         onClick={prevHandle}
         tabIndex={prevDisabled ? null : 0}
         onKeyDown={runIfEnterPrev}
@@ -581,11 +578,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         })}
         style={styles?.item}
         aria-disabled={prevDisabled}
-        role="button"
+        disabled={disabled || prevDisabled}
         aria-label={locale.prev_page}
       >
         {prev}
-      </li>
+      </PaginationItem>
     );
   }
 
@@ -602,7 +599,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     }
 
     next = (
-      <li
+      <PaginationItem
         onClick={nextHandle}
         tabIndex={nextTabIndex}
         onKeyDown={runIfEnterNext}
@@ -611,11 +608,11 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         })}
         style={styles?.item}
         aria-disabled={nextDisabled}
-        role="button"
+        disabled={disabled || nextDisabled}
         aria-label={locale.next_page}
       >
         {next}
-      </li>
+      </PaginationItem>
     );
   }
 

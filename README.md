@@ -104,6 +104,22 @@ Then open `http://localhost:8000`.
 | onChange                     | `(page: number, pageSize: number, info?: { recommendPage?: number }) => void` | -                                      | Triggered when page or page size changes. The `info.recommendPage` is only provided when pageSize changes, indicating the recommended page number based on the new page size. |
 | onShowSizeChange             | `(current: number, size: number) => void`                                     | -                                      | Triggered when page size changes.                                                                                                                                             |
 
+## Custom item accessibility
+
+Default page and jump anchors expose button semantics, and previous/next actions
+use native buttons. The outer `li` keeps its list-item semantics. Focus, labels,
+current-page state, and activation belong to the inner control.
+
+When `itemRender` or an icon returns a native `button` or `a`, Pagination reuses
+that control instead of wrapping it. Native buttons use browser Enter/Space
+activation; links with `href` retain link behavior. Other custom content keeps
+its existing delegated interaction for compatibility. Custom components should
+provide their own accessible control semantics; Pagination cannot assume that
+they forward DOM props or safely wrap them in another interactive element.
+
+Custom styles that target the outer item's focus should also account for focus
+on its child, for example with `:focus-within` or a child `:focus-visible` rule.
+
 ## Development
 
 ```bash

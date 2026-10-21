@@ -595,7 +595,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 
     if (simple) {
       nextDisabled = !hasNext;
-      nextTabIndex = hasPrev ? 0 : null;
+      nextTabIndex = nextDisabled ? null : 0;
     } else {
       nextDisabled = !hasNext || !allPages;
       nextTabIndex = nextDisabled ? null : 0;

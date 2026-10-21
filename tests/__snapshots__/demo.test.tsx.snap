@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Example align 1`] = `
 <div>
@@ -2704,6 +2704,7 @@ exports[`Example jumperWithGoButton 1`] = `
       aria-label="下一页"
       class="rc-pagination-next"
       role="button"
+      tabindex="0"
     >
       <button
         aria-hidden="true"
@@ -4349,6 +4350,7 @@ exports[`Example simple 1`] = `
       aria-label="下一页"
       class="rc-pagination-next"
       role="button"
+      tabindex="0"
     >
       <button
         aria-hidden="true"
@@ -4395,6 +4397,7 @@ exports[`Example simple 1`] = `
       aria-label="下一页"
       class="rc-pagination-next"
       role="button"
+      tabindex="0"
     >
       <button
         aria-hidden="true"
@@ -4446,6 +4449,7 @@ exports[`Example simple 1`] = `
       aria-label="下一页"
       class="rc-pagination-next"
       role="button"
+      tabindex="0"
     >
       <button
         aria-hidden="true"
@@ -4502,6 +4506,7 @@ exports[`Example simple 1`] = `
       aria-label="下一页"
       class="rc-pagination-next"
       role="button"
+      tabindex="0"
     >
       <button
         aria-hidden="true"
@@ -4553,6 +4558,7 @@ exports[`Example simple 1`] = `
       aria-label="下一页"
       class="rc-pagination-next"
       role="button"
+      tabindex="0"
     >
       <button
         aria-hidden="true"
@@ -4636,6 +4642,7 @@ exports[`Example simple 1`] = `
       aria-label="下一页"
       class="rc-pagination-next"
       role="button"
+      tabindex="0"
     >
       <button
         aria-hidden="true"

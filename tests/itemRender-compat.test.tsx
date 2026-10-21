@@ -51,6 +51,52 @@ describe('itemRender interaction compatibility', () => {
   });
 
   it.each([
+    ['default', false],
+    ['default', true],
+    ['opaque', false],
+    ['opaque', true],
+  ] as const)(
+    'allows Tab navigation after disabling a focused %s item (shift=%s)',
+    async (kind, shift) => {
+      const Label = () => <span>page</span>;
+      const onChange = jest.fn();
+      const renderPagination = (disabled: boolean) => (
+        <div>
+          <button data-testid="before">Before pagination</button>
+          <Pagination
+            total={100}
+            disabled={disabled}
+            onChange={onChange}
+            itemRender={kind === 'opaque' ? () => <Label /> : undefined}
+          />
+          <button data-testid="after">After pagination</button>
+        </div>
+      );
+      const { container, rerender, getByTestId } = render(
+        renderPagination(false),
+      );
+      const item = container.querySelector<HTMLElement>(
+        '.rc-pagination-item-2',
+      );
+      const control = kind === 'opaque' ? item : item.querySelector('a');
+      control.focus();
+      expect(control).toHaveFocus();
+
+      rerender(renderPagination(true));
+      expect(control).toHaveFocus();
+      expect(control).toHaveAttribute('tabindex', '-1');
+      // Disabling activation must still allow the focused item to be left.
+      expect(fireEvent.keyDown(control, { key: 'Enter' })).toBe(false);
+      expect(fireEvent.keyDown(control, { key: ' ' })).toBe(false);
+      expect(onChange).not.toHaveBeenCalled();
+
+      await userEvent.tab({ shift });
+      expect(getByTestId(shift ? 'before' : 'after')).toHaveFocus();
+      expect(onChange).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each([
     ['prev', 49],
     ['next', 51],
     ['jump-prev', 45],

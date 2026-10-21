@@ -1,4 +1,5 @@
 import React from 'react';
+import isEnterOrSpaceKey from './isEnterOrSpaceKey';
 
 interface PaginationItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   disabled?: boolean;
@@ -59,7 +60,9 @@ const PaginationItem: React.FC<PaginationItemProps> = ({
         }}
         onKeyDown={(event) => {
           if (controlDisabled) {
-            event.preventDefault();
+            if (isEnterOrSpaceKey(event)) {
+              event.preventDefault();
+            }
             return;
           }
           if (
@@ -103,7 +106,9 @@ const PaginationItem: React.FC<PaginationItemProps> = ({
     },
     onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => {
       if (controlDisabled) {
-        event.preventDefault();
+        if (isEnterOrSpaceKey(event)) {
+          event.preventDefault();
+        }
         return;
       }
       controlProps.onKeyDown?.(event);

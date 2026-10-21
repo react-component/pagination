@@ -97,6 +97,89 @@ describe('itemRender interaction compatibility', () => {
   );
 
   it.each([
+    ['fragment', 'global'],
+    ['fragment', 'prev'],
+    ['fragment', 'next'],
+    ['opaque', 'global'],
+    ['opaque', 'prev'],
+    ['opaque', 'next'],
+  ] as const)(
+    'blocks child activation for a disabled %s renderer (%s)',
+    (kind, mode) => {
+      const onClick = jest.fn();
+      const onKeyDown = jest.fn();
+      const onChange = jest.fn();
+      const Control = () => (
+        <button type="button" onClick={onClick} onKeyDown={onKeyDown}>
+          Custom control
+        </button>
+      );
+      const { container } = render(
+        <Pagination
+          total={100}
+          current={mode === 'next' ? 10 : 1}
+          disabled={mode === 'global'}
+          onChange={onChange}
+          itemRender={() =>
+            kind === 'fragment' ? (
+              <>
+                <Control />
+              </>
+            ) : (
+              <Control />
+            )
+          }
+        />,
+      );
+      const button = container.querySelector(
+        `.rc-pagination-${mode === 'global' ? 'item-2' : mode} button`,
+      );
+      expect(fireEvent.click(button)).toBe(false);
+      expect(fireEvent.keyDown(button, { key: 'Enter' })).toBe(false);
+      expect(fireEvent.keyDown(button, { key: ' ' })).toBe(false);
+      expect(onClick).not.toHaveBeenCalled();
+      expect(onKeyDown).not.toHaveBeenCalled();
+      expect(onChange).not.toHaveBeenCalled();
+      expect(fireEvent.keyDown(button, { key: 'Tab' })).toBe(true);
+      expect(onKeyDown).toHaveBeenCalledTimes(1);
+    },
+  );
+
+  it.each([false, true])(
+    'allows focus to leave a native button after disabling (shift=%s)',
+    async (shift) => {
+      const onChange = jest.fn();
+      const renderPagination = (disabled: boolean) => (
+        <div>
+          <button>Before pagination</button>
+          <Pagination
+            total={100}
+            disabled={disabled}
+            onChange={onChange}
+            itemRender={buttonItemRender}
+          />
+          <button>After pagination</button>
+        </div>
+      );
+      const { container, rerender } = render(renderPagination(false));
+      const button = container.querySelector<HTMLButtonElement>(
+        '.rc-pagination-item-2 button',
+      );
+      button.focus();
+      expect(button).toHaveFocus();
+      rerender(renderPagination(true));
+      expect(button).toBeDisabled();
+      await userEvent.tab({ shift });
+      expect(
+        container
+          .querySelector('.rc-pagination')
+          .contains(document.activeElement),
+      ).toBe(false);
+      expect(onChange).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each([
     ['prev', 49],
     ['next', 51],
     ['jump-prev', 45],

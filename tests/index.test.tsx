@@ -651,8 +651,8 @@ describe('keyboard support', () => {
     const prevButton = $('li.rc-pagination-prev');
     expect(prevButton).toBeTruthy();
 
-    fireEvent.click(prevButton.querySelector('button, a') || prevButton);
-    fireEvent.click(prevButton.querySelector('button, a') || prevButton);
+    fireEvent.click(prevButton);
+    fireEvent.click(prevButton);
 
     await activate(prevButton, '{Enter}');
     await activate(prevButton, '{Enter}');
@@ -677,8 +677,8 @@ describe('keyboard support', () => {
     await activate(nextButton, '{Enter}');
     await activate(nextButton, '{Enter}');
 
-    fireEvent.click(nextButton.querySelector('button, a') || nextButton);
-    fireEvent.click(nextButton.querySelector('button, a') || nextButton);
+    fireEvent.click(nextButton);
+    fireEvent.click(nextButton);
 
     expect(onChange).toHaveBeenLastCalledWith(54, 10);
   });
@@ -707,9 +707,7 @@ describe('keyboard support', () => {
     expect(jumpPrevButton).toBeTruthy();
 
     await activate(jumpPrevButton, '{Enter}');
-    fireEvent.click(
-      jumpPrevButton.querySelector('button, a') || jumpPrevButton,
-    );
+    fireEvent.click(jumpPrevButton);
 
     expect(onChange).toHaveBeenLastCalledWith(40, 10);
   });
@@ -728,9 +726,7 @@ describe('keyboard support', () => {
     const jumpNextButton = $('li.rc-pagination-jump-next');
     expect(jumpNextButton).toBeTruthy();
 
-    fireEvent.click(
-      jumpNextButton.querySelector('button, a') || jumpNextButton,
-    );
+    fireEvent.click(jumpNextButton);
     await activate(jumpNextButton, '{Enter}');
 
     expect(onChange).toHaveBeenLastCalledWith(60, 10);

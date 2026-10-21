@@ -51,21 +51,22 @@ const PaginationItem: React.FC<PaginationItemProps> = ({
     return (
       <li
         {...restProps}
-        onClick={(event) => {
+        onClickCapture={(event) => {
           if (controlDisabled) {
             event.preventDefault();
-            return;
+            event.stopPropagation();
           }
-          onClick?.(event);
         }}
-        onKeyDown={(event) => {
-          if (controlDisabled) {
-            if (isEnterOrSpaceKey(event)) {
-              event.preventDefault();
-            }
-            return;
+        onKeyDownCapture={(event) => {
+          if (controlDisabled && isEnterOrSpaceKey(event)) {
+            event.preventDefault();
+            event.stopPropagation();
           }
+        }}
+        onClick={onClick}
+        onKeyDown={(event) => {
           if (
+            !controlDisabled &&
             !event.defaultPrevented &&
             !event.isPropagationStopped() &&
             !hasNativeActivation(event.target)

@@ -118,6 +118,6 @@ describe('itemRender', () => {
     expect(prev.querySelector('a')).toHaveAttribute('aria-disabled', 'true');
     expect(prev.querySelector('a')).toHaveAttribute('tabindex', '-1');
     expect(prev.querySelector('a')).not.toHaveAttribute('disabled');
-    expect(next.querySelector('a')).toHaveAttribute('aria-disabled', 'false');
+    expect(next.querySelector('a')).not.toHaveAttribute('aria-disabled');
   });
 });

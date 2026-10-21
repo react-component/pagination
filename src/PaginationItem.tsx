@@ -4,7 +4,10 @@ interface PaginationItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   disabled?: boolean;
 }
 
-/** Keep the list item structural when itemRender supplies a native control. */
+/**
+ * Keep the list item structural and merge control semantics directly onto the
+ * element returned by `itemRender`, so custom controls own their DOM contract.
+ */
 const PaginationItem: React.FC<PaginationItemProps> = ({
   children,
   disabled,
@@ -16,13 +19,11 @@ const PaginationItem: React.FC<PaginationItemProps> = ({
   'aria-disabled': ariaDisabled,
   ...restProps
 }) => {
-  const nativeControl =
-    React.isValidElement<React.HTMLProps<HTMLElement>>(children) &&
-    (children.type === 'button' || children.type === 'a');
+  const controlDisabled = disabled || ariaDisabled === true;
 
-  if (!nativeControl) {
-    // Arbitrary components need not forward DOM props. Preserve their existing
-    // content and delegated interaction instead of wrapping interactive nodes.
+  // Only when a valid element is provided are control semantics merged into
+  // it; otherwise the list item itself keeps them as the fallback control.
+  if (!React.isValidElement<React.HTMLProps<HTMLElement>>(children)) {
     return (
       <li
         {...restProps}
@@ -33,58 +34,47 @@ const PaginationItem: React.FC<PaginationItemProps> = ({
         aria-current={ariaCurrent}
         aria-disabled={ariaDisabled}
       >
-        {React.isValidElement(children) &&
-        typeof children.type !== 'string' &&
-        ariaDisabled !== undefined
-          ? React.cloneElement(
-              children as React.ReactElement<{ disabled?: boolean }>,
-              { disabled },
-            )
-          : children}
+        {children}
       </li>
     );
   }
 
-  const button = children.type === 'button';
-  const link = !button && !!children.props.href;
-  const controlDisabled = disabled || (button && children.props.disabled);
+  const { props: controlProps } = children;
+
   const control = React.cloneElement(children, {
-    'aria-hidden': undefined,
-    'aria-label': children.props['aria-label'] ?? ariaLabel,
+    role: controlProps.href === undefined ? 'button' : undefined,
+    'aria-label': controlProps['aria-label'] ?? ariaLabel,
     'aria-current': ariaCurrent,
-    'aria-disabled': controlDisabled || ariaDisabled,
-    tabIndex: controlDisabled ? -1 : 0,
-    ...(button ? { type: 'button', disabled: controlDisabled } : {}),
-    ...(!button && !link
-      ? {
-          role: 'button',
-          onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => {
-            children.props.onKeyDown?.(event);
-            if (!event.defaultPrevented) {
-              onKeyDown?.(event as React.KeyboardEvent<HTMLLIElement>);
-            }
-          },
-        }
-      : {}),
+    'aria-disabled': controlDisabled || undefined,
+    tabIndex: controlDisabled || tabIndex == null ? -1 : 0,
     onClick: (event: React.MouseEvent<HTMLElement>) => {
       if (controlDisabled) {
         event.preventDefault();
         return;
       }
-      children.props.onClick?.(event);
+      controlProps.onClick?.(event);
       if (!event.isPropagationStopped()) {
         onClick?.(event as React.MouseEvent<HTMLLIElement>);
       }
     },
+    onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => {
+      controlProps.onKeyDown?.(event);
+      if (event.defaultPrevented) {
+        return;
+      }
+      // Native buttons and links already activate on Enter/Space through
+      // their own click synthesis; activating here as well would fire twice.
+      const { currentTarget } = event;
+      const nativeActivation =
+        currentTarget.tagName === 'BUTTON' ||
+        (currentTarget.tagName === 'A' && currentTarget.hasAttribute('href'));
+      if (!nativeActivation) {
+        onKeyDown?.(event as React.KeyboardEvent<HTMLLIElement>);
+      }
+    },
   });
 
-  // Native buttons synthesize clicks for Enter/Space; handling keydown on the
-  // parent as well would activate the same action twice.
-  return (
-    <li {...restProps} aria-disabled={ariaDisabled}>
-      {control}
-    </li>
-  );
+  return <li {...restProps}>{control}</li>;
 };
 
 export default PaginationItem;

@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`simple Pagination props: showQuickJumper should render normally quick-jumper 1`] = `
 <div
@@ -74,14 +74,13 @@ exports[`simple Pagination should support simple is readOnly value 1`] = `
     class="rc-pagination rc-pagination-simple"
   >
     <li
-      aria-disabled="true"
       class="rc-pagination-prev rc-pagination-disabled"
     >
       <button
         aria-disabled="true"
         aria-label="上一页"
         class="rc-pagination-item-link"
-        disabled=""
+        role="button"
         tabindex="-1"
         title="上一页"
         type="button"
@@ -100,14 +99,13 @@ exports[`simple Pagination should support simple is readOnly value 1`] = `
       0
     </li>
     <li
-      aria-disabled="true"
       class="rc-pagination-next rc-pagination-disabled"
     >
       <button
         aria-disabled="true"
         aria-label="下一页"
         class="rc-pagination-item-link"
-        disabled=""
+        role="button"
         tabindex="-1"
         title="下一页"
         type="button"

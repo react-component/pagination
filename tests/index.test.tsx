@@ -76,7 +76,10 @@ describe('Uncontrolled Pagination', () => {
   it('prev-button should be disabled', () => {
     const prevButton = wrapper.container.querySelector('.rc-pagination-prev');
     expect(prevButton).toHaveClass('rc-pagination-disabled');
-    expect(prevButton).toHaveAttribute('aria-disabled', 'true');
+    expect(prevButton.querySelector('button, a')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
   });
 
   it('should hightlight current page and not highlight other page', () =>
@@ -94,7 +97,9 @@ describe('Uncontrolled Pagination', () => {
   it('next button should not be disabled', () => {
     const nextButton = wrapper.container.querySelector('.rc-pagination-next');
     expect(nextButton).not.toHaveClass('rc-pagination-disabled');
-    expect(nextButton).toHaveAttribute('aria-disabled', 'false');
+    expect(nextButton.querySelector('button, a')).not.toHaveAttribute(
+      'aria-disabled',
+    );
   });
 
   it('should expose role and label for navigation items', () => {

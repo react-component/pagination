@@ -73,7 +73,10 @@ describe('simple Pagination', () => {
   it('prev-button should be disabled', () => {
     const prevButton = wrapper.container.querySelector('.rc-pagination-prev');
     expect(prevButton).toHaveClass('rc-pagination-disabled');
-    expect(prevButton).toHaveAttribute('aria-disabled', 'true');
+    expect(prevButton.querySelector('button, a')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
   });
 
   it('no quick jump', () => {

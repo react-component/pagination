@@ -114,7 +114,7 @@ describe('accessible pagination controls', () => {
     );
     expect(
       container.querySelector('.rc-pagination-prev button'),
-    ).toBeDisabled();
+    ).toHaveAttribute('aria-disabled', 'true');
   });
 
   it('prevents navigation from a disabled custom link', () => {
@@ -131,7 +131,7 @@ describe('accessible pagination controls', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('preserves delegated keyboard behavior for opaque custom content', () => {
+  it('keeps keyboard behavior for plain custom content', () => {
     const onChange = jest.fn();
     const { container } = render(
       <Pagination
@@ -140,9 +140,9 @@ describe('accessible pagination controls', () => {
         itemRender={(page) => <span>{page}</span>}
       />,
     );
-    const item = container.querySelector('.rc-pagination-item-2');
-    expect(item).toHaveAttribute('tabindex', '0');
-    fireEvent.keyDown(item, { key: 'Enter' });
+    const control = container.querySelector('.rc-pagination-item-2 > span');
+    expect(control).toHaveAttribute('tabindex', '0');
+    fireEvent.keyDown(control, { key: 'Enter' });
     expect(onChange).toHaveBeenCalledTimes(1);
   });
   it('composes custom click handlers without duplicate activation', async () => {
@@ -189,7 +189,7 @@ describe('accessible pagination controls', () => {
     ).toBeDisabled();
   });
   it.each(['prev', 'next', 'jump-prev', 'jump-next'])(
-    'retains Enter/Space handling for opaque %s content',
+    'retains Enter/Space handling for plain %s content',
     (type) => {
       const onChange = jest.fn();
       const { container } = render(
@@ -200,10 +200,10 @@ describe('accessible pagination controls', () => {
           itemRender={(page) => <span>{page}</span>}
         />,
       );
-      const item = container.querySelector(`.rc-pagination-${type}`);
-      fireEvent.keyDown(item, { key: 'Enter' });
+      const control = container.querySelector(`.rc-pagination-${type} > span`);
+      fireEvent.keyDown(control, { key: 'Enter' });
       expect(onChange).toHaveBeenCalledTimes(1);
-      fireEvent.keyDown(item, { key: ' ' });
+      fireEvent.keyDown(control, { key: ' ' });
       expect(onChange).toHaveBeenCalledTimes(2);
     },
   );

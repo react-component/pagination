@@ -127,6 +127,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     ) : (
       <button
         type="button"
+        tabIndex={-1}
         title={title}
         className={`${prefixCls}-item-link`}
       />

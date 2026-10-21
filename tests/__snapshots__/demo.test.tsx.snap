@@ -1356,6 +1356,7 @@ exports[`Example itemRender 1`] = `
       aria-disabled="true"
       aria-label="上一页"
       class="rc-pagination-prev rc-pagination-disabled"
+      tabindex="-1"
     >
       Prev
     </li>

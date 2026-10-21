@@ -226,6 +226,77 @@ describe('accessible pagination controls', () => {
     expect(onKeyDown).toHaveBeenCalledTimes(1);
     expect(onChange).not.toHaveBeenCalled();
   });
+  it('allows a custom control to stop delegated keyboard activation', () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <Pagination
+        total={100}
+        onChange={onChange}
+        itemRender={(page) => (
+          <a onKeyDown={(event) => event.stopPropagation()}>{page}</a>
+        )}
+      />,
+    );
+    fireEvent.keyDown(container.querySelector('.rc-pagination-item-2 a'), {
+      key: 'Enter',
+    });
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it('keeps a single tab stop when itemRender wraps the original element', () => {
+    const { container } = render(
+      <Pagination
+        total={100}
+        onChange={() => {}}
+        itemRender={(_, type, element) => <span>{element}</span>}
+      />,
+    );
+    // The unavailable Previous control keeps no tab stop on the first page.
+    expect(
+      container
+        .querySelector('.rc-pagination-prev')
+        .querySelectorAll('[tabindex="0"], button:not([tabindex="-1"])'),
+    ).toHaveLength(0);
+    const next = container.querySelector('.rc-pagination-next');
+    const tabStops = next.querySelectorAll(
+      '[tabindex="0"], button:not([tabindex="-1"])',
+    );
+    expect(tabStops).toHaveLength(1);
+    expect(tabStops[0]).toBe(next.querySelector('span'));
+  });
+
+  it('keeps interaction when itemRender returns a fragment', () => {
+    const onChange = jest.fn();
+    const { container } = render(
+      <Pagination
+        total={100}
+        onChange={onChange}
+        itemRender={(_, type, element) => <>{element}</>}
+      />,
+    );
+    const item = container.querySelector('.rc-pagination-item-2');
+    expect(item).toHaveAttribute('tabindex', '0');
+    fireEvent.click(item.querySelector('a'));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    // Selecting the current page is a no-op, so keyboard-check another page.
+    fireEvent.keyDown(container.querySelector('.rc-pagination-item-3'), {
+      key: 'Enter',
+    });
+    expect(onChange).toHaveBeenCalledTimes(2);
+  });
+
+  it('treats custom anchors with an empty href as links', () => {
+    const { container } = render(
+      <Pagination
+        total={100}
+        onChange={() => {}}
+        itemRender={(page) => <a href="">{page}</a>}
+      />,
+    );
+    const link = container.querySelector('.rc-pagination-item-2 a');
+    expect(link).toHaveAttribute('href', '');
+    expect(link).not.toHaveAttribute('role');
+  });
   it('does not submit the quick-jump input when focusing a page control', async () => {
     const onChange = jest.fn();
     const { getByRole } = render(

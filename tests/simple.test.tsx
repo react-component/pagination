@@ -37,6 +37,21 @@ describe('simple Pagination', () => {
     expect(onChange).toHaveBeenLastCalledWith(2, 10);
   });
 
+  it('should set correct tabIndex for prev and next buttons in simple mode', () => {
+    const { container, rerender } = render(
+      <Pagination simple defaultCurrent={1} total={25} />,
+    );
+    const prev = container.querySelector('.rc-pagination-prev');
+    const next = container.querySelector('.rc-pagination-next');
+
+    expect(prev).not.toHaveAttribute('tabindex');
+    expect(next).toHaveAttribute('tabindex', '0');
+
+    rerender(<Pagination simple current={3} total={25} />);
+    expect(prev).toHaveAttribute('tabindex', '0');
+    expect(next).not.toHaveAttribute('tabindex');
+  });
+
   it('should return to 1 when blur goto input in uncontrol mode', () => {
     const { container } = render(
       <Pagination simple defaultCurrent={1} total={25} />,

@@ -73,8 +73,9 @@ const Options: React.FC<OptionsProps> = (props) => {
     setGoInputText('');
     if (
       e.relatedTarget &&
-      (e.relatedTarget.className.includes(`${rootPrefixCls}-item-link`) ||
-        e.relatedTarget.className.includes(`${rootPrefixCls}-item`))
+      e.relatedTarget.closest(
+        `.${rootPrefixCls}-item-link, .${rootPrefixCls}-item`,
+      )
     ) {
       return;
     }

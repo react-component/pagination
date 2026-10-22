@@ -1,6 +1,7 @@
 import type { RenderResult } from '@testing-library/react';
 import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import Pagination from '../src';
 import { resetWarned } from '@rc-component/util';
 import { sizeChangerRender } from './commonUtil';
@@ -21,7 +22,7 @@ describe('Default Pagination', () => {
 
   it('onChange should be forbidden when total is default', () => {
     const pagers = $$('.rc-pagination-item');
-    fireEvent.click(pagers[0]);
+    fireEvent.click(pagers[0].querySelector('button, a') || pagers[0]);
     expect(onChange).not.toHaveBeenCalled();
   });
 });
@@ -66,17 +67,19 @@ describe('Uncontrolled Pagination', () => {
       wrapper.container.querySelector('.rc-pagination-item-active'),
     ).toHaveTextContent('1');
     expect($$('.rc-pagination-item')[0]).toHaveTextContent('1');
-    expect($$('.rc-pagination-item')[0]).toHaveAttribute(
-      'aria-current',
-      'page',
-    );
+    expect(
+      $$('.rc-pagination-item')[0].querySelector('button, a'),
+    ).toHaveAttribute('aria-current', 'page');
     expect($$('.rc-pagination-item')[0]).toHaveAttribute('title', '1');
   });
 
   it('prev-button should be disabled', () => {
     const prevButton = wrapper.container.querySelector('.rc-pagination-prev');
     expect(prevButton).toHaveClass('rc-pagination-disabled');
-    expect(prevButton).toHaveAttribute('aria-disabled', 'true');
+    expect(prevButton.querySelector('button, a')).toHaveAttribute(
+      'aria-disabled',
+      'true',
+    );
   });
 
   it('should hightlight current page and not highlight other page', () =>
@@ -94,18 +97,24 @@ describe('Uncontrolled Pagination', () => {
   it('next button should not be disabled', () => {
     const nextButton = wrapper.container.querySelector('.rc-pagination-next');
     expect(nextButton).not.toHaveClass('rc-pagination-disabled');
-    expect(nextButton).toHaveAttribute('aria-disabled', 'false');
+    expect(nextButton.querySelector('button, a')).not.toHaveAttribute(
+      'aria-disabled',
+    );
   });
 
   it('should expose role and label for navigation items', () => {
-    const prevButton = wrapper.container.querySelector('.rc-pagination-prev');
-    const nextButton = wrapper.container.querySelector('.rc-pagination-next');
-    const currentPage = wrapper.container.querySelector(
-      '.rc-pagination-item-active',
+    const prevButton = wrapper.container.querySelector(
+      '.rc-pagination-prev button',
     );
-    expect(prevButton).toHaveAttribute('role', 'button');
+    const nextButton = wrapper.container.querySelector(
+      '.rc-pagination-next button',
+    );
+    const currentPage = wrapper.container.querySelector(
+      '.rc-pagination-item-active a',
+    );
+    expect(prevButton.tagName).toBe('BUTTON');
     expect(prevButton).toHaveAttribute('aria-label');
-    expect(nextButton).toHaveAttribute('role', 'button');
+    expect(nextButton.tagName).toBe('BUTTON');
     expect(nextButton).toHaveAttribute('aria-label');
     expect(currentPage).toHaveAttribute('role', 'button');
     expect(currentPage).toHaveAttribute('aria-current', 'page');
@@ -116,7 +125,7 @@ describe('Uncontrolled Pagination', () => {
     expect(pagers).toHaveLength(3);
     const page2 = pagers[1];
     expect(page2).toHaveClass('rc-pagination-item-2');
-    fireEvent.click(page2);
+    fireEvent.click(page2.querySelector('button, a') || page2);
     expect(
       wrapper.container.querySelector('.rc-pagination-item-active'),
     ).toHaveTextContent('2');
@@ -126,7 +135,7 @@ describe('Uncontrolled Pagination', () => {
 
   it('should response next page', () => {
     const nextButton = wrapper.container.querySelector('.rc-pagination-next');
-    fireEvent.click(nextButton);
+    fireEvent.click(nextButton.querySelector('button, a') || nextButton);
     expect(
       wrapper.container.querySelector('.rc-pagination-item-active'),
     ).toHaveTextContent('2');
@@ -197,9 +206,9 @@ describe('Uncontrolled Pagination', () => {
     );
     expect(totalText).toHaveTextContent('1 - 10 of 25 items');
     const nextButton = wrapper.container.querySelector('.rc-pagination-next');
-    fireEvent.click(nextButton);
+    fireEvent.click(nextButton.querySelector('button, a') || nextButton);
     expect(totalText).toHaveTextContent('11 - 20 of 25 items');
-    fireEvent.click(nextButton);
+    fireEvent.click(nextButton.querySelector('button, a') || nextButton);
     expect(totalText).toHaveTextContent('21 - 25 of 25 items');
   });
 
@@ -213,9 +222,10 @@ describe('Uncontrolled Pagination', () => {
     warnSpy.mockRestore();
   });
 
-  it('should response keyboard event', () => {
+  it('should response keyboard event', async () => {
     const pagers = $$('.rc-pagination-item');
-    fireEvent.keyDown(pagers[2], { key: 'Enter', keyCode: 13, which: 13 });
+    pagers[2].querySelector<HTMLElement>('button, a').focus();
+    await userEvent.keyboard('{Enter}');
     expect(
       wrapper.container.querySelector('.rc-pagination-item-active'),
     ).toHaveTextContent('3');
@@ -250,7 +260,7 @@ describe('Controlled Pagination', () => {
 
   it('should not response mouse click', () => {
     const nextButton = wrapper.container.querySelector('.rc-pagination-next');
-    fireEvent.click(nextButton);
+    fireEvent.click(nextButton.querySelector('button, a') || nextButton);
     expect(
       wrapper.container.querySelector('.rc-pagination-item-active'),
     ).toHaveTextContent('2');
@@ -611,7 +621,7 @@ describe('should emit onChange when total is string', () => {
 
   it('onChange should be called when click page', () => {
     const pagers = wrapper.container.querySelectorAll('.rc-pagination-item-3');
-    fireEvent.click(pagers[0]);
+    fireEvent.click(pagers[0].querySelector('button, a') || pagers[0]);
     expect(onChange).toHaveBeenCalledWith(3, 10);
   });
 });
@@ -619,7 +629,12 @@ describe('should emit onChange when total is string', () => {
 describe('keyboard support', () => {
   let wrapper: RenderResult;
   const onChange = jest.fn();
-  const $ = (selector: string) => wrapper.container.querySelector(selector);
+  const $ = (selector: string) =>
+    wrapper.container.querySelector(selector + ' > :is(button, a)');
+  async function activate(control: Element, key: string) {
+    (control as HTMLElement).focus();
+    await userEvent.keyboard(key);
+  }
 
   beforeEach(() => {
     wrapper = render(
@@ -632,35 +647,35 @@ describe('keyboard support', () => {
     onChange.mockReset();
   });
 
-  it('should work for prev page', () => {
+  it('should work for prev page', async () => {
     const prevButton = $('li.rc-pagination-prev');
     expect(prevButton).toBeTruthy();
 
     fireEvent.click(prevButton);
     fireEvent.click(prevButton);
 
-    fireEvent.keyDown(prevButton, { key: 'Enter', keyCode: 13, which: 13 });
-    fireEvent.keyDown(prevButton, { key: 'Enter', keyCode: 13, which: 13 });
+    await activate(prevButton, '{Enter}');
+    await activate(prevButton, '{Enter}');
 
     expect(onChange).toHaveBeenLastCalledWith(46, 10);
   });
 
-  it('should work for prev page with space key', () => {
+  it('should work for prev page with space key', async () => {
     const prevButton = $('li.rc-pagination-prev');
     expect(prevButton).toBeTruthy();
 
-    fireEvent.keyDown(prevButton, { key: ' ', keyCode: 32, which: 32 });
-    fireEvent.keyDown(prevButton, { key: 'Spacebar', keyCode: 32, which: 32 });
+    await activate(prevButton, ' ');
+    await activate(prevButton, ' ');
 
     expect(onChange).toHaveBeenLastCalledWith(48, 10);
   });
 
-  it('should work for next page', () => {
+  it('should work for next page', async () => {
     const nextButton = $('li.rc-pagination-next');
     expect(nextButton).toBeTruthy();
 
-    fireEvent.keyDown(nextButton, { key: 'Enter', keyCode: 13, which: 13 });
-    fireEvent.keyDown(nextButton, { key: 'Enter', keyCode: 13, which: 13 });
+    await activate(nextButton, '{Enter}');
+    await activate(nextButton, '{Enter}');
 
     fireEvent.click(nextButton);
     fireEvent.click(nextButton);
@@ -668,69 +683,61 @@ describe('keyboard support', () => {
     expect(onChange).toHaveBeenLastCalledWith(54, 10);
   });
 
-  it('should work for next page with space key', () => {
+  it('should work for next page with space key', async () => {
     const nextButton = $('li.rc-pagination-next');
     expect(nextButton).toBeTruthy();
 
-    fireEvent.keyDown(nextButton, { key: ' ', keyCode: 32, which: 32 });
-    fireEvent.keyDown(nextButton, { key: 'Spacebar', keyCode: 32, which: 32 });
+    await activate(nextButton, ' ');
+    await activate(nextButton, ' ');
 
     expect(onChange).toHaveBeenLastCalledWith(52, 10);
   });
 
-  it('should work for next page with enter keyCode only', () => {
+  it('should work for next page with native Enter activation', async () => {
     const nextButton = $('li.rc-pagination-next');
     expect(nextButton).toBeTruthy();
 
-    fireEvent.keyDown(nextButton, { keyCode: 13, which: 13 });
+    await activate(nextButton, '{Enter}');
 
     expect(onChange).toHaveBeenLastCalledWith(51, 10);
   });
 
-  it('should work for jump prev page', () => {
+  it('should work for jump prev page', async () => {
     const jumpPrevButton = $('li.rc-pagination-jump-prev');
     expect(jumpPrevButton).toBeTruthy();
 
-    fireEvent.keyDown(jumpPrevButton, { key: 'Enter', keyCode: 13, which: 13 });
+    await activate(jumpPrevButton, '{Enter}');
     fireEvent.click(jumpPrevButton);
 
     expect(onChange).toHaveBeenLastCalledWith(40, 10);
   });
 
-  it('should work for jump prev page with space key', () => {
+  it('should work for jump prev page with space key', async () => {
     const jumpPrevButton = $('li.rc-pagination-jump-prev');
     expect(jumpPrevButton).toBeTruthy();
 
-    fireEvent.keyDown(jumpPrevButton, { key: ' ', keyCode: 32, which: 32 });
-    fireEvent.keyDown(jumpPrevButton, {
-      key: 'Spacebar',
-      keyCode: 32,
-      which: 32,
-    });
+    await activate(jumpPrevButton, ' ');
+    await activate(jumpPrevButton, ' ');
 
     expect(onChange).toHaveBeenLastCalledWith(40, 10);
   });
 
-  it('should work for jump next page', () => {
+  it('should work for jump next page', async () => {
     const jumpNextButton = $('li.rc-pagination-jump-next');
     expect(jumpNextButton).toBeTruthy();
 
     fireEvent.click(jumpNextButton);
-    fireEvent.keyDown(jumpNextButton, { key: 'Enter', keyCode: 13, which: 13 });
+    await activate(jumpNextButton, '{Enter}');
 
     expect(onChange).toHaveBeenLastCalledWith(60, 10);
   });
 
-  it('should work for jump next page with space key', () => {
+  it('should work for jump next page with space key', async () => {
     const jumpNextButton = $('li.rc-pagination-jump-next');
     expect(jumpNextButton).toBeTruthy();
 
-    fireEvent.keyDown(jumpNextButton, { key: ' ', keyCode: 32, which: 32 });
-    fireEvent.keyDown(jumpNextButton, {
-      key: 'Spacebar',
-      keyCode: 32,
-      which: 32,
-    });
+    await activate(jumpNextButton, ' ');
+    await activate(jumpNextButton, ' ');
 
     expect(onChange).toHaveBeenLastCalledWith(60, 10);
   });

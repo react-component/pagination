@@ -2,6 +2,7 @@
 import { clsx } from 'clsx';
 import React from 'react';
 import type { PaginationProps } from './interface';
+import PaginationItem from './PaginationItem';
 
 export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
   rootPrefixCls: string;
@@ -11,6 +12,7 @@ export interface PagerProps extends Pick<PaginationProps, 'itemRender'> {
   className?: string;
   style?: React.CSSProperties;
   showTitle: boolean;
+  disabled?: boolean;
   onClick?: (page: number) => void;
   onKeyPress?: (
     e: React.KeyboardEvent<HTMLLIElement>,
@@ -28,6 +30,7 @@ const Pager: React.FC<PagerProps> = (props) => {
     className,
     style,
     showTitle,
+    disabled,
     onClick,
     onKeyPress,
     itemRender,
@@ -52,29 +55,23 @@ const Pager: React.FC<PagerProps> = (props) => {
     onKeyPress(e, onClick, page);
   };
 
-  const pager = itemRender(
-    page,
-    'page',
-    <a tabIndex={-1} aria-hidden="true" rel="nofollow">
-      {page}
-    </a>,
-  );
+  const pager = itemRender(page, 'page', <a rel="nofollow">{page}</a>);
   const pagerLabel = `${pageLabel} ${page}`.trim();
 
   return pager ? (
-    <li
+    <PaginationItem
       title={showTitle ? String(page) : null}
       className={cls}
       style={style}
       onClick={handleClick}
       onKeyDown={handleKeyPress}
       tabIndex={0}
-      role="button"
+      disabled={disabled || !page}
       aria-label={pagerLabel}
       aria-current={active ? 'page' : undefined}
     >
       {pager}
-    </li>
+    </PaginationItem>
   ) : null;
 };
 
